@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" type="text/css">
-    <title>ثبت نام | رین تاک</title>
-    <script src="{{ asset('assets/jquery.js') }}"></script>
-    <script src="{{ asset('assets/tailwind.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
+    <title>ثبت نام | طبابوک</title>
+    {{-- <script src="{{ asset('assets/jquery.js') }}"></script> --}}
+    <script src="{{ asset('js/tailwind.js') }}"></script>
     <style>
         input:focus {
             border-color: #8b5cf6 !important;
@@ -99,9 +99,9 @@
             <div class="flex flex-col my-12 items-center justify-center relative z-10 w-full">
                 <div class="w-full flex flex-row justify-center items-center animate-fadeIn">
                     <div class="text-center">
-                        <h2 class="text-center font-bold text-white text-5xl mb-2 drop-shadow-lg">rintalk</h2>
+                        <h2 class="text-center font-bold text-white text-5xl mb-2 drop-shadow-lg">TabaBook</h2>
                         <div class="w-20 h-1 bg-white mx-auto rounded-full"></div>
-                        <p class="text-white/80 text-sm"> یادگیری زبان</p>
+                        <p class="text-white/80 text-sm">فروشگاه کتاب</p>
                     </div>
                 </div>
             </div>

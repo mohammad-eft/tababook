@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     {{-- <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> --}}
-    <script src="{{ asset('assets/jquery.js') }}"></script>
-    <script src="{{asset('assets/tailwind.js')}}"></script>
+    {{-- <script src="{{ asset('assets/jquery.js') }}"></script> --}}
+    <script src="{{asset('js/tailwind.js')}}"></script>
 
-    <title>ورود |  آموزش زبان</title>
+    <title>ورود |  طبابوک</title>
    <style>
     input {
         transition: all 0.3s ease;
@@ -97,9 +97,9 @@
                 <div class="w-full flex flex-row justify-center items-center animate-fadeIn">
                     {{-- <img class="max-md:w-4/12 w-8/12" src="{{ asset('assets/img/e125edbd-f303-47f3-9dbc-af414f99ccb2.webp') }}" alt=""> --}}
                     <div class="text-center">
-                        <h2 class="text-center font-bold text-white text-5xl mb-2 drop-shadow-lg">rintalk</h2>
+                        <h2 class="text-center font-bold text-white text-5xl mb-2 drop-shadow-lg">TabaBook</h2>
                         <div class="w-20 h-1 bg-white mx-auto rounded-full"></div>
-                        <p class="text-white/80 text-sm mt-2"> آموزش زبان</p>
+                        <p class="text-white/80 text-sm mt-2">فروشگاه کتاب</p>
                     </div>
                 </div>
             </div>

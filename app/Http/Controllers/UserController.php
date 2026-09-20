@@ -25,7 +25,7 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('client.signup');
+        return view('signup');
     }
 
     public function store(Request $request)
@@ -183,7 +183,7 @@ class UserController extends Controller
 
     public function login()
     {
-        return view('client.login');
+        return view('login');
     }
 
     public function compelete_form()

@@ -14,8 +14,8 @@ use App\Http\Middleware\AuthMiddleware;
 Route::view('/', 'home');
 
 
-Route::get('/login', [UserController::class, 'login'])->name('login')->middleware([AuthMiddleware::class]);
-Route::get('/signup', [UserController::class, "create"])->name('signup')->middleware([AuthMiddleware::class]);
+Route::get('/login', [UserController::class, 'login'])->name('login');
+Route::get('/signup', [UserController::class, "create"])->name('signup');
 Route::post('/check', [UserController::class, "checkAuth"])->name('checkAuth');
 
 Route::group([
