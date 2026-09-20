@@ -11,7 +11,7 @@ use App\Http\Middleware\AuthMiddleware;
 //     return view('welcome');
 // });
 
-Route::view('/', 'home');
+Route::view('/', 'home')->name('home');
 
 
 Route::get('/login', [UserController::class, 'login'])->name('login');

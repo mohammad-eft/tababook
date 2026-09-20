@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\category;
-use App\Models\logo;
+// use App\Models\logo;
 use App\Models\product;
-use App\Models\service;
+// use App\Models\service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -17,10 +17,10 @@ class CategoryController extends Controller
     public function create()
     {
         $categories = category::select('id', 'title')->get();
-        $logo = logo::first();
+        // $logo = logo::first();
         return view('admin.category.create', [
             'categories' => $categories,
-            'logo' => $logo
+            // 'logo' => $logo
         ]);
     }
     public function store(Request $request)
@@ -51,10 +51,10 @@ class CategoryController extends Controller
     public function adminIndex()
     {
         $cats = category::all();
-        $logo = logo::first();
+        // $logo = logo::first();
         return view('admin.category.index', [
             'categories' => $cats,
-            'logo' => $logo
+            // 'logo' => $logo
         ]);
     }
     public function showChildren($param)
@@ -140,8 +140,8 @@ class CategoryController extends Controller
     public function relatedProducts(category $category)
     {
         // return $category;
-        $logo = logo::first();
-        $services = service::all();
+        // $logo = logo::first();
+        // $services = service::all();
         $categories = category::with('products')->has('products')->get();
         $products = $category->products;
         foreach ($products as $product) {
@@ -160,8 +160,8 @@ class CategoryController extends Controller
         }
         return view('user.product.index', [
             'currentCat' => $category,
-            'logo' => $logo,
-            'services' => $services,
+            // 'logo' => $logo,
+            // 'services' => $services,
             'categories' => $categories,
             'products' => $products,
         ]);

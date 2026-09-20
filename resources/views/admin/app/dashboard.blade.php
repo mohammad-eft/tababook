@@ -5,11 +5,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {{-- <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> --}}
-    <link rel="stylesheet" href="{{ url('assets/css/style.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url('css/style.css') }}" type="text/css">
     <title>@yield('title')</title>
-    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/IMG_20251225_131334_688.png') }}">
-    <script src="{{ asset('assets/js/tailwind.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.js') }}"></script>
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/IMG_20251225_131334_688.png') }}">
+    <script src="{{ asset('js/tailwind.js') }}"></script>
+    <script src="{{ asset('js/jquery.js') }}"></script>
 </head>
 
 <body>
@@ -25,15 +25,15 @@
         <div class="hidden lg:block lg:w-3/12 bg-[#0D0E12] fixed right-0 top-0 h-dvh px-5">
             <div class="flex justify-center pt-5">
                 <a href="{{ route('home') }}" class="right-0 mr-[15px]">
-                    @if ($logo)
+                    {{-- @if ($logo)
                         <img src="{{ asset('storage/' . $logo->logo) }}" alt="" class="w-32 h-20">
-                    @endif
+                    @endif --}}
                 </a>
             </div>
             <hr class="text-[darkslategray] mt-2.5">
             <div class="py-3 h-[80%] overflow-y-auto flex flex-col gap-3" style="scrollbar-width: none;">
                 @can('access', ['admin'])
-                    <div class="border-b border-gray-500 pb-3">
+                    {{-- <div class="border-b border-gray-500 pb-3">
                         <div
                             class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('settings.*')) bg-[#383c4d] @endif">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -82,7 +82,7 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="border-b border-gray-500 pb-3">
                         <div
                             class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('category.*')) bg-[#383c4d] @endif">
@@ -121,7 +121,7 @@
                         </div>
                     </div>
                     {{-- orders --}}
-                    <div class="border-b border-gray-500 pb-3">
+                    {{-- <div class="border-b border-gray-500 pb-3">
                         <div
                             class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('category.*')) bg-[#383c4d] @endif">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -148,7 +148,7 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div> --}}
                     {{-- orders --}}
                     <div class="border-b border-gray-500 pb-3">
                         <div
@@ -185,7 +185,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="border-b border-gray-500 pb-3">
+                    {{-- <div class="border-b border-gray-500 pb-3">
                         <div
                             class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('consultRequest.*')) bg-[#383c4d] @endif">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -217,7 +217,7 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div> --}}
                 @endcan
                 <div class="border-b border-gray-500 pb-3">
                     <div
@@ -236,7 +236,7 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="overflow-y-auto transition-all duration-300 @if (Route::is('user.*')) max-h-100 @else max-h-0 @endif"
+                    {{-- <div class="overflow-y-auto transition-all duration-300 @if (Route::is('user.*')) max-h-100 @else max-h-0 @endif"
                         style="scrollbar-width: none;">
                         <ul class="gap-2.5 pr-3">
                             @can('access', ['admin'])
@@ -260,7 +260,7 @@
                                     کاربری</a>
                             </li>
                         </ul>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -276,15 +276,15 @@
                 </div>
                 <div class="flex justify-center pt-5">
                     <a href="{{ route('home') }}" class="right-0 mr-[15px]">
-                        @if ($logo)
+                        {{-- @if ($logo)
                             <img src="{{ asset('storage/' . $logo->logo) }}" alt="" class="w-40 h-15">
-                        @endif
+                        @endif --}}
                     </a>
                 </div>
                 <hr class="text-[darkslategray] mt-2.5">
                 <div class="py-5 h-[80%] overflow-y-auto flex flex-col gap-3" style="scrollbar-width: none;">
                     @can('access', ['admin'])
-                        <div class="border-b border-gray-500 pb-3">
+                        {{-- <div class="border-b border-gray-500 pb-3">
                             <div
                                 class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('settings.*')) bg-[#383c4d] @endif">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -337,7 +337,7 @@
                                     </li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="border-b border-gray-500 pb-3">
                             <div
                                 class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('category.*')) bg-[#383c4d] @endif">
@@ -410,7 +410,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="border-b border-gray-500 pb-3">
+                        {{-- <div class="border-b border-gray-500 pb-3">
                             <div
                                 class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('consultRequest.*')) bg-[#383c4d] @endif">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -443,7 +443,7 @@
                                     </li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> --}}
                     @endcan
                     <div class="border-b border-gray-500 pb-3">
                         <div
@@ -500,7 +500,7 @@
             </div>
         </div>
     </div>
-    <script src="{{ asset('assets/js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
 </body>
 
 </html>

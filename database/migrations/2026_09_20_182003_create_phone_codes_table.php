@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('phone_codes', function (Blueprint $table) {
             $table->id();
-            $table->integer('phoneNumber');
-            $table->integer('code');
+            $table->string('phoneNumber');
+            $table->string('code');
             $table->timestamps();
         });
     }

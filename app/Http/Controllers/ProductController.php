@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\category;
 use App\Models\category_product;
-use App\Models\logo;
+// use App\Models\logo;
 use App\Models\product;
-use App\Models\carts;
+// use App\Models\carts;
 use App\Models\product_attributes;
 use App\Models\product_media;
-use App\Models\service;
+// use App\Models\service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -19,9 +19,9 @@ class ProductController extends Controller
 {
     public function create()
     {
-        $logo = logo::first();
+        // $logo = logo::first();
         $cats = category::all();
-        return view('admin.product.create', ['logo' => $logo, 'categories' => $cats]);
+        return view('admin.product.create', ['categories' => $cats]);
     }
     public function store(Request $request)
     {
@@ -91,7 +91,7 @@ class ProductController extends Controller
     }
     public function adminIndex()
     {
-        $logo = logo::first();
+        // $logo = logo::first();
         $products = product::with('media')->with('categories')->get();
         foreach ($products as $product) {
             if ($product->media->isNotEmpty()) {
@@ -107,7 +107,7 @@ class ProductController extends Controller
                 $product['mainImg'] = 'default.jpg';
             }
         }
-        return view('admin.product.index', ['products' => $products, 'logo' => $logo]);
+        return view('admin.product.index', ['products' => $products]);
     }
     public function edit(Request $request)
     {
@@ -237,8 +237,8 @@ class ProductController extends Controller
     public function show(product $product)
     {
         // dd($product);
-        $logo = logo::first();
-        $services = service::all();
+        // $logo = logo::first();
+        // $services = service::all();
         $categories = category::with('products')->has('products')->get();
         if ($product->media->isNotEmpty()) {
             foreach ($product->media as $media) {
@@ -256,22 +256,22 @@ class ProductController extends Controller
         $currentUser = null;
         $cart = null;
         $allCartCount = 0;
-        if (Auth::check()) {
-            $currentUser = Auth::user();
-            $cartt = carts::where('product_id', $product->id)->where('user_id', Auth::id())->where('order_id', null)->first();
-            foreach ($currentUser->carts as $cart) {
-                if ($cart->order_id == null) {
-                    $cartCount = $cart->quantity;
-                    // $cartCount= 0;
-                }
-            }
-            $allCarts = carts::select('user_id', 'order_id', 'quantity', 'product_id')->where('user_id', Auth::id())->where('order_id', null)->get();
-            if (count($allCarts)) {
-                foreach ($allCarts as $allCart) {
-                    $allCartCount += $allCart->quantity;
-                }
-            }
-        }
+        // if (Auth::check()) {
+        //     $currentUser = Auth::user();
+        //     $cartt = carts::where('product_id', $product->id)->where('user_id', Auth::id())->where('order_id', null)->first();
+        //     foreach ($currentUser->carts as $cart) {
+        //         if ($cart->order_id == null) {
+        //             $cartCount = $cart->quantity;
+        //             // $cartCount= 0;
+        //         }
+        //     }
+        //     // $allCarts = carts::select('user_id', 'order_id', 'quantity', 'product_id')->where('user_id', Auth::id())->where('order_id', null)->get();
+        //     if (count($allCarts)) {
+        //         foreach ($allCarts as $allCart) {
+        //             $allCartCount += $allCart->quantity;
+        //         }
+        //     }
+        // }
         $proIds = [];
         if (isset($allCarts)) {
             foreach ($allCarts as $pro) {
@@ -280,10 +280,10 @@ class ProductController extends Controller
         }
         return view('user.product.show', [
             'product' => $product,
-            'logo' => $logo,
-            'services' => $services,
-            'cartCount' => $cartCount,
-            'cart' => isset($cartt) ? $cartt : null,
+            // 'logo' => $logo,
+            // 'services' => $services,
+            // 'cartCount' => $cartCount,
+            // 'cart' => isset($cartt) ? $cartt : null,
             'categories' => $categories,
             'allCartCount' => $allCartCount,
             'proIds' => $proIds
@@ -291,8 +291,8 @@ class ProductController extends Controller
     }
     public function index()
     {
-        $logo = logo::first();
-        $services = service::all();
+        // $logo = logo::first();
+        // $services = service::all();
         $categories = category::with('products')->has('products')->get();
         $products = product::all();
         foreach ($products as $product) {
@@ -311,23 +311,23 @@ class ProductController extends Controller
         }
         $cartCount = 0;
         $cart = null;
-        $allCartCount = 0;
-        if (Auth::check()) {
-            $allCarts = carts::select('user_id', 'order_id', 'quantity')->where('user_id', Auth::id())->where('order_id', null)->get();
-            if (count($allCarts)) {
-                foreach ($allCarts as $allCart) {
-                    $allCartCount += $allCart->quantity;
-                }
-            }
-        }
+        // $allCartCount = 0;
+        // if (Auth::check()) {
+        //     $allCarts = carts::select('user_id', 'order_id', 'quantity')->where('user_id', Auth::id())->where('order_id', null)->get();
+        //     if (count($allCarts)) {
+        //         foreach ($allCarts as $allCart) {
+        //             $allCartCount += $allCart->quantity;
+        //         }
+        //     }
+        // }
         return view('user.product.index', [
-            'logo' => $logo,
-            'services' => $services,
+            // 'logo' => $logo,
+            // 'services' => $services,
             'categories' => $categories,
             'products' => $products,
             'cartCount' => $cartCount,
-            'cart' => $cart,
-            'allCartCount' => $allCartCount
+            // 'cart' => $cart,
+            // 'allCartCount' => $allCartCount
         ]);
     }
     public function filter(Request $request)
@@ -340,8 +340,8 @@ class ProductController extends Controller
         foreach ($category_products as $catPro) {
             $products[] = product::find($catPro['product_id']);
         }
-        $logo = logo::first();
-        $services = service::all();
+        // $logo = logo::first();
+        // $services = service::all();
         $categories = category::with('products')->has('products')->get();
         foreach ($products as $product) {
             if ($product->media->isNotEmpty()) {
@@ -358,8 +358,8 @@ class ProductController extends Controller
             }
         }
         return view('user.product.index', [
-            'logo' => $logo,
-            'services' => $services,
+            // 'logo' => $logo,
+            // 'services' => $services,
             'categories' => $categories,
             'products' => $products,
             'catIds' => $request['selectedCats']
@@ -374,8 +374,8 @@ class ProductController extends Controller
     public function searchResult(Request $request)
     {
         $products = product::where('title', 'like', '%' . $request['searchedValue'] . '%')->get();
-        $logo = logo::first();
-        $services = service::all();
+        // $logo = logo::first();
+        // $services = service::all();
         $categories = category::with('products')->has('products')->get();
         foreach ($products as $product) {
             if ($product->media->isNotEmpty()) {
@@ -392,8 +392,8 @@ class ProductController extends Controller
             }
         }
         return view('user.product.index', [
-            'logo' => $logo,
-            'services' => $services,
+            // 'logo' => $logo,
+            // 'services' => $services,
             'categories' => $categories,
             'products' => $products,
         ]);

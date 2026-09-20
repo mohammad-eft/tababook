@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {{-- <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> --}}
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> --}}
-    <link rel="stylesheet" href="{{ url('assets/css/style.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url('css/style.css') }}" type="text/css">
     <title>@yield('title')</title>
-    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/IMG_20251225_131334_688.png') }}">
-    <script src="{{ asset('assets/js/tailwind.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.js') }}"></script>
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/IMG_20251225_131334_688.png') }}">
+    <script src="{{ asset('js/tailwind.js') }}"></script>
+    <script src="{{ asset('js/jquery.js') }}"></script>
 </head>
 
 <body
@@ -28,12 +28,12 @@
                 <!-- hamburger_menu_svg -->
             </div>
             <div class="w-1/3 lg:w-1/5 h-full  cursor-pointer">
-                @if ($logo)
+                {{-- @if ($logo)
                     <a href="{{ route('home') }}">
                         <img src="{{ asset('storage/' . $logo->logo) }}" alt=""
                             class="object-fit w-3/4 sm:w-2/4 max-lg:mx-auto">
                     </a>
-                @endif
+                @endif --}}
             </div>
             <div class="w-1/3 lg:w-4/5 h-8/12 flex gap-4 items-center justify-end lg:justify-between">
                 <ul class="h-9/12 h-full flex items-center gap-5 text-xs xl:text-md font-bold max-lg:hidden">
@@ -235,9 +235,9 @@
                         </svg>
                     </div>
                     <div class="w-full flex flex-col gap-3 items-center">
-                        @if ($logo)
+                        {{-- @if ($logo)
                             <img src="{{ asset('storage/' . $logo->logo) }}" alt="" class="w-5/12">
-                        @endif
+                        @endif --}}
                         <h4 class="text-[15px] text-[#868686] font-bold ">چاپخانه آنلاین شاهکار</h4>
                         <span class="w-full h-[1px] bg-[#292931]"></span>
                     </div>
@@ -589,8 +589,8 @@
         let authenticationDiv = document.getElementById('authenticationDiv')
         let orderBasket = document.getElementById('orderBasket')
     </script>
-    <script src="{{ asset('assets/js/shoppingCart.js') }}"></script>
-    <script src="{{ asset('assets/js/main.js') }}"></script>
+    {{-- <script src="{{ asset('js/shoppingCart.js') }}"></script> --}}
+    <script src="{{ asset('js/main.js') }}"></script>
 </body>
 
 </html>

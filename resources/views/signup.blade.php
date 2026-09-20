@@ -438,7 +438,7 @@
             message.classList.add('opacity-0')
         }
     </script>
-    <script src="{{ asset('assets/rules.js') }}"></script>
+    <script src="{{ asset('js/rules.js') }}"></script>
 </body>
 
 </html>
