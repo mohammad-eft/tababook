@@ -1,0 +1,28 @@
+@import url("fontiran.css");
+
+* {
+    font-family: "IRANSansX";
+}
+
+.in-fa {
+  font-family: 'IRANSansXFaNum';
+}
+
+.samim {
+    font-family: "Samim";
+}
+
+.yekan {
+    font-family: "Yekan";
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+    /* Firefox */
+}
