@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     {{-- <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> --}}
-    {{-- <script src="{{ asset('assets/jquery.js') }}"></script> --}}
+    <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{asset('js/tailwind.js')}}"></script>
 
     <title>ورود |  طبابوک</title>
