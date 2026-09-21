@@ -108,4 +108,6 @@ Route::group([
     Route::post('/storeHeaderSetting', 'storeHeaderSetting')->name('storeHeaderSetting');
     Route::get('/bannerSettings', 'bannerSettings')->name('bannerSettings');
     Route::post('/storeBanners', 'storeBanners')->name('storeBanners');
+    Route::get('/cardSettings', 'cardSettings')->name('cardSettings');
+    Route::post('/cardStore', 'cardStore')->name('cardStore');
 });
