@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::define('panelCan' , function(User $user , $role){
+        Gate::define('access' , function(User $user , $role){
             return $user->hasRoles([$role]);
         });
     }

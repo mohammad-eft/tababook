@@ -5,6 +5,7 @@ arrowDowns.forEach((arrowDown) => {
       if (arrowDown.nextElementSibling.classList.contains('max-h-0')) {
          arrowDowns.forEach((arrow) => {
             arrow.children[0].classList.remove('rotate-180')
+            console.log(arrow.nextElementSibling)
             arrow.nextElementSibling.classList.remove('max-h-100')
             arrow.nextElementSibling.classList.add('max-h-0')
          })
