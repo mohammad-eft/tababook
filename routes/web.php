@@ -9,6 +9,7 @@ use App\Http\Middleware\AuthMiddleware;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\SearchController;
 
 Route::view('/', 'home')->name('home');
 
@@ -110,4 +111,12 @@ Route::group([
     Route::post('/storeBanners', 'storeBanners')->name('storeBanners');
     Route::get('/cardSettings', 'cardSettings')->name('cardSettings');
     Route::post('/cardStore', 'cardStore')->name('cardStore');
+});
+
+Route::group([
+    'prefix'=>'search',
+    'controller'=>SearchController::class,
+    'as'=>'search.'
+], function(){
+    Route::get('/', 'page')->name('page');
 });
