@@ -147,7 +147,7 @@
                               <span class="text-red-500 text-sm absolute bg-white right-3 -bottom-6">{{ $message }}</span>  
                             @enderror
                         </div>
-                        <div class="relative w-full group @error('password') mb-5 @enderror flex gap-3">
+                        {{-- <div class="relative w-full group @error('password') mb-5 @enderror flex gap-3">
                             <div class="w-3/4">
                                 <span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-purple-500 transition-colors">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -162,7 +162,7 @@
                                 @enderror
                             </div>
                             <button type="button" id="countDown" class="w-1/4 text-sm rounded-xl bg-purple-500 text-white cursor-pointer" onclick="sendCode(this)">ارسال کد</button>
-                        </div>
+                        </div> --}}
                         
                         <!-- چک‌باکس قوانین -->
                         <div class="w-full flex gap-3 items-center mt-2 p-3 bg-purple-50 rounded-xl border border-purple-200">
@@ -274,7 +274,8 @@
         let countDown = document.getElementById('countDown')
         function checkAuth(e) {
             e.preventDefault()
-            if(phoneNumber.value == '' || password.value == '' || code.value == ''){
+            // || code.value == ''
+            if(phoneNumber.value == '' || password.value == ''){
                 openMessage('پر کردن همه فیلد ها الزامی است')
                 setTimeout(function(){
                     closeMessage()
@@ -291,15 +292,16 @@
                     dataType: "json",
                     data: {
                         'phoneNumber': phoneNumber.value,
-                        'code': code.value
+                        // 'code': code.value
                     },
                     success: function(data){
-                        if(!data.flag){
-                            openMessage('کد وارد شده نامعتبر')
-                            setTimeout(function(){
-                                closeMessage()
-                            }, 2000)
-                        } else {
+                        // if(!data.flag){
+                        //     // openMessage('کد وارد شده نامعتبر')
+                        //     openMessage('کد وارد شده نامعتبر')
+                        //     setTimeout(function(){
+                        //         closeMessage()
+                        //     }, 2000)
+                        // } else {
                             if (data.user) {
                                 openMessage('شما قبلا با این شماره ثبت نام کرده اید')
                                 setTimeout(function(){
@@ -309,7 +311,7 @@
                             } else {
                                 signupForm.submit()
                             }
-                        }
+                        // }
                     },
                     error: function(){
                         openMessage('خطا در دریافت اطلاعات')
@@ -320,100 +322,100 @@
                 })
             }
         }
-        function sendCode(el){
-            el.innerHTML = "<div class='size-8 mx-auto border-2 border-white border-t-[#eb3153]/0 rounded-full animate-spin'></div>"
-            if(phoneNumber.value == '' || password.value == ''){
-                openMessage('پر کردن همه فیلد ها الزامی است')
-                setTimeout(function(){
-                    closeMessage()
-                }, 2000)
-                el.innerHTML = 'ارسال کد'
-            } else {
+        // function sendCode(el){
+        //     el.innerHTML = "<div class='size-8 mx-auto border-2 border-white border-t-[#eb3153]/0 rounded-full animate-spin'></div>"
+        //     if(phoneNumber.value == '' || password.value == ''){
+        //         openMessage('پر کردن همه فیلد ها الزامی است')
+        //         setTimeout(function(){
+        //             closeMessage()
+        //         }, 2000)
+        //         el.innerHTML = 'ارسال کد'
+        //     } else {
                 
-                $.ajax({
-                    url: link+"api/sendCode",
-                    type: "POST",
-                    dataType: "json",
-                    data: {
-                        'phoneNumber': phoneNumber.value
-                    },
-                    success: function(response){
-                        el.innerHTML = 'ارسال کد'
-                        console.log('response')
-                        console.log(response)
-                        console.log(el)
-                        if(!response){
-                            openMessage('شما قبلا با این شماره ثبت نام کرده اید')
-                            setTimeout(function(){
-                                closeMessage()
-                            }, 2000)
-                        } else {
-                            counter()
-                        }
-                    },
-                    error: function(){
-                        openMessage('خطا در دریافت اطلاعات')
-                        setTimeout(function(){
-                            closeMessage()
-                        }, 2000)
-                    }
-                })
-            }
-        }
-        function counter() {
-            let phoneNumber = document.getElementById('phoneNumber')
-            countDown.classList.add('cursor-no-drop')
-            countDown.classList.remove('cursor-pointer')
-            countDown.classList.remove('hover:bg-purple-500')
-            countDown.classList.add('hover:bg-purple-500/50')
-            countDown.classList.remove('bg-purple-500')
-            countDown.classList.add('bg-purple-500/50')
-            countDown.setAttribute('disabled', true)
-            countDown.setAttribute('dir', 'ltr')
-            let count = 120
-            let result = setInterval(() => {
-                let minute = Math.floor(count / 60)
-                let seconds = count % 60
-                count -= 1
-                if (count < 0) {
+        //         $.ajax({
+        //             url: link+"api/sendCode",
+        //             type: "POST",
+        //             dataType: "json",
+        //             data: {
+        //                 'phoneNumber': phoneNumber.value
+        //             },
+        //             success: function(response){
+        //                 el.innerHTML = 'ارسال کد'
+        //                 console.log('response')
+        //                 console.log(response)
+        //                 console.log(el)
+        //                 if(!response){
+        //                     openMessage('شما قبلا با این شماره ثبت نام کرده اید')
+        //                     setTimeout(function(){
+        //                         closeMessage()
+        //                     }, 2000)
+        //                 } else {
+        //                     counter()
+        //                 }
+        //             },
+        //             error: function(){
+        //                 openMessage('خطا در دریافت اطلاعات')
+        //                 setTimeout(function(){
+        //                     closeMessage()
+        //                 }, 2000)
+        //             }
+        //         })
+        //     }
+        // }
+        // function counter() {
+        //     let phoneNumber = document.getElementById('phoneNumber')
+        //     countDown.classList.add('cursor-no-drop')
+        //     countDown.classList.remove('cursor-pointer')
+        //     countDown.classList.remove('hover:bg-purple-500')
+        //     countDown.classList.add('hover:bg-purple-500/50')
+        //     countDown.classList.remove('bg-purple-500')
+        //     countDown.classList.add('bg-purple-500/50')
+        //     countDown.setAttribute('disabled', true)
+        //     countDown.setAttribute('dir', 'ltr')
+        //     let count = 120
+        //     let result = setInterval(() => {
+        //         let minute = Math.floor(count / 60)
+        //         let seconds = count % 60
+        //         count -= 1
+        //         if (count < 0) {
 
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                        }
-                    })
-                    $.ajax({
-                        url: link+'api/removeActivationCode',
-                        type: "POST",
-                        dataType: "json",
-                        data: {
-                            'phoneNumber': phoneNumber.value
-                        },
-                        success: function(data) {
-                            console.log(data)
-                            countDown.classList.remove('cursor-no-drop')
-                            countDown.classList.add('bg-purple-500')
-                            countDown.classList.remove('bg-purple-500/50')
-                            countDown.classList.add('cursor-pointer')
-                            countDown.classList.add('hover:bg-purple-500')
-                            countDown.classList.remove('hover:bg-purple-500/50')
-                            countDown.removeAttribute('disabled')
-                            countDown.removeAttribute('dir')
-                            countDown.innerText = "ارسال مجدد"
-                        },
-                        error: function() {
-                            openMessage('خطا در دریافت اطلاعات')
-                            setTimeout(function(){
-                                closeMessage()
-                            }, 2000)
-                        }
-                    })
-                    clearInterval(result)
-                }
-                countDown.innerText = minute.toString().padStart(2, "0") + " : " + seconds.toString().padStart(2,
-                    "0");
-            }, 1000)
-        }
+        //             $.ajaxSetup({
+        //                 headers: {
+        //                     'X-CSRF-TOKEN': "{{ csrf_token() }}"
+        //                 }
+        //             })
+        //             $.ajax({
+        //                 url: link+'api/removeActivationCode',
+        //                 type: "POST",
+        //                 dataType: "json",
+        //                 data: {
+        //                     'phoneNumber': phoneNumber.value
+        //                 },
+        //                 success: function(data) {
+        //                     console.log(data)
+        //                     countDown.classList.remove('cursor-no-drop')
+        //                     countDown.classList.add('bg-purple-500')
+        //                     countDown.classList.remove('bg-purple-500/50')
+        //                     countDown.classList.add('cursor-pointer')
+        //                     countDown.classList.add('hover:bg-purple-500')
+        //                     countDown.classList.remove('hover:bg-purple-500/50')
+        //                     countDown.removeAttribute('disabled')
+        //                     countDown.removeAttribute('dir')
+        //                     countDown.innerText = "ارسال مجدد"
+        //                 },
+        //                 error: function() {
+        //                     openMessage('خطا در دریافت اطلاعات')
+        //                     setTimeout(function(){
+        //                         closeMessage()
+        //                     }, 2000)
+        //                 }
+        //             })
+        //             clearInterval(result)
+        //         }
+        //         countDown.innerText = minute.toString().padStart(2, "0") + " : " + seconds.toString().padStart(2,
+        //             "0");
+        //     }, 1000)
+        // }
         function openMessage(content){
             message.innerHTML = ''
             let element = document.createElement('div')
