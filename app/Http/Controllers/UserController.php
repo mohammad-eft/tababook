@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use IPPanel\Models\Response;
-
+use Log;
 class UserController extends Controller
 {
     // public function home()
@@ -34,12 +34,12 @@ class UserController extends Controller
             'phoneNumber'=>['required'],
             'password'=>['required'],
             'rules'=>['required'],
-            'code'=>['required']
+            // 'code'=>['required']
         ],[
             'phoneNumber.required'=>"وارد کردن شماره تلفن الزامی میباشد",
             'password.required'=>"وارد کردن گذرواژه الزامی میباشد",
             'rules.required'=>"پذیرفتن قوانین الزامی میباشد",
-            'code.required'=>" وارد کردن کد ارسال شده الزامی میباشد",
+            // 'code.required'=>" وارد کردن کد ارسال شده الزامی میباشد",
         ]);
         if ($request->rules) {
             $phone = User::where('phoneNumber', $request->phoneNumber)->first();
@@ -125,7 +125,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $user->role;
-        return view('admin.users.profile', ['user' => $user]);
+        return view('profile', ['user' => $user]);
     }
 
     public function show(user $user)
