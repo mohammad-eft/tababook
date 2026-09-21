@@ -6,10 +6,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Middleware\AuthMiddleware;
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+use App\Http\Middleware\AdminMiddleware;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\SettingController;
 
 Route::view('/', 'home')->name('home');
 
@@ -49,7 +48,7 @@ Route::group([
     'prefix' => 'category',
     'controller' => CategoryController::class,
     'as' => 'category.',
-    'middleware' => AuthMiddleware::class
+    'middleware' => AdminMiddleware::class
 ], function () {
     Route::get('/create', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
@@ -58,16 +57,16 @@ Route::group([
     Route::post('/edit/', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{id}', 'delete')->name('delete');
-    Route::get('/list', 'index')->withoutMiddleware(AuthMiddleware::class)->name('index');
-    Route::get('/relatedProducts/{category}', 'relatedProducts')->withoutMiddleware(AuthMiddleware::class)->missing(function () {
+    Route::get('/list', 'index')->withoutMiddleware(AdminMiddleware::class)->name('index');
+    Route::get('/relatedProducts/{category}', 'relatedProducts')->withoutMiddleware(AdminMiddleware::class)->missing(function () {
         return to_route('missing');
     })->name('relatedProducts');
 
 
-    // Route::get('/show/{category}', 'show')->withoutMiddleware(AuthMiddleware::class)->missing(function () {
+    // Route::get('/show/{category}', 'show')->withoutMiddleware(AdminMiddleware::class)->missing(function () {
     //     return to_route('missing');
     // })->name('show');
-    // Route::post('/showSubCategories', 'showSubCats')->withoutMiddleware(AuthMiddleware::class)->name('showSubCats');
+    // Route::post('/showSubCategories', 'showSubCats')->withoutMiddleware(AdminMiddleware::class)->name('showSubCats');
     // Route::post('/admin/deleteAll', 'deleteAll')->name('deleteAll');
 });
 
@@ -77,7 +76,7 @@ Route::group([
     'prefix' => 'product',
     'controller' => ProductController::class,
     'as' => 'product.',
-    'middleware' => AuthMiddleware::class
+    'middleware' => AdminMiddleware::class
 ], function () {
     Route::get('/create', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
@@ -85,15 +84,28 @@ Route::group([
     Route::post('/edit/', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{id}', 'delete')->name('delete');
-    Route::get('/show/{product}', 'show')->withoutMiddleware(AuthMiddleware::class)->missing(function () {
+    Route::get('/show/{product}', 'show')->withoutMiddleware(AdminMiddleware::class)->missing(function () {
         return to_route('missing');
     })->name('show');
-    Route::get('/list', 'index')->withoutMiddleware(AuthMiddleware::class)->name('index');
-    Route::post('/filterRelatedProducts', 'filter')->withoutMiddleware(AuthMiddleware::class)->name('filter');
-    Route::post('/search', 'search')->withoutMiddleware(AuthMiddleware::class)->name('search');
-    Route::post('/searchResult', 'searchResult')->withoutMiddleware(AuthMiddleware::class)->name('searchResult');
+    Route::get('/list', 'index')->withoutMiddleware(AdminMiddleware::class)->name('index');
+    Route::post('/filterRelatedProducts', 'filter')->withoutMiddleware(AdminMiddleware::class)->name('filter');
+    Route::post('/search', 'search')->withoutMiddleware(AdminMiddleware::class)->name('search');
+    Route::post('/searchResult', 'searchResult')->withoutMiddleware(AdminMiddleware::class)->name('searchResult');
     // Route::get('/admin/show/{product}', 'adminShow')->missing(function () {
     //     return to_route('missing');
     // })->name('adminShow');
     // Route::post('/admin/deleteAll', 'deleteAll')->name('deleteAll');
+});
+
+Route::group([
+    'prefix'=>'setting',
+    'controller'=>SettingController::class,
+    'middleware'=>[AdminMiddleware::class],
+    'as'=>'setting.'
+
+], function(){
+    Route::get('/headerSettings', 'headerSettings')->name('headerSettings');
+    Route::post('/storeHeaderSetting', 'storeHeaderSetting')->name('storeHeaderSetting');
+    Route::get('/bannerSettings', 'bannerSettings')->name('bannerSettings');
+    Route::post('/storeBanners', 'storeBanners')->name('storeBanners');
 });
