@@ -78,6 +78,15 @@ class SettingController extends Controller
 
     public function storeBanners(Request $request){
         $settings = $request->setting;
-        dd($settings);
+        foreach($settings as $key=>$value){
+            if($key == 'topBanner' || $key == 'secondBanner'|| $key == 'rightBanner'|| $key == 'leftBanner'){
+                $name = $value->getClientOriginalName();
+                $fullName = time()."_".$name;
+                $path = $value->storeAs('settings', $fullName, 'public');
+                $value = $path;
+            }
+            $value && setting::upsert(['meta_key'=>$key, 'meta_value'=>$value],['meta_key'], ['meta_value']);
+        }
+        return redirect()->back();
     }
 }
