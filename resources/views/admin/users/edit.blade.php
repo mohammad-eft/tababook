@@ -1,26 +1,6 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {{-- <link rel="stylesheet" href="../css/output.css" type="text/css"> --}}
-    <script src="{{ asset('js/tailwind.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
-    <style>
-        .chosenItem:hover img {
-            transform: scale(1.1);
-        }
-
-        .borderGradient {
-            background: rgb(180, 115, 187);
-            background: linear-gradient(90deg, rgba(180, 115, 187, 1) 50%, rgba(255, 255, 255, 1) 100%);
-        }
-    </style>
-    <title>tabaBook</title>
-</head>
-
-<body>
+@extends('admin.app.dashboard')
+@section('title', 'طبابوک | ایجاد محصول')
+@section('content')
     <div class="w-full">
         <div class="pb-5 w-full flex justify-center items-center">
             <h1 class="text-xl text-center font-bold lg:text-start">کاربر {{ $user->name }}{{ $user->family }}</h1>
@@ -101,5 +81,4 @@
             </form>
         </div>
     </div>
-</body>
-</html>
+@endsection

@@ -8,12 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Middleware\AuthMiddleware;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Auth;
-
-Route::get('/test', function () {
-    $user = Auth::user();
-    $user->roles;
-    dd($user);
-});
+use App\Http\Controllers\SettingController;
 
 Route::view('/', 'home')->name('home');
 
@@ -100,4 +95,17 @@ Route::group([
     //     return to_route('missing');
     // })->name('adminShow');
     // Route::post('/admin/deleteAll', 'deleteAll')->name('deleteAll');
+});
+
+Route::group([
+    'prefix'=>'setting',
+    'controller'=>SettingController::class,
+    'middleware'=>[AdminMiddleware::class],
+    'as'=>'setting.'
+
+], function(){
+    Route::get('/headerSettings', 'headerSettings')->name('headerSettings');
+    Route::post('/storeHeaderSetting', 'storeHeaderSetting')->name('storeHeaderSetting');
+    Route::get('/bannerSettings', 'bannerSettings')->name('bannerSettings');
+    Route::post('/storeBanners', 'storeBanners')->name('storeBanners');
 });
