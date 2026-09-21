@@ -238,7 +238,7 @@
                         {{-- @if ($logo)
                             <img src="{{ asset('storage/' . $logo->logo) }}" alt="" class="w-5/12">
                         @endif --}}
-                        <h4 class="text-[15px] text-[#868686] font-bold ">چاپخانه آنلاین شاهکار</h4>
+                        <h4 class="text-[15px] text-[#868686] font-bold ">چاپخانه آنلاین طبابوک</h4>
                         <span class="w-full h-[1px] bg-[#292931]"></span>
                     </div>
 
@@ -523,7 +523,7 @@
                     <div class="flex flex-col gap-3 justify-center items-start mx-auto">
                         <h5 class="xl:text-2xl lg:text-xl font-bold text-[var(--text)]">درباره ما</h5>
                         <p class="w-10/12 xl:text-lg text-sm font-bold text-[var(--text-secondary)]">
-                            چاپ <span class="text-[var(--gold)]">شاهکار</span> با سال‌ها تجربه در زمینه چاپ دیجیتال و
+                            چاپ <span class="text-[var(--gold)]">طبابوک</span> با سال‌ها تجربه در زمینه چاپ دیجیتال و
                             تبلیغات محیطی، همراه مطمئن شما در مسیر برندسازی و معرفی کسب‌وکار است.</p>
                     </div>
                     <!-- social_network_svg -->

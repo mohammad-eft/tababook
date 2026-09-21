@@ -17,11 +17,11 @@ use IPPanel\Models\Response;
 
 class UserController extends Controller
 {
-    public function home()
-    {
-        $story = story::all();
-        return view('home', ['story' => $story]);
-    }
+    // public function home()
+    // {
+    //     $story = story::all();
+    //     return view('home', ['story' => $story]);
+    // }
 
     public function create()
     {
@@ -90,7 +90,7 @@ class UserController extends Controller
                 if ($checkHash) {
                     $user->role;
                     Auth::login($user);
-                    return redirect()->back();
+                    return to_route('home');
                 }
             }
             if(isset($request->code)){
@@ -99,7 +99,7 @@ class UserController extends Controller
                     if($phoneCode->code == $request->code){
                         $user->role;
                         Auth::login($user);
-                        return redirect()->back();
+                        return to_route('home');
                     }
                 }
             }
@@ -214,13 +214,20 @@ class UserController extends Controller
 
     public function checkAuth(Request $request)
     {
+        // $flag = false;
+        // $user = User::where('phoneNumber', $request->phoneNumber)->first();
+        // $code = phone_code::where('phoneNumber', $request->phoneNumber)->first();
+        // if($code && $code->code == $request->code){
+        //     $flag = true;
+        // }
+        $phoneNumber = $request->input('phoneNumber');
+        $user = User::where('phoneNumber', $phoneNumber)->first();
         $flag = false;
-        $user = User::where('phoneNumber', $request->phoneNumber)->first();
-        $code = phone_code::where('phoneNumber', $request->phoneNumber)->first();
-        if($code->code == $request->code){
+        if($user){
             $flag = true;
         }
         return response()->json(['user'=>$user, 'flag'=>$flag]);
+
     }
 
     public function removeActivationCode(Request $request){

@@ -68,7 +68,7 @@
                         </ul>
                     </div>
                     <div class="w-3/12 relative hidden lg:block">
-                        <input type="text" class="w-full outline-none rounded-md py-3 pl-2 pr-10 text-xs"
+                        <input type="text" class="w-full outline-none rounded-md py-3 pl-2 pr-10 text-xs bg-white"
                             placeholder="جست و جو">
                         <svg class="absolute w-6 top-[20%] right-[3%]" xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 512 512">

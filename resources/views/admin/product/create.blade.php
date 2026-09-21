@@ -1,5 +1,5 @@
 @extends('admin.app.dashboard')
-@section('title', 'شاهکار | ایجاد محصول')
+@section('title', 'طبابوک | ایجاد محصول')
 @section('content')
     @if (session('message'))
         <div
@@ -149,5 +149,5 @@
             </form>
         </div>
     </div>
-    <script src="{{ url('assets/js/attribute.js') }}"></script>
+    <script src="{{ url('js/attribute.js') }}"></script>
 @endsection
