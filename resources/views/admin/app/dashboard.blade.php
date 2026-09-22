@@ -66,6 +66,11 @@
                                     <a href="{{ route('setting.bannerSettings') }}"
                                         class="py-1 @if (Route::is('setting.bannerSettings')) text-[#FF0000] @endif">تنظیمات بنر ها</a>
                                 </li>
+                                <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
+                                    <span class="size-1 bg-white rounded-sm"></span>
+                                    <a href="{{ route('setting.cardSettings') }}"
+                                        class="py-1 @if (Route::is('setting.cardSettings')) text-[#FF0000] @endif">تنظیمات کارت ها</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
