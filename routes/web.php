@@ -10,8 +10,12 @@ use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SearchController;
-
+use App\Models\product;
 Route::view('/', 'home')->name('home');
+
+Route::get('/test', function(){
+    dd(product::all());
+});
 
 
 Route::get('/login', [UserController::class, 'login'])->name('login');

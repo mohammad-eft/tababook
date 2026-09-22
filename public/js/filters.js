@@ -4,9 +4,9 @@ let filters = {
     'exists': 1,
     'hasDescount': 0,
     'fromPrice': 0,
-    'toPrice': 9999999999,
+    'toPrice': null,
     'sortType': 'asc',
     'sortBy': 'created_at',
     'page': 1,
-    'category': null
+    'category': null,
 }

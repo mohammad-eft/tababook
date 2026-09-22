@@ -17,7 +17,7 @@
         ارسال رایگان برای سفارش‌های بالای ۱ میلیون تومان
     </div>
 
-    <header class="bg-white sticky top-0 z-20 shadow-[0_2px_10px_rgba(0,0,0,.04)]">
+    <header class="bg-white sticky top-0 z-20 shadow-[0_2px_10px_rgba(0,0,0,.04)] hidden">
         <div
             class="max-w-[1280px] min-h-[78px] mx-auto flex flex-wrap items-center gap-2.5 md:gap-[22px] px-3.5 md:px-5 py-2.5">
             <div class="text-[21px] md:text-[26px] font-extrabold text-[#ef394e] whitespace-nowrap">طبابوک</div>
@@ -75,7 +75,7 @@
                     <div class="font-semibold text-sm mb-[15px]">دسته‌بندی</div>
                     @foreach ($categories as $category)
                         <label class="flex items-center gap-2 my-3 text-[13px] text-[#52525b]"><input
-                            class="accent-[#ef394e] w-[17px] h-[17px] categories" type="checkbox" data-filter="{{ $category->title }}">{{ $category->title }}</label>
+                            class="accent-[#ef394e] w-[17px] h-[17px] categories" type="checkbox" data-filter="{{ $category->id }}">{{ $category->title }}</label>
                     @endforeach
                 </section>
 
@@ -151,9 +151,9 @@
                             class="absolute top-[25px] right-[25px] z-10 bg-[#ef394e] text-white rounded-[5px] text-[10px] px-[7px] py-1">5٪</span>
                         <button onclick="toggleFav(5)"
                             class="absolute top-[22px] left-5 z-10 border-0 bg-white text-xl text-[#aaa]">♡</button>
-                        <img src="https://placehold.co/600x600/f3f4f6/777?text=Product"
+                        <img src=""
                             alt="گوشی موبایل اپل iPhone 15 ظرفیت 128 گیگابایت" loading="lazy"
-                            onerror="this.src='https://placehold.co/600x600/f3f4f6/777?text=Product'"
+                            onerror=""
                             class="w-full aspect-square object-contain rounded-lg bg-[#f8f8f8] block mb-3.5">
                         <h3 class="m-0 mb-2.5 text-[13px] leading-[1.9] h-[50px] overflow-hidden">گوشی موبایل اپل
                             iPhone 15 ظرفیت 128 گیگابایت</h3>
