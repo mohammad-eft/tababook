@@ -551,7 +551,8 @@
                 <span class="w-2/3 h-[2.5px] rounded-full bg-slate-500 -rotate-45 -translate-y-1/2"></span>
             </button>
             <h3 class="text-center text-sm font-bold text-gray-400">ابتدا وارد شوید</h3>
-            <form action="{{ route('user.checkUserPopup') }}" class="flex flex-col items-center my-6 gap-3 w-full"
+            {{-- {{ route('user.checkUserPopup') }} --}}
+            <form action="" class="flex flex-col items-center my-6 gap-3 w-full"
                 method="post" id="loginForm">
                 @csrf
                 <input type="number"
@@ -569,7 +570,8 @@
                     </div>
                 </div>
                 <div class="w-full flex flex-row items-center justify-between" id="loginWay">
-                    <a href="{{ route('user.forgetPassword') }}"
+                    {{-- {{ route('user.forgetPassword') }} --}}
+                    <a href="#"
                         class="text-[#d5a743] inline-block max-md:my-1 my-4 max-md:text-sm">فراموشی رمز عبور</a>
                     <span class="text-[#d5a743] inline-block max-md:my-1 my-4 max-md:text-sm cursor-pointer"
                         onclick="loginWithPassKey(this)">ورود با رمز عبور</span>
@@ -581,7 +583,7 @@
                 <div class="w-full text-center">
                     <span class="text-[#4B5675] mt-1 md:mt-5 max-md:text-sm">
                         هنوز عضو نشدی؟
-                        <a href="{{ route('user.signup') }}" class="text-[#d5a743] mr-2">ثبت نام!</a>
+                        <a href="{{ route('signup') }}" class="text-[#d5a743] mr-2">ثبت نام!</a>
                     </span>
                 </div>
             </form>

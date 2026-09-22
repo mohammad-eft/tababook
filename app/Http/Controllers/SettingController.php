@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\setting;
+use App\Models\category;
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
@@ -28,7 +29,6 @@ class SettingController extends Controller
             'heroSecondaryButtonLink' => $heroSecondaryButtonLink
         ]);
     }
-
     public function storeHeaderSetting(Request $request)
     {
         $settings = $request->setting;
@@ -43,7 +43,6 @@ class SettingController extends Controller
         }
         return redirect()->back();
     }
-
     public function bannerSettings()
     {
         $topBanner = setting::where('meta_key', 'topBanner')->first();
@@ -78,7 +77,6 @@ class SettingController extends Controller
             'leftBannerButtonLink' => $leftBannerButtonLink,
         ]);
     }
-
     public function storeBanners(Request $request)
     {
         $settings = $request->setting;
@@ -93,7 +91,6 @@ class SettingController extends Controller
         }
         return redirect()->back();
     }
-
     public function cardSettings()
     {
         $twoCardsRightTitle = setting::where('meta_key', 'twoCardsRightTitle')->first();
@@ -123,7 +120,6 @@ class SettingController extends Controller
             'twoCardsSectionLink'=>$twoCardsSectionLink,
         ]);
     }
-
     public function cardStore(Request $request){
         $settings = $request->setting;
         foreach ($settings as $key => $value) {
@@ -136,5 +132,29 @@ class SettingController extends Controller
             $value && setting::upsert(['meta_key' => $key, 'meta_value' => $value], ['meta_key'], ['meta_value']);
         }
         return redirect()->back();
+    }
+
+    public function home(){
+        $setting = [];
+        $logo = setting::where('meta_key', 'logo')->first();
+        $heroBanner = setting::where('meta_key', 'heroBanner')->first();
+        $heroTitle = setting::where('meta_key', 'heroTitle')->first();
+        $heroSubtitle = setting::where('meta_key', 'heroSubtitle')->first();
+        $heroPrimaryButton = setting::where('meta_key', 'heroPrimaryButton')->first();
+        $heroPrimaryButtonLink = setting::where('meta_key', 'heroPrimaryButtonLink')->first();
+        $heroSecondaryButton = setting::where('meta_key', 'heroSecondaryButton')->first();
+        $heroSecondaryButtonLink = setting::where('meta_key', 'heroSecondaryButtonLink')->first();
+
+        $setting['logo'] = $logo ? $logo->meta_value : null;
+        $setting['heroBanner'] = $logo ? $heroBanner->meta_value : null;
+        $setting['heroTitle'] = $logo ? $heroTitle->meta_value : null;
+        $setting['heroSubtitle'] = $logo ? $heroSubtitle->meta_value : null;
+        $setting['heroPrimaryButton'] = $logo ? $heroPrimaryButton->meta_value : null;
+        $setting['heroPrimaryButtonLink'] = $logo ? $heroPrimaryButtonLink->meta_value : null;
+        $setting['heroSecondaryButton'] = $logo ? $heroSecondaryButton->meta_value : null;
+        $setting['heroSecondaryButtonLink'] = $logo ? $heroSecondaryButtonLink->meta_value : null;
+
+        $categories = category::all();
+        return view('home', ['setting'=>$setting, 'categories'=>$categories]);
     }
 }
