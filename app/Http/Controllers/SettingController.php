@@ -123,11 +123,64 @@ class SettingController extends Controller
             'twoCardsSectionLinkText'=>$twoCardsSectionLinkText,
         ]);
     }
-    public function cardStore(Request $request){
-        
+    
+    public function cardStore(Request $request)
+    {    
         $settings = $request->setting;
         foreach ($settings as $key => $value) {
             if ($key == 'twoCardsRightImage' || $key == 'twoCardsLeftImage') {
+                $name = $value->getClientOriginalName();
+                $fullName = time() . '_' . $name;
+                $path = $value->storeAs('settings', $fullName, 'public');
+                $value = $path;
+            }
+            $value && setting::upsert(['meta_key' => $key, 'meta_value' => $value], ['meta_key'], ['meta_value']);
+        }
+        return redirect()->back();
+    }
+
+    public function serviceSettings()
+    {
+        $serviceTitle1 = setting::where('meta_key', 'serviceTitle1')->first();
+        $serviceSubTitle1 = setting::where('meta_key', 'serviceSubTitle1')->first();
+        $serviceImage1 = setting::where('meta_key', 'serviceImage1')->first();
+        $serviceTitle2 = setting::where('meta_key', 'serviceTitle2')->first();
+        $serviceSubTitle2 = setting::where('meta_key', 'serviceSubTitle2')->first();
+        $serviceImage2 = setting::where('meta_key', 'serviceImage2')->first();
+        $serviceTitle3 = setting::where('meta_key', 'serviceTitle3')->first();
+        $serviceSubTitle3 = setting::where('meta_key', 'serviceSubTitle3')->first();
+        $serviceImage3 = setting::where('meta_key', 'serviceImage3')->first();
+        $serviceTitle4 = setting::where('meta_key', 'serviceTitle4')->first();
+        $serviceSubTitle4 = setting::where('meta_key', 'serviceSubTitle4')->first();
+        $serviceImage4 = setting::where('meta_key', 'serviceImage4')->first();
+        $serviceTitle5 = setting::where('meta_key', 'serviceTitle5')->first();
+        $serviceSubTitle5 = setting::where('meta_key', 'serviceSubTitle5')->first();
+        $serviceImage5 = setting::where('meta_key', 'serviceImage5')->first();
+        
+        return view('admin.setting.services',[
+            'serviceTitle1'=>$serviceTitle1,
+            'serviceSubTitle1'=>$serviceSubTitle1,
+            'serviceImage1'=>$serviceImage1,
+            'serviceTitle2'=>$serviceTitle2,
+            'serviceSubTitle2'=>$serviceSubTitle2,
+            'serviceImage2'=>$serviceImage2,
+            'serviceTitle3'=>$serviceTitle3,
+            'serviceSubTitle3'=>$serviceSubTitle3,
+            'serviceImage3'=>$serviceImage3,
+            'serviceTitle4'=>$serviceTitle4,
+            'serviceSubTitle4'=>$serviceSubTitle4,
+            'serviceImage4'=>$serviceImage4,
+            'serviceTitle5'=>$serviceTitle5,
+            'serviceSubTitle5'=>$serviceSubTitle5,
+            'serviceImage5'=>$serviceImage5,
+        ]);
+    }
+
+    public function serviceStore(Request $request)
+    {    
+        $settings = $request->all();
+        foreach ($settings as $key => $value) {
+            if ($key == 'serviceImage1' || $key == 'serviceImage2' || $key == 'serviceImage3' || $key == 'serviceImage4' || $key == 'serviceImage5') {
                 $name = $value->getClientOriginalName();
                 $fullName = time() . '_' . $name;
                 $path = $value->storeAs('settings', $fullName, 'public');
@@ -177,6 +230,24 @@ class SettingController extends Controller
         $twoCardsLeftButton = setting::where('meta_key', 'twoCardsLeftButton')->first();
         $twoCardsLeftButtonLink = setting::where('meta_key', 'twoCardsLeftButtonLink')->first();
 
+        $serviceTitle1 = setting::where('meta_key', 'serviceTitle1')->first();
+        $serviceSubTitle1 = setting::where('meta_key', 'serviceSubTitle1')->first();
+        $serviceImage1 = setting::where('meta_key', 'serviceImage1')->first();
+        $serviceTitle2 = setting::where('meta_key', 'serviceTitle2')->first();
+        $serviceSubTitle2 = setting::where('meta_key', 'serviceSubTitle2')->first();
+        $serviceImage2 = setting::where('meta_key', 'serviceImage2')->first();
+        $serviceTitle3 = setting::where('meta_key', 'serviceTitle3')->first();
+        $serviceSubTitle3 = setting::where('meta_key', 'serviceSubTitle3')->first();
+        $serviceImage3 = setting::where('meta_key', 'serviceImage3')->first();
+        $serviceTitle4 = setting::where('meta_key', 'serviceTitle4')->first();
+        $serviceSubTitle4 = setting::where('meta_key', 'serviceSubTitle4')->first();
+        $serviceImage4 = setting::where('meta_key', 'serviceImage4')->first();
+        $serviceTitle5 = setting::where('meta_key', 'serviceTitle5')->first();
+        $serviceSubTitle5 = setting::where('meta_key', 'serviceSubTitle5')->first();
+        $serviceImage5 = setting::where('meta_key', 'serviceImage5')->first();
+        
+        
+
         $setting['logo'] = $logo ? $logo->meta_value : null;
         $setting['heroBanner'] = $logo ? $heroBanner->meta_value : null;
         $setting['heroTitle'] = $logo ? $heroTitle->meta_value : null;
@@ -186,34 +257,50 @@ class SettingController extends Controller
         $setting['heroSecondaryButton'] = $logo ? $heroSecondaryButton->meta_value : null;
         $setting['heroSecondaryButtonLink'] = $logo ? $heroSecondaryButtonLink->meta_value : null;
 
-        $setting['topBanner']=$topBanner->meta_value;
-        $setting['topBannerLink']=$topBannerLink->meta_value;
-        $setting['secondBanner']=$secondBanner->meta_value;
-        $setting['secondBannerTitle']=$secondBannerTitle->meta_value;
-        $setting['secondBannerSubtitle']=$secondBannerSubtitle->meta_value;
-        $setting['secondBannerButton']=$secondBannerButton->meta_value;
-        $setting['secondBannerButtonLink']=$secondBannerButtonLink->meta_value;
-        $setting['rightBanner']=$rightBanner->meta_value;
-        $setting['rightBannerLink']=$rightBannerLink->meta_value;
-        $setting['leftBanner']=$leftBanner->meta_value;
-        $setting['leftBannerTitle']=$leftBannerTitle->meta_value;
-        $setting['leftBannerSubtitle']=$leftBannerSubtitle->meta_value;
-        $setting['leftBannerButton']=$leftBannerButton->meta_value;
-        $setting['leftBannerButtonLink']=$leftBannerButtonLink->meta_value;
+        $setting['topBanner']=$topBanner ? $topBanner->meta_value : null;
+        $setting['topBannerLink']=$topBannerLink ? $topBannerLink->meta_value : null;
+        $setting['secondBanner']=$secondBanner ? $secondBanner->meta_value : null;
+        $setting['secondBannerTitle']=$secondBannerTitle ? $secondBannerTitle->meta_value : null;
+        $setting['secondBannerSubtitle']=$secondBannerSubtitle ? $secondBannerSubtitle->meta_value : null;
+        $setting['secondBannerButton']=$secondBannerButton ? $secondBannerButton->meta_value : null;
+        $setting['secondBannerButtonLink']=$secondBannerButtonLink ? $secondBannerButtonLink->meta_value : null;
+        $setting['rightBanner']=$rightBanner ? $rightBanner->meta_value : null;
+        $setting['rightBannerLink']=$rightBannerLink ? $rightBannerLink->meta_value : null;
+        $setting['leftBanner']=$leftBanner ? $leftBanner->meta_value : null;
+        $setting['leftBannerTitle']=$leftBannerTitle ? $leftBannerTitle->meta_value : null;
+        $setting['leftBannerSubtitle']=$leftBannerSubtitle ? $leftBannerSubtitle->meta_value : null;
+        $setting['leftBannerButton']=$leftBannerButton ? $leftBannerButton->meta_value : null;
+        $setting['leftBannerButtonLink']=$leftBannerButtonLink ? $leftBannerButtonLink->meta_value : null;
 
-        $setting['twoCardsSectionTitle'] = $twoCardsSectionTitle->meta_value;
-        $setting['twoCardsSectionLinkUrl'] = $twoCardsSectionLinkUrl->meta_value;
-        $setting['twoCardsSectionLinkText'] = $twoCardsSectionLinkText->meta_value;
-        $setting['twoCardsRightTitle'] = $twoCardsRightTitle->meta_value;
-        $setting['twoCardsRightSubtitle'] = $twoCardsRightSubtitle->meta_value;
-        $setting['twoCardsRightImage'] = $twoCardsRightImage->meta_value;
-        $setting['twoCardsRightButton'] = $twoCardsRightButton->meta_value;
-        $setting['twoCardsRightButtonLink'] = $twoCardsRightButtonLink->meta_value;
-        $setting['twoCardsLeftTitle'] = $twoCardsLeftTitle->meta_value;
-        $setting['twoCardsLeftSubtitle'] = $twoCardsLeftSubtitle->meta_value;
-        $setting['twoCardsLeftImage'] = $twoCardsLeftImage->meta_value;
-        $setting['twoCardsLeftButton'] = $twoCardsLeftButton->meta_value;
-        $setting['twoCardsLeftButtonLink'] = $twoCardsLeftButtonLink->meta_value;
+        $setting['twoCardsSectionTitle'] =  $twoCardsSectionTitle ? $twoCardsSectionTitle->meta_value : null;
+        $setting['twoCardsSectionLinkUrl'] =  $twoCardsSectionLinkUrl ? $twoCardsSectionLinkUrl->meta_value : null;
+        $setting['twoCardsSectionLinkText'] =  $twoCardsSectionLinkText ? $twoCardsSectionLinkText->meta_value : null;
+        $setting['twoCardsRightTitle'] =  $twoCardsRightTitle ? $twoCardsRightTitle->meta_value : null;
+        $setting['twoCardsRightSubtitle'] =  $twoCardsRightSubtitle ? $twoCardsRightSubtitle->meta_value : null;
+        $setting['twoCardsRightImage'] =  $twoCardsRightImage ? $twoCardsRightImage->meta_value : null;
+        $setting['twoCardsRightButton'] =  $twoCardsRightButton ? $twoCardsRightButton->meta_value : null;
+        $setting['twoCardsRightButtonLink'] =  $twoCardsRightButtonLink ? $twoCardsRightButtonLink->meta_value : null;
+        $setting['twoCardsLeftTitle'] =  $twoCardsLeftTitle ? $twoCardsLeftTitle->meta_value : null;
+        $setting['twoCardsLeftSubtitle'] =  $twoCardsLeftSubtitle ? $twoCardsLeftSubtitle->meta_value : null;
+        $setting['twoCardsLeftImage'] =  $twoCardsLeftImage ? $twoCardsLeftImage->meta_value : null;
+        $setting['twoCardsLeftButton'] =  $twoCardsLeftButton ? $twoCardsLeftButton->meta_value : null;
+        $setting['twoCardsLeftButtonLink'] =  $twoCardsLeftButtonLink ? $twoCardsLeftButtonLink->meta_value : null;
+
+        $setting['serviceTitle1'] = $serviceTitle1 ? $serviceTitle1->meta_value : null;
+        $setting['serviceSubTitle1'] = $serviceSubTitle1 ? $serviceSubTitle1->meta_value : null;
+        $setting['serviceImage1'] = $serviceImage1 ? $serviceImage1->meta_value : null;
+        $setting['serviceTitle2'] = $serviceTitle2 ? $serviceTitle2->meta_value : null;
+        $setting['serviceSubTitle2'] = $serviceSubTitle2 ? $serviceSubTitle2->meta_value : null;
+        $setting['serviceImage2'] = $serviceImage2 ? $serviceImage2->meta_value : null;
+        $setting['serviceTitle3'] = $serviceTitle3 ? $serviceTitle3->meta_value : null;
+        $setting['serviceSubTitle3'] = $serviceSubTitle3 ? $serviceSubTitle3->meta_value : null;
+        $setting['serviceImage3'] = $serviceImage3 ? $serviceImage3->meta_value : null;
+        $setting['serviceTitle4'] = $serviceTitle4 ? $serviceTitle4->meta_value : null;
+        $setting['serviceSubTitle4'] = $serviceSubTitle4 ? $serviceSubTitle4->meta_value : null;
+        $setting['serviceImage4'] = $serviceImage4 ? $serviceImage4->meta_value : null;
+        $setting['serviceTitle5'] = $serviceTitle5 ? $serviceTitle5->meta_value : null;
+        $setting['serviceSubTitle5'] = $serviceSubTitle5 ? $serviceSubTitle5->meta_value : null;
+        $setting['serviceImage5'] = $serviceImage5 ? $serviceImage5->meta_value : null;
 
         $categories = category::all();
         // $products = product::where('show_in_home', 1)->weherNotNull('secondary_price')->get();

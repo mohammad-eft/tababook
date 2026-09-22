@@ -696,142 +696,87 @@
         <!-- weblag -->
         <!-- prapery -->
         <section
-            class="w-11/12 lg:h-30 flex max-sm:flex max-sm:flex-col gap-4 items-center justify-between max-lg:grid grid-cols-2 lg:py-4 sm:py-3 sm:px-5  rounded-xl">
+            class="w-11/12 lg:h-30 grid grid-cols-1 lg:grid-cols-5 gap-4 items-center lg:py-4 sm:py-3 rounded-xl">
             <div
-                class="w-full lg:w-1/6 h-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2">
-                <div class="group max-sm:w-9/12 msx-sm:h-full flex max-lg:flex-col gap-2 justify-center items-center">
-
+                class="w-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2">
+                <div class="group max-sm:w-9/12 msx-sm:h-full flex max-lg:flex-col gap-2 justify-center w-full items-center">
                     <div class="group-hover:scale-[1.05] group-active:scale-[1.3] transition_root">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
-                            class="xl:size-13 lg:size-9 size-7 fill-green-700">
-                            <path
-                                d="M73 127L256 49.4 439 127c5.9 2.5 9.1 7.8 9 12.8c-.4 91.4-38.4 249.3-186.3 320.1c-3.6 1.7-7.8 1.7-11.3 0C102.4 389 64.5 231.2 64 139.7c0-5 3.1-10.2 9-12.8zM457.7 82.8L269.4 2.9C265.2 1 260.7 0 256 0s-9.2 1-13.4 2.9L54.3 82.8c-22 9.3-38.4 31-38.3 57.2c.5 99.2 41.3 280.7 213.6 363.2c16.7 8 36.1 8 52.8 0C454.8 420.7 495.5 239.2 496 140c.1-26.2-16.3-47.9-38.3-57.2zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z">
-                            </path>
-                        </svg>
+                        <img src="{{ asset('storage/'.$setting['serviceImage1']) }}" class="xl:size-13 lg:size-9 size-7 object-cover" alt="">
                     </div>
                     <div
                         class="flex flex-col sm:gap-2 gap-1 lg:items-start items-center max-sm:items-center justify-center">
-                        <h5 class="xl:text-lg sm:text-xs text-sm font-bold text-[var(--text)]">
-                            ضمانت اصالت</h5>
+                        <h5 class="xl:text-lg text-md font-bold text-[var(--text)]">{{ $setting['serviceTitle1'] }}</h5>
                         <div
                             class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px] sm:text-[7px] text-[10px] text-[var(--text-secondary)]">
-                            <span class="font-bold max-lg:text-center">محصولات با تضمین اصالت محصول</span>
+                            <span class="font-bold max-lg:text-center">{{ $setting['serviceSubTitle1'] }}</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <span class="w-0.5 h-full bg-[var(--border)] rounded-full max-lg:hidden"></span>
-            <div
-                class="w-full lg:w-1/6 h-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2">
-                <div class="group max-sm:w-9/12 msx-sm:h-full flex max-lg:flex-col gap-2 justify-center items-center">
 
+            <div
+                class="w-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2">
+                <div class="group max-sm:w-9/12 msx-sm:h-full flex max-lg:flex-col gap-2 justify-center w-full items-center">
                     <div class="group-hover:scale-[1.05] group-active:scale-[1.3] transition_root">
-                        <svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"
-                            class="xl:size-13 size-9 fill-green-700">
-                            <path
-                                d="M1757 1408l35 313q3 28-16 50-19 21-48 21h-1664q-29 0-48-21-19-22-16-50l35-313h1722zm-93-839l86 775h-1708l86-775q3-24 21-40.5t43-16.5h256v128q0 53 37.5 90.5t90.5 37.5 90.5-37.5 37.5-90.5v-128h384v128q0 53 37.5 90.5t90.5 37.5 90.5-37.5 37.5-90.5v-128h256q25 0 43 16.5t21 40.5zm-384-185v256q0 26-19 45t-45 19-45-19-19-45v-256q0-106-75-181t-181-75-181 75-75 181v256q0 26-19 45t-45 19-45-19-19-45v-256q0-159 112.5-271.5t271.5-112.5 271.5 112.5 112.5 271.5z">
-                            </path>
-                        </svg>
+                        <img src="{{ asset('storage/'.$setting['serviceImage2']) }}" class="xl:size-13 lg:size-9 size-7 object-cover" alt="">
                     </div>
                     <div
                         class="flex flex-col sm:gap-2 gap-1 lg:items-start items-center max-sm:items-center justify-center">
-                        <h5 class="xl:text-lg sm:text-xs text-sm font-bold text-[var(--text)]">پرداخت امن
-                        </h5>
+                        <h5 class="xl:text-lg text-md font-bold text-[var(--text)]">{{ $setting['serviceTitle2'] }}</h5>
                         <div
                             class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px] sm:text-[7px] text-[10px] text-[var(--text-secondary)]">
-                            <span class="font-bold max-lg:text-center">پرداخت امن با تمام مجوز های قانونی</span>
+                            <span class="font-bold max-lg:text-center">{{ $setting['serviceSubTitle2'] }}</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div
-                class="w-full lg:w-1/4 h-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 px-2 max-lg:col-span-2 gradient_box1 rounded-xl">
-                <div class="group max-sm:w-9/12 msx-sm:h-full flex max-lg:flex-col gap-2 justify-center items-center">
-                    <div class="group-hover:scale-[1.05] group-active:scale-[1.6] transition_root">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="xl:size-13 size-9" viewBox="0 0 24 24"
-                            fill="none" stroke="green" stroke-width="1.6" stroke-linecap="round"
-                            stroke-linejoin="round">
-                            <path
-                                d="M12 3 C12.7 3.6 13.6 3.5 14.3 3.9 C15.1 4.2 15.5 5 16.2 5.4 C17 5.8 17.8 6.3 18 7.2 C18.3 8 19 8.8 19 9.8 C19 10.8 18.3 11.6 18 12.4 C17.8 13.3 17 13.8 16.2 14.2 C15.5 14.6 15.1 15.4 14.3 15.7 C13.6 16.1 12.7 16 12 16.6 C11.3 16 10.4 16.1 9.7 15.7 C8.9 15.4 8.5 14.6 7.8 14.2 C7 13.8 6.2 13.3 6 12.4 C5.7 11.6 5 10.8 5 9.8 C5 8.8 5.7 8 6 7.2 C6.2 6.3 7 5.8 7.8 5.4 C8.5 5 8.9 4.2 9.7 3.9 C10.4 3.5 11.3 3.6 12 3Z">
-                            </path>
-                            <circle cx="12" cy="9.8" r="4.2"></circle>
-                            <path d="M9.8 14.6L7.7 20H10L12 17.7"></path>
-                            <path d="M14.2 14.6L16.3 20H14L12 17.7"></path>
-                        </svg>
-                    </div>
-                    <div
-                        class="flex flex-col sm:gap-2 gap-1 lg:items-start items-center max-sm:items-center justify-center">
-                        <h5 class="xl:text-lg text-md font-bold text-[var(--text)]">چرا ما را انتخاب
-                            کنید</h5>
-                        <div
-                            class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px] text-[10px] text-[var(--text)]">
-                            <span class="font-bold max-lg:text-center">ما با دانش فنی بالا و کادر مجرب و به روز همراه
-                                شما در مسیر
-                                خلق یک اثر ماندگار هستیم.</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div
-                class="w-full lg:w-1/6 h-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2">
-                <div class="group max-sm:w-9/12 msx-sm:h-full flex max-lg:flex-col gap-2 justify-center items-center">
 
+            <div
+                class="w-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2">
+                <div class="group max-sm:w-9/12 msx-sm:h-full flex max-lg:flex-col gap-2 justify-center w-full items-center">
                     <div class="group-hover:scale-[1.05] group-active:scale-[1.3] transition_root">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                            class="xl:size-13 lg:size-9 size-7 fill-none" stroke="green" stroke-width="1.2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M2 7h11v10H2z"></path>
-                            <path d="M13 10h4l4 3.5V17h-8z"></path>
-                            <circle cx="6" cy="18.5" r="1.6"></circle>
-                            <circle cx="17" cy="18.5" r="1.6"></circle>
-                        </svg>
+                        <img src="{{ asset('storage/'.$setting['serviceImage3']) }}" class="xl:size-13 lg:size-9 size-7 object-cover" alt="">
                     </div>
                     <div
                         class="flex flex-col sm:gap-2 gap-1 lg:items-start items-center max-sm:items-center justify-center">
-                        <h5 class="xl:text-lg sm:text-xs text-sm font-bold text-[var(--text)]">تحویل
-                            سریع</h5>
-                        <div
-                            class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px] sm:text-[7px]  text-[10px] text-[var(--text-secondary)]">
-                            <span class="font-bold max-lg:text-center">با فرایند تولید بهینه و منسجم سفارش شما در سریع
-                                ترین زمان
-                                ممکن آماده میشود.</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <span class="w-0.5 h-full bg-[var(--border)] rounded-full max-lg:hidden"></span>
-            <div
-                class="w-full lg:w-1/6 h-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2">
-                <div class="group max-sm:w-9/12 msx-sm:h-full flex max-lg:flex-col gap-2 justify-center items-center">
-
-                    <div class="group-hover:scale-[1.05] group-active:scale-[1.3] transition_root">
-                        <svg class="xl:size-13 lg:size-9 size-7" viewBox="0 0 64 64" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <!-- Circle -->
-                            <circle cx="32" cy="32" r="22" stroke="green" stroke-width="3.5"
-                                stroke-linecap="round" stroke-dasharray="132 12"></circle>
-
-                            <!-- Top & Bottom marks -->
-                            <line x1="32" y1="6" x2="32" y2="11" stroke="green"
-                                stroke-width="3" stroke-linecap="round">
-                            </line>
-                            <line x1="32" y1="53" x2="32" y2="58" stroke="green"
-                                stroke-width="3" stroke-linecap="round"></line>
-
-                            <!-- Dollar -->
-                            <text x="32" y="42" text-anchor="middle" font-size="28" font-family="Arial, sans-serif"
-                                font-weight="700" fill="green">$</text>
-                        </svg>
-                    </div>
-                    <div
-                        class="flex flex-col sm:gap-2 gap-1 lg:items-start items-center max-sm:items-center justify-center">
-                        <h5 class="xl:text-lg sm:text-xs text-sm font-bold text-[var(--text)]">قیمت
-                            مناسب</h5>
+                        <h5 class="xl:text-lg text-md font-bold text-[var(--text)]">{{ $setting['serviceTitle3'] }}</h5>
                         <div
                             class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px] sm:text-[7px] text-[10px] text-[var(--text-secondary)]">
-                            <span class="max-lg:text-center font-bold">با بهینه سازی مصرف مواد اولیه و کاهش هزینه های
-                                اضافه به
-                                صرفه ترین قیمت ها را داریم.</span>
+                            <span class="font-bold max-lg:text-center">{{ $setting['serviceSubTitle3'] }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="w-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2">
+                <div class="group max-sm:w-9/12 msx-sm:h-full flex max-lg:flex-col gap-2 justify-center w-full items-center">
+                    <div class="group-hover:scale-[1.05] group-active:scale-[1.3] transition_root">
+                        <img src="{{ asset('storage/'.$setting['serviceImage4']) }}" class="xl:size-13 lg:size-9 size-7 object-cover" alt="">
+                    </div>
+                    <div
+                        class="flex flex-col sm:gap-2 gap-1 lg:items-start items-center max-sm:items-center justify-center">
+                        <h5 class="xl:text-lg text-md font-bold text-[var(--text)]">{{ $setting['serviceTitle4'] }}</h5>
+                        <div
+                            class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px] sm:text-[7px] text-[10px] text-[var(--text-secondary)]">
+                            <span class="font-bold max-lg:text-center">{{ $setting['serviceSubTitle4'] }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="w-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2">
+                <div class="group max-sm:w-9/12 msx-sm:h-full flex max-lg:flex-col gap-2 justify-center w-full items-center">
+                    <div class="group-hover:scale-[1.05] group-active:scale-[1.3] transition_root">
+                        <img src="{{ asset('storage/'.$setting['serviceImage5']) }}" class="xl:size-13 lg:size-9 size-7 object-cover" alt="">
+                    </div>
+                    <div
+                        class="flex flex-col sm:gap-2 gap-1 lg:items-start items-center max-sm:items-center justify-center">
+                        <h5 class="xl:text-lg text-md font-bold text-[var(--text)]">{{ $setting['serviceTitle5'] }}</h5>
+                        <div
+                            class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px] sm:text-[7px] text-[10px] text-[var(--text-secondary)]">
+                            <span class="font-bold max-lg:text-center">{{ $setting['serviceSubTitle5'] }}</span>
                         </div>
                     </div>
                 </div>
@@ -839,7 +784,7 @@
         </section>
         <section class="w-full flex justify-center gap-5 mt-10">
             <div
-                class="w-11/12 flex items-center justify-center bg-gray-200 p-5 rounded-md lg:flex-row flex-col flex-col-reverse gap-10 lg:gap-0">
+                class="w-11/12 flex items-center justify-center bg-gray-200 p-5 rounded-md lg:flex-row flex-col-reverse gap-10 lg:gap-0">
                 <div class="flex flex-col lg:w-5/12 w-full gap-3">
                     <div class="flex w-full gap-1">
                         <input type="text" class="lg:w-8/12 w-10/12 bg-white rounded-md px-3"
