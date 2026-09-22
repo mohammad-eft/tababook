@@ -4,25 +4,18 @@
     font-family: "IRANSansX";
 }
 
-.in-fa {
-  font-family: 'IRANSansXFaNum';
+.cart_shdow{
+    box-shadow: 0 0 3px 2px rgb(239, 238, 238);
 }
 
-.samim {
-    font-family: "Samim";
-}
+.transition_fast {
+        transition: all 0.2s ease;
+    }
 
-.yekan {
-    font-family: "Yekan";
-}
+    .transition_normal {
+        transition: all 0.3s ease;
+    }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-input[type="number"] {
-    -moz-appearance: textfield;
-    /* Firefox */
-}
+    .transition_slow {
+        transition: all 0.5s ease;
+    }
