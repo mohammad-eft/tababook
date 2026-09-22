@@ -98,7 +98,7 @@ class SearchController extends Controller
     public function getFilters(Request $request)
     {
         $filters = $request->input('filters');
-        $results = [];
+        Log::info($filters);
         $writer = $filters['writer'] ?? null;
         $category = $filters['category'] ?? null;
         $exists = $filters['exists'] ?? 1;
@@ -114,11 +114,11 @@ class SearchController extends Controller
                 Log::info('writer');
                 $query->where('products.writer', 'like', '%' . $writer . '%');
             }
-            if ($fromPrice && !$toPrice) {
+            if ($fromPrice==0 && !$toPrice) {
                 Log::info('fromPrice');
                 $query->where('products.primary_price', '>', $fromPrice);
             }
-            if ($toPrice && !$fromPrice) {
+            if ($toPrice && !$fromPrice!=0) {
                 Log::info('toPrice');
                 $query->where('products.primary_price', '<', $toPrice);
             }
@@ -144,14 +144,12 @@ class SearchController extends Controller
             }
         });
 
-        // فیلتر دسته‌بندی
         if ($category && is_array($category) && count($category) > 0) {
             $products = $products->whereHas('categories', function ($q) use ($category) {
                 $q->whereIn('categories.id', $category);
             });
         }
 
-        // فیلتر کلیدواژه
         if ($keyword) {
             $products = $products->where(function ($q) use ($keyword) {
                 $q
@@ -161,9 +159,9 @@ class SearchController extends Controller
         }
 
         $products = $products->orderBy($sortBy, $sortType)->get();
-        $results['products'] = $products;
+     
 
-        return response()->json(['results' => $results, 'filters' => $filters]);
+        return response()->json(['products' => $products, 'filters' => $filters]);
     }
 
     public function page()

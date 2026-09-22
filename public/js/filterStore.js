@@ -1,80 +1,69 @@
-// let categories = document.querySelectorAll('.categories')
-// let minPrice = document.getElementById('minPrice')
-// let maxPrice = document.getElementById('maxPrice')
-// categories.forEach(category=>{
-//     category.addEventListener('change', ()=>{
-//         filters.category = {}
-//         categories.forEach((cat, index)=>{
-//             if(cat.checked){
-//                 filters.category[index]=cat.getAttribute('data-filter')
-//             }
-//         })
-//         $.ajax({
-//             url: api+'getFilters',
-//             type: "POST",
-//             dataType: "json",
-//             data: {
-//                 'filters': filters
-//             },
-//             success: function(data){
-//                 console.log(data)
-//             },
-//             error: function(){
-//                 console.log('error')
-//             }
-//         })
-//     })
-// })
+let categories = document.querySelectorAll('.categories')
+let minPrice = document.getElementById('minPrice')
+let maxPrice = document.getElementById('maxPrice')
+let searchInput = document.getElementById('searchInput')
+let hasDescount = document.getElementById('hasDescount')
+let exists = document.getElementById('exists')
 
-let categories = document.querySelectorAll('.categories');
-let minPrice = document.getElementById('minPrice');
-let maxPrice = document.getElementById('maxPrice');
-
-// اطمینان از اینکه filters همیشه یه آبجکت هست
-window.filters = window.filters || {};
+window.filters = window.filters || {}
 
 categories.forEach(category => {
     category.addEventListener('change', () => {
 
-        // ساخت آبجکت دسته‌بندی از چک‌باکس‌های انتخاب‌شده
-        let categoryObj = {};
-        let hasAny = false;
+        let categoryObj = {}
+        let hasAny = false
 
         categories.forEach((cat, index) => {
             if (cat.checked) {
-                hasAny = true;
-                // از data-filter استفاده می‌کنیم (id واقعی دسته)
-                categoryObj[index] = cat.getAttribute('data-filter');
+                hasAny = true
+                categoryObj[index] = cat.getAttribute('data-filter')
             }
-        });
+        })
 
-        // اگه چیزی چک شده بود، بذار؛ وگرنه کلاً حذفش کن
         if (hasAny) {
-            filters.category = categoryObj;
+            filters.category = categoryObj
         } else {
-            delete filters.category;
+            delete filters.category
         }
+        getFilters()
+    })
+})
 
-        // لاگ برای دیباگ
-        // console.log('filters being sent:', JSON.stringify(filters));
-        // console.log(filters)
-
-        $.ajax({
-            url: api + 'getFilters',
-            type: "POST",
-            dataType: "json",
-            data: {
-                filters: filters
-            },
-            success: function (data) {
-                console.log(data.filters)
-                console.log(data.results.products)
-                console.log(data.results.categories)
-               
-            },
-            error: function (xhr) {
-                console.log('error:', xhr.responseText);
-            }
-        });
-    });
-});
+minPrice.addEventListener('keyup', ()=>{
+    filters.fromPrice = minPrice.value
+    getFilters()
+})
+maxPrice.addEventListener('keyup', ()=>{
+    filters.toPrice = maxPrice.value
+    getFilters()
+})
+searchInput.addEventListener('keyup', ()=>{
+    filters.keyword = searchInput.value
+    console.log(searchInput.value)
+    getFilters()
+})
+hasDescount.addEventListener('change', ()=>{
+    hasDescount.checked ? filters.hasDescount = 1 : filters.hasDescount = 0
+    getFilters()
+})
+exists.addEventListener('change', ()=>{
+    exists.checked ? filters.exists = 1 : filters.exists = 0
+    getFilters()
+})
+function getFilters(){
+    $.ajax({
+        url: api + 'getFilters',
+        type: "POST",
+        dataType: "json",
+        data: {
+            'filters': filters
+        },
+        success: function (response) {
+            console.log(response.filters)
+            console.log(response.products)
+        },
+        error: function (xhr) {
+            console.log('error:', xhr.responseText);
+        }
+    })
+}
