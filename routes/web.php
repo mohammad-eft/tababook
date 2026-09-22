@@ -86,7 +86,7 @@ Route::group([
     Route::get('/create', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
     Route::get('/admin/list', 'adminIndex')->name('adminIndex');
-    Route::post('/edit/', 'edit')->name('edit');
+    Route::post('/edit', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{id}', 'delete')->name('delete');
     Route::get('/show/{product}', 'show')->withoutMiddleware(AdminMiddleware::class)->missing(function () {

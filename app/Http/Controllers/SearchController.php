@@ -111,11 +111,11 @@ class SearchController extends Controller
             if ($writer) {
                 $query->where('products.writer', 'like', '%' . $writer . '%');
             }
-            if ($fromPrice==0 && !$toPrice) {
-                $query->where('products.primary_price', '>', $fromPrice);
+            if ($fromPrice && !$toPrice) {
+                $query->where('products.primary_price', '>=', $fromPrice);
             }
-            if ($toPrice && $fromPrice!=0) {
-                $query->where('products.primary_price', '<', $toPrice);
+            if ($toPrice && !$fromPrice) {
+                $query->where('products.primary_price', '<=', $toPrice);
             }
             if ($fromPrice && $toPrice) {
                 $query->whereBetween('products.primary_price', [$fromPrice, $toPrice]);
@@ -141,13 +141,6 @@ class SearchController extends Controller
             });
         }
         $products = $products->orderBy($sortBy, $sortType)->get();
-        return response()->json(['products' => $products, 'filters' => $filters]);
-    }
-
-    public function page()
-    {
-        $products = product::with('media')->with('categories')->get();
-        $categories = category::all();
         foreach ($products as $product) {
             if ($product->media->isNotEmpty()) {
                 foreach ($product->media as $media) {
@@ -168,9 +161,32 @@ class SearchController extends Controller
                 $product->percent = intval($x * 100);
             }
         }
-        
-           
-        
+        return response()->json($products);
+    }
+
+    public function page()
+    {
+        $products = product::with('media')->with('categories')->get();
+        $categories = category::all();
+        foreach ($products as $product) {
+            if ($product->media->isNotEmpty()) {
+                foreach ($product->media as $media) {
+                    if ($media->is_main) {
+                        $product->image  = $media->media_path;
+                        break;
+                    } else {
+                        $product->image = 'default.jpg';
+                    }
+                }
+            } else {
+                $product->image = 'default.jpg';
+            }
+            if ($product->secondary_price) {
+                $campare = $product->primary_price - $product->secondary_price;
+                $x = $campare / $product->primary_price;
+                $product->percent = intval($x * 100);
+            }
+        }
         return view('search', ['products' => $products, 'categories'=>$categories]);
     }
 }
