@@ -98,7 +98,6 @@ class SearchController extends Controller
     public function getFilters(Request $request)
     {
         $filters = $request->input('filters');
-        $results = [];
         $writer = $filters['writer'] ?? null;
         $category = $filters['category'] ?? null;
         $exists = $filters['exists'] ?? 1;
@@ -108,67 +107,86 @@ class SearchController extends Controller
         $sortType = $filters['sortType'] ?? 'asc';
         $sortBy = $filters['sortBy'] ?? 'created_at';
         $keyword = $filters['keyword'] ?? null;
-
         $products = Product::where(function ($query) use ($writer, $exists, $hasDescount, $fromPrice, $toPrice) {
             if ($writer) {
-                Log::info('writer');
                 $query->where('products.writer', 'like', '%' . $writer . '%');
             }
             if ($fromPrice && !$toPrice) {
-                Log::info('fromPrice');
-                $query->where('products.primary_price', '>', $fromPrice);
+                $query->where('products.primary_price', '>=', $fromPrice);
             }
             if ($toPrice && !$fromPrice) {
-                Log::info('toPrice');
-                $query->where('products.primary_price', '<', $toPrice);
+                $query->where('products.primary_price', '<=', $toPrice);
             }
             if ($fromPrice && $toPrice) {
-                Log::info('fromToPrice');
                 $query->whereBetween('products.primary_price', [$fromPrice, $toPrice]);
             }
             if ($exists == 1) {
-                Log::info('exists');
                 $query->where('products.count', '!=', 0);
             }
-            if ($exists == 0) {
-                Log::info('notExists');
-                $query->where('products.count', 0);
-            }
             if ($hasDescount == 1) {
-                Log::info('hasDiscount');
                 $query->whereNotNull('products.secondary_price');
             }
-            if ($hasDescount == 0) {
-                
-                $query->whereNull('products.secondary_price');
-            }
         });
-
-        // فیلتر دسته‌بندی
         if ($category && is_array($category) && count($category) > 0) {
             $products = $products->whereHas('categories', function ($q) use ($category) {
                 $q->whereIn('categories.id', $category);
             });
         }
-
-        // فیلتر کلیدواژه
         if ($keyword) {
             $products = $products->where(function ($q) use ($keyword) {
                 $q
-                    ->where('products.summary', 'like', '%' . $keyword . '%')
+                    ->where('products.title', 'like', '%' . $keyword . '%')
+                    ->orWhere('products.summary', 'like', '%' . $keyword . '%')
                     ->orWhere('products.description', 'like', '%' . $keyword . '%');
             });
         }
-
         $products = $products->orderBy($sortBy, $sortType)->get();
-        $results['products'] = $products;
+        foreach ($products as $product) {
+            if ($product->media->isNotEmpty()) {
+                foreach ($product->media as $media) {
+                    if ($media->is_main) {
+                        $product->image  = $media->media_path;
+                        break;
+                    } else {
+                        $product->image = 'default.jpg';
+                    }
+                }
+            } else {
+                $product->image = 'default.jpg';
+            }
 
-        return response()->json(['results' => $results, 'filters' => $filters]);
+            if ($product->secondary_price) {
+                $campare = $product->primary_price - $product->secondary_price;
+                $x = $campare / $product->primary_price;
+                $product->percent = intval($x * 100);
+            }
+        }
+        return response()->json($products);
     }
 
     public function page()
     {
+        $products = product::with('media')->with('categories')->get();
         $categories = category::all();
-        return view('search', ['categories' => $categories]);
+        foreach ($products as $product) {
+            if ($product->media->isNotEmpty()) {
+                foreach ($product->media as $media) {
+                    if ($media->is_main) {
+                        $product->image  = $media->media_path;
+                        break;
+                    } else {
+                        $product->image = 'default.jpg';
+                    }
+                }
+            } else {
+                $product->image = 'default.jpg';
+            }
+            if ($product->secondary_price) {
+                $campare = $product->primary_price - $product->secondary_price;
+                $x = $campare / $product->primary_price;
+                $product->percent = intval($x * 100);
+            }
+        }
+        return view('search', ['products' => $products, 'categories'=>$categories]);
     }
 }
