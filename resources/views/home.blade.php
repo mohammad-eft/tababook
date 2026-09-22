@@ -4,75 +4,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>book</title>
     <script src="{{ asset('js/tailwind.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
-    <style>
-        .chosenItem:hover img {
-            transform: scale(1.1);
-        }
-
-        .borderGradient {
-            background: rgb(180, 115, 187);
-            background: linear-gradient(90deg, rgba(180, 115, 187, 1) 50%, rgba(255, 255, 255, 1) 100%);
-        }
-    </style>
-    <title>tabaBook</title>
 </head>
 
 <body>
-
-    <div class="w-full bg-[#f2f2f2] md:bg-white">
-        <!-- header -->
-
-        <section class="2xl:container m-auto">
-            <!-- top banner -->
-            <img src="{{ asset('img/top-banner.png') }}" class="w-full h-20 object-cover">
-            <!-- top banner -->
-
-            <div class="bg-[#f2f2f2] py-6">
-                <div class="w-11/12 m-auto flex flex-col lg:flex-row justify-between items-center">
-                    <div class="w-full lg:w-8/12 flex flex-row justify-between lg:justify-start items-center">
-                        <button onclick="hamburgerMenu()"
-                            class="w-6 lg:hidden h-4 flex flex-col justify-between items-start">
-                            <span class="w-full h-0.5 rounded-sm bg-slate-600"></span>
-                            <span class="w-10/12 h-0.5 rounded-sm bg-slate-600"></span>
-                            <span class="w-full h-0.5 rounded-sm bg-slate-600"></span>
-                        </button>
-                        <div class="ml-4">
-                            <a href="#">
-                                <img src="{{ asset('img/logo.png') }}" alt="">
-                            </a>
-                        </div>
-                        <ul class="hidden lg:flex flex-row justify-start items-center">
-                            <li class="mx-3">
-                                <a href="#" class="transition-all duration-300 font-bold hover:text-[#B473BB]">
-                                    کتاب های صوتی
-                                </a>
-                            </li>
-                            <li class="mx-3">
-                                <a href="#" class="transition-all duration-300 font-bold hover:text-[#B473BB]">
-                                    کتاب رایگان
-                                </a>
-                            </li>
-                            <li class="mx-3">
-                                <a href="#" class="transition-all duration-300 font-bold hover:text-[#B473BB]">
-                                    پر فروش های ماه
-                                </a>
-                            </li>
-                            <li class="mx-3">
-                                <a href="#" class="transition-all duration-300 font-bold hover:text-[#B473BB]">
-                                    کتاب های برگزیده
-                                </a>
-                            </li>
-                        </ul>
+    <header class="w-full flex flex-col justify-start items-center">
+        <section class="w-full py-2 bg-green-700 flex justify-center items-center">
+            <p class="lg:text-sm text-[9px] font-bold text-white">ارسال های بالای 500هزار تومن رایکان</p>
+        </section>
+        <section class="w-11/12  flex flex-col justify-start items-center">
+            <div class="w-full flex justify-between gap-1 items-center">
+                <div class="xl:w-1/3 lg:w-1/4 max-lg:w-1/3 h-full flex justify-start items-center lg:hidden">
+                    <div class="flex flex-col gap-1 items-start justify-center " onclick="hamburger_menu('open')">
+                        <span class="lg:w-7 w-4 lg:h-1 h-0.5 bg-black rounded-full"></span>
+                        <span class="lg:w-7 w-4 lg:h-1 h-0.5 bg-black rounded-full"></span>
+                        <span class="lg:w-7 w-4 lg:h-1 h-0.5 bg-black rounded-full"></span>
                     </div>
-                    <div class="w-4/12 hidden lg:flex items-center justify-end gap-5">
-                        
-                            {{-- <input type="text" class="w-full outline-none rounded-md py-3 pl-2 pr-10 text-xs bg-white"
-                                placeholder="جست و جو">
-                            <svg class="absolute w-6 top-[20%] right-[3%]" xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 512 512">
+                </div>
+                <div class="xl:w-1/3 lg:w-1/4 max-lg:w-1/3 h-full flex lg:justify-start justify-center items-center">
+                    <img src="{{asset('storage/home/ei_1788433185339-removebg-preview.webp')}}" alt="" class="xl:w-1/3 lg:w-1/2 w-full">
+                </div>
+                <div class="xl:w-1/3 lg:w-2/4 max-lg:w-1/3 h-full flex justify-center items-center max-lg:hidden">
+                    <div class="w-full py-2 bg-white rounded-full flex justify-between items-center px-4 cart_shdow">
+                        <input type="text" class="outline-none w-full h-full"
+                            placeholder="کتاب یا نویسنده یا مخصول خود را جستجو کنید">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-5 fill-[#929391]">
                                 <path
+                                    d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="xl:w-1/3 lg:w-1/4 max-lg:w-1/3 h-full flex justify-end items-center lg:gap-5 gap-2">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="lg:size-5 size-4">
+                            <path
+                                d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464H398.7c-8.9-63.3-63.3-112-129-112H178.3c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="lg:size-5 size-4">
+                            <path
+                                d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z" />
+                        </svg>
+                    </div>
+                    <div class="relative sm:p-2.5 p-1.5">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                            class="lg:size-5 size-4 cursor-pointer">
                                     d="M400 208A192 192 0 1 0 16 208a192 192 0 1 0 384 0zM349.3 360.6C312.2 395 262.6 416 208 416C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208c0 54.6-21 104.2-55.4 141.3l149 149c3.1 3.1 3.1 8.2 0 11.3s-8.2 3.1-11.3 0l-149-149z" />
                             </svg> --}}
                             <a href="{{ route('search.page') }}">
@@ -94,1119 +75,1988 @@
                         <svg class="absolute w-5 md:w-8 top-[20%] right-[3%]" xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 512 512">
                             <path
-                                d="M400 208A192 192 0 1 0 16 208a192 192 0 1 0 384 0zM349.3 360.6C312.2 395 262.6 416 208 416C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208c0 54.6-21 104.2-55.4 141.3l149 149c3.1 3.1 3.1 8.2 0 11.3s-8.2 3.1-11.3 0l-149-149z" />
+                                d="M24 0C10.7 0 0 10.7 0 24S10.7 48 24 48H69.5c3.8 0 7.1 2.7 7.9 6.5l51.6 271c6.5 34 36.2 58.5 70.7 58.5H488c13.3 0 24-10.7 24-24s-10.7-24-24-24H199.7c-11.5 0-21.4-8.2-23.6-19.5L170.7 288H459.2c32.6 0 61.1-21.8 69.5-53.3l41-152.3C576.6 57 557.4 32 531.1 32h-411C111 12.8 91.6 0 69.5 0H24zM131.1 80H520.7L482.4 222.2c-2.8 10.5-12.3 17.8-23.2 17.8H161.6L131.1 80zM176 512a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm336-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0z">
+                            </path>
+                        </svg>
+                        <span
+                            class="sm:size-3 size-1 bg-green-700 rounded-full absolute top-0 right-0 text-xs flex justify-center items-center">4</span>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full h-10 flex justify-center items-center">
+                <ul class="flex gap-4 lg:gap-6 xl:gap-10 text-sm lg:text-base justify-end font-bold max-lg:hidden">
+                    <li
+                        class="flex justify-center flex-col items-center cursor-pointer py-1 group transition-all duration-300 ">
+                        <span>خانه</span>
+                        <div
+                            class="rounded-md group-hover:w-full w-[0px] bg-[#fcd7a4] h-[2px] transition-all duration-300">
+                        </div>
+                    </li>
+                    <li
+                        class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
+                        <span>نمونه کارها</span>
+                        <div
+                            class="rounded-md group-hover:w-full w-[0px] bg-[#fcd7a4] h-[2px] transition-all duration-300">
+                        </div>
+                    </li>
+                    <li
+                        class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
+                        <span>مشاوره</span>
+                        <div
+                            class="rounded-md group-hover:w-full w-[0px] bg-[#fcd7a4] h-[2px] transition-all duration-300">
+                        </div>
+                    </li>
+                    <li
+                        class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
+                        <span>گاه نوشت</span>
+                        <div
+                            class="rounded-md group-hover:w-full w-[0px] bg-[#fcd7a4] h-[2px] transition-all duration-300">
+                        </div>
+                    </li>
+                    <li
+                        class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
+                        <span>تماس باما</span>
+                        <div
+                            class="rounded-md group-hover:w-full w-[0px] bg-[#fcd7a4] h-[2px] transition-all duration-300">
+                        </div>
+
+                    </li>
+                    <li
+                        class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
+                        <span>درباره ما</span>
+                        <div
+                            class="rounded-md group-hover:w-full w-[0px] bg-[#fcd7a4] h-[2px] transition-all duration-300">
+                        </div>
+                    </li>
+                </ul>
+                <div class="w-full py-2 bg-white rounded-full flex justify-between items-center px-2 cart_shdow lg:hidden">
+                    <input type="text" class="outline-none w-full h-full text-xs"
+                        placeholder="کتاب یا نویسنده یا مخصول خود را جستجو کنید">
+                    <div class="">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-4 fill-[#929391]">
+                            <path
+                                d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
                         </svg>
                     </div>
                 </div>
-                <div class="w-full h-svh flex flex-row lg:hidden bg-black bg-opacity-50 absolute top-0 -right-full transition-all duration-500"
-                    id="hamburgerMenu">
-                    <div class="w-9/12 h-full bg-black p-4">
-                        <div>
-                            <a href="#">
-                                <img src="{{ asset('img/logo.png') }}" alt="">
-                            </a>
-                        </div>
-                        <ul class="mt-8 grid grid-cols-1 gap-6">
-                            <li class="flex flex-row justify-between items-center">
-                                <a href="#" class="font-bold text-white text-xs">کتاب های صوتی</a>
-                                <svg class="w-2.5 h-2.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                    <path fill="#fff"
-                                        d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
-                                </svg>
-                            </li>
-                            <li class="flex flex-row justify-between items-center">
-                                <a href="#" class="font-bold text-white text-xs">کتاب های رایگان</a>
-                                <svg class="w-2.5 h-2.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                    <path fill="#fff"
-                                        d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
-                                </svg>
-                            </li>
-                            <li class="flex flex-row justify-between items-center">
-                                <a href="#" class="font-bold text-white text-xs">پرفروش های ماه</a>
-                                <svg class="w-2.5 h-2.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                    <path fill="#fff"
-                                        d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
-                                </svg>
-                            </li>
-                            <li class="flex flex-row justify-between items-center">
-                                <a href="#" class="font-bold text-white text-xs">کتاب های برگزیده</a>
-                                <svg class="w-2.5 h-2.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                    <path fill="#fff"
-                                        d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
-                                </svg>
-                            </li>
-                            <li class="flex flex-row justify-between items-center">
-                                <a href="#" class="font-bold text-[#DA3638]">تخفیف های شگفت انگیز</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div onclick="removeHamburgerMenu()" class="w-3/12 h-full"></div>
-                </div>
-            </div>
-
-        </section>
-
-        <!-- header -->
-
-        <!-- sub header -->
-
-        <section class="2xl:container mx-auto my-10">
-            <div class="w-11/12 md:h-[310px] lg:h-[380px] xl:h-[493px] m-auto flex flex-col-reverse md:flex-row items-start">
-                <div class="w-full md:w-5/12 h-full">
-                    <div class="w-full h-2/6 bg-[#BEB1D6] md:rounded-l-none rounded-2xl md:rounded-r-[32px] lg:rounded-r-[45px] p-3 lg:p-5 xl:p-9">
-                        <div class="w-full h-full md:rounded-[21px] rounded-xl lg:rounded-[27px] bg-white p-3 flex flex-col justify-between">
-                            <h1 class="text-base lg:text-xl">هدف حقیقی کتاب ها چیست؟</h1>
-                            <span class="mr-4 mt-2 md:mt-0">انیس کنج تنهایی کتاب..!</span>
-                        </div>
-                    </div>
-                    <div class="w-full h-1/6 bg-[#BEB1D6] mt-3 md:mt-0 rounded-t-2xl md:rounded-t-none">
-                        <div class="w-full md:rounded-tl-[32px] rounded-t-2xl lg:rounded-tl-[45px] md:rounded-tr-none px-3 md:px-0 md:pl-3 h-full bg-white lg:py-2 py-3 pl-3 xl:py-4 lg:pl-4">
-                            <div
-                                class="bg-[#BEB1D6] bg-opacity-40 text-[10px] lg:text-base p-2 lg:p-3 xl:p-6 rounded-tl-[32px] rounded-bl-[17px] rounded-r-[17px]">
-                                چگونه کتابخوان شویم و کتابخوان باقی بمانیم؟
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-full h-2/6 bg-[#fff] pl-4 pr-4 md:pr-0 pt-3 xl:pt-4">
-                        <p class="leading-7 text-sm h-full overflow-hidden xl:text-base">
-                            در پاسخ به این سوال که چرا کتاب خواندن مفید است و اهمیت کتاب خواندن در چیست
-                            باید بگوییم که کتاب قرار است به بهبود کیفیت زندگی ما کمک کند. بهتر است به ان به چشم یک کالای
-                            لوکس نگاه نکنید، کالایی که هیچوقت هم پولی برای خریدنش ندارید!
-                            همه کتاب های نوشته شده،پتانسیل بهبود کیفیت زندگی شمارا ندارند.مخم است که بدانیم چه کتابی
-                            بخوانیم.
-                        </p>
-                        <a href="#" class="mr-3 text-sm text-gray-500 xl:hidden">...بیشتر</a>
-                    </div>
-                </div>
-                <div class="w-full md:w-8/12 h-[200px] mb-3 md:rounded-tr-none md:mb-0 md:h-full rounded-2xl bg-[#BEB1D6] md:rounded-l-[32px] md:rounded-br-[32px] lg:rounded-l-[45px] lg:rounded-br-[45px] p-3 lg:p-5 xl:p-9">
-                    <a href="#" class="inline-block w-full h-full">
-                        <img src="{{ asset('img/IMG_20240916_131037_356.jpg') }}"
-                            class="w-full h-full object-cover md:rounded-l-[25px] rounded-xl md:rounded-br-[25px] lg:rounded-l-[38px] lg:rounded-br-[38px] md:rounded-tr-lg" alt="">
-                    </a>
-                </div>
             </div>
         </section>
 
-        <!-- sub header -->
-
-        <!-- banner -->
-
-        <section class="2xl:container m-auto">
-            <div class="w-11/12 m-auto">
-                <img src="{{ asset('img/banner1.png') }}" class="w-full" alt="">
-            </div>
-        </section>
-
-        <!-- banner -->
-
-        <!-- chosen -->
-
-
-        <section class="2xl:container m-auto">
-            <div class="md:bg-[#FFDDE3]">
-                <div class="w-full md:h-8 lg:h-20 bg-white rounded-b-[100%]"></div>
-                <div class="w-11/12 m-auto md:py-10 pt-10 pb-5">
-                    <div class="w-full border-b border-[#D2D2D2] pb-3 mb-12 lg:mb-16 relative">
-                        <h2
-                            class="absolute -bottom-[17px] pl-2 md:pl-0 bg-[#f2f2f2] md:bg-inherit md:text-[42px] lg:text-[52px] md:static">
-                            برگزیده</h2>
-                    </div>
-                    <div class="grid xl:grid-cols-4 grid-cols-2 md:grid-cols-3 gap-3 md:gap-6">
-
-
-
-                        <div class="w-full bg-white rounded-lg">
-                            <div class="p-1 md:p-2 lg:p-3">
-                                <div class="overflow-hidden rounded-lg">
-                                    <a href="#" class="chosenItem">
-                                        <img src="{{ asset('img/8117448608719503.jpg') }}"
-                                            class="w-full h-[117px] lg:h-[272px] object-cover rounded-lg transition-all duration-500"
-                                            alt="">
-                                    </a>
-                                </div>
-                                <div class="mt-1.5 md:mt-3 lg:mt-5">
-                                    <a href="#" class="inline-block lg:mb-7">
-                                        <h2
-                                            class="text-[#6E3075] text-xs md:text-base lg:text-[22px] font-bold h-[30px] md:h-[48px] lg:h-[66px]">
-                                            آدم های معمولی دنیا را تغییر میدهند ..!
-                                        </h2>
-                                    </a>
-                                    <div class="flex flex-col text-xs md:text-base lg:text-lg mb-4">
-                                        <span>اپرا وینفری</span>
-                                        <span>مترجم : شبنم حیدری پور</span>
-                                    </div>
-                                    <div class="borderGradient w-10/12 float-left h-0.5 mb-1 md:mb-2.5"></div>
-                                </div>
-                            </div>
-                            <div
-                                class="w-full flex flex-row justify-between items-center lg:pt-6 pr-[6px] md:pr-2 lg:pr-3">
-                                <div class="flex flex-row justify-start items-center">
-                                    <svg class="w-2.5 h-2.5 md:w-4 md:h-4 lg:w-5 lg:h-6 ml-1 lg:ml-2.5"
-                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                        <path fill="#B473BB"
-                                            d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H152V24zM48 192h80v56H48V192zm0 104h80v64H48V296zm128 0h96v64H176V296zm144 0h80v64H320V296zm80-48H320V192h80v56zm0 160v40c0 8.8-7.2 16-16 16H320V408h80zm-128 0v56H176V408h96zm-144 0v56H64c-8.8 0-16-7.2-16-16V408h80zM272 248H176V192h96v56z" />
-                                    </svg>
-                                    <span
-                                        class="text-[#B473BB] text-[7px] md:text-sm lg:text-base font-bold mt-[4px]">1402/12/07</span>
-                                </div>
-                                <a href="#"
-                                    class="text-[#B473BB] text-[7px] md:text-sm lg:text-base pb-2.5 pt-2.5 lg:pb-5 lg:pt-4 px-[14px] lg:border-t-[6px] lg:border-r-[6px] lg:border-[#FFDDE3] lg:rounded-tr-[11px]">بیشتر
-                                    بخوانید</a>
-                            </div>
-                        </div>
-
-                        <div class="w-full bg-white rounded-lg">
-                            <div class="p-1 md:p-2 lg:p-3">
-                                <div class="overflow-hidden rounded-lg">
-                                    <a href="#" class="chosenItem">
-                                        <img src="{{ asset('img/download (8).jfif') }}"
-                                            class="w-full h-[117px] lg:h-[272px] object-cover rounded-lg transition-all duration-500"
-                                            alt="">
-                                    </a>
-                                </div>
-                                <div class="mt-1.5 md:mt-3 lg:mt-5">
-                                    <a href="#" class="inline-block lg:mb-7">
-                                        <h2
-                                            class="text-[#6E3075] text-xs md:text-base lg:text-[22px] font-bold h-[30px] md:h-[48px] lg:h-[66px]">
-                                            پارسا و کاپشن جادویی..!
-                                        </h2>
-                                    </a>
-                                    <div class="flex flex-col text-xs md:text-base lg:text-lg mb-4">
-                                        <span>سایه گستر</span>
-                                        <span>ناشر : سایه گستر</span>
-                                    </div>
-                                    <div class="borderGradient w-10/12 float-left h-0.5 mb-1 md:mb-2.5"></div>
-                                </div>
-                            </div>
-                            <div
-                                class="w-full flex flex-row justify-between items-center lg:pt-6 pr-[6px] md:pr-2 lg:pr-3">
-                                <div class="flex flex-row justify-start items-center">
-                                    <svg class="w-2.5 h-2.5 md:w-4 md:h-4 lg:w-5 lg:h-6 ml-1 lg:ml-2.5"
-                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                        <path fill="#B473BB"
-                                            d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H152V24zM48 192h80v56H48V192zm0 104h80v64H48V296zm128 0h96v64H176V296zm144 0h80v64H320V296zm80-48H320V192h80v56zm0 160v40c0 8.8-7.2 16-16 16H320V408h80zm-128 0v56H176V408h96zm-144 0v56H64c-8.8 0-16-7.2-16-16V408h80zM272 248H176V192h96v56z" />
-                                    </svg>
-                                    <span
-                                        class="text-[#B473BB] text-[7px] md:text-sm lg:text-base font-bold mt-[4px]">1402/12/07</span>
-                                </div>
-                                <a href="#"
-                                    class="text-[#B473BB] text-[7px] md:text-sm lg:text-base pb-2.5 pt-2.5 lg:pb-5 lg:pt-4 px-[14px] lg:border-t-[6px] lg:border-r-[6px] lg:border-[#FFDDE3] lg:rounded-tr-[11px]">بیشتر
-                                    بخوانید</a>
-                            </div>
-                        </div>
-
-                        <div class="w-full bg-white rounded-lg">
-                            <div class="p-1 md:p-2 lg:p-3">
-                                <div class="overflow-hidden rounded-lg">
-                                    <a href="#" class="chosenItem">
-                                        <img src="{{ asset('img/1535812623054466.jpg') }}"
-                                            class="w-full h-[117px] lg:h-[272px] object-cover rounded-lg transition-all duration-500"
-                                            alt="">
-                                    </a>
-                                </div>
-                                <div class="mt-1.5 md:mt-3 lg:mt-5">
-                                    <a href="#" class="inline-block lg:mb-7">
-                                        <h2
-                                            class="text-[#6E3075] text-xs md:text-base lg:text-[22px] font-bold h-[30px] md:h-[48px] lg:h-[66px]">
-                                            هنر سرسختی و تسلیم نشدن..!
-                                        </h2>
-                                    </a>
-                                    <div class="flex flex-col text-xs md:text-base lg:text-lg mb-4">
-                                        <span>تاد کاشدن</span>
-                                        <span>ناشر : نشر هورمزد</span>
-                                    </div>
-                                    <div class="borderGradient w-10/12 float-left h-0.5 mb-1 md:mb-2.5"></div>
-                                </div>
-                            </div>
-                            <div
-                                class="w-full flex flex-row justify-between items-center lg:pt-6 pr-[6px] md:pr-2 lg:pr-3">
-                                <div class="flex flex-row justify-start items-center">
-                                    <svg class="w-2.5 h-2.5 md:w-4 md:h-4 lg:w-5 lg:h-6 ml-1 lg:ml-2.5"
-                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                        <path fill="#B473BB"
-                                            d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H152V24zM48 192h80v56H48V192zm0 104h80v64H48V296zm128 0h96v64H176V296zm144 0h80v64H320V296zm80-48H320V192h80v56zm0 160v40c0 8.8-7.2 16-16 16H320V408h80zm-128 0v56H176V408h96zm-144 0v56H64c-8.8 0-16-7.2-16-16V408h80zM272 248H176V192h96v56z" />
-                                    </svg>
-                                    <span
-                                        class="text-[#B473BB] text-[7px] md:text-sm lg:text-base font-bold mt-[4px]">1402/12/07</span>
-                                </div>
-                                <a href="#"
-                                    class="text-[#B473BB] text-[7px] md:text-sm lg:text-base pb-2.5 pt-2.5 lg:pb-5 lg:pt-4 px-[14px] lg:border-t-[6px] lg:border-r-[6px] lg:border-[#FFDDE3] lg:rounded-tr-[11px]">بیشتر
-                                    بخوانید</a>
-                            </div>
-                        </div>
-
-                        <div class="w-full bg-white rounded-lg">
-                            <div class="p-1 md:p-2 lg:p-3">
-                                <div class="overflow-hidden rounded-lg">
-                                    <a href="#" class="chosenItem">
-                                        <img src="{{ asset('img/317717 1.png') }}"
-                                            class="w-full h-[117px] lg:h-[272px] object-cover rounded-lg transition-all duration-500"
-                                            alt="">
-                                    </a>
-                                </div>
-                                <div class="mt-1.5 md:mt-3 lg:mt-5">
-                                    <a href="#" class="inline-block lg:mb-7">
-                                        <h2
-                                            class="text-[#6E3075] text-xs md:text-base lg:text-[22px] font-bold h-[30px] md:h-[48px] lg:h-[66px]">
-                                            سفر به انتهای دنیا..!
-                                        </h2>
-                                    </a>
-                                    <div class="flex flex-col text-xs md:text-base lg:text-lg mb-4">
-                                        <span>سلفون</span>
-                                        <span>مترجم : آرزو ویشکا</span>
-                                    </div>
-                                    <div class="borderGradient w-10/12 float-left h-0.5 mb-1 md:mb-2.5"></div>
-                                </div>
-                            </div>
-                            <div
-                                class="w-full flex flex-row justify-between items-center lg:pt-6 pr-[6px] md:pr-2 lg:pr-3">
-                                <div class="flex flex-row justify-start items-center">
-                                    <svg class="w-2.5 h-2.5 md:w-4 md:h-4 lg:w-5 lg:h-6 ml-1 lg:ml-2.5"
-                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                        <path fill="#B473BB"
-                                            d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H152V24zM48 192h80v56H48V192zm0 104h80v64H48V296zm128 0h96v64H176V296zm144 0h80v64H320V296zm80-48H320V192h80v56zm0 160v40c0 8.8-7.2 16-16 16H320V408h80zm-128 0v56H176V408h96zm-144 0v56H64c-8.8 0-16-7.2-16-16V408h80zM272 248H176V192h96v56z" />
-                                    </svg>
-                                    <span
-                                        class="text-[#B473BB] text-[7px] md:text-sm lg:text-base font-bold mt-[4px]">1402/12/07</span>
-                                </div>
-                                <a href="#"
-                                    class="text-[#B473BB] text-[7px] md:text-sm lg:text-base pb-2.5 pt-2.5 lg:pb-5 lg:pt-4 px-[14px] lg:border-t-[6px] lg:border-r-[6px] lg:border-[#FFDDE3] lg:rounded-tr-[11px]">بیشتر
-                                    بخوانید</a>
-                            </div>
-                        </div>
-
-                        <div class="w-full bg-white rounded-lg">
-                            <div class="p-1 md:p-2 lg:p-3">
-                                <div class="overflow-hidden rounded-lg">
-                                    <a href="#" class="chosenItem">
-                                        <img src="{{ asset('img/8117448608719503.jpg') }}"
-                                            class="w-full h-[117px] lg:h-[272px] object-cover rounded-lg transition-all duration-500"
-                                            alt="">
-                                    </a>
-                                </div>
-                                <div class="mt-1.5 md:mt-3 lg:mt-5">
-                                    <a href="#" class="inline-block lg:mb-7">
-                                        <h2
-                                            class="text-[#6E3075] text-xs md:text-base lg:text-[22px] font-bold h-[30px] md:h-[48px] lg:h-[66px]">
-                                            آدم های معمولی دنیا را تغییر میدهند ..!
-                                        </h2>
-                                    </a>
-                                    <div class="flex flex-col text-xs md:text-base lg:text-lg mb-4">
-                                        <span>اپرا وینفری</span>
-                                        <span>مترجم : شبنم حیدری پور</span>
-                                    </div>
-                                    <div class="borderGradient w-10/12 float-left h-0.5 mb-1 md:mb-2.5"></div>
-                                </div>
-                            </div>
-                            <div
-                                class="w-full flex flex-row justify-between items-center lg:pt-6 pr-[6px] md:pr-2 lg:pr-3">
-                                <div class="flex flex-row justify-start items-center">
-                                    <svg class="w-2.5 h-2.5 md:w-4 md:h-4 lg:w-5 lg:h-6 ml-1 lg:ml-2.5"
-                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                        <path fill="#B473BB"
-                                            d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H152V24zM48 192h80v56H48V192zm0 104h80v64H48V296zm128 0h96v64H176V296zm144 0h80v64H320V296zm80-48H320V192h80v56zm0 160v40c0 8.8-7.2 16-16 16H320V408h80zm-128 0v56H176V408h96zm-144 0v56H64c-8.8 0-16-7.2-16-16V408h80zM272 248H176V192h96v56z" />
-                                    </svg>
-                                    <span
-                                        class="text-[#B473BB] text-[7px] md:text-sm lg:text-base font-bold mt-[4px]">1402/12/07</span>
-                                </div>
-                                <a href="#"
-                                    class="text-[#B473BB] text-[7px] md:text-sm lg:text-base pb-2.5 pt-2.5 lg:pb-5 lg:pt-4 px-[14px] lg:border-t-[6px] lg:border-r-[6px] lg:border-[#FFDDE3] lg:rounded-tr-[11px]">بیشتر
-                                    بخوانید</a>
-                            </div>
-                        </div>
-
-                        <div class="w-full bg-white rounded-lg">
-                            <div class="p-1 md:p-2 lg:p-3">
-                                <div class="overflow-hidden rounded-lg">
-                                    <a href="#" class="chosenItem">
-                                        <img src="{{ asset('img/download (8).jfif') }}"
-                                            class="w-full h-[117px] lg:h-[272px] object-cover rounded-lg transition-all duration-500"
-                                            alt="">
-                                    </a>
-                                </div>
-                                <div class="mt-1.5 md:mt-3 lg:mt-5">
-                                    <a href="#" class="inline-block lg:mb-7">
-                                        <h2
-                                            class="text-[#6E3075] text-xs md:text-base lg:text-[22px] font-bold h-[30px] md:h-[48px] lg:h-[66px]">
-                                            پارسا و کاپشن جادویی..!
-                                        </h2>
-                                    </a>
-                                    <div class="flex flex-col text-xs md:text-base lg:text-lg mb-4">
-                                        <span>سایه گستر</span>
-                                        <span>ناشر : سایه گستر</span>
-                                    </div>
-                                    <div class="borderGradient w-10/12 float-left h-0.5 mb-1 md:mb-2.5"></div>
-                                </div>
-                            </div>
-                            <div
-                                class="w-full flex flex-row justify-between items-center lg:pt-6 pr-[6px] md:pr-2 lg:pr-3">
-                                <div class="flex flex-row justify-start items-center">
-                                    <svg class="w-2.5 h-2.5 md:w-4 md:h-4 lg:w-5 lg:h-6 ml-1 lg:ml-2.5"
-                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                        <path fill="#B473BB"
-                                            d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H152V24zM48 192h80v56H48V192zm0 104h80v64H48V296zm128 0h96v64H176V296zm144 0h80v64H320V296zm80-48H320V192h80v56zm0 160v40c0 8.8-7.2 16-16 16H320V408h80zm-128 0v56H176V408h96zm-144 0v56H64c-8.8 0-16-7.2-16-16V408h80zM272 248H176V192h96v56z" />
-                                    </svg>
-                                    <span
-                                        class="text-[#B473BB] text-[7px] md:text-sm lg:text-base font-bold mt-[4px]">1402/12/07</span>
-                                </div>
-                                <a href="#"
-                                    class="text-[#B473BB] text-[7px] md:text-sm lg:text-base pb-2.5 pt-2.5 lg:pb-5 lg:pt-4 px-[14px] lg:border-t-[6px] lg:border-r-[6px] lg:border-[#FFDDE3] lg:rounded-tr-[11px]">بیشتر
-                                    بخوانید</a>
-                            </div>
-                        </div>
-
-                        <div class="w-full bg-white rounded-lg">
-                            <div class="p-1 md:p-2 lg:p-3">
-                                <div class="overflow-hidden rounded-lg">
-                                    <a href="#" class="chosenItem">
-                                        <img src="{{ asset('img/1535812623054466.jpg') }}"
-                                            class="w-full h-[117px] lg:h-[272px] object-cover rounded-lg transition-all duration-500"
-                                            alt="">
-                                    </a>
-                                </div>
-                                <div class="mt-1.5 md:mt-3 lg:mt-5">
-                                    <a href="#" class="inline-block lg:mb-7">
-                                        <h2
-                                            class="text-[#6E3075] text-xs md:text-base lg:text-[22px] font-bold h-[30px] md:h-[48px] lg:h-[66px]">
-                                            هنر سرسختی و تسلیم نشدن..!
-                                        </h2>
-                                    </a>
-                                    <div class="flex flex-col text-xs md:text-base lg:text-lg mb-4">
-                                        <span>تاد کاشدن</span>
-                                        <span>ناشر : نشر هورمزد</span>
-                                    </div>
-                                    <div class="borderGradient w-10/12 float-left h-0.5 mb-1 md:mb-2.5"></div>
-                                </div>
-                            </div>
-                            <div
-                                class="w-full flex flex-row justify-between items-center lg:pt-6 pr-[6px] md:pr-2 lg:pr-3">
-                                <div class="flex flex-row justify-start items-center">
-                                    <svg class="w-2.5 h-2.5 md:w-4 md:h-4 lg:w-5 lg:h-6 ml-1 lg:ml-2.5"
-                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                        <path fill="#B473BB"
-                                            d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H152V24zM48 192h80v56H48V192zm0 104h80v64H48V296zm128 0h96v64H176V296zm144 0h80v64H320V296zm80-48H320V192h80v56zm0 160v40c0 8.8-7.2 16-16 16H320V408h80zm-128 0v56H176V408h96zm-144 0v56H64c-8.8 0-16-7.2-16-16V408h80zM272 248H176V192h96v56z" />
-                                    </svg>
-                                    <span
-                                        class="text-[#B473BB] text-[7px] md:text-sm lg:text-base font-bold mt-[4px]">1402/12/07</span>
-                                </div>
-                                <a href="#"
-                                    class="text-[#B473BB] text-[7px] md:text-sm lg:text-base pb-2.5 pt-2.5 lg:pb-5 lg:pt-4 px-[14px] lg:border-t-[6px] lg:border-r-[6px] lg:border-[#FFDDE3] lg:rounded-tr-[11px]">بیشتر
-                                    بخوانید</a>
-                            </div>
-                        </div>
-
-                        <div class="w-full bg-white rounded-lg">
-                            <div class="p-1 md:p-2 lg:p-3">
-                                <div class="overflow-hidden rounded-lg">
-                                    <a href="#" class="chosenItem">
-                                        <img src="{{ asset('img/317717 1.png') }}"
-                                            class="w-full h-[117px] lg:h-[272px] object-cover rounded-lg transition-all duration-500"
-                                            alt="">
-                                    </a>
-                                </div>
-                                <div class="mt-1.5 md:mt-3 lg:mt-5">
-                                    <a href="#" class="inline-block lg:mb-7">
-                                        <h2
-                                            class="text-[#6E3075] text-xs md:text-base lg:text-[22px] font-bold h-[30px] md:h-[48px] lg:h-[66px]">
-                                            سفر به انتهای دنیا..!
-                                        </h2>
-                                    </a>
-                                    <div class="flex flex-col text-xs md:text-base lg:text-lg mb-4">
-                                        <span>سلفون</span>
-                                        <span>مترجم : آرزو ویشکا</span>
-                                    </div>
-                                    <div class="borderGradient w-10/12 float-left h-0.5 mb-1 md:mb-2.5"></div>
-                                </div>
-                            </div>
-                            <div
-                                class="w-full flex flex-row justify-between items-center lg:pt-6 pr-[6px] md:pr-2 lg:pr-3">
-                                <div class="flex flex-row justify-start items-center">
-                                    <svg class="w-2.5 h-2.5 md:w-4 md:h-4 lg:w-5 lg:h-6 ml-1 lg:ml-2.5"
-                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                        <path fill="#B473BB"
-                                            d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H152V24zM48 192h80v56H48V192zm0 104h80v64H48V296zm128 0h96v64H176V296zm144 0h80v64H320V296zm80-48H320V192h80v56zm0 160v40c0 8.8-7.2 16-16 16H320V408h80zm-128 0v56H176V408h96zm-144 0v56H64c-8.8 0-16-7.2-16-16V408h80zM272 248H176V192h96v56z" />
-                                    </svg>
-                                    <span
-                                        class="text-[#B473BB] text-[7px] md:text-sm lg:text-base font-bold mt-[4px]">1402/12/07</span>
-                                </div>
-                                <a href="#"
-                                    class="text-[#B473BB] text-[7px] md:text-sm lg:text-base pb-2.5 pt-2.5 lg:pb-5 lg:pt-4 px-[14px] lg:border-t-[6px] lg:border-r-[6px] lg:border-[#FFDDE3] lg:rounded-tr-[11px]">بیشتر
-                                    بخوانید</a>
-                            </div>
-                        </div>
-
-
-
-
-
-
-
-
+        <!-- hamburger_menu_item -->
+        <div class="w-full h-dvh bg-black/50 invisible opacity-0 fixed top-0 right-0 transition_normal lg:hidden z-3"
+            onclick="hamburger_menu('close')" id="hamburger_menu_item_close"></div>
+        <div class="xl:w-18/100 lg:w-21/100 sm:w-1/2 w-2/3 bg-white h-dvh flex flex-col justify-start items-center fixed top-0 right-0 rounded-l-4xl transition_normal z-3 lg:hidden translate-x-full"
+            id="hamburger_menu_item">
+            <div class="w-11/12 h-full flex flex-col gap-6 justify-start items-start rounded-l-4xl  relative">
+                <div class="w-full h-20 flex gap-3 justify-between items-center px-">
+                    <img src="{{asset('storage/home/ei_1788433185339-removebg-preview.webp')}}" alt="" class="w-2/3 h-full">
+                    <div onclick="hamburger_menu('close')">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="size-7">
+                            <path
+                                d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z" />
+                        </svg>
                     </div>
                 </div>
-            </div>
-            <div class="md:h-8 lg:h-12 bg-[#FFDDE3] rounded-b-[100%]"></div>
-
-        </section>
-
-
-        <!-- chosen -->
-
-
-        <!-- website news -->
-
-        <section class="2xl:container m-auto bg-white">
-            <div class="w-11/12 m-auto py-6 md:py-0 md:mt-20">
-                <div class="w-full flex flex-row justify-start items-center">
-                    <svg class="w-5 h-5 md:w-8 md:h-8 ml-3 md:ml-5" xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 512 512">
-                        <path fill="#ff1098"
-                            d="M168 80c-13.3 0-24 10.7-24 24V408c0 8.4-1.4 16.5-4.1 24H440c13.3 0 24-10.7 24-24V104c0-13.3-10.7-24-24-24H168zM72 480c-39.8 0-72-32.2-72-72V112C0 98.7 10.7 88 24 88s24 10.7 24 24V408c0 13.3 10.7 24 24 24s24-10.7 24-24V104c0-39.8 32.2-72 72-72H440c39.8 0 72 32.2 72 72V408c0 39.8-32.2 72-72 72H72zM176 136c0-13.3 10.7-24 24-24h96c13.3 0 24 10.7 24 24v80c0 13.3-10.7 24-24 24H200c-13.3 0-24-10.7-24-24V136zm200-24h32c13.3 0 24 10.7 24 24s-10.7 24-24 24H376c-13.3 0-24-10.7-24-24s10.7-24 24-24zm0 80h32c13.3 0 24 10.7 24 24s-10.7 24-24 24H376c-13.3 0-24-10.7-24-24s10.7-24 24-24zM200 272H408c13.3 0 24 10.7 24 24s-10.7 24-24 24H200c-13.3 0-24-10.7-24-24s10.7-24 24-24zm0 80H408c13.3 0 24 10.7 24 24s-10.7 24-24 24H200c-13.3 0-24-10.7-24-24s10.7-24 24-24z" />
-                    </svg>
-                    <h2 class="text-base md:text-xl">چه‌خبر؟</h2>
-                </div>
-                <div class="w-full flex flex-col md:flex-row items-center mt-4">
+                <!-- item -->
+                <div class="w-full flex flex-col gap-2 justify-start items-center">
                     <div
-                        class="w-full h-40 md:w-1/3 rounded-lg md:h-[300px] lg:h-[412px] p-3 md:p-4 lg:p-5 bg-[#FAF0F8]">
-                        <h3 class="text-base md:text-[1.17em] mb-3 md:mb-8">
-                            سایت کتابخوانی
-                        </h3>
-                        <div class="lg:mb-6 xl:mb-10 leading-7">
-                            <p class="text-xs md:text-sm lg:text-base">
-                                کتاب، مونس و غمخوار اوقات حزن و خستگی است که غم و اندوه را به سرور و شادمانی تبدیل
-                                می‌کند؛
-                                رنج و غم را از آینه‌ی خاطر زدوده و گنجینه‌ی ذهن را پر از گوهرهای گرانبها می‌کند.
-                            </p>
-                            <a href="#" class="lg:hidden inline-block text-[#727272]">...بیشتر</a>
-                            <p class="hidden lg:block">
-                                مطالعه، یگانه راهی است برای آشنایی و گفتگو با بزرگان روزگار که قرن‌ها پیش در دنیا به سر
-                                برده
-                                و اکنون در زیر خاک منزل دارند.
-                                <a href="#" class="xl:hidden inline-block text-[#727272] mr-2">...بیشتر</a>
-                            </p>
-                            <p class="hidden xl:block">
-                                چیزهایی که به دنبال آن می‌گردی،‌ همه در همین دنیاست! اما تنها راهی که آدمیزاد بتواند نود
-                                و
-                                نه درصد آن‌ها را ببیند، در کتاب است.
-                            </p>
+                        class="w-full py-2 bg-green-300/50 rounded-xl gradient_item flex gap-3 justify-start items-center px-4">
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                class="xl:size-6 size-5 fill-green-700">
+                                <path
+                                    d="M272.5 5.7c9-7.6 22.1-7.6 31.1 0l264 224c10.1 8.6 11.4 23.7 2.8 33.8s-23.7 11.3-33.8 2.8L512 245.5V432c0 44.2-35.8 80-80 80H144c-44.2 0-80-35.8-80-80V245.5L39.5 266.3c-10.1 8.6-25.3 7.3-33.8-2.8s-7.3-25.3 2.8-33.8l264-224zM288 55.5L112 204.8V432c0 17.7 14.3 32 32 32h48V312c0-22.1 17.9-40 40-40H344c22.1 0 40 17.9 40 40V464h48c17.7 0 32-14.3 32-32V204.8L288 55.5zM240 464h96V320H240V464z">
+                                </path>
+                            </svg>
+                        </div>
+                        <span class="xl:text-lg text-green-700 font-bold">صفحه اصلی</span>
+                    </div>
+                    <div class="w-full py-2 rounded-xl gradient_item flex gap-3 justify-start items-center px-4">
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="xl:size-6 size-5">
+                                <path
+                                    d="M272.5 5.7c9-7.6 22.1-7.6 31.1 0l264 224c10.1 8.6 11.4 23.7 2.8 33.8s-23.7 11.3-33.8 2.8L512 245.5V432c0 44.2-35.8 80-80 80H144c-44.2 0-80-35.8-80-80V245.5L39.5 266.3c-10.1 8.6-25.3 7.3-33.8-2.8s-7.3-25.3 2.8-33.8l264-224zM288 55.5L112 204.8V432c0 17.7 14.3 32 32 32h48V312c0-22.1 17.9-40 40-40H344c22.1 0 40 17.9 40 40V464h48c17.7 0 32-14.3 32-32V204.8L288 55.5zM240 464h96V320H240V464z">
+                                </path>
+                            </svg>
+                        </div>
+                        <span class="xl:text-lg font-bold">کتاب ها</span>
+                    </div>
+                </div>
+                <!-- item -->
+            </div>
+        </div>
+        <!-- hamburger_menu_item -->
+    </header>
+
+    <main class="w-full  flex flex-col gap-10 justify-start items-center my-10">
+        <!-- hero -->
+        <section class="w-full xl:h-90 lg:h-80 flex max-lg:flex-col gap-20 justify-start items-center bg-[#F3ECE2]">
+            <div class="lg:w-1/2 w-full h-full flex justify-center items-center">
+                <img src="{{asset('storage/home/hero2.webp')}}" alt="" class="w-full lg:h-full max-h-[50vh] max-w-150">
+            </div>
+            <div class="lg:w-1/2 w-full h-full  flex lg:justify-start justify-center items-center">
+                <div
+                    class="xl:w-9/12 lg:w-10/12 w-11/12 h-full flex flex-col gap-5 justify-center lg:items-start items-center">
+                    <div
+                        class="flex flex-col gap-2 justify-start items-start max-lg:items-center xl:text-4xl lg:text-4xl text-[8vw] font-bold">
+                        <h1>هر کتاب ،</h1>
+                        <h2>شروع یک دنیای تازه است.</h2>
+                    </div>
+                    <p class="max-xl:text-sm max-lg:text-center">مجموعه ای کتاب ها و لوازم تحریر برای مطالعه ، یادکیری
+                        یادکیری یادکیری و خلق کردن</p>
+                    <div class="w-full flex lg:gap-6 gap-3 justify-between items-center">
+                        <a href="#"
+                            class="w-1/2 lg:py-3 py-2 bg-green-700 xl:text-lg max-lg:text-sm text-white font-bold rounded-xl flex justify-center items-center">
+                            کشف گتاب ها
+                        </a>
+                        <a href="#"
+                            class="w-1/2 lg:py-3 py-2 border-2 border-[#254c24] rounded-xl xl:text-lg max-lg:text-sm text-green-700 font-bold flex justify-center items-center">
+                            مشاهده لوازم تخریر
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <!-- hero -->
+        <!-- category -->
+        <section
+            class="max-w-11/12 w-11/12 lg:h-32 h-25  flex lg:gap-5 gap-3 justify-start items-center overflow-x-auto p-1">
+            <div
+                class="xl:min-w-1/9 xl:max-w-1/9 lg:min-w-1/8 max-w-1/8 min-w-1/3 max-w-1/3  h-full bg-white flex flex-col gap-3 justify-center items-center rounded-xl cart_shdow">
+                <div class="lg:size-15 size-12 rounded-full bg-[#FAEDD9] flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-7/12">
+                        <path
+                            d="M395.8 39.6c9.4-9.4 24.6-9.4 33.9 0l42.6 42.6c9.4 9.4 9.4 24.6 0 33.9L417.6 171 341 94.4l54.8-54.8zM318.4 117L395 193.6l-219 219V400c0-8.8-7.2-16-16-16H128V352c0-8.8-7.2-16-16-16H99.4l219-219zM66.9 379.5c1.2-4 2.7-7.9 4.7-11.5H96v32c0 8.8 7.2 16 16 16h32v24.4c-3.7 1.9-7.5 3.5-11.6 4.7L39.6 472.4l27.3-92.8zM452.4 17c-21.9-21.9-57.3-21.9-79.2 0L60.4 329.7c-11.4 11.4-19.7 25.4-24.2 40.8L.7 491.5c-1.7 5.6-.1 11.7 4 15.8s10.2 5.7 15.8 4l121-35.6c15.4-4.5 29.4-12.9 40.8-24.2L495 138.8c21.9-21.9 21.9-57.3 0-79.2L452.4 17zM331.3 202.7c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0l-128 128c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l128-128z" />
+                    </svg>
+                </div>
+                <span class="max-lg:text-xs font-bold">نوشت افزار</span>
+            </div>
+            <div
+                class="xl:min-w-1/9 xl:max-w-1/9 lg:min-w-1/8 max-w-1/8 min-w-1/3 max-w-1/3  h-full bg-white flex flex-col gap-3 justify-center items-center rounded-xl cart_shdow">
+                <div class="lg:size-15 size-12 rounded-full bg-[#FAEDD9] flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-7/12">
+                        <path
+                            d="M395.8 39.6c9.4-9.4 24.6-9.4 33.9 0l42.6 42.6c9.4 9.4 9.4 24.6 0 33.9L417.6 171 341 94.4l54.8-54.8zM318.4 117L395 193.6l-219 219V400c0-8.8-7.2-16-16-16H128V352c0-8.8-7.2-16-16-16H99.4l219-219zM66.9 379.5c1.2-4 2.7-7.9 4.7-11.5H96v32c0 8.8 7.2 16 16 16h32v24.4c-3.7 1.9-7.5 3.5-11.6 4.7L39.6 472.4l27.3-92.8zM452.4 17c-21.9-21.9-57.3-21.9-79.2 0L60.4 329.7c-11.4 11.4-19.7 25.4-24.2 40.8L.7 491.5c-1.7 5.6-.1 11.7 4 15.8s10.2 5.7 15.8 4l121-35.6c15.4-4.5 29.4-12.9 40.8-24.2L495 138.8c21.9-21.9 21.9-57.3 0-79.2L452.4 17zM331.3 202.7c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0l-128 128c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l128-128z" />
+                    </svg>
+                </div>
+                <span class="max-lg:text-xs font-bold">نوشت افزار</span>
+            </div>
+            <div
+                class="xl:min-w-1/9 xl:max-w-1/9 lg:min-w-1/8 max-w-1/8 min-w-1/3 max-w-1/3  h-full bg-white flex flex-col gap-3 justify-center items-center rounded-xl cart_shdow">
+                <div class="lg:size-15 size-12 rounded-full bg-[#FAEDD9] flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-7/12">
+                        <path
+                            d="M395.8 39.6c9.4-9.4 24.6-9.4 33.9 0l42.6 42.6c9.4 9.4 9.4 24.6 0 33.9L417.6 171 341 94.4l54.8-54.8zM318.4 117L395 193.6l-219 219V400c0-8.8-7.2-16-16-16H128V352c0-8.8-7.2-16-16-16H99.4l219-219zM66.9 379.5c1.2-4 2.7-7.9 4.7-11.5H96v32c0 8.8 7.2 16 16 16h32v24.4c-3.7 1.9-7.5 3.5-11.6 4.7L39.6 472.4l27.3-92.8zM452.4 17c-21.9-21.9-57.3-21.9-79.2 0L60.4 329.7c-11.4 11.4-19.7 25.4-24.2 40.8L.7 491.5c-1.7 5.6-.1 11.7 4 15.8s10.2 5.7 15.8 4l121-35.6c15.4-4.5 29.4-12.9 40.8-24.2L495 138.8c21.9-21.9 21.9-57.3 0-79.2L452.4 17zM331.3 202.7c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0l-128 128c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l128-128z" />
+                    </svg>
+                </div>
+                <span class="max-lg:text-xs font-bold">نوشت افزار</span>
+            </div>
+            <div
+                class="xl:min-w-1/9 xl:max-w-1/9 lg:min-w-1/8 max-w-1/8 min-w-1/3 max-w-1/3  h-full bg-white flex flex-col gap-3 justify-center items-center rounded-xl cart_shdow">
+                <div class="lg:size-15 size-12 rounded-full bg-[#FAEDD9] flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-7/12">
+                        <path
+                            d="M395.8 39.6c9.4-9.4 24.6-9.4 33.9 0l42.6 42.6c9.4 9.4 9.4 24.6 0 33.9L417.6 171 341 94.4l54.8-54.8zM318.4 117L395 193.6l-219 219V400c0-8.8-7.2-16-16-16H128V352c0-8.8-7.2-16-16-16H99.4l219-219zM66.9 379.5c1.2-4 2.7-7.9 4.7-11.5H96v32c0 8.8 7.2 16 16 16h32v24.4c-3.7 1.9-7.5 3.5-11.6 4.7L39.6 472.4l27.3-92.8zM452.4 17c-21.9-21.9-57.3-21.9-79.2 0L60.4 329.7c-11.4 11.4-19.7 25.4-24.2 40.8L.7 491.5c-1.7 5.6-.1 11.7 4 15.8s10.2 5.7 15.8 4l121-35.6c15.4-4.5 29.4-12.9 40.8-24.2L495 138.8c21.9-21.9 21.9-57.3 0-79.2L452.4 17zM331.3 202.7c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0l-128 128c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l128-128z" />
+                    </svg>
+                </div>
+                <span class="max-lg:text-xs font-bold">نوشت افزار</span>
+            </div>
+            <div
+                class="xl:min-w-1/9 xl:max-w-1/9 lg:min-w-1/8 max-w-1/8 min-w-1/3 max-w-1/3  h-full bg-white flex flex-col gap-3 justify-center items-center rounded-xl cart_shdow">
+                <div class="lg:size-15 size-12 rounded-full bg-[#FAEDD9] flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-7/12">
+                        <path
+                            d="M395.8 39.6c9.4-9.4 24.6-9.4 33.9 0l42.6 42.6c9.4 9.4 9.4 24.6 0 33.9L417.6 171 341 94.4l54.8-54.8zM318.4 117L395 193.6l-219 219V400c0-8.8-7.2-16-16-16H128V352c0-8.8-7.2-16-16-16H99.4l219-219zM66.9 379.5c1.2-4 2.7-7.9 4.7-11.5H96v32c0 8.8 7.2 16 16 16h32v24.4c-3.7 1.9-7.5 3.5-11.6 4.7L39.6 472.4l27.3-92.8zM452.4 17c-21.9-21.9-57.3-21.9-79.2 0L60.4 329.7c-11.4 11.4-19.7 25.4-24.2 40.8L.7 491.5c-1.7 5.6-.1 11.7 4 15.8s10.2 5.7 15.8 4l121-35.6c15.4-4.5 29.4-12.9 40.8-24.2L495 138.8c21.9-21.9 21.9-57.3 0-79.2L452.4 17zM331.3 202.7c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0l-128 128c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l128-128z" />
+                    </svg>
+                </div>
+                <span class="max-lg:text-xs font-bold">نوشت افزار</span>
+            </div>
+            <div
+                class="xl:min-w-1/9 xl:max-w-1/9 lg:min-w-1/8 max-w-1/8 min-w-1/3 max-w-1/3  h-full bg-white flex flex-col gap-3 justify-center items-center rounded-xl cart_shdow">
+                <div class="lg:size-15 size-12 rounded-full bg-[#FAEDD9] flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-7/12">
+                        <path
+                            d="M395.8 39.6c9.4-9.4 24.6-9.4 33.9 0l42.6 42.6c9.4 9.4 9.4 24.6 0 33.9L417.6 171 341 94.4l54.8-54.8zM318.4 117L395 193.6l-219 219V400c0-8.8-7.2-16-16-16H128V352c0-8.8-7.2-16-16-16H99.4l219-219zM66.9 379.5c1.2-4 2.7-7.9 4.7-11.5H96v32c0 8.8 7.2 16 16 16h32v24.4c-3.7 1.9-7.5 3.5-11.6 4.7L39.6 472.4l27.3-92.8zM452.4 17c-21.9-21.9-57.3-21.9-79.2 0L60.4 329.7c-11.4 11.4-19.7 25.4-24.2 40.8L.7 491.5c-1.7 5.6-.1 11.7 4 15.8s10.2 5.7 15.8 4l121-35.6c15.4-4.5 29.4-12.9 40.8-24.2L495 138.8c21.9-21.9 21.9-57.3 0-79.2L452.4 17zM331.3 202.7c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0l-128 128c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l128-128z" />
+                    </svg>
+                </div>
+                <span class="max-lg:text-xs font-bold">نوشت افزار</span>
+            </div>
+            <div
+                class="xl:min-w-1/9 xl:max-w-1/9 lg:min-w-1/8 max-w-1/8 min-w-1/3 max-w-1/3  h-full bg-white flex flex-col gap-3 justify-center items-center rounded-xl cart_shdow">
+                <div class="lg:size-15 size-12 rounded-full bg-[#FAEDD9] flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-7/12">
+                        <path
+                            d="M395.8 39.6c9.4-9.4 24.6-9.4 33.9 0l42.6 42.6c9.4 9.4 9.4 24.6 0 33.9L417.6 171 341 94.4l54.8-54.8zM318.4 117L395 193.6l-219 219V400c0-8.8-7.2-16-16-16H128V352c0-8.8-7.2-16-16-16H99.4l219-219zM66.9 379.5c1.2-4 2.7-7.9 4.7-11.5H96v32c0 8.8 7.2 16 16 16h32v24.4c-3.7 1.9-7.5 3.5-11.6 4.7L39.6 472.4l27.3-92.8zM452.4 17c-21.9-21.9-57.3-21.9-79.2 0L60.4 329.7c-11.4 11.4-19.7 25.4-24.2 40.8L.7 491.5c-1.7 5.6-.1 11.7 4 15.8s10.2 5.7 15.8 4l121-35.6c15.4-4.5 29.4-12.9 40.8-24.2L495 138.8c21.9-21.9 21.9-57.3 0-79.2L452.4 17zM331.3 202.7c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0l-128 128c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l128-128z" />
+                    </svg>
+                </div>
+                <span class="max-lg:text-xs font-bold">نوشت افزار</span>
+            </div>
+            <div
+                class="xl:min-w-1/9 xl:max-w-1/9 lg:min-w-1/8 max-w-1/8 min-w-1/3 max-w-1/3  h-full bg-white flex flex-col gap-3 justify-center items-center rounded-xl cart_shdow">
+                <div class="lg:size-15 size-12 rounded-full bg-[#FAEDD9] flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-7/12">
+                        <path
+                            d="M395.8 39.6c9.4-9.4 24.6-9.4 33.9 0l42.6 42.6c9.4 9.4 9.4 24.6 0 33.9L417.6 171 341 94.4l54.8-54.8zM318.4 117L395 193.6l-219 219V400c0-8.8-7.2-16-16-16H128V352c0-8.8-7.2-16-16-16H99.4l219-219zM66.9 379.5c1.2-4 2.7-7.9 4.7-11.5H96v32c0 8.8 7.2 16 16 16h32v24.4c-3.7 1.9-7.5 3.5-11.6 4.7L39.6 472.4l27.3-92.8zM452.4 17c-21.9-21.9-57.3-21.9-79.2 0L60.4 329.7c-11.4 11.4-19.7 25.4-24.2 40.8L.7 491.5c-1.7 5.6-.1 11.7 4 15.8s10.2 5.7 15.8 4l121-35.6c15.4-4.5 29.4-12.9 40.8-24.2L495 138.8c21.9-21.9 21.9-57.3 0-79.2L452.4 17zM331.3 202.7c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0l-128 128c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l128-128z" />
+                    </svg>
+                </div>
+                <span class="max-lg:text-xs font-bold">نوشت افزار</span>
+            </div>
+            <div
+                class="xl:min-w-1/9 xl:max-w-1/9 lg:min-w-1/8 max-w-1/8 min-w-1/3 max-w-1/3  h-full bg-white flex flex-col gap-3 justify-center items-center rounded-xl cart_shdow">
+                <div class="lg:size-15 size-12 rounded-full bg-[#FAEDD9] flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-7/12">
+                        <path
+                            d="M395.8 39.6c9.4-9.4 24.6-9.4 33.9 0l42.6 42.6c9.4 9.4 9.4 24.6 0 33.9L417.6 171 341 94.4l54.8-54.8zM318.4 117L395 193.6l-219 219V400c0-8.8-7.2-16-16-16H128V352c0-8.8-7.2-16-16-16H99.4l219-219zM66.9 379.5c1.2-4 2.7-7.9 4.7-11.5H96v32c0 8.8 7.2 16 16 16h32v24.4c-3.7 1.9-7.5 3.5-11.6 4.7L39.6 472.4l27.3-92.8zM452.4 17c-21.9-21.9-57.3-21.9-79.2 0L60.4 329.7c-11.4 11.4-19.7 25.4-24.2 40.8L.7 491.5c-1.7 5.6-.1 11.7 4 15.8s10.2 5.7 15.8 4l121-35.6c15.4-4.5 29.4-12.9 40.8-24.2L495 138.8c21.9-21.9 21.9-57.3 0-79.2L452.4 17zM331.3 202.7c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0l-128 128c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l128-128z" />
+                    </svg>
+                </div>
+                <span class="max-lg:text-xs font-bold">نوشت افزار</span>
+            </div>
+            <div
+                class="xl:min-w-1/9 xl:max-w-1/9 lg:min-w-1/8 max-w-1/8 min-w-1/3 max-w-1/3  h-full bg-white flex flex-col gap-3 justify-center items-center rounded-xl cart_shdow">
+                <div class="lg:size-15 size-12 rounded-full bg-[#FAEDD9] flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-7/12">
+                        <path
+                            d="M395.8 39.6c9.4-9.4 24.6-9.4 33.9 0l42.6 42.6c9.4 9.4 9.4 24.6 0 33.9L417.6 171 341 94.4l54.8-54.8zM318.4 117L395 193.6l-219 219V400c0-8.8-7.2-16-16-16H128V352c0-8.8-7.2-16-16-16H99.4l219-219zM66.9 379.5c1.2-4 2.7-7.9 4.7-11.5H96v32c0 8.8 7.2 16 16 16h32v24.4c-3.7 1.9-7.5 3.5-11.6 4.7L39.6 472.4l27.3-92.8zM452.4 17c-21.9-21.9-57.3-21.9-79.2 0L60.4 329.7c-11.4 11.4-19.7 25.4-24.2 40.8L.7 491.5c-1.7 5.6-.1 11.7 4 15.8s10.2 5.7 15.8 4l121-35.6c15.4-4.5 29.4-12.9 40.8-24.2L495 138.8c21.9-21.9 21.9-57.3 0-79.2L452.4 17zM331.3 202.7c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0l-128 128c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l128-128z" />
+                    </svg>
+                </div>
+                <span class="max-lg:text-xs font-bold">نوشت افزار</span>
+            </div>
+            <div
+                class="xl:min-w-1/9 xl:max-w-1/9 lg:min-w-1/8 max-w-1/8 min-w-1/3 max-w-1/3  h-full bg-white flex flex-col gap-3 justify-center items-center rounded-xl cart_shdow">
+                <div class="lg:size-15 size-12 rounded-full bg-[#FAEDD9] flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-7/12">
+                        <path
+                            d="M395.8 39.6c9.4-9.4 24.6-9.4 33.9 0l42.6 42.6c9.4 9.4 9.4 24.6 0 33.9L417.6 171 341 94.4l54.8-54.8zM318.4 117L395 193.6l-219 219V400c0-8.8-7.2-16-16-16H128V352c0-8.8-7.2-16-16-16H99.4l219-219zM66.9 379.5c1.2-4 2.7-7.9 4.7-11.5H96v32c0 8.8 7.2 16 16 16h32v24.4c-3.7 1.9-7.5 3.5-11.6 4.7L39.6 472.4l27.3-92.8zM452.4 17c-21.9-21.9-57.3-21.9-79.2 0L60.4 329.7c-11.4 11.4-19.7 25.4-24.2 40.8L.7 491.5c-1.7 5.6-.1 11.7 4 15.8s10.2 5.7 15.8 4l121-35.6c15.4-4.5 29.4-12.9 40.8-24.2L495 138.8c21.9-21.9 21.9-57.3 0-79.2L452.4 17zM331.3 202.7c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0l-128 128c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l128-128z" />
+                    </svg>
+                </div>
+                <span class="max-lg:text-xs font-bold">نوشت افزار</span>
+            </div>
+            <div
+                class="xl:min-w-1/9 xl:max-w-1/9 lg:min-w-1/8 max-w-1/8 min-w-1/3 max-w-1/3  h-full bg-white flex flex-col gap-3 justify-center items-center rounded-xl cart_shdow">
+                <div class="lg:size-15 size-12 rounded-full bg-[#FAEDD9] flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-7/12">
+                        <path
+                            d="M395.8 39.6c9.4-9.4 24.6-9.4 33.9 0l42.6 42.6c9.4 9.4 9.4 24.6 0 33.9L417.6 171 341 94.4l54.8-54.8zM318.4 117L395 193.6l-219 219V400c0-8.8-7.2-16-16-16H128V352c0-8.8-7.2-16-16-16H99.4l219-219zM66.9 379.5c1.2-4 2.7-7.9 4.7-11.5H96v32c0 8.8 7.2 16 16 16h32v24.4c-3.7 1.9-7.5 3.5-11.6 4.7L39.6 472.4l27.3-92.8zM452.4 17c-21.9-21.9-57.3-21.9-79.2 0L60.4 329.7c-11.4 11.4-19.7 25.4-24.2 40.8L.7 491.5c-1.7 5.6-.1 11.7 4 15.8s10.2 5.7 15.8 4l121-35.6c15.4-4.5 29.4-12.9 40.8-24.2L495 138.8c21.9-21.9 21.9-57.3 0-79.2L452.4 17zM331.3 202.7c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0l-128 128c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l128-128z" />
+                    </svg>
+                </div>
+                <span class="max-lg:text-xs font-bold">نوشت افزار</span>
+            </div>
+            <div
+                class="xl:min-w-1/9 xl:max-w-1/9 lg:min-w-1/8 max-w-1/8 min-w-1/3 max-w-1/3  h-full bg-white flex flex-col gap-3 justify-center items-center rounded-xl cart_shdow">
+                <div class="lg:size-15 size-12 rounded-full bg-[#FAEDD9] flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-7/12">
+                        <path
+                            d="M395.8 39.6c9.4-9.4 24.6-9.4 33.9 0l42.6 42.6c9.4 9.4 9.4 24.6 0 33.9L417.6 171 341 94.4l54.8-54.8zM318.4 117L395 193.6l-219 219V400c0-8.8-7.2-16-16-16H128V352c0-8.8-7.2-16-16-16H99.4l219-219zM66.9 379.5c1.2-4 2.7-7.9 4.7-11.5H96v32c0 8.8 7.2 16 16 16h32v24.4c-3.7 1.9-7.5 3.5-11.6 4.7L39.6 472.4l27.3-92.8zM452.4 17c-21.9-21.9-57.3-21.9-79.2 0L60.4 329.7c-11.4 11.4-19.7 25.4-24.2 40.8L.7 491.5c-1.7 5.6-.1 11.7 4 15.8s10.2 5.7 15.8 4l121-35.6c15.4-4.5 29.4-12.9 40.8-24.2L495 138.8c21.9-21.9 21.9-57.3 0-79.2L452.4 17zM331.3 202.7c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0l-128 128c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l128-128z" />
+                    </svg>
+                </div>
+                <span class="max-lg:text-xs font-bold">نوشت افزار</span>
+            </div>
+
+
+
+        </section>
+        <!-- category -->
+        <!-- likly -->
+        <section class="w-11/12 flex flex-col gap-4 justify-start items-start">
+            <div class="flex flex-col gap-1 justify-start lg:items-start items-center">
+                <h3 class="text-xl font-bold">محبوب ترین های این زوز ها</h3>
+                <p class="text-[#ADB4B2] max-lg:text-center max-lg:text-sm">انتخاب هایی که بیشتر از همه موزد توجه کاربران قرار گرفته است</p>
+            </div>
+            <div class="max-w-full w-full overflow-x-auto p-1 flex gap-4 justify-start items-center">
+                <div
+                    class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2">
+                    <div class="w-full h-1/2 flex justify-center items-center relative">
+                        <img src="{{asset('storage/home/bookSM_1847177_0 (1).jpg')}}" alt="" class="max-w-full max-h-24 lg:max-h-42">
+                        <span
+                            class="lg:px-2 px-1 lg;py-1 py-0.5 bg-red-500 rounded-md text-xs max-lg:text-[9px] text-white absolute top-0 right-0">-13%</span>
+                        <div class="px-2 py-1 absolute top-0 left-0 change_like_svh">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="lg:size-5 size-4">
+                                    <path
+                                        d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z" />
+                                </svg>
+                            </div>
+                            <div class="hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                    class="size-5 fill-red-500">
+                                    <path
+                                        d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full h-1/2 flex flex-col gap-1 justify-start items-start">
+                        <h5 class="lg:text-lg text-sm font-bold">عادت های اتمی</h5>
+                        <span class="text-[#ADB4B2] max-lg:text-xs">جمیز کلیر</span>
+                        <div class="flex justify-start items-center">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                    class="size-4 fill-yellow-400">
+                                    <path
+                                        d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                                </svg>
+                            </div>
+                            <span class="lg:text-xs text-[10px] text-[#ADB4B2]">5.0</span>
+                        </div>
+                        <div class="flex gap-1 justify-start items-center font-bold mt-2 max-lg:text-sm">
+                            <span>450,000</span>
+                            <span>تومان</span>
+                        </div>
+                        <div class="w-full py-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3"
+                                    fill="white">
+                                    <path
+                                        d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <span class="lg:text-sm text-[10px] text-white font-bold">افزودن به سبد خرید</span>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2">
+                    <div class="w-full h-1/2 flex justify-center items-center relative">
+                        <img src="{{asset('storage/home/bookSM_1847177_0 (1).jpg')}}" alt="" class="max-w-full max-h-24 lg:max-h-42">
+                        <span
+                            class="lg:px-2 px-1 lg;py-1 py-0.5 bg-red-500 rounded-md text-xs max-lg:text-[9px] text-white absolute top-0 right-0">-13%</span>
+                        <div class="px-2 py-1 absolute top-0 left-0 change_like_svh">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="lg:size-5 size-4">
+                                    <path
+                                        d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z" />
+                                </svg>
+                            </div>
+                            <div class="hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                    class="size-5 fill-red-500">
+                                    <path
+                                        d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full h-1/2 flex flex-col gap-1 justify-start items-start">
+                        <h5 class="lg:text-lg text-sm font-bold">عادت های اتمی</h5>
+                        <span class="text-[#ADB4B2] max-lg:text-xs">جمیز کلیر</span>
+                        <div class="flex justify-start items-center">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                    class="size-4 fill-yellow-400">
+                                    <path
+                                        d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                                </svg>
+                            </div>
+                            <span class="lg:text-xs text-[10px] text-[#ADB4B2]">5.0</span>
+                        </div>
+                        <div class="flex gap-1 justify-start items-center font-bold mt-2 max-lg:text-sm">
+                            <span>450,000</span>
+                            <span>تومان</span>
+                        </div>
+                        <div class="w-full py-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3"
+                                    fill="white">
+                                    <path
+                                        d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <span class="lg:text-sm text-[10px] text-white font-bold">افزودن به سبد خرید</span>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2">
+                    <div class="w-full h-1/2 flex justify-center items-center relative">
+                        <img src="{{asset('storage/home/bookSM_1847177_0 (1).jpg')}}" alt="" class="max-w-full max-h-24 lg:max-h-42">
+                        <span
+                            class="lg:px-2 px-1 lg;py-1 py-0.5 bg-red-500 rounded-md text-xs max-lg:text-[9px] text-white absolute top-0 right-0">-13%</span>
+                        <div class="px-2 py-1 absolute top-0 left-0 change_like_svh">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="lg:size-5 size-4">
+                                    <path
+                                        d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z" />
+                                </svg>
+                            </div>
+                            <div class="hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                    class="size-5 fill-red-500">
+                                    <path
+                                        d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full h-1/2 flex flex-col gap-1 justify-start items-start">
+                        <h5 class="lg:text-lg text-sm font-bold">عادت های اتمی</h5>
+                        <span class="text-[#ADB4B2] max-lg:text-xs">جمیز کلیر</span>
+                        <div class="flex justify-start items-center">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                    class="size-4 fill-yellow-400">
+                                    <path
+                                        d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                                </svg>
+                            </div>
+                            <span class="lg:text-xs text-[10px] text-[#ADB4B2]">5.0</span>
+                        </div>
+                        <div class="flex gap-1 justify-start items-center font-bold mt-2 max-lg:text-sm">
+                            <span>450,000</span>
+                            <span>تومان</span>
+                        </div>
+                        <div class="w-full py-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3"
+                                    fill="white">
+                                    <path
+                                        d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <span class="lg:text-sm text-[10px] text-white font-bold">افزودن به سبد خرید</span>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2">
+                    <div class="w-full h-1/2 flex justify-center items-center relative">
+                        <img src="{{asset('storage/home/bookSM_1847177_0 (1).jpg')}}" alt="" class="max-w-full max-h-24 lg:max-h-42">
+                        <span
+                            class="lg:px-2 px-1 lg;py-1 py-0.5 bg-red-500 rounded-md text-xs max-lg:text-[9px] text-white absolute top-0 right-0">-13%</span>
+                        <div class="px-2 py-1 absolute top-0 left-0 change_like_svh">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="lg:size-5 size-4">
+                                    <path
+                                        d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z" />
+                                </svg>
+                            </div>
+                            <div class="hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                    class="size-5 fill-red-500">
+                                    <path
+                                        d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full h-1/2 flex flex-col gap-1 justify-start items-start">
+                        <h5 class="lg:text-lg text-sm font-bold">عادت های اتمی</h5>
+                        <span class="text-[#ADB4B2] max-lg:text-xs">جمیز کلیر</span>
+                        <div class="flex justify-start items-center">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                    class="size-4 fill-yellow-400">
+                                    <path
+                                        d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                                </svg>
+                            </div>
+                            <span class="lg:text-xs text-[10px] text-[#ADB4B2]">5.0</span>
+                        </div>
+                        <div class="flex gap-1 justify-start items-center font-bold mt-2 max-lg:text-sm">
+                            <span>450,000</span>
+                            <span>تومان</span>
+                        </div>
+                        <div class="w-full py-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3"
+                                    fill="white">
+                                    <path
+                                        d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <span class="lg:text-sm text-[10px] text-white font-bold">افزودن به سبد خرید</span>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2">
+                    <div class="w-full h-1/2 flex justify-center items-center relative">
+                        <img src="{{asset('storage/home/bookSM_1847177_0 (1).jpg')}}" alt="" class="max-w-full max-h-24 lg:max-h-42">
+                        <span
+                            class="lg:px-2 px-1 lg;py-1 py-0.5 bg-red-500 rounded-md text-xs max-lg:text-[9px] text-white absolute top-0 right-0">-13%</span>
+                        <div class="px-2 py-1 absolute top-0 left-0 change_like_svh">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="lg:size-5 size-4">
+                                    <path
+                                        d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z" />
+                                </svg>
+                            </div>
+                            <div class="hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                    class="size-5 fill-red-500">
+                                    <path
+                                        d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full h-1/2 flex flex-col gap-1 justify-start items-start">
+                        <h5 class="lg:text-lg text-sm font-bold">عادت های اتمی</h5>
+                        <span class="text-[#ADB4B2] max-lg:text-xs">جمیز کلیر</span>
+                        <div class="flex justify-start items-center">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                    class="size-4 fill-yellow-400">
+                                    <path
+                                        d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                                </svg>
+                            </div>
+                            <span class="lg:text-xs text-[10px] text-[#ADB4B2]">5.0</span>
+                        </div>
+                        <div class="flex gap-1 justify-start items-center font-bold mt-2 max-lg:text-sm">
+                            <span>450,000</span>
+                            <span>تومان</span>
+                        </div>
+                        <div class="w-full py-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3"
+                                    fill="white">
+                                    <path
+                                        d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <span class="lg:text-sm text-[10px] text-white font-bold">افزودن به سبد خرید</span>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2">
+                    <div class="w-full h-1/2 flex justify-center items-center relative">
+                        <img src="{{asset('storage/home/bookSM_1847177_0 (1).jpg')}}" alt="" class="max-w-full max-h-24 lg:max-h-42">
+                        <span
+                            class="lg:px-2 px-1 lg;py-1 py-0.5 bg-red-500 rounded-md text-xs max-lg:text-[9px] text-white absolute top-0 right-0">-13%</span>
+                        <div class="px-2 py-1 absolute top-0 left-0 change_like_svh">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="lg:size-5 size-4">
+                                    <path
+                                        d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z" />
+                                </svg>
+                            </div>
+                            <div class="hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                    class="size-5 fill-red-500">
+                                    <path
+                                        d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full h-1/2 flex flex-col gap-1 justify-start items-start">
+                        <h5 class="lg:text-lg text-sm font-bold">عادت های اتمی</h5>
+                        <span class="text-[#ADB4B2] max-lg:text-xs">جمیز کلیر</span>
+                        <div class="flex justify-start items-center">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                    class="size-4 fill-yellow-400">
+                                    <path
+                                        d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                                </svg>
+                            </div>
+                            <span class="lg:text-xs text-[10px] text-[#ADB4B2]">5.0</span>
+                        </div>
+                        <div class="flex gap-1 justify-start items-center font-bold mt-2 max-lg:text-sm">
+                            <span>450,000</span>
+                            <span>تومان</span>
+                        </div>
+                        <div class="w-full py-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3"
+                                    fill="white">
+                                    <path
+                                        d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <span class="lg:text-sm text-[10px] text-white font-bold">افزودن به سبد خرید</span>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2">
+                    <div class="w-full h-1/2 flex justify-center items-center relative">
+                        <img src="{{asset('storage/home/bookSM_1847177_0 (1).jpg')}}" alt="" class="max-w-full max-h-24 lg:max-h-42">
+                        <span
+                            class="lg:px-2 px-1 lg;py-1 py-0.5 bg-red-500 rounded-md text-xs max-lg:text-[9px] text-white absolute top-0 right-0">-13%</span>
+                        <div class="px-2 py-1 absolute top-0 left-0 change_like_svh">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="lg:size-5 size-4">
+                                    <path
+                                        d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z" />
+                                </svg>
+                            </div>
+                            <div class="hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                    class="size-5 fill-red-500">
+                                    <path
+                                        d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full h-1/2 flex flex-col gap-1 justify-start items-start">
+                        <h5 class="lg:text-lg text-sm font-bold">عادت های اتمی</h5>
+                        <span class="text-[#ADB4B2] max-lg:text-xs">جمیز کلیر</span>
+                        <div class="flex justify-start items-center">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                    class="size-4 fill-yellow-400">
+                                    <path
+                                        d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                                </svg>
+                            </div>
+                            <span class="lg:text-xs text-[10px] text-[#ADB4B2]">5.0</span>
+                        </div>
+                        <div class="flex gap-1 justify-start items-center font-bold mt-2 max-lg:text-sm">
+                            <span>450,000</span>
+                            <span>تومان</span>
+                        </div>
+                        <div class="w-full py-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3"
+                                    fill="white">
+                                    <path
+                                        d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <span class="lg:text-sm text-[10px] text-white font-bold">افزودن به سبد خرید</span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </section>
+        <!-- likly -->
+
+        <!-- baner1 -->
+        <section class="w-11/12 flex max-lg:flex-col justify-start items-center bg-[#EBEFE1] rounded-xl py-2">
+            <div class="lg:w-1/2 w-full flex justify-center items-center relative">
+                <img src="{{asset('storage/home/baner1.webp')}}" alt="" class="max-w-full lg:h-full max-h-55 max-lg:max-h-40 ">
+                <div
+                    class="lg:size-25 size-20 rounded-full bg-green-700 flex flex-col gap-1 justify-center items-center absolute lg:top-1/12 top-0 right-1/24">
+                    <div class="flex gap-1 justify-start items-center">
+                        <span class="max-lg:text-sm text-white">تا</span>
+                        <span class="lg:text-lg font-bold text-white">%30</span>
+                    </div>
+                    <span class="max-lg:text-sm text-white">تخفیف</span>
+                </div>
+            </div>
+            <div
+                class="lg:w-1/2 w-full min-h-full  flex lg:justify-start justify-center items-center lg:pr-20 lg:py-4 max-lg:px-2 max-lg:pt-7">
+                <div class="w-full h-full flex flex-col gap-3 justify-center lg:items-start items-center">
+                    <h3 class="lg:text-4xl text-2xl font-bold">وقتشه یه چیز تازه بخونی</h3>
+                    <p class="max-xl:text-sm max-lg:text-xs max-lg:text-center">مجموعه ای کتاب ها و لوازم تحریر برای
+                        مطالعه ، یادکیری
+                        و خلق کردن</p>
+
+                    <a href="#"
+                        class="px-6 lg:py-3 py-2 bg-green-700  text-sm text-white font-bold rounded-xl flex justify-center items-center mt-2">
+                        مشاهده پیشنهاد ها
+                    </a>
+
+
+                </div>
+            </div>
+
+        </section>
+        <!-- baner1 -->
+        <!-- new product -->
+        <section class="w-11/12 flex flex-col gap-4 justify-start items-start">
+            <div class="flex flex-col gap-1 justify-start lg:items-start items-center">
+                <h3 class="text-xl font-bold">تازه به قفسه ها اضافه شده</h3>
+                <p class="text-[#ADB4B2] max-lg:text-center max-lg:text-sm">جدید ترین کتاب ها و محصولات فروشکاه را زودتر ار بقیه ببین</p>
+            </div>
+            <div class="max-w-full w-full overflow-x-auto p-1 flex gap-4 justify-start items-center">
+                <div
+                    class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2">
+                    <div class="w-full h-1/2 flex justify-center items-center relative">
+                        <img src="{{asset('storage/home/bookSM_1847177_0 (1).jpg')}}" alt="" class="max-w-full max-h-24 lg:max-h-42">
+                        <span
+                            class="lg:px-2 px-1 lg;py-1 py-0.5 bg-red-500 rounded-md text-xs max-lg:text-[9px] text-white absolute top-0 right-0">-13%</span>
+                        <div class="px-2 py-1 absolute top-0 left-0 change_like_svh">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="lg:size-5 size-4">
+                                    <path
+                                        d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z" />
+                                </svg>
+                            </div>
+                            <div class="hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                    class="size-5 fill-red-500">
+                                    <path
+                                        d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full h-1/2 flex flex-col gap-1 justify-start items-start">
+                        <h5 class="lg:text-lg text-sm font-bold">عادت های اتمی</h5>
+                        <span class="text-[#ADB4B2] max-lg:text-xs">جمیز کلیر</span>
+                        <div class="flex justify-start items-center">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                    class="size-4 fill-yellow-400">
+                                    <path
+                                        d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                                </svg>
+                            </div>
+                            <span class="lg:text-xs text-[10px] text-[#ADB4B2]">5.0</span>
+                        </div>
+                        <div class="flex gap-1 justify-start items-center font-bold mt-2 max-lg:text-sm">
+                            <span>450,000</span>
+                            <span>تومان</span>
+                        </div>
+                        <div class="w-full py-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3"
+                                    fill="white">
+                                    <path
+                                        d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <span class="lg:text-sm text-[10px] text-white font-bold">افزودن به سبد خرید</span>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2">
+                    <div class="w-full h-1/2 flex justify-center items-center relative">
+                        <img src="{{asset('storage/home/bookSM_1847177_0 (1).jpg')}}" alt="" class="max-w-full max-h-24 lg:max-h-42">
+                        <span
+                            class="lg:px-2 px-1 lg;py-1 py-0.5 bg-red-500 rounded-md text-xs max-lg:text-[9px] text-white absolute top-0 right-0">-13%</span>
+                        <div class="px-2 py-1 absolute top-0 left-0 change_like_svh">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="lg:size-5 size-4">
+                                    <path
+                                        d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z" />
+                                </svg>
+                            </div>
+                            <div class="hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                    class="size-5 fill-red-500">
+                                    <path
+                                        d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full h-1/2 flex flex-col gap-1 justify-start items-start">
+                        <h5 class="lg:text-lg text-sm font-bold">عادت های اتمی</h5>
+                        <span class="text-[#ADB4B2] max-lg:text-xs">جمیز کلیر</span>
+                        <div class="flex justify-start items-center">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                    class="size-4 fill-yellow-400">
+                                    <path
+                                        d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                                </svg>
+                            </div>
+                            <span class="lg:text-xs text-[10px] text-[#ADB4B2]">5.0</span>
+                        </div>
+                        <div class="flex gap-1 justify-start items-center font-bold mt-2 max-lg:text-sm">
+                            <span>450,000</span>
+                            <span>تومان</span>
+                        </div>
+                        <div class="w-full py-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3"
+                                    fill="white">
+                                    <path
+                                        d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <span class="lg:text-sm text-[10px] text-white font-bold">افزودن به سبد خرید</span>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2">
+                    <div class="w-full h-1/2 flex justify-center items-center relative">
+                        <img src="{{asset('storage/home/bookSM_1847177_0 (1).jpg')}}" alt="" class="max-w-full max-h-24 lg:max-h-42">
+                        <span
+                            class="lg:px-2 px-1 lg;py-1 py-0.5 bg-red-500 rounded-md text-xs max-lg:text-[9px] text-white absolute top-0 right-0">-13%</span>
+                        <div class="px-2 py-1 absolute top-0 left-0 change_like_svh">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="lg:size-5 size-4">
+                                    <path
+                                        d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z" />
+                                </svg>
+                            </div>
+                            <div class="hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                    class="size-5 fill-red-500">
+                                    <path
+                                        d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full h-1/2 flex flex-col gap-1 justify-start items-start">
+                        <h5 class="lg:text-lg text-sm font-bold">عادت های اتمی</h5>
+                        <span class="text-[#ADB4B2] max-lg:text-xs">جمیز کلیر</span>
+                        <div class="flex justify-start items-center">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                    class="size-4 fill-yellow-400">
+                                    <path
+                                        d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                                </svg>
+                            </div>
+                            <span class="lg:text-xs text-[10px] text-[#ADB4B2]">5.0</span>
+                        </div>
+                        <div class="flex gap-1 justify-start items-center font-bold mt-2 max-lg:text-sm">
+                            <span>450,000</span>
+                            <span>تومان</span>
+                        </div>
+                        <div class="w-full py-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3"
+                                    fill="white">
+                                    <path
+                                        d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <span class="lg:text-sm text-[10px] text-white font-bold">افزودن به سبد خرید</span>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2">
+                    <div class="w-full h-1/2 flex justify-center items-center relative">
+                        <img src="{{asset('storage/home/bookSM_1847177_0 (1).jpg')}}" alt="" class="max-w-full max-h-24 lg:max-h-42">
+                        <span
+                            class="lg:px-2 px-1 lg;py-1 py-0.5 bg-red-500 rounded-md text-xs max-lg:text-[9px] text-white absolute top-0 right-0">-13%</span>
+                        <div class="px-2 py-1 absolute top-0 left-0 change_like_svh">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="lg:size-5 size-4">
+                                    <path
+                                        d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z" />
+                                </svg>
+                            </div>
+                            <div class="hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                    class="size-5 fill-red-500">
+                                    <path
+                                        d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full h-1/2 flex flex-col gap-1 justify-start items-start">
+                        <h5 class="lg:text-lg text-sm font-bold">عادت های اتمی</h5>
+                        <span class="text-[#ADB4B2] max-lg:text-xs">جمیز کلیر</span>
+                        <div class="flex justify-start items-center">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                    class="size-4 fill-yellow-400">
+                                    <path
+                                        d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                                </svg>
+                            </div>
+                            <span class="lg:text-xs text-[10px] text-[#ADB4B2]">5.0</span>
+                        </div>
+                        <div class="flex gap-1 justify-start items-center font-bold mt-2 max-lg:text-sm">
+                            <span>450,000</span>
+                            <span>تومان</span>
+                        </div>
+                        <div class="w-full py-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3"
+                                    fill="white">
+                                    <path
+                                        d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <span class="lg:text-sm text-[10px] text-white font-bold">افزودن به سبد خرید</span>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2">
+                    <div class="w-full h-1/2 flex justify-center items-center relative">
+                        <img src="{{asset('storage/home/bookSM_1847177_0 (1).jpg')}}" alt="" class="max-w-full max-h-24 lg:max-h-42">
+                        <span
+                            class="lg:px-2 px-1 lg;py-1 py-0.5 bg-red-500 rounded-md text-xs max-lg:text-[9px] text-white absolute top-0 right-0">-13%</span>
+                        <div class="px-2 py-1 absolute top-0 left-0 change_like_svh">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="lg:size-5 size-4">
+                                    <path
+                                        d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z" />
+                                </svg>
+                            </div>
+                            <div class="hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                    class="size-5 fill-red-500">
+                                    <path
+                                        d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full h-1/2 flex flex-col gap-1 justify-start items-start">
+                        <h5 class="lg:text-lg text-sm font-bold">عادت های اتمی</h5>
+                        <span class="text-[#ADB4B2] max-lg:text-xs">جمیز کلیر</span>
+                        <div class="flex justify-start items-center">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                    class="size-4 fill-yellow-400">
+                                    <path
+                                        d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                                </svg>
+                            </div>
+                            <span class="lg:text-xs text-[10px] text-[#ADB4B2]">5.0</span>
+                        </div>
+                        <div class="flex gap-1 justify-start items-center font-bold mt-2 max-lg:text-sm">
+                            <span>450,000</span>
+                            <span>تومان</span>
+                        </div>
+                        <div class="w-full py-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3"
+                                    fill="white">
+                                    <path
+                                        d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <span class="lg:text-sm text-[10px] text-white font-bold">افزودن به سبد خرید</span>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2">
+                    <div class="w-full h-1/2 flex justify-center items-center relative">
+                        <img src="{{asset('storage/home/bookSM_1847177_0 (1).jpg')}}" alt="" class="max-w-full max-h-24 lg:max-h-42">
+                        <span
+                            class="lg:px-2 px-1 lg;py-1 py-0.5 bg-red-500 rounded-md text-xs max-lg:text-[9px] text-white absolute top-0 right-0">-13%</span>
+                        <div class="px-2 py-1 absolute top-0 left-0 change_like_svh">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="lg:size-5 size-4">
+                                    <path
+                                        d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z" />
+                                </svg>
+                            </div>
+                            <div class="hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                    class="size-5 fill-red-500">
+                                    <path
+                                        d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full h-1/2 flex flex-col gap-1 justify-start items-start">
+                        <h5 class="lg:text-lg text-sm font-bold">عادت های اتمی</h5>
+                        <span class="text-[#ADB4B2] max-lg:text-xs">جمیز کلیر</span>
+                        <div class="flex justify-start items-center">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                    class="size-4 fill-yellow-400">
+                                    <path
+                                        d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                                </svg>
+                            </div>
+                            <span class="lg:text-xs text-[10px] text-[#ADB4B2]">5.0</span>
+                        </div>
+                        <div class="flex gap-1 justify-start items-center font-bold mt-2 max-lg:text-sm">
+                            <span>450,000</span>
+                            <span>تومان</span>
+                        </div>
+                        <div class="w-full py-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3"
+                                    fill="white">
+                                    <path
+                                        d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <span class="lg:text-sm text-[10px] text-white font-bold">افزودن به سبد خرید</span>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2">
+                    <div class="w-full h-1/2 flex justify-center items-center relative">
+                        <img src="{{asset('storage/home/bookSM_1847177_0 (1).jpg')}}" alt="" class="max-w-full max-h-24 lg:max-h-42">
+                        <span
+                            class="lg:px-2 px-1 lg;py-1 py-0.5 bg-red-500 rounded-md text-xs max-lg:text-[9px] text-white absolute top-0 right-0">-13%</span>
+                        <div class="px-2 py-1 absolute top-0 left-0 change_like_svh">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="lg:size-5 size-4">
+                                    <path
+                                        d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z" />
+                                </svg>
+                            </div>
+                            <div class="hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                    class="size-5 fill-red-500">
+                                    <path
+                                        d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full h-1/2 flex flex-col gap-1 justify-start items-start">
+                        <h5 class="lg:text-lg text-sm font-bold">عادت های اتمی</h5>
+                        <span class="text-[#ADB4B2] max-lg:text-xs">جمیز کلیر</span>
+                        <div class="flex justify-start items-center">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                    class="size-4 fill-yellow-400">
+                                    <path
+                                        d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                                </svg>
+                            </div>
+                            <span class="lg:text-xs text-[10px] text-[#ADB4B2]">5.0</span>
+                        </div>
+                        <div class="flex gap-1 justify-start items-center font-bold mt-2 max-lg:text-sm">
+                            <span>450,000</span>
+                            <span>تومان</span>
+                        </div>
+                        <div class="w-full py-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3"
+                                    fill="white">
+                                    <path
+                                        d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <span class="lg:text-sm text-[10px] text-white font-bold">افزودن به سبد خرید</span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+        <section class="w-full flex justify-center">
+            <div class="w-11/12 flex flex-col gap-5">
+                <span class="text-2xl fount-bold">امروز دنباله چه چیزی هستی؟</span>
+                <div class="flex w-full max-w-full items-center gap-4 overflow-hidden overflow-x-auto">
+                    <div class="flex flex-col items-center gap-5 py-4 px-5 shadow-lg lg:rounded-xl rounded-md">
+                        <img class="rounded-xl lg:min-w-35 lg:max-w-35 min-w-16 max-w-16 " src="{{asset('storage/home/d05d5a19-651d-4bae-b31d-0e018e208b93.jfif')}}" alt="">
+                        <span class="lg:text-xl text-xs">فلسفه</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-5 py-4 px-5 shadow-lg lg:rounded-xl rounded-md">
+                        <img class="rounded-xl lg:min-w-35 lg:max-w-35 min-w-16 max-w-16 " src="{{asset('storage/home/d05d5a19-651d-4bae-b31d-0e018e208b93.jfif')}}" alt="">
+                        <span class="lg:text-xl text-xs">فلسفه</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-5 py-4 px-5 shadow-lg lg:rounded-xl rounded-md">
+                        <img class="rounded-xl lg:min-w-35 lg:max-w-35 min-w-16 max-w-16 " src="{{asset('storage/home/d05d5a19-651d-4bae-b31d-0e018e208b93.jfif')}}" alt="">
+                        <span class="lg:text-xl text-xs">فلسفه</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-5 py-4 px-5 shadow-lg lg:rounded-xl rounded-md">
+                        <img class="rounded-xl lg:min-w-35 lg:max-w-35 min-w-16 max-w-16 " src="{{asset('storage/home/d05d5a19-651d-4bae-b31d-0e018e208b93.jfif')}}" alt="">
+                        <span class="lg:text-xl text-xs">فلسفه</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-5 py-4 px-5 shadow-lg lg:rounded-xl rounded-md">
+                        <img class="rounded-xl lg:min-w-35 lg:max-w-35 min-w-16 max-w-16 " src="{{asset('storage/home/d05d5a19-651d-4bae-b31d-0e018e208b93.jfif')}}" alt="">
+                        <span class="lg:text-xl text-xs">فلسفه</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-5 py-4 px-5 shadow-lg lg:rounded-xl rounded-md">
+                        <img class="rounded-xl lg:min-w-35 lg:max-w-35 min-w-16 max-w-16 " src="{{asset('storage/home/d05d5a19-651d-4bae-b31d-0e018e208b93.jfif')}}" alt="">
+                        <span class="lg:text-xl text-xs">فلسفه</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-5 py-4 px-5 shadow-lg lg:rounded-xl rounded-md">
+                        <img class="rounded-xl lg:min-w-35 lg:max-w-35 min-w-16 max-w-16 " src="{{asset('storage/home/d05d5a19-651d-4bae-b31d-0e018e208b93.jfif')}}" alt="">
+                        <span class="lg:text-xl text-xs">فلسفه</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-5 py-4 px-5 shadow-lg lg:rounded-xl rounded-md">
+                        <img class="rounded-xl lg:min-w-35 lg:max-w-35 min-w-16 max-w-16 " src="{{asset('storage/home/d05d5a19-651d-4bae-b31d-0e018e208b93.jfif')}}" alt="">
+                        <span class="lg:text-xl text-xs">فلسفه</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-5 py-4 px-5 shadow-lg lg:rounded-xl rounded-md">
+                        <img class="rounded-xl lg:min-w-35 lg:max-w-35 min-w-16 max-w-16 " src="{{asset('storage/home/d05d5a19-651d-4bae-b31d-0e018e208b93.jfif')}}" alt="">
+                        <span class="lg:text-xl text-xs">فلسفه</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-5 py-4 px-5 shadow-lg lg:rounded-xl rounded-md">
+                        <img class="rounded-xl lg:min-w-35 lg:max-w-35 min-w-16 max-w-16 " src="{{asset('storage/home/d05d5a19-651d-4bae-b31d-0e018e208b93.jfif')}}" alt="">
+                        <span class="lg:text-xl text-xs">فلسفه</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-5 py-4 px-5 shadow-lg lg:rounded-xl rounded-md">
+                        <img class="rounded-xl lg:min-w-35 lg:max-w-35 min-w-16 max-w-16 " src="{{asset('storage/home/d05d5a19-651d-4bae-b31d-0e018e208b93.jfif')}}" alt="">
+                        <span class="lg:text-xl text-xs">فلسفه</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-5 py-4 px-5 shadow-lg lg:rounded-xl rounded-md">
+                        <img class="rounded-xl lg:min-w-35 lg:max-w-35 min-w-16 max-w-16 " src="{{asset('storage/home/d05d5a19-651d-4bae-b31d-0e018e208b93.jfif')}}" alt="">
+                        <span class="lg:text-xl text-xs">فلسفه</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-5 py-4 px-5 shadow-lg lg:rounded-xl rounded-md">
+                        <img class="rounded-xl lg:min-w-35 lg:max-w-35 min-w-16 max-w-16 " src="{{asset('storage/home/d05d5a19-651d-4bae-b31d-0e018e208b93.jfif')}}" alt="">
+                        <span class="lg:text-xl text-xs">فلسفه</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="w-full flex justify-center mt-10">
+            <div class="w-11/12 flex flex-col lg:flex-row justify-between items-center gap-5">
+                <img class="lg:w-5/12 rounded-2xl" src="{{asset('storage/home/3d8d32c7-ddad-491b-9912-a4acebd6d4cd.jfif')}}" alt="">
+                <div class="lg:w-7/12 h-60 relative">
+                    <img class="h-full rounded-xl" src="{{asset('storage/home/1d82d8bc-1cdb-4336-94c3-78ff58e240ca.jfif')}}" alt="">
+                    <div class="absolute lg:left-20 left-4 top-10 flex flex-col items-end">
+                        <span class=" lg:text-xl text-md font-bold">میزت رو برای ایده های جدید آمادش</span>
+                        <span class="text-end lg:text-lg text-sm">کن</span>
+                        <span class="text-end lg:text-md text-xs">دفتر، تراش، مداد، ماژیک، استیکرو... </span>
+                        <div class="lg:w-50 w-30 rounded-xl bg-green-600 flex items-center justify-center gap-2 mt-5 p-2">
+                            <span class="lg:text-md text-xs">مشاهده مجموعه</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="lg:size-5 size-3">
+                                    <path d="M7.4 273.4C2.7 268.8 0 262.6 0 256s2.7-12.8 7.4-17.4l176-168c9.6-9.2 24.8-8.8 33.9 .8s8.8 24.8-.8 33.9L83.9 232 424 232c13.3 0 24 10.7 24 24s-10.7 24-24 24L83.9 280 216.6 406.6c9.6 9.2 9.9 24.3 .8 33.9s-24.3 9.9-33.9 .8l-176-168z"/>
+                                </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="w-full flex justify-center gap-5 mt-10">
+            <div class="w-11/12 flex flex-col gap-5">
+                <span class="text-2xl fount-bold"> برای خودت می خری یاهدیه </span>
+                <div class="flex items-center flex-col lg:flex-row gap-8">
+                    <div class="lg:w-6/12 w-full flex justify-between p-5 px-7 bg-[#f8f4eb] rounded-xl">
+                        <div class="flex flex-col gap-3">
+                            <span class="text-2xl font-bold">برای خودم</span>
+                            <span class="text-gray-600">چیزی برای خواندن یاد گرفتن و ساختن</span>
+                            <div class="flex justify-center items-center w-30 py-2 border-2 border-gray-300 rounded-xl">
+                                <span>شروع خرید</span>
+                            </div>
+                        </div>
+                        <img class="min-w-40 max-w-40 scale-120" src="{{asset('storage/home/file_000000004c54820e9552ef272c460143.png')}}" alt="">
+                    </div>
+                    <div class="lg:w-6/12 w-full flex justify-between p-5 px-7 bg-[#f8f4eb] rounded-xl">
+                        <div class="flex flex-col gap-3">
+                            <span class="text-2xl font-bold">برای هدیه</span>
+                            <span class="text-gray-600"> کتاب ها و محصولاتی که برای هدیه دادن انتخاب </span>
+                            <div class="flex justify-center items-center w-35 p-2 border-2 border-gray-300 rounded-xl">
+                                <span>مشاهده هدیه ها</span>
+                            </div>
+                        </div>
+                        <img class="min-w-40 max-w-40 scale-120" src="{{asset('storage/home/file_00000000bd08820eb0276495acea8a50.png')}}" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+
+        <!-- new product -->
+        <!-- maybe likly-->
+        <section class="w-11/12 flex flex-col gap-4 justify-start items-start">
+            <div class="flex flex-col gap-1 justify-start lg:items-start items-center">
+                <h3 class="text-xl font-bold">شاید این ها را دوست داشته باشی</h3>
+                <p class="text-[#ADB4B2] max-lg:text-center max-lg:text-sm">این لیست طبق علایق قبلی شما در فروشکاه ما حمع شده</p>
+            </div>
+            <div class="max-w-full w-full overflow-x-auto p-1 flex gap-4 justify-start items-center">
+                <div
+                    class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2">
+                    <div class="w-full h-1/2 flex justify-center items-center relative">
+                        <img src="{{asset('storage/home/bookSM_1847177_0 (1).jpg')}}" alt="" class="max-w-full max-h-24 lg:max-h-42">
+                        <span
+                            class="lg:px-2 px-1 lg;py-1 py-0.5 bg-red-500 rounded-md text-xs max-lg:text-[9px] text-white absolute top-0 right-0">-13%</span>
+                        <div class="px-2 py-1 absolute top-0 left-0 change_like_svh">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="lg:size-5 size-4">
+                                    <path
+                                        d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z" />
+                                </svg>
+                            </div>
+                            <div class="hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                    class="size-5 fill-red-500">
+                                    <path
+                                        d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full h-1/2 flex flex-col gap-1 justify-start items-start">
+                        <h5 class="lg:text-lg text-sm font-bold">عادت های اتمی</h5>
+                        <span class="text-[#ADB4B2] max-lg:text-xs">جمیز کلیر</span>
+                        <div class="flex justify-start items-center">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                    class="size-4 fill-yellow-400">
+                                    <path
+                                        d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                                </svg>
+                            </div>
+                            <span class="lg:text-xs text-[10px] text-[#ADB4B2]">5.0</span>
+                        </div>
+                        <div class="flex gap-1 justify-start items-center font-bold mt-2 max-lg:text-sm">
+                            <span>450,000</span>
+                            <span>تومان</span>
+                        </div>
+                        <div class="w-full py-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3"
+                                    fill="white">
+                                    <path
+                                        d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <span class="lg:text-sm text-[10px] text-white font-bold">افزودن به سبد خرید</span>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2">
+                    <div class="w-full h-1/2 flex justify-center items-center relative">
+                        <img src="{{asset('storage/home/bookSM_1847177_0 (1).jpg')}}" alt="" class="max-w-full max-h-24 lg:max-h-42">
+                        <span
+                            class="lg:px-2 px-1 lg;py-1 py-0.5 bg-red-500 rounded-md text-xs max-lg:text-[9px] text-white absolute top-0 right-0">-13%</span>
+                        <div class="px-2 py-1 absolute top-0 left-0 change_like_svh">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="lg:size-5 size-4">
+                                    <path
+                                        d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z" />
+                                </svg>
+                            </div>
+                            <div class="hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                    class="size-5 fill-red-500">
+                                    <path
+                                        d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full h-1/2 flex flex-col gap-1 justify-start items-start">
+                        <h5 class="lg:text-lg text-sm font-bold">عادت های اتمی</h5>
+                        <span class="text-[#ADB4B2] max-lg:text-xs">جمیز کلیر</span>
+                        <div class="flex justify-start items-center">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                    class="size-4 fill-yellow-400">
+                                    <path
+                                        d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                                </svg>
+                            </div>
+                            <span class="lg:text-xs text-[10px] text-[#ADB4B2]">5.0</span>
+                        </div>
+                        <div class="flex gap-1 justify-start items-center font-bold mt-2 max-lg:text-sm">
+                            <span>450,000</span>
+                            <span>تومان</span>
+                        </div>
+                        <div class="w-full py-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3"
+                                    fill="white">
+                                    <path
+                                        d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <span class="lg:text-sm text-[10px] text-white font-bold">افزودن به سبد خرید</span>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2">
+                    <div class="w-full h-1/2 flex justify-center items-center relative">
+                        <img src="{{asset('storage/home/bookSM_1847177_0 (1).jpg')}}" alt="" class="max-w-full max-h-24 lg:max-h-42">
+                        <span
+                            class="lg:px-2 px-1 lg;py-1 py-0.5 bg-red-500 rounded-md text-xs max-lg:text-[9px] text-white absolute top-0 right-0">-13%</span>
+                        <div class="px-2 py-1 absolute top-0 left-0 change_like_svh">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="lg:size-5 size-4">
+                                    <path
+                                        d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z" />
+                                </svg>
+                            </div>
+                            <div class="hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                    class="size-5 fill-red-500">
+                                    <path
+                                        d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full h-1/2 flex flex-col gap-1 justify-start items-start">
+                        <h5 class="lg:text-lg text-sm font-bold">عادت های اتمی</h5>
+                        <span class="text-[#ADB4B2] max-lg:text-xs">جمیز کلیر</span>
+                        <div class="flex justify-start items-center">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                    class="size-4 fill-yellow-400">
+                                    <path
+                                        d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                                </svg>
+                            </div>
+                            <span class="lg:text-xs text-[10px] text-[#ADB4B2]">5.0</span>
+                        </div>
+                        <div class="flex gap-1 justify-start items-center font-bold mt-2 max-lg:text-sm">
+                            <span>450,000</span>
+                            <span>تومان</span>
+                        </div>
+                        <div class="w-full py-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3"
+                                    fill="white">
+                                    <path
+                                        d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <span class="lg:text-sm text-[10px] text-white font-bold">افزودن به سبد خرید</span>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2">
+                    <div class="w-full h-1/2 flex justify-center items-center relative">
+                        <img src="{{asset('storage/home/bookSM_1847177_0 (1).jpg')}}" alt="" class="max-w-full max-h-24 lg:max-h-42">
+                        <span
+                            class="lg:px-2 px-1 lg;py-1 py-0.5 bg-red-500 rounded-md text-xs max-lg:text-[9px] text-white absolute top-0 right-0">-13%</span>
+                        <div class="px-2 py-1 absolute top-0 left-0 change_like_svh">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="lg:size-5 size-4">
+                                    <path
+                                        d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z" />
+                                </svg>
+                            </div>
+                            <div class="hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                    class="size-5 fill-red-500">
+                                    <path
+                                        d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full h-1/2 flex flex-col gap-1 justify-start items-start">
+                        <h5 class="lg:text-lg text-sm font-bold">عادت های اتمی</h5>
+                        <span class="text-[#ADB4B2] max-lg:text-xs">جمیز کلیر</span>
+                        <div class="flex justify-start items-center">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                    class="size-4 fill-yellow-400">
+                                    <path
+                                        d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                                </svg>
+                            </div>
+                            <span class="lg:text-xs text-[10px] text-[#ADB4B2]">5.0</span>
+                        </div>
+                        <div class="flex gap-1 justify-start items-center font-bold mt-2 max-lg:text-sm">
+                            <span>450,000</span>
+                            <span>تومان</span>
+                        </div>
+                        <div class="w-full py-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3"
+                                    fill="white">
+                                    <path
+                                        d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <span class="lg:text-sm text-[10px] text-white font-bold">افزودن به سبد خرید</span>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2">
+                    <div class="w-full h-1/2 flex justify-center items-center relative">
+                        <img src="{{asset('storage/home/bookSM_1847177_0 (1).jpg')}}" alt="" class="max-w-full max-h-24 lg:max-h-42">
+                        <span
+                            class="lg:px-2 px-1 lg;py-1 py-0.5 bg-red-500 rounded-md text-xs max-lg:text-[9px] text-white absolute top-0 right-0">-13%</span>
+                        <div class="px-2 py-1 absolute top-0 left-0 change_like_svh">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="lg:size-5 size-4">
+                                    <path
+                                        d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z" />
+                                </svg>
+                            </div>
+                            <div class="hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                    class="size-5 fill-red-500">
+                                    <path
+                                        d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full h-1/2 flex flex-col gap-1 justify-start items-start">
+                        <h5 class="lg:text-lg text-sm font-bold">عادت های اتمی</h5>
+                        <span class="text-[#ADB4B2] max-lg:text-xs">جمیز کلیر</span>
+                        <div class="flex justify-start items-center">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                    class="size-4 fill-yellow-400">
+                                    <path
+                                        d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                                </svg>
+                            </div>
+                            <span class="lg:text-xs text-[10px] text-[#ADB4B2]">5.0</span>
+                        </div>
+                        <div class="flex gap-1 justify-start items-center font-bold mt-2 max-lg:text-sm">
+                            <span>450,000</span>
+                            <span>تومان</span>
+                        </div>
+                        <div class="w-full py-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3"
+                                    fill="white">
+                                    <path
+                                        d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <span class="lg:text-sm text-[10px] text-white font-bold">افزودن به سبد خرید</span>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2">
+                    <div class="w-full h-1/2 flex justify-center items-center relative">
+                        <img src="{{asset('storage/home/bookSM_1847177_0 (1).jpg')}}" alt="" class="max-w-full max-h-24 lg:max-h-42">
+                        <span
+                            class="lg:px-2 px-1 lg;py-1 py-0.5 bg-red-500 rounded-md text-xs max-lg:text-[9px] text-white absolute top-0 right-0">-13%</span>
+                        <div class="px-2 py-1 absolute top-0 left-0 change_like_svh">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="lg:size-5 size-4">
+                                    <path
+                                        d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z" />
+                                </svg>
+                            </div>
+                            <div class="hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                    class="size-5 fill-red-500">
+                                    <path
+                                        d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full h-1/2 flex flex-col gap-1 justify-start items-start">
+                        <h5 class="lg:text-lg text-sm font-bold">عادت های اتمی</h5>
+                        <span class="text-[#ADB4B2] max-lg:text-xs">جمیز کلیر</span>
+                        <div class="flex justify-start items-center">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                    class="size-4 fill-yellow-400">
+                                    <path
+                                        d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                                </svg>
+                            </div>
+                            <span class="lg:text-xs text-[10px] text-[#ADB4B2]">5.0</span>
+                        </div>
+                        <div class="flex gap-1 justify-start items-center font-bold mt-2 max-lg:text-sm">
+                            <span>450,000</span>
+                            <span>تومان</span>
+                        </div>
+                        <div class="w-full py-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3"
+                                    fill="white">
+                                    <path
+                                        d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <span class="lg:text-sm text-[10px] text-white font-bold">افزودن به سبد خرید</span>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2">
+                    <div class="w-full h-1/2 flex justify-center items-center relative">
+                        <img src="{{asset('storage/home/bookSM_1847177_0 (1).jpg')}}" alt="" class="max-w-full max-h-24 lg:max-h-42">
+                        <span
+                            class="lg:px-2 px-1 lg;py-1 py-0.5 bg-red-500 rounded-md text-xs max-lg:text-[9px] text-white absolute top-0 right-0">-13%</span>
+                        <div class="px-2 py-1 absolute top-0 left-0 change_like_svh">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="lg:size-5 size-4">
+                                    <path
+                                        d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z" />
+                                </svg>
+                            </div>
+                            <div class="hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                    class="size-5 fill-red-500">
+                                    <path
+                                        d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full h-1/2 flex flex-col gap-1 justify-start items-start">
+                        <h5 class="lg:text-lg text-sm font-bold">عادت های اتمی</h5>
+                        <span class="text-[#ADB4B2] max-lg:text-xs">جمیز کلیر</span>
+                        <div class="flex justify-start items-center">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                    class="size-4 fill-yellow-400">
+                                    <path
+                                        d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
+                                </svg>
+                            </div>
+                            <span class="lg:text-xs text-[10px] text-[#ADB4B2]">5.0</span>
+                        </div>
+                        <div class="flex gap-1 justify-start items-center font-bold mt-2 max-lg:text-sm">
+                            <span>450,000</span>
+                            <span>تومان</span>
+                        </div>
+                        <div class="w-full py-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3"
+                                    fill="white">
+                                    <path
+                                        d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <span class="lg:text-sm text-[10px] text-white font-bold">افزودن به سبد خرید</span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </section>
+        <!-- maybe likly -->
+
+        <!-- weblag -->
+        <section
+            class="max-w-full w-full flex justify-start lg:gap-6 sm:gap-2 gap-1 overflow-x-auto lg:px-8 md:px-6 px-3 py-5">
+            <div
+                class="xl:min-w-24/100 lg:min-w-32/100 sm:min-w-49/100 min-w-full xl:max-w-24/100 lg:max-w-32/100 sm:max-w-49/100 min-h-full bg-white rounded-md flex flex-col  gap-1 items-center justify-between sm:p-1 p-0.5 cart_shdow">
+                <div class="w-full h-1/2 max-h-40">
+                    <img src="{{asset('storage/home/weblog1.png')}}" alt="" class="object-fit w-full h-full rounded-t-2xl rounded-b-sm">
+                </div>
+                <div class="w-full h-5/12 flex flex-col lg:gap-3 gap-2 justify-start items-center">
+                    <p class=" w-10/12 lg:text-sm sm:text-xs text-[10px] text-[#ADB4B2] text-center">کتاب و مطالعه</p>
+                    <h3 class=" w-11/12 max-xl:text-sm max-lg:text-xs max-sm:text-base text-center font-bold">چطور یک
+                        کتاب خوب را انتخاب کنیم</h3>
+
+
+                    <span class="xl:text-xs lg:text-[11px] sm:text-[9px] text-xs text-[#ADB4B2]">18فروردین
+                        1403</span>
+                </div>
+            </div>
+            <div
+                class="xl:min-w-24/100 lg:min-w-32/100 sm:min-w-49/100 min-w-full xl:max-w-24/100 lg:max-w-32/100 sm:max-w-49/100 min-h-full bg-white rounded-md flex flex-col  gap-1 items-center justify-between sm:p-1 p-0.5 cart_shdow">
+                <div class="w-full h-1/2 max-h-40">
+                    <img src="{{asset('storage/home/weblog1.png')}}" alt="" class="object-fit w-full h-full rounded-t-2xl rounded-b-sm">
+                </div>
+                <div class="w-full h-5/12 flex flex-col lg:gap-3 gap-2 justify-start items-center">
+                    <p class=" w-10/12 lg:text-sm sm:text-xs text-[10px] text-[#ADB4B2] text-center">کتاب و مطالعه</p>
+                    <h3 class=" w-11/12 max-xl:text-sm max-lg:text-xs max-sm:text-base text-center font-bold">چطور یک
+                        کتاب خوب را انتخاب کنیم</h3>
+
+
+                    <span class="xl:text-xs lg:text-[11px] sm:text-[9px] text-xs text-[#ADB4B2]">18فروردین
+                        1403</span>
+                </div>
+            </div>
+            <div
+                class="xl:min-w-24/100 lg:min-w-32/100 sm:min-w-49/100 min-w-full xl:max-w-24/100 lg:max-w-32/100 sm:max-w-49/100 min-h-full bg-white rounded-md flex flex-col  gap-1 items-center justify-between sm:p-1 p-0.5 cart_shdow">
+                <div class="w-full h-1/2 max-h-40">
+                    <img src="{{asset('storage/home/weblog1.png')}}" alt="" class="object-fit w-full h-full rounded-t-2xl rounded-b-sm">
+                </div>
+                <div class="w-full h-5/12 flex flex-col lg:gap-3 gap-2 justify-start items-center">
+                    <p class=" w-10/12 lg:text-sm sm:text-xs text-[10px] text-[#ADB4B2] text-center">کتاب و مطالعه</p>
+                    <h3 class=" w-11/12 max-xl:text-sm max-lg:text-xs max-sm:text-base text-center font-bold">چطور یک
+                        کتاب خوب را انتخاب کنیم</h3>
+
+
+                    <span class="xl:text-xs lg:text-[11px] sm:text-[9px] text-xs text-[#ADB4B2]">18فروردین
+                        1403</span>
+                </div>
+            </div>
+            <div
+                class="xl:min-w-24/100 lg:min-w-32/100 sm:min-w-49/100 min-w-full xl:max-w-24/100 lg:max-w-32/100 sm:max-w-49/100 min-h-full bg-white rounded-md flex flex-col  gap-1 items-center justify-between sm:p-1 p-0.5 cart_shdow">
+                <div class="w-full h-1/2 max-h-40">
+                    <img src="{{asset('storage/home/weblog1.png')}}" alt="" class="object-fit w-full h-full rounded-t-2xl rounded-b-sm">
+                </div>
+                <div class="w-full h-5/12 flex flex-col lg:gap-3 gap-2 justify-start items-center">
+                    <p class=" w-10/12 lg:text-sm sm:text-xs text-[10px] text-[#ADB4B2] text-center">کتاب و مطالعه</p>
+                    <h3 class=" w-11/12 max-xl:text-sm max-lg:text-xs max-sm:text-base text-center font-bold">چطور یک
+                        کتاب خوب را انتخاب کنیم</h3>
+
+
+                    <span class="xl:text-xs lg:text-[11px] sm:text-[9px] text-xs text-[#ADB4B2]">18فروردین
+                        1403</span>
+                </div>
+            </div>
+            <div
+                class="xl:min-w-24/100 lg:min-w-32/100 sm:min-w-49/100 min-w-full xl:max-w-24/100 lg:max-w-32/100 sm:max-w-49/100 min-h-full bg-white rounded-md flex flex-col  gap-1 items-center justify-between sm:p-1 p-0.5 cart_shdow">
+                <div class="w-full h-1/2 max-h-40">
+                    <img src="{{asset('storage/home/weblog1.png')}}" alt="" class="object-fit w-full h-full rounded-t-2xl rounded-b-sm">
+                </div>
+                <div class="w-full h-5/12 flex flex-col lg:gap-3 gap-2 justify-start items-center">
+                    <p class=" w-10/12 lg:text-sm sm:text-xs text-[10px] text-[#ADB4B2] text-center">کتاب و مطالعه</p>
+                    <h3 class=" w-11/12 max-xl:text-sm max-lg:text-xs max-sm:text-base text-center font-bold">چطور یک
+                        کتاب خوب را انتخاب کنیم</h3>
+
+
+                    <span class="xl:text-xs lg:text-[11px] sm:text-[9px] text-xs text-[#ADB4B2]">18فروردین
+                        1403</span>
+                </div>
+            </div>
+
+
+        </section>
+        <!-- weblag -->
+        <!-- prapery -->
+        <section
+            class="w-11/12 lg:h-30 flex max-sm:flex max-sm:flex-col gap-4 items-center justify-between max-lg:grid grid-cols-2 lg:py-4 sm:py-3 sm:px-5  rounded-xl">
+            <div
+                class="w-full lg:w-1/6 h-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2">
+                <div class="group max-sm:w-9/12 msx-sm:h-full flex max-lg:flex-col gap-2 justify-center items-center">
+
+                    <div class="group-hover:scale-[1.05] group-active:scale-[1.3] transition_root">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                            class="xl:size-13 lg:size-9 size-7 fill-green-700">
+                            <path
+                                d="M73 127L256 49.4 439 127c5.9 2.5 9.1 7.8 9 12.8c-.4 91.4-38.4 249.3-186.3 320.1c-3.6 1.7-7.8 1.7-11.3 0C102.4 389 64.5 231.2 64 139.7c0-5 3.1-10.2 9-12.8zM457.7 82.8L269.4 2.9C265.2 1 260.7 0 256 0s-9.2 1-13.4 2.9L54.3 82.8c-22 9.3-38.4 31-38.3 57.2c.5 99.2 41.3 280.7 213.6 363.2c16.7 8 36.1 8 52.8 0C454.8 420.7 495.5 239.2 496 140c.1-26.2-16.3-47.9-38.3-57.2zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div
+                        class="flex flex-col sm:gap-2 gap-1 lg:items-start items-center max-sm:items-center justify-center">
+                        <h5 class="xl:text-lg sm:text-xs text-sm font-bold text-[var(--text)]">
+                            ضمانت اصالت</h5>
+                        <div
+                            class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px] sm:text-[7px] text-[10px] text-[var(--text-secondary)]">
+                            <span class="font-bold max-lg:text-center">محصولات با تضمین اصالت محصول</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <span class="w-0.5 h-full bg-[var(--border)] rounded-full max-lg:hidden"></span>
+            <div
+                class="w-full lg:w-1/6 h-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2">
+                <div class="group max-sm:w-9/12 msx-sm:h-full flex max-lg:flex-col gap-2 justify-center items-center">
+
+                    <div class="group-hover:scale-[1.05] group-active:scale-[1.3] transition_root">
+                        <svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"
+                            class="xl:size-13 size-9 fill-green-700">
+                            <path
+                                d="M1757 1408l35 313q3 28-16 50-19 21-48 21h-1664q-29 0-48-21-19-22-16-50l35-313h1722zm-93-839l86 775h-1708l86-775q3-24 21-40.5t43-16.5h256v128q0 53 37.5 90.5t90.5 37.5 90.5-37.5 37.5-90.5v-128h384v128q0 53 37.5 90.5t90.5 37.5 90.5-37.5 37.5-90.5v-128h256q25 0 43 16.5t21 40.5zm-384-185v256q0 26-19 45t-45 19-45-19-19-45v-256q0-106-75-181t-181-75-181 75-75 181v256q0 26-19 45t-45 19-45-19-19-45v-256q0-159 112.5-271.5t271.5-112.5 271.5 112.5 112.5 271.5z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div
+                        class="flex flex-col sm:gap-2 gap-1 lg:items-start items-center max-sm:items-center justify-center">
+                        <h5 class="xl:text-lg sm:text-xs text-sm font-bold text-[var(--text)]">پرداخت امن
+                        </h5>
+                        <div
+                            class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px] sm:text-[7px] text-[10px] text-[var(--text-secondary)]">
+                            <span class="font-bold max-lg:text-center">پرداخت امن با تمام مجوز های قانونی</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="w-full lg:w-1/4 h-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 px-2 max-lg:col-span-2 gradient_box1 rounded-xl">
+                <div class="group max-sm:w-9/12 msx-sm:h-full flex max-lg:flex-col gap-2 justify-center items-center">
+                    <div class="group-hover:scale-[1.05] group-active:scale-[1.6] transition_root">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="xl:size-13 size-9" viewBox="0 0 24 24"
+                            fill="none" stroke="green" stroke-width="1.6" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path
+                                d="M12 3 C12.7 3.6 13.6 3.5 14.3 3.9 C15.1 4.2 15.5 5 16.2 5.4 C17 5.8 17.8 6.3 18 7.2 C18.3 8 19 8.8 19 9.8 C19 10.8 18.3 11.6 18 12.4 C17.8 13.3 17 13.8 16.2 14.2 C15.5 14.6 15.1 15.4 14.3 15.7 C13.6 16.1 12.7 16 12 16.6 C11.3 16 10.4 16.1 9.7 15.7 C8.9 15.4 8.5 14.6 7.8 14.2 C7 13.8 6.2 13.3 6 12.4 C5.7 11.6 5 10.8 5 9.8 C5 8.8 5.7 8 6 7.2 C6.2 6.3 7 5.8 7.8 5.4 C8.5 5 8.9 4.2 9.7 3.9 C10.4 3.5 11.3 3.6 12 3Z">
+                            </path>
+                            <circle cx="12" cy="9.8" r="4.2"></circle>
+                            <path d="M9.8 14.6L7.7 20H10L12 17.7"></path>
+                            <path d="M14.2 14.6L16.3 20H14L12 17.7"></path>
+                        </svg>
+                    </div>
+                    <div
+                        class="flex flex-col sm:gap-2 gap-1 lg:items-start items-center max-sm:items-center justify-center">
+                        <h5 class="xl:text-lg text-md font-bold text-[var(--text)]">چرا ما را انتخاب
+                            کنید</h5>
+                        <div
+                            class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px] text-[10px] text-[var(--text)]">
+                            <span class="font-bold max-lg:text-center">ما با دانش فنی بالا و کادر مجرب و به روز همراه شما در مسیر
+                                خلق یک اثر ماندگار هستیم.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="w-full lg:w-1/6 h-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2">
+                <div class="group max-sm:w-9/12 msx-sm:h-full flex max-lg:flex-col gap-2 justify-center items-center">
+
+                    <div class="group-hover:scale-[1.05] group-active:scale-[1.3] transition_root">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                            class="xl:size-13 lg:size-9 size-7 fill-none" stroke="green" stroke-width="1.2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 7h11v10H2z"></path>
+                            <path d="M13 10h4l4 3.5V17h-8z"></path>
+                            <circle cx="6" cy="18.5" r="1.6"></circle>
+                            <circle cx="17" cy="18.5" r="1.6"></circle>
+                        </svg>
+                    </div>
+                    <div
+                        class="flex flex-col sm:gap-2 gap-1 lg:items-start items-center max-sm:items-center justify-center">
+                        <h5 class="xl:text-lg sm:text-xs text-sm font-bold text-[var(--text)]">تحویل
+                            سریع</h5>
+                        <div
+                            class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px] sm:text-[7px]  text-[10px] text-[var(--text-secondary)]">
+                            <span class="font-bold max-lg:text-center">با فرایند تولید بهینه و منسجم سفارش شما در سریع ترین زمان
+                                ممکن آماده میشود.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <span class="w-0.5 h-full bg-[var(--border)] rounded-full max-lg:hidden"></span>
+            <div
+                class="w-full lg:w-1/6 h-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2">
+                <div class="group max-sm:w-9/12 msx-sm:h-full flex max-lg:flex-col gap-2 justify-center items-center">
+
+                    <div class="group-hover:scale-[1.05] group-active:scale-[1.3] transition_root">
+                        <svg class="xl:size-13 lg:size-9 size-7" viewBox="0 0 64 64" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <!-- Circle -->
+                            <circle cx="32" cy="32" r="22" stroke="green" stroke-width="3.5" stroke-linecap="round"
+                                stroke-dasharray="132 12"></circle>
+
+                            <!-- Top & Bottom marks -->
+                            <line x1="32" y1="6" x2="32" y2="11" stroke="green" stroke-width="3" stroke-linecap="round">
+                            </line>
+                            <line x1="32" y1="53" x2="32" y2="58" stroke="green" stroke-width="3"
+                                stroke-linecap="round"></line>
+
+                            <!-- Dollar -->
+                            <text x="32" y="42" text-anchor="middle" font-size="28" font-family="Arial, sans-serif"
+                                font-weight="700" fill="green">$</text>
+                        </svg>
+                    </div>
+                    <div
+                        class="flex flex-col sm:gap-2 gap-1 lg:items-start items-center max-sm:items-center justify-center">
+                        <h5 class="xl:text-lg sm:text-xs text-sm font-bold text-[var(--text)]">قیمت
+                            مناسب</h5>
+                        <div
+                            class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px] sm:text-[7px] text-[10px] text-[var(--text-secondary)]">
+                            <span class="max-lg:text-center font-bold">با بهینه سازی مصرف مواد اولیه و کاهش هزینه های اضافه به
+                                صرفه ترین قیمت ها را داریم.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="w-full flex justify-center gap-5 mt-10">
+            <div class="w-11/12 flex items-center justify-center bg-gray-200 p-5 rounded-md lg:flex-row flex-col flex-col-reverse gap-10 lg:gap-0">
+                <div class="flex flex-col lg:w-5/12 w-full gap-3">
+                     <div class="flex w-full gap-1">
+                        <input type="text" class="lg:w-8/12 w-10/12 bg-white rounded-md px-3" placeholder="ایمیل خود را وارد کنید">
+                        <button class="p-3 bg-green-600 text-white font-bold rounded-md " >عضویت</button>
+                     </div>
+                </div>
+                <div class="lg:w-5/12 flex items-start justify-evenly flex-row-reverse gap-5">
+                    <div class="flex flex-col">
+                        <span>یک خبر خوب برای صندوق ورودی ات</span>
+                        <span>از انتخاب های , محصولات جدید و پیشنهاد ویژه با خبرشو</span>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-15 fill-green-600">
+                        <path d="M64 112c-8.8 0-16 7.2-16 16v22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1V128c0-8.8-7.2-16-16-16H64zM48 212.2V384c0 8.8 7.2 16 16 16H448c8.8 0 16-7.2 16-16V212.2L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64H448c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z"/>
+                    </svg>
+                </div>
+            </div>
+        </section>
+        <!-- prapery -->
+
+
+
+    </main>
+
+    <footer class="w-full mt-20 flex justify-center items-start bg-white py-6">
+        <section class="w-11/12 flex flex-col gap-4 justify-between items-start">
+            <div class="w-full flex flex-col md:flex-row gap-5">
+                <div class="w-full md:w-2/3 h-full flex flex-col sm:flex-row gap-5 justify-between items-start">
+                    <!-- address -->
+                    <div class="sm:w-1/2 w-full h-full flex flex-col justify-start lg:items-start items-center">
+
+                        <img src="{{asset('storage/home/ei_1788433185339-removebg-preview.webp')}}" alt="" class="w-45">
+                        <div class="flex flex-col gap-2 items-start text-xs lg:text-sm xl:text-md">
+                            <span class="text-lg text-green-700 font-bold">کناب فروشی طباطبایی</span>
+                            <p>با ما کتاب را جوری دیگر تجربه کنید</p>
+                        </div>
+
+                    </div>
+                    <!-- address -->
+                    <!-- servis -->
+                    <div class="sm:w-1/2 w-full h-full flex flex-col gap-3 justify-start items-start">
+                        <div class="flex w-full h-full">
+                            <div class="w-1/2 h-full flex flex-col gap-3 justify-start items-start">
+                                <h5 class="xl:text-2xl lg:text-xl font-bold text-[var(--text)]">خدمات ما</h5>
+                                <div
+                                    class="w-full flex flex-col gap-1 items-start justify-start xl:text-md lg:text-sm text-xs font-bold text-[#A4A4A5]">
+                                    <span class="hover:text-green-700 transition duration-300 cursor-pointer">فتوکپی
+                                        و پرینت</span>
+                                    <span class="hover:text-green-700 transition duration-300 cursor-pointer">اجاره
+                                        بیلبورد</span>
+                                    <span class="hover:text-green-700 transition duration-300 cursor-pointer">اعلامیه
+                                        ترحیم</span>
+                                    <span class="hover:text-green-700 transition duration-300 cursor-pointer">بنر
+                                        زیارتی و تبریک</span>
+                                    <span class="hover:text-green-700 transition duration-300 cursor-pointer">سفارش
+                                        تابلوی خطاطی</span>
+                                    <span class="hover:text-green-700 transition duration-300 cursor-pointer">چاپ
+                                        طرح روی ماگ</span>
+                                </div>
+                            </div>
+                            <div class="w-1/2 h-full flex flex-col gap-3 justify-start items-start">
+                                <h5 class="xl:text-2xl lg:text-xl font-bold text-[var(--text)]">دسته بندی ها</h5>
+                                <div
+                                    class="w-full flex flex-col gap-1 items-start justify-start xl:text-md lg:text-sm text-xs font-bold text-[#A4A4A5]">
+                                    <a href="" class="hover:text-green-700 transition duration-300 cursor-pointer">چاپ
+                                        روی
+                                        پارچه</a>
+                                    <a href=""
+                                        class="hover:text-green-700 transition duration-300 cursor-pointer">تابلو</a>
+                                    <a href="" class="hover:text-green-700 transition duration-300 cursor-pointer">کارت
+                                        ویزیت</a>
+                                    <a href="" class="hover:text-green-700 transition duration-300 cursor-pointer">پرچم
+                                        رومیزی</a>
+                                    <a href=""
+                                        class="hover:text-green-700 transition duration-300 cursor-pointer">بنر</a>
+                                    <a href="" class="hover:text-green-700 transition duration-300 cursor-pointer">بنر
+                                        تبلیغاتی</a>
+                                    <a href=""
+                                        class="hover:text-green-700 transition duration-300 cursor-pointer">چاپ</a>
+                                    <a href=""
+                                        class="hover:text-green-700 transition duration-300 cursor-pointer">تجهیرات
+                                        تبلیفاتی</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- servis -->
+                </div>
+                <!-- news -->
+                <div class="w-full md:w-1/3 h-full flex flex-col justify-center items-start">
+                    <div class="flex flex-col gap-3 justify-center items-start mx-auto">
+                        <h5 class="xl:text-2xl lg:text-xl font-bold">درباره ما</h5>
+                        <div class="flex flex-col gap-2 items-start text-xs lg:text-sm xl:text-md">
+                            <div class="flex justify-center items-center gap-2">
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                        class="lg:size-4 size-3 fill-green-700">
+                                        <path
+                                            d="M375.8 275.2c-16.4-7-35.4-2.4-46.7 11.4l-33.2 40.6c-46-26.7-84.4-65.1-111.1-111.1L225.3 183c13.8-11.3 18.5-30.3 11.4-46.7l-48-112C181.2 6.7 162.3-3.1 143.6 .9l-112 24C13.2 28.8 0 45.1 0 64v0C0 295.2 175.2 485.6 400.1 509.5c9.8 1 19.6 1.8 29.6 2.2c0 0 0 0 0 0c0 0 .1 0 .1 0c6.1 .2 12.1 .4 18.2 .4l0 0c18.9 0 35.2-13.2 39.1-31.6l24-112c4-18.7-5.8-37.6-23.4-45.1l-112-48zM441.5 464C225.8 460.5 51.5 286.2 48.1 70.5l99.2-21.3 43 100.4L154.4 179c-18.2 14.9-22.9 40.8-11.1 61.2c30.9 53.3 75.3 97.7 128.6 128.6c20.4 11.8 46.3 7.1 61.2-11.1l29.4-35.9 100.4 43L441.5 464zM48 64v0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0s0 0 0 0">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <span class="font-bold">09371509497</span>
+                            </div>
+                            <div class="flex justify-center items-center gap-2">
+                                <div>
+                                    <svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"
+                                        class="lg:size-4 size-3 fill-green-700">
+                                        <path
+                                            d="M1664 1504v-768q-32 36-69 66-268 206-426 338-51 43-83 67t-86.5 48.5-102.5 24.5h-2q-48 0-102.5-24.5t-86.5-48.5-83-67q-158-132-426-338-37-30-69-66v768q0 13 9.5 22.5t22.5 9.5h1472q13 0 22.5-9.5t9.5-22.5zm0-1051v-24.5l-.5-13-3-12.5-5.5-9-9-7.5-14-2.5h-1472q-13 0-22.5 9.5t-9.5 22.5q0 168 147 284 193 152 401 317 6 5 35 29.5t46 37.5 44.5 31.5 50.5 27.5 43 9h2q20 0 43-9t50.5-27.5 44.5-31.5 46-37.5 35-29.5q208-165 401-317 54-43 100.5-115.5t46.5-131.5zm128-37v1088q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-1088q0-66 47-113t113-47h1472q66 0 113 47t47 113z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <span class=" font-bold">shahkar@gmail.com</span>
+                            </div>
+                            <div class="flex justify-center items-center gap-2">
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"
+                                        class="lg:size-4 size-3 fill-green-700">
+                                        <path
+                                            d="M336 192c0-79.5-64.5-144-144-144S48 112.5 48 192c0 16.3 7.7 42 24.7 75.4c16.4 32.2 38.8 66.4 62.1 98.3c20.3 27.9 40.7 53.3 57.2 73.1c16.5-19.8 36.9-45.2 57.2-73.1c23.2-31.9 45.6-66.2 62.1-98.3C328.3 234 336 208.3 336 192zm48 0c0 83.1-105.6 219-160.2 283.6C204.8 498.1 192 512 192 512s-12.8-13.9-31.8-36.4C105.6 411 0 275.1 0 192C0 86 86 0 192 0S384 86 384 192zm-160 0a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm-112 0a80 80 0 1 1 160 0 80 80 0 1 1 -160 0z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <span class=" font-bold">آذربایجان
+                                    شرقی،بناب،خیابان طالقانی</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- social_network_svg -->
+                    <div class="w-full py-6 flex items-center justify-center gap-10">
+                        <div
+                            class="p-2 rounded-full bg-[var(--background)] border border-green-700 flex justify-center items-center cursor-pointer scale transition_root">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
+                                class="sm:size-4 size-4 fill-green-700">
+                                <path
+                                    d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z">
+                                </path>
+                            </svg>
                         </div>
                         <div
-                            class="flex md:flex-col xl:flex-row justify-start items-start xl:items-center mt-3 md:mt-2 lg:mt-0">
-                            <a href="#"
-                                class="text-xs text-[#ff1098] pl-2 relative xl:after:absolute xl:after:w-px xl:after:h-[14px] xl:after:bg-[#727272] xl:after:left-0 xl:after:top-0 md:mb-1 xl:mb-0">نویسنده
-                                سایت کتابخوانی</a>
-                            <span
-                                class="xl:mr-2 text-xs text-[#727272] pl-2 relative xl:after:absolute xl:after:w-px xl:after:h-[14px] xl:after:bg-[#727272] xl:after:left-0 xl:after:top-0 md:mb-1 xl:mb-0">20
-                                ساعت قبل</span>
-                            <span class="text-xs text-[#727272] xl:mr-2">1505 بازدید</span>
+                            class="p-2 rounded-full bg-[var(--background)] border border-green-700 flex justify-center items-center cursor-pointer scale transition_root">
+                            <svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"
+                                class="sm:size-4 size-4 fill-green-700">
+                                <path
+                                    d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45-14 8-31 8-11 0-24-5l-527-215-298 327q-18 21-47 21-14 0-23-4-19-7-30-23.5t-11-36.5v-452l-472-193q-37-14-40-55-3-39 32-59l1664-960q35-21 68 2zm-342 1499l221-1323-1434 827 336 137 863-639-478 797z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div
+                            class="p-2 rounded-full bg-[var(--background)] border border-green-700 flex justify-center items-center cursor-pointer scale transition_root">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                class="sm:size-4 size-4 fill-green-700">
+                                <path
+                                    d="M464 258.2c0 2.7-1 5.2-4.2 8c-3.8 3.1-10.1 5.8-17.8 5.8H344c-53 0-96 43-96 96c0 6.8 .7 13.4 2.1 19.8c3.3 15.7 10.2 31.1 14.4 40.6l0 0c.7 1.6 1.4 3 1.9 4.3c5 11.5 5.6 15.4 5.6 17.1c0 5.3-1.9 9.5-3.8 11.8c-.9 1.1-1.6 1.6-2 1.8c-.3 .2-.8 .3-1.6 .4c-2.9 .1-5.7 .2-8.6 .2C141.1 464 48 370.9 48 256S141.1 48 256 48s208 93.1 208 208c0 .7 0 1.4 0 2.2zm48 .5c0-.9 0-1.8 0-2.7C512 114.6 397.4 0 256 0S0 114.6 0 256S114.6 512 256 512c3.5 0 7.1-.1 10.6-.2c31.8-1.3 53.4-30.1 53.4-62c0-14.5-6.1-28.3-12.1-42c-4.3-9.8-8.7-19.7-10.8-29.9c-.7-3.2-1-6.5-1-9.9c0-26.5 21.5-48 48-48h97.9c36.5 0 69.7-24.8 70.1-61.3zM160 256a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm0-64a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm128-64a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm64 64a32 32 0 1 0 0-64 32 32 0 1 0 0 64z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div
+                            class="p-2 rounded-full bg-[var(--background)] border border-green-700 flex justify-center items-center cursor-pointer scale transition_root">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
+                                class="sm:size-4 size-4 fill-green-700">
+                                <path
+                                    d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z">
+                                </path>
+                            </svg>
                         </div>
                     </div>
-                    <div
-                        class="w-full h-40 md:w-2/3 md:mr-5 lg:mr-7 md:h-[300px] lg:h-[412px] rounded-lg relative mt-4 md:mt-0">
-                        <img src="{{ asset('img/a7ea116f27d5d0d5a4e37c3f8400c638.jpg') }}"
-                            class="w-full h-full rounded-lg object-cover" alt="">
-                        <svg class="absolute md:w-20 w-16 md:h-20 h-16 rotate-180 top-[30%] right-[38%] md:inset-[40%] lg:inset-[42%] xl:inset-[45%]"
-                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                            <defs>
-                                <style>
-                                    .fa-secondary {
-                                        opacity: .4
-                                    }
-                                </style>
-                            </defs>
-                            <path class="fa-secondary"
-                                d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c-7.6 4.2-12.3 12.3-12.3 20.9V344c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88c-7.4-4.5-16.7-4.7-24.3-.5z" />
-                            <path class="fa-primary" fill="#fff"
-                                d="M212.5 147.5c-7.4-4.5-16.7-4.7-24.3-.5s-12.3 12.3-12.3 20.9V344c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88z" />
-                        </svg>
-                    </div>
+                    <!-- social_network_svg -->
                 </div>
-
-
-                <div class="hidden md:grid grid-cols-6 md:gap-3 lg:gap-5 xl:gap-10 md:mt-4 lg:mt-8">
-
-
-                    <div class="w-full relative rounded-md">
-                        <a href="#">
-                            <img src="{{ asset('img/images (2).jfif') }}"
-                                class="w-full md:h-20 lg:h-24 xl:h-28 rounded-md object-cover" alt="">
-                            <svg class="absolute md:w-10 md:h-10 lg:w-14 lg:h-14 rotate-180 md:top-[17%] xl:top-[20%] right-[32%]"
-                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                <defs>
-                                    <style>
-                                        .fa-secondary {
-                                            opacity: .4
-                                        }
-                                    </style>
-                                </defs>
-                                <path class="fa-secondary"
-                                    d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c-7.6 4.2-12.3 12.3-12.3 20.9V344c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88c-7.4-4.5-16.7-4.7-24.3-.5z" />
-                                <path class="fa-primary" fill="#fff"
-                                    d="M212.5 147.5c-7.4-4.5-16.7-4.7-24.3-.5s-12.3 12.3-12.3 20.9V344c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88z" />
-                            </svg>
-                            <span href="#"
-                                class="inline-block mt-2.5 md:text-[10px] lg:text-sm font-bold transition-all duration-300 hover:text-[#B473BB]">
-                                ویدیو هفته کتاب خوانی
-                            </span>
-                        </a>
-                    </div>
-
-
-                    <div class="w-full relative rounded-md">
-                        <a href="#">
-                            <img src="{{ asset('img/download (1).jfif') }}"
-                                class="w-full md:h-20 lg:h-24 xl:h-28 rounded-md object-cover" alt="">
-                            <svg class="absolute md:w-10 md:h-10 lg:w-14 lg:h-14 rotate-180 md:top-[17%] xl:top-[20%] right-[32%]"
-                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                <defs>
-                                    <style>
-                                        .fa-secondary {
-                                            opacity: .4
-                                        }
-                                    </style>
-                                </defs>
-                                <path class="fa-secondary"
-                                    d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c-7.6 4.2-12.3 12.3-12.3 20.9V344c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88c-7.4-4.5-16.7-4.7-24.3-.5z" />
-                                <path class="fa-primary" fill="#fff"
-                                    d="M212.5 147.5c-7.4-4.5-16.7-4.7-24.3-.5s-12.3 12.3-12.3 20.9V344c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88z" />
-                            </svg>
-                            <span href="#"
-                                class="inline-block mt-2.5 md:text-[10px] lg:text-sm font-bold transition-all duration-300 hover:text-[#B473BB]">
-                                ویدیوی آموزشی
-                            </span>
-                        </a>
-                    </div>
-
-
-                    <div class="w-full relative rounded-md">
-                        <a href="#">
-                            <img src="{{ asset('img/images.jfif') }}" class="w-full md:h-20 lg:h-24 xl:h-28 rounded-md object-cover"
-                                alt="">
-                            <svg class="absolute md:w-10 md:h-10 lg:w-14 lg:h-14 rotate-180 md:top-[17%] xl:top-[20%] right-[32%]"
-                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                <defs>
-                                    <style>
-                                        .fa-secondary {
-                                            opacity: .4
-                                        }
-                                    </style>
-                                </defs>
-                                <path class="fa-secondary"
-                                    d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c-7.6 4.2-12.3 12.3-12.3 20.9V344c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88c-7.4-4.5-16.7-4.7-24.3-.5z" />
-                                <path class="fa-primary" fill="#fff"
-                                    d="M212.5 147.5c-7.4-4.5-16.7-4.7-24.3-.5s-12.3 12.3-12.3 20.9V344c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88z" />
-                            </svg>
-                            <span href="#"
-                                class="inline-block mt-2.5 md:text-[10px] lg:text-sm font-bold transition-all duration-300 hover:text-[#B473BB]">
-                                آموزش زبان انگلیسی
-                            </span>
-                        </a>
-                    </div>
-
-
-                    <div class="w-full relative rounded-md">
-                        <a href="#">
-                            <img src="{{ asset('img/download (7).jfif') }}"
-                                class="w-full md:h-20 lg:h-24 xl:h-28 rounded-md object-cover" alt="">
-                            <svg class="absolute md:w-10 md:h-10 lg:w-14 lg:h-14 rotate-180 md:top-[17%] xl:top-[20%] right-[32%]"
-                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                <defs>
-                                    <style>
-                                        .fa-secondary {
-                                            opacity: .4
-                                        }
-                                    </style>
-                                </defs>
-                                <path class="fa-secondary"
-                                    d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c-7.6 4.2-12.3 12.3-12.3 20.9V344c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88c-7.4-4.5-16.7-4.7-24.3-.5z" />
-                                <path class="fa-primary" fill="#fff"
-                                    d="M212.5 147.5c-7.4-4.5-16.7-4.7-24.3-.5s-12.3 12.3-12.3 20.9V344c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88z" />
-                            </svg>
-                            <span href="#"
-                                class="inline-block mt-2.5 md:text-[10px] lg:text-sm font-bold transition-all duration-300 hover:text-[#B473BB]">
-                                رها کردن طریقت تسلیم
-                            </span>
-                        </a>
-                    </div>
-
-
-                    <div class="w-full relative rounded-md">
-                        <a href="#">
-                            <img src="{{ asset('img/images (1).jfif') }}"
-                                class="w-full md:h-20 lg:h-24 xl:h-28 rounded-md object-cover" alt="">
-                            <svg class="absolute md:w-10 md:h-10 lg:w-14 lg:h-14 rotate-180 md:top-[17%] xl:top-[20%] right-[32%]"
-                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                <defs>
-                                    <style>
-                                        .fa-secondary {
-                                            opacity: .4
-                                        }
-                                    </style>
-                                </defs>
-                                <path class="fa-secondary"
-                                    d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c-7.6 4.2-12.3 12.3-12.3 20.9V344c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88c-7.4-4.5-16.7-4.7-24.3-.5z" />
-                                <path class="fa-primary" fill="#fff"
-                                    d="M212.5 147.5c-7.4-4.5-16.7-4.7-24.3-.5s-12.3 12.3-12.3 20.9V344c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88z" />
-                            </svg>
-                            <span href="#"
-                                class="inline-block mt-2.5 md:text-[10px] lg:text-sm font-bold transition-all duration-300 hover:text-[#B473BB]">
-                                آموزش آشپزی
-                            </span>
-                        </a>
-                    </div>
-
-
-                    <div class="w-full relative rounded-md">
-                        <a href="#">
-                            <img src="{{ asset('img/images (3).jfif') }}"
-                                class="w-full md:h-20 lg:h-24 xl:h-28 rounded-md object-cover" alt="">
-                            <svg class="absolute md:w-10 md:h-10 lg:w-14 lg:h-14 rotate-180 md:top-[17%] xl:top-[20%] right-[32%]"
-                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                <defs>
-                                    <style>
-                                        .fa-secondary {
-                                            opacity: .4
-                                        }
-                                    </style>
-                                </defs>
-                                <path class="fa-secondary"
-                                    d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c-7.6 4.2-12.3 12.3-12.3 20.9V344c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88c-7.4-4.5-16.7-4.7-24.3-.5z" />
-                                <path class="fa-primary" fill="#fff"
-                                    d="M212.5 147.5c-7.4-4.5-16.7-4.7-24.3-.5s-12.3 12.3-12.3 20.9V344c0 8.7 4.7 16.7 12.3 20.9s16.8 4.1 24.3-.5l144-88c7.1-4.4 11.5-12.1 11.5-20.5s-4.4-16.1-11.5-20.5l-144-88z" />
-                            </svg>
-                            <span href="#"
-                                class="inline-block mt-2.5 md:text-[10px] lg:text-sm font-bold transition-all duration-300 hover:text-[#B473BB]">
-                                ویدیو علمی
-                            </span>
-                        </a>
-                    </div>
-
-
-                </div>
-
-                <div class="md:hidden mt-4">
-                    <div class="h-24 flex flex-row items-center">
-                        <div class="w-[11%] rounded-lg h-24 bg-[#FFDBE6]"></div>
-                        <div class="w-[89%] mr-1.5 rounded-lg h-24 bg-[#FFDBE6] p-2 relative">
-                            <a href="#" class="w-full flex flex-row items-center">
-                                <img src="{{ asset('img/db45b6492571406bb0336aa19a2b0d3f.jpg') }}"
-                                    class="w-1/3 h-20 object-cover rounded-lg" alt="">
-                                <h4 class="mr-2 text-xs">
-                                    دهه شصتی ها پیشتاز تالیف در حوزه کودک و نوجوان
-                                </h4>
-                            </a>
-                            <a href="#"
-                                class="absolute w-14 pt-2 pb-[7px] rounded-b-lg -right-11 top-[32%] rotate-[270deg] text-white text-center text-xs bg-[#B473BB]">
-                                بیشتر
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="h-24 flex flex-row items-center mt-2">
-                        <div class="w-[11%] rounded-lg h-24 bg-[#FFDBE6]"></div>
-                        <div class="w-[89%] mr-1.5 rounded-lg h-24 bg-[#FFDBE6] p-2 relative">
-                            <a href="#" class="w-full flex flex-row items-center">
-                                <img src="{{ asset('img/4cb69059405d4fb7aa6fc3b093de8cc2.jpg') }}"
-                                    class="w-1/3 h-20 object-cover rounded-lg" alt="">
-                                <h4 class="mr-2 text-xs">
-                                    بازار کتاب و رونق کسب و کار های کتابی
-                                </h4>
-                            </a>
-                            <a href="#"
-                                class="absolute w-14 pt-2 pb-[7px] rounded-b-lg -right-11 top-[32%] rotate-[270deg] text-white text-center text-xs bg-[#B473BB]">
-                                بیشتر
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="h-24 flex flex-row items-center mt-2">
-                        <div class="w-[11%] rounded-lg h-24 bg-[#FFDBE6]"></div>
-                        <div class="w-[89%] mr-1.5 rounded-lg h-24 bg-[#FFDBE6] p-2 relative">
-                            <a href="#" class="w-full flex flex-row items-center">
-                                <img src="{{ asset('img/mark-twain-chitext-300x200.gif') }}"
-                                    class="w-1/3 h-20 object-cover rounded-lg" alt="">
-                                <h4 class="mr-2 text-xs">
-                                    جملات کوتاه از مارتین تواین( 140 نقل قول )
-                                </h4>
-                            </a>
-                            <a href="#"
-                                class="absolute w-14 pt-2 pb-[7px] rounded-b-lg -right-11 top-[32%] rotate-[270deg] text-white text-center text-xs bg-[#B473BB]">
-                                بیشتر
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <!-- news -->
+            </div>
+            <div class="mx-auto flex flex-col gap-1 items-center justify-center">
+                <p class="xl:text-[15px] lg:text-[12px] text-[13px]">طراحی و توسعه <span
+                        class="font-bold">شرکت اندیشه
+                        گران طراحان دیجیتال<span class="text-green-700">(فائوس)</span> </span></p>
+                <span class="text-[17px] font-bold text-green-700">09147794595</span>
             </div>
         </section>
-
-        <!-- website news -->
-
-
-        <!-- image item -->
-
-        <section class="2xl:container m-auto py-6 md:py-0 md:mt-10 xl:mt-20">
-            <div class="w-full h-5 md:h-8 lg:h-12 bg-[#FFDDE3] rounded-t-[100%]"></div>
-            <div class="bg-[#FFDDE3]">
-                <div class="w-11/12 m-auto grid grid-cols-3 lg:grid-cols-6 gap-4 md:gap-10 lg:gap-20">
-                    <a href="#" class="inline-block w-full rounded-lg">
-                        <img src="{{ asset('img/0009892_-_200 1.png') }}" class="w-full rounded-lg h-[100px] lg:h-[200px]" alt="">
-                    </a>
-                    <a href="#" class="inline-block w-full rounded-lg">
-                        <img src="{{ asset('img/0009887_-_200 1.png') }}" class="w-full rounded-lg h-[100px] lg:h-[200px]" alt="">
-                    </a>
-                    <a href="#" class="inline-block w-full rounded-lg">
-                        <img src="{{ asset('img/0009609_-_200 1.png') }}" class="w-full rounded-lg h-[100px] lg:h-[200px]" alt="">
-                    </a>
-                    <a href="#" class="inline-block w-full rounded-lg">
-                        <img src="{{ asset('img/0009614_-_200 1.png') }}" class="w-full rounded-lg h-[100px] lg:h-[200px]" alt="">
-                    </a>
-                    <a href="#" class="inline-block w-full rounded-lg">
-                        <img src="{{ asset('img/0010068_-_200 1.png') }}" class="w-full rounded-lg h-[100px] lg:h-[200px]" alt="">
-                    </a>
-                    <a href="#" class="inline-block w-full rounded-lg">
-                        <img src="{{ asset('img/0010086_-_200 1.png') }}" class="w-full rounded-lg h-[100px] lg:h-[200px]" alt="">
-                    </a>
-                </div>
-            </div>
-            <div class="h-5 md:h-8 lg:h-12 bg-[#FFDDE3] rounded-b-[100%]"></div>
-        </section>
-
-        <!-- image item -->
-
-
-        <!-- big without title image -->
-
-        <section class="2xl:container m-auto py-6 md:py-0 md:mt-10">
-            <div class="w-11/12 m-auto xl:py-10">
-                <div class="w-full border-b border-[#D2D2D2] pb-3 mb-8 lg:mb-16 relative">
-                    <h2
-                        class="absolute -bottom-[17px] pl-2 md:pl-0 bg-[#f2f2f2] md:bg-inherit md:text-[42px] lg:text-[52px] md:static">
-                    بنر تبلیغاتی    
-                    </h2>
-                </div>
-                <div>
-                    <a href="#">
-                        <img src="{{ asset('img/0001013 1.png') }}" class="w-full h-28 md:h-48 lg:h-56 xl:h-[474px] object-cover"
-                            alt="">
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- big without title image -->
-
-
-        <!-- new text paragraph -->
-
-        <section class="2xl:container m-auto">
-
-            <div class="w-full md:h-8 lg:h-12 bg-[#FFDDE3] rounded-t-[100%] md:mt-10 lg:mt-20"></div>
-            <div class="w-full md:bg-[#FFDDE3]">
-                <div class="w-11/12 m-auto pb-5">
-                    <div class="w-full border-b border-[#D2D2D2] pb-3 mb-12 lg:mb-16 relative">
-                        <h2
-                            class="absolute -bottom-[17px] pl-2 md:pl-0 bg-[#f2f2f2] md:bg-inherit md:text-[42px] lg:text-[52px] md:static">
-                            تازه های متنی</h2>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 lg:gap-6">
-
-
-
-                        <div class="w-full bg-white rounded-lg flex flex-col justify-between">
-                            <div class="p-1 md:p-2 lg:p-3">
-                                <div class="overflow-hidden rounded-lg">
-                                    <a href="#" class="chosenItem">
-                                        <img src="{{ asset('img/download (3).jfif') }}"
-                                            class="w-full h-[242px] lg:h-[272px] object-cover rounded-lg transition-all duration-500"
-                                            alt="">
-                                    </a>
-                                </div>
-                                <div class="mt-1.5 md:mt-3 lg:mt-5">
-                                    <a href="#" class="inline-block lg:mb-7">
-                                        <h2
-                                            class="text-xs md:text-base lg:text-[22px] font-bold h-[30px] md:h-[48px] lg:h-[66px]">
-                                            کتاب نیه توچکا نیزوانوا
-                                        </h2>
-                                    </a>
-                                    <p class="flex flex-col h-[72px] text-xs md:text-base mb-4 overflow-hidden">
-                                        کتاب نیه توچکا رمان ناتمام فئودور داستایوفسکی‌ است که به شکل یک اعتراف
-                                        نگاشته شده و در پس زمینه به مضمون کودکی و بزرگسالی می‌پردازد.
-                                    </p>
-                                    <div class="md:hidden borderGradient w-10/12 float-left h-0.5 mb-1 md:mb-2.5">
-                                    </div>
-                                </div>
-                            </div>
-                            <div
-                                class="w-full flex flex-row justify-between items-center lg:pt-6 pb-2 md:pb-0 pr-2 lg:pr-3">
-                                <div class="flex flex-row justify-start items-center">
-                                    <svg class="w-4 h-4 lg:w-5 lg:h-6 ml-1 lg:ml-2.5" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 448 512">
-                                        <path fill="#B473BB"
-                                            d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H152V24zM48 192h80v56H48V192zm0 104h80v64H48V296zm128 0h96v64H176V296zm144 0h80v64H320V296zm80-48H320V192h80v56zm0 160v40c0 8.8-7.2 16-16 16H320V408h80zm-128 0v56H176V408h96zm-144 0v56H64c-8.8 0-16-7.2-16-16V408h80zM272 248H176V192h96v56z" />
-                                    </svg>
-                                    <span
-                                        class="text-[#B473BB] text-xs md:text-sm lg:text-base font-bold mt-[4px]">1402/12/07</span>
-                                </div>
-                                <a href="#"
-                                    class="text-[#B473BB] text-xs md:text-sm lg:text-base pb-2.5 pt-2.5 lg:pb-5 lg:pt-4 px-[14px] lg:border-t-[6px] lg:border-r-[6px] lg:border-[#FFDDE3] lg:rounded-tr-[11px]">بیشتر
-                                    بخوانید</a>
-                            </div>
-                        </div>
-
-
-                        <div class="w-full bg-white rounded-lg flex flex-col justify-between">
-                            <div class="p-1 md:p-2 lg:p-3">
-                                <div class="overflow-hidden rounded-lg">
-                                    <a href="#" class="chosenItem">
-                                        <img src="{{ asset('img/ketabkhoob 1.png') }}"
-                                            class="w-full h-[242px] lg:h-[272px] object-cover rounded-lg transition-all duration-500"
-                                            alt="">
-                                    </a>
-                                </div>
-                                <div class="mt-1.5 md:mt-3 lg:mt-5">
-                                    <a href="#" class="inline-block lg:mb-7">
-                                        <h2
-                                            class="text-xs md:text-base lg:text-[22px] font-bold h-[30px] md:h-[48px] lg:h-[66px]">
-                                            کتاب قلعه حیوانات
-                                        </h2>
-                                    </a>
-                                    <p class="flex flex-col h-[72px] text-xs md:text-base mb-4 overflow-hidden">
-                                        نمی‌توانستند تشخیص دهند که کدام‌یک حیوان است و کدام‌یک انسان! دیگر ممکن نبود
-                                        که یکی را از دیگری تمیز دهند. آدم‌ها شبیه خوک‌ها بودند و خوک‌ها شبیه آدم‌ها!
-                                    </p>
-                                    <div class="md:hidden borderGradient w-10/12 float-left h-0.5 mb-1 md:mb-2.5">
-                                    </div>
-                                </div>
-                            </div>
-                            <div
-                                class="w-full flex flex-row justify-between items-center lg:pt-6 pb-2 md:pb-0 pr-2 lg:pr-3">
-                                <div class="flex flex-row justify-start items-center">
-                                    <svg class="w-4 h-4 lg:w-5 lg:h-6 ml-1 lg:ml-2.5" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 448 512">
-                                        <path fill="#B473BB"
-                                            d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H152V24zM48 192h80v56H48V192zm0 104h80v64H48V296zm128 0h96v64H176V296zm144 0h80v64H320V296zm80-48H320V192h80v56zm0 160v40c0 8.8-7.2 16-16 16H320V408h80zm-128 0v56H176V408h96zm-144 0v56H64c-8.8 0-16-7.2-16-16V408h80zM272 248H176V192h96v56z" />
-                                    </svg>
-                                    <span
-                                        class="text-[#B473BB] text-xs md:text-sm lg:text-base font-bold mt-[4px]">1402/12/07</span>
-                                </div>
-                                <a href="#"
-                                    class="text-[#B473BB] text-xs md:text-sm lg:text-base pb-2.5 pt-2.5 lg:pb-5 lg:pt-4 px-[14px] lg:border-t-[6px] lg:border-r-[6px] lg:border-[#FFDDE3] lg:rounded-tr-[11px]">بیشتر
-                                    بخوانید</a>
-                            </div>
-                        </div>
-
-
-                        <div class="w-full bg-white rounded-lg flex flex-col justify-between">
-                            <div class="p-1 md:p-2 lg:p-3">
-                                <div class="overflow-hidden rounded-lg">
-                                    <a href="#" class="chosenItem">
-                                        <img src="{{ asset('img/شازده-کوچولو-768x432 1.png') }}"
-                                            class="w-full h-[242px] lg:h-[272px] object-cover rounded-lg transition-all duration-500"
-                                            alt="">
-                                    </a>
-                                </div>
-                                <div class="mt-1.5 md:mt-3 lg:mt-5">
-                                    <a href="#" class="inline-block lg:mb-7">
-                                        <h2
-                                            class="text-xs md:text-base lg:text-[22px] font-bold h-[30px] md:h-[48px] lg:h-[66px]">
-                                            کتاب شازده کوچولو
-                                        </h2>
-                                    </a>
-                                    <p class="flex flex-col h-[72px] text-xs md:text-base mb-4 overflow-hidden">
-                                        شازده کوچولو پرسید: کی اوضاع بهتر میشه؟روباه گفت: از وقتی که بفهمی همه چیز
-                                        به خودت بستگی داره
-                                    </p>
-                                    <div class="md:hidden borderGradient w-10/12 float-left h-0.5 mb-1 md:mb-2.5">
-                                    </div>
-                                </div>
-                            </div>
-                            <div
-                                class="w-full flex flex-row justify-between items-center lg:pt-6 pb-2 md:pb-0 pr-2 lg:pr-3">
-                                <div class="flex flex-row justify-start items-center">
-                                    <svg class="w-4 h-4 lg:w-5 lg:h-6 ml-1 lg:ml-2.5" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 448 512">
-                                        <path fill="#B473BB"
-                                            d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H152V24zM48 192h80v56H48V192zm0 104h80v64H48V296zm128 0h96v64H176V296zm144 0h80v64H320V296zm80-48H320V192h80v56zm0 160v40c0 8.8-7.2 16-16 16H320V408h80zm-128 0v56H176V408h96zm-144 0v56H64c-8.8 0-16-7.2-16-16V408h80zM272 248H176V192h96v56z" />
-                                    </svg>
-                                    <span
-                                        class="text-[#B473BB] text-xs md:text-sm lg:text-base font-bold mt-[4px]">1402/12/07</span>
-                                </div>
-                                <a href="#"
-                                    class="text-[#B473BB] text-xs md:text-sm lg:text-base pb-2.5 pt-2.5 lg:pb-5 lg:pt-4 px-[14px] lg:border-t-[6px] lg:border-r-[6px] lg:border-[#FFDDE3] lg:rounded-tr-[11px]">بیشتر
-                                    بخوانید</a>
-                            </div>
-                        </div>
-
-
-                        <div class="w-full bg-white rounded-lg flex flex-col justify-between">
-                            <div class="p-1 md:p-2 lg:p-3">
-                                <div class="overflow-hidden rounded-lg">
-                                    <a href="#" class="chosenItem">
-                                        <img src="{{ asset('img/download (7).jfif') }}"
-                                            class="w-full h-[242px] lg:h-[272px] object-cover rounded-lg transition-all duration-500"
-                                            alt="">
-                                    </a>
-                                </div>
-                                <div class="mt-1.5 md:mt-3 lg:mt-5">
-                                    <a href="#" class="inline-block lg:mb-7">
-                                        <h2
-                                            class="text-xs md:text-base lg:text-[22px] font-bold h-[30px] md:h-[48px] lg:h-[66px]">
-                                            کتاب رهایی، طریقت تسلیم
-                                        </h2>
-                                    </a>
-                                    <p class="flex flex-col h-[72px] text-xs md:text-base mb-4 overflow-hidden">
-                                        در بخشی از کتاب رهایی، طریقت تسلیم: سازوکاری برای شاد زیستن می‌خوانیم استرس،
-                                        نتیجه فشار انباشته‌شده احساسات سرکوب و مهارشده ماست.
-                                    </p>
-                                    <div class="md:hidden borderGradient w-10/12 float-left h-0.5 mb-1 md:mb-2.5">
-                                    </div>
-                                </div>
-                            </div>
-                            <div
-                                class="w-full flex flex-row justify-between items-center lg:pt-6 pb-2 md:pb-0 pr-2 lg:pr-3">
-                                <div class="flex flex-row justify-start items-center">
-                                    <svg class="w-4 h-4 lg:w-5 lg:h-6 ml-1 lg:ml-2.5" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 448 512">
-                                        <path fill="#B473BB"
-                                            d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H152V24zM48 192h80v56H48V192zm0 104h80v64H48V296zm128 0h96v64H176V296zm144 0h80v64H320V296zm80-48H320V192h80v56zm0 160v40c0 8.8-7.2 16-16 16H320V408h80zm-128 0v56H176V408h96zm-144 0v56H64c-8.8 0-16-7.2-16-16V408h80zM272 248H176V192h96v56z" />
-                                    </svg>
-                                    <span
-                                        class="text-[#B473BB] text-xs md:text-sm lg:text-base font-bold mt-[4px]">1402/12/07</span>
-                                </div>
-                                <a href="#"
-                                    class="text-[#B473BB] text-xs md:text-sm lg:text-base pb-2.5 pt-2.5 lg:pb-5 lg:pt-4 px-[14px] lg:border-t-[6px] lg:border-r-[6px] lg:border-[#FFDDE3] lg:rounded-tr-[11px]">بیشتر
-                                    بخوانید</a>
-                            </div>
-                        </div>
-
-
-                        <div class="w-full bg-white rounded-lg flex flex-col justify-between">
-                            <div class="p-1 md:p-2 lg:p-3">
-                                <div class="overflow-hidden rounded-lg">
-                                    <a href="#" class="chosenItem">
-                                        <img src="{{ asset('img/download (6).jfif') }}"
-                                            class="w-full h-[242px] lg:h-[272px] object-cover rounded-lg transition-all duration-500"
-                                            alt="">
-                                    </a>
-                                </div>
-                                <div class="mt-1.5 md:mt-3 lg:mt-5">
-                                    <a href="#" class="inline-block lg:mb-7">
-                                        <h2
-                                            class="text-xs md:text-base lg:text-[22px] font-bold h-[30px] md:h-[48px] lg:h-[66px]">
-                                            کتاب خانه ارواح
-                                        </h2>
-                                    </a>
-                                    <p class="flex flex-col h-[72px] text-xs md:text-base mb-4 overflow-hidden">
-                                        من عاشق کتاب‌ها شده بودم. ما مُدام در حال جابه‌جایی بودیم و من نمی‌توانستم
-                                        هیچ دوستی داشته باشم؛ کتاب‌ها به من کمک می‌کردند....
-                                    </p>
-                                    <div class="md:hidden borderGradient w-10/12 float-left h-0.5 mb-1 md:mb-2.5">
-                                    </div>
-                                </div>
-                            </div>
-                            <div
-                                class="w-full flex flex-row justify-between items-center lg:pt-6 pb-2 md:pb-0 pr-2 lg:pr-3">
-                                <div class="flex flex-row justify-start items-center">
-                                    <svg class="w-4 h-4 lg:w-5 lg:h-6 ml-1 lg:ml-2.5" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 448 512">
-                                        <path fill="#B473BB"
-                                            d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H152V24zM48 192h80v56H48V192zm0 104h80v64H48V296zm128 0h96v64H176V296zm144 0h80v64H320V296zm80-48H320V192h80v56zm0 160v40c0 8.8-7.2 16-16 16H320V408h80zm-128 0v56H176V408h96zm-144 0v56H64c-8.8 0-16-7.2-16-16V408h80zM272 248H176V192h96v56z" />
-                                    </svg>
-                                    <span
-                                        class="text-[#B473BB] text-xs md:text-sm lg:text-base font-bold mt-[4px]">1402/12/07</span>
-                                </div>
-                                <a href="#"
-                                    class="text-[#B473BB] text-xs md:text-sm lg:text-base pb-2.5 pt-2.5 lg:pb-5 lg:pt-4 px-[14px] lg:border-t-[6px] lg:border-r-[6px] lg:border-[#FFDDE3] lg:rounded-tr-[11px]">بیشتر
-                                    بخوانید</a>
-                            </div>
-                        </div>
-
-
-                        <div class="w-full bg-white rounded-lg flex flex-col justify-between">
-                            <div class="p-1 md:p-2 lg:p-3">
-                                <div class="overflow-hidden rounded-lg">
-                                    <a href="#" class="chosenItem">
-                                        <img src="{{ asset('img/download (5).jfif') }}"
-                                            class="w-full h-[242px] lg:h-[272px] object-cover rounded-lg transition-all duration-500"
-                                            alt="">
-                                    </a>
-                                </div>
-                                <div class="mt-1.5 md:mt-3 lg:mt-5">
-                                    <a href="#" class="inline-block lg:mb-7">
-                                        <h2
-                                            class="text-xs md:text-base lg:text-[22px] font-bold h-[30px] md:h-[48px] lg:h-[66px]">
-                                            کتاب قوانین تفکر
-                                        </h2>
-                                    </a>
-                                    <p class="flex flex-col h-[72px] text-xs md:text-base mb-4 overflow-hidden">
-                                        کتاب قوانین تفکر، به تألیف ریچارد تمپلر، ذهنیت و شیوه‌ی تفکر شما را زیر و رو
-                                        می‌کند! این کتاب مجموعه‌ای از صد قانون و اصولی است که مرحله‌به‌مرحله به شما
-                                        می‌آموزد عادت‌های فکری‌تان را تغییر دهید
-                                    </p>
-                                    <div class="md:hidden borderGradient w-10/12 float-left h-0.5 mb-1 md:mb-2.5">
-                                    </div>
-                                </div>
-                            </div>
-                            <div
-                                class="w-full flex flex-row justify-between items-center lg:pt-6 pb-2 md:pb-0 pr-2 lg:pr-3">
-                                <div class="flex flex-row justify-start items-center">
-                                    <svg class="w-4 h-4 lg:w-5 lg:h-6 ml-1 lg:ml-2.5" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 448 512">
-                                        <path fill="#B473BB"
-                                            d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H152V24zM48 192h80v56H48V192zm0 104h80v64H48V296zm128 0h96v64H176V296zm144 0h80v64H320V296zm80-48H320V192h80v56zm0 160v40c0 8.8-7.2 16-16 16H320V408h80zm-128 0v56H176V408h96zm-144 0v56H64c-8.8 0-16-7.2-16-16V408h80zM272 248H176V192h96v56z" />
-                                    </svg>
-                                    <span
-                                        class="text-[#B473BB] text-xs md:text-sm lg:text-base font-bold mt-[4px]">1402/12/07</span>
-                                </div>
-                                <a href="#"
-                                    class="text-[#B473BB] text-xs md:text-sm lg:text-base pb-2.5 pt-2.5 lg:pb-5 lg:pt-4 px-[14px] lg:border-t-[6px] lg:border-r-[6px] lg:border-[#FFDDE3] lg:rounded-tr-[11px]">بیشتر
-                                    بخوانید</a>
-                            </div>
-                        </div>
+    </footer>
 
 
 
 
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="md:h-8 lg:h-12 bg-[#FFDDE3] rounded-b-[100%]"></div>
-
-        </section>
-
-        <!-- new text paragraph -->
-
-        <!-- banner -->
-
-        <section class="2xl:container m-auto hidden md:block md:my-7 lg:my-10">
-            <div class="w-11/12 m-auto">
-                <a href="#" class="inline-block">
-                    <img src="{{ asset('img/last-banner.png') }}" class="h-[127px] rounded-lg" alt="">
-                </a>
-            </div>
-        </section>
-
-        <!-- banner -->
-
-
-        <!-- footer -->
-
-        <section class="2xl:container m-auto">
-            <div class="w-full md:h-8 lg:h-12 bg-[#FFDDE3] rounded-t-[100%] md:mt-10"></div>
-            <div class="w-full bg-[#1E0937] py-5">
-                <div class="w-11/12 m-auto">
-                    <p class="text-center text-white text-xs md:text-base">
-                        تمامی حقوق مادی و معنوی این وبسایت متعلق به فروشگاه طبابوک میباشد.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- footer -->
-
-    </div>
 
 
     <script src="{{ asset('js/custom.js') }}"></script>
