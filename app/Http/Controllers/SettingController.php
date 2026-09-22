@@ -105,7 +105,8 @@ class SettingController extends Controller
         $twoCardsLeftButton = setting::where('meta_key', 'twoCardsLeftButton')->first();
         $twoCardsLeftButtonLink = setting::where('meta_key', 'twoCardsLeftButtonLink')->first();
         $twoCardsSectionTitle = setting::where('meta_key', 'twoCardsSectionTitle')->first();  // "برای خودت می‌خری یا هدیه؟"
-        $twoCardsSectionLink = setting::where('meta_key', 'twoCardsSectionLink')->first();  // "مشاهده همه →"
+        $twoCardsSectionLinkUrl = setting::where('meta_key', 'twoCardsSectionLinkUrl')->first();  // "مشاهده همه →"
+        $twoCardsSectionLinkText = setting::where('meta_key', 'twoCardsSectionLinkText')->first();  // "مشاهده همه →"
         return view('admin.setting.cards',[
             'twoCardsRightTitle'=>$twoCardsRightTitle,
             'twoCardsRightSubtitle'=>$twoCardsRightSubtitle,
@@ -118,10 +119,12 @@ class SettingController extends Controller
             'twoCardsLeftButton'=>$twoCardsLeftButton,
             'twoCardsLeftButtonLink'=>$twoCardsLeftButtonLink,
             'twoCardsSectionTitle'=>$twoCardsSectionTitle,
-            'twoCardsSectionLink'=>$twoCardsSectionLink,
+            'twoCardsSectionLinkUrl'=>$twoCardsSectionLinkUrl,
+            'twoCardsSectionLinkText'=>$twoCardsSectionLinkText,
         ]);
     }
     public function cardStore(Request $request){
+        
         $settings = $request->setting;
         foreach ($settings as $key => $value) {
             if ($key == 'twoCardsRightImage' || $key == 'twoCardsLeftImage') {
@@ -159,7 +162,10 @@ class SettingController extends Controller
         $leftBannerSubtitle = setting::where('meta_key', 'leftBannerSubtitle')->first();
         $leftBannerButton = setting::where('meta_key', 'leftBannerButton')->first();
         $leftBannerButtonLink = setting::where('meta_key', 'leftBannerButtonLink')->first();
-
+        
+        $twoCardsSectionTitle = setting::where('meta_key', 'twoCardsSectionTitle')->first();
+        $twoCardsSectionLinkUrl = setting::where('meta_key', 'twoCardsSectionLinkUrl')->first();
+        $twoCardsSectionLinkText = setting::where('meta_key', 'twoCardsSectionLinkText')->first();
         $twoCardsRightTitle = setting::where('meta_key', 'twoCardsRightTitle')->first();
         $twoCardsRightSubtitle = setting::where('meta_key', 'twoCardsRightSubtitle')->first();
         $twoCardsRightImage = setting::where('meta_key', 'twoCardsRightImage')->first();
@@ -170,8 +176,6 @@ class SettingController extends Controller
         $twoCardsLeftImage = setting::where('meta_key', 'twoCardsLeftImage')->first();
         $twoCardsLeftButton = setting::where('meta_key', 'twoCardsLeftButton')->first();
         $twoCardsLeftButtonLink = setting::where('meta_key', 'twoCardsLeftButtonLink')->first();
-        $twoCardsSectionTitle = setting::where('meta_key', 'twoCardsSectionTitle')->first();
-        $twoCardsSectionLink = setting::where('meta_key', 'twoCardsSectionLink')->first();
 
         $setting['logo'] = $logo ? $logo->meta_value : null;
         $setting['heroBanner'] = $logo ? $heroBanner->meta_value : null;
@@ -197,6 +201,9 @@ class SettingController extends Controller
         $setting['leftBannerButton']=$leftBannerButton->meta_value;
         $setting['leftBannerButtonLink']=$leftBannerButtonLink->meta_value;
 
+        $setting['twoCardsSectionTitle'] = $twoCardsSectionTitle->meta_value;
+        $setting['twoCardsSectionLinkUrl'] = $twoCardsSectionLinkUrl->meta_value;
+        $setting['twoCardsSectionLinkText'] = $twoCardsSectionLinkText->meta_value;
         $setting['twoCardsRightTitle'] = $twoCardsRightTitle->meta_value;
         $setting['twoCardsRightSubtitle'] = $twoCardsRightSubtitle->meta_value;
         $setting['twoCardsRightImage'] = $twoCardsRightImage->meta_value;
@@ -207,8 +214,6 @@ class SettingController extends Controller
         $setting['twoCardsLeftImage'] = $twoCardsLeftImage->meta_value;
         $setting['twoCardsLeftButton'] = $twoCardsLeftButton->meta_value;
         $setting['twoCardsLeftButtonLink'] = $twoCardsLeftButtonLink->meta_value;
-        $setting['twoCardsSectionTitle'] = $twoCardsSectionTitle->meta_value;
-        $setting['twoCardsSectionLink'] = $twoCardsSectionLink->meta_value;
 
         $categories = category::all();
         // $products = product::where('show_in_home', 1)->weherNotNull('secondary_price')->get();
