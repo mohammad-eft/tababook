@@ -191,6 +191,53 @@ class SettingController extends Controller
         return redirect()->back();
     }
 
+    public function footerSettings(){
+        $footerBrandName = setting::where('meta_key', 'footerBrandName')->first();
+        $footerBrandDescription = setting::where('meta_key', 'footerBrandDescription')->first();
+        $footerServicesTitle = setting::where('meta_key', 'footerServicesTitle')->first();
+        $footerCategoriesTitle = setting::where('meta_key', 'footerCategoriesTitle')->first();
+        $footerAboutTitle = setting::where('meta_key', 'footerAboutTitle')->first();
+        $footerPhone = setting::where('meta_key', 'footerPhone')->first();
+        $footerEmail = setting::where('meta_key', 'footerEmail')->first();
+        $footerAddress = setting::where('meta_key', 'footerAddress')->first();
+        $footerInstagram = setting::where('meta_key', 'footerInstagram')->first();
+        $footerTelegram = setting::where('meta_key', 'footerTelegram')->first();
+        $footerEmailSocial = setting::where('meta_key', 'footerEmailSocial')->first();
+        $footerCopyright = setting::where('meta_key', 'footerCopyright')->first();
+        $footerDesignerText = setting::where('meta_key', 'footerDesignerText')->first();
+        $footerDesignerPhone = setting::where('meta_key', 'footerDesignerPhone')->first();
+        $footerDesignerUrl = setting::where('meta_key', 'footerDesignerUrl')->first();
+        $footerServices = setting::where('meta_key', 'footerServices')->first();
+        $footerCategories = setting::where('meta_key', 'footerCategories')->first();
+
+        return view('admin.setting.footer', [
+            'footerBrandName'=>$footerBrandName,
+            'footerBrandDescription'=>$footerBrandDescription,
+            'footerServicesTitle'=>$footerServicesTitle,
+            'footerCategoriesTitle'=>$footerCategoriesTitle,
+            'footerAboutTitle'=>$footerAboutTitle,
+            'footerPhone'=>$footerPhone,
+            'footerEmail'=>$footerEmail,
+            'footerAddress'=>$footerAddress,
+            'footerInstagram'=>$footerInstagram,
+            'footerTelegram'=>$footerTelegram,
+            'footerEmailSocial'=>$footerEmailSocial,
+            'footerCopyright'=>$footerCopyright,
+            'footerDesignerText'=>$footerDesignerText,
+            'footerDesignerPhone'=>$footerDesignerPhone,
+            'footerDesignerUrl'=>$footerDesignerUrl,
+            'footerServices'=>json_decode($footerServices),
+            'footerCategories'=>json_decode($footerCategories),
+        ]);
+    }
+    public function footerStore(Request $request){
+        $settings = $request->all();
+        foreach ($settings as $key => $value) {
+            $value && setting::upsert(['meta_key' => $key, 'meta_value' => $value], ['meta_key'], ['meta_value']);
+        }
+        return redirect()->back();
+    }
+
     public function home(){
         $setting = [];
         $logo = setting::where('meta_key', 'logo')->first();
@@ -245,8 +292,24 @@ class SettingController extends Controller
         $serviceTitle5 = setting::where('meta_key', 'serviceTitle5')->first();
         $serviceSubTitle5 = setting::where('meta_key', 'serviceSubTitle5')->first();
         $serviceImage5 = setting::where('meta_key', 'serviceImage5')->first();
-        
-        
+
+        $footerBrandName = setting::where('meta_key', 'footerBrandName')->first();
+        $footerBrandDescription = setting::where('meta_key', 'footerBrandDescription')->first();
+        $footerServicesTitle = setting::where('meta_key', 'footerServicesTitle')->first();
+        $footerCategoriesTitle = setting::where('meta_key', 'footerCategoriesTitle')->first();
+        $footerAboutTitle = setting::where('meta_key', 'footerAboutTitle')->first();
+        $footerPhone = setting::where('meta_key', 'footerPhone')->first();
+        $footerEmail = setting::where('meta_key', 'footerEmail')->first();
+        $footerAddress = setting::where('meta_key', 'footerAddress')->first();
+        $footerInstagram = setting::where('meta_key', 'footerInstagram')->first();
+        $footerTelegram = setting::where('meta_key', 'footerTelegram')->first();
+        $footerEmailSocial = setting::where('meta_key', 'footerEmailSocial')->first();
+        $footerCopyright = setting::where('meta_key', 'footerCopyright')->first();
+        $footerDesignerText = setting::where('meta_key', 'footerDesignerText')->first();
+        $footerDesignerPhone = setting::where('meta_key', 'footerDesignerPhone')->first();
+        $footerDesignerUrl = setting::where('meta_key', 'footerDesignerUrl')->first();
+        $footerServices = setting::where('meta_key', 'footerServices')->first();
+        $footerCategories = setting::where('meta_key', 'footerCategories')->first();
 
         $setting['logo'] = $logo ? $logo->meta_value : null;
         $setting['heroBanner'] = $logo ? $heroBanner->meta_value : null;
@@ -301,6 +364,24 @@ class SettingController extends Controller
         $setting['serviceTitle5'] = $serviceTitle5 ? $serviceTitle5->meta_value : null;
         $setting['serviceSubTitle5'] = $serviceSubTitle5 ? $serviceSubTitle5->meta_value : null;
         $setting['serviceImage5'] = $serviceImage5 ? $serviceImage5->meta_value : null;
+
+        $setting['footerBrandName'] = $footerBrandName ? $footerBrandName->meta_value : null;
+        $setting['footerBrandDescription'] = $footerBrandDescription ? $footerBrandDescription->meta_value : null;
+        $setting['footerServicesTitle'] = $footerServicesTitle ? $footerServicesTitle->meta_value : null;
+        $setting['footerCategoriesTitle'] = $footerCategoriesTitle ? $footerCategoriesTitle->meta_value : null;
+        $setting['footerAboutTitle'] = $footerAboutTitle ? $footerAboutTitle->meta_value : null;
+        $setting['footerPhone'] = $footerPhone ? $footerPhone->meta_value : null;
+        $setting['footerEmail'] = $footerEmail ? $footerEmail->meta_value : null;
+        $setting['footerAddress'] = $footerAddress ? $footerAddress->meta_value : null;
+        $setting['footerInstagram'] = $footerInstagram ? $footerInstagram->meta_value : null;
+        $setting['footerTelegram'] = $footerTelegram ? $footerTelegram->meta_value : null;
+        $setting['footerEmailSocial'] = $footerEmailSocial ? $footerEmailSocial->meta_value : null;
+        $setting['footerCopyright'] = $footerCopyright ? $footerCopyright->meta_value : null;
+        $setting['footerDesignerText'] = $footerDesignerText ? $footerDesignerText->meta_value : null;
+        $setting['footerDesignerPhone'] = $footerDesignerPhone ? $footerDesignerPhone->meta_value : null;
+        $setting['footerDesignerUrl'] = $footerDesignerUrl ? $footerDesignerUrl->meta_value : null;
+        $setting['footerServices'] = $footerServices ? json_decode($footerServices->meta_value) : null;
+        $setting['footerCategories'] = $footerCategories ? json_decode($footerCategories->meta_value) : null;
 
         $categories = category::all();
         // $products = product::where('show_in_home', 1)->weherNotNull('secondary_price')->get();

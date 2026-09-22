@@ -76,6 +76,11 @@
                                     <a href="{{ route('setting.serviceSettings') }}"
                                         class="py-1 @if (Route::is('setting.serviceSettings')) text-[#FF0000] @endif">تنظیمات خدمات</a>
                                 </li>
+                                <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
+                                    <span class="size-1 bg-white rounded-sm"></span>
+                                    <a href="{{ route('setting.footerSettings') }}"
+                                        class="py-1 @if (Route::is('setting.footerSettings')) text-[#FF0000] @endif">فوتر</a>
+                                </li>
                             </ul>
                         </div>
                     </div>

@@ -820,8 +820,8 @@
                         <img src="{{ asset('storage/home/ei_1788433185339-removebg-preview.webp') }}" alt=""
                             class="w-45">
                         <div class="flex flex-col gap-2 items-start text-xs lg:text-sm xl:text-md">
-                            <span class="text-lg text-green-700 font-bold">کناب فروشی طباطبایی</span>
-                            <p>با ما کتاب را جوری دیگر تجربه کنید</p>
+                            <span class="text-lg text-green-700 font-bold">{{ $setting['footerBrandName'] }}</span>
+                            <p>{{ $setting['footerBrandDescription'] }}</p>
                         </div>
 
                     </div>
@@ -830,49 +830,24 @@
                     <div class="sm:w-1/2 w-full h-full flex flex-col gap-3 justify-start items-start">
                         <div class="flex w-full h-full">
                             <div class="w-1/2 h-full flex flex-col gap-3 justify-start items-start">
-                                <h5 class="xl:text-2xl lg:text-xl font-bold text-[var(--text)]">خدمات ما</h5>
+                                <h5 class="xl:text-2xl lg:text-xl font-bold text-[var(--text)]">{{ $setting['footerServicesTitle'] }}</h5>
                                 <div
-                                    class="w-full flex flex-col gap-1 items-start justify-start xl:text-md lg:text-sm text-xs font-bold text-[#A4A4A5]">
-                                    <span class="hover:text-green-700 transition duration-300 cursor-pointer">فتوکپی
-                                        و پرینت</span>
-                                    <span class="hover:text-green-700 transition duration-300 cursor-pointer">اجاره
-                                        بیلبورد</span>
-                                    <span class="hover:text-green-700 transition duration-300 cursor-pointer">اعلامیه
-                                        ترحیم</span>
-                                    <span class="hover:text-green-700 transition duration-300 cursor-pointer">بنر
-                                        زیارتی و تبریک</span>
-                                    <span class="hover:text-green-700 transition duration-300 cursor-pointer">سفارش
-                                        تابلوی خطاطی</span>
-                                    <span class="hover:text-green-700 transition duration-300 cursor-pointer">چاپ
-                                        طرح روی ماگ</span>
+                                    class="w-full flex flex-col gap-2 items-start justify-start xl:text-md lg:text-sm text-xs font-bold text-[#A4A4A5]">
+                                    @foreach ($setting['footerServices'] as $service)
+                                        <a href="{{ $service->url }}" class="hover:text-green-700 transition duration-300 cursor-pointer">{{ $service->title }}</a>
+                                    @endforeach
+                                 
+
                                 </div>
                             </div>
                             <div class="w-1/2 h-full flex flex-col gap-3 justify-start items-start">
-                                <h5 class="xl:text-2xl lg:text-xl font-bold text-[var(--text)]">دسته بندی ها</h5>
+                                <h5 class="xl:text-2xl lg:text-xl font-bold text-[var(--text)]">{{ $setting['footerCategoriesTitle'] }}</h5>
                                 <div
                                     class="w-full flex flex-col gap-1 items-start justify-start xl:text-md lg:text-sm text-xs font-bold text-[#A4A4A5]">
-                                    <a href=""
-                                        class="hover:text-green-700 transition duration-300 cursor-pointer">چاپ
-                                        روی
-                                        پارچه</a>
-                                    <a href=""
-                                        class="hover:text-green-700 transition duration-300 cursor-pointer">تابلو</a>
-                                    <a href=""
-                                        class="hover:text-green-700 transition duration-300 cursor-pointer">کارت
-                                        ویزیت</a>
-                                    <a href=""
-                                        class="hover:text-green-700 transition duration-300 cursor-pointer">پرچم
-                                        رومیزی</a>
-                                    <a href=""
-                                        class="hover:text-green-700 transition duration-300 cursor-pointer">بنر</a>
-                                    <a href=""
-                                        class="hover:text-green-700 transition duration-300 cursor-pointer">بنر
-                                        تبلیغاتی</a>
-                                    <a href=""
-                                        class="hover:text-green-700 transition duration-300 cursor-pointer">چاپ</a>
-                                    <a href=""
-                                        class="hover:text-green-700 transition duration-300 cursor-pointer">تجهیرات
-                                        تبلیفاتی</a>
+                                    @foreach ($setting['footerCategories'] as $category)
+                                    <a href="{{ $category->url }}"
+                                        class="hover:text-green-700 transition duration-300 cursor-pointer">{{ $category->title }}</a>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -882,7 +857,7 @@
                 <!-- news -->
                 <div class="w-full md:w-1/3 h-full flex flex-col justify-center items-start">
                     <div class="flex flex-col gap-3 justify-center items-start mx-auto">
-                        <h5 class="xl:text-2xl lg:text-xl font-bold">درباره ما</h5>
+                        <h5 class="xl:text-2xl lg:text-xl font-bold">{{ $setting['footerAboutTitle'] }}</h5>
                         <div class="flex flex-col gap-2 items-start text-xs lg:text-sm xl:text-md">
                             <div class="flex justify-center items-center gap-2">
                                 <div>
@@ -893,7 +868,7 @@
                                         </path>
                                     </svg>
                                 </div>
-                                <span class="font-bold">09371509497</span>
+                                <span class="font-bold">{{ $setting['footerPhone'] }}</span>
                             </div>
                             <div class="flex justify-center items-center gap-2">
                                 <div>
@@ -904,7 +879,7 @@
                                         </path>
                                     </svg>
                                 </div>
-                                <span class=" font-bold">shahkar@gmail.com</span>
+                                <span class=" font-bold">{{ $setting['footerEmail'] }}</span>
                             </div>
                             <div class="flex justify-center items-center gap-2">
                                 <div>
@@ -915,14 +890,13 @@
                                         </path>
                                     </svg>
                                 </div>
-                                <span class=" font-bold">آذربایجان
-                                    شرقی،بناب،خیابان طالقانی</span>
+                                <span class=" font-bold">{{ $setting['footerAddress'] }}</span>
                             </div>
                         </div>
                     </div>
                     <!-- social_network_svg -->
                     <div class="w-full py-6 flex items-center justify-center gap-10">
-                        <div
+                        <a href="{{ $setting['footerInstagram'] }}"
                             class="p-2 rounded-full bg-[var(--background)] border border-green-700 flex justify-center items-center cursor-pointer scale transition_root">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
                                 class="sm:size-4 size-4 fill-green-700">
@@ -930,8 +904,8 @@
                                     d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z">
                                 </path>
                             </svg>
-                        </div>
-                        <div
+                        </a>
+                        <a href="{{ $setting['footerTelegram'] }}"
                             class="p-2 rounded-full bg-[var(--background)] border border-green-700 flex justify-center items-center cursor-pointer scale transition_root">
                             <svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"
                                 class="sm:size-4 size-4 fill-green-700">
@@ -939,8 +913,8 @@
                                     d="M1764 11q33 24 27 64l-256 1536q-5 29-32 45-14 8-31 8-11 0-24-5l-527-215-298 327q-18 21-47 21-14 0-23-4-19-7-30-23.5t-11-36.5v-452l-472-193q-37-14-40-55-3-39 32-59l1664-960q35-21 68 2zm-342 1499l221-1323-1434 827 336 137 863-639-478 797z">
                                 </path>
                             </svg>
-                        </div>
-                        <div
+                        </a>
+                        <a href="{{ $setting['footerEmailSocial'] }}"
                             class="p-2 rounded-full bg-[var(--background)] border border-green-700 flex justify-center items-center cursor-pointer scale transition_root">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
                                 class="sm:size-4 size-4 fill-green-700">
@@ -948,8 +922,8 @@
                                     d="M464 258.2c0 2.7-1 5.2-4.2 8c-3.8 3.1-10.1 5.8-17.8 5.8H344c-53 0-96 43-96 96c0 6.8 .7 13.4 2.1 19.8c3.3 15.7 10.2 31.1 14.4 40.6l0 0c.7 1.6 1.4 3 1.9 4.3c5 11.5 5.6 15.4 5.6 17.1c0 5.3-1.9 9.5-3.8 11.8c-.9 1.1-1.6 1.6-2 1.8c-.3 .2-.8 .3-1.6 .4c-2.9 .1-5.7 .2-8.6 .2C141.1 464 48 370.9 48 256S141.1 48 256 48s208 93.1 208 208c0 .7 0 1.4 0 2.2zm48 .5c0-.9 0-1.8 0-2.7C512 114.6 397.4 0 256 0S0 114.6 0 256S114.6 512 256 512c3.5 0 7.1-.1 10.6-.2c31.8-1.3 53.4-30.1 53.4-62c0-14.5-6.1-28.3-12.1-42c-4.3-9.8-8.7-19.7-10.8-29.9c-.7-3.2-1-6.5-1-9.9c0-26.5 21.5-48 48-48h97.9c36.5 0 69.7-24.8 70.1-61.3zM160 256a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm0-64a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm128-64a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm64 64a32 32 0 1 0 0-64 32 32 0 1 0 0 64z">
                                 </path>
                             </svg>
-                        </div>
-                        <div
+                        </a>
+                        <a href="{{ $setting['footerCopyright'] }}"
                             class="p-2 rounded-full bg-[var(--background)] border border-green-700 flex justify-center items-center cursor-pointer scale transition_root">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
                                 class="sm:size-4 size-4 fill-green-700">
@@ -957,16 +931,15 @@
                                     d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z">
                                 </path>
                             </svg>
-                        </div>
+                        </a>
                     </div>
                     <!-- social_network_svg -->
                 </div>
                 <!-- news -->
             </div>
             <div class="mx-auto flex flex-col gap-1 items-center justify-center">
-                <p class="xl:text-[15px] lg:text-[12px] text-[13px]">طراحی و توسعه <span class="font-bold">شرکت اندیشه
-                        گران طراحان دیجیتال<span class="text-green-700">(فائوس)</span> </span></p>
-                <span class="text-[17px] font-bold text-green-700">09147794595</span>
+                <p class="xl:text-[15px] lg:text-[12px] text-[13px]">{{ $setting['footerDesignerText'] }}</p>
+                <span class="text-[17px] font-bold text-green-700">{{ $setting['footerDesignerPhone'] }}</span>
             </div>
         </section>
     </footer>

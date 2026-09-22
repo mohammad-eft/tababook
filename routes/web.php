@@ -112,6 +112,8 @@ Route::group([
     Route::post('/cardStore', 'cardStore')->name('cardStore');
     Route::get('/serviceSettings', 'serviceSettings')->name('serviceSettings');
     Route::post('/serviceStore', 'serviceStore')->name('serviceStore');
+    Route::get('/footerSettings', 'footerSettings')->name('footerSettings');
+    Route::post('/footerStore', 'footerStore')->name('footerStore');
 });
 
 Route::group([
