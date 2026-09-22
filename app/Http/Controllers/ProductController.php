@@ -278,7 +278,7 @@ class ProductController extends Controller
                 $proIds[] = $pro->product_id;
             }
         }
-        return view('user.product.show', [
+        return view('admin.product.single', [
             'product' => $product,
             // 'logo' => $logo,
             // 'services' => $services,

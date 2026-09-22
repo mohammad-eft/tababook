@@ -20,6 +20,8 @@ return new class extends Migration
             $table->integer('secondary_price')->nullable();
             $table->integer('count');
             $table->boolean('show_in_home')->default(false);
+            $table->string('writer')->nullable();
+            $table->string('publication')->nullable();
             $table->timestamps();
         });
     }

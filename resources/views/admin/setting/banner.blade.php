@@ -29,7 +29,7 @@
                         <label class="text-sm font-medium text-gray-700 md:pt-2.5">تصویر تبلیغ</label>
                         <div class="md:col-span-2">
                             <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-indigo-400 transition">
-                                <img id="topBannerPreview" src="{{ $topBanner->meta_value ?? '' }}" alt=""
+                                <img id="topBannerPreview" src="{{ $topBanner ? asset('storage/'.$topBanner->meta_value) : '' }}" alt=""
                                     class="w-full h-32 object-contain rounded-lg mb-3 {{ isset($topBanner) ? '' : 'hidden' }}">
                                 <svg class="w-10 h-10 mx-auto text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
@@ -73,7 +73,7 @@
                         <label class="text-sm font-medium text-gray-700 md:pt-2.5">تصویر بنر</label>
                         <div class="md:col-span-2">
                             <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-indigo-400 transition">
-                                <img id="secondBannerPreview" src="{{ $secondBanner->meta_value ?? '' }}" alt=""
+                                <img id="secondBannerPreview" src="{{ $secondBanner ? asset('storage/'.$secondBanner->meta_value) : '' }}" alt=""
                                     class="w-full h-40 object-cover rounded-lg mb-3 {{ isset($secondBanner) ? '' : 'hidden' }}">
                                 <svg class="w-10 h-10 mx-auto text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
@@ -149,7 +149,7 @@
                         <label class="text-sm font-medium text-gray-700 md:pt-2.5">تصویر بنر</label>
                         <div class="md:col-span-2">
                             <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-indigo-400 transition">
-                                <img id="rightBannerPreview" src="{{ $rightBanner->meta_value ?? '' }}" alt=""
+                                <img id="rightBannerPreview" src="{{ $rightBanner ? asset('storage/'.$rightBanner->meta_value) : '' }}" alt=""
                                     class="w-full h-40 object-cover rounded-lg mb-3 {{ isset($rightBanner) ? '' : 'hidden' }}">
                                 <svg class="w-10 h-10 mx-auto text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
@@ -193,7 +193,7 @@
                         <label class="text-sm font-medium text-gray-700 md:pt-2.5">تصویر بنر</label>
                         <div class="md:col-span-2">
                             <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-indigo-400 transition">
-                                <img id="leftBannerPreview" src="{{ $leftBanner->meta_value ?? '' }}" alt=""
+                                <img id="leftBannerPreview" src="{{ $leftBanner ? asset('storage/'.$leftBanner->meta_value) : '' }}" alt=""
                                     class="w-full h-40 object-cover rounded-lg mb-3 {{ isset($leftBanner) ? '' : 'hidden' }}">
                                 <svg class="w-10 h-10 mx-auto text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>

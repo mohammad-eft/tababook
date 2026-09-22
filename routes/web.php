@@ -9,8 +9,13 @@ use App\Http\Middleware\AuthMiddleware;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\SettingController;
-
+use App\Http\Controllers\SearchController;
+use App\Models\product;
 Route::view('/', 'home')->name('home');
+
+Route::get('/test', function(){
+    dd(product::all());
+});
 
 
 Route::get('/login', [UserController::class, 'login'])->name('login');
@@ -108,4 +113,14 @@ Route::group([
     Route::post('/storeHeaderSetting', 'storeHeaderSetting')->name('storeHeaderSetting');
     Route::get('/bannerSettings', 'bannerSettings')->name('bannerSettings');
     Route::post('/storeBanners', 'storeBanners')->name('storeBanners');
+    Route::get('/cardSettings', 'cardSettings')->name('cardSettings');
+    Route::post('/cardStore', 'cardStore')->name('cardStore');
+});
+
+Route::group([
+    'prefix'=>'search',
+    'controller'=>SearchController::class,
+    'as'=>'search.'
+], function(){
+    Route::get('/', 'page')->name('page');
 });
