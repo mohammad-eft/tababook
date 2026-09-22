@@ -10,13 +10,8 @@ use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SearchController;
-use App\Models\product;
-Route::view('/', 'home')->name('home');
 
-Route::get('/test', function(){
-    dd(product::all());
-});
-
+Route::get('/', [SettingController::class, 'home'])->name('home');
 
 Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::get('/signup', [UserController::class, "create"])->name('signup');
@@ -59,7 +54,7 @@ Route::group([
     Route::post('/store', 'store')->name('store');
     Route::get('/admin/list', 'adminIndex')->name('adminIndex');
     Route::post('/admin/show', 'adminShow')->name('adminShow');
-    Route::post('/edit/', 'edit')->name('edit');
+    Route::post('/edit', 'edit')->name('edit');
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{id}', 'delete')->name('delete');
     Route::get('/list', 'index')->withoutMiddleware(AdminMiddleware::class)->name('index');

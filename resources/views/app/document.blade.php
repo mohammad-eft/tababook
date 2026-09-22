@@ -70,7 +70,7 @@
                             </div>
                             <div
                                 class="w-full flex flex-col justify-start items-start overflow-y-auto max-h-100 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:bg-[var(--gold)] [&::-webkit-scrollbar-thumb]:rounded-full">
-                                @foreach ($services as $service)
+                                {{-- @foreach ($services as $service)
                                     <div
                                         class="w-full bg-[var(--background-2)] relative flex flex-col items-start justify-start p-4">
                                         <div class="group pb-4 pr-4">
@@ -79,7 +79,7 @@
                                         </div>
                                         <span class="w-full h-[1px] bg-[#292931]"></span>
                                     </div>
-                                @endforeach
+                                @endforeach --}}
                             </div>
                         </div>
                         <!-- items_serviss -->
@@ -281,7 +281,7 @@
                         <!-- rezume_item_hamburger_menu -->
                         <div class="w-full h-0 flex flex-col gap-2 overflow-y-auto transition_root">
                             <span class="w-full h-[1px] bg-[#292931]"></span>
-                            @foreach ($services as $service)
+                            {{-- @foreach ($services as $service)
                                 <div class="group w-11/12 mx-auto py-1.5 flex items-center justify-start gap-4 px-3">
                                     <div class="size-6 flex justify-center items-center">
                                         <span class="size-2 rounded-full bg-[var(--gold)]"></span>
@@ -289,7 +289,7 @@
                                     <span
                                         class="text-xs sm:text-md font-bold text-white group-active:pr-5 group-active:text-[var(--gold)] transition_root">{{ $service['title'] }}</span>
                                 </div>
-                            @endforeach
+                            @endforeach --}}
                         </div>
                         <!-- rezume_item_hamburger_menu -->
                         <span class="w-full h-[1px] bg-[#292931]"></span>
@@ -498,10 +498,10 @@
                                 <h5 class="xl:text-2xl lg:text-xl font-bold text-[var(--text)]">خدمات ما</h5>
                                 <div
                                     class="w-full flex flex-col gap-1 items-start justify-start xl:text-md lg:text-sm text-xs font-bold text-[#A4A4A5]">
-                                    @foreach ($services as $service)
+                                    {{-- @foreach ($services as $service)
                                         <span
                                             class="hover:text-[var(--gold)] transition duration-300 cursor-pointer">{{ $service['title'] }}</span>
-                                    @endforeach
+                                    @endforeach --}}
                                 </div>
                             </div>
                             <div class="w-1/2 h-full flex flex-col gap-3 justify-start items-start">

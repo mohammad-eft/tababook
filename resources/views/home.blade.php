@@ -14,8 +14,8 @@
         <section class="w-full py-2 bg-green-700 flex justify-center items-center">
             <p class="lg:text-sm text-[9px] font-bold text-white">ارسال های بالای 500هزار تومن رایکان</p>
         </section>
-        <section class="w-11/12  flex flex-col justify-start items-center">
-            <div class="w-full flex justify-between gap-1 items-center">
+        <section class="w-11/12 flex flex-col gap-4 justify-start items-center">
+            <div class="w-full flex justify-between gap-1 items-center pt-5 lg:pt-10">
                 <div class="xl:w-1/3 lg:w-1/4 max-lg:w-1/3 h-full flex justify-start items-center lg:hidden">
                     <div class="flex flex-col gap-1 items-start justify-center " onclick="hamburger_menu('open')">
                         <span class="lg:w-7 w-4 lg:h-1 h-0.5 bg-black rounded-full"></span>
@@ -23,11 +23,11 @@
                         <span class="lg:w-7 w-4 lg:h-1 h-0.5 bg-black rounded-full"></span>
                     </div>
                 </div>
-                <div class="xl:w-1/3 lg:w-1/4 max-lg:w-1/3 h-full flex lg:justify-start justify-center items-center">
-                    <img src="{{asset('storage/home/ei_1788433185339-removebg-preview.webp')}}" alt="" class="xl:w-1/3 lg:w-1/2 w-full">
+                <div class="hidden xl:w-1/3 lg:w-1/4 max-lg:w-1/3 h-full lg:flex lg:justify-start justify-center items-center">
+                    <img src="{{ asset('storage/'.$setting['logo']) }}" alt="" class="xl:w-1/3 lg:w-1/2 w-full">
                 </div>
                 <div class="xl:w-1/3 lg:w-2/4 max-lg:w-1/3 h-full flex justify-center items-center max-lg:hidden">
-                    <div class="w-full py-2 bg-white rounded-full flex justify-between items-center px-4 cart_shdow">
+                    <div class="w-full py-2 flex justify-between items-center px-4 cart_shdow bg-[#F3ECE2] border border-[#e9d2b1] rounded-lg">
                         <input type="text" class="outline-none w-full h-full"
                             placeholder="کتاب یا نویسنده یا مخصول خود را جستجو کنید">
                         <div class="">
@@ -39,23 +39,20 @@
                     </div>
                 </div>
                 <div class="xl:w-1/3 lg:w-1/4 max-lg:w-1/3 h-full flex justify-end items-center lg:gap-5 gap-2">
-                    <div>
+                    <a @if(!Auth::check()) href="{{ route('login') }}" @else href="{{ route('user.profile') }}" @endif class="block">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="lg:size-5 size-4">
                             <path
                                 d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464H398.7c-8.9-63.3-63.3-112-129-112H178.3c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z" />
                         </svg>
-                    </div>
-                    <div>
+                    </a>
+                    <div class="cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="lg:size-5 size-4">
                             <path
                                 d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z" />
                         </svg>
                     </div>
-                    <div class="relative sm:p-2.5 p-1.5">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
-                            class="lg:size-5 size-4 cursor-pointer">
-                                    d="M400 208A192 192 0 1 0 16 208a192 192 0 1 0 384 0zM349.3 360.6C312.2 395 262.6 416 208 416C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208c0 54.6-21 104.2-55.4 141.3l149 149c3.1 3.1 3.1 8.2 0 11.3s-8.2 3.1-11.3 0l-149-149z" />
-                            </svg> --}}
+                    {{-- <div class="relative sm:p-2.5 p-1.5 flex items-center gap-4">
+                       
                             <a href="{{ route('search.page') }}">
                                 <svg class="w-[30px] h-[30px] text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-width="1.2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
@@ -68,7 +65,7 @@
                                 </svg>
                             </a>
                         
-                    </div>
+                    </div> --}}
                     <div class="w-full relative lg:hidden block mt-5">
                         <input type="text" class="w-full outline-none rounded-md py-2 md:py-4 pl-2 pr-10 md:pr-20"
                             placeholder="جست و جو">
@@ -84,49 +81,46 @@
                 </div>
             </div>
             <div class="w-full h-10 flex justify-center items-center">
-                <ul class="flex gap-4 lg:gap-6 xl:gap-10 text-sm lg:text-base justify-end font-bold max-lg:hidden">
-                    <li
-                        class="flex justify-center flex-col items-center cursor-pointer py-1 group transition-all duration-300 ">
-                        <span>خانه</span>
-                        <div
-                            class="rounded-md group-hover:w-full w-[0px] bg-[#fcd7a4] h-[2px] transition-all duration-300">
-                        </div>
+                <ul class="flex gap-4 lg:gap-6 xl:gap-10 text-sm lg:text-base justify-end max-lg:hidden">
+                    <li>
+                        <a href="{{ route('home') }}" class="flex justify-center flex-col items-center cursor-pointer py-1 group transition-all duration-300">
+                            <span>خانه</span>
+                            <div
+                                class="rounded-md group-hover:w-full @if(Route::is('home')) w-full @else w-0 @endif bg-[#fcd7a4] h-[2px] transition-all duration-300">
+                            </div>
+                        </a>
                     </li>
-                    <li
-                        class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
-                        <span>نمونه کارها</span>
-                        <div
-                            class="rounded-md group-hover:w-full w-[0px] bg-[#fcd7a4] h-[2px] transition-all duration-300">
-                        </div>
+                    <li>
+                        <a href="#" class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
+                            <span>محصولات</span>
+                            <div
+                                class="rounded-md group-hover:w-full w-0 bg-[#fcd7a4] h-[2px] transition-all duration-300">
+                            </div>
+                        </a>
                     </li>
-                    <li
-                        class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
-                        <span>مشاوره</span>
-                        <div
-                            class="rounded-md group-hover:w-full w-[0px] bg-[#fcd7a4] h-[2px] transition-all duration-300">
-                        </div>
+                    <li>
+                        <a href="#" class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
+                            <span>دسته بندی ها</span>
+                            <div
+                                class="rounded-md group-hover:w-full w-[0px] bg-[#fcd7a4] h-[2px] transition-all duration-300">
+                            </div>
+                        </a>
                     </li>
-                    <li
-                        class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
-                        <span>گاه نوشت</span>
-                        <div
-                            class="rounded-md group-hover:w-full w-[0px] bg-[#fcd7a4] h-[2px] transition-all duration-300">
-                        </div>
+                    <li>
+                        <a href="#" class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
+                            <span>تماس باما</span>
+                            <div
+                                class="rounded-md group-hover:w-full w-[0px] bg-[#fcd7a4] h-[2px] transition-all duration-300">
+                            </div>
+                        </a>
                     </li>
-                    <li
-                        class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
-                        <span>تماس باما</span>
-                        <div
-                            class="rounded-md group-hover:w-full w-[0px] bg-[#fcd7a4] h-[2px] transition-all duration-300">
-                        </div>
-
-                    </li>
-                    <li
-                        class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
-                        <span>درباره ما</span>
-                        <div
-                            class="rounded-md group-hover:w-full w-[0px] bg-[#fcd7a4] h-[2px] transition-all duration-300">
-                        </div>
+                    <li>
+                        <a href="#" class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
+                            <span>درباره ما</span>
+                            <div
+                                class="rounded-md group-hover:w-full w-[0px] bg-[#fcd7a4] h-[2px] transition-all duration-300">
+                            </div>
+                        </a>
                     </li>
                 </ul>
                 <div class="w-full py-2 bg-white rounded-full flex justify-between items-center px-2 cart_shdow lg:hidden">
@@ -188,30 +182,29 @@
         <!-- hamburger_menu_item -->
     </header>
 
-    <main class="w-full  flex flex-col gap-10 justify-start items-center my-10">
+    <main class="w-full flex flex-col gap-10 justify-start items-center mb-10">
         <!-- hero -->
         <section class="w-full xl:h-90 lg:h-80 flex max-lg:flex-col gap-20 justify-start items-center bg-[#F3ECE2]">
             <div class="lg:w-1/2 w-full h-full flex justify-center items-center">
-                <img src="{{asset('storage/home/hero2.webp')}}" alt="" class="w-full lg:h-full max-h-[50vh] max-w-150">
+                <img src="{{ asset('storage/'.$setting['heroBanner']) }}" alt="" class="w-full lg:h-full max-h-full">
             </div>
             <div class="lg:w-1/2 w-full h-full  flex lg:justify-start justify-center items-center">
                 <div
                     class="xl:w-9/12 lg:w-10/12 w-11/12 h-full flex flex-col gap-5 justify-center lg:items-start items-center">
                     <div
                         class="flex flex-col gap-2 justify-start items-start max-lg:items-center xl:text-4xl lg:text-4xl text-[8vw] font-bold">
-                        <h1>هر کتاب ،</h1>
-                        <h2>شروع یک دنیای تازه است.</h2>
+                        <h1>{{ $setting['heroTitle'] }}</h1>
+                        
                     </div>
-                    <p class="max-xl:text-sm max-lg:text-center">مجموعه ای کتاب ها و لوازم تحریر برای مطالعه ، یادکیری
-                        یادکیری یادکیری و خلق کردن</p>
+                    <p class="max-xl:text-sm max-lg:text-center">{{ $setting['heroSubtitle'] }}</p>
                     <div class="w-full flex lg:gap-6 gap-3 justify-between items-center">
-                        <a href="#"
+                        <a href="{{ $setting['heroPrimaryButtonLink'] }}"
                             class="w-1/2 lg:py-3 py-2 bg-green-700 xl:text-lg max-lg:text-sm text-white font-bold rounded-xl flex justify-center items-center">
-                            کشف گتاب ها
+                            {{ $setting['heroPrimaryButton'] }}
                         </a>
-                        <a href="#"
+                        <a href="{{ $setting['heroSecondaryButtonLink'] }}"
                             class="w-1/2 lg:py-3 py-2 border-2 border-[#254c24] rounded-xl xl:text-lg max-lg:text-sm text-green-700 font-bold flex justify-center items-center">
-                            مشاهده لوازم تخریر
+                           {{ $setting['heroSecondaryButton'] }}
                         </a>
                     </div>
                 </div>
@@ -222,138 +215,15 @@
         <!-- category -->
         <section
             class="max-w-11/12 w-11/12 lg:h-32 h-25  flex lg:gap-5 gap-3 justify-start items-center overflow-x-auto p-1">
-            <div
+            @foreach($categories as $category)
+            <a href="{{ route('category.relatedProducts', [$category->id]) }}"
                 class="xl:min-w-1/9 xl:max-w-1/9 lg:min-w-1/8 max-w-1/8 min-w-1/3 max-w-1/3  h-full bg-white flex flex-col gap-3 justify-center items-center rounded-xl cart_shdow">
                 <div class="lg:size-15 size-12 rounded-full bg-[#FAEDD9] flex justify-center items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-7/12">
-                        <path
-                            d="M395.8 39.6c9.4-9.4 24.6-9.4 33.9 0l42.6 42.6c9.4 9.4 9.4 24.6 0 33.9L417.6 171 341 94.4l54.8-54.8zM318.4 117L395 193.6l-219 219V400c0-8.8-7.2-16-16-16H128V352c0-8.8-7.2-16-16-16H99.4l219-219zM66.9 379.5c1.2-4 2.7-7.9 4.7-11.5H96v32c0 8.8 7.2 16 16 16h32v24.4c-3.7 1.9-7.5 3.5-11.6 4.7L39.6 472.4l27.3-92.8zM452.4 17c-21.9-21.9-57.3-21.9-79.2 0L60.4 329.7c-11.4 11.4-19.7 25.4-24.2 40.8L.7 491.5c-1.7 5.6-.1 11.7 4 15.8s10.2 5.7 15.8 4l121-35.6c15.4-4.5 29.4-12.9 40.8-24.2L495 138.8c21.9-21.9 21.9-57.3 0-79.2L452.4 17zM331.3 202.7c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0l-128 128c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l128-128z" />
-                    </svg>
+                    <img src="{{ $category->image ? asset('storage/'.$category->image) : '' }}" class="size-7/12 rounded-full" alt="">
                 </div>
-                <span class="max-lg:text-xs font-bold">نوشت افزار</span>
-            </div>
-            <div
-                class="xl:min-w-1/9 xl:max-w-1/9 lg:min-w-1/8 max-w-1/8 min-w-1/3 max-w-1/3  h-full bg-white flex flex-col gap-3 justify-center items-center rounded-xl cart_shdow">
-                <div class="lg:size-15 size-12 rounded-full bg-[#FAEDD9] flex justify-center items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-7/12">
-                        <path
-                            d="M395.8 39.6c9.4-9.4 24.6-9.4 33.9 0l42.6 42.6c9.4 9.4 9.4 24.6 0 33.9L417.6 171 341 94.4l54.8-54.8zM318.4 117L395 193.6l-219 219V400c0-8.8-7.2-16-16-16H128V352c0-8.8-7.2-16-16-16H99.4l219-219zM66.9 379.5c1.2-4 2.7-7.9 4.7-11.5H96v32c0 8.8 7.2 16 16 16h32v24.4c-3.7 1.9-7.5 3.5-11.6 4.7L39.6 472.4l27.3-92.8zM452.4 17c-21.9-21.9-57.3-21.9-79.2 0L60.4 329.7c-11.4 11.4-19.7 25.4-24.2 40.8L.7 491.5c-1.7 5.6-.1 11.7 4 15.8s10.2 5.7 15.8 4l121-35.6c15.4-4.5 29.4-12.9 40.8-24.2L495 138.8c21.9-21.9 21.9-57.3 0-79.2L452.4 17zM331.3 202.7c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0l-128 128c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l128-128z" />
-                    </svg>
-                </div>
-                <span class="max-lg:text-xs font-bold">نوشت افزار</span>
-            </div>
-            <div
-                class="xl:min-w-1/9 xl:max-w-1/9 lg:min-w-1/8 max-w-1/8 min-w-1/3 max-w-1/3  h-full bg-white flex flex-col gap-3 justify-center items-center rounded-xl cart_shdow">
-                <div class="lg:size-15 size-12 rounded-full bg-[#FAEDD9] flex justify-center items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-7/12">
-                        <path
-                            d="M395.8 39.6c9.4-9.4 24.6-9.4 33.9 0l42.6 42.6c9.4 9.4 9.4 24.6 0 33.9L417.6 171 341 94.4l54.8-54.8zM318.4 117L395 193.6l-219 219V400c0-8.8-7.2-16-16-16H128V352c0-8.8-7.2-16-16-16H99.4l219-219zM66.9 379.5c1.2-4 2.7-7.9 4.7-11.5H96v32c0 8.8 7.2 16 16 16h32v24.4c-3.7 1.9-7.5 3.5-11.6 4.7L39.6 472.4l27.3-92.8zM452.4 17c-21.9-21.9-57.3-21.9-79.2 0L60.4 329.7c-11.4 11.4-19.7 25.4-24.2 40.8L.7 491.5c-1.7 5.6-.1 11.7 4 15.8s10.2 5.7 15.8 4l121-35.6c15.4-4.5 29.4-12.9 40.8-24.2L495 138.8c21.9-21.9 21.9-57.3 0-79.2L452.4 17zM331.3 202.7c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0l-128 128c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l128-128z" />
-                    </svg>
-                </div>
-                <span class="max-lg:text-xs font-bold">نوشت افزار</span>
-            </div>
-            <div
-                class="xl:min-w-1/9 xl:max-w-1/9 lg:min-w-1/8 max-w-1/8 min-w-1/3 max-w-1/3  h-full bg-white flex flex-col gap-3 justify-center items-center rounded-xl cart_shdow">
-                <div class="lg:size-15 size-12 rounded-full bg-[#FAEDD9] flex justify-center items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-7/12">
-                        <path
-                            d="M395.8 39.6c9.4-9.4 24.6-9.4 33.9 0l42.6 42.6c9.4 9.4 9.4 24.6 0 33.9L417.6 171 341 94.4l54.8-54.8zM318.4 117L395 193.6l-219 219V400c0-8.8-7.2-16-16-16H128V352c0-8.8-7.2-16-16-16H99.4l219-219zM66.9 379.5c1.2-4 2.7-7.9 4.7-11.5H96v32c0 8.8 7.2 16 16 16h32v24.4c-3.7 1.9-7.5 3.5-11.6 4.7L39.6 472.4l27.3-92.8zM452.4 17c-21.9-21.9-57.3-21.9-79.2 0L60.4 329.7c-11.4 11.4-19.7 25.4-24.2 40.8L.7 491.5c-1.7 5.6-.1 11.7 4 15.8s10.2 5.7 15.8 4l121-35.6c15.4-4.5 29.4-12.9 40.8-24.2L495 138.8c21.9-21.9 21.9-57.3 0-79.2L452.4 17zM331.3 202.7c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0l-128 128c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l128-128z" />
-                    </svg>
-                </div>
-                <span class="max-lg:text-xs font-bold">نوشت افزار</span>
-            </div>
-            <div
-                class="xl:min-w-1/9 xl:max-w-1/9 lg:min-w-1/8 max-w-1/8 min-w-1/3 max-w-1/3  h-full bg-white flex flex-col gap-3 justify-center items-center rounded-xl cart_shdow">
-                <div class="lg:size-15 size-12 rounded-full bg-[#FAEDD9] flex justify-center items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-7/12">
-                        <path
-                            d="M395.8 39.6c9.4-9.4 24.6-9.4 33.9 0l42.6 42.6c9.4 9.4 9.4 24.6 0 33.9L417.6 171 341 94.4l54.8-54.8zM318.4 117L395 193.6l-219 219V400c0-8.8-7.2-16-16-16H128V352c0-8.8-7.2-16-16-16H99.4l219-219zM66.9 379.5c1.2-4 2.7-7.9 4.7-11.5H96v32c0 8.8 7.2 16 16 16h32v24.4c-3.7 1.9-7.5 3.5-11.6 4.7L39.6 472.4l27.3-92.8zM452.4 17c-21.9-21.9-57.3-21.9-79.2 0L60.4 329.7c-11.4 11.4-19.7 25.4-24.2 40.8L.7 491.5c-1.7 5.6-.1 11.7 4 15.8s10.2 5.7 15.8 4l121-35.6c15.4-4.5 29.4-12.9 40.8-24.2L495 138.8c21.9-21.9 21.9-57.3 0-79.2L452.4 17zM331.3 202.7c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0l-128 128c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l128-128z" />
-                    </svg>
-                </div>
-                <span class="max-lg:text-xs font-bold">نوشت افزار</span>
-            </div>
-            <div
-                class="xl:min-w-1/9 xl:max-w-1/9 lg:min-w-1/8 max-w-1/8 min-w-1/3 max-w-1/3  h-full bg-white flex flex-col gap-3 justify-center items-center rounded-xl cart_shdow">
-                <div class="lg:size-15 size-12 rounded-full bg-[#FAEDD9] flex justify-center items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-7/12">
-                        <path
-                            d="M395.8 39.6c9.4-9.4 24.6-9.4 33.9 0l42.6 42.6c9.4 9.4 9.4 24.6 0 33.9L417.6 171 341 94.4l54.8-54.8zM318.4 117L395 193.6l-219 219V400c0-8.8-7.2-16-16-16H128V352c0-8.8-7.2-16-16-16H99.4l219-219zM66.9 379.5c1.2-4 2.7-7.9 4.7-11.5H96v32c0 8.8 7.2 16 16 16h32v24.4c-3.7 1.9-7.5 3.5-11.6 4.7L39.6 472.4l27.3-92.8zM452.4 17c-21.9-21.9-57.3-21.9-79.2 0L60.4 329.7c-11.4 11.4-19.7 25.4-24.2 40.8L.7 491.5c-1.7 5.6-.1 11.7 4 15.8s10.2 5.7 15.8 4l121-35.6c15.4-4.5 29.4-12.9 40.8-24.2L495 138.8c21.9-21.9 21.9-57.3 0-79.2L452.4 17zM331.3 202.7c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0l-128 128c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l128-128z" />
-                    </svg>
-                </div>
-                <span class="max-lg:text-xs font-bold">نوشت افزار</span>
-            </div>
-            <div
-                class="xl:min-w-1/9 xl:max-w-1/9 lg:min-w-1/8 max-w-1/8 min-w-1/3 max-w-1/3  h-full bg-white flex flex-col gap-3 justify-center items-center rounded-xl cart_shdow">
-                <div class="lg:size-15 size-12 rounded-full bg-[#FAEDD9] flex justify-center items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-7/12">
-                        <path
-                            d="M395.8 39.6c9.4-9.4 24.6-9.4 33.9 0l42.6 42.6c9.4 9.4 9.4 24.6 0 33.9L417.6 171 341 94.4l54.8-54.8zM318.4 117L395 193.6l-219 219V400c0-8.8-7.2-16-16-16H128V352c0-8.8-7.2-16-16-16H99.4l219-219zM66.9 379.5c1.2-4 2.7-7.9 4.7-11.5H96v32c0 8.8 7.2 16 16 16h32v24.4c-3.7 1.9-7.5 3.5-11.6 4.7L39.6 472.4l27.3-92.8zM452.4 17c-21.9-21.9-57.3-21.9-79.2 0L60.4 329.7c-11.4 11.4-19.7 25.4-24.2 40.8L.7 491.5c-1.7 5.6-.1 11.7 4 15.8s10.2 5.7 15.8 4l121-35.6c15.4-4.5 29.4-12.9 40.8-24.2L495 138.8c21.9-21.9 21.9-57.3 0-79.2L452.4 17zM331.3 202.7c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0l-128 128c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l128-128z" />
-                    </svg>
-                </div>
-                <span class="max-lg:text-xs font-bold">نوشت افزار</span>
-            </div>
-            <div
-                class="xl:min-w-1/9 xl:max-w-1/9 lg:min-w-1/8 max-w-1/8 min-w-1/3 max-w-1/3  h-full bg-white flex flex-col gap-3 justify-center items-center rounded-xl cart_shdow">
-                <div class="lg:size-15 size-12 rounded-full bg-[#FAEDD9] flex justify-center items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-7/12">
-                        <path
-                            d="M395.8 39.6c9.4-9.4 24.6-9.4 33.9 0l42.6 42.6c9.4 9.4 9.4 24.6 0 33.9L417.6 171 341 94.4l54.8-54.8zM318.4 117L395 193.6l-219 219V400c0-8.8-7.2-16-16-16H128V352c0-8.8-7.2-16-16-16H99.4l219-219zM66.9 379.5c1.2-4 2.7-7.9 4.7-11.5H96v32c0 8.8 7.2 16 16 16h32v24.4c-3.7 1.9-7.5 3.5-11.6 4.7L39.6 472.4l27.3-92.8zM452.4 17c-21.9-21.9-57.3-21.9-79.2 0L60.4 329.7c-11.4 11.4-19.7 25.4-24.2 40.8L.7 491.5c-1.7 5.6-.1 11.7 4 15.8s10.2 5.7 15.8 4l121-35.6c15.4-4.5 29.4-12.9 40.8-24.2L495 138.8c21.9-21.9 21.9-57.3 0-79.2L452.4 17zM331.3 202.7c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0l-128 128c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l128-128z" />
-                    </svg>
-                </div>
-                <span class="max-lg:text-xs font-bold">نوشت افزار</span>
-            </div>
-            <div
-                class="xl:min-w-1/9 xl:max-w-1/9 lg:min-w-1/8 max-w-1/8 min-w-1/3 max-w-1/3  h-full bg-white flex flex-col gap-3 justify-center items-center rounded-xl cart_shdow">
-                <div class="lg:size-15 size-12 rounded-full bg-[#FAEDD9] flex justify-center items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-7/12">
-                        <path
-                            d="M395.8 39.6c9.4-9.4 24.6-9.4 33.9 0l42.6 42.6c9.4 9.4 9.4 24.6 0 33.9L417.6 171 341 94.4l54.8-54.8zM318.4 117L395 193.6l-219 219V400c0-8.8-7.2-16-16-16H128V352c0-8.8-7.2-16-16-16H99.4l219-219zM66.9 379.5c1.2-4 2.7-7.9 4.7-11.5H96v32c0 8.8 7.2 16 16 16h32v24.4c-3.7 1.9-7.5 3.5-11.6 4.7L39.6 472.4l27.3-92.8zM452.4 17c-21.9-21.9-57.3-21.9-79.2 0L60.4 329.7c-11.4 11.4-19.7 25.4-24.2 40.8L.7 491.5c-1.7 5.6-.1 11.7 4 15.8s10.2 5.7 15.8 4l121-35.6c15.4-4.5 29.4-12.9 40.8-24.2L495 138.8c21.9-21.9 21.9-57.3 0-79.2L452.4 17zM331.3 202.7c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0l-128 128c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l128-128z" />
-                    </svg>
-                </div>
-                <span class="max-lg:text-xs font-bold">نوشت افزار</span>
-            </div>
-            <div
-                class="xl:min-w-1/9 xl:max-w-1/9 lg:min-w-1/8 max-w-1/8 min-w-1/3 max-w-1/3  h-full bg-white flex flex-col gap-3 justify-center items-center rounded-xl cart_shdow">
-                <div class="lg:size-15 size-12 rounded-full bg-[#FAEDD9] flex justify-center items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-7/12">
-                        <path
-                            d="M395.8 39.6c9.4-9.4 24.6-9.4 33.9 0l42.6 42.6c9.4 9.4 9.4 24.6 0 33.9L417.6 171 341 94.4l54.8-54.8zM318.4 117L395 193.6l-219 219V400c0-8.8-7.2-16-16-16H128V352c0-8.8-7.2-16-16-16H99.4l219-219zM66.9 379.5c1.2-4 2.7-7.9 4.7-11.5H96v32c0 8.8 7.2 16 16 16h32v24.4c-3.7 1.9-7.5 3.5-11.6 4.7L39.6 472.4l27.3-92.8zM452.4 17c-21.9-21.9-57.3-21.9-79.2 0L60.4 329.7c-11.4 11.4-19.7 25.4-24.2 40.8L.7 491.5c-1.7 5.6-.1 11.7 4 15.8s10.2 5.7 15.8 4l121-35.6c15.4-4.5 29.4-12.9 40.8-24.2L495 138.8c21.9-21.9 21.9-57.3 0-79.2L452.4 17zM331.3 202.7c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0l-128 128c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l128-128z" />
-                    </svg>
-                </div>
-                <span class="max-lg:text-xs font-bold">نوشت افزار</span>
-            </div>
-            <div
-                class="xl:min-w-1/9 xl:max-w-1/9 lg:min-w-1/8 max-w-1/8 min-w-1/3 max-w-1/3  h-full bg-white flex flex-col gap-3 justify-center items-center rounded-xl cart_shdow">
-                <div class="lg:size-15 size-12 rounded-full bg-[#FAEDD9] flex justify-center items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-7/12">
-                        <path
-                            d="M395.8 39.6c9.4-9.4 24.6-9.4 33.9 0l42.6 42.6c9.4 9.4 9.4 24.6 0 33.9L417.6 171 341 94.4l54.8-54.8zM318.4 117L395 193.6l-219 219V400c0-8.8-7.2-16-16-16H128V352c0-8.8-7.2-16-16-16H99.4l219-219zM66.9 379.5c1.2-4 2.7-7.9 4.7-11.5H96v32c0 8.8 7.2 16 16 16h32v24.4c-3.7 1.9-7.5 3.5-11.6 4.7L39.6 472.4l27.3-92.8zM452.4 17c-21.9-21.9-57.3-21.9-79.2 0L60.4 329.7c-11.4 11.4-19.7 25.4-24.2 40.8L.7 491.5c-1.7 5.6-.1 11.7 4 15.8s10.2 5.7 15.8 4l121-35.6c15.4-4.5 29.4-12.9 40.8-24.2L495 138.8c21.9-21.9 21.9-57.3 0-79.2L452.4 17zM331.3 202.7c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0l-128 128c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l128-128z" />
-                    </svg>
-                </div>
-                <span class="max-lg:text-xs font-bold">نوشت افزار</span>
-            </div>
-            <div
-                class="xl:min-w-1/9 xl:max-w-1/9 lg:min-w-1/8 max-w-1/8 min-w-1/3 max-w-1/3  h-full bg-white flex flex-col gap-3 justify-center items-center rounded-xl cart_shdow">
-                <div class="lg:size-15 size-12 rounded-full bg-[#FAEDD9] flex justify-center items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-7/12">
-                        <path
-                            d="M395.8 39.6c9.4-9.4 24.6-9.4 33.9 0l42.6 42.6c9.4 9.4 9.4 24.6 0 33.9L417.6 171 341 94.4l54.8-54.8zM318.4 117L395 193.6l-219 219V400c0-8.8-7.2-16-16-16H128V352c0-8.8-7.2-16-16-16H99.4l219-219zM66.9 379.5c1.2-4 2.7-7.9 4.7-11.5H96v32c0 8.8 7.2 16 16 16h32v24.4c-3.7 1.9-7.5 3.5-11.6 4.7L39.6 472.4l27.3-92.8zM452.4 17c-21.9-21.9-57.3-21.9-79.2 0L60.4 329.7c-11.4 11.4-19.7 25.4-24.2 40.8L.7 491.5c-1.7 5.6-.1 11.7 4 15.8s10.2 5.7 15.8 4l121-35.6c15.4-4.5 29.4-12.9 40.8-24.2L495 138.8c21.9-21.9 21.9-57.3 0-79.2L452.4 17zM331.3 202.7c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0l-128 128c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l128-128z" />
-                    </svg>
-                </div>
-                <span class="max-lg:text-xs font-bold">نوشت افزار</span>
-            </div>
-            <div
-                class="xl:min-w-1/9 xl:max-w-1/9 lg:min-w-1/8 max-w-1/8 min-w-1/3 max-w-1/3  h-full bg-white flex flex-col gap-3 justify-center items-center rounded-xl cart_shdow">
-                <div class="lg:size-15 size-12 rounded-full bg-[#FAEDD9] flex justify-center items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-7/12">
-                        <path
-                            d="M395.8 39.6c9.4-9.4 24.6-9.4 33.9 0l42.6 42.6c9.4 9.4 9.4 24.6 0 33.9L417.6 171 341 94.4l54.8-54.8zM318.4 117L395 193.6l-219 219V400c0-8.8-7.2-16-16-16H128V352c0-8.8-7.2-16-16-16H99.4l219-219zM66.9 379.5c1.2-4 2.7-7.9 4.7-11.5H96v32c0 8.8 7.2 16 16 16h32v24.4c-3.7 1.9-7.5 3.5-11.6 4.7L39.6 472.4l27.3-92.8zM452.4 17c-21.9-21.9-57.3-21.9-79.2 0L60.4 329.7c-11.4 11.4-19.7 25.4-24.2 40.8L.7 491.5c-1.7 5.6-.1 11.7 4 15.8s10.2 5.7 15.8 4l121-35.6c15.4-4.5 29.4-12.9 40.8-24.2L495 138.8c21.9-21.9 21.9-57.3 0-79.2L452.4 17zM331.3 202.7c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0l-128 128c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0l128-128z" />
-                    </svg>
-                </div>
-                <span class="max-lg:text-xs font-bold">نوشت افزار</span>
-            </div>
-
-
+                <span class="max-lg:text-xs font-bold">{{ $category->title }}</span>
+            </a>
+            @endforeach
 
         </section>
         <!-- category -->
