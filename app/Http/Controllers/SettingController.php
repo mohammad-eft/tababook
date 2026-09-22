@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\setting;
 use App\Models\category;
+use App\Models\product;
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
@@ -144,6 +145,20 @@ class SettingController extends Controller
         $heroPrimaryButtonLink = setting::where('meta_key', 'heroPrimaryButtonLink')->first();
         $heroSecondaryButton = setting::where('meta_key', 'heroSecondaryButton')->first();
         $heroSecondaryButtonLink = setting::where('meta_key', 'heroSecondaryButtonLink')->first();
+        $topBanner = setting::where('meta_key', 'topBanner')->first();
+        $topBannerLink = setting::where('meta_key', 'topBannerLink')->first();
+        $secondBanner = setting::where('meta_key', 'secondBanner')->first();
+        $secondBannerTitle = setting::where('meta_key', 'secondBannerTitle')->first();
+        $secondBannerSubtitle = setting::where('meta_key', 'secondBannerSubtitle')->first();
+        $secondBannerButton = setting::where('meta_key', 'secondBannerButton')->first();
+        $secondBannerButtonLink = setting::where('meta_key', 'secondBannerButtonLink')->first();
+        $rightBanner = setting::where('meta_key', 'rightBanner')->first();
+        $rightBannerLink = setting::where('meta_key', 'rightBannerLink')->first();
+        $leftBanner = setting::where('meta_key', 'leftBanner')->first();
+        $leftBannerTitle = setting::where('meta_key', 'leftBannerTitle')->first();
+        $leftBannerSubtitle = setting::where('meta_key', 'leftBannerSubtitle')->first();
+        $leftBannerButton = setting::where('meta_key', 'leftBannerButton')->first();
+        $leftBannerButtonLink = setting::where('meta_key', 'leftBannerButtonLink')->first();
 
         $setting['logo'] = $logo ? $logo->meta_value : null;
         $setting['heroBanner'] = $logo ? $heroBanner->meta_value : null;
@@ -154,7 +169,63 @@ class SettingController extends Controller
         $setting['heroSecondaryButton'] = $logo ? $heroSecondaryButton->meta_value : null;
         $setting['heroSecondaryButtonLink'] = $logo ? $heroSecondaryButtonLink->meta_value : null;
 
+        $setting['topBanner']=$topBanner->meta_value;
+        $setting['topBannerLink']=$topBannerLink->meta_value;
+        $setting['secondBanner']=$secondBanner->meta_value;
+        $setting['secondBannerTitle']=$secondBannerTitle->meta_value;
+        $setting['secondBannerSubtitle']=$secondBannerSubtitle->meta_value;
+        $setting['secondBannerButton']=$secondBannerButton->meta_value;
+        $setting['secondBannerButtonLink']=$secondBannerButtonLink->meta_value;
+        $setting['rightBanner']=$rightBanner->meta_value;
+        $setting['rightBannerLink']=$rightBannerLink->meta_value;
+        $setting['leftBanner']=$leftBanner->meta_value;
+        $setting['leftBannerTitle']=$leftBannerTitle->meta_value;
+        $setting['leftBannerSubtitle']=$leftBannerSubtitle->meta_value;
+        $setting['leftBannerButton']=$leftBannerButton->meta_value;
+        $setting['leftBannerButtonLink']=$leftBannerButtonLink->meta_value;
+
         $categories = category::all();
-        return view('home', ['setting'=>$setting, 'categories'=>$categories]);
+        // $products = product::where('show_in_home', 1)->weherNotNull('secondary_price')->get();
+        $products = product::where('show_in_home', 1)->get();
+        $newProducts = product::where('show_in_home', 1)->orderBy('created_at', 'desc')->limit(6)->get();
+        foreach ($products as $product) {
+            if ($product->media->isNotEmpty()) {
+                foreach ($product->media as $media) {
+                    if ($media->is_main) {
+                        $product->image  = $media->media_path;
+                        break;
+                    } else {
+                        $product->image = 'default.jpg';
+                    }
+                }
+            } else {
+                $product->image = 'default.jpg';
+            }
+            if ($product->secondary_price) {
+                $campare = $product->primary_price - $product->secondary_price;
+                $x = $campare / $product->primary_price;
+                $product->percent = intval($x * 100);
+            }
+        }
+        foreach ($newProducts as $product) {
+            if ($product->media->isNotEmpty()) {
+                foreach ($product->media as $media) {
+                    if ($media->is_main) {
+                        $product->image  = $media->media_path;
+                        break;
+                    } else {
+                        $product->image = 'default.jpg';
+                    }
+                }
+            } else {
+                $product->image = 'default.jpg';
+            }
+            if ($product->secondary_price) {
+                $campare = $product->primary_price - $product->secondary_price;
+                $x = $campare / $product->primary_price;
+                $product->percent = intval($x * 100);
+            }
+        }
+        return view('home', ['setting'=>$setting, 'categories'=>$categories, 'products'=>$products, 'newProducts'=>$newProducts]);
     }
 }
