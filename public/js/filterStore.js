@@ -4,6 +4,26 @@ let maxPrice = document.getElementById('maxPrice')
 let searchInput = document.getElementById('searchInput')
 let hasDescount = document.getElementById('hasDescount')
 let exists = document.getElementById('exists')
+let searchButton = document.getElementById('searchButton')
+let sortBtn = document.querySelectorAll('.sort-btn')
+
+function getFilters() {
+    $.ajax({
+        url: api + 'getFilters',
+        type: "POST",
+        dataType: "json",
+        data: {
+            'filters': filters
+        },
+        success: function (response) {
+            console.log(response.filters)
+            console.log(response.products)
+        },
+        error: function (xhr) {
+            console.log('error:', xhr.responseText);
+        }
+    })
+}
 
 window.filters = window.filters || {}
 
@@ -37,9 +57,8 @@ maxPrice.addEventListener('keyup', ()=>{
     filters.toPrice = maxPrice.value
     getFilters()
 })
-searchInput.addEventListener('keyup', ()=>{
+searchButton.addEventListener('click', ()=>{
     filters.keyword = searchInput.value
-    console.log(searchInput.value)
     getFilters()
 })
 hasDescount.addEventListener('change', ()=>{
@@ -50,20 +69,20 @@ exists.addEventListener('change', ()=>{
     exists.checked ? filters.exists = 1 : filters.exists = 0
     getFilters()
 })
-function getFilters(){
-    $.ajax({
-        url: api + 'getFilters',
-        type: "POST",
-        dataType: "json",
-        data: {
-            'filters': filters
-        },
-        success: function (response) {
-            console.log(response.filters)
-            console.log(response.products)
-        },
-        error: function (xhr) {
-            console.log('error:', xhr.responseText);
-        }
+
+sortBtn.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+        sortBtn.forEach(button=>{
+            button.classList.remove('font-bold')
+            button.classList.remove('text-[#ef394e]')
+            button.classList.add('text-[#52525b]')
+        })
+        btn.classList.remove('text-[#52525b]')
+        btn.classList.add('font-bold')
+        btn.classList.add('text-[#ef394e]')
+        // console.log(btn.dataset.sortBy + ' ' + btn.dataset.sortType)
+        filters.sortBy = btn.dataset.sortBy
+        filters.sortType = btn.dataset.sortType
+        getFilters()
     })
-}
+})

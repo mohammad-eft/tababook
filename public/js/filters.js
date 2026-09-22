@@ -2,7 +2,6 @@ let filters = {
     'keyword': null,
     'writer': null,
     'exists': 1,
-    'hasDescount': 0,
     'fromPrice': 0,
     'toPrice': null,
     'sortType': 'asc',

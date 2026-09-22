@@ -24,12 +24,16 @@
 
             <div
                 class="search flex-1 basis-full md:basis-auto order-3 md:order-none relative max-w-none md:max-w-[760px]">
-                <span class="absolute right-[18px] top-1/2 -translate-y-1/2 text-[#71717a] text-xl">⌕</span>
+                {{-- <span class="absolute right-[18px] top-1/2 -translate-y-1/2 text-[#71717a] text-xl">⌕</span> --}}
                 <input id="searchInput" type="search"
-                    class="w-full h-[50px] border-0 outline-none rounded-[10px] bg-[#f1f2f4] focus:bg-white focus:shadow-[0_0_0_2px_rgba(239,57,78,.15)] pr-[52px] pl-[50px] text-sm"
+                    class="w-full h-[50px] border-0 outline-none rounded-[10px] bg-[#f1f2f4] focus:bg-white focus:shadow-[0_0_0_2px_rgba(239,57,78,.15)] pr-10 pl-[50px] text-sm"
                     placeholder="جستجو در محصولات، برندها و دسته‌ها..." autocomplete="off">
-                <button id="clearSearch"
-                    class="hidden absolute left-[14px] top-1/2 -translate-y-1/2 border-0 bg-transparent text-[#888] text-xl">×</button>
+                <button id="searchButton"
+                    class="absolute left-[14px] top-1/2 -translate-y-1/2 border-0 bg-transparent text-[#888] cursor-pointer text-xl">
+                    <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
+                    </svg>
+                </button>
             </div>
 
             <button
@@ -44,11 +48,11 @@
 
         <nav class="hidden md:block border-t border-[#fafafa]">
             <div class="max-w-[1280px] mx-auto px-5 h-[46px] flex items-center gap-[25px] text-[13px] text-[#52525b]">
-                <a href="#" class="hover:text-[#ef394e]">دسته‌بندی کالاها</a>
+                {{-- <a href="#" class="hover:text-[#ef394e]">دسته‌بندی کالاها</a> --}}
                 <a href="#" class="hover:text-[#ef394e]">پیشنهاد شگفت‌انگیز</a>
                 <a href="#" class="hover:text-[#ef394e]">پرفروش‌ترین‌ها</a>
                 <a href="#" class="hover:text-[#ef394e]">تخفیف‌ها</a>
-                <a href="#" class="hover:text-[#ef394e]">سوپرمارکت</a>
+                {{-- <a href="#" class="hover:text-[#ef394e]">سوپرمارکت</a> --}}
             </div>
         </nav>
     </header>
@@ -121,52 +125,70 @@
                     class="bg-white border border-[#e4e4e7] rounded-xl p-3 md:px-[15px] flex flex-col md:flex-row md:items-center justify-between gap-3 mb-3.5">
                     <div class="flex items-center gap-2 flex-wrap">
                         <span class="text-xs text-[#71717a]">مرتب‌سازی:</span>
-                        <button
+                        {{-- <button
                             class="sort-btn text-xs border-0 bg-[#fff0f2] text-[#ef394e] font-bold px-2.5 py-2 rounded-[7px]"
                             data-sort="relevance">مرتبط‌ترین</button>
                         <button
                             class="sort-btn text-xs border-0 bg-transparent text-[#52525b] px-2.5 py-2 rounded-[7px]"
-                            data-sort="popular">پربازدیدترین</button>
+                            data-sort="popular">پربازدیدترین</button> --}}
                         <button
-                            class="sort-btn text-xs border-0 bg-transparent text-[#52525b] px-2.5 py-2 rounded-[7px]"
-                            data-sort="cheap">ارزان‌ترین</button>
+                            class="sort-btn text-xs border-0 bg-transparent text-[#ef394e] font-bold px-2.5 py-2 rounded-[7px] cursor-pointer"
+                            data-sort-by="created_at" data-sort-type="desc">جدیدترین</button>
                         <button
-                            class="sort-btn text-xs border-0 bg-transparent text-[#52525b] px-2.5 py-2 rounded-[7px]"
-                            data-sort="expensive">گران‌ترین</button>
+                            class="sort-btn text-xs border-0 bg-transparent text-[#52525b] px-2.5 py-2 rounded-[7px] cursor-pointer"
+                            data-sort-by="primary_price" data-sort-type="asc">ارزان‌ترین</button>
                         <button
-                            class="sort-btn text-xs border-0 bg-transparent text-[#52525b] px-2.5 py-2 rounded-[7px]"
-                            data-sort="newest">جدیدترین</button>
+                            class="sort-btn text-xs border-0 bg-transparent text-[#52525b] px-2.5 py-2 rounded-[7px] cursor-pointer"
+                            data-sort-by="primary_price" data-sort-type="desc">گران‌ترین</button>
                     </div>
-                    <button id="viewToggle"
-                        class="border border-[#e4e4e7] bg-white rounded-[7px] w-9 h-[34px] self-end md:self-auto">▦</button>
+                    {{-- <button id="viewToggle"
+                        class="border border-[#e4e4e7] bg-white rounded-[7px] w-9 h-[34px] self-end md:self-auto">▦</button> --}}
                 </div>
 
                 <div id="chips" class="flex gap-2 flex-wrap mb-3.5"></div>
 
                 <div id="products"
                     class="grid grid-cols-1 min-[431px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 bg-white border border-[#e4e4e7] rounded-xl overflow-hidden">
-                    <article
-                        class="group relative min-w-0 bg-white p-[17px] border-l border-b border-[#e4e4e7] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_6px_22px_rgba(0,0,0,.08)]">
-                        <span
-                            class="absolute top-[25px] right-[25px] z-10 bg-[#ef394e] text-white rounded-[5px] text-[10px] px-[7px] py-1">5٪</span>
-                        <button onclick="toggleFav(5)"
-                            class="absolute top-[22px] left-5 z-10 border-0 bg-white text-xl text-[#aaa]">♡</button>
-                        <img src=""
-                            alt="گوشی موبایل اپل iPhone 15 ظرفیت 128 گیگابایت" loading="lazy"
-                            onerror=""
-                            class="w-full aspect-square object-contain rounded-lg bg-[#f8f8f8] block mb-3.5">
-                        <h3 class="m-0 mb-2.5 text-[13px] leading-[1.9] h-[50px] overflow-hidden">گوشی موبایل اپل
-                            iPhone 15 ظرفیت 128 گیگابایت</h3>
-                        <div class="flex justify-between items-center mb-2.5 text-[11px]">
-                            <span>۴٫۹ ⭐</span><span class="text-[#f59e0b]">★★★★★</span>
-                        </div>
-                        <div class="flex items-center justify-between gap-2">
-                            <strong class="text-[15px]">۵۱٬۹۹۰٬۰۰۰</strong><span
-                                class="text-[10px] text-[#71717a]">تومان</span>
-                        </div>
-                        <div class="line-through text-[#a1a1aa] text-[10px]">۵۴٬۹۹۰٬۰۰۰ تومان</div>
-                        <div class="mt-2.5 text-[10px] text-[#16a34a]">● موجود در انبار</div>
-                    </article>
+                    @foreach ($products as $product)
+                        <a href="#"
+                            class="group relative min-w-0 bg-white p-[17px] border-l border-b border-[#e4e4e7] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_6px_22px_rgba(0,0,0,.08)]">
+                            @if ($product->percent)
+                                <span
+                                    class="absolute top-[25px] right-[25px] z-10 bg-[#ef394e] text-white rounded-[5px] text-[10px] px-[7px] py-1 in-fa">{{ $product->percent }} %</span>
+                            @endif
+                            <button onclick="toggleFav(5)"
+                                class="absolute top-[22px] left-5 z-10 border-0 bg-white text-xl text-[#aaa]">♡</button>
+                            <img src="{{ asset('storage/'.$product->image) }}"
+                                alt="{{ $product->title }}" loading="lazy"
+                                onerror=""
+                                class="w-full aspect-square object-contain rounded-lg bg-[#f8f8f8] block mb-3.5">
+                            <h3 class="m-0 mb-2.5 text-[13px] leading-[1.9] h-[50px] overflow-hidden">{{ $product->title }}</h3>
+                            <div class="flex justify-between items-center mb-2.5 text-[11px]">
+                                <span>۴٫۹ ⭐</span><span class="text-[#f59e0b]">★★★★★</span>
+                            </div>
+                            @if ($product->secondary_price)
+                                <div class="flex items-center justify-between gap-2">
+                                    <strong class="text-[15px] in-fa">{{ $product->secondary_price }}</strong>
+                                    <span
+                                        class="text-[10px] text-[#71717a]">تومان
+                                    </span>
+                                </div>
+                                <div class="line-through text-[#a1a1aa] text-[10px] in-fa">{{ $product->primary_price }} تومان</div>                                
+                            @else
+                                <div class="flex items-center justify-between gap-2">
+                                    <strong class="text-[15px] in-fa">{{ $product->primary_price }}</strong>
+                                    <span
+                                        class="text-[10px] text-[#71717a]">تومان
+                                    </span>
+                                </div>
+                            @endif
+                            @if ($product->count > 0)
+                                <div class="mt-2.5 text-[10px] text-[#16a34a]">● موجود در انبار</div>
+                            @else
+                                <div class="mt-2.5 text-[10px] text-[#a31616]">● ناموجود</div>
+                            @endif
+                        </a>
+                    @endforeach
                 </div>
 
                 <div id="empty"
