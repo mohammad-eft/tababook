@@ -1,8 +1,5 @@
 @extends('app.document')
-@section('title')
-    طبابوک | {{ $product['title'] }}
-@endsection
-
+@section('title', 'جست و جو')
 @section('content')
     @if (session('success'))
         <div

@@ -1,71 +1,16 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>فروشگاه | جستجوی محصولات</title>
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
-    <script src="{{ asset('js/tailwind.js') }}"></script>
+@extends('app.document')
+@section('title', 'جست و جو')
+@section('content')
     <script src="{{ asset('js/filters.js') }}"></script>
-    <script src="{{ asset('js/jquery.js') }}"></script>
-</head>
-
-<body class="m-0 bg-[#f7f7f8] text-[#3f3f46]">
-
-    <div class="h-[38px] bg-white border-b border-[#e4e4e7] flex items-center justify-center text-[#71717a] text-xs">
-        ارسال رایگان برای سفارش‌های بالای ۱ میلیون تومان
-    </div>
-
-    <header class="bg-white sticky top-0 z-20 shadow-[0_2px_10px_rgba(0,0,0,.04)]">
-        <div
-            class="max-w-[1280px] min-h-[78px] mx-auto flex flex-wrap items-center gap-2.5 md:gap-[22px] px-3.5 md:px-5 py-2.5">
-            <div class="text-[21px] md:text-[26px] font-extrabold text-[#ef394e] whitespace-nowrap">طبابوک</div>
-
-            <div
-                class="search flex-1 basis-full md:basis-auto order-3 md:order-none relative max-w-none md:max-w-[760px]">
-                {{-- <span class="absolute right-[18px] top-1/2 -translate-y-1/2 text-[#71717a] text-xl">⌕</span> --}}
-                <input id="searchInput" type="search"
-                    class="w-full h-[50px] border-0 outline-none rounded-[10px] bg-[#f1f2f4] focus:bg-white focus:shadow-[0_0_0_2px_rgba(239,57,78,.15)] pr-10 pl-[50px] text-sm"
-                    placeholder="جستجو در محصولات، برندها و دسته‌ها..." autocomplete="off">
-                <button id="searchButton"
-                    class="absolute left-[14px] top-1/2 -translate-y-1/2 border-0 bg-transparent text-[#888] cursor-pointer text-xl">
-                    <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
-                    </svg>
-                </button>
-            </div>
-
-            <button
-                class="h-11 border border-[#e4e4e7] bg-white rounded-[9px] px-[15px] text-[#333] whitespace-nowrap mr-auto md:mr-0 hidden">
-                ورود | ثبت‌نام
-            </button>
-            <button class="border-0 bg-transparent text-[22px] relative mr-auto" aria-label="سبد خرید">
-                🛒<span
-                    class="absolute -top-1.5 -right-1.5 w-[18px] h-[18px] rounded-full bg-[#ef394e] text-white text-[10px] grid place-items-center">2</span>
-            </button>
-        </div>
-
-        <nav class="hidden md:block border-t border-[#fafafa]">
-            <div class="max-w-[1280px] mx-auto px-5 h-[46px] flex items-center gap-[25px] text-[13px] text-[#52525b]">
-                {{-- <a href="#" class="hover:text-[#ef394e]">دسته‌بندی کالاها</a> --}}
-                <a href="#" class="hover:text-[#ef394e]">پیشنهاد شگفت‌انگیز</a>
-                <a href="#" class="hover:text-[#ef394e]">پرفروش‌ترین‌ها</a>
-                <a href="#" class="hover:text-[#ef394e]">تخفیف‌ها</a>
-                {{-- <a href="#" class="hover:text-[#ef394e]">سوپرمارکت</a> --}}
-            </div>
-        </nav>
-    </header>
-
     <main class="max-w-[1280px] mx-auto my-4 md:my-6 px-3 md:px-5">
         <div class="text-[#71717a] text-xs mb-[18px]">خانه / <b class="text-[#333]">جستجو</b></div>
 
-        {{-- <div class="flex items-end justify-between gap-2.5 mb-[18px]">
+        <div class="flex items-end justify-between gap-2.5 mb-[18px]">
             <div>
-                <h1 id="title" class="m-0 text-[18px] md:text-[22px]">نتایج جستجو برای</h1>
+                <h1 id="title" class="m-0 text-[18px] md:text-[22px]">نتایج جستجو برای "{{ $title }}"</h1>
                 <div id="resultCount" class="text-[#71717a] text-[13px]"></div>
             </div>
-        </div> --}}
+        </div>
 
         <div class="grid grid-cols-1 md:grid-cols-[250px_1fr] gap-[18px]">
             <div class="fixed w-full h-dvh bg-black/50 z-99 top-0 right-0 md:hidden invisible opacity-0 transition-all duration-300" id="filterBg"></div>
@@ -93,20 +38,6 @@
                             class="w-full border border-[#e4e4e7] rounded-lg p-[9px] outline-none text-[11px]">
                     </div>
                 </section>
-
-                {{-- <section class="p-[18px] border-b border-[#e4e4e7]">
-                    <div class="font-semibold text-sm mb-[15px]">امتیاز کاربران</div>
-                    <label class="flex items-center gap-2 my-3 text-[13px] text-[#52525b]"><input
-                            class="accent-[#ef394e] w-[17px] h-[17px]" type="radio" name="rating" value="4"> ۴
-                        به بالا ⭐</label>
-                    <label class="flex items-center gap-2 my-3 text-[13px] text-[#52525b]"><input
-                            class="accent-[#ef394e] w-[17px] h-[17px]" type="radio" name="rating" value="3"> ۳
-                        به بالا ⭐</label>
-                    <label class="flex items-center gap-2 my-3 text-[13px] text-[#52525b]"><input
-                            class="accent-[#ef394e] w-[17px] h-[17px]" type="radio" name="rating" value="0"
-                            checked> همه</label>
-                </section> --}}
-
                 <section class="p-[18px]">
                     <label class="flex items-center gap-2 my-3 text-[13px] text-[#52525b]">
                         <input id="hasDescount" class="accent-[#ef394e] w-[17px] h-[17px]" type="checkbox">
@@ -126,12 +57,6 @@
                     class="bg-white border border-[#e4e4e7] rounded-xl p-3 md:px-[15px] flex flex-col md:flex-row md:items-center justify-between gap-3 mb-3.5">
                     <div class="flex items-center gap-2 flex-wrap">
                         <span class="text-xs text-[#71717a]">مرتب‌سازی:</span>
-                        {{-- <button
-                            class="sort-btn text-xs border-0 bg-[#fff0f2] text-[#ef394e] font-bold px-2.5 py-2 rounded-[7px]"
-                            data-sort="relevance">مرتبط‌ترین</button>
-                        <button
-                            class="sort-btn text-xs border-0 bg-transparent text-[#52525b] px-2.5 py-2 rounded-[7px]"
-                            data-sort="popular">پربازدیدترین</button> --}}
                         <button
                             class="sort-btn text-xs border-0 bg-transparent text-[#ef394e] font-bold px-2.5 py-2 rounded-[7px] cursor-pointer"
                             data-sort-by="created_at" data-sort-type="desc">جدیدترین</button>
@@ -162,8 +87,8 @@
                                 <span
                                     class="absolute top-[25px] right-[25px] z-10 bg-[#ef394e] text-white rounded-[5px] text-[10px] px-[7px] py-1 in-fa">{{ $product->percent }} %</span>
                             @endif
-                            <button
-                                class="absolute top-[22px] left-5 z-10 border-0 bg-white text-xl text-[#aaa]">♡</button>
+                            {{-- <button
+                                class="absolute top-[22px] left-5 z-10 border-0 bg-white text-xl text-[#aaa]">♡</button> --}}
                             <img src="{{ asset('storage/'.$product->image) }}"
                                 alt="{{ $product->title }}" loading="lazy"
                                 class="w-full aspect-square object-contain rounded-lg bg-[#f8f8f8] block mb-3.5">
@@ -203,15 +128,6 @@
                     <p class="text-[13px] text-[#777]">عبارت جستجو یا فیلترها را تغییر دهید و دوباره امتحان کنید.</p>
                 </div>
 
-                <div id="pagination" class="flex justify-center gap-1.5 my-[22px] mb-10">
-                    <button class="page w-[38px] h-[38px] border border-[#e4e4e7] bg-white rounded-lg">‹</button>
-                    <button
-                        class="page active w-[38px] h-[38px] border border-[#ef394e] bg-[#ef394e] text-white rounded-lg">۱</button>
-                    <button class="page w-[38px] h-[38px] border border-[#e4e4e7] bg-white rounded-lg">۲</button>
-                    <button class="page w-[38px] h-[38px] border border-[#e4e4e7] bg-white rounded-lg">۳</button>
-                    <button class="page w-[38px] h-[38px] border border-[#e4e4e7] bg-white rounded-lg">۴</button>
-                    <button class="page w-[38px] h-[38px] border border-[#e4e4e7] bg-white rounded-lg">›</button>
-                </div>
             </section>
         </div>
     </main>
@@ -221,6 +137,4 @@
         let imgPath = "{{ asset('storage/') }}/"
     </script>
     <script src="{{ asset('js/filterStore.js') }}"></script>
-</body>
-
-</html>
+@endsection

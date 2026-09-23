@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\classes\homeSetting;
 use App\Models\category;
 use App\Models\product;
 use Illuminate\Http\Request;
@@ -9,26 +10,6 @@ use Log;
 
 class SearchController extends Controller
 {
-    public function search(Request $request)
-    {
-        $title = $request->input('title');
-        $results = [];
-        $products = product::where('title', 'like', '%' . $title . '%')
-            ->orWhere('summary', 'like', '%' . $title . '%')
-            ->orWhere('description', 'like', '%' . $title . '%')
-            ->orWhere('writer', 'like', '%' . $title . '%')
-            ->orWhere('publication', 'like', '%' . $title . '%')
-            ->get();
-
-        $categories = category::where('title', 'like', '%' . $title . '%')
-            ->orWhere('description', 'like', '%' . $title . '%')
-            ->get();
-
-        $results['products'] = $products;
-        $results['categories'] = $categories;
-        return response()->json($results);
-    }
-
     public function getFilters(Request $request)
     {
         $filters = $request->input('filters');
@@ -38,7 +19,7 @@ class SearchController extends Controller
         $hasDescount = $filters['hasDescount'] ?? 0;
         $fromPrice = $filters['fromPrice'] ?? 0;
         $toPrice = $filters['toPrice'] ?? null;
-        $sortType = $filters['sortType'] ?? 'asc';
+        $sortType = $filters['sortType'] ?? 'desc';
         $sortBy = $filters['sortBy'] ?? 'created_at';
         $keyword = $filters['keyword'] ?? null;
         $products = Product::where(function ($query) use ($writer, $exists, $hasDescount, $fromPrice, $toPrice) {
@@ -98,9 +79,16 @@ class SearchController extends Controller
         return response()->json($products);
     }
 
-    public function page()
+    public function page(Request $request)
     {
-        $products = product::with('media')->with('categories')->get();
+        $title = $request->input('title');
+        // $products = product::with('media')->with('categories')->get();
+        $products = product::with('media')->with('categories')->where('title', 'like', '%' . $title . '%')
+            ->orWhere('summary', 'like', '%' . $title . '%')
+            ->orWhere('description', 'like', '%' . $title . '%')
+            ->orWhere('writer', 'like', '%' . $title . '%')
+            ->orWhere('publication', 'like', '%' . $title . '%')
+            ->orderBy('created_at', 'desc')->get();
         $categories = category::all();
         foreach ($products as $product) {
             if ($product->media->isNotEmpty()) {
@@ -121,6 +109,7 @@ class SearchController extends Controller
                 $product->percent = intval($x * 100);
             }
         }
-        return view('search', ['products' => $products, 'categories'=>$categories]);
+        $setting = homeSetting::document();
+        return view('search', ['products' => $products, 'categories'=>$categories, 'title'=>$title, 'setting'=>$setting]);
     }
 }

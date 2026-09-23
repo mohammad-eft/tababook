@@ -4,7 +4,7 @@ let maxPrice = document.getElementById('maxPrice')
 let searchInput = document.getElementById('searchInput')
 let hasDescount = document.getElementById('hasDescount')
 let exists = document.getElementById('exists')
-let searchButton = document.getElementById('searchButton')
+// let searchButton = document.getElementById('searchButton')
 let sortBtn = document.querySelectorAll('.sort-btn')
 let productsElement = document.getElementById('products')
 let empty = document.getElementById('empty')
@@ -34,8 +34,6 @@ function getFilters() {
                         elements += `<span class="absolute top-[25px] right-[25px] z-10 bg-[#ef394e] text-white rounded-[5px] text-[10px] px-[7px] py-1 in-fa">${ product.percent } %</span>`
                     }
                     elements += `
-                        <button
-                            class="absolute top-[22px] left-5 z-10 border-0 bg-white text-xl text-[#aaa]">♡</button>
                         <img src="${imgPath+product.image}"
                             alt="${ product.title }" loading="lazy"
                             class="w-full aspect-square object-contain rounded-lg bg-[#f8f8f8] block mb-3.5">
@@ -107,10 +105,10 @@ maxPrice.addEventListener('keyup', ()=>{
     filters.toPrice = maxPrice.value
     getFilters()
 })
-searchButton.addEventListener('click', ()=>{
-    filters.keyword = searchInput.value
-    getFilters()
-})
+// searchButton.addEventListener('click', ()=>{
+//     filters.keyword = searchInput.value
+//     getFilters()
+// })
 hasDescount.addEventListener('change', ()=>{
     hasDescount.checked ? filters.hasDescount = 1 : filters.hasDescount = 0
     getFilters()
@@ -155,7 +153,7 @@ resetFilters.addEventListener('click', ()=>{
         'exists': 1,
         'fromPrice': 0,
         'toPrice': null,
-        'sortType': 'asc',
+        'sortType': 'desc',
         'sortBy': 'created_at',
         'page': 1,
         'category': null,

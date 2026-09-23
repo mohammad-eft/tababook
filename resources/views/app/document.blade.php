@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {{-- <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> --}}
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> --}}
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="{{ url('css/style.css') }}" type="text/css">
     <title>@yield('title')</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('img/IMG_20251225_131334_688.png') }}">
@@ -28,12 +28,12 @@
                 <!-- hamburger_menu_svg -->
             </div>
             <div class="w-1/3 lg:w-1/5 h-full  cursor-pointer">
-                {{-- @if ($logo)
+                @if ($logo)
                     <a href="{{ route('home') }}">
                         <img src="{{ asset('storage/' . $logo->logo) }}" alt=""
                             class="object-fit w-3/4 sm:w-2/4 max-lg:mx-auto">
                     </a>
-                @endif --}}
+                @endif
             </div>
             <div class="w-1/3 lg:w-4/5 h-8/12 flex gap-4 items-center justify-end lg:justify-between">
                 <ul class="h-9/12 h-full flex items-center gap-5 text-xs xl:text-md font-bold max-lg:hidden">
@@ -70,7 +70,7 @@
                             </div>
                             <div
                                 class="w-full flex flex-col justify-start items-start overflow-y-auto max-h-100 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:bg-[var(--gold)] [&::-webkit-scrollbar-thumb]:rounded-full">
-                                {{-- @foreach ($services as $service)
+                                @foreach ($services as $service)
                                     <div
                                         class="w-full bg-[var(--background-2)] relative flex flex-col items-start justify-start p-4">
                                         <div class="group pb-4 pr-4">
@@ -79,7 +79,7 @@
                                         </div>
                                         <span class="w-full h-[1px] bg-[#292931]"></span>
                                     </div>
-                                @endforeach --}}
+                                @endforeach
                             </div>
                         </div>
                         <!-- items_serviss -->
@@ -194,13 +194,13 @@
                                             href="{{ route('user.profile') }}">حساب کاربری</a>
                                     </li>
                                     <li class="w-full text-nowrap font-bold text-slate-800 rounded-xl"><a
-                                            href="{{ route('user.logout') }}">خروج</a>
+                                            href="{{ route('logout') }}">خروج</a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     @else
-                        <a href="{{ route('user.login') }}"
+                        <a href="{{ route('login') }}"
                             class="xl:px-7 sm:px-5 px-3 sm:py-2 py-2 rounded-xl flex flex-col sm:flex-row gap-2 justify-center items-center gradient_box1">
 
                             <div>
@@ -235,9 +235,9 @@
                         </svg>
                     </div>
                     <div class="w-full flex flex-col gap-3 items-center">
-                        {{-- @if ($logo)
+                        @if ($logo)
                             <img src="{{ asset('storage/' . $logo->logo) }}" alt="" class="w-5/12">
-                        @endif --}}
+                        @endif
                         <h4 class="text-[15px] text-[#868686] font-bold ">چاپخانه آنلاین طبابوک</h4>
                         <span class="w-full h-[1px] bg-[#292931]"></span>
                     </div>
@@ -281,7 +281,7 @@
                         <!-- rezume_item_hamburger_menu -->
                         <div class="w-full h-0 flex flex-col gap-2 overflow-y-auto transition_root">
                             <span class="w-full h-[1px] bg-[#292931]"></span>
-                            {{-- @foreach ($services as $service)
+                            @foreach ($services as $service)
                                 <div class="group w-11/12 mx-auto py-1.5 flex items-center justify-start gap-4 px-3">
                                     <div class="size-6 flex justify-center items-center">
                                         <span class="size-2 rounded-full bg-[var(--gold)]"></span>
@@ -289,7 +289,7 @@
                                     <span
                                         class="text-xs sm:text-md font-bold text-white group-active:pr-5 group-active:text-[var(--gold)] transition_root">{{ $service['title'] }}</span>
                                 </div>
-                            @endforeach --}}
+                            @endforeach
                         </div>
                         <!-- rezume_item_hamburger_menu -->
                         <span class="w-full h-[1px] bg-[#292931]"></span>
@@ -498,10 +498,10 @@
                                 <h5 class="xl:text-2xl lg:text-xl font-bold text-[var(--text)]">خدمات ما</h5>
                                 <div
                                     class="w-full flex flex-col gap-1 items-start justify-start xl:text-md lg:text-sm text-xs font-bold text-[#A4A4A5]">
-                                    {{-- @foreach ($services as $service)
+                                    @foreach ($services as $service)
                                         <span
                                             class="hover:text-[var(--gold)] transition duration-300 cursor-pointer">{{ $service['title'] }}</span>
-                                    @endforeach --}}
+                                    @endforeach
                                 </div>
                             </div>
                             <div class="w-1/2 h-full flex flex-col gap-3 justify-start items-start">
@@ -589,8 +589,12 @@
         let authenticationDiv = document.getElementById('authenticationDiv')
         let orderBasket = document.getElementById('orderBasket')
     </script>
-    {{-- <script src="{{ asset('js/shoppingCart.js') }}"></script> --}}
+    <script src="{{ asset('js/shoppingCart.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
 </body>
+</html> --}}
+@include('app.header')
 
-</html>
+    @yield('content')
+    
+@include('app.footer')

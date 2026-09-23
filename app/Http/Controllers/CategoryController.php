@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\classes\homeSetting;
 use App\Models\category;
 // use App\Models\logo;
 use App\Models\product;
@@ -158,12 +159,12 @@ class CategoryController extends Controller
                 $product['mainImg'] = 'default.jpg';
             }
         }
+        $setting = homeSetting::all();
         return view('user.product.index', [
             'currentCat' => $category,
-            // 'logo' => $logo,
-            // 'services' => $services,
             'categories' => $categories,
             'products' => $products,
+            'setting'=>$setting
         ]);
     }
 
