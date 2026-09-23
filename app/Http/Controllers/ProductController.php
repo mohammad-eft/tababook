@@ -5,12 +5,9 @@ namespace App\Http\Controllers;
 use App\classes\homeSetting;
 use App\Models\category;
 use App\Models\category_product;
-// use App\Models\logo;
 use App\Models\product;
-// use App\Models\carts;
 use App\Models\product_attributes;
 use App\Models\product_media;
-// use App\Models\service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -259,12 +256,25 @@ class ProductController extends Controller
             }
         }
         $setting = homeSetting::document();
+        $cartProIds = null;
+        if(Auth::check()){
+            Auth::user()->load(['carts'=>function($query){
+                $query->whereNull('order_id');
+            }])->pluck('id')->toArray();
+            $cartProIds = Auth::user()->carts()->pluck('product_id')->toArray();
+            
+            $product->load(['carts'=>function($q){
+                $q->where('user_id', Auth::id())->whereNull('order_id')->first();
+            }]);
+            
+        }
         return view('admin.product.single', [
             'product' => $product,
             'setting'=>$setting,
             'categories' => $categories,
             'allCartCount' => $allCartCount,
-            'proIds' => $proIds
+            'proIds' => $proIds,
+            'cartProIds'=>$cartProIds
         ]);
     }
     public function index()

@@ -11,6 +11,11 @@ use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SearchController;
+use App\Models\product;
+Route::get('/test', function(){
+    $products = product::with('carts')->get();
+    dd($products);
+});
 
 Route::get('/', [SettingController::class, 'home'])->name('home');
 

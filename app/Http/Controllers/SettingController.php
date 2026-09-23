@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\classes\homeSetting;
 use App\Models\setting;
 use App\Models\category;
 use App\Models\product;
 use Illuminate\Http\Request;
+use Symfony\Component\CssSelector\Node\FunctionNode;
 
 class SettingController extends Controller
 {
@@ -124,7 +126,6 @@ class SettingController extends Controller
             'twoCardsSectionLinkText'=>$twoCardsSectionLinkText,
         ]);
     }
-    
     public function cardStore(Request $request)
     {    
         $settings = $request->setting;
@@ -139,7 +140,6 @@ class SettingController extends Controller
         }
         return redirect()->back();
     }
-
     public function serviceSettings()
     {
         $serviceTitle1 = setting::where('meta_key', 'serviceTitle1')->first();
@@ -176,7 +176,6 @@ class SettingController extends Controller
             'serviceImage5'=>$serviceImage5,
         ]);
     }
-
     public function serviceStore(Request $request)
     {    
         $settings = $request->all();
@@ -191,7 +190,6 @@ class SettingController extends Controller
         }
         return redirect()->back();
     }
-
     public function footerSettings(){
         $footerBrandName = setting::where('meta_key', 'footerBrandName')->first();
         $footerBrandDescription = setting::where('meta_key', 'footerBrandDescription')->first();
@@ -238,7 +236,6 @@ class SettingController extends Controller
         }
         return redirect()->back();
     }
-
     public function home(){
         $setting = homeSetting::all();
         $categories = category::all();
@@ -283,6 +280,18 @@ class SettingController extends Controller
                 $product->percent = intval($x * 100);
             }
         }
-        return view('home', ['setting'=>$setting, 'categories'=>$categories, 'products'=>$products, 'newProducts'=>$newProducts]);
+        $cartProIds = [];
+        if(Auth::check()){
+            Auth::user()->load(['carts'=>function($query){
+                $query->whereNull('order_id');
+            }])->pluck('id')->toArray();
+            $cartProIds = Auth::user()->carts()->pluck('product_id')->toArray();
+            foreach($products as $product){
+                $product->load(['carts'=>function($q){
+                    $q->where('user_id', Auth::id())->whereNull('order_id')->first();
+                }]);
+            }
+        }
+        return view('home', ['setting'=>$setting, 'categories'=>$categories, 'products'=>$products, 'newProducts'=>$newProducts, 'cartProIds'=>$cartProIds]);
     }
 }
