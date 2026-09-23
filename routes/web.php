@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartsController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UserController;
@@ -121,5 +122,14 @@ Route::group([
     'controller'=>SearchController::class,
     'as'=>'search.'
 ], function(){
-    Route::get('/', 'page')->name('page');
+    // Route::post('/', 'search')->name('search');
+    Route::post('/', 'page')->name('page');
+});
+
+Route::group([
+    'prefix'=>'cart',
+    'controller'=>CartsController::class,
+    'as'=>'cart.'
+], function(){
+    Route::get('/', 'list')->name('list');
 });

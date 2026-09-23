@@ -943,12 +943,6 @@
             </div>
         </section>
     </footer>
-
-
-
-
-
-
     <script src="{{ asset('js/custom.js') }}"></script>
 </body>
 

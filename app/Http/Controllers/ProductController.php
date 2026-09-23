@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\classes\homeSetting;
 use App\Models\category;
 use App\Models\category_product;
 // use App\Models\logo;
@@ -19,7 +20,6 @@ class ProductController extends Controller
 {
     public function create()
     {
-        // $logo = logo::first();
         $cats = category::all();
         return view('admin.product.create', ['categories' => $cats]);
     }
@@ -91,7 +91,6 @@ class ProductController extends Controller
     }
     public function adminIndex()
     {
-        // $logo = logo::first();
         $products = product::with('media')->with('categories')->get();
         foreach ($products as $product) {
             if ($product->media->isNotEmpty()) {
@@ -236,9 +235,6 @@ class ProductController extends Controller
     }
     public function show(product $product)
     {
-        // dd($product);
-        // $logo = logo::first();
-        // $services = service::all();
         $categories = category::with('products')->has('products')->get();
         if ($product->media->isNotEmpty()) {
             foreach ($product->media as $media) {
@@ -256,34 +252,16 @@ class ProductController extends Controller
         $currentUser = null;
         $cart = null;
         $allCartCount = 0;
-        // if (Auth::check()) {
-        //     $currentUser = Auth::user();
-        //     $cartt = carts::where('product_id', $product->id)->where('user_id', Auth::id())->where('order_id', null)->first();
-        //     foreach ($currentUser->carts as $cart) {
-        //         if ($cart->order_id == null) {
-        //             $cartCount = $cart->quantity;
-        //             // $cartCount= 0;
-        //         }
-        //     }
-        //     // $allCarts = carts::select('user_id', 'order_id', 'quantity', 'product_id')->where('user_id', Auth::id())->where('order_id', null)->get();
-        //     if (count($allCarts)) {
-        //         foreach ($allCarts as $allCart) {
-        //             $allCartCount += $allCart->quantity;
-        //         }
-        //     }
-        // }
         $proIds = [];
         if (isset($allCarts)) {
             foreach ($allCarts as $pro) {
                 $proIds[] = $pro->product_id;
             }
         }
+        $setting = homeSetting::document();
         return view('admin.product.single', [
             'product' => $product,
-            // 'logo' => $logo,
-            // 'services' => $services,
-            // 'cartCount' => $cartCount,
-            // 'cart' => isset($cartt) ? $cartt : null,
+            'setting'=>$setting,
             'categories' => $categories,
             'allCartCount' => $allCartCount,
             'proIds' => $proIds

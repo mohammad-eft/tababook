@@ -4,7 +4,7 @@ let filters = {
     'exists': 1,
     'fromPrice': 0,
     'toPrice': null,
-    'sortType': 'asc',
+    'sortType': 'desc',
     'sortBy': 'created_at',
     'page': 1,
     'category': null,

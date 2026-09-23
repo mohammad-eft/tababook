@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\classes\homeSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\carts;
+use App\Models\category;
 use App\Models\User;
 use App\Models\product;
 
@@ -53,7 +55,6 @@ class CartsController extends Controller
 
         return response()->json($cart);
     }
-
     public function showCarts(Request $request)
     {
         $carts = carts::where('user_id', $request->user_id)->where('order_id', null)->get();
@@ -98,5 +99,10 @@ class CartsController extends Controller
             'total_price' => $total_price,
             'count' => $carts->sum('quantity')
         ]);
+    }
+    public function list(){
+        $categories = category::all();
+        $setting = homeSetting::document();
+        return view('user.cart.cart', ['categories'=>$categories, 'setting'=>$setting]);
     }
 }

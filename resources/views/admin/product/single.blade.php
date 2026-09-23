@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
+@extends('app.document')
+@section('title', 'جست و جو')
+@section('content')
+    <!-- address navbar -->
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    {{-- <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> --}}
-    <link rel="stylesheet" href="{{ url('css/style.css') }}" type="text/css">
-    <title>@yield('title')</title>
-    <link rel="icon" type="image/x-icon" href="{{ asset('img/IMG_20251225_131334_688.png') }}">
-    <script src="{{ asset('js/tailwind.js') }}"></script>
-    <script src="{{ asset('js/jquery.js') }}"></script>
+
+
     <style>
         .heder_hover_item:hover .heder_hover_items_item{
     visibility: visible;
@@ -322,10 +317,9 @@ input[type="checkbox"]:checked::after {
   box-shadow: 0px 0px 8px #888888;
 }
     </style>
-</head>
 
-<body>
-    <!-- address navbar -->
+
+
     <section
         class="w-full px-2 lg:px-0 lg:mb-5 py-5 flex flex-row justify-between items-center text-[#beb1d6] text-xs lg:text-sm">
         <nav class="flex flex-row items-center text-xs lg:text-base">
@@ -2032,20 +2026,9 @@ input[type="checkbox"]:checked::after {
                                 @foreach ($product->attributes as $attribute)
                                     <div class="flex flex-row items-start">
                                         <div class="w-1/4 text-[#beb1d6] text-sm py-3 leading-[2.17]">
-                                            @if ($attribute->attribute_key == 'اندازه' && $counterSize == 0)
-                                                @php
-                                                    $counterSize++;
-                                                @endphp
-                                                {{ $attribute->attribute_key }}
-                                            @endif
-                                            @if ($attribute->attribute_key == 'جنس' && $counterMaterial == 0)
-                                                @php
-                                                    $counterMaterial++;
-                                                @endphp
-                                                {{ $attribute->attribute_key }}
-                                            @endif
+                                            {{ $attribute->attribute_key }}
                                         </div>
-                                        <div class="w-3/4 text-sm border-b border-(--color-border) py-3 leading-[2.17]">
+                                        <div class="w-3/4 text-sm @if($product->attributes[count($product->attributes)-1]->attribute_key !== $attribute->attribute_key) border-b border-(--color-border) @endif py-3 leading-[2.17]">
                                             {{ $attribute->attribute_value }}
                                         </div>
                                     </div>
@@ -3726,6 +3709,4 @@ viewBox="0 0 576 512">
     })
 }
      </script>
-</body>
-
-</html>
+@endsection
