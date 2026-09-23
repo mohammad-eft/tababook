@@ -49,7 +49,7 @@
                             <label class="p-2.5 text-gray-400">ایمیل</label>
                             <span class="p-2.5 text-gary-600">{{ $user->email }}</span>
                             <label class="p-2.5 text-gray-400">نقش</label>
-                            <span class="p-2.5 text-gary-600">{{ $user->role[0]->title }}</span>
+                            <span class="p-2.5 text-gary-600">{{ $user->roles[0]->title }}</span>
                             {{-- <label class="p-2.5 text-gray-400">سایت کمپانی</label>
                     <a href="#" class="p-2.5 text-gary-600">famenu.ie</a>
                     <label class="p-2.5 text-gray-400">کشور </label>
@@ -75,7 +75,7 @@
                             <span class="p-2.5 text-gary-600">{{ $user->phoneNumber }}<mark
                                     class="mx-2 text-green-700 bg-green-300 px-1 rounded-md">تایید
                                     شده</mark></span>
-                            <span class="p-2.5 text-gary-600">{{ $user->role[0]->title}}</span>
+                            <span class="p-2.5 text-gary-600">{{ $user->roles[0]->title}}</span>
                             <span class="p-2.5 text-gary-600">{{ $user->email }}</span>
                             {{-- <a href="#" class="p-2.5 text-gary-600">famenu.ie</a>
                     <span class="p-2.5 text-gary-600">ایران</span>

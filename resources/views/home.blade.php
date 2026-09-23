@@ -24,7 +24,7 @@
                     </div>
                 </div>
                 <div
-                    class="hidden xl:w-1/3 lg:w-1/4 max-lg:w-1/3 h-full lg:flex lg:justify-start justify-center items-center">
+                    class="xl:w-1/3 lg:w-1/4 max-lg:w-1/3 h-full flex lg:justify-start justify-center items-center">
                     <img src="{{ asset('storage/' . $setting['logo']) }}" alt="" class="xl:w-1/3 lg:w-1/2 w-full">
                 </div>
                 <div class="xl:w-1/3 lg:w-2/4 max-lg:w-1/3 h-full flex justify-center items-center max-lg:hidden">
@@ -54,6 +54,19 @@
                                 d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z" />
                         </svg>
                     </div>
+
+                    <a href="" class="relative sm:p-2.5 p-1.5">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                             class="lg:size-5 size-4 cursor-pointer">
+                            <path
+                                    d="M24 0C10.7 0 0 10.7 0 24S10.7 48 24 48H69.5c3.8 0 7.1 2.7 7.9 6.5l51.6 271c6.5 34 36.2 58.5 70.7 58.5H488c13.3 0 24-10.7 24-24s-10.7-24-24-24H199.7c-11.5 0-21.4-8.2-23.6-19.5L170.7 288H459.2c32.6 0 61.1-21.8 69.5-53.3l41-152.3C576.6 57 557.4 32 531.1 32h-411C111 12.8 91.6 0 69.5 0H24zM131.1 80H520.7L482.4 222.2c-2.8 10.5-12.3 17.8-23.2 17.8H161.6L131.1 80zM176 512a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm336-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0z">
+                            </path>
+                        </svg>
+                        <span
+                                    class="sm:size-4 size-3 bg-green-700 rounded-full absolute top-0 right-0 lg:text-xs text-[9px] flex justify-center items-center text-white">4</span>
+
+                    </a>
                     {{-- <div class="relative sm:p-2.5 p-1.5 flex items-center gap-4">
                        
                             <a href="{{ route('search.page') }}">
@@ -69,18 +82,18 @@
                             </a>
                         
                     </div> --}}
-                    <div class="w-full relative lg:hidden block mt-5">
-                        <input type="text" class="w-full outline-none rounded-md py-2 md:py-4 pl-2 pr-10 md:pr-20"
-                            placeholder="جست و جو">
-                        <svg class="absolute w-5 md:w-8 top-[20%] right-[3%]" xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 512 512">
-                            <path
-                                d="M24 0C10.7 0 0 10.7 0 24S10.7 48 24 48H69.5c3.8 0 7.1 2.7 7.9 6.5l51.6 271c6.5 34 36.2 58.5 70.7 58.5H488c13.3 0 24-10.7 24-24s-10.7-24-24-24H199.7c-11.5 0-21.4-8.2-23.6-19.5L170.7 288H459.2c32.6 0 61.1-21.8 69.5-53.3l41-152.3C576.6 57 557.4 32 531.1 32h-411C111 12.8 91.6 0 69.5 0H24zM131.1 80H520.7L482.4 222.2c-2.8 10.5-12.3 17.8-23.2 17.8H161.6L131.1 80zM176 512a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm336-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0z">
-                            </path>
-                        </svg>
-                        <span
-                            class="sm:size-3 size-1 bg-green-700 rounded-full absolute top-0 right-0 text-xs flex justify-center items-center">4</span>
-                    </div>
+{{--                    <div class="w-full relative lg:hidden block mt-5">--}}
+{{--                        <input type="text" class="w-full outline-none rounded-md py-2 md:py-4 pl-2 pr-10 md:pr-20"--}}
+{{--                            placeholder="جست و جو">--}}
+{{--                        <svg class="absolute w-5 md:w-8 top-[20%] right-[3%]" xmlns="http://www.w3.org/2000/svg"--}}
+{{--                            viewBox="0 0 512 512">--}}
+{{--                            <path--}}
+{{--                                d="M24 0C10.7 0 0 10.7 0 24S10.7 48 24 48H69.5c3.8 0 7.1 2.7 7.9 6.5l51.6 271c6.5 34 36.2 58.5 70.7 58.5H488c13.3 0 24-10.7 24-24s-10.7-24-24-24H199.7c-11.5 0-21.4-8.2-23.6-19.5L170.7 288H459.2c32.6 0 61.1-21.8 69.5-53.3l41-152.3C576.6 57 557.4 32 531.1 32h-411C111 12.8 91.6 0 69.5 0H24zM131.1 80H520.7L482.4 222.2c-2.8 10.5-12.3 17.8-23.2 17.8H161.6L131.1 80zM176 512a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm336-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0z">--}}
+{{--                            </path>--}}
+{{--                        </svg>--}}
+{{--                        <span--}}
+{{--                            class="sm:size-3 size-1 bg-green-700 rounded-full absolute top-0 right-0 text-xs flex justify-center items-center">4</span>--}}
+{{--                    </div>--}}
                 </div>
             </div>
             <div class="w-full h-10 flex justify-center items-center">
@@ -132,7 +145,7 @@
                     </li>
                 </ul>
                 <div
-                    class="w-full py-2 bg-white rounded-full flex justify-between items-center px-2 cart_shdow lg:hidden">
+                    class="w-full py-3 bg-white rounded-full flex justify-between items-center px-2 cart_shdow lg:hidden">
                     <input type="text" class="outline-none w-full h-full text-xs"
                         placeholder="کتاب یا نویسنده یا مخصول خود را جستجو کنید">
                     <div class="">
@@ -152,8 +165,7 @@
             id="hamburger_menu_item">
             <div class="w-11/12 h-full flex flex-col gap-6 justify-start items-start rounded-l-4xl  relative">
                 <div class="w-full h-20 flex gap-3 justify-between items-center px-">
-                    <img src="{{ asset('storage/home/ei_1788433185339-removebg-preview.webp') }}" alt=""
-                        class="w-2/3 h-full">
+                    <img src="{{ asset('storage/' . $setting['logo']) }}" alt="" class="w-2/3 h-full">
                     <div onclick="hamburger_menu('close')">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="size-7">
                             <path
@@ -192,9 +204,9 @@
         <!-- hamburger_menu_item -->
     </header>
 
-    <main class="w-full flex flex-col gap-10 justify-start items-center mb-10">
+    <main class="w-full flex flex-col gap-10 justify-start items-center my-10">
         <!-- hero -->
-        <section class="w-full xl:h-90 lg:h-80 flex max-lg:flex-col gap-20 justify-start items-center bg-[#F3ECE2]">
+        <section class="w-full xl:h-90 lg:h-80 flex max-lg:flex-col xl:gap-20 lg:gap-15 gap-5 justify-start items-center bg-[#F3ECE2] max-lg:pb-5">
             <div class="lg:w-1/2 w-full h-full flex justify-center items-center">
                 <img src="{{ asset('storage/' . $setting['heroBanner']) }}" alt=""
                     class="w-full lg:h-full max-h-full">
@@ -203,14 +215,14 @@
                 <div
                     class="xl:w-9/12 lg:w-10/12 w-11/12 h-full flex flex-col gap-5 justify-center lg:items-start items-center">
                     <div
-                        class="flex flex-col gap-2 justify-start items-start max-lg:items-center xl:text-4xl lg:text-4xl text-[8vw] font-bold">
+                        class="flex flex-col gap-2 justify-start items-start max-lg:items-center xl:text-4xl lg:text-4xl text-[8vw] font-bold max-lg:text-center">
                         <h1>{{ $setting['heroTitle'] }}</h1>
 
                     </div>
                     <p class="max-xl:text-sm max-lg:text-center">{{ $setting['heroSubtitle'] }}</p>
                     <div class="w-full flex lg:gap-6 gap-3 justify-between items-center">
                         <a href="{{ $setting['heroPrimaryButtonLink'] }}"
-                            class="w-1/2 lg:py-3 py-2 bg-green-700 xl:text-lg max-lg:text-sm text-white font-bold rounded-xl flex justify-center items-center">
+                            class="w-1/2 lg:py-4 py-3 bg-green-700 xl:text-lg max-lg:text-sm text-white font-bold rounded-xl flex justify-center items-center">
                             {{ $setting['heroPrimaryButton'] }}
                         </a>
                         <a href="{{ $setting['heroSecondaryButtonLink'] }}"
@@ -246,10 +258,10 @@
                 <p class="text-[#ADB4B2] max-lg:text-center max-lg:text-sm">انتخاب هایی که بیشتر از همه مورد توجه
                     کاربران قرار گرفته است</p>
             </div>
-            <div class="max-w-full w-full overflow-x-auto p-1 flex gap-4 justify-start items-center">
+            <div class="max-w-full w-full overflow-x-auto py-2 px-1 flex gap-4 justify-start">
                 @foreach ($products as $product)
                     <div
-                        class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2">
+                        class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  min-h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2">
                         <div class="w-full h-1/2 flex justify-center items-center relative">
                             <a href={{ route('product.show', [$product->id]) }} class="block">
                                 <img src="{{ asset('storage/' . $product->image) }}" alt=""
@@ -257,7 +269,7 @@
                             </a>
                             @if ($product->percent)
                                 <span
-                                    class="lg:px-2 px-1 lg;py-1 py-0.5 bg-red-500 rounded-md text-xs max-lg:text-[9px] text-white absolute top-0 right-0">{{ $product->percent }}%</span>
+                                    class="lg:px-2 px-1 lg:py-1 py-0.5 bg-red-500 rounded-md text-xs max-lg:text-[9px] text-white absolute top-0 right-0">{{ $product->percent }}%</span>
                             @endif
                             <div class="px-2 py-1 absolute top-0 left-0 change_like_svh">
                                 <div>
@@ -278,7 +290,7 @@
                         </div>
                         <div class="w-full h-1/2 flex flex-col gap-1 justify-start items-start">
                             <a href={{ route('product.show', [$product->id]) }}
-                                class="lg:text-lg text-sm font-bold">{{ $product->title }}</a>
+                                class="lg:text-lg text-sm font-bold max-w-full truncate">{{ $product->title }}</a>
                             <span class="text-[#ADB4B2] max-lg:text-xs">{{ $product->writer }}</span>
                             <div class="flex justify-start items-center">
                                 <div>
@@ -325,9 +337,9 @@
 
         <!-- baner1 -->
         <section class="w-11/12 flex max-lg:flex-col justify-start items-center bg-[#EBEFE1] rounded-xl">
-            <div class="lg:w-1/2 w-full flex justify-center items-center relative h-43">
+            <div class="lg:w-1/2 w-full flex justify-center items-center relative">
                 <img src="{{ asset('storage/' . $setting['secondBanner']) }}" alt=""
-                    class="w-full h-full object-cover rounded-r-xl max-lg:max-h-20 ">
+                    class="w-full h-full object-cover rounded-r-xl lg:max-h-90 max-h-70">
                 {{-- <div
                     class="lg:size-25 size-20 rounded-full bg-green-700 flex flex-col gap-1 justify-center items-center absolute lg:top-1/12 top-0 right-1/24">
                     <div class="flex gap-1 justify-start items-center">
@@ -338,7 +350,7 @@
                 </div> --}}
             </div>
             <div
-                class="lg:w-1/2 w-full min-h-full  flex lg:justify-start justify-center items-center lg:pr-20 lg:py-4 max-lg:px-2 max-lg:pt-7">
+                class="lg:w-1/2 w-full min-h-full  flex lg:justify-start justify-center items-center lg:pr-20 lg:py-4 max-lg:px-2 max-lg:pt-7 max-lg:pb-5">
                 <div class="w-full h-full flex flex-col gap-3 justify-center lg:items-start items-center">
                     <h3 class="lg:text-4xl text-2xl font-bold">{{ $setting['secondBannerTitle'] }}</h3>
                     <p class="max-xl:text-sm max-lg:text-xs max-lg:text-center">{{ $setting['secondBannerSubtitle'] }}
@@ -362,11 +374,11 @@
                 <p class="text-[#ADB4B2] max-lg:text-center max-lg:text-sm">جدید ترین کتاب ها و محصولات فروشگاه را
                     زودتر از بقیه ببین</p>
             </div>
-            <div class="max-w-full w-full overflow-x-auto p-1 flex gap-4 justify-start items-center">
+            <div class="max-w-full w-full overflow-x-auto py-2 px-1 flex gap-4 justify-start">
 
                 @foreach ($newProducts as $product)
                     <div
-                        class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2">
+                        class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  min-h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2 pb-5">
                         <div class="w-full h-1/2 flex justify-center items-center relative">
                             <a href={{ route('product.show', [$product->id]) }} class="block">
                                 <img src="{{ asset('storage/' . $product->image) }}" alt=""
@@ -374,7 +386,7 @@
                             </a>
                             @if ($product->percent)
                                 <span
-                                    class="lg:px-2 px-1 lg;py-1 py-0.5 bg-red-500 rounded-md text-xs max-lg:text-[9px] text-white absolute top-0 right-0">{{ $product->percent }}%</span>
+                                    class="lg:px-2 px-1 lg:py-1 py-0.5 bg-red-500 rounded-md text-xs max-lg:text-[9px] text-white absolute top-0 right-0">{{ $product->percent }}%</span>
                             @endif
                             <div class="px-2 py-1 absolute top-0 left-0 change_like_svh">
                                 <div>
@@ -395,7 +407,7 @@
                         </div>
                         <div class="w-full h-1/2 flex flex-col gap-1 justify-start items-start">
                             <a href={{ route('product.show', [$product->id]) }}
-                                class="lg:text-lg text-sm font-bold">{{ $product->title }}</a>
+                                class="lg:text-lg text-sm font-bold max-w-full truncate">{{ $product->title }}</a>
                             <span class="text-[#ADB4B2] max-lg:text-xs">{{ $product->writer }}</span>
                             <div class="flex justify-start items-center">
                                 <div>
@@ -539,21 +551,21 @@
         </section> --}}
 
 
-        <section class="w-full flex justify-center mt-10">
-            <div class="w-11/12 flex flex-col lg:flex-row justify-between items-center gap-3">
-                <a href="{{ $setting['rightBannerLink'] }}" class="lg:w-5/12 rounded-2xl h-full">
+        <section class="w-full flex justify-center ">
+            <div class="w-11/12 flex max-lg:flex-col justify-between items-center gap-3">
+                <a href="{{ $setting['rightBannerLink'] }}" class="lg:w-5/12 w-full rounded-2xl h-full">
                     <img class="w-full h-full rounded-xl"
                         src="{{ asset('storage/'.$setting['rightBanner']) }}" alt="">
                 </a>
-                <div class="lg:w-7/12 h-60 relative flex items-center gap-3 bg-[#F3ECE2] rounded-xl">
-                    <img class="h-full w-1/2 rounded-r-xl object-cover"
+                <div class="lg:w-7/12 w-full lg:h-60 relative flex max-lg:flex-col items-center gap-3 bg-[#F3ECE2] rounded-xl">
+                    <img class="h-full lg:w-1/2 w-full rounded-r-xl object-cover max-h-40"
                         src="{{ asset('storage/'.$setting['leftBanner']) }}" alt="">
-                    <div class="w-1/2 lg:left-20 left-4 top-10 flex flex-col items-end p-3">
-                        <span class=" lg:text-xl text-md font-bold">{{ $setting['leftBannerTitle'] }}</span>
+                    <div class="lg:w-1/2 w-full flex flex-col gap-2 lg:items-start items-center p-3">
+                        <span class="lg:text-xl text-md font-bold">{{ $setting['leftBannerTitle'] }}</span>
                        
-                        <span class="text-end lg:text-md text-xs">{{ $setting['leftBannerSubtitle'] }}</span>
+                        <span class="lg:text-md text-xs">{{ $setting['leftBannerSubtitle'] }}</span>
                         <a href="{{ $setting['leftBannerButtonLink'] }}"
-                            class="lg:w-50 w-30 rounded-xl bg-green-600 flex items-center justify-center gap-2 mt-5 p-2">
+                            class="w-full rounded-xl bg-green-600 flex items-center justify-center gap-2 mt-5 p-2">
                             <span class="lg:text-md text-xs text-white">{{ $setting['leftBannerButton'] }}</span>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="lg:size-5 size-3 fill-white">
                                 <path
@@ -566,35 +578,35 @@
         </section>
 
 
-        <section class="w-full flex justify-center gap-5 mt-10">
+        <section class="w-full flex justify-center gap-5">
             <div class="w-11/12 flex flex-col gap-5">
                 <div class="w-full flex justify-between items-center">
-                    <span class="text-2xl fount-bold">{{ $setting['twoCardsSectionTitle'] }} </span>
+                    <span class="lg:text-2xl text-xl font-bold">{{ $setting['twoCardsSectionTitle'] }} </span>
                     <a href="{{ $setting['twoCardsSectionLinkUrl'] }}" class="text-sm text-gray-500">{{ $setting['twoCardsSectionLinkText'] }}</a>
                 </div>
                 <div class="flex items-center flex-col lg:flex-row gap-8">
-                    <div class="lg:w-6/12 w-full flex justify-between p-5 px-7 bg-[#f8f4eb] rounded-xl">
-                        <div class="flex flex-col gap-3">
-                            <span class="text-2xl font-bold">{{ $setting['twoCardsRightTitle'] }}</span>
-                            <span class="text-gray-600">{{ $setting['twoCardsRightSubtitle'] }}</span>
+                    <div class="lg:w-6/12 w-full flex max-lg:flex-col gap-2 justify-between p-5 px-7 bg-[#f8f4eb] rounded-xl">
+                        <div class="lg:w-1/2 w-full flex flex-col max-lg:items-center justify-center gap-3 max-lg:order-2">
+                            <span class="text-xl max-lg:text-lg font-bold">{{ $setting['twoCardsRightTitle'] }}</span>
+                            <span class="max-lg:text-sm text-gray-600 max-lg:text-center">{{ $setting['twoCardsRightSubtitle'] }}</span>
                             <a href="{{ $setting['twoCardsRightButtonLink'] }}"
-                                class="flex justify-center items-center w-30 py-2 border-2 border-gray-300 rounded-xl">
+                                class="flex justify-center items-center w-9/12 py-2 border-2 border-gray-300 rounded-xl">
                                 <span>{{ $setting['twoCardsRightButton'] }}</span>
                             </a>
                         </div>
-                        <img class="min-w-40 max-w-40 scale-120 rounded-l-xl"
+                        <img class="lg:w-1/2 w-full max-h-60 rounded-l-xl max-lg:order-1"
                             src="{{ asset('storage/'.$setting['twoCardsRightImage']) }}"
                             alt="">
                     </div>
-                    <div class="lg:w-6/12 w-full flex justify-between p-5 px-7 bg-[#f8f4eb] rounded-xl">
-                        <div class="flex flex-col gap-3">
+                    <div class="lg:w-6/12 w-full flex max-lg:flex-col gap-2 justify-between p-5 px-7 bg-[#f8f4eb] rounded-xl">
+                        <div class="lg:w-1/2 w-full flex flex-col max-lg:items-center justify-center gap-3 max-lg:order-2">
                             <span class="text-2xl font-bold">{{ $setting['twoCardsLeftTitle'] }}</span>
-                            <span class="text-gray-600">{{ $setting['twoCardsLeftSubtitle'] }} </span>
-                            <a href="{{ $setting['twoCardsLeftButtonLink'] }}" class="flex justify-center items-center w-35 p-2 border-2 border-gray-300 rounded-xl">
+                            <span class="max-lg:text-sm text-gray-600 max-lg:text-center">{{ $setting['twoCardsLeftSubtitle'] }} </span>
+                            <a href="{{ $setting['twoCardsLeftButtonLink'] }}" class="flex justify-center items-center w-9/12 py-2 border-2 border-gray-300 rounded-xl">
                                 <span>{{ $setting['twoCardsLeftButton'] }}</span>
                             </a>
                         </div>
-                        <img class="min-w-40 max-w-40 scale-120 rounded-l-xl"
+                        <img class="lg:w-1/2 w-full max-h-60 rounded-l-xl max-lg:order-1"
                             src="{{ asset('storage/'.$setting['twoCardsLeftImage']) }}"
                             alt="">
                     </div>
@@ -616,7 +628,7 @@
                         <img src="{{ asset('storage/home/bookSM_1847177_0 (1).jpg') }}" alt=""
                             class="max-w-full max-h-24 lg:max-h-42">
                         <span
-                            class="lg:px-2 px-1 lg;py-1 py-0.5 bg-red-500 rounded-md text-xs max-lg:text-[9px] text-white absolute top-0 right-0">-13%</span>
+                            class="lg:px-2 px-1 lg:py-1 py-0.5 bg-red-500 rounded-md text-xs max-lg:text-[9px] text-white absolute top-0 right-0">-13%</span>
                         <div class="px-2 py-1 absolute top-0 left-0 change_like_svh">
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
@@ -696,18 +708,18 @@
         <!-- weblag -->
         <!-- prapery -->
         <section
-            class="w-11/12 lg:h-30 grid grid-cols-1 lg:grid-cols-5 gap-4 items-center lg:py-4 sm:py-3 rounded-xl">
+            class="w-11/12  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-center lg:py-4 sm:py-3 rounded-xl">
             <div
                 class="w-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2">
-                <div class="group max-sm:w-9/12 msx-sm:h-full flex max-lg:flex-col gap-2 justify-center w-full items-center">
-                    <div class="group-hover:scale-[1.05] group-active:scale-[1.3] transition_root">
-                        <img src="{{ asset('storage/'.$setting['serviceImage1']) }}" class="xl:size-13 lg:size-9 size-7 object-cover" alt="">
+                <div class="group w-full msx-sm:h-full flex max-lg:flex-col gap-2 justify-center w-full items-center">
+                    <div class="group-hover:scale-[1.05] group-active:scale-[1.3] transition_normal">
+                        <img src="{{ asset('storage/'.$setting['serviceImage1']) }}" class="xl:size-13 xl:min-w-13 lg:size-9 lg:min-w-9 size-12 object-cover" alt="">
                     </div>
                     <div
                         class="flex flex-col sm:gap-2 gap-1 lg:items-start items-center max-sm:items-center justify-center">
-                        <h5 class="xl:text-lg text-md font-bold text-[var(--text)]">{{ $setting['serviceTitle1'] }}</h5>
+                        <h5 class="text-lg font-bold text-[var(--text)]">{{ $setting['serviceTitle1'] }}</h5>
                         <div
-                            class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px] sm:text-[7px] text-[10px] text-[var(--text-secondary)]">
+                            class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px] sm:text-[10px] text-[11px] text-[var(--text-secondary)]">
                             <span class="font-bold max-lg:text-center">{{ $setting['serviceSubTitle1'] }}</span>
                         </div>
                     </div>
@@ -716,15 +728,15 @@
 
             <div
                 class="w-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2">
-                <div class="group max-sm:w-9/12 msx-sm:h-full flex max-lg:flex-col gap-2 justify-center w-full items-center">
-                    <div class="group-hover:scale-[1.05] group-active:scale-[1.3] transition_root">
-                        <img src="{{ asset('storage/'.$setting['serviceImage2']) }}" class="xl:size-13 lg:size-9 size-7 object-cover" alt="">
+                <div class="group w-full msx-sm:h-full flex max-lg:flex-col gap-2 justify-center w-full items-center">
+                    <div class="group-hover:scale-[1.05] group-active:scale-[1.3] transition_normal">
+                        <img src="{{ asset('storage/'.$setting['serviceImage2']) }}" class="xl:size-13 xl:min-w-13 lg:size-9 lg:min-w-9 size-12 object-cover" alt="">
                     </div>
                     <div
                         class="flex flex-col sm:gap-2 gap-1 lg:items-start items-center max-sm:items-center justify-center">
                         <h5 class="xl:text-lg text-md font-bold text-[var(--text)]">{{ $setting['serviceTitle2'] }}</h5>
                         <div
-                            class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px] sm:text-[7px] text-[10px] text-[var(--text-secondary)]">
+                            class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px] sm:text-[10px] text-[11px] text-[var(--text-secondary)]">
                             <span class="font-bold max-lg:text-center">{{ $setting['serviceSubTitle2'] }}</span>
                         </div>
                     </div>
@@ -732,16 +744,16 @@
             </div>
 
             <div
-                class="w-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2">
-                <div class="group max-sm:w-9/12 msx-sm:h-full flex max-lg:flex-col gap-2 justify-center w-full items-center">
-                    <div class="group-hover:scale-[1.05] group-active:scale-[1.3] transition_root">
-                        <img src="{{ asset('storage/'.$setting['serviceImage3']) }}" class="xl:size-13 lg:size-9 size-7 object-cover" alt="">
+                class="w-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2 max-lg:col-span-2 max-sm:col-span-1">
+                <div class="group w-full msx-sm:h-full flex max-lg:flex-col gap-2 justify-center w-full items-center">
+                    <div class="group-hover:scale-[1.05] group-active:scale-[1.3] transition_normal">
+                        <img src="{{ asset('storage/'.$setting['serviceImage3']) }}" class="xl:size-13 xl:min-w-13 lg:size-9 lg:min-w-9 size-12 object-cover" alt="">
                     </div>
                     <div
                         class="flex flex-col sm:gap-2 gap-1 lg:items-start items-center max-sm:items-center justify-center">
                         <h5 class="xl:text-lg text-md font-bold text-[var(--text)]">{{ $setting['serviceTitle3'] }}</h5>
                         <div
-                            class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px] sm:text-[7px] text-[10px] text-[var(--text-secondary)]">
+                            class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px]sm:text-[10px] text-[11px] text-[var(--text-secondary)]">
                             <span class="font-bold max-lg:text-center">{{ $setting['serviceSubTitle3'] }}</span>
                         </div>
                     </div>
@@ -750,15 +762,15 @@
 
             <div
                 class="w-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2">
-                <div class="group max-sm:w-9/12 msx-sm:h-full flex max-lg:flex-col gap-2 justify-center w-full items-center">
-                    <div class="group-hover:scale-[1.05] group-active:scale-[1.3] transition_root">
-                        <img src="{{ asset('storage/'.$setting['serviceImage4']) }}" class="xl:size-13 lg:size-9 size-7 object-cover" alt="">
+                <div class="group w-full msx-sm:h-full flex max-lg:flex-col gap-2 justify-center w-full items-center">
+                    <div class="group-hover:scale-[1.05] group-active:scale-[1.3] transition_normal">
+                        <img src="{{ asset('storage/'.$setting['serviceImage4']) }}" class="xl:size-13 xl:min-w-13 lg:size-9 lg:min-w-9 size-12 object-cover" alt="">
                     </div>
                     <div
                         class="flex flex-col sm:gap-2 gap-1 lg:items-start items-center max-sm:items-center justify-center">
                         <h5 class="xl:text-lg text-md font-bold text-[var(--text)]">{{ $setting['serviceTitle4'] }}</h5>
                         <div
-                            class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px] sm:text-[7px] text-[10px] text-[var(--text-secondary)]">
+                            class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px] sm:text-[10px] text-[11px] text-[var(--text-secondary)]">
                             <span class="font-bold max-lg:text-center">{{ $setting['serviceSubTitle4'] }}</span>
                         </div>
                     </div>
@@ -767,15 +779,15 @@
 
             <div
                 class="w-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2">
-                <div class="group max-sm:w-9/12 msx-sm:h-full flex max-lg:flex-col gap-2 justify-center w-full items-center">
-                    <div class="group-hover:scale-[1.05] group-active:scale-[1.3] transition_root">
-                        <img src="{{ asset('storage/'.$setting['serviceImage5']) }}" class="xl:size-13 lg:size-9 size-7 object-cover" alt="">
+                <div class="group w-full msx-sm:h-full flex max-lg:flex-col gap-2 justify-center w-full items-center">
+                    <div class="group-hover:scale-[1.05] group-active:scale-[1.3] transition_normal">
+                        <img src="{{ asset('storage/'.$setting['serviceImage5']) }}" class="xl:size-13 xl:min-w-13 lg:size-9 lg:min-w-9 size-12 object-cover" alt="">
                     </div>
                     <div
                         class="flex flex-col sm:gap-2 gap-1 lg:items-start items-center max-sm:items-center justify-center">
                         <h5 class="xl:text-lg text-md font-bold text-[var(--text)]">{{ $setting['serviceTitle5'] }}</h5>
                         <div
-                            class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px] sm:text-[7px] text-[10px] text-[var(--text-secondary)]">
+                            class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px] sm:text-[10px] text-[11px] text-[var(--text-secondary)]">
                             <span class="font-bold max-lg:text-center">{{ $setting['serviceSubTitle5'] }}</span>
                         </div>
                     </div>
@@ -787,13 +799,13 @@
                 class="w-11/12 flex items-center justify-center bg-gray-200 p-5 rounded-md lg:flex-row flex-col-reverse gap-10 lg:gap-0">
                 <div class="flex flex-col lg:w-5/12 w-full gap-3">
                     <div class="flex w-full gap-1">
-                        <input type="text" class="lg:w-8/12 w-10/12 bg-white rounded-md px-3"
+                        <input type="text" class="lg:w-8/12 w-10/12 bg-white rounded-md px-3 outline-none"
                             placeholder="ایمیل خود را وارد کنید">
-                        <button class="p-3 bg-green-600 text-white font-bold rounded-md ">عضویت</button>
+                        <button class="p-3 bg-green-600 text-white font-bold rounded-md max-lg:text-sm">عضویت</button>
                     </div>
                 </div>
                 <div class="lg:w-5/12 flex items-start justify-evenly flex-row-reverse gap-5">
-                    <div class="flex flex-col">
+                    <div class="flex flex-col max-lg:text-sm ">
                         <span>یک خبر خوب برای صندوق ورودی ات</span>
                         <span>از انتخاب های , محصولات جدید و پیشنهاد ویژه با خبرشو</span>
                     </div>
@@ -817,8 +829,7 @@
                     <!-- address -->
                     <div class="sm:w-1/2 w-full h-full flex flex-col justify-start lg:items-start items-center">
 
-                        <img src="{{ asset('storage/home/ei_1788433185339-removebg-preview.webp') }}" alt=""
-                            class="w-45">
+                        <img src="{{ asset('storage/' . $setting['logo']) }}" alt="" class="w-45">
                         <div class="flex flex-col gap-2 items-start text-xs lg:text-sm xl:text-md">
                             <span class="text-lg text-green-700 font-bold">{{ $setting['footerBrandName'] }}</span>
                             <p>{{ $setting['footerBrandDescription'] }}</p>
@@ -897,7 +908,7 @@
                     <!-- social_network_svg -->
                     <div class="w-full py-6 flex items-center justify-center gap-10">
                         <a href="{{ $setting['footerInstagram'] }}"
-                            class="p-2 rounded-full bg-[var(--background)] border border-green-700 flex justify-center items-center cursor-pointer scale transition_root">
+                            class="p-2 rounded-full bg-[var(--background)] border border-green-700 flex justify-center items-center cursor-pointer scale transition_normal">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
                                 class="sm:size-4 size-4 fill-green-700">
                                 <path
@@ -906,7 +917,7 @@
                             </svg>
                         </a>
                         <a href="{{ $setting['footerTelegram'] }}"
-                            class="p-2 rounded-full bg-[var(--background)] border border-green-700 flex justify-center items-center cursor-pointer scale transition_root">
+                            class="p-2 rounded-full bg-[var(--background)] border border-green-700 flex justify-center items-center cursor-pointer scale transition_normal">
                             <svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"
                                 class="sm:size-4 size-4 fill-green-700">
                                 <path
@@ -915,7 +926,7 @@
                             </svg>
                         </a>
                         <a href="{{ $setting['footerEmailSocial'] }}"
-                            class="p-2 rounded-full bg-[var(--background)] border border-green-700 flex justify-center items-center cursor-pointer scale transition_root">
+                            class="p-2 rounded-full bg-[var(--background)] border border-green-700 flex justify-center items-center cursor-pointer scale transition_normal">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
                                 class="sm:size-4 size-4 fill-green-700">
                                 <path
@@ -924,7 +935,7 @@
                             </svg>
                         </a>
                         <a href="{{ $setting['footerCopyright'] }}"
-                            class="p-2 rounded-full bg-[var(--background)] border border-green-700 flex justify-center items-center cursor-pointer scale transition_root">
+                            class="p-2 rounded-full bg-[var(--background)] border border-green-700 flex justify-center items-center cursor-pointer scale transition_normal">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
                                 class="sm:size-4 size-4 fill-green-700">
                                 <path

@@ -1,0 +1,12 @@
+[22-Sep-2026 21:28:58 UTC] PHP Warning:  require(/home/tababook/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/tababook/public_html/artisan on line 10
+[22-Sep-2026 21:28:58 UTC] PHP Warning:  require(/home/tababook/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/tababook/public_html/artisan on line 10
+[22-Sep-2026 21:28:58 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/tababook/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/tababook/public_html/artisan:10
+Stack trace:
+#0 {main}
+  thrown in /home/tababook/public_html/artisan on line 10
+[22-Sep-2026 21:29:06 UTC] PHP Warning:  require(/home/tababook/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/tababook/public_html/artisan on line 10
+[22-Sep-2026 21:29:06 UTC] PHP Warning:  require(/home/tababook/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/tababook/public_html/artisan on line 10
+[22-Sep-2026 21:29:06 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/tababook/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/tababook/public_html/artisan:10
+Stack trace:
+#0 {main}
+  thrown in /home/tababook/public_html/artisan on line 10
