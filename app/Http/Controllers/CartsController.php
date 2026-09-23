@@ -43,7 +43,6 @@ class CartsController extends Controller
     }
     function update(Request $request)
     {
-        return response()->json($request->all());
         $user_id = $request->input('user_id');
         if (Auth::check()) {
             $user_id = Auth::id();
@@ -102,6 +101,34 @@ class CartsController extends Controller
     public function list(){
         $categories = category::all();
         $setting = homeSetting::document();
-        return view('user.cart.cart', ['categories'=>$categories, 'setting'=>$setting]);
+       
+        Auth::user()->load(['carts'=>function($query){
+            $query->whereNull('order_id')->with(['product'=>function($query){
+                $query->get();
+            }]);
+        }]);
+        $totalPrice = 0;
+        $totalDiscount = 0;
+        foreach(Auth::user()->carts as $cart){
+            if($cart->product->secondary_price){
+                $totalPrice += $cart->product->secondary_price;
+                $totalDiscount += $cart->product->primary_price - $cart->product->secondary_price;
+            } else {
+                $totalPrice += $cart->product->primary_price;
+            }
+            if ($cart->product->media->isNotEmpty()) {
+                foreach ($cart->product->media as $media) {
+                    if ($media->is_main) {
+                        $cart->product->image  = $media->media_path;
+                        break;
+                    } else {
+                        $cart->product->image = 'default.jpg';
+                    }
+                }
+            } else {
+                $cart->product->image = 'default.jpg';
+            }
+        }
+        return view('user.cart.cart', ['categories'=>$categories, 'setting'=>$setting, 'totalPrice'=>$totalPrice, 'totalDiscount'=>$totalDiscount]);
     }
 }
