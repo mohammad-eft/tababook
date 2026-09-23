@@ -286,6 +286,11 @@ class SettingController extends Controller
                 $query->whereNull('order_id');
             }])->pluck('id')->toArray();
             $cartProIds = Auth::user()->carts()->pluck('product_id')->toArray();
+            foreach($products as $product){
+                $product->load(['carts'=>function($q){
+                    $q->where('user_id', Auth::id())->whereNull('order_id')->first();
+                }]);
+            }
         }
         return view('home', ['setting'=>$setting, 'categories'=>$categories, 'products'=>$products, 'newProducts'=>$newProducts, 'cartProIds'=>$cartProIds]);
     }

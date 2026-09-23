@@ -14,7 +14,6 @@ class CartsController extends Controller
 {
     public function store(Request $request)
     {
-        return response()->json($request->all());
         $user_id = Auth::id();
         if (!Auth::check()) {
             $user_id = $request->input('user_id');
@@ -34,10 +33,8 @@ class CartsController extends Controller
         if ($cart) {
             $cart->delete();
         }
-
         $remainingItems = carts::where('user_id', $request->user_id)->where('order_id', null)->get();
         $count = $remainingItems->sum('quantity');
-
         return response()->json([
             'message' => 'محصول از سبد خرید حذف شد',
             'data' => $data,
@@ -46,6 +43,7 @@ class CartsController extends Controller
     }
     function update(Request $request)
     {
+        return response()->json($request->all());
         $user_id = $request->input('user_id');
         if (Auth::check()) {
             $user_id = Auth::id();

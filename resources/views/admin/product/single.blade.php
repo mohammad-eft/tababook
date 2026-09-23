@@ -1316,11 +1316,23 @@ input[type="checkbox"]:checked::after {
                                     </span>
                                 </div>
                                 <div>
-                                    <button
-                                        onclick="addToShoppingCart()"
-                                        class="rounded-lg leading-[2.17] bg-(--color-primary) text-(--color-primary-text) block text-center w-full py-2 cursor-pointer">
-                                        افزودن به سبد خرید
+                                    @if(Auth::check() && in_array($product->id, $cartProIds))
+                                    <div class="w-full p-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
+                                        <button onclick="setCount(this)" class="w-1/3 text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="+">+</button>
+                                        <input type="number" class="w-1/3 text-white text-sm text-center outline-none" readonly="" value="{{ $product->carts[0]->quantity }}">
+                                        <button onclick="setCount(this)" class="w-1/3 text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="-">-</button>
+                                    </div>
+                                    @else
+                                    <button onclick="addToCart(this)" class="w-full p-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="3">
+                                        <div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3" fill="white">
+                                                <path d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
+                                                </path>
+                                            </svg>
+                                        </div>
+                                        <span class="lg:text-sm text-[10px] text-white font-bold">افزودن به سبد خرید</span>
                                     </button>
+                                    @endif
                                 </div>
                             </div>
 
@@ -3190,26 +3202,26 @@ input[type="checkbox"]:checked::after {
 
     <!-- buy button mobile end -->
      <script>
-        let chocolateMenu = document.getElementById('chocolateMenu')
-let chocIcon = document.getElementById('chocIcon')
-let chocIconMobile = document.getElementById('chocIconMobile')
-let boxC = document.getElementById('boxC')
+//         let chocolateMenu = document.getElementById('chocolateMenu')
+// let chocIcon = document.getElementById('chocIcon')
+// let chocIconMobile = document.getElementById('chocIconMobile')
+// let boxC = document.getElementById('boxC')
 
-function closeChocMenu() {
-    chocolateMenu.classList.remove('right-0')
-    chocolateMenu.classList.add('-right-full')
-    boxC.classList.add('opacity-0')
-}
-chocIcon.addEventListener('click', () => {
-    chocolateMenu.classList.remove('-right-full')
-    boxC.classList.remove('opacity-0')
-    chocolateMenu.classList.add('right-0')
-})
-chocIconMobile.addEventListener('click', () => {
-    chocolateMenu.classList.remove('-right-full')
-    boxC.classList.remove('opacity-0')
-    chocolateMenu.classList.add('right-0')
-})
+// function closeChocMenu() {
+//     chocolateMenu.classList.remove('right-0')
+//     chocolateMenu.classList.add('-right-full')
+//     boxC.classList.add('opacity-0')
+// }
+// chocIcon.addEventListener('click', () => {
+//     chocolateMenu.classList.remove('-right-full')
+//     boxC.classList.remove('opacity-0')
+//     chocolateMenu.classList.add('right-0')
+// })
+// chocIconMobile.addEventListener('click', () => {
+//     chocolateMenu.classList.remove('-right-full')
+//     boxC.classList.remove('opacity-0')
+//     chocolateMenu.classList.add('right-0')
+// })
 
 let subMenuActive = document.querySelectorAll('.subMenuActive');
 subMenuActive.forEach((item) => {

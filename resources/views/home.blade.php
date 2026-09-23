@@ -116,13 +116,14 @@
                             @endif
                             <div class="w-[153px]">
                                 @if (Auth::check() && in_array($product->id, $cartProIds))
+                               
                                     <div class="w-full p-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
-                                        <button class="w-1/3 text-lg font-bold quantityBtn text-white cursor-pointer" data-state="+">+</button>
-                                        <input type="number" class="w-1/3 text-sm text-center outline-none text-white" readonly value="{{ $product->cart->quantity }}">
-                                        <button class="w-1/3 text-lg font-bold quantityBtn text-white cursor-pointer" data-state="-">-</button>
+                                        <button onclick="setCount(this)" class="w-1/3 text-lg font-bold text-white cursor-pointer" data-state="+">+</button>
+                                        <input type="number" class="w-1/3 text-sm text-center outline-none text-white" readonly value="{{ $product->carts[0]->quantity }}">
+                                        <button onclick="setCount(this)" class="w-1/3 text-lg font-bold text-white cursor-pointer" data-state="-">-</button>
                                     </div>
                                 @else
-                                    <button class="addToCart w-full p-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
+                                    <button onclick="addToCart(this)" class="w-full p-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
                                                 class="lg:size-4 size-3" fill="white">
@@ -244,12 +245,12 @@
                             <div class="w-[153px]">
                                 @if (Auth::check() && in_array($product->id, $cartProIds))
                                     <div class="w-full p-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
-                                        <button class="w-1/3 text-lg font-bold quantityBtn text-white cursor-pointer" data-state="+">+</button>
-                                        <input type="number" class="w-1/3 text-sm text-center outline-none text-white" readonly value="{{ $product->cart->quantity }}">
-                                        <button class="w-1/3 text-lg font-bold quantityBtn text-white cursor-pointer" data-state="-">-</button>
+                                        <button onclick="setCount(this)" class="w-1/3 text-lg font-bold text-white flex justify-center items-center cursor-pointer" data-state="+">+</button>
+                                        <input type="number" class="w-1/3 text-sm text-center outline-none text-white" readonly value="{{ $product->carts[0]->quantity }}">
+                                        <button onclick="setCount(this)" class="w-1/3 text-lg font-bold text-white flex justify-center items-center cursor-pointer" data-state="-">-</button>
                                     </div>
                                 @else
-                                    <button class="addToCart w-full p-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
+                                    <button onclick="addToCart(this)" class="w-full p-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
                                                 class="lg:size-4 size-3" fill="white">
@@ -635,5 +636,5 @@
         </section>
         <!-- prapery -->
     </main>
-    <script src="{{ asset('js/cart.js') }}"></script>
+    
 @endsection

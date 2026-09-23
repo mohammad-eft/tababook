@@ -133,6 +133,7 @@
         </section>
     </footer>
     <script src="{{ asset('js/custom.js') }}"></script>
+    <script src="{{ asset('js/cart.js') }}"></script>
 </body>
 
 </html>
