@@ -55,4 +55,8 @@ class User extends Authenticatable
     {
         return $this->roles()->whereIn('en_title', $role)->exists();
     }
+
+    public function carts(){
+        return $this->hasMany(carts::class);
+    }
 }

@@ -131,10 +131,6 @@
             </section>
         </div>
     </main>
-    <script>
-        let url = "{{ url('/') }}/"
-        let api = "{{ url('api/') }}/"
-        let imgPath = "{{ asset('storage/') }}/"
-    </script>
+    
     <script src="{{ asset('js/filterStore.js') }}"></script>
 @endsection

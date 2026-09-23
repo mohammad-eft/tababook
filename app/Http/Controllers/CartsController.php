@@ -14,6 +14,7 @@ class CartsController extends Controller
 {
     public function store(Request $request)
     {
+        return response()->json($request->all());
         $user_id = Auth::id();
         if (!Auth::check()) {
             $user_id = $request->input('user_id');

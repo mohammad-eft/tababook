@@ -1,6 +1,6 @@
 @extends('app.document')
 @section('title', 'طبابوک | فروشگاه کتاب و لوازم تحیری')
-    @section('content')
+@section('content')
     <main class="w-full flex flex-col gap-10 justify-start items-center my-10">
         <!-- hero -->
         <section class="w-full xl:h-90 lg:h-80 flex max-lg:flex-col xl:gap-20 lg:gap-15 gap-5 justify-start items-center bg-[#F3ECE2] max-lg:pb-5">
@@ -114,18 +114,26 @@
                                     </span>
                                 </div>
                             @endif
-                            <div>
-                                <button class="addToCart w-full py-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
-                                    <div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
-                                            class="lg:size-4 size-3" fill="white">
-                                            <path
-                                                d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
-                                            </path>
-                                        </svg>
+                            <div class="w-[153px]">
+                                @if (Auth::check() && in_array($product->id, $cartProIds))
+                                    <div class="w-full p-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
+                                        <button class="w-1/3 text-lg font-bold quantityBtn text-white cursor-pointer" data-state="+">+</button>
+                                        <input type="number" class="w-1/3 text-sm text-center outline-none text-white" readonly value="{{ $product->cart->quantity }}">
+                                        <button class="w-1/3 text-lg font-bold quantityBtn text-white cursor-pointer" data-state="-">-</button>
                                     </div>
-                                    <span class="lg:text-sm text-[10px] text-white font-bold">افزودن به سبد خرید</span>
-                                </button>
+                                @else
+                                    <button class="addToCart w-full p-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
+                                        <div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                                class="lg:size-4 size-3" fill="white">
+                                                <path
+                                                    d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
+                                                </path>
+                                            </svg>
+                                        </div>
+                                        <span class="lg:text-sm text-[10px] text-white font-bold">افزودن به سبد خرید</span>
+                                    </button>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -233,18 +241,26 @@
                                     </span>
                                 </div>
                             @endif
-                            <div>
-                                <button class="addToCart w-full py-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
-                                    <div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
-                                            class="lg:size-4 size-3" fill="white">
-                                            <path
-                                                d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
-                                            </path>
-                                        </svg>
+                            <div class="w-[153px]">
+                                @if (Auth::check() && in_array($product->id, $cartProIds))
+                                    <div class="w-full p-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
+                                        <button class="w-1/3 text-lg font-bold quantityBtn text-white cursor-pointer" data-state="+">+</button>
+                                        <input type="number" class="w-1/3 text-sm text-center outline-none text-white" readonly value="{{ $product->cart->quantity }}">
+                                        <button class="w-1/3 text-lg font-bold quantityBtn text-white cursor-pointer" data-state="-">-</button>
                                     </div>
-                                    <span class="lg:text-sm text-[10px] text-white font-bold">افزودن به سبد خرید</span>
-                                </button>
+                                @else
+                                    <button class="addToCart w-full p-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
+                                        <div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                                class="lg:size-4 size-3" fill="white">
+                                                <path
+                                                    d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
+                                                </path>
+                                            </svg>
+                                        </div>
+                                        <span class="lg:text-sm text-[10px] text-white font-bold">افزودن به سبد خرید</span>
+                                    </button>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -619,4 +635,5 @@
         </section>
         <!-- prapery -->
     </main>
+    <script src="{{ asset('js/cart.js') }}"></script>
 @endsection

@@ -8,6 +8,18 @@
     <script src="{{ asset('js/jquery.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
     <title>@yield('title')</title>
+    <script>
+        let url = "{{ url('/') }}/"
+        let api = "{{ url('api/') }}/"
+        let imgPath = "{{ asset('storage/') }}/"
+        let flag = "{{ Auth::check() }}"
+        let userId = null;
+        let user = null
+        if(flag){
+            userId = "{{ Auth::id() }}"
+            user = "{{ Auth::user() }}"
+        }
+    </script>
 </head>
 
 <body>
