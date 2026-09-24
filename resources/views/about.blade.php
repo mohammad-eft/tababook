@@ -61,26 +61,25 @@
             <div class="py-14 sm:py-20 lg:py-24 flex flex-col justify-center">
                 <div class="flex items-center gap-3 mb-5">
                     <span class="w-12 h-[3px] bg-brand rounded-full"></span>
-                    <span class="text-brand font-semibold">داستان کتاب‌یار</span>
+                    <span class="text-brand font-semibold">{{ $aboutUs->title }}</span>
                 </div>
                 <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.35] text-slate-900">
                     درباره ما
                 </h1>
-                <p class="mt-5 text-lg sm:text-xl font-medium leading-9 text-slate-700">
+                {{-- <p class="mt-5 text-lg sm:text-xl font-medium leading-9 text-slate-700">
                     ما اینجا هستیم تا کتاب، بخشی از زندگی شما باشد.
-                </p>
+                </p> --}}
                 <p class="mt-4 text-sm sm:text-base leading-8 text-slate-600 max-w-xl">
-                    کتاب‌یار یک فروشگاه آنلاین کتاب است که با عشق به مطالعه و باور به قدرت دانش،
-                    تلاش می‌کند انتخاب کتاب و تجربه خرید را برای همه ساده‌تر، سریع‌تر و لذت‌بخش‌تر کند.
+                   {{ $aboutUs->description }}
                 </p>
-                <div class="mt-8 flex flex-wrap gap-3">
+                {{-- <div class="mt-8 flex flex-wrap gap-3">
                     <a href="#story" class="px-6 py-3 rounded-xl bg-brand text-white font-semibold hover:bg-brandDark transition">
                         داستان ما
                     </a>
                     <a href="#values" class="px-6 py-3 rounded-xl border border-brand/30 text-brand font-semibold hover:bg-white transition">
                         ارزش‌های ما
                     </a>
-                </div>
+                </div> --}}
             </div>
 
             <div class="hero-image relative overflow-hidden rounded-b-[35px] lg:rounded-b-none lg:rounded-r-[35px]">
@@ -99,7 +98,7 @@
     </section>
 
     <!-- Why -->
-    <section class="py-16 sm:py-20">
+    {{-- <section class="py-16 sm:py-20">
         <div class="container-x">
             <div class="text-center mb-10">
                 <h2 class="line-title text-2xl sm:text-3xl font-extrabold text-brand">چرا کتاب‌یار؟</h2>
@@ -129,10 +128,10 @@
                 </article>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <!-- Story -->
-    <section id="story" class="pb-16 sm:pb-20">
+    {{-- <section id="story" class="pb-16 sm:pb-20">
         <div class="container-x">
             <div class="rounded-[28px] overflow-hidden bg-softGreen grid lg:grid-cols-2 shadow-soft">
                 <div class="p-8 sm:p-12 lg:p-16 flex flex-col justify-center">
@@ -156,10 +155,10 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <!-- Values -->
-    <section id="values" class="py-16 sm:py-20 bg-white">
+    {{-- <section id="values" class="py-16 sm:py-20 bg-white">
         <div class="container-x">
             <div class="text-center mb-12">
                 <h2 class="line-title text-2xl sm:text-3xl font-extrabold text-brand">ارزش‌های ما</h2>
@@ -216,7 +215,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 </main>
 
 <!-- Footer -->

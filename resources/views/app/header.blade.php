@@ -136,7 +136,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{route('user.contact')}}"
+                        <a href="{{route('contactUs.create')}}"
                             class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
                             <span>تماس باما</span>
                             <div
@@ -145,7 +145,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{route('user.about')}}"
+                        <a href="{{route('aboutUs.clientList')}}"
                             class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
                             <span>درباره ما</span>
                             <div
@@ -199,11 +199,11 @@
                         class="w-full py-2 bg-green-300/50 rounded-xl gradient_item flex gap-3 justify-start items-center px-4">
                         <span class="xl:text-lg text-green-700 font-bold"> دسته بندی ها</span>
                     </a>
-                    <a href="{{route('user.contact')}}"
+                    <a href="{{route('contactUs.list')}}"
                         class="w-full py-2 bg-green-300/50 rounded-xl gradient_item flex gap-3 justify-start items-center px-4">
                         <span class="xl:text-lg text-green-700 font-bold">تماس باما</span>
                     </a>
-                    <a href="{{route('user.about')}}"
+                    <a href="{{route('aboutUs.clientList')}}"
                         class="w-full py-2 bg-green-300/50 rounded-xl gradient_item flex gap-3 justify-start items-center px-4">
                         <span class="xl:text-lg text-green-700 font-bold">درباره ما</span>
                     </a>

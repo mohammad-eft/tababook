@@ -302,7 +302,7 @@ class SettingController extends Controller
                 }]);
             }
         }
-        $setting = homeSetting::document();
+        $setting = homeSetting::all();
         return view('home', [
             'setting'=>$setting, 
             'categories'=>$categories, 

@@ -612,7 +612,7 @@
                 </div>
             </div>
         </section>
-        <section class="w-full flex justify-center gap-5 mt-10">
+        {{-- <section class="w-full flex justify-center gap-5 mt-10">
             <div
                 class="w-11/12 flex items-center justify-center bg-gray-200 p-5 rounded-md lg:flex-row flex-col-reverse gap-10 lg:gap-0">
                 <div class="flex flex-col lg:w-5/12 w-full gap-3">
@@ -633,7 +633,7 @@
                     </svg>
                 </div>
             </div>
-        </section>
+        </section> --}}
         <!-- prapery -->
     </main>
     

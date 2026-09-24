@@ -6,12 +6,13 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\classes\homeSettin;
+use App\classes\homeSetting;
 class ContactUsController extends Controller
 {
     public function create()
     {
         $setting = homeSetting::document();
-        return view('client.contactUs.create', ['setting'=>$setting]);
+        return view('contactUs.create', ['setting'=>$setting]);
     }
 
     public function store(Request $request)
@@ -39,18 +40,18 @@ class ContactUsController extends Controller
     public function clientSingle(contactUs $contactUs)
     {
         $setting = homeSetting::document();
-        return view('client.contactUs.show', ['contactUs' => $contactUs, 'setting'=>$setting]);
+        return view('contactUs.show', ['contactUs' => $contactUs, 'setting'=>$setting]);
     }
     public function myMessage()
     {
         $setting = homeSetting::document();
-        return view('client.contactUs.myMessage', ['setting'=>$setting]);
+        return view('contactUs.myMessage', ['setting'=>$setting]);
     }
 
     public function edit(contactUs $contactUs)
     {
         $setting = homeSetting::document();
-        return view('client.contactUs.edit', ['contactUs' => $contactUs,'setting'=>$setting]);
+        return view('contactUs.edit', ['contactUs' => $contactUs,'setting'=>$setting]);
     }
 
     public function update(Request $request)

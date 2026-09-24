@@ -42,8 +42,8 @@ class AboutUsController extends Controller
 
     public function clientList()
     {
-        $aboutUs = aboutUs::all();
+        $aboutUs = aboutUs::first();
         $setting = homeSetting::document();
-        return view("client.aboutUs.aboutUsList", ['aboutUs' => $aboutUs, 'setting'=>$setting]);
+        return view("about", ['aboutUs' => $aboutUs, 'setting'=>$setting]);
     }
 }

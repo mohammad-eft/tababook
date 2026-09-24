@@ -10,6 +10,8 @@ use App\Http\Middleware\AuthMiddleware;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\SearchController;
 use App\Models\product;
 Route::get('/test', function(){
@@ -47,8 +49,6 @@ Route::group([
     Route::get('/create_user', 'create_user')->name('create_user');
     Route::post('/store_user', 'store_user')->name('store_user');
     Route::get('/dashboard', 'dashboard')->name('dashboard');
-    Route::get('/about', 'about')->name('about');
-    Route::get('/contact', 'contact')->name('contact');
 });
 
 // category routes
@@ -141,4 +141,37 @@ Route::group([
     'as'=>'cart.'
 ], function(){
     Route::get('/', 'list')->name('list');
+});
+
+// aboutUs
+Route::group([
+    'prefix' => 'aboutUs',
+    'controller' => AboutUsController::class,
+    'as' => 'aboutUs.',
+    'middleware' => [AuthMiddleware::class]
+], function () {
+    Route::get('/create_edit/{aboutUs?}', 'create_edit')->name('create_edit');
+    Route::post('/updateOrcreate', 'updateOrcreate')->name('updateOrcreate');
+    Route::get('/aboutUs', 'index')->name('list');
+    Route::get('/delete/{aboutUs}', 'delete')->name('delete');
+    Route::get('/clientList', 'clientList')->name('clientList')->withoutMiddleware([AuthMiddleware::class]);
+});
+
+///contactUs
+Route::group([
+    'prefix' => 'contactUs',
+    'controller' => contactUsController::class,
+    'as' => 'contactUs.',
+    'middleware' => [AuthMiddleware::class]
+], function () {
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/myMessage', 'myMessage')->name('myMessage');
+    Route::get('/contactUs', 'index')->name('list');
+    Route::get('/single/{contactUs}', 'single')->name('single');
+    Route::get('/clientSingle/{contactUs}', 'clientSingle')->name('show');
+    Route::get('/edit/{contactUs}', 'edit')->name('edit');
+    Route::post('/update', 'update')->name('update');
+    Route::get('/delete/{contactUs}', 'delete')->name('delete');
+    Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
 });
