@@ -75,10 +75,10 @@
                             </div>
                         </div>
 
-                        <button
-                            class="w-full bg-gray-900 hover:bg-gray-800 text-white font-medium py-3 rounded-xl transition">
+                        <a href="{{ route('order.create') }}"
+                            class="w-full block text-center bg-gray-900 hover:bg-gray-800 text-white font-medium py-3 rounded-xl transition">
                             تکمیل خرید
-                        </button>
+                        </a>
 
                         <p class="text-xs text-gray-400 text-center mt-3">
                             ارسال رایگان برای خرید بالای ۵۰۰ هزار تومان

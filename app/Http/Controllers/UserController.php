@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\partnerRequests;
 use App\Models\phone_code;
 use App\Models\role;
+use App\classes\homeSetting;
 use App\Models\role_user;
 use Illuminate\Http\Request;
 // use App\Models\address;
@@ -14,7 +15,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use IPPanel\Models\Response;
-use App\classes\homeSetting;
 use Log;
 class UserController extends Controller
 {
@@ -119,25 +119,29 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('admin.users.index', ['users' => $users]);
+        $setting = homeSetting::document();
+        return view('admin.users.index', ['users' => $users, 'setting'=>$setting]);
     }
 
     public function profile()
     {
         $user = Auth::user();
         $user->role;
-        return view('profile', ['user' => $user]);
+        $setting = homeSetting::document();
+        return view('profile', ['user' => $user, 'setting'=>$setting]);
     }
 
     public function show(user $user)
     {
-        return view('admin.users.single', ['user' => $user]);
+        $setting = homeSetting::document();
+        return view('admin.users.single', ['user' => $user, 'setting'=>$setting]);
     }
 
     public function edit(user $user)
     {
         $roles = role::all();
-        return view('admin.users.edit', ['user' => $user, 'roles' => $roles]);
+        $setting = homeSetting::document();
+        return view('admin.users.edit', ['user' => $user, 'roles' => $roles, 'setting'=>$setting]);
     }
 
     public function update(Request $request)
@@ -189,7 +193,8 @@ class UserController extends Controller
 
     public function compelete_form()
     {
-        return view('admin.users.compelete_form', ['user' => Auth::user()->role]);
+        $setting = homeSetting::document();
+        return view('admin.users.compelete_form', ['user' => Auth::user()->roles, 'setting'=>$setting]);
     }
 
     public function save(Request $request)
@@ -210,7 +215,8 @@ class UserController extends Controller
 
     public function setting()
     {
-        return view('admin.users.setting');
+        $setting = homeSetting::document();
+        return view('admin.users.setting', ['setting'=>$setting]);
     }
 
     public function checkAuth(Request $request)
@@ -239,7 +245,8 @@ class UserController extends Controller
     public function create_user()
     {
         $roles = role::all();
-        return view('admin.users.create', ['roles' => $roles]);
+        $setting = homeSetting::document();
+        return view('admin.users.create', ['roles' => $roles, 'setting'=>$setting]);
     }
 
     public function store_user(Request $request)
@@ -270,7 +277,8 @@ class UserController extends Controller
         $user = Auth::user();
         $partner = partnerRequests::where('user_id', $user->id)->where('status', 1)->get();
         $partnerCount = $partner->count();
-        return view('admin.users.dashboard', ['user' => $user, 'partnerCount' => $partnerCount]);
+        $setting = homeSetting::document();
+        return view('admin.users.dashboard', ['user' => $user, 'partnerCount' => $partnerCount, 'setting'=>$setting]);
     }
 
     public function sendCode(Request $request){
@@ -339,11 +347,11 @@ class UserController extends Controller
         return response()->json($phoneCode);
     }
     public function about(){
-        $setting = homeSetting::all();
+        $setting = homeSetting::document();
         return view('about', ['setting' => $setting]);
     }
     public function contact(){
-        $setting = homeSetting::all();
+        $setting = homeSetting::document();
         return view('contact', ['setting' => $setting]);
     }
 }

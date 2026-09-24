@@ -5,12 +5,14 @@ use App\Models\contactUs;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
+use App\classes\homeSettin;
+use App\classes\homeSetting;
 class ContactUsController extends Controller
 {
     public function create()
     {
-        return view('client.contactUs.create');
+        $setting = homeSetting::document();
+        return view('contactUs.create', ['setting'=>$setting]);
     }
 
     public function store(Request $request)
@@ -27,24 +29,29 @@ class ContactUsController extends Controller
     public function index()
     {
         $allContactUs = contactUs::all();
-        return view('admin.contactUs.index', ['allContactUs' => $allContactUs]);
+        $setting = homeSetting::document();
+        return view('admin.contactUs.index', ['allContactUs' => $allContactUs, 'setting'=>$setting]);
     }
     public function single(contactUs $contactUs)
     {
-        return view('admin.contactUs.single', ['contactUs' => $contactUs]);
+        $setting = homeSetting::document();
+        return view('admin.contactUs.single', ['contactUs' => $contactUs, 'setting'=>$setting]);
     }
     public function clientSingle(contactUs $contactUs)
     {
-        return view('client.contactUs.show', ['contactUs' => $contactUs]);
+        $setting = homeSetting::document();
+        return view('contactUs.show', ['contactUs' => $contactUs, 'setting'=>$setting]);
     }
     public function myMessage()
     {
-        return view('client.contactUs.myMessage');
+        $setting = homeSetting::document();
+        return view('contactUs.myMessage', ['setting'=>$setting]);
     }
 
     public function edit(contactUs $contactUs)
     {
-        return view('client.contactUs.edit', ['contactUs' => $contactUs]);
+        $setting = homeSetting::document();
+        return view('contactUs.edit', ['contactUs' => $contactUs,'setting'=>$setting]);
     }
 
     public function update(Request $request)

@@ -22,7 +22,9 @@ class SettingController extends Controller
         $heroPrimaryButtonLink = setting::where('meta_key', 'heroPrimaryButtonLink')->first();
         $heroSecondaryButton = setting::where('meta_key', 'heroSecondaryButton')->first();
         $heroSecondaryButtonLink = setting::where('meta_key', 'heroSecondaryButtonLink')->first();
+        $setting = homeSetting::document();
         return view('admin.setting.header', [
+            'setting'=>$setting,
             'logo' => $logo,
             'heroBanner' => $heroBanner,
             'heroTitle' => $heroTitle,
@@ -64,7 +66,9 @@ class SettingController extends Controller
         $leftBannerButton = setting::where('meta_key', 'leftBannerButton')->first();
         $leftBannerButtonLink = setting::where('meta_key', 'leftBannerButtonLink')->first();
 
+        $setting = homeSetting::document();
         return view('admin.setting.banner', [
+            'setting'=>$setting,
             'topBanner' => $topBanner,
             'topBannerLink' => $topBannerLink,
             'secondBanner' => $secondBanner,
@@ -110,8 +114,10 @@ class SettingController extends Controller
         $twoCardsSectionTitle = setting::where('meta_key', 'twoCardsSectionTitle')->first();  // "برای خودت می‌خری یا هدیه؟"
         $twoCardsSectionLinkUrl = setting::where('meta_key', 'twoCardsSectionLinkUrl')->first();  // "مشاهده همه →"
         $twoCardsSectionLinkText = setting::where('meta_key', 'twoCardsSectionLinkText')->first();  // "مشاهده همه →"
+        $setting = homeSetting::document();
         return view('admin.setting.cards',[
             'twoCardsRightTitle'=>$twoCardsRightTitle,
+            'setting'=>$setting,
             'twoCardsRightSubtitle'=>$twoCardsRightSubtitle,
             'twoCardsRightImage'=>$twoCardsRightImage,
             'twoCardsRightButton'=>$twoCardsRightButton,
@@ -158,7 +164,9 @@ class SettingController extends Controller
         $serviceSubTitle5 = setting::where('meta_key', 'serviceSubTitle5')->first();
         $serviceImage5 = setting::where('meta_key', 'serviceImage5')->first();
         
+        $setting = homeSetting::document();
         return view('admin.setting.services',[
+            'setting'=>$setting,
             'serviceTitle1'=>$serviceTitle1,
             'serviceSubTitle1'=>$serviceSubTitle1,
             'serviceImage1'=>$serviceImage1,
@@ -209,7 +217,9 @@ class SettingController extends Controller
         $footerServices = setting::where('meta_key', 'footerServices')->first();
         $footerCategories = setting::where('meta_key', 'footerCategories')->first();
 
+        $setting = homeSetting::document();
         return view('admin.setting.footer', [
+            'setting'=>$setting,
             'footerBrandName'=>$footerBrandName,
             'footerBrandDescription'=>$footerBrandDescription,
             'footerServicesTitle'=>$footerServicesTitle,
@@ -292,6 +302,14 @@ class SettingController extends Controller
                 }]);
             }
         }
-        return view('home', ['setting'=>$setting, 'categories'=>$categories, 'products'=>$products, 'newProducts'=>$newProducts, 'cartProIds'=>$cartProIds]);
+        $setting = homeSetting::all();
+        return view('home', [
+            'setting'=>$setting, 
+            'categories'=>$categories, 
+            'products'=>$products, 
+            'newProducts'=>$newProducts, 
+            'cartProIds'=>$cartProIds,
+            'setting'=>$setting
+        ]);
     }
 }

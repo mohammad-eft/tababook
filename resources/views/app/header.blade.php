@@ -45,7 +45,7 @@
                     <div
                         class="w-full py-2 flex justify-between items-center px-4 cart_shdow bg-[#F3ECE2] border border-[#e9d2b1] rounded-lg">
                         <input type="text" name="title" class="outline-none w-full h-full"
-                            placeholder="کتاب یا نویسنده یا مخصول خود را جستجو کنید">
+                            placeholder="کتاب یا نویسنده یا محصول خود را جستجو کنید">
                         <button class="cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-5 fill-[#929391]">
                                 <path
@@ -136,7 +136,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{route('user.contact')}}"
+                        <a href="{{route('contactUs.create')}}"
                             class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
                             <span>تماس باما</span>
                             <div
@@ -145,7 +145,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{route('user.about')}}"
+                        <a href="{{route('aboutUs.clientList')}}"
                             class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
                             <span>درباره ما</span>
                             <div
@@ -157,7 +157,7 @@
                 <div
                     class="w-full py-2 bg-white rounded-full flex justify-between items-center px-2 cart_shdow lg:hidden">
                     <input type="text" class="outline-none w-full h-full text-xs"
-                        placeholder="کتاب یا نویسنده یا مخصول خود را جستجو کنید">
+                        placeholder="کتاب یا نویسنده یا محصول خود را جستجو کنید">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-4 fill-[#929391]">
                             <path
@@ -199,11 +199,11 @@
                         class="w-full py-2 bg-green-300/50 rounded-xl gradient_item flex gap-3 justify-start items-center px-4">
                         <span class="xl:text-lg text-green-700 font-bold"> دسته بندی ها</span>
                     </a>
-                    <a href="{{route('user.contact')}}"
+                    <a href="{{route('contactUs.list')}}"
                         class="w-full py-2 bg-green-300/50 rounded-xl gradient_item flex gap-3 justify-start items-center px-4">
                         <span class="xl:text-lg text-green-700 font-bold">تماس باما</span>
                     </a>
-                    <a href="{{route('user.about')}}"
+                    <a href="{{route('aboutUs.clientList')}}"
                         class="w-full py-2 bg-green-300/50 rounded-xl gradient_item flex gap-3 justify-start items-center px-4">
                         <span class="xl:text-lg text-green-700 font-bold">درباره ما</span>
                     </a>

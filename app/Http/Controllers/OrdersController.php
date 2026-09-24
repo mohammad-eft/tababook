@@ -11,13 +11,20 @@ use App\Models\defaultComment;
 use App\Models\logo;
 use App\Models\product;
 use App\Models\User;
+use App\Models\address;
 use App\Models\header;
 use App\Models\introduction;
 use App\Models\service;
 use Hekmatinasser\Verta\Verta;
+use App\classes\homeSetting;
+use Psy\Readline\Interactive\Renderer\OverlayViewport;
 
 class OrdersController extends Controller
 {
+    public function create(){
+        $setting = homeSetting::document();
+        return view('user.order.create', ['setting'=>$setting]);
+    }
     public function store(Request $request)
     {
         $user_id = Auth::id();
@@ -33,13 +40,16 @@ class OrdersController extends Controller
         if ($cartItems->isEmpty()) {
             return response()->json(['message' => 'سبد خرید خالی است'], 400);
         }
-
+        $address_id = address::create([
+            'user_id'=>Auth::id(),
+            'address'=>$request->address
+        ]);
         $createdOrders = [];
         $dateTime = explode(' ', verta());
         $date = implode('/', explode('-', $dateTime[0]));
         $time = $dateTime[1];
         $order_id = orders::insertGetId([
-            'address_id' => isset($request->address) ? $request->address : null,
+            'address_id' => $address_id,
             'user_id' => $user_id,
             'order_status_id' => 1,
             'date'=>$date,
@@ -59,7 +69,8 @@ class OrdersController extends Controller
             ];
         }
 
-        return response()->json($createdOrders);
+        // return response()->json($createdOrders);
+        return redirect()->back();
     }
 
     public function index(){
@@ -82,10 +93,12 @@ class OrdersController extends Controller
                 $product['mainImg'] = 'default.jpg';
             }
         }
+        $setting = homeSetting::document();
         return view('admin.order.index', [
             'categories' => $categories,
             'products' => $products,
-            'orders'=>$orders
+            'orders'=>$orders,
+            'setting'=>$setting
         ]);
     }
 
