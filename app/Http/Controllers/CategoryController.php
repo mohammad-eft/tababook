@@ -19,8 +19,10 @@ class CategoryController extends Controller
     {
         $categories = category::select('id', 'title')->get();
         // $logo = logo::first();
+        $setting = homeSetting::document();
         return view('admin.category.create', [
             'categories' => $categories,
+            'setting'=>$setting
             // 'logo' => $logo
         ]);
     }
