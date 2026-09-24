@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\SearchController;
 use App\Models\product;
 Route::get('/test', function(){
@@ -174,4 +175,13 @@ Route::group([
     Route::post('/update', 'update')->name('update');
     Route::get('/delete/{contactUs}', 'delete')->name('delete');
     Route::post('/deleteAll', 'deleteAll')->name('deleteAll');
+});
+
+Route::group([
+    'prefix'=>'order',
+    'controller'=>OrdersController::class,
+    'as'=>'order.'
+], function(){
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
 });
