@@ -9,7 +9,7 @@
                 @endphp
             @endif
             <div class="h-48 p-4 border border-(--color-border) rounded-[10px] flex flex-col items-center justify-between">
-                <a href="{{ route('category-show', [$category]) }}" class="block mb-1 w-[137px]" target="_blank">
+                <a href="{{ route('category.relatedProducts', [$category]) }}" class="block mb-1 w-[137px]" target="_blank">
                     <img src="{{ asset($category->image) }}" class="w-[115px] max-h-20 h-20 mx-auto" alt="">
                     <span class="inline-block w-full text-center pt-2">{{ $category->title }}</span>
                 </a>

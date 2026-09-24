@@ -321,7 +321,7 @@ input[type="checkbox"]:checked::after {
 
 
     <section
-        class="w-full px-2 lg:px-0 lg:mb-5 py-5 flex flex-row justify-between items-center text-[#beb1d6] text-xs lg:text-sm">
+        class="w-11/12 mx-auto lg:mb-5 py-5 flex flex-row justify-between items-center text-[#beb1d6] text-xs lg:text-sm">
         <nav class="flex flex-row items-center text-xs lg:text-base">
             <div>
                 <a href="#" class="leading-[2.17]">
@@ -360,7 +360,7 @@ input[type="checkbox"]:checked::after {
     <!-- address navbar -->
 
     <!-- single product -->
-    <section class="text-(--color-text) ">
+    <section class="w-11/12 text-(--color-text) mx-auto">
         <div class="flex flex-col lg:flex-row">
             <div class="lg:ml-4 shrink-0 flex flex-col-reverse lg:flex-col lg:w-[36%] overflow-hidden">
                 <div
@@ -1941,7 +1941,7 @@ input[type="checkbox"]:checked::after {
 
     <!-- ads desktop -->
 
-    <section class="hidden lg:block">
+    <section class="w-11/12 mx-auto hidden lg:block">
         <div class="w-full overflow-hidden mt-4">
             <a href="#" class="inline-block w-full">
                 <img class="inline-block w-full object-cover rounded-md"
@@ -1955,7 +1955,7 @@ input[type="checkbox"]:checked::after {
 
     <!-- specifications table mobile -->
 
-    <section class="lg:hidden text-(--color-text)">
+    <section class="w-11/12 lg:hidden text-(--color-text)">
         <div class="py-5 px-2">
             <h3 class="text-lg font-bold leading-[180%] mb-4">
                 جدول مشخصات
@@ -1989,11 +1989,11 @@ input[type="checkbox"]:checked::after {
 
     <!-- specifications table mobile -->
 
-    <hr class="w-full border-none h-2 bg-[var(--color-border)] lg:hidden">
+    <hr class="w-11/12 border-none h-2 bg-[var(--color-border)] lg:hidden">
 
     <!-- specifications table desktop -->
 
-    <section class="text-(--color-text) mt-4 lg:pb-10">
+    <section class="w-11/12 mx-auto text-(--color-text) mt-4 lg:pb-10">
         <div class="hidden lg:block sticky top-0 bg-white z-[555]">
             <ul class="flex flex-row border-b border-(--color-border)">
                 <li

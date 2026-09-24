@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520">
+<defs>
+  <linearGradient id="bg" x1="0" x2="1"><stop stop-color="#f8f2e8"/><stop offset="1" stop-color="#eef6ed"/></linearGradient>
+  <filter id="s"><feDropShadow dx="0" dy="12" stdDeviation="18" flood-opacity=".12"/></filter>
+</defs>
+<rect width="1000" height="520" rx="34" fill="url(#bg)"/>
+<circle cx="860" cy="90" r="110" fill="#e0f0df"/>
+<path d="M830 115c45-55 91-54 122-18-46 3-79 28-122 18Z" fill="#91bd91"/>
+<path d="M855 145c42-33 79-25 97 4-39-4-65 8-97-4Z" fill="#b1d2ae"/>
+<g filter="url(#s)">
+ <rect x="110" y="285" width="520" height="34" rx="9" fill="#173d2b"/>
+ <rect x="135" y="245" width="470" height="42" rx="9" fill="#356b4d"/>
+ <rect x="155" y="202" width="425" height="46" rx="9" fill="#f0eadc"/>
+ <rect x="190" y="158" width="370" height="47" rx="9" fill="#0c7f45"/>
+ <rect x="225" y="118" width="300" height="43" rx="9" fill="#315d47"/>
+</g>
+<rect x="650" y="285" width="115" height="120" rx="24" fill="#fff" filter="url(#s)"/>
+<path d="M675 285c-2-38 20-64 51-64 31 0 50 26 49 64" fill="#fff" stroke="#d7e5d6" stroke-width="6"/>
+<path d="M700 350c15-24 35-24 50 0" fill="none" stroke="#0b8f4d" stroke-width="9" stroke-linecap="round"/>
+<rect x="690" y="318" width="35" height="32" rx="8" fill="#e4f2e3"/>
+<text x="708" y="342" text-anchor="middle" font-size="24" fill="#0b8f4d">ک</text>
+<path d="M810 390c20-82 70-130 126-112-35 32-48 70-126 112Z" fill="#8ebc8d"/>
+<path d="M820 407c-35-53-71-63-105-41 33 18 54 42 105 41Z" fill="#b6d5b4"/>
+</svg>

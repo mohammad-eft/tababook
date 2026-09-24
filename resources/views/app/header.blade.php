@@ -92,18 +92,18 @@
                             </a>
                         
                     </div> --}}
-                    <div class="w-full relative lg:hidden block mt-5">
-                        <input type="text" class="w-full outline-none rounded-md py-2 md:py-4 pl-2 pr-10 md:pr-20"
-                            placeholder="جست و جو">
-                        <svg class="absolute w-5 md:w-8 top-[20%] right-[3%]" xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 512 512">
-                            <path
-                                d="M24 0C10.7 0 0 10.7 0 24S10.7 48 24 48H69.5c3.8 0 7.1 2.7 7.9 6.5l51.6 271c6.5 34 36.2 58.5 70.7 58.5H488c13.3 0 24-10.7 24-24s-10.7-24-24-24H199.7c-11.5 0-21.4-8.2-23.6-19.5L170.7 288H459.2c32.6 0 61.1-21.8 69.5-53.3l41-152.3C576.6 57 557.4 32 531.1 32h-411C111 12.8 91.6 0 69.5 0H24zM131.1 80H520.7L482.4 222.2c-2.8 10.5-12.3 17.8-23.2 17.8H161.6L131.1 80zM176 512a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm336-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0z">
-                            </path>
-                        </svg>
-                        <span
-                            class="sm:size-3 size-1 bg-green-700 rounded-full absolute top-0 right-0 text-xs flex justify-center items-center">4</span>
-                    </div>
+{{--                    <div class="w-full relative lg:hidden block mt-5">--}}
+{{--                        <input type="text" class="w-full outline-none rounded-md py-2 md:py-4 pl-2 pr-10 md:pr-20"--}}
+{{--                            placeholder="جست و جو">--}}
+{{--                        <svg class="absolute w-5 md:w-8 top-[20%] right-[3%]" xmlns="http://www.w3.org/2000/svg"--}}
+{{--                            viewBox="0 0 512 512">--}}
+{{--                            <path--}}
+{{--                                d="M24 0C10.7 0 0 10.7 0 24S10.7 48 24 48H69.5c3.8 0 7.1 2.7 7.9 6.5l51.6 271c6.5 34 36.2 58.5 70.7 58.5H488c13.3 0 24-10.7 24-24s-10.7-24-24-24H199.7c-11.5 0-21.4-8.2-23.6-19.5L170.7 288H459.2c32.6 0 61.1-21.8 69.5-53.3l41-152.3C576.6 57 557.4 32 531.1 32h-411C111 12.8 91.6 0 69.5 0H24zM131.1 80H520.7L482.4 222.2c-2.8 10.5-12.3 17.8-23.2 17.8H161.6L131.1 80zM176 512a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm336-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0z">--}}
+{{--                            </path>--}}
+{{--                        </svg>--}}
+{{--                        <span--}}
+{{--                            class="sm:size-3 size-1 bg-green-700 rounded-full absolute top-0 right-0 text-xs flex justify-center items-center">4</span>--}}
+{{--                    </div>--}}
                 </div>
             </div>
             <div class="w-full h-10 flex justify-center items-center">
@@ -118,7 +118,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#"
+                        <a href="{{ route('product.index') }}"
                             class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
                             <span>محصولات</span>
                             <div
@@ -127,7 +127,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#"
+                        <a href="{{ route('category.index') }}"
                             class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
                             <span>دسته بندی ها</span>
                             <div
@@ -136,7 +136,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#"
+                        <a href="{{route('user.contact')}}"
                             class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
                             <span>تماس باما</span>
                             <div
@@ -145,7 +145,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#"
+                        <a href="{{route('user.about')}}"
                             class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
                             <span>درباره ما</span>
                             <div
@@ -175,7 +175,7 @@
             id="hamburger_menu_item">
             <div class="w-11/12 h-full flex flex-col gap-6 justify-start items-start rounded-l-4xl  relative">
                 <div class="w-full h-20 flex gap-3 justify-between items-center px-">
-                    <img src="{{ asset('storage/home/ei_1788433185339-removebg-preview.webp') }}" alt=""
+                    <img src="{{ asset('storage/' . $setting['logo']) }}" alt=""
                         class="w-2/3 h-full">
                     <div onclick="hamburger_menu('close')">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="size-7">
@@ -186,28 +186,28 @@
                 </div>
                 <!-- item -->
                 <div class="w-full flex flex-col gap-2 justify-start items-center">
-                    <div
+                    <a href="{{ route('home') }}"
                         class="w-full py-2 bg-green-300/50 rounded-xl gradient_item flex gap-3 justify-start items-center px-4">
-                        <div>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
-                                class="xl:size-6 size-5 fill-green-700">
-                                <path
-                                    d="M272.5 5.7c9-7.6 22.1-7.6 31.1 0l264 224c10.1 8.6 11.4 23.7 2.8 33.8s-23.7 11.3-33.8 2.8L512 245.5V432c0 44.2-35.8 80-80 80H144c-44.2 0-80-35.8-80-80V245.5L39.5 266.3c-10.1 8.6-25.3 7.3-33.8-2.8s-7.3-25.3 2.8-33.8l264-224zM288 55.5L112 204.8V432c0 17.7 14.3 32 32 32h48V312c0-22.1 17.9-40 40-40H344c22.1 0 40 17.9 40 40V464h48c17.7 0 32-14.3 32-32V204.8L288 55.5zM240 464h96V320H240V464z">
-                                </path>
-                            </svg>
-                        </div>
+
                         <span class="xl:text-lg text-green-700 font-bold">صفحه اصلی</span>
-                    </div>
-                    <div class="w-full py-2 rounded-xl gradient_item flex gap-3 justify-start items-center px-4">
-                        <div>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="xl:size-6 size-5">
-                                <path
-                                    d="M272.5 5.7c9-7.6 22.1-7.6 31.1 0l264 224c10.1 8.6 11.4 23.7 2.8 33.8s-23.7 11.3-33.8 2.8L512 245.5V432c0 44.2-35.8 80-80 80H144c-44.2 0-80-35.8-80-80V245.5L39.5 266.3c-10.1 8.6-25.3 7.3-33.8-2.8s-7.3-25.3 2.8-33.8l264-224zM288 55.5L112 204.8V432c0 17.7 14.3 32 32 32h48V312c0-22.1 17.9-40 40-40H344c22.1 0 40 17.9 40 40V464h48c17.7 0 32-14.3 32-32V204.8L288 55.5zM240 464h96V320H240V464z">
-                                </path>
-                            </svg>
-                        </div>
-                        <span class="xl:text-lg font-bold">کتاب ها</span>
-                    </div>
+                    </a>
+                    <a href="{{ route('product.index') }}"
+                        class="w-full py-2 bg-green-300/50 rounded-xl gradient_item flex gap-3 justify-start items-center px-4">
+                        <span class="xl:text-lg text-green-700 font-bold"> محصولات</span>
+                    </a>
+                    <a href="{{ route('category.index') }}"
+                        class="w-full py-2 bg-green-300/50 rounded-xl gradient_item flex gap-3 justify-start items-center px-4">
+                        <span class="xl:text-lg text-green-700 font-bold"> دسته بندی ها</span>
+                    </a>
+                    <a href="{{route('user.contact')}}"
+                        class="w-full py-2 bg-green-300/50 rounded-xl gradient_item flex gap-3 justify-start items-center px-4">
+                        <span class="xl:text-lg text-green-700 font-bold">تماس باما</span>
+                    </a>
+                    <a href="{{route('user.about')}}"
+                        class="w-full py-2 bg-green-300/50 rounded-xl gradient_item flex gap-3 justify-start items-center px-4">
+                        <span class="xl:text-lg text-green-700 font-bold">درباره ما</span>
+                    </a>
+
                 </div>
                 <!-- item -->
             </div>

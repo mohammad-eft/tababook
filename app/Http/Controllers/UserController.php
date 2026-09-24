@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use IPPanel\Models\Response;
+use App\classes\homeSetting;
 use Log;
 class UserController extends Controller
 {
@@ -336,5 +337,13 @@ class UserController extends Controller
             $patternValues,  // pattern values
         );
         return response()->json($phoneCode);
+    }
+    public function about(){
+        $setting = homeSetting::all();
+        return view('about', ['setting' => $setting]);
+    }
+    public function contact(){
+        $setting = homeSetting::all();
+        return view('contact', ['setting' => $setting]);
     }
 }
