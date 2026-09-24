@@ -47,6 +47,8 @@ Route::group([
     Route::get('/create_user', 'create_user')->name('create_user');
     Route::post('/store_user', 'store_user')->name('store_user');
     Route::get('/dashboard', 'dashboard')->name('dashboard');
+    Route::get('/about', 'about')->name('about');
+    Route::get('/contact', 'contact')->name('contact');
 });
 
 // category routes
@@ -66,7 +68,9 @@ Route::group([
     Route::get('/list', 'index')->withoutMiddleware(AdminMiddleware::class)->name('index');
     Route::get('/relatedProducts/{category}', 'relatedProducts')->withoutMiddleware(AdminMiddleware::class)->missing(function () {
         return to_route('missing');
+
     })->name('relatedProducts');
+    Route::get('/show' , 'show')->name('show');
 
 
     // Route::get('/show/{category}', 'show')->withoutMiddleware(AdminMiddleware::class)->missing(function () {

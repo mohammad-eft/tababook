@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420">
+<rect width="1200" height="420" fill="#edf4ea"/>
+<path d="M0 90h1200M0 210h1200M0 330h1200M140 0v420M330 0v420M550 0v420M790 0v420M1010 0v420" stroke="#fff" stroke-width="28"/>
+<path d="M0 160C240 80 390 270 620 165s360-40 580 70" fill="none" stroke="#d3dfcf" stroke-width="18"/>
+<path d="M90 360C290 260 420 370 610 285s390-30 500 45" fill="none" stroke="#c8d9c4" stroke-width="13"/>
+<path d="M610 112c-48 0-82 38-82 84 0 62 82 137 82 137s82-75 82-137c0-46-34-84-82-84Z" fill="#0b8f4d"/>
+<circle cx="610" cy="194" r="28" fill="#fff"/>
+<rect x="55" y="55" width="310" height="110" rx="22" fill="#fff" opacity=".94"/>
+<text x="85" y="100" font-family="sans-serif" font-size="25" font-weight="700" fill="#0b6f40">کتاب‌یار</text>
+<text x="85" y="137" font-family="sans-serif" font-size="18" fill="#66756c">موقعیت فروشگاه روی نقشه</text>
+</svg>

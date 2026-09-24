@@ -299,6 +299,7 @@ class ProductController extends Controller
         }
         $cartCount = 0;
         $cart = null;
+        $setting = homeSetting::document();
         // $allCartCount = 0;
         // if (Auth::check()) {
         //     $allCarts = carts::select('user_id', 'order_id', 'quantity')->where('user_id', Auth::id())->where('order_id', null)->get();
@@ -314,6 +315,7 @@ class ProductController extends Controller
             'categories' => $categories,
             'products' => $products,
             'cartCount' => $cartCount,
+            'setting' => $setting,
             // 'cart' => $cart,
             // 'allCartCount' => $allCartCount
         ]);

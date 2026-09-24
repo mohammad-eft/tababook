@@ -174,28 +174,24 @@ class CategoryController extends Controller
     //     return response()->json($category);
     // }
 
-    // public function index()
-    // {
-    //     $courses = course::all();
-    //     $products = product::all();
-    //     $products = $this->getProductMedias($products);
-    //     $settings = settings::all();
-    //     $logo = logo::first();
-    //     $footer_columns = footer_column::whereIn('section_number', [1, 2, 3])->with('rows')->get();
-    //     $footer_form_column = footer_column::where('section_number', 4)->with('images')->with('texts')->first();
-    //     $user = Auth::user();
-    //     $cats = category::all();
-    //     return view('user.category.index', [
-    //         'courses' => $courses,
-    //         'products' => $products,
-    //         'settings' => $settings,
-    //         'categories' => $cats,
-    //         'logo' => $logo,
-    //         'footerColumns' => $footer_columns,
-    //         'footer_form_column' => $footer_form_column,
-    //         'user' => $user
-    //     ]);
-    // }
+     public function index()
+     {
+
+         $products = product::all();
+
+
+
+         $user = Auth::user();
+         $cats = category::all();
+         $setting = homeSetting::document();
+         return view('user.category.index', [
+
+             'products' => $products,
+             'setting' => $setting,
+             'categories' => $cats,
+             'user' => $user
+         ]);
+     }
 
     // public function show(category $category)
     // {
