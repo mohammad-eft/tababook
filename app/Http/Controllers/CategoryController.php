@@ -53,9 +53,11 @@ class CategoryController extends Controller
     {
         $cats = category::all();
         // $logo = logo::first();
+        $setting = homeSetting::document();
         return view('admin.category.index', [
             'categories' => $cats,
             // 'logo' => $logo
+            'setting'=>$setting
         ]);
     }
     public function showChildren($param)
@@ -159,7 +161,7 @@ class CategoryController extends Controller
                 $product['mainImg'] = 'default.jpg';
             }
         }
-        $setting = homeSetting::all();
+        $setting = homeSetting::document();
         return view('user.product.index', [
             'currentCat' => $category,
             'categories' => $categories,

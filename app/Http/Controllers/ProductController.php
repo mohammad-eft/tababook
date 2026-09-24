@@ -18,7 +18,8 @@ class ProductController extends Controller
     public function create()
     {
         $cats = category::all();
-        return view('admin.product.create', ['categories' => $cats]);
+        $setting = homeSetting::document();
+        return view('admin.product.create', ['categories' => $cats, 'setting'=>$setting]);
     }
     public function store(Request $request)
     {
@@ -103,7 +104,8 @@ class ProductController extends Controller
                 $product['mainImg'] = 'default.jpg';
             }
         }
-        return view('admin.product.index', ['products' => $products]);
+        $setting = homeSetting::document();
+        return view('admin.product.index', ['products' => $products, 'setting'=>$setting]);
     }
     public function edit(Request $request)
     {
@@ -268,13 +270,15 @@ class ProductController extends Controller
             }]);
             
         }
+        $setting = homeSetting::document();
         return view('admin.product.single', [
             'product' => $product,
             'setting'=>$setting,
             'categories' => $categories,
             'allCartCount' => $allCartCount,
             'proIds' => $proIds,
-            'cartProIds'=>$cartProIds
+            'cartProIds'=>$cartProIds,
+            'setting'=>$setting
         ]);
     }
     public function index()
@@ -347,12 +351,14 @@ class ProductController extends Controller
                 $product['mainImg'] = 'default.jpg';
             }
         }
+        $setting = homeSetting::document();
         return view('user.product.index', [
             // 'logo' => $logo,
             // 'services' => $services,
             'categories' => $categories,
             'products' => $products,
-            'catIds' => $request['selectedCats']
+            'catIds' => $request['selectedCats'],
+            'setting'=>$setting
         ]);
     }
     public function search(Request $request)
@@ -381,11 +387,13 @@ class ProductController extends Controller
                 $product['mainImg'] = 'default.jpg';
             }
         }
+        $setting = homeSetting::document();
         return view('user.product.index', [
             // 'logo' => $logo,
             // 'services' => $services,
             'categories' => $categories,
             'products' => $products,
+            'setting'=>$setting
         ]);
     }
 }

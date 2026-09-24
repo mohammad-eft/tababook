@@ -15,6 +15,7 @@ use App\Models\header;
 use App\Models\introduction;
 use App\Models\service;
 use Hekmatinasser\Verta\Verta;
+use App\classes\homeSetting;
 
 class OrdersController extends Controller
 {
@@ -82,10 +83,12 @@ class OrdersController extends Controller
                 $product['mainImg'] = 'default.jpg';
             }
         }
+        $setting = homeSetting::document();
         return view('admin.order.index', [
             'categories' => $categories,
             'products' => $products,
-            'orders'=>$orders
+            'orders'=>$orders,
+            'setting'=>$setting
         ]);
     }
 

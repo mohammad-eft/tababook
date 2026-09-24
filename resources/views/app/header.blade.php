@@ -45,7 +45,7 @@
                     <div
                         class="w-full py-2 flex justify-between items-center px-4 cart_shdow bg-[#F3ECE2] border border-[#e9d2b1] rounded-lg">
                         <input type="text" name="title" class="outline-none w-full h-full"
-                            placeholder="کتاب یا نویسنده یا مخصول خود را جستجو کنید">
+                            placeholder="کتاب یا نویسنده یا محصول خود را جستجو کنید">
                         <button class="cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-5 fill-[#929391]">
                                 <path
@@ -157,7 +157,7 @@
                 <div
                     class="w-full py-2 bg-white rounded-full flex justify-between items-center px-2 cart_shdow lg:hidden">
                     <input type="text" class="outline-none w-full h-full text-xs"
-                        placeholder="کتاب یا نویسنده یا مخصول خود را جستجو کنید">
+                        placeholder="کتاب یا نویسنده یا محصول خود را جستجو کنید">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-4 fill-[#929391]">
                             <path

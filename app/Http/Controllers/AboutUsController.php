@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\aboutUs;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\classes\homeSetting;
 
 class AboutUsController extends Controller
 {
     public function create_edit(aboutUs $aboutUs = null)
     {
-        return view('admin.aboutUs.create', ['aboutUs' => $aboutUs]);
+        $setting = homeSetting::document();
+        return view('admin.aboutUs.create', ['aboutUs' => $aboutUs, 'setting'=>$setting]);
     }
 
     public function updateOrcreate(Request $request)
@@ -28,7 +30,8 @@ class AboutUsController extends Controller
     public function index()
     {
         $allAboutUs = aboutUs::all();
-        return view('admin.aboutUs.index', ['allAboutUs' => $allAboutUs]);
+        $setting = homeSetting::document();
+        return view('admin.aboutUs.index', ['allAboutUs' => $allAboutUs, 'setting'=>$setting]);
     }
 
     public function delete(aboutUs $aboutUs)
@@ -40,6 +43,7 @@ class AboutUsController extends Controller
     public function clientList()
     {
         $aboutUs = aboutUs::all();
-        return view("client.aboutUs.aboutUsList", ['aboutUs' => $aboutUs]);
+        $setting = homeSetting::document();
+        return view("client.aboutUs.aboutUsList", ['aboutUs' => $aboutUs, 'setting'=>$setting]);
     }
 }

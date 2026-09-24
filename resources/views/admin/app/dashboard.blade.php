@@ -25,9 +25,7 @@
         <div class="hidden lg:block lg:w-3/12 bg-[#0D0E12] fixed right-0 top-0 h-dvh px-5">
             <div class="flex justify-center pt-5">
                 <a href="{{ route('home') }}" class="right-0 mr-[15px]">
-                    {{-- @if ($logo)
-                        <img src="{{ asset('storage/' . $logo->logo) }}" alt="" class="w-32 h-20">
-                    @endif --}}
+                    <img src="{{ asset('storage/' . $setting['logo']) }}" alt="" class="w-full">
                 </a>
             </div>
             <hr class="text-[darkslategray] mt-2.5">

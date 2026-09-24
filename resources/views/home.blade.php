@@ -1,5 +1,5 @@
 @extends('app.document')
-@section('title', 'طبابوک | فروشگاه کتاب و لوازم تحیری')
+@section('title', 'طبابوک | فروشگاه کتاب و لوازم تحریر')
 @section('content')
     <main class="w-full flex flex-col gap-10 justify-start items-center my-10">
         <!-- hero -->
