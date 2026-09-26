@@ -136,7 +136,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{route('contactUs.create')}}"
+                        <a href="{{route('aboutUs.clientList')}}"
                             class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
                             <span>تماس باما</span>
                             <div
