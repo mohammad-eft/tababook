@@ -59,7 +59,7 @@
                 @foreach ($products as $product)
                     <div
                         class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  min-h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2">
-                        <div class="w-full h-1/2 flex justify-center items-center relative">
+                        <div class="w-full h-1/2 flex justify-center items-center relative py-7">
                             <a href={{ route('product.show', [$product->id]) }} class="block">
                                 <img src="{{ asset('storage/' . $product->image) }}" alt=""
                                     class="max-w-full max-h-24 lg:max-h-42">
@@ -114,7 +114,7 @@
                                     </span>
                                 </div>
                             @endif
-                            <div class="w-[153px]">
+                            <div class="w-full">
                                 @if (Auth::check() && in_array($product->id, $cartProIds))
                                
                                     <div class="w-full p-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
@@ -123,7 +123,7 @@
                                         <button onclick="setCount(this)" class="w-1/3 text-lg font-bold text-white cursor-pointer" data-state="-">-</button>
                                     </div>
                                 @else
-                                    <button onclick="addToCart(this)" class="w-full p-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
+                                    <button onclick="addToCart(this)" class="w-full px-4 py-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
                                                 class="lg:size-4 size-3" fill="white">
@@ -187,7 +187,7 @@
                 @foreach ($newProducts as $product)
                     <div
                         class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  min-h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2 pb-5">
-                        <div class="w-full h-1/2 flex justify-center items-center relative">
+                        <div class="w-full h-1/2 flex justify-center items-center relative py-7">
                             <a href={{ route('product.show', [$product->id]) }} class="block">
                                 <img src="{{ asset('storage/' . $product->image) }}" alt=""
                                     class="max-w-full max-h-24 lg:max-h-42">
@@ -242,7 +242,7 @@
                                     </span>
                                 </div>
                             @endif
-                            <div class="w-[153px]">
+                            <div class="w-full">
                                 @if (Auth::check() && in_array($product->id, $cartProIds))
                                     <div class="w-full p-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
                                         <button onclick="setCount(this)" class="w-1/3 text-lg font-bold text-white flex justify-center items-center cursor-pointer" data-state="+">+</button>
@@ -250,7 +250,7 @@
                                         <button onclick="setCount(this)" class="w-1/3 text-lg font-bold text-white flex justify-center items-center cursor-pointer" data-state="-">-</button>
                                     </div>
                                 @else
-                                    <button onclick="addToCart(this)" class="w-full p-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
+                                    <button onclick="addToCart(this)" class="w-full px-4 py-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
                                                 class="lg:size-4 size-3" fill="white">
@@ -370,12 +370,12 @@
 
 
         <section class="w-full flex justify-center ">
-            <div class="w-11/12 flex max-lg:flex-col justify-between items-center gap-3">
+            <div class="w-11/12 lg:h-60 flex max-lg:flex-col justify-between gap-3">
                 <a href="{{ $setting['rightBannerLink'] }}" class="lg:w-5/12 w-full rounded-2xl h-full">
                     <img class="w-full h-full rounded-xl"
                         src="{{ asset('storage/'.$setting['rightBanner']) }}" alt="">
                 </a>
-                <div class="lg:w-7/12 w-full lg:h-60 relative flex max-lg:flex-col items-center gap-3 bg-[#F3ECE2] rounded-xl">
+                <div class="lg:w-7/12 w-full h-full relative flex max-lg:flex-col items-center gap-3 bg-[#F3ECE2] rounded-xl">
                     <img class="h-full lg:w-1/2 w-full rounded-r-xl object-cover max-h-40"
                         src="{{ asset('storage/'.$setting['leftBanner']) }}" alt="">
                     <div class="lg:w-1/2 w-full flex flex-col gap-2 lg:items-start items-center p-3">
@@ -403,7 +403,7 @@
                     <a href="{{ $setting['twoCardsSectionLinkUrl'] }}" class="text-sm text-gray-500">{{ $setting['twoCardsSectionLinkText'] }}</a>
                 </div>
                 <div class="flex items-center flex-col lg:flex-row gap-8">
-                    <div class="lg:w-6/12 w-full flex max-lg:flex-col gap-2 justify-between p-5 px-7 bg-[#f8f4eb] rounded-xl">
+                    <div class="lg:w-6/12 w-full flex max-lg:flex-col gap-2 justify-between py-5 px-7 bg-[#f8f4eb] rounded-xl">
                         <div class="lg:w-1/2 w-full flex flex-col max-lg:items-center justify-center gap-3 max-lg:order-2">
                             <span class="text-xl max-lg:text-lg font-bold">{{ $setting['twoCardsRightTitle'] }}</span>
                             <span class="max-lg:text-sm text-gray-600 max-lg:text-center">{{ $setting['twoCardsRightSubtitle'] }}</span>
