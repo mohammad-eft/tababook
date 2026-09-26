@@ -21,3 +21,13 @@ let hamburger_menu_item = document.getElementById('hamburger_menu_item')
                 item.children[1].classList.toggle('hidden')
             })
         })
+
+
+let account_pupup_item = document.getElementById('account_pupup_item')
+// console.log('hfksldhfksjhdfjksdf')
+function account_pupup(item){
+    if(item == 'open'){
+        account_pupup_item.classList.toggle('invisible')
+        account_pupup_item.classList.toggle('opacity-0')
+    }
+}

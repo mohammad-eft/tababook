@@ -8,9 +8,9 @@
                     $cat = $category;
                 @endphp
             @endif
-            <div class="h-48 p-4 border border-(--color-border) rounded-[10px] flex flex-col items-center justify-between">
+            <div class="h-48 p-4 bg-white rounded-[10px] flex flex-col items-center justify-between" style="box-shadow: 0 0 5px 2px #F4F4F4;">
                 <a href="{{ route('category.relatedProducts', [$category]) }}" class="block mb-1 w-[137px]" target="_blank">
-                    <img src="{{ asset($category->image) }}" class="w-[115px] max-h-20 h-20 mx-auto" alt="">
+                    <img src="{{ asset('storage/'. $category->image) }}" class="w-[115px] max-h-20 h-20 mx-auto" alt="">
                     <span class="inline-block w-full text-center pt-2">{{ $category->title }}</span>
                 </a>
                 <span
