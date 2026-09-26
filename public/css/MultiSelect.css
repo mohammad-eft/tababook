@@ -1,0 +1,283 @@
+/* =========================================================
+   MultiSelect CSS - نسخه اصلاح‌شده برای جلوگیری از تداخل با Tailwind
+   ========================================================= */
+
+:root {
+  --spacing-smaller: 0.1875rem;
+  --spacing-small: 0.3125rem;
+  --spacing-medium: 0.4375rem;
+  --spacing-large: 0.75rem;
+  --font-size: 0.75rem;
+  --font-size-large: 0.875rem;
+  --font-size-larger: 1rem;
+  --line-height: 1rem;
+  --line-height-larger: 1.25rem;
+  --primary-color: #40c979;
+  --ms-bg: #ffffff;
+  --text-color-dark: #212529;
+  --text-color: #585858;
+  --text-color-light: #65727e;
+  --border-color: #bebebe;
+  --border-color-light: #f1f3f5;
+  --input-placeholder: #65727e;
+  --input-background: #e9e9ed;
+  --input-border: #dee2e6;
+  --input-border-active: #c1c9d0;
+  --input-border-invalid: #e44e4e;
+  --input-outline-invalid: rgba(219, 138, 138, 0.5);
+  --input-color: #e9e9ed;
+  --input-disabled: #f7f7f7;
+  --option-background: #f3f4f7;
+  --checkbox-border: #ced4da;
+  --checkbox-background: #ffffff;
+  --checkbox-active: #ffffff;
+  --input-min-height: 35px;
+  --options-height: 40dvh;
+  --border-radius: 0.3125rem;
+  --icon-size: 0.75rem;
+  --icon-space: 1.875rem;
+  --checkbox-size: 1rem;
+  --checkbox-radius: 0.25rem;
+  --checkbox-thickness: 0.125rem;
+}
+
+/* ========== کانتینر اصلی ========== */
+.multi-select {
+  display: flex !important;
+  box-sizing: border-box !important;
+  flex-direction: column !important;
+  position: relative !important;
+  width: 100% !important;
+  user-select: none;
+  font-family: inherit;
+}
+
+/* ========== هدر ========== */
+.multi-select .multi-select-header {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  box-sizing: border-box !important;
+  background-color: var(--ms-bg) !important;
+  border: 1px solid var(--input-border) !important;
+  border-radius: var(--border-radius) !important;
+  padding: 5px 30px 5px 10px !important;
+  padding-right: var(--icon-space) !important;
+  overflow: hidden;
+  gap: var(--spacing-medium);
+  min-height: var(--input-min-height);
+  cursor: pointer;
+  position: relative;
+  width: 100%;
+  font-size: var(--font-size-larger);
+  color: var(--text-color-dark);
+  transition: border-color .2s;
+}
+.multi-select .multi-select-header:hover {
+  border-color: var(--input-border-active) !important;
+}
+
+/* فلش کشویی */
+.multi-select .multi-select-header::after {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  top: 50% !important;
+  right: 1rem !important;
+  transform: translateY(-50%) !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23949ba3' viewBox='0 0 16 16'%3E%3Cpath d='M8 13.1l-8-8 2.1-2.2 5.9 5.9 5.9-5.9 2.1 2.2z'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: contain !important;
+  height: var(--icon-size) !important;
+  width: var(--icon-size) !important;
+}
+.multi-select .multi-select-header.multi-select-header-active {
+  border-color: var(--input-border-active) !important;
+}
+.multi-select .multi-select-header.multi-select-header-active::after {
+  transform: translateY(-50%) rotate(180deg) !important;
+}
+.multi-select .multi-select-header.multi-select-header-active + .multi-select-options {
+  display: flex !important;
+}
+.multi-select .multi-select-header .multi-select-header-placeholder {
+  color: var(--text-color-light) !important;
+}
+.multi-select .multi-select-header .multi-select-header-option {
+  display: inline-flex !important;
+  align-items: center;
+  background-color: var(--option-background) !important;
+  color: var(--text-color-dark) !important;
+  font-size: var(--font-size-large) !important;
+  padding: var(--spacing-smaller) var(--spacing-small) !important;
+  border-radius: var(--border-radius) !important;
+  margin: 0 !important;
+}
+.multi-select .multi-select-header .multi-select-header-max {
+  font-size: var(--font-size-large) !important;
+  color: var(--text-color-light) !important;
+}
+
+/* ========== دراپ‌داون ========== */
+.multi-select .multi-select-options {
+  display: none;
+  box-sizing: border-box !important;
+  flex-flow: wrap !important;
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 999 !important;
+  margin-top: var(--spacing-small) !important;
+  padding: var(--spacing-small) !important;
+  background-color: var(--ms-bg) !important;
+  border-radius: var(--border-radius) !important;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.15) !important;
+  max-height: var(--options-height) !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  border: 1px solid var(--input-border) !important;
+}
+
+/* اسکرول‌بار */
+.multi-select .multi-select-options::-webkit-scrollbar { width: 0.3125rem; }
+.multi-select .multi-select-options::-webkit-scrollbar-track { background: var(--input-background); }
+.multi-select .multi-select-options::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 5px; }
+.multi-select .multi-select-options::-webkit-scrollbar-thumb:hover { background: var(--input-placeholder); }
+
+/* ========== گزینه‌ها، گروه، همه ========== */
+.multi-select .multi-select-header,
+.multi-select .multi-select-option,
+.multi-select .multi-select-all,
+.multi-select .multi-select-group {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  box-sizing: border-box !important;
+  align-items: center !important;
+  border-radius: var(--border-radius) !important;
+  cursor: pointer !important;
+  width: 100% !important;
+  font-size: var(--font-size-larger) !important;
+  color: var(--text-color-dark) !important;
+  text-align: right;
+}
+
+.multi-select .multi-select-options .multi-select-option,
+.multi-select .multi-select-options .multi-select-all,
+.multi-select .multi-select-options .multi-select-group {
+  padding: 0.5rem var(--spacing-large) !important;
+  gap: 8px;
+}
+.multi-select .multi-select-options .multi-select-option[data-group]:not([data-group=""]) {
+  padding-left: 2.5rem !important;
+}
+
+/* چک‌باکس */
+.multi-select .multi-select-options .multi-select-option .multi-select-option-radio,
+.multi-select .multi-select-options .multi-select-all .multi-select-option-radio,
+.multi-select .multi-select-options .multi-select-group .multi-select-option-radio {
+  background: var(--checkbox-background) !important;
+  margin-left: var(--spacing-large) !important;
+  height: var(--checkbox-size) !important;
+  width: var(--checkbox-size) !important;
+  min-width: var(--checkbox-size) !important;
+  border: 1px solid var(--checkbox-border) !important;
+  border-radius: var(--checkbox-radius) !important;
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* متن گزینه */
+.multi-select .multi-select-options .multi-select-option .multi-select-option-text,
+.multi-select .multi-select-options .multi-select-all .multi-select-option-text,
+.multi-select .multi-select-options .multi-select-group .multi-select-option-text {
+  box-sizing: border-box !important;
+  flex: 1 !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: inherit !important;
+  font-size: var(--font-size-larger) !important;
+  line-height: var(--line-height-larger) !important;
+  padding-bottom: 1px;
+}
+
+/* حالت انتخاب‌شده */
+.multi-select .multi-select-options .multi-select-option.multi-select-selected .multi-select-option-radio,
+.multi-select .multi-select-options .multi-select-all.multi-select-selected .multi-select-option-radio,
+.multi-select .multi-select-options .multi-select-group.multi-select-selected .multi-select-option-radio {
+  border-color: var(--primary-color) !important;
+  background-color: var(--primary-color) !important;
+}
+.multi-select .multi-select-options .multi-select-option.multi-select-selected .multi-select-option-radio::after,
+.multi-select .multi-select-options .multi-select-all.multi-select-selected .multi-select-option-radio::after,
+.multi-select .multi-select-options .multi-select-group.multi-select-selected .multi-select-option-radio::after {
+  content: "" !important;
+  display: block !important;
+  width: calc(var(--checkbox-size) / 4) !important;
+  height: calc(var(--checkbox-size) / 2) !important;
+  border: solid var(--checkbox-active) !important;
+  border-width: 0 var(--checkbox-thickness) var(--checkbox-thickness) 0 !important;
+  transform: rotate(45deg) translate(-30%, 70%) !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.multi-select .multi-select-options .multi-select-option.multi-select-selected .multi-select-option-text,
+.multi-select .multi-select-options .multi-select-all.multi-select-selected .multi-select-option-text,
+.multi-select .multi-select-options .multi-select-group.multi-select-selected .multi-select-option-text {
+  color: var(--text-color-dark) !important;
+}
+
+/* هاور */
+.multi-select .multi-select-options .multi-select-option:hover, 
+.multi-select .multi-select-options .multi-select-option:active,
+.multi-select .multi-select-options .multi-select-all:hover, 
+.multi-select .multi-select-options .multi-select-all:active,
+.multi-select .multi-select-options .multi-select-group:hover, 
+.multi-select .multi-select-options .multi-select-group:active {
+  background-color: var(--option-background) !important;
+}
+
+/* انتخاب همه */
+.multi-select .multi-select-options .multi-select-all {
+  border-bottom: 1px solid var(--border-color-light) !important;
+  border-radius: 0 !important;
+}
+
+/* گروه */
+.multi-select .multi-select-options .multi-select-group {
+  font-weight: bold !important;
+  border-radius: 0 !important;
+}
+
+/* جستجو */
+.multi-select .multi-select-options .multi-select-search {
+  padding: var(--spacing-medium) var(--spacing-large) !important;
+  border: 1px solid var(--input-border) !important;
+  border-radius: var(--border-radius) !important;
+  margin: 0.625rem !important;
+  width: calc(100% - 1.25rem) !important;
+  outline: none !important;
+  font-size: var(--font-size-larger) !important;
+  background-color: var(--ms-bg) !important;
+  color: var(--text-color-dark) !important;
+  font-family: inherit;
+}
+.multi-select .multi-select-options .multi-select-search::placeholder {
+  color: var(--text-color-light) !important;
+}
+
+/* حالت disabled */
+.multi-select.disabled {
+  opacity: 0.6 !important;
+  pointer-events: none !important;
+  background-color: var(--input-disabled) !important;
+}
+
+/* حالت invalid */
+.multi-select.multi-select-invalid .multi-select-header {
+  border-color: var(--input-border-invalid) !important;
+  outline: var(--input-outline-invalid) solid 1px !important;
+}

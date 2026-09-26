@@ -1,5 +1,5 @@
 @extends('admin.app.dashboard')
-@section('title', 'طبابوک | ایجاد محصول')
+@section('title', 'طبابوک | تنظیمات هدر و هیرو')
 @section('content')
  <div class="max-w-4xl mx-auto">
 
