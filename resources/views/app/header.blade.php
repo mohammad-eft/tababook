@@ -27,7 +27,7 @@
         <a href="{{ $setting['topBannerLink'] }}" class="w-full py-2 bg-green-700 flex justify-center items-center">
             <img src="{{ asset('storage/' . $setting['topBanner']) }}" class="w-full" alt="">
         </a>
-        <section class="w-11/12 flex flex-col gap-4 justify-start items-center">
+        <section class="w-11/12 flex flex-col gap-4 justify-start items-center bg-white">
             <div class="w-full flex justify-between gap-1 items-center pt-5 lg:pt-10">
                 <div class="xl:w-1/3 lg:w-1/4 max-lg:w-1/3 h-full flex justify-start items-center lg:hidden">
                     <div class="flex flex-col gap-1 items-start justify-center " onclick="hamburger_menu('open')">
@@ -37,8 +37,8 @@
                     </div>
                 </div>
                 <div
-                    class="hidden xl:w-1/3 lg:w-1/4 max-lg:w-1/3 h-full lg:flex lg:justify-start justify-center items-center">
-                    <img src="{{ asset('storage/' . $setting['logo']) }}" alt="" class="xl:w-1/3 lg:w-1/2 w-full">
+                    class="hidden xl:w-1/6 lg:w-1/4 max-lg:w-1/3 h-full lg:flex lg:justify-start justify-center items-center">
+                    <img src="{{ asset('storage/' . $setting['logo']) }}" alt="" class="w-10/12">
                 </div>
 {{--                <form action="{{ route('search.page') }}" method="POST" class="xl:w-1/3 lg:w-2/4 max-lg:w-1/3 h-full flex justify-center items-center max-lg:hidden">--}}
 {{--                    @csrf--}}
@@ -48,13 +48,13 @@
 {{--                            placeholder="کتاب یا نویسنده یا محصول خود را جستجو کنید">--}}
 {{--                        <button class="cursor-pointer">--}}
 {{--                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-5 fill-[#929391]">--}}
-{{--                                <path--}}
-{{--                                    d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />--}}
-{{--                            </svg>--}}
+{{--                               <path--}}
+{{--                                   d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />--}}
+{{--                           </svg>--}}
 {{--                        </button>--}}
 {{--                    </div>--}}
 {{--                </form>--}}
-                <ul class="xl:w-1/3 lg:w-2/4 max-lg:w-1/3 h-full flex justify-center items-center max-lg:hidden">
+                <ul class="h-full flex gap-4 lg:gap-6 xl:gap-10 justify-center items-center max-lg:hidden">
                     <li>
                         <a href="{{ route('home') }}"
                            class="flex justify-center flex-col items-center cursor-pointer py-1 group transition-all duration-300">
@@ -101,7 +101,7 @@
                         </a>
                     </li>
                 </ul>
-                <div class="xl:w-1/3 lg:w-1/4 max-lg:w-1/3 h-full flex justify-end items-center lg:gap-5 gap-2">
+                <div class="w-1/6 h-full flex justify-end items-center lg:gap-5 gap-2">
 {{--                    <a @if (!Auth::check()) href="{{ route('login') }}" @else href="{{ route('user.profile') }}" @endif--}}
 {{--                        class="block relative ">--}}
 {{--                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="lg:size-5 size-4">--}}
@@ -109,13 +109,21 @@
 {{--                                d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464H398.7c-8.9-63.3-63.3-112-129-112H178.3c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z" />--}}
 {{--                        </svg>--}}
 {{--                    </a>--}}
+                    <div class="relative" onclick="search_pupup('open')">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="lg:size-5 size-4">
+                            <path
+                                    d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
+                        </svg>
+
+                    </div>
                     <div
-                        class="block relative group" >
-                        <svg onclick="account_pupup('open')" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="lg:size-5 size-4">
+                        class="block relative group" onclick="account_pupup('open')">
+                        <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="lg:size-5 size-4">
                             <path
                                 d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464H398.7c-8.9-63.3-63.3-112-129-112H178.3c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z" />
                         </svg>
-                        <div class="w-50 bg-white absolute top-7 left-0 p-3 invisible opacity-0 transition-all duration-400 group-hover:visible group-hover:opacity-100" style="box-shadow:0 0 8px 2px #bab2b29e" id="account_pupup_item">
+                        <div class="w-50 bg-white absolute top-7 left-0 p-3 invisible opacity-0 transition-all duration-400 group-hover:visible group-hover:opacity-100 z-6" style="box-shadow:0 0 8px 2px #bab2b29e" id="account_pupup_item">
 
                                 <a @if (!Auth::check()) href="{{ route('login') }}" @else href="{{ route('user.profile') }}" @endif class="w-full rounded-lg cursor-pointer px-4 py-2 hover:bg-[#F9FAFC] flex gap-5 items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-4">
@@ -134,7 +142,6 @@
                                 </a>
 
                             </div>
-
                     </div>
                     @if(Auth::check())
                     <a href="{{ route('cart.list') }}" class="block relative" id="orderBasket">
@@ -152,19 +159,19 @@
                     </div>
                     @endif
                     {{-- <div class="relative sm:p-2.5 p-1.5 flex items-center gap-4">
-                       
+
                             <a href="{{ route('search.page') }}">
                                 <svg class="w-[30px] h-[30px] text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-width="1.2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
                                 </svg>
                             </a>
-                        
+
                             <a @if (!Auth::check()) href="{{ route('login') }}" @else href="{{ route('user.profile') }}" @endif>
                                 <svg class="w-[30px] h-[30px] text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a8.949 8.949 0 0 0 4.951-1.488A3.987 3.987 0 0 0 13 16h-2a3.987 3.987 0 0 0-3.951 3.512A8.948 8.948 0 0 0 12 21Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
                                 </svg>
                             </a>
-                        
+
                     </div> --}}
 {{--                    <div class="w-full relative lg:hidden block mt-5">--}}
 {{--                        <input type="text" class="w-full outline-none rounded-md py-2 md:py-4 pl-2 pr-10 md:pr-20"--}}
@@ -287,4 +294,34 @@
             </div>
         </div>
         <!-- hamburger_menu_item -->
+
+
+{{--        search_item--}}
+        <div class="w-full h-dvh bg-black/50 fixed top-0 right-0 z-1 invisible opacity-0 transition-all duration-400" onclick="search_pupup('close')" id="search_pupup_item_close"></div>
+        <div class="w-full h-0 bg-white fixed top-0 right-0 z-2 flex justify-center items-start overflow-y-hidden transition-all duration-400" id="search_pupup_item">
+            <div class="w-11/12 flex max-sm:flex-col max-sm:gap-4 justify-between max-sm:justify-start items-center max-sm:items-start lg:pt-10 pt-6">
+                <div class="1/12 h-full" onclick="search_pupup('close')">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="lg:size-9 sm:size-7 size-5"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>
+                </div>
+                <form action="{{ route('search.page') }}" method="POST" class="w-10/12 max-sm:w-full flex justify-center items-center">
+                    @csrf
+                    <div
+                            class="w-full py-2 flex justify-between items-center px-4 max-sm:px-2 cart_shdow bg-white rounded-lg">
+                        <input type="text" name="title" class="outline-none w-full h-full max-sm:text-[15px]"
+                               placeholder="کتاب یا نویسنده یا محصول خود را جستجو کنید">
+                        <button class="cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="sm:size-5 size-4 fill-[#929391]">
+                                <path
+                                        d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+{{--        search_item--}}
+{{--        account_pupup_close--}}
+        <div class="w-full h-dvh fixed top-0 right-0 z-5 invisible opacity-0 transition-all duration-400" onclick="account_pupup('close')" id="account_pupup_close"></div>
+{{--        account_pupup_close--}}
     </header>
