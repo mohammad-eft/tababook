@@ -4,22 +4,22 @@
     font-family: "IRANSansX";
 }
 
-.cart_shdow{
+.cart_shdow {
     box-shadow: 0 0 3px 2px rgb(239, 238, 238);
 }
 
-.in-fa{
+.in-fa {
     font-family: "IRANSansXFaNum";
 }
 
 .transition_fast {
-        transition: all 0.2s ease;
-    }
+    transition: all 0.2s ease;
+}
 
-    .transition_normal {
-        transition: all 0.3s ease;
-    }
+.transition_normal {
+    transition: all 0.3s ease;
+}
 
-    .transition_slow {
-        transition: all 0.5s ease;
-    }
+.transition_slow {
+    transition: all 0.5s ease;
+}

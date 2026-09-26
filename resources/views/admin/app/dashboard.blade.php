@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {{-- <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> --}}
     <link rel="stylesheet" href="{{ url('css/style.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url('css/MultiSelect.css') }}" type="text/css">
     <title>@yield('title')</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('img/IMG_20251225_131334_688.png') }}">
     <script src="{{ asset('js/tailwind.js') }}"></script>
     <script src="{{ asset('js/jquery.js') }}"></script>
+    
 </head>
 
 <body>
@@ -632,6 +634,7 @@
         </div>
     </div>
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/multiselect.js') }}"></script>
 </body>
 
 </html>
