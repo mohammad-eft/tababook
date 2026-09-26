@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="flex items-center gap-3">
-            <a href="#" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl text-sm font-medium transition-colors shadow-sm flex items-center gap-2">
+            <a href="{{ route('pack.create') }}" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl text-sm font-medium transition-colors shadow-sm flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                 </svg>
@@ -167,271 +167,84 @@
                         <th class="py-3 px-4 font-medium">تعداد کتاب</th>
                         <th class="py-3 px-4 font-medium">قیمت</th>
                         <th class="py-3 px-4 font-medium">تخفیف</th>
-                        <th class="py-3 px-4 font-medium">وضعیت</th>
+                
                         <th class="py-3 px-4 font-medium">تاریخ ایجاد</th>
                         <th class="py-3 px-4 font-medium w-32">عملیات</th>
                     </tr>
                 </thead>
                 <tbody id="packsTableBody" class="divide-y divide-slate-100">
-                    <!-- ردیف ۱ -->
-                    <tr class="hover:bg-slate-50 transition-colors">
-                        <td class="py-3 px-4">
-                            <input type="checkbox" class="pack-checkbox w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
-                        </td>
-                        <td class="py-3 px-4">
-                            <div class="flex items-center gap-3">
-                                <div class="w-12 h-12 rounded-lg bg-slate-100 overflow-hidden flex-shrink-0">
-                                    <img src="https://picsum.photos/60/60?random=10" alt="" class="w-full h-full object-cover">
-                                </div>
-                                <div class="min-w-0">
-                                    <p class="font-bold text-slate-800 truncate">پک کتاب‌های روانشناسی موفقیت</p>
-                                    <p class="text-xs text-slate-500 truncate mt-0.5">شامل ۵ کتاب برتر حوزه روانشناسی</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="py-3 px-4">
-                            <span class="inline-flex items-center gap-1 text-slate-700">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                                </svg>
-                                ۵ کتاب
-                            </span>
-                        </td>
-                        <td class="py-3 px-4">
-                            <div class="flex flex-col">
-                                <span class="font-bold text-slate-800">۴۲۵,۰۰۰ تومان</span>
-                                <span class="text-xs text-slate-400 line-through">۵۰۰,۰۰۰ تومان</span>
-                            </div>
-                        </td>
-                        <td class="py-3 px-4">
-                            <span class="inline-flex items-center bg-rose-50 text-rose-600 text-xs px-2.5 py-1 rounded-full font-medium">۱۵٪</span>
-                        </td>
-                        <td class="py-3 px-4">
-                            <span class="inline-flex items-center gap-1 bg-emerald-50 text-emerald-700 text-xs px-2.5 py-1 rounded-full font-medium">
-                                <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
-                                فعال
-                            </span>
-                        </td>
-                        <td class="py-3 px-4 text-slate-500 text-xs">۱۴۰۴/۰۱/۱۵</td>
-                        <td class="py-3 px-4">
-                            <div class="flex items-center gap-1">
-                                <button class="tooltip-wrapper relative p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                    </svg>
-                                    <span class="tooltip absolute bottom-full right-1/2 translate-x-1/2 mb-1 bg-slate-800 text-white text-xs px-2 py-1 rounded whitespace-nowrap">مشاهده</span>
-                                </button>
-                                <button class="tooltip-wrapper relative p-2 text-slate-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-colors">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                    </svg>
-                                    <span class="tooltip absolute bottom-full right-1/2 translate-x-1/2 mb-1 bg-slate-800 text-white text-xs px-2 py-1 rounded whitespace-nowrap">ویرایش</span>
-                                </button>
-                                <button class="tooltip-wrapper relative p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                    </svg>
-                                    <span class="tooltip absolute bottom-full right-1/2 translate-x-1/2 mb-1 bg-slate-800 text-white text-xs px-2 py-1 rounded whitespace-nowrap">حذف</span>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
 
-                    <!-- ردیف ۲ -->
+                    @foreach ($packs as $pack)
                     <tr class="hover:bg-slate-50 transition-colors">
                         <td class="py-3 px-4">
                             <input type="checkbox" class="pack-checkbox w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
                         </td>
                         <td class="py-3 px-4">
                             <div class="flex items-center gap-3">
-                                <div class="w-12 h-12 rounded-lg bg-slate-100 overflow-hidden flex-shrink-0">
-                                    <img src="https://picsum.photos/60/60?random=11" alt="" class="w-full h-full object-cover">
-                                </div>
-                                <div class="min-w-0">
-                                    <p class="font-bold text-slate-800 truncate">پک کتاب‌های کلاسیک جهان</p>
-                                    <p class="text-xs text-slate-500 truncate mt-0.5">شاهکارهای ادبیات کلاسیک در یک پک</p>
-                                </div>
+                                <a href="{{ route('pack.single', $pack->id) }}" class="block w-12 h-12 rounded-lg bg-slate-100 overflow-hidden flex-shrink-0">
+                                    <img src="{{ asset('storage/'.$pack->image) }}" alt="" class="w-full h-full object-cover">
+                                </a>
+                                <a href="{{ route('pack.single', $pack->id) }}" class="min-w-0">
+                                    <p class="font-bold text-slate-800 truncate">{{ $pack->title }}</p>
+                                    <p class="text-xs text-slate-500 truncate mt-0.5">{{ $pack->summary }}</p>
+                                </a>
                             </div>
                         </td>
                         <td class="py-3 px-4">
-                            <span class="inline-flex items-center gap-1 text-slate-700">
+                            <span class="inline-flex items-center gap-1 text-slate-700 in-fa">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                                 </svg>
-                                ۳ کتاب
+                                {{ count($pack->products) }}
                             </span>
                         </td>
                         <td class="py-3 px-4">
-                            <div class="flex flex-col">
-                                <span class="font-bold text-slate-800">۳۲۰,۰۰۰ تومان</span>
-                                <span class="text-xs text-slate-400 line-through">۴۰۰,۰۰۰ تومان</span>
-                            </div>
+                            @if ($pack->secondary_price)
+                                <div class="flex flex-col">
+                                    <span class="font-bold text-slate-800 in-fa">{{ $pack->secondary_price }} تومان</span>
+                                    <span class="text-xs text-slate-400 line-through in-fa">{{ $pack->primary_price }} تومان</span>
+                                </div>
+                            @else
+                                <div class="flex flex-col">
+                                    <span class="font-bold text-slate-800 in-fa">{{ $pack->primary_price }} تومان</span>
+                                </div>
+                            @endif
                         </td>
-                        <td class="py-3 px-4">
-                            <span class="inline-flex items-center bg-rose-50 text-rose-600 text-xs px-2.5 py-1 rounded-full font-medium">۲۰٪</span>
-                        </td>
-                        <td class="py-3 px-4">
-                            <span class="inline-flex items-center gap-1 bg-amber-50 text-amber-700 text-xs px-2.5 py-1 rounded-full font-medium">
-                                <span class="w-1.5 h-1.5 bg-amber-500 rounded-full"></span>
-                                در انتظار انتشار
-                            </span>
-                        </td>
-                        <td class="py-3 px-4 text-slate-500 text-xs">۱۴۰۴/۰۱/۱۲</td>
+                        @if($pack->percent)
+                            <td class="py-3 px-4">
+                                <span class="inline-flex items-center bg-rose-50 text-rose-600 text-xs px-2.5 py-1 rounded-full font-medium in-fa" dir="ltr">{{ $pack->percent }} %</span>
+                            </td>
+                        @else
+                            <td class="py-3 px-4">
+                                <span class="inline-flex items-center bg-rose-50 text-rose-600 text-xs px-2.5 py-1 rounded-full font-medium">-</span>
+                            </td>
+                        @endif
+                        <td class="py-3 px-4 text-slate-500 text-xs in-fa">{{ $pack->date }}</td>
                         <td class="py-3 px-4">
                             <div class="flex items-center gap-1">
-                                <button class="tooltip-wrapper relative p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors">
+                                <a href="{{ route('pack.single', $pack->id) }}" class="tooltip-wrapper relative p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                     </svg>
                                     <span class="tooltip absolute bottom-full right-1/2 translate-x-1/2 mb-1 bg-slate-800 text-white text-xs px-2 py-1 rounded whitespace-nowrap">مشاهده</span>
-                                </button>
-                                <button class="tooltip-wrapper relative p-2 text-slate-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-colors">
+                                </a>
+                                <a href="{{ route('pack.edit', $pack->id) }}" class="tooltip-wrapper relative p-2 text-slate-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                     </svg>
                                     <span class="tooltip absolute bottom-full right-1/2 translate-x-1/2 mb-1 bg-slate-800 text-white text-xs px-2 py-1 rounded whitespace-nowrap">ویرایش</span>
-                                </button>
-                                <button class="tooltip-wrapper relative p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors">
+                                </a>
+                                <a href="{{ route('pack.delete', $pack->id) }}" class="tooltip-wrapper relative p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                     </svg>
                                     <span class="tooltip absolute bottom-full right-1/2 translate-x-1/2 mb-1 bg-slate-800 text-white text-xs px-2 py-1 rounded whitespace-nowrap">حذف</span>
-                                </button>
+                                </a>
                             </div>
                         </td>
                     </tr>
-
-                    <!-- ردیف ۳ -->
-                    <tr class="hover:bg-slate-50 transition-colors">
-                        <td class="py-3 px-4">
-                            <input type="checkbox" class="pack-checkbox w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
-                        </td>
-                        <td class="py-3 px-4">
-                            <div class="flex items-center gap-3">
-                                <div class="w-12 h-12 rounded-lg bg-slate-100 overflow-hidden flex-shrink-0">
-                                    <img src="https://picsum.photos/60/60?random=12" alt="" class="w-full h-full object-cover">
-                                </div>
-                                <div class="min-w-0">
-                                    <p class="font-bold text-slate-800 truncate">پک کتاب‌های کودک و نوجوان</p>
-                                    <p class="text-xs text-slate-500 truncate mt-0.5">مجموعه‌ای جذاب برای کودکان</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="py-3 px-4">
-                            <span class="inline-flex items-center gap-1 text-slate-700">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                                </svg>
-                                ۷ کتاب
-                            </span>
-                        </td>
-                        <td class="py-3 px-4">
-                            <div class="flex flex-col">
-                                <span class="font-bold text-slate-800">۲۸۰,۰۰۰ تومان</span>
-                                <span class="text-xs text-slate-400 line-through">۳۵۰,۰۰۰ تومان</span>
-                            </div>
-                        </td>
-                        <td class="py-3 px-4">
-                            <span class="inline-flex items-center bg-rose-50 text-rose-600 text-xs px-2.5 py-1 rounded-full font-medium">۲۰٪</span>
-                        </td>
-                        <td class="py-3 px-4">
-                            <span class="inline-flex items-center gap-1 bg-emerald-50 text-emerald-700 text-xs px-2.5 py-1 rounded-full font-medium">
-                                <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
-                                فعال
-                            </span>
-                        </td>
-                        <td class="py-3 px-4 text-slate-500 text-xs">۱۴۰۴/۰۱/۱۰</td>
-                        <td class="py-3 px-4">
-                            <div class="flex items-center gap-1">
-                                <button class="tooltip-wrapper relative p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                    </svg>
-                                    <span class="tooltip absolute bottom-full right-1/2 translate-x-1/2 mb-1 bg-slate-800 text-white text-xs px-2 py-1 rounded whitespace-nowrap">مشاهده</span>
-                                </button>
-                                <button class="tooltip-wrapper relative p-2 text-slate-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-colors">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                    </svg>
-                                    <span class="tooltip absolute bottom-full right-1/2 translate-x-1/2 mb-1 bg-slate-800 text-white text-xs px-2 py-1 rounded whitespace-nowrap">ویرایش</span>
-                                </button>
-                                <button class="tooltip-wrapper relative p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                    </svg>
-                                    <span class="tooltip absolute bottom-full right-1/2 translate-x-1/2 mb-1 bg-slate-800 text-white text-xs px-2 py-1 rounded whitespace-nowrap">حذف</span>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <!-- ردیف ۴ -->
-                    <tr class="hover:bg-slate-50 transition-colors">
-                        <td class="py-3 px-4">
-                            <input type="checkbox" class="pack-checkbox w-4 h-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
-                        </td>
-                        <td class="py-3 px-4">
-                            <div class="flex items-center gap-3">
-                                <div class="w-12 h-12 rounded-lg bg-slate-100 overflow-hidden flex-shrink-0">
-                                    <img src="https://picsum.photos/60/60?random=13" alt="" class="w-full h-full object-cover">
-                                </div>
-                                <div class="min-w-0">
-                                    <p class="font-bold text-slate-800 truncate">پک کتاب‌های تاریخی ایران</p>
-                                    <p class="text-xs text-slate-500 truncate mt-0.5">سیری در تاریخ پرافتخار ایران</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="py-3 px-4">
-                            <span class="inline-flex items-center gap-1 text-slate-700">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                                </svg>
-                                ۴ کتاب
-                            </span>
-                        </td>
-                        <td class="py-3 px-4">
-                            <div class="flex flex-col">
-                                <span class="font-bold text-slate-800">۵۸۰,۰۰۰ تومان</span>
-                                <span class="text-xs text-slate-400 line-through">۷۰۰,۰۰۰ تومان</span>
-                            </div>
-                        </td>
-                        <td class="py-3 px-4">
-                            <span class="inline-flex items-center bg-rose-50 text-rose-600 text-xs px-2.5 py-1 rounded-full font-medium">۱۷٪</span>
-                        </td>
-                        <td class="py-3 px-4">
-                            <span class="inline-flex items-center gap-1 bg-rose-50 text-rose-700 text-xs px-2.5 py-1 rounded-full font-medium">
-                                <span class="w-1.5 h-1.5 bg-rose-500 rounded-full"></span>
-                                غیرفعال
-                            </span>
-                        </td>
-                        <td class="py-3 px-4 text-slate-500 text-xs">۱۴۰۴/۰۱/۰۵</td>
-                        <td class="py-3 px-4">
-                            <div class="flex items-center gap-1">
-                                <button class="tooltip-wrapper relative p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                    </svg>
-                                    <span class="tooltip absolute bottom-full right-1/2 translate-x-1/2 mb-1 bg-slate-800 text-white text-xs px-2 py-1 rounded whitespace-nowrap">مشاهده</span>
-                                </button>
-                                <button class="tooltip-wrapper relative p-2 text-slate-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-colors">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                    </svg>
-                                    <span class="tooltip absolute bottom-full right-1/2 translate-x-1/2 mb-1 bg-slate-800 text-white text-xs px-2 py-1 rounded whitespace-nowrap">ویرایش</span>
-                                </button>
-                                <button class="tooltip-wrapper relative p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                    </svg>
-                                    <span class="tooltip absolute bottom-full right-1/2 translate-x-1/2 mb-1 bg-slate-800 text-white text-xs px-2 py-1 rounded whitespace-nowrap">حذف</span>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -439,172 +252,73 @@
         <!-- نمای موبایل: کارت‌ها -->
         <div class="md:hidden divide-y divide-slate-100" id="packsMobileList">
             <!-- کارت ۱ -->
-            <div class="p-4">
-                <div class="flex items-start gap-3">
-                    <input type="checkbox" class="pack-checkbox w-4 h-4 mt-1 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer flex-shrink-0">
-                    <div class="w-14 h-14 rounded-lg bg-slate-100 overflow-hidden flex-shrink-0">
-                        <img src="https://picsum.photos/60/60?random=10" alt="" class="w-full h-full object-cover">
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between items-start gap-2">
-                            <h3 class="font-bold text-slate-800 text-sm">پک کتاب‌های روانشناسی موفقیت</h3>
-                            <span class="inline-flex items-center gap-1 bg-emerald-50 text-emerald-700 text-xs px-2 py-0.5 rounded-full font-medium flex-shrink-0">
-                                فعال
-                            </span>
-                        </div>
-                        <p class="text-xs text-slate-500 mt-1 line-clamp-1">شامل ۵ کتاب برتر حوزه روانشناسی</p>
+            @foreach ($packs as $pack)
+                <div class="p-4">
+                    <div class="flex items-start gap-3">
+                        <input type="checkbox" class="pack-checkbox w-4 h-4 mt-1 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer flex-shrink-0">
+                        <a href="{{ route('pack.single', $pack->id) }}" class="w-14 h-14 rounded-lg bg-slate-100 overflow-hidden flex-shrink-0">
+                            <img src="{{ asset('storage/'.$pack->image) }}" alt="" class="w-full h-full object-cover">
+                        </a>
+                        <div class="flex-1 min-w-0">
+                            <a href="{{ route('pack.single', $pack->id) }}" class="flex justify-between items-start gap-2">
+                                <h3 class="font-bold text-slate-800 text-sm">{{ $pack->title }}</h3>
+                                {{-- <span class="inline-flex items-center gap-1 bg-emerald-50 text-emerald-700 text-xs px-2 py-0.5 rounded-full font-medium flex-shrink-0">
+                                    فعال
+                                </span> --}}
+                            </a>
+                            <a href="{{ route('pack.single', $pack->id) }}" class="text-xs text-slate-500 mt-1 line-clamp-1 in-fa">{{ $pack->summary }}</a>
 
-                        <div class="flex flex-wrap items-center gap-2 mt-2">
-                            <span class="inline-flex items-center gap-1 text-xs text-slate-600 bg-slate-100 px-2 py-0.5 rounded">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                                </svg>
-                                ۵ کتاب
-                            </span>
-                            <span class="inline-flex items-center bg-rose-50 text-rose-600 text-xs px-2 py-0.5 rounded-full font-medium">۱۵٪ تخفیف</span>
-                        </div>
-
-                        <div class="flex items-center justify-between mt-3">
-                            <div class="flex flex-col">
-                                <span class="font-bold text-slate-800 text-sm">۴۲۵,۰۰۰ تومان</span>
-                                <span class="text-xs text-slate-400 line-through">۵۰۰,۰۰۰ تومان</span>
+                            <div class="flex flex-wrap items-center gap-2 mt-2">
+                                <span class="inline-flex items-center gap-1 text-xs text-slate-600 bg-slate-100 px-2 py-0.5 rounded">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                    </svg>
+                                    {{ count($pack->products) }}
+                                </span>
+                                @if ($pack->percent)
+                                    <span class="inline-flex items-center bg-rose-50 text-rose-600 text-xs px-2 py-0.5 rounded-full font-medium in-fa">{{ $pack->percent }} % تخفیف</span>
+                                @else
+                                    <span class="inline-flex items-center bg-rose-50 text-rose-600 text-xs px-2 py-0.5 rounded-full font-medium">-</span>
+                                @endif
                             </div>
-                            <div class="flex items-center gap-1">
-                                <button class="p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                    </svg>
-                                </button>
-                                <button class="p-2 text-slate-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-colors">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                    </svg>
-                                </button>
-                                <button class="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                    </svg>
-                                </button>
+
+                            <div class="flex items-center justify-between mt-3">
+                                @if($pack->secondary_price)
+                                    <div class="flex flex-col">
+                                        <span class="font-bold text-slate-800 text-sm in-fa">{{ $pack->secondary_price }} تومان</span>
+                                        <span class="text-xs text-slate-400 line-through in-fa">{{ $pack->primary_price }} تومان</span>
+                                    </div>
+                                @else
+                                    <div class="flex flex-col">
+                                        <span class="font-bold text-slate-800 text-sm in-fa">{{ $pack->primary_price }} تومان</span>
+                                    </div>
+                                @endif
+                                <div class="flex items-center gap-1">
+                                    <a href="{{ route('pack.single', $pack->id) }}" class="p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                        </svg>
+                                    </a>
+                                    <a href="{{ route('pack.edit', $pack->id) }}" class="p-2 text-slate-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-colors">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                        </svg>
+                                    </a>
+                                    <a href="{{ route('pack.delete', $pack->id) }}" class="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                    </a>
+                                </div>
                             </div>
+
+                            <p class="text-xs text-slate-400 mt-2 in-fa">{{ $pack->date }}</p>
                         </div>
-
-                        <p class="text-xs text-slate-400 mt-2">۱۴۰۴/۰۱/۱۵</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- کارت ۲ -->
-            <div class="p-4">
-                <div class="flex items-start gap-3">
-                    <input type="checkbox" class="pack-checkbox w-4 h-4 mt-1 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer flex-shrink-0">
-                    <div class="w-14 h-14 rounded-lg bg-slate-100 overflow-hidden flex-shrink-0">
-                        <img src="https://picsum.photos/60/60?random=11" alt="" class="w-full h-full object-cover">
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between items-start gap-2">
-                            <h3 class="font-bold text-slate-800 text-sm">پک کتاب‌های کلاسیک جهان</h3>
-                            <span class="inline-flex items-center gap-1 bg-amber-50 text-amber-700 text-xs px-2 py-0.5 rounded-full font-medium flex-shrink-0">
-                                در انتظار
-                            </span>
-                        </div>
-                        <p class="text-xs text-slate-500 mt-1 line-clamp-1">شاهکارهای ادبیات کلاسیک در یک پک</p>
-
-                        <div class="flex flex-wrap items-center gap-2 mt-2">
-                            <span class="inline-flex items-center gap-1 text-xs text-slate-600 bg-slate-100 px-2 py-0.5 rounded">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                                </svg>
-                                ۳ کتاب
-                            </span>
-                            <span class="inline-flex items-center bg-rose-50 text-rose-600 text-xs px-2 py-0.5 rounded-full font-medium">۲۰٪ تخفیف</span>
-                        </div>
-
-                        <div class="flex items-center justify-between mt-3">
-                            <div class="flex flex-col">
-                                <span class="font-bold text-slate-800 text-sm">۳۲۰,۰۰۰ تومان</span>
-                                <span class="text-xs text-slate-400 line-through">۴۰۰,۰۰۰ تومان</span>
-                            </div>
-                            <div class="flex items-center gap-1">
-                                <button class="p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                    </svg>
-                                </button>
-                                <button class="p-2 text-slate-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-colors">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                    </svg>
-                                </button>
-                                <button class="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-
-                        <p class="text-xs text-slate-400 mt-2">۱۴۰۴/۰۱/۱۲</p>
                     </div>
                 </div>
-            </div>
+            @endforeach
 
-            <!-- کارت ۳ -->
-            <div class="p-4">
-                <div class="flex items-start gap-3">
-                    <input type="checkbox" class="pack-checkbox w-4 h-4 mt-1 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer flex-shrink-0">
-                    <div class="w-14 h-14 rounded-lg bg-slate-100 overflow-hidden flex-shrink-0">
-                        <img src="https://picsum.photos/60/60?random=12" alt="" class="w-full h-full object-cover">
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between items-start gap-2">
-                            <h3 class="font-bold text-slate-800 text-sm">پک کتاب‌های کودک و نوجوان</h3>
-                            <span class="inline-flex items-center gap-1 bg-emerald-50 text-emerald-700 text-xs px-2 py-0.5 rounded-full font-medium flex-shrink-0">
-                                فعال
-                            </span>
-                        </div>
-                        <p class="text-xs text-slate-500 mt-1 line-clamp-1">مجموعه‌ای جذاب برای کودکان</p>
-
-                        <div class="flex flex-wrap items-center gap-2 mt-2">
-                            <span class="inline-flex items-center gap-1 text-xs text-slate-600 bg-slate-100 px-2 py-0.5 rounded">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                                </svg>
-                                ۷ کتاب
-                            </span>
-                            <span class="inline-flex items-center bg-rose-50 text-rose-600 text-xs px-2 py-0.5 rounded-full font-medium">۲۰٪ تخفیف</span>
-                        </div>
-
-                        <div class="flex items-center justify-between mt-3">
-                            <div class="flex flex-col">
-                                <span class="font-bold text-slate-800 text-sm">۲۸۰,۰۰۰ تومان</span>
-                                <span class="text-xs text-slate-400 line-through">۳۵۰,۰۰۰ تومان</span>
-                            </div>
-                            <div class="flex items-center gap-1">
-                                <button class="p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                    </svg>
-                                </button>
-                                <button class="p-2 text-slate-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-colors">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                    </svg>
-                                </button>
-                                <button class="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-
-                        <p class="text-xs text-slate-400 mt-2">۱۴۰۴/۰۱/۱۰</p>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <!-- نوار عملیات گروهی -->
@@ -751,22 +465,22 @@
     }
 
     // ========== حذف با تأیید ==========
-    document.querySelectorAll('.tooltip-wrapper').forEach(btn => {
-        if (btn.querySelector('.tooltip')?.textContent === 'حذف') {
-            btn.addEventListener('click', function (e) {
-                e.preventDefault();
-                if (confirm('آیا از حذف این پک اطمینان دارید؟ این عمل قابل بازگشت نیست.')) {
-                    const row = this.closest('tr') || this.closest('.p-4');
-                    if (row) {
-                        row.style.transition = 'opacity .3s, transform .3s';
-                        row.style.opacity = '0';
-                        row.style.transform = 'translateX(-20px)';
-                        setTimeout(() => row.remove(), 300);
-                    }
-                }
-            });
-        }
-    });
+    // document.querySelectorAll('.tooltip-wrapper').forEach(btn => {
+    //     if (btn.querySelector('.tooltip')?.textContent === 'حذف') {
+    //         btn.addEventListener('click', function (e) {
+    //             e.preventDefault();
+    //             if (confirm('آیا از حذف این پک اطمینان دارید؟ این عمل قابل بازگشت نیست.')) {
+    //                 const row = this.closest('tr') || this.closest('.p-4');
+    //                 if (row) {
+    //                     row.style.transition = 'opacity .3s, transform .3s';
+    //                     row.style.opacity = '0';
+    //                     row.style.transform = 'translateX(-20px)';
+    //                     setTimeout(() => row.remove(), 300);
+    //                 }
+    //             }
+    //         });
+    //     }
+    // });
 </script>
 
 

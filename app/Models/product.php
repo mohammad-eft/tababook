@@ -31,4 +31,7 @@ class product extends Model
     {
         return $this->hasMany(carts::class);
     }
+    public function packs(){
+        return $this->belongsToMany(pack::class, 'product_packs');
+    }
 }

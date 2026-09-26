@@ -20,6 +20,6 @@ class pack extends Model
     }
 
     public function products(){
-        return $this->belongsToMany(product::class);
+        return $this->belongsToMany(product::class, 'product_packs');
     }
 }
