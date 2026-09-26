@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\contactUs;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\classes\homeSettin;
 use App\classes\homeSetting;
 class ContactUsController extends Controller
 {

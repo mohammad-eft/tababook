@@ -4,14 +4,10 @@ namespace App\Http\Controllers;
 
 use App\classes\homeSetting;
 use App\Models\category;
-// use App\Models\logo;
 use App\Models\product;
-// use App\Models\service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use DB;
-use Log;
 
 class CategoryController extends Controller
 {
