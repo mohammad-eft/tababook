@@ -24,10 +24,48 @@ let hamburger_menu_item = document.getElementById('hamburger_menu_item')
 
 
 let account_pupup_item = document.getElementById('account_pupup_item')
+let account_pupup_close = document.getElementById('account_pupup_close')
 // console.log('hfksldhfksjhdfjksdf')
 function account_pupup(item){
     if(item == 'open'){
-        account_pupup_item.classList.toggle('invisible')
-        account_pupup_item.classList.toggle('opacity-0')
+        account_pupup_item.classList.remove('invisible')
+        account_pupup_item.classList.remove('opacity-0')
+        account_pupup_close.classList.remove('invisible')
+        account_pupup_close.classList.remove('opacity-0')
+    }
+    if(item == 'close'){
+        console.log('djfsdfjsjdf')
+        account_pupup_item.classList.add('invisible')
+        account_pupup_item.classList.add('opacity-0')
+        account_pupup_close.classList.add('invisible')
+        account_pupup_close.classList.add('opacity-0')
     }
 }
+
+
+
+let search_pupup_item = document.getElementById('search_pupup_item')
+let search_pupup_item_close = document.getElementById('search_pupup_item_close')
+
+// search_pupup
+function search_pupup(item){
+    if(item == 'open'){
+        search_pupup_item.classList.remove('h-0')
+        search_pupup_item.classList.add('h-1/4')
+        search_pupup_item_close.classList.remove('invisible')
+        search_pupup_item_close.classList.remove('opacity-0')
+
+    }if(item == 'close'){
+        search_pupup_item.classList.add('h-0')
+        search_pupup_item.classList.remove('h-1/4')
+        search_pupup_item_close.classList.add('invisible')
+        search_pupup_item_close.classList.add('opacity-0')
+
+    }
+}
+
+
+
+
+
+// search_pupup
