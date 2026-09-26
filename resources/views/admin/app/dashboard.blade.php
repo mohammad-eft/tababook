@@ -22,7 +22,7 @@
                 <span class="inline-block w-full h-1/5 bg-black rounded-md"></span>
             </div>
         </div>
-        <div class="hidden lg:block lg:w-3/12 bg-[#0D0E12] fixed right-0 top-0 h-dvh px-5">
+        <div class="hidden lg:block lg:w-[265px] bg-[#0D0E12] fixed right-0 top-0 h-dvh px-5">
             <div class="flex justify-center pt-5">
                 <a href="{{ route('home') }}" class="right-0 mr-[15px]">
                     <img src="{{ asset('storage/' . $setting['logo']) }}" alt="" class="w-full">
@@ -32,7 +32,7 @@
             <div class="py-3 h-[80%] overflow-y-auto flex flex-col gap-3" style="scrollbar-width: none;">
                 @can('access', ['admin'])
                  
-                    <div class="border-b border-gray-500 pb-3">
+                    <div class="pb-3">
                         <div
                             class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('category.*')) bg-[#383c4d] @endif">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -82,7 +82,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="border-b border-gray-500 pb-3">
+                    <div class="pb-3">
                         <div
                             class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('category.*')) bg-[#383c4d] @endif">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -119,7 +119,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="border-b border-gray-500 pb-3">
+                    <div class="pb-3">
                         <div
                             class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('product.*')) bg-[#383c4d] @endif">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -154,7 +154,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="border-b border-gray-500 pb-3">
+                    <div class="pb-3">
                         <div
                             class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('order.*')) bg-[#383c4d] @endif">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -186,7 +186,7 @@
                     </div>
                    
                 @endcan
-                <div class="border-b border-gray-500 pb-3">
+                <div class="pb-3">
                     <div
                         class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('user.*')) bg-[#383c4d] @endif">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -229,7 +229,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="border-b border-gray-500 pb-3">
+                <div class="pb-3">
                     <div
                         class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('aboutUs.*')) bg-[#383c4d] @endif">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -270,7 +270,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="border-b border-gray-500 pb-3">
+                <div class="pb-3">
                     <div
                         class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('contactUs.*')) bg-[#383c4d] @endif">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -314,7 +314,7 @@
             </div>
         </div>
         <!-- responsive menu -->
-        <div class="lg:hidden flex fixed z-1000 -right-full w-full h-dvh transition-all duration-500" id="menu">
+        <div class="lg:hidden flex fixed z-1000 -right-full w-full h-dvh transition-all duration-500 bg-[#0D0E12]/50" id="menu">
             <div class="responsive-menu-shadow w-2/3 md:w-5/12 px-5 pt-10 bg-[#0D0E12]">
                 <div class="relative" onclick="responsive_menu('close')">
                     <button
@@ -333,7 +333,7 @@
                 <hr class="text-[darkslategray] mt-2.5">
                 <div class="py-5 h-[80%] overflow-y-auto flex flex-col gap-3" style="scrollbar-width: none;">
                     @can('access', ['admin'])
-                        {{-- <div class="border-b border-gray-500 pb-3">
+                        {{-- <div class="pb-3">
                             <div
                                 class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('settings.*')) bg-[#383c4d] @endif">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -387,7 +387,7 @@
                                 </ul>
                             </div>
                         </div> --}}
-                        <div class="border-b border-gray-500 pb-3">
+                        <div class="pb-3">
                             <div
                                 class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('category.*')) bg-[#383c4d] @endif">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -423,7 +423,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="border-b border-gray-500 pb-3">
+                        <div class="pb-3">
                             <div
                                 class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('product.*')) bg-[#383c4d] @endif">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -459,7 +459,7 @@
                                 </ul>
                             </div>
                         </div>
-                        {{-- <div class="border-b border-gray-500 pb-3">
+                        {{-- <div class="pb-3">
                             <div
                                 class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('consultRequest.*')) bg-[#383c4d] @endif">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -494,7 +494,7 @@
                             </div>
                         </div> --}}
                     @endcan
-                    <div class="border-b border-gray-500 pb-3">
+                    <div class="pb-3">
                         <div
                             class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('user.*')) bg-[#383c4d] @endif">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -538,7 +538,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="border-b border-gray-500 pb-3">
+                    <div class="pb-3">
                         <div
                             class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('user.*')) bg-[#383c4d] @endif">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -582,11 +582,11 @@
                     </div>
                 </div>
             </div>
-            <div class="w-1/3 md:w-7/12 bg-black/50" onclick="responsive_menu('close')"></div>
+            <div class="w-1/3 md:w-7/12" onclick="responsive_menu('close')"></div>
         </div>
         <!-- end responsive menu -->
         <div class="w-full">
-            <div class="w-full lg:w-9/12 float-end p-5 overflow-y-auto" style="scrollbar-width:none;">
+            <div class="w-full lg:w-[calc(100%-265px)] float-end p-5 overflow-y-auto" style="scrollbar-width:none;">
                 @yield('content')
             </div>
         </div>
