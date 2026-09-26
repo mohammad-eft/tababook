@@ -34,9 +34,9 @@
                  
                     <div class="pb-3">
                         <div
-                            class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('category.*')) bg-[#383c4d] @endif">
+                            class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('setting.*')) bg-[#383c4d] @endif">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                class="size-6 fill-white w-[15px] transition-all duration-300 @if (Route::is('category.*')) rotate-180 @endif">
+                                class="size-6 fill-white w-[15px] transition-all duration-300 @if (Route::is('setting.*')) rotate-180 @endif">
                                 <path fill-rule="evenodd"
                                     d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
                                     clip-rule="evenodd" />
@@ -83,6 +83,41 @@
                                     <span class="size-1 bg-white rounded-sm"></span>
                                     <a href="{{ route('setting.footerSettings') }}"
                                         class="py-1 @if (Route::is('setting.footerSettings')) text-[#FF0000] @endif">فوتر</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="pb-3">
+                        <div
+                            class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('pack.*')) bg-[#383c4d] @endif">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="size-6 fill-white w-[15px] transition-all duration-300 @if (Route::is('pack.*')) rotate-180 @endif">
+                                <path fill-rule="evenodd"
+                                    d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <div class="flex flex-row-reverse items-center gap-2 text-white">
+                                <span class="flex justify-end">پک های محصول</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-5 fill-white">
+                                    <path
+                                        d="M64 80c0-26.5 21.5-48 48-48h80c17.7 0 33.6 7.1 45.3 19.7L248.3 64H400c26.5 0 48 21.5 48 48v32H64V80z" />
+                                    <path
+                                        d="M64 160v272c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V160H64zm48 64h288v208H112V224zm40 40c-13.3 0-24 10.7-24 24s10.7 24 24 24h208c13.3 0 24-10.7 24-24s-10.7-24-24-24H152z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="overflow-y-auto transition-all duration-300 @if (Route::is('pack.*')) max-h-100 @else max-h-0 @endif"
+                            style="scrollbar-width: none;">
+                            <ul class="gap-2.5 pr-3">
+                                <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
+                                    <span class="size-1 bg-white rounded-sm"></span>
+                                    <a href="{{ route('pack.create') }}"
+                                        class="py-1 @if (Route::is('pack.create')) text-[#FF0000] @endif">ایجاد پک</a>
+                                </li>
+                                <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
+                                    <span class="size-1 bg-white rounded-sm"></span>
+                                    <a href="{{ route('pack.list') }}"
+                                        class="py-1 @if (Route::is('pack.list')) text-[#FF0000] @endif">نمایش همه پک ها</a>
                                 </li>
                             </ul>
                         </div>

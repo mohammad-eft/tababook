@@ -12,6 +12,7 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\PackController;
 use App\Http\Controllers\SearchController;
 use App\Models\product;
 Route::get('/test', function(){
@@ -181,9 +182,25 @@ Route::group([
 Route::group([
     'prefix'=>'order',
     'controller'=>OrdersController::class,
+    'middleware'=>AuthMiddleware::class,
     'as'=>'order.'
 ], function(){
     Route::get('/create', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
     Route::get('/index', 'index')->name('index');
+});
+
+Route::group([
+    'prefix'=>'pack',
+    'controller'=>PackController::class,
+    'middleware'=>AuthMiddleware::class,
+    'as'=>'pack.'
+], function(){
+    Route::get('/create', 'create')->name('create');
+    Route::Post('/store', 'store')->name('store');
+    Route::get('/edit/{pack}', 'edit')->name('edit');
+    Route::post('/update/{pack}', 'update')->name('update');
+    Route::get('/delete/{pack}', 'delete')->name('delete');
+    Route::get('/list', 'list')->name('list');
+    Route::get('/single/{pack}', 'single')->name('single');
 });
