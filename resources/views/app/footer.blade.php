@@ -1,13 +1,13 @@
 
-    <footer class="w-full mt-20 flex justify-center items-start bg-white py-6">
+    <footer class="w-full mt-20 flex justify-center items-start bg-white py-6" style="box-shadow:0 0 22px 2px #e2e2e2;">
         <section class="w-11/12 flex flex-col gap-4 justify-between items-start">
             <div class="w-full flex flex-col md:flex-row gap-5">
                 <div class="w-full md:w-2/3 h-full flex flex-col sm:flex-row gap-5 justify-between items-start">
                     <!-- address -->
                     <div class="sm:w-1/2 w-full h-full flex flex-col justify-start lg:items-start items-center">
 
-                        <img src="{{ asset('storage/home/ei_1788433185339-removebg-preview.webp') }}" alt=""
-                            class="w-45">
+                        <img src="{{ asset('storage/' . $setting['logo']) }}" alt="" class="w-45">
+
                         <div class="flex flex-col gap-2 items-start text-xs lg:text-sm xl:text-md">
                             <span class="text-lg text-green-700 font-bold">{{ $setting['footerBrandName'] }}</span>
                             <p>{{ $setting['footerBrandDescription'] }}</p>
