@@ -20,7 +20,7 @@
         </div>
     @endif
     <!-- order_box_start -->
-    <section class="w-full flex justify-center items-center">
+    <section class="w-full flex justify-center items-center bg-red-500">
         <div class="w-11/12 h-full flex flex-col justify-between items-center">
             <!-- root_single -->
             <div class="w-full flex justify-start items-center gap-3 py-2">

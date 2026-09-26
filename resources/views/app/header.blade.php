@@ -40,28 +40,102 @@
                     class="hidden xl:w-1/3 lg:w-1/4 max-lg:w-1/3 h-full lg:flex lg:justify-start justify-center items-center">
                     <img src="{{ asset('storage/' . $setting['logo']) }}" alt="" class="xl:w-1/3 lg:w-1/2 w-full">
                 </div>
-                <form action="{{ route('search.page') }}" method="POST" class="xl:w-1/3 lg:w-2/4 max-lg:w-1/3 h-full flex justify-center items-center max-lg:hidden">
-                    @csrf
-                    <div
-                        class="w-full py-2 flex justify-between items-center px-4 cart_shdow bg-[#F3ECE2] border border-[#e9d2b1] rounded-lg">
-                        <input type="text" name="title" class="outline-none w-full h-full"
-                            placeholder="کتاب یا نویسنده یا محصول خود را جستجو کنید">
-                        <button class="cursor-pointer">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-5 fill-[#929391]">
-                                <path
-                                    d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
-                            </svg>
-                        </button>
-                    </div>
-                </form>
+{{--                <form action="{{ route('search.page') }}" method="POST" class="xl:w-1/3 lg:w-2/4 max-lg:w-1/3 h-full flex justify-center items-center max-lg:hidden">--}}
+{{--                    @csrf--}}
+{{--                    <div--}}
+{{--                        class="w-full py-2 flex justify-between items-center px-4 cart_shdow bg-[#F3ECE2] border border-[#e9d2b1] rounded-lg">--}}
+{{--                        <input type="text" name="title" class="outline-none w-full h-full"--}}
+{{--                            placeholder="کتاب یا نویسنده یا محصول خود را جستجو کنید">--}}
+{{--                        <button class="cursor-pointer">--}}
+{{--                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-5 fill-[#929391]">--}}
+{{--                                <path--}}
+{{--                                    d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />--}}
+{{--                            </svg>--}}
+{{--                        </button>--}}
+{{--                    </div>--}}
+{{--                </form>--}}
+                <ul class="xl:w-1/3 lg:w-2/4 max-lg:w-1/3 h-full flex justify-center items-center max-lg:hidden">
+                    <li>
+                        <a href="{{ route('home') }}"
+                           class="flex justify-center flex-col items-center cursor-pointer py-1 group transition-all duration-300">
+                            <span>خانه</span>
+                            <div
+                                    class="rounded-md group-hover:w-full @if (Route::is('home')) w-full @else w-0 @endif bg-[#fcd7a4] h-[2px] transition-all duration-300">
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('product.index') }}"
+                           class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
+                            <span>محصولات</span>
+                            <div
+                                    class="rounded-md group-hover:w-full w-0 bg-[#fcd7a4] h-[2px] transition-all duration-300">
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('category.index') }}"
+                           class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
+                            <span>دسته بندی ها</span>
+                            <div
+                                    class="rounded-md group-hover:w-full w-[0px] bg-[#fcd7a4] h-[2px] transition-all duration-300">
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('contactUs.create')}}"
+                           class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
+                            <span>تماس باما</span>
+                            <div
+                                    class="rounded-md group-hover:w-full w-[0px] bg-[#fcd7a4] h-[2px] transition-all duration-300">
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('aboutUs.clientList')}}"
+                           class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
+                            <span>درباره ما</span>
+                            <div
+                                    class="rounded-md group-hover:w-full w-[0px] bg-[#fcd7a4] h-[2px] transition-all duration-300">
+                            </div>
+                        </a>
+                    </li>
+                </ul>
                 <div class="xl:w-1/3 lg:w-1/4 max-lg:w-1/3 h-full flex justify-end items-center lg:gap-5 gap-2">
-                    <a @if (!Auth::check()) href="{{ route('login') }}" @else href="{{ route('user.profile') }}" @endif
-                        class="block">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="lg:size-5 size-4">
+{{--                    <a @if (!Auth::check()) href="{{ route('login') }}" @else href="{{ route('user.profile') }}" @endif--}}
+{{--                        class="block relative ">--}}
+{{--                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="lg:size-5 size-4">--}}
+{{--                            <path--}}
+{{--                                d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464H398.7c-8.9-63.3-63.3-112-129-112H178.3c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z" />--}}
+{{--                        </svg>--}}
+{{--                    </a>--}}
+                    <div
+                        class="block relative group" >
+                        <svg onclick="account_pupup('open')" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="lg:size-5 size-4">
                             <path
                                 d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464H398.7c-8.9-63.3-63.3-112-129-112H178.3c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z" />
                         </svg>
-                    </a>
+                        <div class="w-50 bg-white absolute top-7 left-0 p-3 invisible opacity-0 transition-all duration-400 group-hover:visible group-hover:opacity-100" style="box-shadow:0 0 8px 2px #bab2b29e" id="account_pupup_item">
+
+                                <a @if (!Auth::check()) href="{{ route('login') }}" @else href="{{ route('user.profile') }}" @endif class="w-full rounded-lg cursor-pointer px-4 py-2 hover:bg-[#F9FAFC] flex gap-5 items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-4">
+                                        <!--! Font Awesome Pro 6.5.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                        <path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464H398.7c-8.9-63.3-63.3-112-129-112H178.3c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z"></path>
+                                    </svg>
+                                    <span class="text-sm text-[#5b5c75]">حساب کاربری</span>
+                                </a>
+                                <a href="" class="w-full rounded-lg cursor-pointer px-4 py-2 hover:bg-[#F9FAFC] flex gap-5 items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 20 20" id="entypo-log-out" class="w-4 fill-red-500">
+                                        <g>
+                                            <path d="M19 10l-6-5v3H6v4h7v3l6-5zM3 3h8V1H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H3V3z"></path>
+                                        </g>
+                                    </svg>
+                                    <span class="text-sm text-red-500">خروج</span>
+                                </a>
+
+                            </div>
+
+                    </div>
                     @if(Auth::check())
                     <a href="{{ route('cart.list') }}" class="block relative" id="orderBasket">
                         <svg class="w-[29px] h-[29px] text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -106,66 +180,66 @@
 {{--                    </div>--}}
                 </div>
             </div>
-            <div class="w-full h-10 flex justify-center items-center">
-                <ul class="flex gap-4 lg:gap-6 xl:gap-10 text-sm lg:text-base justify-end max-lg:hidden">
-                    <li>
-                        <a href="{{ route('home') }}"
-                            class="flex justify-center flex-col items-center cursor-pointer py-1 group transition-all duration-300">
-                            <span>خانه</span>
-                            <div
-                                class="rounded-md group-hover:w-full @if (Route::is('home')) w-full @else w-0 @endif bg-[#fcd7a4] h-[2px] transition-all duration-300">
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('product.index') }}"
-                            class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
-                            <span>محصولات</span>
-                            <div
-                                class="rounded-md group-hover:w-full w-0 bg-[#fcd7a4] h-[2px] transition-all duration-300">
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('category.index') }}"
-                            class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
-                            <span>دسته بندی ها</span>
-                            <div
-                                class="rounded-md group-hover:w-full w-[0px] bg-[#fcd7a4] h-[2px] transition-all duration-300">
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{route('aboutUs.clientList')}}"
-                            class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
-                            <span>تماس باما</span>
-                            <div
-                                class="rounded-md group-hover:w-full w-[0px] bg-[#fcd7a4] h-[2px] transition-all duration-300">
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{route('aboutUs.clientList')}}"
-                            class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
-                            <span>درباره ما</span>
-                            <div
-                                class="rounded-md group-hover:w-full w-[0px] bg-[#fcd7a4] h-[2px] transition-all duration-300">
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-                <div
-                    class="w-full py-2 bg-white rounded-full flex justify-between items-center px-2 cart_shdow lg:hidden">
-                    <input type="text" class="outline-none w-full h-full text-xs"
-                        placeholder="کتاب یا نویسنده یا محصول خود را جستجو کنید">
-                    <div class="">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-4 fill-[#929391]">
-                            <path
-                                d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
-                        </svg>
-                    </div>
-                </div>
-            </div>
+{{--            <div class="w-full h-10 flex justify-center items-center">--}}
+{{--                <ul class="flex gap-4 lg:gap-6 xl:gap-10 text-sm lg:text-base justify-end max-lg:hidden">--}}
+{{--                    <li>--}}
+{{--                        <a href="{{ route('home') }}"--}}
+{{--                            class="flex justify-center flex-col items-center cursor-pointer py-1 group transition-all duration-300">--}}
+{{--                            <span>خانه</span>--}}
+{{--                            <div--}}
+{{--                                class="rounded-md group-hover:w-full @if (Route::is('home')) w-full @else w-0 @endif bg-[#fcd7a4] h-[2px] transition-all duration-300">--}}
+{{--                            </div>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                    <li>--}}
+{{--                        <a href="{{ route('product.index') }}"--}}
+{{--                            class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">--}}
+{{--                            <span>محصولات</span>--}}
+{{--                            <div--}}
+{{--                                class="rounded-md group-hover:w-full w-0 bg-[#fcd7a4] h-[2px] transition-all duration-300">--}}
+{{--                            </div>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                    <li>--}}
+{{--                        <a href="{{ route('category.index') }}"--}}
+{{--                            class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">--}}
+{{--                            <span>دسته بندی ها</span>--}}
+{{--                            <div--}}
+{{--                                class="rounded-md group-hover:w-full w-[0px] bg-[#fcd7a4] h-[2px] transition-all duration-300">--}}
+{{--                            </div>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                    <li>--}}
+{{--                        <a href="{{route('contactUs.create')}}"--}}
+{{--                            class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">--}}
+{{--                            <span>تماس باما</span>--}}
+{{--                            <div--}}
+{{--                                class="rounded-md group-hover:w-full w-[0px] bg-[#fcd7a4] h-[2px] transition-all duration-300">--}}
+{{--                            </div>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                    <li>--}}
+{{--                        <a href="{{route('aboutUs.clientList')}}"--}}
+{{--                            class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">--}}
+{{--                            <span>درباره ما</span>--}}
+{{--                            <div--}}
+{{--                                class="rounded-md group-hover:w-full w-[0px] bg-[#fcd7a4] h-[2px] transition-all duration-300">--}}
+{{--                            </div>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                </ul>--}}
+{{--                <div--}}
+{{--                    class="w-full py-2 bg-white rounded-full flex justify-between items-center px-2 cart_shdow lg:hidden">--}}
+{{--                    <input type="text" class="outline-none w-full h-full text-xs"--}}
+{{--                        placeholder="کتاب یا نویسنده یا محصول خود را جستجو کنید">--}}
+{{--                    <div class="">--}}
+{{--                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-4 fill-[#929391]">--}}
+{{--                            <path--}}
+{{--                                d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />--}}
+{{--                        </svg>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
         </section>
 
         <!-- hamburger_menu_item -->
