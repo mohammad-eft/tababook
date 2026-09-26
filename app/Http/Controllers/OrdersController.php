@@ -7,17 +7,11 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\orders;
 use App\Models\carts;
 use App\Models\category;
-use App\Models\defaultComment;
-use App\Models\logo;
 use App\Models\product;
 use App\Models\User;
 use App\Models\address;
-use App\Models\header;
-use App\Models\introduction;
-use App\Models\service;
 use Hekmatinasser\Verta\Verta;
 use App\classes\homeSetting;
-use Psy\Readline\Interactive\Renderer\OverlayViewport;
 
 class OrdersController extends Controller
 {

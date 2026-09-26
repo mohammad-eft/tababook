@@ -154,6 +154,36 @@
                             </ul>
                         </div>
                     </div>
+                    <div class="border-b border-gray-500 pb-3">
+                        <div
+                            class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('order.*')) bg-[#383c4d] @endif">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="size-6 fill-white w-[15px] transition-all duration-300 @if (Route::is('order.*')) rotate-180 @endif">
+                                <path fill-rule="evenodd"
+                                    d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <div class="flex flex-row-reverse items-center gap-2 text-white">
+                                <span class="flex justify-end">سفارشات</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="size-5 fill-white">
+                                    <path
+                                        d="M0 185.8c0-6.4 1.6-12.7 4.7-18.3L82.4 25C90.8 9.6 106.9 0 124.5 0h391c17.6 0 33.7 9.6 42.1 25l77.7 142.4c3.1 5.6 4.7 11.9 4.7 18.3c0 21.1-17.1 38.2-38.2 38.2H576V488c0 13.3-10.7 24-24 24s-24-10.7-24-24V224H384V472c0 22.1-17.9 40-40 40H104c-22.1 0-40-17.9-40-40V224H38.2C17.1 224 0 206.9 0 185.8zM112 224v96H336V224H112zM515.5 48l-391 0L54.7 176H585.3L515.5 48zM112 464H336V368H112v96z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="overflow-y-auto transition-all duration-300 @if (Route::is('order.*')) max-h-100 @else max-h-0 @endif"
+                            style="scrollbar-width: none;">
+                            <ul class="gap-2.5 pr-3">
+                           
+                                <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
+                                    <span class="size-1 bg-white rounded-sm"></span>
+                                    <a href="{{ route('order.index') }}"
+                                        class="py-1 @if (Route::is('order.index')) text-[#FF0000] @endif">لیست
+                                        سفارشات</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                    
                 @endcan
                 <div class="border-b border-gray-500 pb-3">

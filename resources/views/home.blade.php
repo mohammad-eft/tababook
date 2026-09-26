@@ -115,7 +115,7 @@
                                 </div>
                             @endif
                             <div class="w-[153px]">
-                                @if (Auth::check() && in_array($product->id, $cartProIds))
+                                @if (Auth::check() && in_array($product->id, $cartProIds) && count($product->carts))
                                
                                     <div class="w-full p-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
                                         <button onclick="setCount(this)" class="w-1/3 text-lg font-bold text-white cursor-pointer" data-state="+">+</button>
@@ -243,7 +243,7 @@
                                 </div>
                             @endif
                             <div class="w-[153px]">
-                                @if (Auth::check() && in_array($product->id, $cartProIds))
+                                @if (Auth::check() && in_array($product->id, $cartProIds) && count($product->carts))
                                     <div class="w-full p-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
                                         <button onclick="setCount(this)" class="w-1/3 text-lg font-bold text-white flex justify-center items-center cursor-pointer" data-state="+">+</button>
                                         <input type="number" class="w-1/3 text-sm text-center outline-none text-white" readonly value="{{ $product->carts[0]->quantity }}">
