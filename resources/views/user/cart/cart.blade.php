@@ -74,7 +74,7 @@
                                 <p class="text-xs text-gray-400">تومان</p>
                             </div>
                         </div>
-                        @if(empty(Auth::user()->carts))
+                        @if(count(Auth::user()->carts))
                         <a href="{{ route('order.create') }}"
                             class="w-full block text-center bg-gray-900 hover:bg-gray-800 text-white font-medium py-3 rounded-xl transition">
                             تکمیل خرید

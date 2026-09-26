@@ -184,4 +184,5 @@ Route::group([
 ], function(){
     Route::get('/create', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
+    Route::get('/index', 'index')->name('index');
 });
