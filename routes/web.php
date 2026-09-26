@@ -124,6 +124,8 @@ Route::group([
     Route::post('/serviceStore', 'serviceStore')->name('serviceStore');
     Route::get('/footerSettings', 'footerSettings')->name('footerSettings');
     Route::post('/footerStore', 'footerStore')->name('footerStore');
+    Route::get('/packSetting', 'packSetting')->name('packSetting');
+    Route::post('/storePackSetting', 'storePackSetting')->name('storePackSetting');
 });
 
 Route::group([

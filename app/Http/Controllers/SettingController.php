@@ -312,4 +312,38 @@ class SettingController extends Controller
             'setting'=>$setting
         ]);
     }
+    public function packSetting(){
+        $packTitle = setting::where('meta_key', 'packTitle')->first();
+        $packSubtitle = setting::where('meta_key', 'packSubtitle')->first();
+        $packImage = setting::where('meta_key', 'packImage')->first();
+        $packLabelText = setting::where('meta_key', 'packLabelText')->first();
+        $packLabelIcon = setting::where('meta_key', 'packLabelIcon')->first();
+        $packLabelColor = setting::where('meta_key', 'packLabelColor')->first();
+        $packTextColor = setting::where('meta_key', 'packTextColor')->first();
+        $setting = homeSetting::document();
+        return view('admin.setting.pack', [
+            'setting'=>$setting,
+            'packTitle' => $packTitle,
+            'packSubtitle' => $packSubtitle,
+            'packImage' => $packImage,
+            'packLabelText' => $packLabelText,
+            'packLabelIcon' => $packLabelIcon,
+            'packLabelColor' => $packLabelColor,
+            'packTextColor' => $packTextColor,
+        ]);
+    }
+    
+    public function storePackSetting(Request $request){
+        $settings = $request->setting;
+        foreach ($settings as $key => $value) {
+            if ($key == 'packImage' || $key == 'packLabelIcon') {
+                $name = $value->getClientOriginalName();
+                $fullName = time() . '_' . $name;
+                $path = $value->storeAs('settings', $fullName, 'public');
+                $value = $path;
+            }
+            $value && setting::upsert(['meta_key' => $key, 'meta_value' => $value], ['meta_key'], ['meta_value']);
+        }
+        return redirect()->back();
+    }
 }
