@@ -57,7 +57,8 @@ class PackController extends Controller
 
     public function single(pack $pack)
     {
-        dd($pack);
+        $setting = homeSetting::document();
+        return view('user.pack.single', ['setting'=>$setting]);
     }
 
     public function list()
