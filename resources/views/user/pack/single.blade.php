@@ -3,9 +3,6 @@
     طبابوک | 
 @endsection
 @section('content')
-    
-
-
 <div class="w-11/12 h-[90vh] mx-auto bg-red-500 flex gap-5 justify-start items-center p-3">
     <div class="w-1/2 h-full bg-blue-500 flex flex-col gap-4 justify-start items-start">
         <span class="px-2 py-1 bg-green-200 text-green-900 rounded-full">پک اقتصادی</span>

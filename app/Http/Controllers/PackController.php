@@ -194,7 +194,6 @@ class PackController extends Controller
 
     public function delete(pack $pack)
     {
-        dd($pack);
         if (count($pack->gallery)) {
             foreach($pack->gallery as $g){
                 Storage::disk('public')->delete($g->image);
