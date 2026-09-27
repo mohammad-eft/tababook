@@ -33,7 +33,7 @@
         </section>
         <!-- hero -->
         <!-- category -->
-        <section
+        {{-- <section
             class="max-w-11/12 w-11/12 lg:h-32 h-25  flex lg:gap-5 gap-3 justify-start items-center overflow-x-auto p-1">
             @foreach ($categories as $category)
                 <a href="{{ route('category.relatedProducts', [$category->id]) }}"
@@ -46,7 +46,407 @@
                 </a>
             @endforeach
 
+        </section> --}}
+
+
+
+        <section class="2xl:container w-11/12 mx-auto">
+            <div class="w-full flex flex-row justify-between items-end">
+                <div class="flex flex-col gap-4">
+                    <div class="flex">
+                        <div class="flex flex-row items-center gap-3 px-2.5 py-1 rounded-full bg-green-500/20">
+                            <svg class="w-5 h-5 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20 7h-.7c.229-.467.349-.98.351-1.5a3.5 3.5 0 0 0-3.5-3.5c-1.717 0-3.215 1.2-4.331 2.481C10.4 2.842 8.949 2 7.5 2A3.5 3.5 0 0 0 4 5.5c.003.52.123 1.033.351 1.5H4a2 2 0 0 0-2 2v2a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V9a2 2 0 0 0-2-2Zm-9.942 0H7.5a1.5 1.5 0 0 1 0-3c.9 0 2 .754 3.092 2.122-.219.337-.392.635-.534.878Zm6.1 0h-3.742c.933-1.368 2.371-3 3.739-3a1.5 1.5 0 0 1 0 3h.003ZM13 14h-2v8h2v-8Zm-4 0H4v6a2 2 0 0 0 2 2h3v-8Zm6 0v8h3a2 2 0 0 0 2-2v-6h-5Z"/>
+                            </svg>
+                            <span class="text-xs text-green-950 font-bold">پک های پیشنهادی</span>
+                        </div>
+                    </div>
+                    <h2 class="text-3xl font-bold text-green-950">پک های آماده برای هر موقعیت</h2>
+                    <p class="text-sm text-green-950/50 max-w-1/2">
+                        با انتخاب هر یک از محصولات کاربردی و مرتبط با موضوع را در یک بسته دریافت کنید.
+                        پک ها انتخابی هوشمندانه برای مطالعه ، یادگیری و هدیه دادن هستند.
+                    </p>
+                </div>
+                <img src="{{ asset('img/pack.png') }}" class="w-85" alt="">
+            </div>
+            <div class="w-full grid grid-cols-2 lg:grid-cols-5 mt-5 gap-4">
+                <div class="w-full rounded-t-xl rounded-b-md border border-gray-200" style="box-shadow: 0px 0px 5px 0px #00000036">
+                    <img src="{{ asset('img/01.png') }}" class="w-full h-[150px] object-cover rounded-xl" alt="">
+                    <div class="mt-3 p-3 flex flex-col gap-2.5">
+                        <a href="#" class="font-bold text-green-950">پک هدیه کتاب دوست</a>
+                        <span class="text-sm text-green-950/50">پک هدیه خاص برا آدمای خاص</span>
+                        <div class="w-full flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023"/>
+                                </svg>
+                                <span class="text-sm text-green-950">کتاب</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 8h2c1.1046 0 2 .89543 2 2 0 1.1046-.8954 2-2 2h-2.5M5 19h11M5 6l.6398 6.398C5.84428 14.4428 7.56494 16 9.61995 16H10.38c2.0551 0 3.7757-1.5572 3.9802-3.602L15 6H5Z"/>
+                                </svg>
+                                <span class="text-sm text-green-950">ماگ</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17 21-5-4-5 4V3.889a.92.92 0 0 1 .244-.629.808.808 0 0 1 .59-.26h8.333a.81.81 0 0 1 .589.26.92.92 0 0 1 .244.63V21Z"/>
+                                </svg>
+                                <span class="text-sm text-green-950">بوکمارک</span>
+                            </div>
+                        </div>
+                        <div class="mt-3 w-full flex justify-between items-center">
+                            <span class="text-green-950 in-fa text-xs font-bold">889,000 تومان</span>
+                            <a href="#" class="px-2.5 rounded-full py-1.5 bg-green-950 text-white font-bold flex itmes-center gap-2">
+                                <span class="text-xs">مشاهده پک</span>
+                                <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4"/>
+                                </svg>
+
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full rounded-t-xl rounded-b-md border border-gray-200" style="box-shadow: 0px 0px 5px 0px #00000036">
+                    <img src="{{ asset('img/02.png') }}" class="w-full h-[150px] object-cover rounded-xl" alt="">
+                    <div class="mt-3 p-3 flex flex-col gap-2.5">
+                        <a href="#" class="font-bold text-green-950">پک هدیه کتاب دوست</a>
+                        <span class="text-sm text-green-950/50">پک هدیه خاص برا آدمای خاص</span>
+                        <div class="w-full flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023"/>
+                                </svg>
+                                <span class="text-sm text-green-950">کتاب</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 8h2c1.1046 0 2 .89543 2 2 0 1.1046-.8954 2-2 2h-2.5M5 19h11M5 6l.6398 6.398C5.84428 14.4428 7.56494 16 9.61995 16H10.38c2.0551 0 3.7757-1.5572 3.9802-3.602L15 6H5Z"/>
+                                </svg>
+                                <span class="text-sm text-green-950">ماگ</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17 21-5-4-5 4V3.889a.92.92 0 0 1 .244-.629.808.808 0 0 1 .59-.26h8.333a.81.81 0 0 1 .589.26.92.92 0 0 1 .244.63V21Z"/>
+                                </svg>
+                                <span class="text-sm text-green-950">بوکمارک</span>
+                            </div>
+                        </div>
+                        <div class="mt-3 w-full flex justify-between items-center">
+                            <span class="text-green-950 in-fa text-xs font-bold">889,000 تومان</span>
+                            <a href="#" class="px-2.5 rounded-full py-1.5 bg-green-950 text-white font-bold flex itmes-center gap-2">
+                                <span class="text-xs">مشاهده پک</span>
+                                <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4"/>
+                                </svg>
+
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full rounded-t-xl rounded-b-md border border-gray-200" style="box-shadow: 0px 0px 5px 0px #00000036">
+                    <img src="{{ asset('img/030.png') }}" class="w-full h-[150px] object-cover rounded-xl" alt="">
+                    <div class="mt-3 p-3 flex flex-col gap-2.5">
+                        <a href="#" class="font-bold text-green-950">پک هدیه کتاب دوست</a>
+                        <span class="text-sm text-green-950/50">پک هدیه خاص برا آدمای خاص</span>
+                        <div class="w-full flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023"/>
+                                </svg>
+                                <span class="text-sm text-green-950">کتاب</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 8h2c1.1046 0 2 .89543 2 2 0 1.1046-.8954 2-2 2h-2.5M5 19h11M5 6l.6398 6.398C5.84428 14.4428 7.56494 16 9.61995 16H10.38c2.0551 0 3.7757-1.5572 3.9802-3.602L15 6H5Z"/>
+                                </svg>
+                                <span class="text-sm text-green-950">ماگ</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17 21-5-4-5 4V3.889a.92.92 0 0 1 .244-.629.808.808 0 0 1 .59-.26h8.333a.81.81 0 0 1 .589.26.92.92 0 0 1 .244.63V21Z"/>
+                                </svg>
+                                <span class="text-sm text-green-950">بوکمارک</span>
+                            </div>
+                        </div>
+                        <div class="mt-3 w-full flex justify-between items-center">
+                            <span class="text-green-950 in-fa text-xs font-bold">889,000 تومان</span>
+                            <a href="#" class="px-2.5 rounded-full py-1.5 bg-green-950 text-white font-bold flex itmes-center gap-2">
+                                <span class="text-xs">مشاهده پک</span>
+                                <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4"/>
+                                </svg>
+
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full rounded-t-xl rounded-b-md border border-gray-200" style="box-shadow: 0px 0px 5px 0px #00000036">
+                    <img src="{{ asset('img/040.png') }}" class="w-full h-[150px] object-cover rounded-xl" alt="">
+                    <div class="mt-3 p-3 flex flex-col gap-2.5">
+                        <a href="#" class="font-bold text-green-950">پک هدیه کتاب دوست</a>
+                        <span class="text-sm text-green-950/50">پک هدیه خاص برا آدمای خاص</span>
+                        <div class="w-full flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023"/>
+                                </svg>
+                                <span class="text-sm text-green-950">کتاب</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 8h2c1.1046 0 2 .89543 2 2 0 1.1046-.8954 2-2 2h-2.5M5 19h11M5 6l.6398 6.398C5.84428 14.4428 7.56494 16 9.61995 16H10.38c2.0551 0 3.7757-1.5572 3.9802-3.602L15 6H5Z"/>
+                                </svg>
+                                <span class="text-sm text-green-950">ماگ</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17 21-5-4-5 4V3.889a.92.92 0 0 1 .244-.629.808.808 0 0 1 .59-.26h8.333a.81.81 0 0 1 .589.26.92.92 0 0 1 .244.63V21Z"/>
+                                </svg>
+                                <span class="text-sm text-green-950">بوکمارک</span>
+                            </div>
+                        </div>
+                        <div class="mt-3 w-full flex justify-between items-center">
+                            <span class="text-green-950 in-fa text-xs font-bold">889,000 تومان</span>
+                            <a href="#" class="px-2.5 rounded-full py-1.5 bg-green-950 text-white font-bold flex itmes-center gap-2">
+                                <span class="text-xs">مشاهده پک</span>
+                                <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4"/>
+                                </svg>
+
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full rounded-t-xl rounded-b-md border border-gray-200" style="box-shadow: 0px 0px 5px 0px #00000036">
+                    <img src="{{ asset('img/050.png') }}" class="w-full h-[150px] object-cover rounded-xl" alt="">
+                    <div class="mt-3 p-3 flex flex-col gap-2.5">
+                        <a href="#" class="font-bold text-green-950">پک هدیه کتاب دوست</a>
+                        <span class="text-sm text-green-950/50">پک هدیه خاص برا آدمای خاص</span>
+                        <div class="w-full flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023"/>
+                                </svg>
+                                <span class="text-sm text-green-950">کتاب</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 8h2c1.1046 0 2 .89543 2 2 0 1.1046-.8954 2-2 2h-2.5M5 19h11M5 6l.6398 6.398C5.84428 14.4428 7.56494 16 9.61995 16H10.38c2.0551 0 3.7757-1.5572 3.9802-3.602L15 6H5Z"/>
+                                </svg>
+                                <span class="text-sm text-green-950">ماگ</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17 21-5-4-5 4V3.889a.92.92 0 0 1 .244-.629.808.808 0 0 1 .59-.26h8.333a.81.81 0 0 1 .589.26.92.92 0 0 1 .244.63V21Z"/>
+                                </svg>
+                                <span class="text-sm text-green-950">بوکمارک</span>
+                            </div>
+                        </div>
+                        <div class="mt-3 w-full flex justify-between items-center">
+                            <span class="text-green-950 in-fa text-xs font-bold">889,000 تومان</span>
+                            <a href="#" class="px-2.5 rounded-full py-1.5 bg-green-950 text-white font-bold flex itmes-center gap-2">
+                                <span class="text-xs">مشاهده پک</span>
+                                <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4"/>
+                                </svg>
+
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full rounded-t-xl rounded-b-md border border-gray-200" style="box-shadow: 0px 0px 5px 0px #00000036">
+                    <img src="{{ asset('img/01.png') }}" class="w-full h-[150px] object-cover rounded-xl" alt="">
+                    <div class="mt-3 p-3 flex flex-col gap-2.5">
+                        <a href="#" class="font-bold text-green-950">پک هدیه کتاب دوست</a>
+                        <span class="text-sm text-green-950/50">پک هدیه خاص برا آدمای خاص</span>
+                        <div class="w-full flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023"/>
+                                </svg>
+                                <span class="text-sm text-green-950">کتاب</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 8h2c1.1046 0 2 .89543 2 2 0 1.1046-.8954 2-2 2h-2.5M5 19h11M5 6l.6398 6.398C5.84428 14.4428 7.56494 16 9.61995 16H10.38c2.0551 0 3.7757-1.5572 3.9802-3.602L15 6H5Z"/>
+                                </svg>
+                                <span class="text-sm text-green-950">ماگ</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17 21-5-4-5 4V3.889a.92.92 0 0 1 .244-.629.808.808 0 0 1 .59-.26h8.333a.81.81 0 0 1 .589.26.92.92 0 0 1 .244.63V21Z"/>
+                                </svg>
+                                <span class="text-sm text-green-950">بوکمارک</span>
+                            </div>
+                        </div>
+                        <div class="mt-3 w-full flex justify-between items-center">
+                            <span class="text-green-950 in-fa text-xs font-bold">889,000 تومان</span>
+                            <a href="#" class="px-2.5 rounded-full py-1.5 bg-green-950 text-white font-bold flex itmes-center gap-2">
+                                <span class="text-xs">مشاهده پک</span>
+                                <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4"/>
+                                </svg>
+
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full rounded-t-xl rounded-b-md border border-gray-200" style="box-shadow: 0px 0px 5px 0px #00000036">
+                    <img src="{{ asset('img/02.png') }}" class="w-full h-[150px] object-cover rounded-xl" alt="">
+                    <div class="mt-3 p-3 flex flex-col gap-2.5">
+                        <a href="#" class="font-bold text-green-950">پک هدیه کتاب دوست</a>
+                        <span class="text-sm text-green-950/50">پک هدیه خاص برا آدمای خاص</span>
+                        <div class="w-full flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023"/>
+                                </svg>
+                                <span class="text-sm text-green-950">کتاب</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 8h2c1.1046 0 2 .89543 2 2 0 1.1046-.8954 2-2 2h-2.5M5 19h11M5 6l.6398 6.398C5.84428 14.4428 7.56494 16 9.61995 16H10.38c2.0551 0 3.7757-1.5572 3.9802-3.602L15 6H5Z"/>
+                                </svg>
+                                <span class="text-sm text-green-950">ماگ</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17 21-5-4-5 4V3.889a.92.92 0 0 1 .244-.629.808.808 0 0 1 .59-.26h8.333a.81.81 0 0 1 .589.26.92.92 0 0 1 .244.63V21Z"/>
+                                </svg>
+                                <span class="text-sm text-green-950">بوکمارک</span>
+                            </div>
+                        </div>
+                        <div class="mt-3 w-full flex justify-between items-center">
+                            <span class="text-green-950 in-fa text-xs font-bold">889,000 تومان</span>
+                            <a href="#" class="px-2.5 rounded-full py-1.5 bg-green-950 text-white font-bold flex itmes-center gap-2">
+                                <span class="text-xs">مشاهده پک</span>
+                                <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4"/>
+                                </svg>
+
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full rounded-t-xl rounded-b-md border border-gray-200" style="box-shadow: 0px 0px 5px 0px #00000036">
+                    <img src="{{ asset('img/030.png') }}" class="w-full h-[150px] object-cover rounded-xl" alt="">
+                    <div class="mt-3 p-3 flex flex-col gap-2.5">
+                        <a href="#" class="font-bold text-green-950">پک هدیه کتاب دوست</a>
+                        <span class="text-sm text-green-950/50">پک هدیه خاص برا آدمای خاص</span>
+                        <div class="w-full flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023"/>
+                                </svg>
+                                <span class="text-sm text-green-950">کتاب</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 8h2c1.1046 0 2 .89543 2 2 0 1.1046-.8954 2-2 2h-2.5M5 19h11M5 6l.6398 6.398C5.84428 14.4428 7.56494 16 9.61995 16H10.38c2.0551 0 3.7757-1.5572 3.9802-3.602L15 6H5Z"/>
+                                </svg>
+                                <span class="text-sm text-green-950">ماگ</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17 21-5-4-5 4V3.889a.92.92 0 0 1 .244-.629.808.808 0 0 1 .59-.26h8.333a.81.81 0 0 1 .589.26.92.92 0 0 1 .244.63V21Z"/>
+                                </svg>
+                                <span class="text-sm text-green-950">بوکمارک</span>
+                            </div>
+                        </div>
+                        <div class="mt-3 w-full flex justify-between items-center">
+                            <span class="text-green-950 in-fa text-xs font-bold">889,000 تومان</span>
+                            <a href="#" class="px-2.5 rounded-full py-1.5 bg-green-950 text-white font-bold flex itmes-center gap-2">
+                                <span class="text-xs">مشاهده پک</span>
+                                <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4"/>
+                                </svg>
+
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full rounded-t-xl rounded-b-md border border-gray-200" style="box-shadow: 0px 0px 5px 0px #00000036">
+                    <img src="{{ asset('img/040.png') }}" class="w-full h-[150px] object-cover rounded-xl" alt="">
+                    <div class="mt-3 p-3 flex flex-col gap-2.5">
+                        <a href="#" class="font-bold text-green-950">پک هدیه کتاب دوست</a>
+                        <span class="text-sm text-green-950/50">پک هدیه خاص برا آدمای خاص</span>
+                        <div class="w-full flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023"/>
+                                </svg>
+                                <span class="text-sm text-green-950">کتاب</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 8h2c1.1046 0 2 .89543 2 2 0 1.1046-.8954 2-2 2h-2.5M5 19h11M5 6l.6398 6.398C5.84428 14.4428 7.56494 16 9.61995 16H10.38c2.0551 0 3.7757-1.5572 3.9802-3.602L15 6H5Z"/>
+                                </svg>
+                                <span class="text-sm text-green-950">ماگ</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17 21-5-4-5 4V3.889a.92.92 0 0 1 .244-.629.808.808 0 0 1 .59-.26h8.333a.81.81 0 0 1 .589.26.92.92 0 0 1 .244.63V21Z"/>
+                                </svg>
+                                <span class="text-sm text-green-950">بوکمارک</span>
+                            </div>
+                        </div>
+                        <div class="mt-3 w-full flex justify-between items-center">
+                            <span class="text-green-950 in-fa text-xs font-bold">889,000 تومان</span>
+                            <a href="#" class="px-2.5 rounded-full py-1.5 bg-green-950 text-white font-bold flex itmes-center gap-2">
+                                <span class="text-xs">مشاهده پک</span>
+                                <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4"/>
+                                </svg>
+
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full rounded-t-xl rounded-b-md border border-gray-200" style="box-shadow: 0px 0px 5px 0px #00000036">
+                    <img src="{{ asset('img/050.png') }}" class="w-full h-[150px] object-cover rounded-xl" alt="">
+                    <div class="mt-3 p-3 flex flex-col gap-2.5">
+                        <a href="#" class="font-bold text-green-950">پک هدیه کتاب دوست</a>
+                        <span class="text-sm text-green-950/50">پک هدیه خاص برا آدمای خاص</span>
+                        <div class="w-full flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023"/>
+                                </svg>
+                                <span class="text-sm text-green-950">کتاب</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 8h2c1.1046 0 2 .89543 2 2 0 1.1046-.8954 2-2 2h-2.5M5 19h11M5 6l.6398 6.398C5.84428 14.4428 7.56494 16 9.61995 16H10.38c2.0551 0 3.7757-1.5572 3.9802-3.602L15 6H5Z"/>
+                                </svg>
+                                <span class="text-sm text-green-950">ماگ</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17 21-5-4-5 4V3.889a.92.92 0 0 1 .244-.629.808.808 0 0 1 .59-.26h8.333a.81.81 0 0 1 .589.26.92.92 0 0 1 .244.63V21Z"/>
+                                </svg>
+                                <span class="text-sm text-green-950">بوکمارک</span>
+                            </div>
+                        </div>
+                        <div class="mt-3 w-full flex justify-between items-center">
+                            <span class="text-green-950 in-fa text-xs font-bold">889,000 تومان</span>
+                            <a href="#" class="px-2.5 rounded-full py-1.5 bg-green-950 text-white font-bold flex itmes-center gap-2">
+                                <span class="text-xs">مشاهده پک</span>
+                                <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4"/>
+                                </svg>
+
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
+
+
+
+
+
         <!-- category -->
         <!-- likly -->
         <section class="w-11/12 flex flex-col gap-4 justify-start items-start">
