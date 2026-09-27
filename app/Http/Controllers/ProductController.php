@@ -247,9 +247,6 @@ class ProductController extends Controller
         } else {
             $product['mainImg'] = 'default.jpg';
         }
-        $cartCount = 0;
-        $currentUser = null;
-        $cart = null;
         $allCartCount = 0;
         $proIds = [];
         if (isset($allCarts)) {
@@ -263,7 +260,7 @@ class ProductController extends Controller
             Auth::user()->load(['carts'=>function($query){
                 $query->whereNull('order_id');
             }])->pluck('id')->toArray();
-            $cartProIds = Auth::user()->carts()->pluck('product_id')->toArray();
+            $cartProIds = Auth::user()->carts()->whereNull('order_id')->pluck('product_id')->toArray();
             
             $product->load(['carts'=>function($q){
                 $q->where('user_id', Auth::id())->whereNull('order_id')->first();
@@ -278,7 +275,6 @@ class ProductController extends Controller
             'allCartCount' => $allCartCount,
             'proIds' => $proIds,
             'cartProIds'=>$cartProIds,
-            'setting'=>$setting
         ]);
     }
     public function index()
@@ -370,8 +366,6 @@ class ProductController extends Controller
     public function searchResult(Request $request)
     {
         $products = product::where('title', 'like', '%' . $request['searchedValue'] . '%')->get();
-        // $logo = logo::first();
-        // $services = service::all();
         $categories = category::with('products')->has('products')->get();
         foreach ($products as $product) {
             if ($product->media->isNotEmpty()) {
@@ -389,8 +383,6 @@ class ProductController extends Controller
         }
         $setting = homeSetting::document();
         return view('user.product.index', [
-            // 'logo' => $logo,
-            // 'services' => $services,
             'categories' => $categories,
             'products' => $products,
             'setting'=>$setting
