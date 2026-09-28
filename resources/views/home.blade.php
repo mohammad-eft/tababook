@@ -51,7 +51,7 @@
 
 
         <section class="2xl:container w-11/12 mx-auto">
-            <div class="w-full flex flex-row justify-between items-end">
+            <div class="w-full flex flex-col lg:flex-row justify-between items-end">
                 <div class="flex flex-col gap-4">
                     <div class="flex">
                         <div class="flex flex-row items-center gap-3 px-2.5 py-1 rounded-full bg-green-500/20">
@@ -61,15 +61,15 @@
                             <span class="text-xs text-green-950 font-bold">پک های پیشنهادی</span>
                         </div>
                     </div>
-                    <h2 class="text-3xl font-bold text-green-950">پک های آماده برای هر موقعیت</h2>
-                    <p class="text-sm text-green-950/50 max-w-1/2">
+                    <h2 class="text-xl lg:text-3xl font-bold text-green-950">پک های آماده برای هر موقعیت</h2>
+                    <p class="text-sm text-green-950/50 lg:max-w-1/2">
                         با انتخاب هر یک از محصولات کاربردی و مرتبط با موضوع را در یک بسته دریافت کنید.
                         پک ها انتخابی هوشمندانه برای مطالعه ، یادگیری و هدیه دادن هستند.
                     </p>
                 </div>
-                <img src="{{ asset('img/pack.png') }}" class="w-85" alt="">
+                <img src="{{ asset('img/pack.png') }}" class="w-85 hidden lg:block" alt="">
             </div>
-            <div class="w-full grid grid-cols-2 lg:grid-cols-5 mt-5 gap-4">
+            <div class="w-full grid grid-cols-1 lg:grid-cols-5 mt-5 gap-4">
                 <div class="w-full rounded-t-xl rounded-b-md border border-gray-200" style="box-shadow: 0px 0px 5px 0px #00000036">
                     <img src="{{ asset('img/01.png') }}" class="w-full h-[150px] object-cover rounded-xl" alt="">
                     <div class="mt-3 p-3 flex flex-col gap-2.5">
