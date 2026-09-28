@@ -64,7 +64,7 @@ class OrdersController extends Controller
         }
 
         // return response()->json($createdOrders);
-        return redirect()->back();
+        return to_route('home');
     }
 
     public function index(){

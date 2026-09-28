@@ -4,8 +4,8 @@
         <!-- Header -->
         <header class="bg-white border-b border-gray-100">
             <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
-                <a href="#" class="text-lg font-bold text-gray-800">📚 کتاب‌فروشی</a>
-                <a href="#" class="text-sm text-gray-500 hover:text-gray-800 transition">ادامه خرید</a>
+                <a href="{{ route('home') }}" class="text-lg font-bold text-gray-800">طبابوک</a>
+                {{-- <a href="#" class="text-sm text-gray-500 hover:text-gray-800 transition">ادامه خرید</a> --}}
             </div>
         </header>
 
@@ -27,7 +27,7 @@
                         <div class="flex-1 min-w-0">
                             <h3 class="font-semibold text-gray-800 text-sm sm:text-base truncate">{{ $cart->product->title }}</h3>
                             <p class="text-xs text-gray-500 mt-0.5 mb-5">{{ $cart->product->summary }}</p>
-                            <div class="w-1/4 p-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $cart->product_id }}">
+                            <div class="w-full lg:w-1/4 p-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $cart->product_id }}">
                                 <button onclick="setCount(this)" class="w-1/3 text-lg font-bold text-white flex justify-center items-center cursor-pointer" data-state="+">+</button>
                                 <input type="number" class="w-1/3 text-sm text-center outline-none text-white" readonly value="{{ $cart->quantity }}">
                                 <button onclick="setCount(this)" class="w-1/3 text-lg font-bold text-white flex justify-center items-center cursor-pointer" data-state="-">-</button>
@@ -39,8 +39,6 @@
                         </div>
                     </div>
                     @endforeach
-           
-
                 </div>
 
                 <!-- Summary -->
