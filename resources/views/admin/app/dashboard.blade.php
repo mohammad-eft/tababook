@@ -414,18 +414,54 @@
                                     </li>
                                     <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
                                         <span class="size-1 bg-white rounded-sm"></span>
-                                        <a href="{{ route('setting.cartSettings') }}"
-                                            class="py-1 @if (Route::is('setting.cartSettings')) text-[#FF0000] @endif">تنظیمات کارت ها</a>
+                                        <a href="{{ route('setting.cardSettings') }}"
+                                            class="py-1 @if (Route::is('setting.cardSettings')) text-[#FF0000] @endif">تنظیمات کارت ها</a>
                                     </li>
                                     <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
                                         <span class="size-1 bg-white rounded-sm"></span>
-                                        <a href="{{ route('setting.servicesSettings') }}"
-                                            class="py-1 @if (Route::is('setting.servicesSettings')) text-[#FF0000] @endif">تنظیمات خدمات</a>
+                                        <a href="{{ route('setting.serviceSettings') }}"
+                                            class="py-1 @if (Route::is('setting.serviceSettings')) text-[#FF0000] @endif">تنظیمات خدمات</a>
                                     </li>
                                     <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
                                         <span class="size-1 bg-white rounded-sm"></span>
                                         <a href="{{ route('setting.footerSettings') }}"
                                             class="py-1 @if (Route::is('setting.footerSettings')) text-[#FF0000] @endif">تنظیمات فوتر</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="pb-3">
+                            <div
+                                class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('pack.*')) bg-[#383c4d] @endif">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                    class="size-6 fill-white w-[15px] transition-all duration-300 @if (Route::is('pack.*')) rotate-180 @endif">
+                                    <path fill-rule="evenodd"
+                                        d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                <div class="flex flex-row-reverse items-center gap-2 text-white">
+                                    <span class="flex justify-end">پک های محصول</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                        class="size-5 fill-white">
+                                        <path
+                                            d="M256 0c17 0 33.6 1.7 49.8 4.8c7.9 1.5 21.8 6.1 29.4 20.1c2 3.7 3.6 7.6 4.6 11.8l9.3 38.5C350.5 81 360.3 86.7 366 85l38-11.2c4-1.2 8.1-1.8 12.2-1.9c16.1-.5 27 9.4 32.3 15.4c22.1 25.1 39.1 54.6 49.9 86.3c2.6 7.6 5.6 21.8-2.7 35.4c-2.2 3.6-4.9 7-8 10L459 246.3c-4.2 4-4.2 15.5 0 19.5l28.7 27.3c3.1 3 5.8 6.4 8 10c8.2 13.6 5.2 27.8 2.7 35.4c-10.8 31.7-27.8 61.1-49.9 86.3c-5.3 6-16.3 15.9-32.3 15.4c-4.1-.1-8.2-.8-12.2-1.9L366 427c-5.7-1.7-15.5 4-16.9 9.8l-9.3 38.5c-1 4.2-2.6 8.2-4.6 11.8c-7.7 14-21.6 18.5-29.4 20.1C289.6 510.3 273 512 256 512s-33.6-1.7-49.8-4.8c-7.9-1.5-21.8-6.1-29.4-20.1c-2-3.7-3.6-7.6-4.6-11.8l-9.3-38.5c-1.4-5.8-11.2-11.5-16.9-9.8l-38 11.2c-4 1.2-8.1 1.8-12.2 1.9c-16.1 .5-27-9.4-32.3-15.4c-22-25.1-39.1-54.6-49.9-86.3c-2.6-7.6-5.6-21.8 2.7-35.4c2.2-3.6 4.9-7 8-10L53 265.7c4.2-4 4.2-15.5 0-19.5L24.2 218.9c-3.1-3-5.8-6.4-8-10C8 195.3 11 181.1 13.6 173.6c10.8-31.7 27.8-61.1 49.9-86.3c5.3-6 16.3-15.9 32.3-15.4c4.1 .1 8.2 .8 12.2 1.9L146 85c5.7 1.7 15.5-4 16.9-9.8l9.3-38.5c1-4.2 2.6-8.2 4.6-11.8c7.7-14 21.6-18.5 29.4-20.1C222.4 1.7 239 0 256 0zM218.1 51.4l-8.5 35.1c-7.8 32.3-45.3 53.9-77.2 44.6L97.9 120.9c-16.5 19.3-29.5 41.7-38 65.7l26.2 24.9c24 22.8 24 66.2 0 89L59.9 325.4c8.5 24 21.5 46.4 38 65.7l34.6-10.2c31.8-9.4 69.4 12.3 77.2 44.6l8.5 35.1c24.6 4.5 51.3 4.5 75.9 0l8.5-35.1c7.8-32.3 45.3-53.9 77.2-44.6l34.6 10.2c16.5-19.3 29.5-41.7 38-65.7l-26.2-24.9c-24-22.8-24-66.2 0-89l26.2-24.9c-8.5-24-21.5-46.4-38-65.7l-34.6 10.2c-31.8 9.4-69.4-12.3-77.2-44.6l-8.5-35.1c-24.6-4.5-51.3-4.5-75.9 0zM208 256a48 48 0 1 0 96 0 48 48 0 1 0 -96 0zm48 96a96 96 0 1 1 0-192 96 96 0 1 1 0 192z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="overflow-y-auto transition-all duration-300 @if (Route::is('pack.*')) max-h-100 @else max-h-0 @endif"
+                                style="scrollbar-width: none;">
+                                <ul class="gap-2.5 pr-3">
+                                    <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
+                                        <span class="size-1 bg-white rounded-sm"></span>
+                                        <a href="{{ route('pack.create') }}"
+                                            class="py-1 @if (Route::is('pack.create')) text-[#FF0000] @endif">ایجاد
+                                            پک</a>
+                                    </li>
+                                    <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
+                                        <span class="size-1 bg-white rounded-sm"></span>
+                                        <a href="{{ route('pack.list') }}"
+                                            class="py-1 @if (Route::is('pack.list')) text-[#FF0000] @endif">لیست
+                                            پک ها</a>
                                     </li>
                                 </ul>
                             </div>
