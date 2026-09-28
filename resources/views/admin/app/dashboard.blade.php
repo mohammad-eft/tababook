@@ -656,13 +656,13 @@
                                 <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
                                     <span class="size-1 bg-white rounded-sm"></span>
                                     <a href="{{ route('contactUs.list') }}"
-                                        class="py-1 @if (Route::is('contactUs.list')) text-[#FF0000] @endif">درباره ما</a>
+                                        class="py-1 @if (Route::is('contactUs.list')) text-[#FF0000] @endif">لیست تیکت ها</a>
                                 </li>
                                 @endcan
                                 <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
                                     <span class="size-1 bg-white rounded-sm"></span>
                                     <a href="{{ route('contactUs.create') }}"
-                                        class="py-1 @if (Route::is('contactUs.create')) text-[#FF0000] @endif">درباره ما</a>
+                                        class="py-1 @if (Route::is('contactUs.create')) text-[#FF0000] @endif">فرم ارتباط با ما</a>
                                     </li>
                             </ul>
                         </div>
