@@ -84,7 +84,7 @@
                                 <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
                                     <span class="size-1 bg-white rounded-sm"></span>
                                     <a href="{{ route('setting.footerSettings') }}"
-                                        class="py-1 @if (Route::is('setting.footerSettings')) text-[#FF0000] @endif">فوتر</a>
+                                        class="py-1 @if (Route::is('setting.footerSettings')) text-[#FF0000] @endif">تنظیمات فوتر</a>
                                 </li>
                             </ul>
                         </div>
@@ -375,17 +375,18 @@
                 <hr class="text-[darkslategray] mt-2.5">
                 <div class="py-5 h-[80%] overflow-y-auto flex flex-col gap-3" style="scrollbar-width: none;">
                     @can('access', ['admin'])
-                        {{-- <div class="pb-3">
+                     
+                        <div class="pb-3">
                             <div
-                                class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('settings.*')) bg-[#383c4d] @endif">
+                                class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('setting.*')) bg-[#383c4d] @endif">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                    class="size-6 fill-white w-[15px] transition-all duration-300 @if (Route::is('settings.*')) rotate-180 @endif">
+                                    class="size-6 fill-white w-[15px] transition-all duration-300 @if (Route::is('setting.*')) rotate-180 @endif">
                                     <path fill-rule="evenodd"
                                         d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
                                         clip-rule="evenodd" />
                                 </svg>
                                 <div class="flex flex-row-reverse items-center gap-2 text-white">
-                                    <span class="flex justify-end">تنظیمات خانه</span>
+                                    <span class="flex justify-end">تنظیمات</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
                                         class="size-5 fill-white">
                                         <path
@@ -393,42 +394,42 @@
                                     </svg>
                                 </div>
                             </div>
-                            <div class="overflow-y-auto transition-all duration-300 @if (Route::is('settings.*')) max-h-100 @else max-h-0 @endif"
+                            <div class="overflow-y-auto transition-all duration-300 @if (Route::is('setting.*')) max-h-100 @else max-h-0 @endif"
                                 style="scrollbar-width: none;">
                                 <ul class="gap-2.5 pr-3">
                                     <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
                                         <span class="size-1 bg-white rounded-sm"></span>
-                                        <a href="{{ route('settings.header.create') }}"
-                                            class="py-1 @if (Route::is('settings.header.create')) text-[#FF0000] @endif">
-                                            هدر</a>
+                                        <a href="{{ route('setting.headerSettings') }}"
+                                            class="py-1 @if (Route::is('setting.headerSettings')) text-[#FF0000] @endif">تنظیمات هدر و هیرو</a>
                                     </li>
                                     <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
                                         <span class="size-1 bg-white rounded-sm"></span>
-                                        <a href="{{ route('settings.logo.create') }}"
-                                            class="py-1 @if (Route::is('settings.logo.create')) text-[#FF0000] @endif">
-                                            لوگو</a>
+                                        <a href="{{ route('setting.packSetting') }}"
+                                            class="py-1 @if (Route::is('setting.packSetting')) text-[#FF0000] @endif">تنظیمات پک ها</a>
                                     </li>
                                     <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
                                         <span class="size-1 bg-white rounded-sm"></span>
-                                        <a href="{{ route('settings.service.create') }}"
-                                            class="py-1 @if (Route::is('settings.service.create')) text-[#FF0000] @endif">خدمات
-                                            ما</a>
+                                        <a href="{{ route('setting.bannerSettings') }}"
+                                            class="py-1 @if (Route::is('setting.bannerSettings')) text-[#FF0000] @endif">تنظیمات بنر ها</a>
                                     </li>
                                     <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
                                         <span class="size-1 bg-white rounded-sm"></span>
-                                        <a href="{{ route('settings.introduction.create') }}"
-                                            class="py-1 @if (Route::is('settings.introduction.create')) text-[#FF0000] @endif">معرفی
-                                            ما</a>
+                                        <a href="{{ route('setting.cartSettings') }}"
+                                            class="py-1 @if (Route::is('setting.cartSettings')) text-[#FF0000] @endif">تنظیمات کارت ها</a>
                                     </li>
                                     <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
                                         <span class="size-1 bg-white rounded-sm"></span>
-                                        <a href="{{ route('settings.defaultComment.create') }}"
-                                            class="py-1 @if (Route::is('settings.defaultComment.create')) text-[#FF0000] @endif">نظرات
-                                            پیش فرض</a>
+                                        <a href="{{ route('setting.servicesSettings') }}"
+                                            class="py-1 @if (Route::is('setting.servicesSettings')) text-[#FF0000] @endif">تنظیمات خدمات</a>
+                                    </li>
+                                    <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
+                                        <span class="size-1 bg-white rounded-sm"></span>
+                                        <a href="{{ route('setting.footerSettings') }}"
+                                            class="py-1 @if (Route::is('setting.footerSettings')) text-[#FF0000] @endif">تنظیمات فوتر</a>
                                     </li>
                                 </ul>
                             </div>
-                        </div> --}}
+                        </div>
                         <div class="pb-3">
                             <div
                                 class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('category.*')) bg-[#383c4d] @endif">
@@ -501,40 +502,7 @@
                                 </ul>
                             </div>
                         </div>
-                        {{-- <div class="pb-3">
-                            <div
-                                class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('consultRequest.*')) bg-[#383c4d] @endif">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                    class="size-6 fill-white w-[15px] transition-all duration-300 @if (Route::is('consultRequest.*')) rotate-180 @endif">
-                                    <path fill-rule="evenodd"
-                                        d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <div class="flex flex-row-reverse items-center gap-2 text-white">
-                                    <span class="flex justify-end">درخواست های مشاوره</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"
-                                        class="size-5 fill-white">
-                                        <path
-                                            d="M192 48a80 80 0 1 1 0 160 80 80 0 1 1 0-160zm0 208A128 128 0 1 0 192 0a128 128 0 1 0 0 256zm-45.7 96h91.4c65.7 0 120.1 48.7 129 112H17.3c8.9-63.3 63.3-112 129-112zm0-48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H386.3c16.4 0 29.7-13.3 29.7-29.7C416 383.8 336.2 304 237.7 304H146.3z" />
-                                        <path
-                                            d="M440 120c0-48.6-39.4-88-88-88s-88 39.4-88 88c0 32.5 17.6 61 44.2 76.5c-6.4 14.6-15.4 29.2-28.1 41.9c-5.3 5.3-11.2 9.8-17.8 13.7c2 4.7 4.7 9.1 8.1 12.9c7.6 8.4 18.5 13.4 30.5 13.4c9.4 0 17.9-3.4 24.4-8.9c1.2-1 2.4-2.1 3.6-3.3c4.3-4.4 8-10.1 10.9-16.7c8.7-3.3 16.8-8.3 23.5-15c8.7-8.7 14.3-20.1 15.9-32.7c13.1-1.2 24.7-7.2 33.1-16.4C436.9 157.2 440 138.9 440 120zM352 232c-20.7 0-40-10.3-40-24c0-13.7 17.9-24 40-24s40 10.3 40 24-17.9 24-40 24z" />
-                                        <path
-                                            d="M488 112a56 56 0 1 1 0 112 56 56 0 1 1 0-112zm0 144A88 88 0 1 0 488 80a88 88 0 1 0 0 176zm-32 64h64c45.3 0 83.1 33.6 89 77.3c-5.2-.8-10.6-1.1-16.1-1.1H423.1c5.9-43.7 43.7-77.3 89-77.3h-56.1zm0-32c-66.2 0-120 53.8-120 120c0 17.7 14.3 32 32 32H584c17.7 0 32-14.3 32-32c0-66.2-53.8-120-120-120H456z" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="overflow-y-auto transition-all duration-300 @if (Route::is('consultRequest.*')) max-h-100 @else max-h-0 @endif"
-                                style="scrollbar-width: none;">
-                                <ul class="gap-2.5 pr-3">
-                                    <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
-                                        <span class="size-1 bg-white rounded-sm"></span>
-                                        <a href="{{ route('consultRequest.index') }}"
-                                            class="py-1 @if (Route::is('consultRequest.index')) text-[#FF0000] @endif">لیست
-                                            درخواست ها</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div> --}}
+                        
                     @endcan
                     <div class="pb-3">
                         <div
@@ -558,12 +526,7 @@
                             style="scrollbar-width: none;">
                             <ul class="gap-2.5 pr-3">
                                 @can('access', ['admin'])
-                                    {{-- <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
-                                        <span class="size-1 bg-white rounded-sm"></span>
-                                        <a href="{{ route('user.admin_create_user') }}"
-                                            class="py-1 @if (Route::is('user.admin_create_user')) text-[#FF0000] @endif">ایجاد
-                                            کاربر جدید</a>
-                                    </li> --}}
+                                   
                                     <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
                                         <span class="size-1 bg-white rounded-sm"></span>
                                         <a href="{{ route('user.list') }}"
@@ -582,9 +545,9 @@
                     </div>
                     <div class="pb-3">
                         <div
-                            class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('user.*')) bg-[#383c4d] @endif">
+                            class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('aboutUs.*')) bg-[#383c4d] @endif">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                class="size-6 fill-white w-[15px] transition-all duration-300 @if (Route::is('user.*')) rotate-180 @endif">
+                                class="size-6 fill-white w-[15px] transition-all duration-300 @if (Route::is('aboutUs.*')) rotate-180 @endif">
                                 <path fill-rule="evenodd"
                                     d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
                                     clip-rule="evenodd" />
@@ -598,16 +561,11 @@
                                 </svg>
                             </div>
                         </div>
-                        <div class="overflow-y-auto transition-all duration-300 @if (Route::is('user.*')) max-h-100 @else max-h-0 @endif"
+                        <div class="overflow-y-auto transition-all duration-300 @if (Route::is('aboutUs.*')) max-h-100 @else max-h-0 @endif"
                             style="scrollbar-width: none;">
                             <ul class="gap-2.5 pr-3">
                                 @can('access', ['admin'])
-                                    {{-- <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
-                                        <span class="size-1 bg-white rounded-sm"></span>
-                                        <a href="{{ route('user.admin_create_user') }}"
-                                            class="py-1 @if (Route::is('user.admin_create_user')) text-[#FF0000] @endif">ایجاد
-                                            کاربر جدید</a>
-                                    </li> --}}
+                                  
                                     <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
                                         <span class="size-1 bg-white rounded-sm"></span>
                                         <a href="{{ route('aboutUs.create_edit') }}"
