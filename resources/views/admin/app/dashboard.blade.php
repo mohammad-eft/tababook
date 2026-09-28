@@ -249,12 +249,7 @@
                         style="scrollbar-width: none;">
                         <ul class="gap-2.5 pr-3">
                             @can('access', ['admin'])
-                                {{-- <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
-                                    <span class="size-1 bg-white rounded-sm"></span>
-                                    <a href="{{ route('user.admin_create_user') }}"
-                                        class="py-1 @if (Route::is('user.admin_create_user')) text-[#FF0000] @endif">ایجاد کاربر
-                                        جدید</a>
-                                </li> --}}
+                               
                                 <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
                                     <span class="size-1 bg-white rounded-sm"></span>
                                     <a href="{{ route('user.list') }}"
@@ -292,12 +287,7 @@
                         style="scrollbar-width: none;">
                         <ul class="gap-2.5 pr-3">
                             @can('access', ['admin'])
-                                {{-- <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
-                                    <span class="size-1 bg-white rounded-sm"></span>
-                                    <a href="{{ route('user.admin_create_user') }}"
-                                        class="py-1 @if (Route::is('user.admin_create_user')) text-[#FF0000] @endif">ایجاد کاربر
-                                        جدید</a>
-                                </li> --}}
+                               
                                 <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
                                     <span class="size-1 bg-white rounded-sm"></span>
                                     <a href="{{ route('aboutUs.create_edit') }}"
@@ -333,12 +323,7 @@
                         style="scrollbar-width: none;">
                         <ul class="gap-2.5 pr-3">
                             @can('access', ['admin'])
-                                {{-- <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
-                                    <span class="size-1 bg-white rounded-sm"></span>
-                                    <a href="{{ route('user.admin_create_user') }}"
-                                        class="py-1 @if (Route::is('user.admin_create_user')) text-[#FF0000] @endif">ایجاد کاربر
-                                        جدید</a>
-                                </li> --}}
+                              
                                 <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
                                     <span class="size-1 bg-white rounded-sm"></span>
                                     <a href="{{ route('contactUs.list') }}"
@@ -373,7 +358,7 @@
                     </a>
                 </div>
                 <hr class="text-[darkslategray] mt-2.5">
-                <div class="py-5 h-[80%] overflow-y-auto flex flex-col gap-3" style="scrollbar-width: none;">
+                <div class="py-5 h-[91%] lg:h-[80%] overflow-y-auto flex flex-col gap-3" style="scrollbar-width: none;">
                     @can('access', ['admin'])
                      
                         <div class="pb-3">
@@ -642,6 +627,43 @@
                                     <a href="{{ route('aboutUs.list') }}"
                                         class="py-1 @if (Route::is('aboutUs.list')) text-[#FF0000] @endif">درباره ما</a>
                                 </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="pb-3">
+                        <div
+                            class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('contactUs.*')) bg-[#383c4d] @endif">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="size-6 fill-white w-[15px] transition-all duration-300 @if (Route::is('contactUs.*')) rotate-180 @endif">
+                                <path fill-rule="evenodd"
+                                    d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <div class="flex flex-row-reverse items-center gap-2 text-white">
+                                <span class="flex justify-end">ارتباط با ما</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"
+                                    class="size-5 fill-white">
+                                    <path
+                                        d="M224 48a80 80 0 1 1 0 160 80 80 0 1 1 0-160zm0 208A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 96h91.4c65.7 0 120.1 48.7 129 112H49.3c8.9-63.3 63.3-112 129-112zm0-48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3zm431 208c17 0 30.7-13.8 30.7-30.7C640 392.2 567.8 320 478.7 320H417.3c-4.4 0-8.8 .2-13.2 .5c46.4 38.6 75.9 96.7 75.9 161.8c0 10.8-2.8 20.9-7.6 29.7H609.3zM432 256c61.9 0 112-50.1 112-112s-50.1-112-112-112c-24.8 0-47.7 8.1-66.3 21.7C377.4 75.9 384 101.2 384 128c0 35.6-11.6 68.5-31.3 95.1C373 243.4 401 256 432 256z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="overflow-y-auto transition-all duration-300 @if (Route::is('contactUs.*')) max-h-100 @else max-h-0 @endif"
+                            style="scrollbar-width: none;">
+                            <ul class="gap-2.5 pr-3">
+                                @can('access', ['admin'])
+                                <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
+                                    <span class="size-1 bg-white rounded-sm"></span>
+                                    <a href="{{ route('contactUs.list') }}"
+                                        class="py-1 @if (Route::is('contactUs.list')) text-[#FF0000] @endif">درباره ما</a>
+                                </li>
+                                @endcan
+                                <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
+                                    <span class="size-1 bg-white rounded-sm"></span>
+                                    <a href="{{ route('contactUs.create') }}"
+                                        class="py-1 @if (Route::is('contactUs.create')) text-[#FF0000] @endif">درباره ما</a>
+                                    </li>
                             </ul>
                         </div>
                     </div>
