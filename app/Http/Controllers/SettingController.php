@@ -309,7 +309,6 @@ class SettingController extends Controller
             'products'=>$products, 
             'newProducts'=>$newProducts, 
             'cartProIds'=>$cartProIds,
-            'setting'=>$setting
         ]);
     }
     public function packSetting(){
