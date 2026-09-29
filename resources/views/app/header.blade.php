@@ -259,9 +259,12 @@
         <div class="xl:w-18/100 lg:w-21/100 sm:w-1/2 w-2/3 bg-white h-dvh flex flex-col justify-start items-center fixed top-0 right-0 rounded-l-4xl transition_normal z-3 lg:hidden translate-x-full"
             id="hamburger_menu_item">
             <div class="w-11/12 h-full flex flex-col gap-6 justify-start items-start rounded-l-4xl  relative">
-                <div class="w-full h-20 flex gap-3 justify-between items-center px-">
-                    <img src="{{ asset('storage/' . $setting['logo']) }}" alt=""
-                        class="w-2/3 h-full">
+                <div class="w-full h-20 flex gap-3 justify-between items-center">
+                    <a href="{{ route('home') }}" class="w-2/3 h-full">
+
+                        <img src="{{ asset('storage/' . $setting['logo']) }}" alt=""
+                            class="w-full h-full">
+                    </a>
                     <div onclick="hamburger_menu('close')">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="size-7">
                             <path

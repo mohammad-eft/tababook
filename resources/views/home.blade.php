@@ -459,7 +459,7 @@
                 @foreach ($products as $product)
                     <div
                         class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  min-h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2">
-                        <div class="w-full h-1/2 flex justify-center items-center relative py-7">
+                        <div class="w-full flex justify-center items-center relative py-7">
                             <a href={{ route('product.show', [$product->id]) }} class="block">
                                 <img src="{{ asset('storage/' . $product->image) }}" alt=""
                                     class="max-w-full max-h-24 lg:max-h-42">
@@ -485,7 +485,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="w-full h-1/2 flex flex-col gap-1 justify-start items-start">
+                        <div class="w-full flex flex-col gap-1 justify-start items-start">
                             <a href={{ route('product.show', [$product->id]) }}
                                 class="lg:text-lg text-sm font-bold max-w-full truncate">{{ $product->title }}</a>
                             <span class="text-[#ADB4B2] max-lg:text-xs">{{ $product->writer }}</span>
@@ -514,16 +514,16 @@
                                     </span>
                                 </div>
                             @endif
-                            <div class="w-full">
+                            <div class="w-full h-12">
                                 @if (Auth::check() && in_array($product->id, $cartProIds) && count($product->carts))
-                               
-                                    <div class="w-full py-2 px-4 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
+
+                                    <div class="w-full h-full px-4 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
                                         <button onclick="setCount(this)" class="w-1/3 text-lg font-bold text-white cursor-pointer" data-state="+">+</button>
                                         <input type="number" class="w-1/3 text-sm text-center outline-none text-white" readonly value="{{ $product->carts[0]->quantity }}">
                                         <button onclick="setCount(this)" class="w-1/3 text-lg font-bold text-white cursor-pointer" data-state="-">-</button>
                                     </div>
                                 @else
-                                    <button onclick="addToCart(this)" class="w-full px-4 py-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
+                                    <button onclick="addToCart(this)" class="w-full px-4 h-full bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
                                                 class="lg:size-4 size-3" fill="white">
@@ -587,7 +587,7 @@
                 @foreach ($newProducts as $product)
                     <div
                         class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  min-h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2 pb-5">
-                        <div class="w-full h-1/2 flex justify-center items-center relative py-7">
+                        <div class="w-full flex justify-center items-center relative py-7">
                             <a href={{ route('product.show', [$product->id]) }} class="block">
                                 <img src="{{ asset('storage/' . $product->image) }}" alt=""
                                     class="max-w-full max-h-24 lg:max-h-42">
@@ -613,7 +613,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="w-full h-1/2 flex flex-col gap-1 justify-start items-start">
+                        <div class="w-full flex flex-col gap-1 justify-start items-start">
                             <a href={{ route('product.show', [$product->id]) }}
                                 class="lg:text-lg text-sm font-bold max-w-full truncate">{{ $product->title }}</a>
                             <span class="text-[#ADB4B2] max-lg:text-xs">{{ $product->writer }}</span>
@@ -642,15 +642,15 @@
                                     </span>
                                 </div>
                             @endif
-                            <div class="w-full">
+                            <div class="w-full h-12">
                                 @if (Auth::check() && in_array($product->id, $cartProIds) && count($product->carts))
-                                    <div class="w-full py-2 px-4 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
+                                    <div class="w-full h-full px-4 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
                                         <button onclick="setCount(this)" class="w-1/3 text-lg font-bold text-white flex justify-center items-center cursor-pointer" data-state="+">+</button>
                                         <input type="number" class="w-1/3 text-sm text-center outline-none text-white" readonly value="{{ $product->carts[0]->quantity }}">
                                         <button onclick="setCount(this)" class="w-1/3 text-lg font-bold text-white flex justify-center items-center cursor-pointer" data-state="-">-</button>
                                     </div>
                                 @else
-                                    <button onclick="addToCart(this)" class="w-full px-4 py-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
+                                    <button onclick="addToCart(this)" class="w-full px-4 h-full bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
                                                 class="lg:size-4 size-3" fill="white">
