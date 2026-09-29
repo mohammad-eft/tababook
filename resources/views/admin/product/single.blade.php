@@ -699,7 +699,7 @@ input[type="checkbox"]:checked::after {
                             </h3>
                             <h3 class="text-md font-bold py-3 lg:hidden flex felx-row justify-between items-center">
                                 <span>ویژگی ها</span>
-                                <a href="#" class="text-xs flex flex-row items-center">
+                                <a href="#phoneDetails" class="text-xs flex flex-row items-center">
                                     <span>مشاهده همه</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 320 512">
                                         <path fill="var(--color-fill)"
@@ -759,14 +759,14 @@ input[type="checkbox"]:checked::after {
                     </div>
 
                     <hr class="w-full border-none h-2 bg-[var(--color-border)] lg:hidden">
-
-                    <div class="lg:hidden py-5 px-2 text-(--color-text)">
-                        <h3 class="text-md font-bold leading-[180%]">
+{{-- py-5 --}}
+                    <div class="lg:hidden  px-2 text-(--color-text)">
+                        {{-- <h3 class="text-md font-bold leading-[180%]">
                             فروشنده
-                        </h3>
+                        </h3> --}}
 
 
-                        <a href="#" class="flex flex-row gap-3 items-center">
+                        {{-- <a href="#" class="flex flex-row gap-3 items-center">
                             <!-- logo -->
                             <div class="size-9 p-2 bg-(--color-primary) rounded-full">
                                 <!-- logo content -->
@@ -778,21 +778,21 @@ input[type="checkbox"]:checked::after {
                                     <span class="text-sm font-bold">
                                         طبابوک
                                     </span>
-                                    {{-- <svg xmlns="http://www.w3.org/2000/svg" class="size-3" viewBox="0 0 320 512">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-3" viewBox="0 0 320 512">
                                         <path fill="var(--color-fill)"
                                             d="M52.7 267.3c-6.2-6.2-6.2-16.4 0-22.6l160-160c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6L86.6 256 235.3 404.7c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0l-160-160z" />
-                                    </svg> --}}
+                                    </svg>
 
-                                    {{-- <span
+                                    <span
                                         class="rounded-full bg-(--color-primary-btn) text-xs text-(--color-primary) leading-[180%] px-2 mr-2 font-bold">
                                         رسمی
                                     </span>
                                     <span
                                         class="rounded-full bg-(--color-primary-btn) text-xs text-(--color-primary) leading-[180%] px-2 mr-2 font-bold">
                                         منتخب
-                                    </span> --}}
+                                    </span>
                                 </div>
-                                {{-- <div class="flex flex-row items-center gap-1.5">
+                                <div class="flex flex-row items-center gap-1.5">
                                     <div
                                         class="flex flex-row items-center gap-1.5 py-0.5 pr-2 pl-0.5 border border-(--color-border) rounded-full text-xs font-bold">
                                         رضایت از کالا
@@ -807,9 +807,9 @@ input[type="checkbox"]:checked::after {
                                             عالی
                                         </span>
                                     </div>
-                                </div> --}}
+                                </div>
                             </div>
-                        </a>
+                        </a> --}}
 
                         {{-- <div class="flex flex-row gap-3 items-center">
 
@@ -1953,7 +1953,7 @@ input[type="checkbox"]:checked::after {
 
     <!-- specifications table mobile -->
 
-    <section class="w-11/12 lg:hidden text-(--color-text)">
+    <section class="w-11/12 lg:hidden text-(--color-text)" id="phoneDetails">
         <div class="py-5 px-2">
             <h3 class="text-lg font-bold leading-[180%] mb-4">
                 جدول مشخصات

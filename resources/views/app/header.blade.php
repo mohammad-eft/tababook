@@ -36,10 +36,10 @@
                         <span class="lg:w-7 w-4 lg:h-1 h-0.5 bg-black rounded-full"></span>
                     </div>
                 </div>
-                <div
+                <a href="{{ route('home') }}"
                     class="hidden xl:w-1/6 lg:w-1/4 max-lg:w-1/3 h-full lg:flex lg:justify-start justify-center items-center">
                     <img src="{{ asset('storage/' . $setting['logo']) }}" alt="" class="w-10/12">
-                </div>
+                </a>
 {{--                <form action="{{ route('search.page') }}" method="POST" class="xl:w-1/3 lg:w-2/4 max-lg:w-1/3 h-full flex justify-center items-center max-lg:hidden">--}}
 {{--                    @csrf--}}
 {{--                    <div--}}
