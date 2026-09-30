@@ -2,6 +2,7 @@
 
 namespace App\classes;
 use App\Models\setting;
+use Log;
 
 class homeSetting{
     public static function all(){
@@ -12,6 +13,7 @@ class homeSetting{
         $heroSubtitle = setting::where('meta_key', 'heroSubtitle')->first();
         $heroPrimaryButton = setting::where('meta_key', 'heroPrimaryButton')->first();
         $heroPrimaryButtonLink = setting::where('meta_key', 'heroPrimaryButtonLink')->first();
+        Log::info($heroPrimaryButton);
         $heroSecondaryButton = setting::where('meta_key', 'heroSecondaryButton')->first();
         $heroSecondaryButtonLink = setting::where('meta_key', 'heroSecondaryButtonLink')->first();
         $topBanner = setting::where('meta_key', 'topBanner')->first();
@@ -78,13 +80,13 @@ class homeSetting{
         $footerCategories = setting::where('meta_key', 'footerCategories')->first();
 
         $setting['logo'] = $logo ? $logo->meta_value : null;
-        $setting['heroBanner'] = $logo ? $heroBanner->meta_value : null;
-        $setting['heroTitle'] = $logo ? $heroTitle->meta_value : null;
-        $setting['heroSubtitle'] = $logo ? $heroSubtitle->meta_value : null;
-        $setting['heroPrimaryButton'] = $logo ? $heroPrimaryButton->meta_value : null;
-        $setting['heroPrimaryButtonLink'] = $logo ? $heroPrimaryButtonLink->meta_value : null;
-        $setting['heroSecondaryButton'] = $logo ? $heroSecondaryButton->meta_value : null;
-        $setting['heroSecondaryButtonLink'] = $logo ? $heroSecondaryButtonLink->meta_value : null;
+        $setting['heroBanner'] = $heroBanner ? $heroBanner->meta_value : null;
+        $setting['heroTitle'] = $heroTitle ? $heroTitle->meta_value : null;
+        $setting['heroSubtitle'] = $heroSubtitle ? $heroSubtitle->meta_value : null;
+        $setting['heroPrimaryButton'] = $heroPrimaryButton ? $heroPrimaryButton->meta_value : null;
+        $setting['heroPrimaryButtonLink'] = $heroPrimaryButtonLink ? $heroPrimaryButtonLink->meta_value : null;
+        $setting['heroSecondaryButton'] = $heroSecondaryButton ? $heroSecondaryButton->meta_value : null;
+        $setting['heroSecondaryButtonLink'] = $heroSecondaryButtonLink ? $heroSecondaryButtonLink->meta_value : null;
 
         $setting['topBanner']=$topBanner ? $topBanner->meta_value : null;
         $setting['topBannerLink']=$topBannerLink ? $topBannerLink->meta_value : null;

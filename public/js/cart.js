@@ -16,7 +16,7 @@ function addToCart(btn){
                 console.log(response)
                 orderBasket.children[1].innerText += 1
                 btn.parentElement.innerHTML = `
-                    <div class="w-full h-12 px-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="${response.product_id}">
+                    <div class="w-full h-12 px-2 bg-(--color-purple) flex gap-2 justify-center items-center rounded-xl" data-product-id="${response.product_id}">
                         <button onclick="setCount(this)" class="w-1/3 text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="+">+</button>
                         <input type="number" class="w-1/3 text-white text-sm text-center outline-none" readonly value="${response.quantity}">
                         <button onclick="setCount(this)" class="w-1/3 text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="-">-</button>
@@ -79,7 +79,7 @@ function setCount(btn){
                 }
                 console.log(data)
                 btn.parentElement.parentElement.innerHTML = `
-                                <button onclick="addToCart(this)" class="w-full px-2 h-12 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="${data.data.product_id}">
+                                <button onclick="addToCart(this)" class="w-full px-2 h-12 bg-(--color-purple) flex gap-2 justify-center items-center rounded-xl" data-product-id="${data.data.product_id}">
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
                                                 class="lg:size-4 size-3" fill="white">
@@ -132,7 +132,7 @@ function setCount(btn){
                 }
                 if (btn.parentElement.children[1].value == 0) {
                     btn.parentElement.parentElement.innerHTML = `
-                                <button class="addToCart w-full p-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="${data.data.product_id}">
+                                <button class="addToCart w-full p-2 bg-(--color-purple) flex gap-2 justify-center items-center rounded-xl" data-product-id="${data.data.product_id}">
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
                                                 class="lg:size-4 size-3" fill="white">

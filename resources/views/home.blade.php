@@ -1,29 +1,30 @@
 @extends('app.document')
 @section('title', 'طبابوک | فروشگاه کتاب و لوازم تحریر')
 @section('content')
-    <main class="w-full flex flex-col gap-10 justify-start items-center my-10">
+    <main class="w-full flex flex-col gap-10 justify-start items-center my-3 lg:my-5">
         <!-- hero -->
-        <section class="w-full xl:h-90 lg:h-80 flex max-lg:flex-col xl:gap-20 lg:gap-15 gap-5 justify-start items-center bg-[#F3ECE2] max-lg:pb-5">
+        <section
+                class="max-w-[1800px] w-full mx-auto xl:h-90 bg-[url('{{ asset('storage/' . $setting['heroBanner']) }}')] bg-cover bg-no-repeat bg-center lg:h-80 flex max-lg:flex-col xl:gap-20 lg:gap-15 gap-5 justify-start items-center bg-(--second-cream-color) max-lg:pb-5">
             <div class="lg:w-1/2 w-full h-full flex justify-center items-center">
                 <img src="{{ asset('storage/' . $setting['heroBanner']) }}" alt=""
-                    class="w-full lg:h-full max-h-full">
+                     class="w-full lg:h-full max-h-full hidden">
             </div>
-            <div class="lg:w-1/2 w-full h-full  flex lg:justify-start justify-center items-center">
+            <div class="lg:w-1/2 w-full h-full  flex lg:justify-start justify-end pl-5 lg:pl-0 items-center">
                 <div
-                    class="xl:w-9/12 lg:w-10/12 w-11/12 h-full flex flex-col gap-5 justify-center lg:items-start items-center">
+                        class="xl:w-9/12 lg:w-10/12 w-11/12 h-full flex flex-col gap-5 justify-center lg:items-start items-end">
                     <div
-                        class="flex flex-col gap-2 justify-start items-start max-lg:items-center xl:text-4xl lg:text-4xl text-[8vw] font-bold max-lg:text-center">
-                        <h1>{{ $setting['heroTitle'] }}</h1>
+                            class="flex flex-col gap-2 justify-start items-end max-lg:items-center text-lg xl:text-4xl lg:text-4xl font-bold text-center lg:text-start">
+                        <h1 class="text-(--primary-text-color)">{{ $setting['heroTitle'] }}</h1>
 
                     </div>
-                    <p class="max-xl:text-sm max-lg:text-center">{{ $setting['heroSubtitle'] }}</p>
+                    <p class="max-xl:text-sm w-2/3 max-lg:text-center text-(--secondary-text-color)">{{ $setting['heroSubtitle'] }}</p>
                     <div class="w-full flex lg:gap-6 gap-3 justify-between items-center">
                         <a href="{{ $setting['heroPrimaryButtonLink'] }}"
-                            class="w-1/2 lg:py-4 py-3 bg-green-700 xl:text-lg max-lg:text-sm text-white font-bold rounded-xl flex justify-center items-center">
+                           class="w-1/2 lg:py-4 py-3 bg-(--purple-btn) xl:text-lg max-lg:text-sm text-white font-bold rounded-xl flex justify-center items-center">
                             {{ $setting['heroPrimaryButton'] }}
                         </a>
                         <a href="{{ $setting['heroSecondaryButtonLink'] }}"
-                            class="w-1/2 lg:py-3 py-2 border-2 border-[#254c24] rounded-xl xl:text-lg max-lg:text-sm text-green-700 font-bold flex justify-center items-center">
+                           class="w-1/2 lg:py-3 py-2 bg-(--green-btn) rounded-xl xl:text-lg max-lg:text-sm text-white font-bold flex justify-center items-center">
                             {{ $setting['heroSecondaryButton'] }}
                         </a>
                     </div>
@@ -32,481 +33,244 @@
 
         </section>
         <!-- hero -->
-        <!-- category -->
-        {{-- <section
-            class="max-w-11/12 w-11/12 lg:h-32 h-25  flex lg:gap-5 gap-3 justify-start items-center overflow-x-auto p-1">
-            @foreach ($categories as $category)
-                <a href="{{ route('category.relatedProducts', [$category->id]) }}"
-                    class="xl:min-w-1/9 xl:max-w-1/9 lg:min-w-1/8 max-w-1/8 min-w-1/3 max-w-1/3  h-full bg-white flex flex-col gap-3 justify-center items-center rounded-xl cart_shdow">
-                    <div class="lg:size-15 size-12 rounded-full bg-[#FAEDD9] flex justify-center items-center">
-                        <img src="{{ $category->image ? asset('storage/' . $category->image) : '' }}"
-                            class="size-7/12 rounded-full" alt="">
+
+
+
+        <section class="max-w-[1800px] w-11/12 mx-auto">
+            <div class="w-full mx-auto flex flex-col items-center">
+                <div class="w-full flex flex-col items-center">
+                    <div class="w-full flex gap-2 items-center">
+                        <div class="w-[50px] h-1 bg-(--primary-text-color)"></div>
+                        <span class="text-sm lg:text-lg text-(--secondary-text-color)">پک های پیشنهادی</span>
                     </div>
-                    <span class="max-lg:text-xs font-bold">{{ $category->title }}</span>
-                </a>
-            @endforeach
-
-        </section> --}}
-
-
-
-        <section class="2xl:container w-11/12 mx-auto">
-            <div class="w-full flex flex-col lg:flex-row justify-between items-end">
-                <div class="flex flex-col gap-4">
-                    <div class="flex">
-                        <div class="flex flex-row items-center gap-3 px-2.5 py-1 rounded-full bg-green-500/20">
-                            <svg class="w-5 h-5 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M20 7h-.7c.229-.467.349-.98.351-1.5a3.5 3.5 0 0 0-3.5-3.5c-1.717 0-3.215 1.2-4.331 2.481C10.4 2.842 8.949 2 7.5 2A3.5 3.5 0 0 0 4 5.5c.003.52.123 1.033.351 1.5H4a2 2 0 0 0-2 2v2a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V9a2 2 0 0 0-2-2Zm-9.942 0H7.5a1.5 1.5 0 0 1 0-3c.9 0 2 .754 3.092 2.122-.219.337-.392.635-.534.878Zm6.1 0h-3.742c.933-1.368 2.371-3 3.739-3a1.5 1.5 0 0 1 0 3h.003ZM13 14h-2v8h2v-8Zm-4 0H4v6a2 2 0 0 0 2 2h3v-8Zm6 0v8h3a2 2 0 0 0 2-2v-6h-5Z"/>
-                            </svg>
-                            <span class="text-xs text-green-950 font-bold">پک های پیشنهادی</span>
-                        </div>
-                    </div>
-                    <h2 class="text-xl lg:text-3xl font-bold text-green-950">پک های آماده برای هر موقعیت</h2>
-                    <p class="text-sm text-green-950/50 lg:max-w-1/2">
-                        با انتخاب هر یک از محصولات کاربردی و مرتبط با موضوع را در یک بسته دریافت کنید.
-                        پک ها انتخابی هوشمندانه برای مطالعه ، یادگیری و هدیه دادن هستند.
-                    </p>
-                </div>
-                <img src="{{ asset('img/pack.png') }}" class="w-85 hidden lg:block" alt="">
-            </div>
-            <div class="w-full grid grid-cols-1 lg:grid-cols-5 mt-5 gap-4">
-                <div class="w-full rounded-t-xl rounded-b-md border border-gray-200" style="box-shadow: 0px 0px 5px 0px #00000036">
-                    <img src="{{ asset('img/01.png') }}" class="w-full h-[150px] object-cover rounded-xl" alt="">
-                    <div class="mt-3 p-3 flex flex-col gap-2.5">
-                        <a href="#" class="font-bold text-green-950">پک هدیه کتاب دوست</a>
-                        <span class="text-sm text-green-950/50">پک هدیه خاص برا آدمای خاص</span>
-                        <div class="w-full flex items-center justify-between">
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023"/>
-                                </svg>
-                                <span class="text-sm text-green-950">کتاب</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 8h2c1.1046 0 2 .89543 2 2 0 1.1046-.8954 2-2 2h-2.5M5 19h11M5 6l.6398 6.398C5.84428 14.4428 7.56494 16 9.61995 16H10.38c2.0551 0 3.7757-1.5572 3.9802-3.602L15 6H5Z"/>
-                                </svg>
-                                <span class="text-sm text-green-950">ماگ</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17 21-5-4-5 4V3.889a.92.92 0 0 1 .244-.629.808.808 0 0 1 .59-.26h8.333a.81.81 0 0 1 .589.26.92.92 0 0 1 .244.63V21Z"/>
-                                </svg>
-                                <span class="text-sm text-green-950">بوکمارک</span>
-                            </div>
-                        </div>
-                        <div class="mt-3 w-full flex justify-between items-center">
-                            <span class="text-green-950 in-fa text-xs font-bold">889,000 تومان</span>
-                            <a href="#" class="px-2.5 rounded-full py-1.5 bg-green-950 text-white font-bold flex itmes-center gap-2">
-                                <span class="text-xs">مشاهده پک</span>
-                                <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4"/>
-                                </svg>
-
-                            </a>
-                        </div>
+                    <div class="w-full flex flex-row justify-between items-center">
+                        <span class="lg:text-[30px] text-(--primary-text-color) font-bold">پک های آماده برای هر موقعیت</span>
+{{--                        <span class="text-gray-400 text-right">با انتخاب هر یک از محصولات کاربردی و مرتبط با موضوع را در یک بسته دریافت کنید. پک ها انتخابی هوشمندانه برای مطالعه ، یادگیری و هدیه دادن هستند.</span>--}}
+                        <a href="#" class="text-sm text-(--secondary-text-color)">مشاهده همه</a>
                     </div>
                 </div>
-                <div class="w-full rounded-t-xl rounded-b-md border border-gray-200" style="box-shadow: 0px 0px 5px 0px #00000036">
-                    <img src="{{ asset('img/02.png') }}" class="w-full h-[150px] object-cover rounded-xl" alt="">
-                    <div class="mt-3 p-3 flex flex-col gap-2.5">
-                        <a href="#" class="font-bold text-green-950">پک هدیه کتاب دوست</a>
-                        <span class="text-sm text-green-950/50">پک هدیه خاص برا آدمای خاص</span>
-                        <div class="w-full flex items-center justify-between">
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023"/>
-                                </svg>
-                                <span class="text-sm text-green-950">کتاب</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 8h2c1.1046 0 2 .89543 2 2 0 1.1046-.8954 2-2 2h-2.5M5 19h11M5 6l.6398 6.398C5.84428 14.4428 7.56494 16 9.61995 16H10.38c2.0551 0 3.7757-1.5572 3.9802-3.602L15 6H5Z"/>
-                                </svg>
-                                <span class="text-sm text-green-950">ماگ</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17 21-5-4-5 4V3.889a.92.92 0 0 1 .244-.629.808.808 0 0 1 .59-.26h8.333a.81.81 0 0 1 .589.26.92.92 0 0 1 .244.63V21Z"/>
-                                </svg>
-                                <span class="text-sm text-green-950">بوکمارک</span>
+                <div class="w-full grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 gap-4 lg:gap-8 mt-5">
+
+                    <div class="relative overflow-hidden rounded-2xl bg-[#f8f3e8]">
+                        <div class="relative h-[180px] lg:h-[250px] w-full">
+                            <img src="{{ asset('img/01.png') }}" class="h-full w-full object-cover" alt="">
+                            <div class="absolute inset-y-0 right-0 w-[45%] bg-[#f8f3e8]">
+                                <div class="absolute -left-3 -top-8 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-5 lg:-left-8 top-4 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-2 lg:-left-8 top-1/2 h-40 w-40 -translate-y-1/2 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-5 bottom-2 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-3 -bottom-8 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
                             </div>
                         </div>
-                        <div class="mt-3 w-full flex justify-between items-center">
-                            <span class="text-green-950 in-fa text-xs font-bold">889,000 تومان</span>
-                            <a href="#" class="px-2.5 rounded-full py-1.5 bg-green-950 text-white font-bold flex itmes-center gap-2">
-                                <span class="text-xs">مشاهده پک</span>
-                                <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4"/>
-                                </svg>
-
-                            </a>
+                        <div class="absolute right-0 top-0 flex h-full w-[45%] items-center justify-center px-3 py-4 lg:py-8">
+                            <div class="text-right">
+                                <h3 class="text-lg lg:text-2xl font-bold text-[#315c50]">
+                                    پک کتاب هدیه
+                                </h3>
+                                <p class="mt-3 text-sm leading-7 text-gray-500">
+                                    انواع کتاب با موضوعات مختلف
+                                </p>
+                                <button class="mt-5 rounded-full bg-[#8eae9f] px-6 py-2 text-white text-sm lg:text-base">
+                                    مشاهده
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="w-full rounded-t-xl rounded-b-md border border-gray-200" style="box-shadow: 0px 0px 5px 0px #00000036">
-                    <img src="{{ asset('img/030.png') }}" class="w-full h-[150px] object-cover rounded-xl" alt="">
-                    <div class="mt-3 p-3 flex flex-col gap-2.5">
-                        <a href="#" class="font-bold text-green-950">پک هدیه کتاب دوست</a>
-                        <span class="text-sm text-green-950/50">پک هدیه خاص برا آدمای خاص</span>
-                        <div class="w-full flex items-center justify-between">
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023"/>
-                                </svg>
-                                <span class="text-sm text-green-950">کتاب</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 8h2c1.1046 0 2 .89543 2 2 0 1.1046-.8954 2-2 2h-2.5M5 19h11M5 6l.6398 6.398C5.84428 14.4428 7.56494 16 9.61995 16H10.38c2.0551 0 3.7757-1.5572 3.9802-3.602L15 6H5Z"/>
-                                </svg>
-                                <span class="text-sm text-green-950">ماگ</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17 21-5-4-5 4V3.889a.92.92 0 0 1 .244-.629.808.808 0 0 1 .59-.26h8.333a.81.81 0 0 1 .589.26.92.92 0 0 1 .244.63V21Z"/>
-                                </svg>
-                                <span class="text-sm text-green-950">بوکمارک</span>
+                    <div class="relative overflow-hidden rounded-2xl bg-[#f8f3e8]">
+                        <div class="relative h-[180px] lg:h-[250px] w-full">
+                            <img src="{{ asset('img/02.png') }}" class="h-full w-full object-cover" alt="">
+                            <div class="absolute inset-y-0 right-0 w-[45%] bg-[#f8f3e8]">
+                                <div class="absolute -left-3 -top-8 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-5 lg:-left-8 top-4 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-2 lg:-left-8 top-1/2 h-40 w-40 -translate-y-1/2 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-5 bottom-2 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-3 -bottom-8 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
                             </div>
                         </div>
-                        <div class="mt-3 w-full flex justify-between items-center">
-                            <span class="text-green-950 in-fa text-xs font-bold">889,000 تومان</span>
-                            <a href="#" class="px-2.5 rounded-full py-1.5 bg-green-950 text-white font-bold flex itmes-center gap-2">
-                                <span class="text-xs">مشاهده پک</span>
-                                <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4"/>
-                                </svg>
-
-                            </a>
+                        <div class="absolute right-0 top-0 flex h-full w-[45%] items-center justify-center px-3 py-4 lg:py-8">
+                            <div class="text-right">
+                                <h3 class="text-lg lg:text-2xl font-bold text-[#315c50]">
+                                    پک مدرسه
+                                </h3>
+                                <p class="mt-3 text-sm leading-7 text-gray-500">
+                                    تمامی وسایل لازم برای تحصیل
+                                </p>
+                                <button class="mt-5 rounded-full bg-[#8eae9f] px-6 py-2 text-white text-sm lg:text-base">
+                                    مشاهده
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="w-full rounded-t-xl rounded-b-md border border-gray-200" style="box-shadow: 0px 0px 5px 0px #00000036">
-                    <img src="{{ asset('img/040.png') }}" class="w-full h-[150px] object-cover rounded-xl" alt="">
-                    <div class="mt-3 p-3 flex flex-col gap-2.5">
-                        <a href="#" class="font-bold text-green-950">پک هدیه کتاب دوست</a>
-                        <span class="text-sm text-green-950/50">پک هدیه خاص برا آدمای خاص</span>
-                        <div class="w-full flex items-center justify-between">
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023"/>
-                                </svg>
-                                <span class="text-sm text-green-950">کتاب</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 8h2c1.1046 0 2 .89543 2 2 0 1.1046-.8954 2-2 2h-2.5M5 19h11M5 6l.6398 6.398C5.84428 14.4428 7.56494 16 9.61995 16H10.38c2.0551 0 3.7757-1.5572 3.9802-3.602L15 6H5Z"/>
-                                </svg>
-                                <span class="text-sm text-green-950">ماگ</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17 21-5-4-5 4V3.889a.92.92 0 0 1 .244-.629.808.808 0 0 1 .59-.26h8.333a.81.81 0 0 1 .589.26.92.92 0 0 1 .244.63V21Z"/>
-                                </svg>
-                                <span class="text-sm text-green-950">بوکمارک</span>
+                    <div class="relative overflow-hidden rounded-2xl bg-[#f8f3e8]">
+                        <div class="relative h-[180px] lg:h-[250px] w-full">
+                            <img src="{{ asset('img/030.png') }}" class="h-full w-full object-cover" alt="">
+                            <div class="absolute inset-y-0 right-0 w-[45%] bg-[#f8f3e8]">
+                                <div class="absolute -left-3 -top-8 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-5 lg:-left-8 top-4 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-2 lg:-left-8 top-1/2 h-40 w-40 -translate-y-1/2 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-5 bottom-2 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-3 -bottom-8 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
                             </div>
                         </div>
-                        <div class="mt-3 w-full flex justify-between items-center">
-                            <span class="text-green-950 in-fa text-xs font-bold">889,000 تومان</span>
-                            <a href="#" class="px-2.5 rounded-full py-1.5 bg-green-950 text-white font-bold flex itmes-center gap-2">
-                                <span class="text-xs">مشاهده پک</span>
-                                <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4"/>
-                                </svg>
-
-                            </a>
+                        <div class="absolute right-0 top-0 flex h-full w-[45%] items-center justify-center px-3 py-4 lg:py-8">
+                            <div class="text-right">
+                                <h3 class="text-lg lg:text-2xl font-bold text-[#315c50]">
+                                    پک کتاب شبانه
+                                </h3>
+                                <p class="mt-3 text-sm leading-7 text-gray-500">
+                                    شامل یک عدد ماگ و دو جلد رمان
+                                </p>
+                                <button class="mt-5 rounded-full bg-[#8eae9f] px-6 py-2 text-white text-sm lg:text-base">
+                                    مشاهده
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="w-full rounded-t-xl rounded-b-md border border-gray-200" style="box-shadow: 0px 0px 5px 0px #00000036">
-                    <img src="{{ asset('img/050.png') }}" class="w-full h-[150px] object-cover rounded-xl" alt="">
-                    <div class="mt-3 p-3 flex flex-col gap-2.5">
-                        <a href="#" class="font-bold text-green-950">پک هدیه کتاب دوست</a>
-                        <span class="text-sm text-green-950/50">پک هدیه خاص برا آدمای خاص</span>
-                        <div class="w-full flex items-center justify-between">
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023"/>
-                                </svg>
-                                <span class="text-sm text-green-950">کتاب</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 8h2c1.1046 0 2 .89543 2 2 0 1.1046-.8954 2-2 2h-2.5M5 19h11M5 6l.6398 6.398C5.84428 14.4428 7.56494 16 9.61995 16H10.38c2.0551 0 3.7757-1.5572 3.9802-3.602L15 6H5Z"/>
-                                </svg>
-                                <span class="text-sm text-green-950">ماگ</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17 21-5-4-5 4V3.889a.92.92 0 0 1 .244-.629.808.808 0 0 1 .59-.26h8.333a.81.81 0 0 1 .589.26.92.92 0 0 1 .244.63V21Z"/>
-                                </svg>
-                                <span class="text-sm text-green-950">بوکمارک</span>
+                    <div class="relative overflow-hidden rounded-2xl bg-[#f8f3e8]">
+                        <div class="relative h-[180px] lg:h-[250px] w-full">
+                            <img src="{{ asset('img/01.png') }}" class="h-full w-full object-cover" alt="">
+                            <div class="absolute inset-y-0 right-0 w-[45%] bg-[#f8f3e8]">
+                                <div class="absolute -left-3 -top-8 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-5 lg:-left-8 top-4 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-2 lg:-left-8 top-1/2 h-40 w-40 -translate-y-1/2 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-5 bottom-2 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-3 -bottom-8 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
                             </div>
                         </div>
-                        <div class="mt-3 w-full flex justify-between items-center">
-                            <span class="text-green-950 in-fa text-xs font-bold">889,000 تومان</span>
-                            <a href="#" class="px-2.5 rounded-full py-1.5 bg-green-950 text-white font-bold flex itmes-center gap-2">
-                                <span class="text-xs">مشاهده پک</span>
-                                <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4"/>
-                                </svg>
-
-                            </a>
+                        <div class="absolute right-0 top-0 flex h-full w-[45%] items-center justify-center px-3 py-4 lg:py-8">
+                            <div class="text-right">
+                                <h3 class="text-lg lg:text-2xl font-bold text-[#315c50]">
+                                    پک کتاب هدیه
+                                </h3>
+                                <p class="mt-3 text-sm leading-7 text-gray-500">
+                                    انواع کتاب با موضوعات مختلف
+                                </p>
+                                <button class="mt-5 rounded-full bg-[#8eae9f] px-6 py-2 text-white text-sm lg:text-base">
+                                    مشاهده
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="w-full rounded-t-xl rounded-b-md border border-gray-200" style="box-shadow: 0px 0px 5px 0px #00000036">
-                    <img src="{{ asset('img/01.png') }}" class="w-full h-[150px] object-cover rounded-xl" alt="">
-                    <div class="mt-3 p-3 flex flex-col gap-2.5">
-                        <a href="#" class="font-bold text-green-950">پک هدیه کتاب دوست</a>
-                        <span class="text-sm text-green-950/50">پک هدیه خاص برا آدمای خاص</span>
-                        <div class="w-full flex items-center justify-between">
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023"/>
-                                </svg>
-                                <span class="text-sm text-green-950">کتاب</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 8h2c1.1046 0 2 .89543 2 2 0 1.1046-.8954 2-2 2h-2.5M5 19h11M5 6l.6398 6.398C5.84428 14.4428 7.56494 16 9.61995 16H10.38c2.0551 0 3.7757-1.5572 3.9802-3.602L15 6H5Z"/>
-                                </svg>
-                                <span class="text-sm text-green-950">ماگ</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17 21-5-4-5 4V3.889a.92.92 0 0 1 .244-.629.808.808 0 0 1 .59-.26h8.333a.81.81 0 0 1 .589.26.92.92 0 0 1 .244.63V21Z"/>
-                                </svg>
-                                <span class="text-sm text-green-950">بوکمارک</span>
+                    <div class="relative overflow-hidden rounded-2xl bg-[#f8f3e8]">
+                        <div class="relative h-[180px] lg:h-[250px] w-full">
+                            <img src="{{ asset('img/02.png') }}" class="h-full w-full object-cover" alt="">
+                            <div class="absolute inset-y-0 right-0 w-[45%] bg-[#f8f3e8]">
+                                <div class="absolute -left-3 -top-8 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-5 lg:-left-8 top-4 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-2 lg:-left-8 top-1/2 h-40 w-40 -translate-y-1/2 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-5 bottom-2 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-3 -bottom-8 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
                             </div>
                         </div>
-                        <div class="mt-3 w-full flex justify-between items-center">
-                            <span class="text-green-950 in-fa text-xs font-bold">889,000 تومان</span>
-                            <a href="#" class="px-2.5 rounded-full py-1.5 bg-green-950 text-white font-bold flex itmes-center gap-2">
-                                <span class="text-xs">مشاهده پک</span>
-                                <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4"/>
-                                </svg>
-
-                            </a>
+                        <div class="absolute right-0 top-0 flex h-full w-[45%] items-center justify-center px-3 py-4 lg:py-8">
+                            <div class="text-right">
+                                <h3 class="text-lg lg:text-2xl font-bold text-[#315c50]">
+                                    پک مدرسه
+                                </h3>
+                                <p class="mt-3 text-sm leading-7 text-gray-500">
+                                    تمامی وسایل لازم برای تحصیل
+                                </p>
+                                <button class="mt-5 rounded-full bg-[#8eae9f] px-6 py-2 text-white text-sm lg:text-base">
+                                    مشاهده
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="w-full rounded-t-xl rounded-b-md border border-gray-200" style="box-shadow: 0px 0px 5px 0px #00000036">
-                    <img src="{{ asset('img/02.png') }}" class="w-full h-[150px] object-cover rounded-xl" alt="">
-                    <div class="mt-3 p-3 flex flex-col gap-2.5">
-                        <a href="#" class="font-bold text-green-950">پک هدیه کتاب دوست</a>
-                        <span class="text-sm text-green-950/50">پک هدیه خاص برا آدمای خاص</span>
-                        <div class="w-full flex items-center justify-between">
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023"/>
-                                </svg>
-                                <span class="text-sm text-green-950">کتاب</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 8h2c1.1046 0 2 .89543 2 2 0 1.1046-.8954 2-2 2h-2.5M5 19h11M5 6l.6398 6.398C5.84428 14.4428 7.56494 16 9.61995 16H10.38c2.0551 0 3.7757-1.5572 3.9802-3.602L15 6H5Z"/>
-                                </svg>
-                                <span class="text-sm text-green-950">ماگ</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17 21-5-4-5 4V3.889a.92.92 0 0 1 .244-.629.808.808 0 0 1 .59-.26h8.333a.81.81 0 0 1 .589.26.92.92 0 0 1 .244.63V21Z"/>
-                                </svg>
-                                <span class="text-sm text-green-950">بوکمارک</span>
+                    <div class="relative overflow-hidden rounded-2xl bg-[#f8f3e8]">
+                        <div class="relative h-[180px] lg:h-[250px] w-full">
+                            <img src="{{ asset('img/030.png') }}" class="h-full w-full object-cover" alt="">
+                            <div class="absolute inset-y-0 right-0 w-[45%] bg-[#f8f3e8]">
+                                <div class="absolute -left-3 -top-8 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-5 lg:-left-8 top-4 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-2 lg:-left-8 top-1/2 h-40 w-40 -translate-y-1/2 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-5 bottom-2 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-3 -bottom-8 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
                             </div>
                         </div>
-                        <div class="mt-3 w-full flex justify-between items-center">
-                            <span class="text-green-950 in-fa text-xs font-bold">889,000 تومان</span>
-                            <a href="#" class="px-2.5 rounded-full py-1.5 bg-green-950 text-white font-bold flex itmes-center gap-2">
-                                <span class="text-xs">مشاهده پک</span>
-                                <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4"/>
-                                </svg>
-
-                            </a>
+                        <div class="absolute right-0 top-0 flex h-full w-[45%] items-center justify-center px-3 py-4 lg:py-8">
+                            <div class="text-right">
+                                <h3 class="text-lg lg:text-2xl font-bold text-[#315c50]">
+                                    پک کتاب شبانه
+                                </h3>
+                                <p class="mt-3 text-sm leading-7 text-gray-500">
+                                    شامل یک عدد ماگ و دو جلد رمان
+                                </p>
+                                <a href="#" class="mt-5 rounded-full bg-[#8eae9f] px-6 py-2 text-white text-sm lg:text-base">
+                                    مشاهده
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="w-full rounded-t-xl rounded-b-md border border-gray-200" style="box-shadow: 0px 0px 5px 0px #00000036">
-                    <img src="{{ asset('img/030.png') }}" class="w-full h-[150px] object-cover rounded-xl" alt="">
-                    <div class="mt-3 p-3 flex flex-col gap-2.5">
-                        <a href="#" class="font-bold text-green-950">پک هدیه کتاب دوست</a>
-                        <span class="text-sm text-green-950/50">پک هدیه خاص برا آدمای خاص</span>
-                        <div class="w-full flex items-center justify-between">
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023"/>
-                                </svg>
-                                <span class="text-sm text-green-950">کتاب</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 8h2c1.1046 0 2 .89543 2 2 0 1.1046-.8954 2-2 2h-2.5M5 19h11M5 6l.6398 6.398C5.84428 14.4428 7.56494 16 9.61995 16H10.38c2.0551 0 3.7757-1.5572 3.9802-3.602L15 6H5Z"/>
-                                </svg>
-                                <span class="text-sm text-green-950">ماگ</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17 21-5-4-5 4V3.889a.92.92 0 0 1 .244-.629.808.808 0 0 1 .59-.26h8.333a.81.81 0 0 1 .589.26.92.92 0 0 1 .244.63V21Z"/>
-                                </svg>
-                                <span class="text-sm text-green-950">بوکمارک</span>
-                            </div>
-                        </div>
-                        <div class="mt-3 w-full flex justify-between items-center">
-                            <span class="text-green-950 in-fa text-xs font-bold">889,000 تومان</span>
-                            <a href="#" class="px-2.5 rounded-full py-1.5 bg-green-950 text-white font-bold flex itmes-center gap-2">
-                                <span class="text-xs">مشاهده پک</span>
-                                <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4"/>
-                                </svg>
 
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="w-full rounded-t-xl rounded-b-md border border-gray-200" style="box-shadow: 0px 0px 5px 0px #00000036">
-                    <img src="{{ asset('img/040.png') }}" class="w-full h-[150px] object-cover rounded-xl" alt="">
-                    <div class="mt-3 p-3 flex flex-col gap-2.5">
-                        <a href="#" class="font-bold text-green-950">پک هدیه کتاب دوست</a>
-                        <span class="text-sm text-green-950/50">پک هدیه خاص برا آدمای خاص</span>
-                        <div class="w-full flex items-center justify-between">
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023"/>
-                                </svg>
-                                <span class="text-sm text-green-950">کتاب</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 8h2c1.1046 0 2 .89543 2 2 0 1.1046-.8954 2-2 2h-2.5M5 19h11M5 6l.6398 6.398C5.84428 14.4428 7.56494 16 9.61995 16H10.38c2.0551 0 3.7757-1.5572 3.9802-3.602L15 6H5Z"/>
-                                </svg>
-                                <span class="text-sm text-green-950">ماگ</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17 21-5-4-5 4V3.889a.92.92 0 0 1 .244-.629.808.808 0 0 1 .59-.26h8.333a.81.81 0 0 1 .589.26.92.92 0 0 1 .244.63V21Z"/>
-                                </svg>
-                                <span class="text-sm text-green-950">بوکمارک</span>
-                            </div>
-                        </div>
-                        <div class="mt-3 w-full flex justify-between items-center">
-                            <span class="text-green-950 in-fa text-xs font-bold">889,000 تومان</span>
-                            <a href="#" class="px-2.5 rounded-full py-1.5 bg-green-950 text-white font-bold flex itmes-center gap-2">
-                                <span class="text-xs">مشاهده پک</span>
-                                <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4"/>
-                                </svg>
-
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="w-full rounded-t-xl rounded-b-md border border-gray-200" style="box-shadow: 0px 0px 5px 0px #00000036">
-                    <img src="{{ asset('img/050.png') }}" class="w-full h-[150px] object-cover rounded-xl" alt="">
-                    <div class="mt-3 p-3 flex flex-col gap-2.5">
-                        <a href="#" class="font-bold text-green-950">پک هدیه کتاب دوست</a>
-                        <span class="text-sm text-green-950/50">پک هدیه خاص برا آدمای خاص</span>
-                        <div class="w-full flex items-center justify-between">
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023"/>
-                                </svg>
-                                <span class="text-sm text-green-950">کتاب</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 8h2c1.1046 0 2 .89543 2 2 0 1.1046-.8954 2-2 2h-2.5M5 19h11M5 6l.6398 6.398C5.84428 14.4428 7.56494 16 9.61995 16H10.38c2.0551 0 3.7757-1.5572 3.9802-3.602L15 6H5Z"/>
-                                </svg>
-                                <span class="text-sm text-green-950">ماگ</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <svg class="w-4 h-4 text-green-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17 21-5-4-5 4V3.889a.92.92 0 0 1 .244-.629.808.808 0 0 1 .59-.26h8.333a.81.81 0 0 1 .589.26.92.92 0 0 1 .244.63V21Z"/>
-                                </svg>
-                                <span class="text-sm text-green-950">بوکمارک</span>
-                            </div>
-                        </div>
-                        <div class="mt-3 w-full flex justify-between items-center">
-                            <span class="text-green-950 in-fa text-xs font-bold">889,000 تومان</span>
-                            <a href="#" class="px-2.5 rounded-full py-1.5 bg-green-950 text-white font-bold flex itmes-center gap-2">
-                                <span class="text-xs">مشاهده پک</span>
-                                <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12l4-4m-4 4 4 4"/>
-                                </svg>
-
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
 
 
-
-
-
         <!-- category -->
         <!-- likly -->
-        <section class="w-11/12 flex flex-col gap-4 justify-start items-start">
-            <div class="flex flex-col gap-1 justify-start lg:items-start items-center">
+        <section class="max-w-[1800px] w-11/12 mx-auto flex flex-col gap-4 justify-start items-start">
+            <div class="w-full flex flex-row gap-1 justify-between items-center">
                 <h3 class="text-xl font-bold">محبوب ترین های این روز ها</h3>
-                <p class="text-[#ADB4B2] max-lg:text-center max-lg:text-sm">انتخاب هایی که بیشتر از همه مورد توجه
-                    کاربران قرار گرفته است</p>
+{{--                <p class="text-[#ADB4B2] max-lg:text-center max-lg:text-sm">انتخاب هایی که بیشتر از همه مورد توجه--}}
+{{--                    کاربران قرار گرفته است</p>--}}
+                <a href="#" class="text-sm text-(--secondary-text-color)">مشاهده همه</a>
             </div>
-            <div class="max-w-full w-full overflow-x-auto py-2 px-1 flex gap-4 justify-start">
+            <div class="max-w-full w-full py-2 px-1 flex gap-4 justify-start overflow-x-auto lg:overflow-x-visible">
                 @foreach ($products as $product)
                     <div
-                        class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  min-h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2">
+                            class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  min-h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2">
                         <div class="w-full flex justify-center items-center relative py-7">
                             <a href={{ route('product.show', [$product->id]) }} class="block">
                                 <img src="{{ asset('storage/' . $product->image) }}" alt=""
-                                    class="max-w-full max-h-24 lg:max-h-42">
+                                     class="max-w-full max-h-24 lg:max-h-42">
                             </a>
                             @if ($product->percent)
                                 <span
-                                    class="lg:px-2 px-1 lg:py-1 py-0.5 bg-red-500 rounded-md text-xs max-lg:text-[9px] text-white absolute top-0 right-0">{{ $product->percent }}%</span>
+                                        class="lg:px-2 px-1 lg:py-1 py-0.5 bg-(--discount-color) rounded-md text-xs max-lg:text-[9px] text-white absolute top-0 right-0">{{ $product->percent }}%</span>
                             @endif
-                            <div class="px-2 py-1 absolute top-0 left-0 change_like_svh">
-                                <div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
-                                        class="lg:size-5 size-4">
-                                        <path
-                                            d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z" />
-                                    </svg>
-                                </div>
-                                <div class="hidden">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
-                                        class="size-5 fill-red-500">
-                                        <path
-                                            d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
-                                    </svg>
-                                </div>
-                            </div>
+{{--                            <div class="px-2 py-1 absolute top-0 left-0 change_like_svh">--}}
+{{--                                <div>--}}
+{{--                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"--}}
+{{--                                         class="lg:size-5 size-4">--}}
+{{--                                        <path--}}
+{{--                                                d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z"/>--}}
+{{--                                    </svg>--}}
+{{--                                </div>--}}
+{{--                                <div class="hidden">--}}
+{{--                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"--}}
+{{--                                         class="size-5 fill-red-500">--}}
+{{--                                        <path--}}
+{{--                                                d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/>--}}
+{{--                                    </svg>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                         </div>
-                        <div class="w-full flex flex-col gap-1 justify-start items-start">
+                        <div class="w-full flex flex-col gap-1.5 lg:gap-2.5 justify-start items-start">
                             <a href={{ route('product.show', [$product->id]) }}
-                                class="lg:text-lg text-sm font-bold max-w-full truncate">{{ $product->title }}</a>
-                            <span class="text-[#ADB4B2] max-lg:text-xs">{{ $product->writer }}</span>
-                            <div class="flex justify-start items-center">
-                                <div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
-                                        class="size-4 fill-yellow-400">
-                                        <path
-                                            d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
-                                    </svg>
-                                </div>
-                                <span class="lg:text-xs text-[10px] text-[#ADB4B2]">5.0</span>
-                            </div>
+                                class="lg:text-lg text-sm font-bold max-w-full truncate text-(--primary-text-color)">{{ $product->title }}</a>
+                            <span class="text-[#ADB4B2] text-sm h-10 max-h-10 ellipsis-2 text-(--secondary-text)">{{ $product->summary }}</span>
+{{--                            <div class="flex justify-start items-center">--}}
+{{--                                <div>--}}
+{{--                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"--}}
+{{--                                         class="size-4 fill-yellow-400">--}}
+{{--                                        <path--}}
+{{--                                                d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/>--}}
+{{--                                    </svg>--}}
+{{--                                </div>--}}
+{{--                                <span class="lg:text-xs text-[10px] text-[#ADB4B2]">5.0</span>--}}
+{{--                            </div>--}}
+                            <div class="flex items-center gap-3">
                             @if ($product->secondary_price)
+                                    <div class="line-through text-[#a1a1aa] text-[10px] in-fa">
+                                        {{ $product->primary_price }} تومان
+                                    </div>
                                 <div class="flex items-center justify-between gap-2">
                                     <strong class="text-[15px] in-fa">{{ $product->secondary_price }}</strong>
                                     <span class="text-[10px] text-[#71717a]">تومان
                                     </span>
                                 </div>
-                                <div class="line-through text-[#a1a1aa] text-[10px] in-fa">
-                                    {{ $product->primary_price }} تومان</div>
+
                             @else
                                 <div class="flex items-center justify-between gap-2">
                                     <strong class="text-[15px] in-fa">{{ $product->primary_price }}</strong>
@@ -514,25 +278,36 @@
                                     </span>
                                 </div>
                             @endif
+                            </div>
                             <div class="w-full h-12">
                                 @if (Auth::check() && in_array($product->id, $cartProIds) && count($product->carts))
 
-                                    <div class="w-full h-full px-4 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
-                                        <button onclick="setCount(this)" class="w-1/3 text-lg font-bold text-white cursor-pointer" data-state="+">+</button>
-                                        <input type="number" class="w-1/3 text-sm text-center outline-none text-white" readonly value="{{ $product->carts[0]->quantity }}">
-                                        <button onclick="setCount(this)" class="w-1/3 text-lg font-bold text-white cursor-pointer" data-state="-">-</button>
+                                    <div class="w-full h-full px-4 bg-(--color-purple) flex gap-2 justify-center items-center rounded-xl"
+                                         data-product-id="{{ $product->id }}">
+                                        <button onclick="setCount(this)"
+                                                class="w-1/3 text-lg font-bold text-white cursor-pointer"
+                                                data-state="+">+
+                                        </button>
+                                        <input type="number" class="w-1/3 text-sm text-center outline-none text-white"
+                                               readonly value="{{ $product->carts[0]->quantity }}">
+                                        <button onclick="setCount(this)"
+                                                class="w-1/3 text-lg font-bold text-white cursor-pointer"
+                                                data-state="-">-
+                                        </button>
                                     </div>
                                 @else
-                                    <button onclick="addToCart(this)" class="w-full px-4 h-full bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
+                                    <button onclick="addToCart(this)"
+                                            class="w-full px-4 h-full bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl cursor-pointer transition-all duration-300 hover:bg-(--green-btn) group"
+                                            data-product-id="{{ $product->id }}">
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
-                                                class="lg:size-4 size-3" fill="white">
+                                                 class="lg:size-4 size-3 fill-(--primary-text-color) transition-all duration-300 group-hover:fill-white">
                                                 <path
-                                                    d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
+                                                        d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
                                                 </path>
                                             </svg>
                                         </div>
-                                        <span class="lg:text-sm text-[10px] text-white font-bold">افزودن به سبد خرید</span>
+                                        <span class="lg:text-sm text-[10px] text-(--primary-text-color) font-bold transition-all duration-300 group-hover:text-white">افزودن به سبد خرید</span>
                                     </button>
                                 @endif
                             </div>
@@ -544,12 +319,13 @@
         <!-- likly -->
 
         <!-- baner1 -->
-        <section class="w-11/12 flex max-lg:flex-col justify-start items-center bg-[#EBEFE1] rounded-xl">
+        <section
+                class="max-w-[1800px] w-11/12 mx-auto flex max-lg:flex-col justify-start items-center bg-(--cream-color) rounded-xl">
             <div class="lg:w-1/2 w-full flex justify-center items-center relative">
                 <img src="{{ asset('storage/' . $setting['secondBanner']) }}" alt=""
-                    class="w-full h-full object-cover rounded-r-xl lg:max-h-90 max-h-70">
+                     class="w-full h-full object-cover rounded-r-xl lg:max-h-90 max-h-70">
                 {{-- <div
-                    class="lg:size-25 size-20 rounded-full bg-green-700 flex flex-col gap-1 justify-center items-center absolute lg:top-1/12 top-0 right-1/24">
+                    class="lg:size-25 size-20 rounded-full bg-(--color-purple) flex flex-col gap-1 justify-center items-center absolute lg:top-1/12 top-0 right-1/24">
                     <div class="flex gap-1 justify-start items-center">
                         <span class="max-lg:text-sm text-white">تا</span>
                         <span class="lg:text-lg font-bold text-white">%30</span>
@@ -558,14 +334,14 @@
                 </div> --}}
             </div>
             <div
-                class="lg:w-1/2 w-full min-h-full  flex lg:justify-start justify-center items-center lg:pr-20 lg:py-4 max-lg:px-2 max-lg:pt-7 max-lg:pb-5">
+                    class="lg:w-1/2 w-full min-h-full  flex lg:justify-start justify-center items-center lg:pr-20 lg:py-4 max-lg:px-2 max-lg:pt-7 max-lg:pb-5">
                 <div class="w-full h-full flex flex-col gap-3 justify-center lg:items-start items-center">
                     <h3 class="lg:text-4xl text-2xl font-bold">{{ $setting['secondBannerTitle'] }}</h3>
                     <p class="max-xl:text-sm max-lg:text-xs max-lg:text-center">{{ $setting['secondBannerSubtitle'] }}
                     </p>
 
                     <a href="{{ $setting['secondBannerButtonLink'] }}"
-                        class="px-6 lg:py-3 py-2 bg-green-700  text-sm text-white font-bold rounded-xl flex justify-center items-center mt-2">
+                       class="px-6 lg:py-3 py-2 bg-(--purple-btn)  text-sm text-white font-bold rounded-xl flex justify-center items-center mt-2">
                         {{ $setting['secondBannerButton'] }}
                     </a>
 
@@ -576,90 +352,105 @@
         </section>
         <!-- baner1 -->
         <!-- new product -->
-        <section class="w-11/12 flex flex-col gap-4 justify-start items-start">
-            <div class="flex flex-col gap-1 justify-start lg:items-start items-center">
+        <section class="max-w-[1800px] w-11/12 mx-auto flex flex-col gap-4 justify-start items-start">
+            <div class="w-full flex flex-row justify-between items-center">
                 <h3 class="text-xl font-bold">تازه به قفسه ها اضافه شده</h3>
-                <p class="text-[#ADB4B2] max-lg:text-center max-lg:text-sm">جدید ترین کتاب ها و محصولات فروشگاه را
-                    زودتر از بقیه ببین</p>
+{{--                <p class="text-[#ADB4B2] max-lg:text-center max-lg:text-sm">جدید ترین کتاب ها و محصولات فروشگاه را--}}
+{{--                    زودتر از بقیه ببین</p>--}}
+                <a href="#" class="text-sm text-(--secondary-text-color)">مشاهده همه</a>
             </div>
-            <div class="max-w-full w-full overflow-x-auto py-2 px-1 flex gap-4 justify-start">
+            <div class="max-w-full w-full py-2 px-1 flex gap-4 justify-start overflow-x-auto lg:overflow-x-visible">
 
                 @foreach ($newProducts as $product)
                     <div
-                        class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  min-h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2 pb-5">
+                            class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  min-h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2 pb-5">
                         <div class="w-full flex justify-center items-center relative py-7">
                             <a href={{ route('product.show', [$product->id]) }} class="block">
                                 <img src="{{ asset('storage/' . $product->image) }}" alt=""
-                                    class="max-w-full max-h-24 lg:max-h-42">
+                                     class="max-w-full max-h-24 lg:max-h-42">
                             </a>
                             @if ($product->percent)
                                 <span
-                                    class="lg:px-2 px-1 lg:py-1 py-0.5 bg-red-500 rounded-md text-xs max-lg:text-[9px] text-white absolute top-0 right-0">{{ $product->percent }}%</span>
+                                        class="lg:px-2 px-1 lg:py-1 py-0.5 bg-(--discount-color) rounded-md text-xs max-lg:text-[9px] text-white absolute top-0 right-0">{{ $product->percent }}%</span>
                             @endif
-                            <div class="px-2 py-1 absolute top-0 left-0 change_like_svh">
-                                <div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
-                                        class="lg:size-5 size-4">
-                                        <path
-                                            d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z" />
-                                    </svg>
-                                </div>
-                                <div class="hidden">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
-                                        class="size-5 fill-red-500">
-                                        <path
-                                            d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z" />
-                                    </svg>
-                                </div>
-                            </div>
+{{--                            <div class="px-2 py-1 absolute top-0 left-0 change_like_svh">--}}
+{{--                                <div>--}}
+{{--                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"--}}
+{{--                                         class="lg:size-5 size-4">--}}
+{{--                                        <path--}}
+{{--                                                d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z"/>--}}
+{{--                                    </svg>--}}
+{{--                                </div>--}}
+{{--                                <div class="hidden">--}}
+{{--                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"--}}
+{{--                                         class="size-5 fill-red-500">--}}
+{{--                                        <path--}}
+{{--                                                d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/>--}}
+{{--                                    </svg>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                         </div>
-                        <div class="w-full flex flex-col gap-1 justify-start items-start">
+                        <div class="w-full flex flex-col gap-1.5 lg:gap-2.5 justify-start items-start">
                             <a href={{ route('product.show', [$product->id]) }}
-                                class="lg:text-lg text-sm font-bold max-w-full truncate">{{ $product->title }}</a>
-                            <span class="text-[#ADB4B2] max-lg:text-xs">{{ $product->writer }}</span>
-                            <div class="flex justify-start items-center">
-                                <div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
-                                        class="size-4 fill-yellow-400">
-                                        <path
-                                            d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z" />
-                                    </svg>
-                                </div>
-                                <span class="lg:text-xs text-[10px] text-[#ADB4B2]">5.0</span>
+                                class="lg:text-lg text-sm font-bold max-w-full truncate text-(--primary-text-color)">{{ $product->title }}</a>
+                            <span class="text-[#ADB4B2] text-sm h-10 max-h-10 ellipsis-2 text-(--secondary-text-color)">{{ $product->summary }}</span>
+{{--                            <div class="flex justify-start items-center">--}}
+{{--                                <div>--}}
+{{--                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"--}}
+{{--                                         class="size-4 fill-yellow-400">--}}
+{{--                                        <path--}}
+{{--                                                d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/>--}}
+{{--                                    </svg>--}}
+{{--                                </div>--}}
+{{--                                <span class="lg:text-xs text-[10px] text-[#ADB4B2]">5.0</span>--}}
+{{--                            </div>--}}
+                            <div class="flex items-center gap-3">
+                                @if ($product->secondary_price)
+                                    <div class="line-through text-[#a1a1aa] text-[10px] in-fa">
+                                        {{ $product->primary_price }} تومان
+                                    </div>
+                                    <div class="flex items-center justify-between gap-2">
+                                        <strong class="text-[15px] in-fa">{{ $product->secondary_price }}</strong>
+                                        <span class="text-[10px] text-[#71717a]">تومان
+                                        </span>
+                                    </div>
+
+                                @else
+                                    <div class="flex items-center justify-between gap-2">
+                                        <strong class="text-[15px] in-fa">{{ $product->primary_price }}</strong>
+                                        <span class="text-[10px] text-[#71717a]">تومان
+                                        </span>
+                                    </div>
+                                @endif
                             </div>
-                            @if ($product->secondary_price)
-                                <div class="flex items-center justify-between gap-2">
-                                    <strong class="text-[15px] in-fa">{{ $product->secondary_price }}</strong>
-                                    <span class="text-[10px] text-[#71717a]">تومان
-                                    </span>
-                                </div>
-                                <div class="line-through text-[#a1a1aa] text-[10px] in-fa">
-                                    {{ $product->primary_price }} تومان</div>
-                            @else
-                                <div class="flex items-center justify-between gap-2">
-                                    <strong class="text-[15px] in-fa">{{ $product->primary_price }}</strong>
-                                    <span class="text-[10px] text-[#71717a]">تومان
-                                    </span>
-                                </div>
-                            @endif
                             <div class="w-full h-12">
                                 @if (Auth::check() && in_array($product->id, $cartProIds) && count($product->carts))
-                                    <div class="w-full h-full px-4 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
-                                        <button onclick="setCount(this)" class="w-1/3 text-lg font-bold text-white flex justify-center items-center cursor-pointer" data-state="+">+</button>
-                                        <input type="number" class="w-1/3 text-sm text-center outline-none text-white" readonly value="{{ $product->carts[0]->quantity }}">
-                                        <button onclick="setCount(this)" class="w-1/3 text-lg font-bold text-white flex justify-center items-center cursor-pointer" data-state="-">-</button>
+                                    <div class="w-full h-full px-4 bg-(--color-purple) flex gap-2 justify-center items-center rounded-xl"
+                                         data-product-id="{{ $product->id }}">
+                                        <button onclick="setCount(this)"
+                                                class="w-1/3 text-lg font-bold text-white flex justify-center items-center cursor-pointer"
+                                                data-state="+">+
+                                        </button>
+                                        <input type="number" class="w-1/3 text-sm text-center outline-none text-white"
+                                               readonly value="{{ $product->carts[0]->quantity }}">
+                                        <button onclick="setCount(this)"
+                                                class="w-1/3 text-lg font-bold text-white flex justify-center items-center cursor-pointer"
+                                                data-state="-">-
+                                        </button>
                                     </div>
                                 @else
-                                    <button onclick="addToCart(this)" class="w-full px-4 h-full bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
+                                    <button onclick="addToCart(this)"
+                                            class="w-full px-4 h-full bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl cursor-pointer transition-all duration-300 hover:bg-(--green-btn) group"
+                                            data-product-id="{{ $product->id }}">
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
-                                                class="lg:size-4 size-3" fill="white">
+                                                 class="lg:size-4 size-3 transition-all duration-300 group-hover:fill-white fill-(--primary-text-color)">
                                                 <path
-                                                    d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
+                                                        d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
                                                 </path>
                                             </svg>
                                         </div>
-                                        <span class="lg:text-sm text-[10px] text-white font-bold">افزودن به سبد خرید</span>
+                                        <span class="lg:text-sm text-[10px] text-(--primary-text-color) transition-all duration-300 group-hover:text-white font-bold">افزودن به سبد خرید</span>
                                     </button>
                                 @endif
                             </div>
@@ -670,16 +461,6 @@
 
             </div>
         </section>
-
-
-
-
-
-
-
-
-
-
 
 
         {{-- <section class="w-full flex justify-center">
@@ -770,24 +551,25 @@
 
 
         <section class="w-full flex justify-center ">
-            <div class="w-11/12 lg:h-60 flex max-lg:flex-col justify-between gap-3">
-                <a href="{{ $setting['rightBannerLink'] }}" class="lg:w-5/12 w-full rounded-2xl h-full">
+            <div class="max-w-[1800px] w-11/12 mx-auto lg:h-60 flex max-lg:flex-col justify-between gap-3">
+                <a href="{{ $setting['rightBannerLink'] }}" class="lg:w-5/12 w-full rounded-2xl h-full bg-(--bg-dark-green) flex justify-center items-center">
                     <img class="w-full h-full rounded-xl"
-                        src="{{ asset('storage/'.$setting['rightBanner']) }}" alt="">
+                         src="{{ asset('storage/'.$setting['rightBanner']) }}" alt="">
                 </a>
-                <div class="lg:w-7/12 w-full h-full relative flex max-lg:flex-col items-center gap-3 bg-[#F3ECE2] rounded-xl">
-                    <img class="h-full lg:w-1/2 w-full rounded-r-xl object-cover max-h-40"
-                        src="{{ asset('storage/'.$setting['leftBanner']) }}" alt="">
+                <div class="lg:w-7/12 w-full h-full relative flex max-lg:flex-col items-center gap-3 bg-(--cream-color) rounded-xl">
+                    <img class="h-full w-1/2 rounded-r-xl object-cover max-h-40"
+                         src="{{ asset('storage/'.$setting['leftBanner']) }}" alt="">
                     <div class="lg:w-1/2 w-full flex flex-col gap-2 lg:items-start items-center p-3">
-                        <span class="lg:text-xl text-md font-bold">{{ $setting['leftBannerTitle'] }}</span>
-                       
-                        <span class="lg:text-md text-xs">{{ $setting['leftBannerSubtitle'] }}</span>
+                        <span class="lg:text-xl text-md font-bold text-(--primary-text-color)">{{ $setting['leftBannerTitle'] }}</span>
+
+                        <span class="lg:text-md text-xs text-(--secondary-text-color)">{{ $setting['leftBannerSubtitle'] }}</span>
                         <a href="{{ $setting['leftBannerButtonLink'] }}"
-                            class="w-full rounded-xl bg-green-600 flex items-center justify-center gap-2 mt-5 p-2">
+                           class="w-1/2 rounded-xl bg-(--pastel-pink) flex items-center justify-center gap-2 mt-5 p-2">
                             <span class="lg:text-md text-xs text-white">{{ $setting['leftBannerButton'] }}</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="lg:size-5 size-3 fill-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
+                                 class="lg:size-5 size-3 fill-white">
                                 <path
-                                    d="M7.4 273.4C2.7 268.8 0 262.6 0 256s2.7-12.8 7.4-17.4l176-168c9.6-9.2 24.8-8.8 33.9 .8s8.8 24.8-.8 33.9L83.9 232 424 232c13.3 0 24 10.7 24 24s-10.7 24-24 24L83.9 280 216.6 406.6c9.6 9.2 9.9 24.3 .8 33.9s-24.3 9.9-33.9 .8l-176-168z" />
+                                        d="M7.4 273.4C2.7 268.8 0 262.6 0 256s2.7-12.8 7.4-17.4l176-168c9.6-9.2 24.8-8.8 33.9 .8s8.8 24.8-.8 33.9L83.9 232 424 232c13.3 0 24 10.7 24 24s-10.7 24-24 24L83.9 280 216.6 406.6c9.6 9.2 9.9 24.3 .8 33.9s-24.3 9.9-33.9 .8l-176-168z"/>
                             </svg>
                         </a>
                     </div>
@@ -797,36 +579,38 @@
 
 
         <section class="w-full flex justify-center gap-5">
-            <div class="w-11/12 flex flex-col gap-5">
+            <div class="max-w-[1800px] w-11/12 mx-auto flex flex-col gap-5">
                 <div class="w-full flex justify-between items-center">
-                    <span class="lg:text-2xl text-xl font-bold">{{ $setting['twoCardsSectionTitle'] }} </span>
-                    <a href="{{ $setting['twoCardsSectionLinkUrl'] }}" class="text-sm text-gray-500">{{ $setting['twoCardsSectionLinkText'] }}</a>
+                    <span class="lg:text-2xl text-xl font-bold text-(--primary-text-color)">{{ $setting['twoCardsSectionTitle'] }} </span>
+                    <a href="{{ $setting['twoCardsSectionLinkUrl'] }}"
+                       class="text-sm text-(--secondary-text-color)">{{ $setting['twoCardsSectionLinkText'] }}</a>
                 </div>
                 <div class="flex items-center flex-col lg:flex-row gap-8">
-                    <div class="lg:w-6/12 w-full flex max-lg:flex-col gap-2 justify-between py-5 px-7 bg-[#f8f4eb] rounded-xl">
+                    <div class="lg:w-6/12 w-full flex max-lg:flex-col gap-2 justify-between py-5 px-7 bg-(--cream-color) rounded-xl">
                         <div class="lg:w-1/2 w-full flex flex-col max-lg:items-center justify-center gap-3 max-lg:order-2">
-                            <span class="text-xl max-lg:text-lg font-bold">{{ $setting['twoCardsRightTitle'] }}</span>
-                            <span class="max-lg:text-sm text-gray-600 max-lg:text-center">{{ $setting['twoCardsRightSubtitle'] }}</span>
+                            <span class="text-xl max-lg:text-lg font-bold text-(--primary-text-color)">{{ $setting['twoCardsRightTitle'] }}</span>
+                            <span class="max-lg:text-sm text-(--secondary-text-color) max-lg:text-center">{{ $setting['twoCardsRightSubtitle'] }}</span>
                             <a href="{{ $setting['twoCardsRightButtonLink'] }}"
-                                class="flex justify-center items-center w-9/12 py-2 border-2 border-gray-300 rounded-xl">
-                                <span>{{ $setting['twoCardsRightButton'] }}</span>
+                               class="flex justify-center items-center w-9/12 py-2 border-2 border-gray-300 rounded-xl">
+                                <span class="text-(--secondary-text-color)">{{ $setting['twoCardsRightButton'] }}</span>
                             </a>
                         </div>
-                        <img class="lg:w-1/2 w-full max-h-60 rounded-l-xl max-lg:order-1"
-                            src="{{ asset('storage/'.$setting['twoCardsRightImage']) }}"
-                            alt="">
+                        <img class="w-1/2 mx-auto max-h-60 rounded-l-xl max-lg:order-1"
+                             src="{{ asset('storage/'.$setting['twoCardsRightImage']) }}"
+                             alt="">
                     </div>
-                    <div class="lg:w-6/12 w-full flex max-lg:flex-col gap-2 justify-between p-5 px-7 bg-[#f8f4eb] rounded-xl">
+                    <div class="lg:w-6/12 w-full flex max-lg:flex-col gap-2 justify-between p-5 px-7 bg-(--second-cream-color) rounded-xl">
                         <div class="lg:w-1/2 w-full flex flex-col max-lg:items-center justify-center gap-3 max-lg:order-2">
-                            <span class="text-2xl font-bold">{{ $setting['twoCardsLeftTitle'] }}</span>
-                            <span class="max-lg:text-sm text-gray-600 max-lg:text-center">{{ $setting['twoCardsLeftSubtitle'] }} </span>
-                            <a href="{{ $setting['twoCardsLeftButtonLink'] }}" class="flex justify-center items-center w-9/12 py-2 border-2 border-gray-300 rounded-xl">
+                            <span class="text-2xl font-bold text-(--primary-text-color)">{{ $setting['twoCardsLeftTitle'] }}</span>
+                            <span class="max-lg:text-sm max-lg:text-center text-(--secondary-text-color)">{{ $setting['twoCardsLeftSubtitle'] }} </span>
+                            <a href="{{ $setting['twoCardsLeftButtonLink'] }}"
+                               class="flex justify-center items-center w-9/12 py-2 border-2 border-gray-300 rounded-xl text-(--secondary-text-color)">
                                 <span>{{ $setting['twoCardsLeftButton'] }}</span>
                             </a>
                         </div>
-                        <img class="lg:w-1/2 w-full max-h-60 rounded-l-xl max-lg:order-1"
-                            src="{{ asset('storage/'.$setting['twoCardsLeftImage']) }}"
-                            alt="">
+                        <img class="w-1/2 mx-auto max-h-60 rounded-l-xl max-lg:order-1"
+                             src="{{ asset('storage/'.$setting['twoCardsLeftImage']) }}"
+                             alt="">
                     </div>
                 </div>
             </div>
@@ -846,7 +630,7 @@
                         <img src="{{ asset('storage/home/bookSM_1847177_0 (1).jpg') }}" alt=""
                             class="max-w-full max-h-24 lg:max-h-42">
                         <span
-                            class="lg:px-2 px-1 lg:py-1 py-0.5 bg-red-500 rounded-md text-xs max-lg:text-[9px] text-white absolute top-0 right-0">-13%</span>
+                            class="lg:px-2 px-1 lg:py-1 py-0.5 bg-(--discount-color) rounded-md text-xs max-lg:text-[9px] text-white absolute top-0 right-0">-13%</span>
                         <div class="px-2 py-1 absolute top-0 left-0 change_like_svh">
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
@@ -881,7 +665,7 @@
                             <span>450,000</span>
                             <span>تومان</span>
                         </div>
-                        <div class="w-full py-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl">
+                        <div class="w-full py-2 bg-(--color-purple) flex gap-2 justify-center items-center rounded-xl">
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
                                     class="lg:size-4 size-3" fill="white">
@@ -926,87 +710,92 @@
         <!-- weblag -->
         <!-- prapery -->
         <section
-            class="w-11/12  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-center lg:py-4 sm:py-3 rounded-xl">
+                class="max-w-[1800px] w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-center lg:py-4 sm:py-3 rounded-xl">
             <div
-                class="w-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2">
-                <div class="group w-full msx-sm:h-full flex max-lg:flex-col gap-2 justify-center items-center">
-                    <div class="group-hover:scale-[1.05] group-active:scale-[1.3] transition_normal">
-                        <img src="{{ asset('storage/'.$setting['serviceImage1']) }}" class="xl:size-13 xl:min-w-13 lg:size-9 lg:min-w-9 size-12 object-cover" alt="">
+                    class="w-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2">
+                <div class="group w-full flex flex-col gap-2 justify-center items-center">
+                    <div class="">
+                        <img src="{{ asset('storage/'.$setting['serviceImage1']) }}"
+                             class="lg:w-8 w-5 object-cover" alt="">
                     </div>
                     <div
-                        class="flex flex-col sm:gap-2 gap-1 lg:items-start items-center max-sm:items-center justify-center">
-                        <h5 class="text-lg font-bold text-[var(--text)]">{{ $setting['serviceTitle1'] }}</h5>
+                            class="flex flex-col sm:gap-2 gap-1 items-center max-sm:items-center justify-center">
+                        <h5 class="xl:text-lg text-md font-bold text-(--primary-text-color)">{{ $setting['serviceTitle1'] }}</h5>
                         <div
-                            class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px] sm:text-[10px] text-[11px] text-[var(--text-secondary)]">
-                            <span class="font-bold max-lg:text-center">{{ $setting['serviceSubTitle1'] }}</span>
+                                class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px] sm:text-[10px] text-[11px] text-[var(--text-secondary)]">
+                            <span class="font-bold text-center text-(--secondary-text-color)">{{ $setting['serviceSubTitle1'] }}</span>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div
-                class="w-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2">
-                <div class="group w-full msx-sm:h-full flex max-lg:flex-col gap-2 justify-center items-center">
-                    <div class="group-hover:scale-[1.05] group-active:scale-[1.3] transition_normal">
-                        <img src="{{ asset('storage/'.$setting['serviceImage2']) }}" class="xl:size-13 xl:min-w-13 lg:size-9 lg:min-w-9 size-12 object-cover" alt="">
+                    class="w-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2">
+                <div class="group w-full flex flex-col gap-2 justify-center items-center">
+                    <div class="">
+                        <img src="{{ asset('storage/'.$setting['serviceImage2']) }}"
+                             class="lg:w-8 w-5 object-cover" alt="">
                     </div>
                     <div
-                        class="flex flex-col sm:gap-2 gap-1 lg:items-start items-center max-sm:items-center justify-center">
-                        <h5 class="xl:text-lg text-md font-bold text-[var(--text)]">{{ $setting['serviceTitle2'] }}</h5>
+                            class="flex flex-col sm:gap-2 gap-1 items-center max-sm:items-center justify-center">
+                        <h5 class="xl:text-lg text-md font-bold text-(--primary-text-color)">{{ $setting['serviceTitle2'] }}</h5>
                         <div
-                            class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px] sm:text-[10px] text-[11px] text-[var(--text-secondary)]">
-                            <span class="font-bold max-lg:text-center">{{ $setting['serviceSubTitle2'] }}</span>
+                                class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px] sm:text-[10px] text-[11px] text-[var(--text-secondary)]">
+                            <span class="font-bold text-center text-(--secondary-text-color)">{{ $setting['serviceSubTitle2'] }}</span>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div
-                class="w-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2 max-lg:col-span-2 max-sm:col-span-1">
-                <div class="group w-full msx-sm:h-full flex max-lg:flex-col gap-2 justify-center items-center">
-                    <div class="group-hover:scale-[1.05] group-active:scale-[1.3] transition_normal">
-                        <img src="{{ asset('storage/'.$setting['serviceImage3']) }}" class="xl:size-13 xl:min-w-13 lg:size-9 lg:min-w-9 size-12 object-cover" alt="">
+                    class="w-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2">
+                <div class="group w-full flex flex-col gap-2 justify-center items-center">
+                    <div class="">
+                        <img src="{{ asset('storage/'.$setting['serviceImage3']) }}"
+                             class="lg:w-8 w-5 object-cover" alt="">
                     </div>
                     <div
-                        class="flex flex-col sm:gap-2 gap-1 lg:items-start items-center max-sm:items-center justify-center">
-                        <h5 class="xl:text-lg text-md font-bold text-[var(--text)]">{{ $setting['serviceTitle3'] }}</h5>
+                            class="flex flex-col sm:gap-2 gap-1 items-center max-sm:items-center justify-center">
+                        <h5 class="xl:text-lg text-md font-bold text-(--primary-text-color)">{{ $setting['serviceTitle3'] }}</h5>
                         <div
-                            class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px]sm:text-[10px] text-[11px] text-[var(--text-secondary)]">
-                            <span class="font-bold max-lg:text-center">{{ $setting['serviceSubTitle3'] }}</span>
+                                class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px]sm:text-[10px] text-[11px] text-[var(--text-secondary)]">
+                            <span class="font-bold text-center text-(--secondary-text-color)">{{ $setting['serviceSubTitle3'] }}</span>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div
-                class="w-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2">
-                <div class="group w-full msx-sm:h-full flex max-lg:flex-col gap-2 justify-center items-center">
-                    <div class="group-hover:scale-[1.05] group-active:scale-[1.3] transition_normal">
-                        <img src="{{ asset('storage/'.$setting['serviceImage4']) }}" class="xl:size-13 xl:min-w-13 lg:size-9 lg:min-w-9 size-12 object-cover" alt="">
+                    class="w-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2">
+                <div class="group w-full flex flex-col gap-2 justify-center items-center">
+                    <div class="">
+                        <img src="{{ asset('storage/'.$setting['serviceImage4']) }}"
+                             class="lg:w-8 w-5 object-cover" alt="">
                     </div>
                     <div
-                        class="flex flex-col sm:gap-2 gap-1 lg:items-start items-center max-sm:items-center justify-center">
-                        <h5 class="xl:text-lg text-md font-bold text-[var(--text)]">{{ $setting['serviceTitle4'] }}</h5>
+                            class="flex flex-col sm:gap-2 gap-1 items-center max-sm:items-center justify-center">
+                        <h5 class="xl:text-lg text-md font-bold text-(--primary-text-color)">{{ $setting['serviceTitle4'] }}</h5>
                         <div
-                            class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px] sm:text-[10px] text-[11px] text-[var(--text-secondary)]">
-                            <span class="font-bold max-lg:text-center">{{ $setting['serviceSubTitle4'] }}</span>
+                                class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px] sm:text-[10px] text-[11px] text-[var(--text-secondary)]">
+                            <span class="font-bold text-center text-(--secondary-text-color)">{{ $setting['serviceSubTitle4'] }}</span>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div
-                class="w-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2">
-                <div class="group w-full msx-sm:h-full flex max-lg:flex-col gap-2 justify-center items-center">
-                    <div class="group-hover:scale-[1.05] group-active:scale-[1.3] transition_normal">
-                        <img src="{{ asset('storage/'.$setting['serviceImage5']) }}" class="xl:size-13 xl:min-w-13 lg:size-9 lg:min-w-9 size-12 object-cover" alt="">
+                    class="w-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2">
+                <div class="group w-full flex flex-col gap-2 justify-center items-center">
+                    <div class="">
+                        <img src="{{ asset('storage/'.$setting['serviceImage5']) }}"
+                             class="lg:w-8 w-5 object-cover" alt="">
                     </div>
                     <div
-                        class="flex flex-col sm:gap-2 gap-1 lg:items-start items-center max-sm:items-center justify-center">
-                        <h5 class="xl:text-lg text-md font-bold text-[var(--text)]">{{ $setting['serviceTitle5'] }}</h5>
+                            class="flex flex-col sm:gap-2 gap-1 items-center max-sm:items-center justify-center">
+                        <h5 class="xl:text-lg text-md font-bold text-(--primary-text-color)">{{ $setting['serviceTitle5'] }}</h5>
                         <div
-                            class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px] sm:text-[10px] text-[11px] text-[var(--text-secondary)]">
-                            <span class="font-bold max-lg:text-center">{{ $setting['serviceSubTitle5'] }}</span>
+                                class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px] sm:text-[10px] text-[11px] text-[var(--text-secondary)]">
+                            <span class="font-bold text-center text-(--secondary-text-color)">{{ $setting['serviceSubTitle5'] }}</span>
                         </div>
                     </div>
                 </div>
@@ -1036,5 +825,5 @@
         </section> --}}
         <!-- prapery -->
     </main>
-    
+
 @endsection

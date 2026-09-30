@@ -68,7 +68,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
                         <label for="heroTitle" class="text-sm font-medium text-gray-700 md:pt-2.5">عنوان اصلی</label>
                         <div class="md:col-span-2">
-                            <input type="text" id="heroTitle" name="setting[heroTitle]" placeholder="به سایت ما خوش آمدید" value="{{ $heroTitle && $heroTitle->meta_value }}"
+                            <input type="text" id="heroTitle" name="setting[heroTitle]" placeholder="به سایت ما خوش آمدید" value="{{ $heroTitle->meta_value }}"
                                 class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition">
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                         <label for="heroSubtitle" class="text-sm font-medium text-gray-700 md:pt-2.5">زیرعنوان</label>
                         <div class="md:col-span-2">
                             <textarea id="heroSubtitle" rows="3" name="setting[heroSubtitle]" placeholder="توضیح کوتاهی درباره کسب‌وکار شما..."
-                                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition resize-none">{{ $heroSubtitle && $heroSubtitle->meta_value }}</textarea>
+                                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition resize-none">{{ $heroSubtitle->meta_value }}</textarea>
                         </div>
                     </div>
 
@@ -87,7 +87,7 @@
                         <label class="text-sm font-medium text-gray-700 md:pt-2.5">تصویر هیرو</label>
                         <div class="md:col-span-2">
                             <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-indigo-400 transition">
-                                <img id="heroPreview" src="{{ $heroBanner && asset('storage/'.$heroBanner->meta_value) }}" alt="" class="w-full h-40 object-cover rounded-lg mb-3 hidden">
+                                <img id="heroPreview" src="{{ asset('storage/'.$heroBanner->meta_value) }}" alt="" class="w-full h-40 object-cover rounded-lg mb-3">
                                 <svg class="w-10 h-10 mx-auto text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                 </svg>
@@ -104,7 +104,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
                         <label for="heroPrimaryButton" class="text-sm font-medium text-gray-700">متن دکمه اصلی</label>
                         <div class="md:col-span-2">
-                            <input type="text" id="heroPrimaryButton" name="setting[heroPrimaryButton]" placeholder="شروع کنید"
+                            <input type="text" id="heroPrimaryButton" value="{{ $heroPrimaryButton->meta_value }}" name="setting[heroPrimaryButton]" placeholder="شروع کنید"
                                 class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition">
                         </div>
                     </div>
@@ -113,7 +113,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
                         <label for="heroPrimaryButtonLink" class="text-sm font-medium text-gray-700">لینک دکمه اصلی</label>
                         <div class="md:col-span-2">
-                            <input type="text" id="heroPrimaryButtonLink" name="setting[heroPrimaryButtonLink]" placeholder="https://example.com"
+                            <input type="text" id="heroPrimaryButtonLink" value="{{ $heroPrimaryButtonLink->meta_value }}" name="setting[heroPrimaryButtonLink]" placeholder="https://example.com"
                                 class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition" dir="ltr">
                         </div>
                     </div>
@@ -121,7 +121,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
                         <label for="heroSecondaryButton" class="text-sm font-medium text-gray-700">متن دکمه فرعی</label>
                         <div class="md:col-span-2">
-                            <input type="text" id="heroSecondaryButton" name="setting[heroSecondaryButton]" placeholder="شروع کنید"
+                            <input type="text" id="heroSecondaryButton" value="{{ $heroSecondaryButton->meta_value }}" name="setting[heroSecondaryButton]" placeholder="شروع کنید"
                                 class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition">
                         </div>
                     </div>
@@ -130,7 +130,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
                         <label for="heroSecondaryButtonLink" class="text-sm font-medium text-gray-700">لینک دکمه فرعی</label>
                         <div class="md:col-span-2">
-                            <input type="text" id="heroSecondaryButtonLink" name="setting[heroSecondaryButtonLink]" placeholder="https://example.com"
+                            <input type="text" id="heroSecondaryButtonLink" value="{{ $heroSecondaryButtonLink->meta_value }}" name="setting[heroSecondaryButtonLink]" placeholder="https://example.com"
                                 class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition" dir="ltr">
                         </div>
                     </div>
