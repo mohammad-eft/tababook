@@ -1,6 +1,6 @@
 
-    <footer class="w-full mt-20 flex justify-center items-start bg-white py-6" style="box-shadow:0 0 22px 2px #e2e2e2;">
-        <section class="w-11/12 flex flex-col gap-4 justify-between items-start">
+    <footer class="w-full mt-20 flex justify-center items-start py-6 bg-[#000528]" style="box-shadow:0 0 22px 2px #e2e2e2;">
+        <section class="max-w-[1800px] w-11/12 mx-auto flex flex-col gap-4 justify-between items-start">
             <div class="w-full flex flex-col md:flex-row gap-5">
                 <div class="w-full md:w-2/3 h-full flex flex-col sm:flex-row gap-5 justify-between items-start">
                     <!-- address -->
@@ -9,8 +9,8 @@
                         <img src="{{ asset('storage/' . $setting['logo']) }}" alt="" class="w-45">
 
                         <div class="flex flex-col gap-2 items-start text-xs lg:text-sm xl:text-md">
-                            <span class="text-lg text-green-700 font-bold">{{ $setting['footerBrandName'] }}</span>
-                            <p>{{ $setting['footerBrandDescription'] }}</p>
+                            <span class="text-lg text-white font-bold">{{ $setting['footerBrandName'] }}</span>
+                            <p class="text-gray-300">{{ $setting['footerBrandDescription'] }}</p>
                         </div>
 
                     </div>
@@ -19,23 +19,23 @@
                     <div class="sm:w-1/2 w-full h-full flex flex-col gap-3 justify-start items-start">
                         <div class="flex w-full h-full">
                             <div class="w-1/2 h-full flex flex-col gap-3 justify-start items-start">
-                                <h5 class="xl:text-2xl lg:text-xl font-bold text-[var(--text)]">{{ $setting['footerServicesTitle'] }}</h5>
+                                <h5 class="xl:text-2xl lg:text-xl font-bold text-[var(--text)] text-white">{{ $setting['footerServicesTitle'] }}</h5>
                                 <div
                                     class="w-full flex flex-col gap-2 items-start justify-start xl:text-md lg:text-sm text-xs font-bold text-[#A4A4A5]">
                                     @foreach ($setting['footerServices'] as $service)
-                                        <a href="{{ $service->url }}" class="hover:text-green-700 transition duration-300 cursor-pointer">{{ $service->title }}</a>
+                                        <a href="{{ $service->url }}" class="hover:text-white transition duration-300 cursor-pointer">{{ $service->title }}</a>
                                     @endforeach
                                  
 
                                 </div>
                             </div>
                             <div class="w-1/2 h-full flex flex-col gap-3 justify-start items-start">
-                                <h5 class="xl:text-2xl lg:text-xl font-bold text-[var(--text)]">{{ $setting['footerCategoriesTitle'] }}</h5>
+                                <h5 class="xl:text-2xl lg:text-xl font-bold text-[var(--text)] text-white">{{ $setting['footerCategoriesTitle'] }}</h5>
                                 <div
                                     class="w-full flex flex-col gap-1 items-start justify-start xl:text-md lg:text-sm text-xs font-bold text-[#A4A4A5]">
                                     @foreach ($setting['footerCategories'] as $category)
                                     <a href="{{ $category->url }}"
-                                        class="hover:text-green-700 transition duration-300 cursor-pointer">{{ $category->title }}</a>
+                                        class="hover:text-white transition duration-300 cursor-pointer">{{ $category->title }}</a>
                                     @endforeach
                                 </div>
                             </div>
@@ -46,7 +46,7 @@
                 <!-- news -->
                 <div class="w-full md:w-1/3 h-full flex flex-col justify-center items-start">
                     <div class="flex flex-col gap-3 justify-center items-start mx-auto">
-                        <h5 class="xl:text-2xl lg:text-xl font-bold">{{ $setting['footerAboutTitle'] }}</h5>
+                        <h5 class="xl:text-2xl lg:text-xl text-white font-bold">{{ $setting['footerAboutTitle'] }}</h5>
                         <div class="flex flex-col gap-2 items-start text-xs lg:text-sm xl:text-md">
                             <div class="flex justify-center items-center gap-2">
                                 <div>
@@ -57,7 +57,7 @@
                                         </path>
                                     </svg>
                                 </div>
-                                <span class="font-bold">{{ $setting['footerPhone'] }}</span>
+                                <span class="font-bold text-white">{{ $setting['footerPhone'] }}</span>
                             </div>
                             <div class="flex justify-center items-center gap-2">
                                 <div>
@@ -68,7 +68,7 @@
                                         </path>
                                     </svg>
                                 </div>
-                                <span class=" font-bold">{{ $setting['footerEmail'] }}</span>
+                                <span class=" font-bold text-white">{{ $setting['footerEmail'] }}</span>
                             </div>
                             <div class="flex justify-center items-center gap-2">
                                 <div>
@@ -79,7 +79,7 @@
                                         </path>
                                     </svg>
                                 </div>
-                                <span class=" font-bold">{{ $setting['footerAddress'] }}</span>
+                                <span class=" font-bold text-white">{{ $setting['footerAddress'] }}</span>
                             </div>
                         </div>
                     </div>
@@ -126,9 +126,9 @@
                 </div>
                 <!-- news -->
             </div>
-            <div class="mx-auto flex flex-col gap-1 items-center justify-center">
-                <p class="xl:text-[15px] lg:text-[12px] text-[13px]">{{ $setting['footerDesignerText'] }}</p>
-                <span class="text-[17px] font-bold text-green-700">{{ $setting['footerDesignerPhone'] }}</span>
+            <div class="w-full pt-4 border-t border-gray-400 flex flex-col gap-1 items-center justify-center">
+                <p class="xl:text-[15px] lg:text-[12px] text-[13px] text-gray-300">{{ $setting['footerDesignerText'] }}</p>
+                <span class="text-[17px] font-bold text-white">{{ $setting['footerDesignerPhone'] }}</span>
             </div>
         </section>
     </footer>

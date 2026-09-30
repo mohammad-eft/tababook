@@ -7,6 +7,14 @@
     <script src="{{ asset('js/tailwind.js') }}"></script>
     <script src="{{ asset('js/jquery.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
+    <style>
+        .ellipsis-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
     <title>@yield('title')</title>
     <script>
         let url = "{{ url('/') }}/"
@@ -27,8 +35,8 @@
         <a href="{{ $setting['topBannerLink'] }}" class="w-full py-2 bg-green-700 flex justify-center items-center">
             <img src="{{ asset('storage/' . $setting['topBanner']) }}" class="w-full" alt="">
         </a>
-        <section class="w-11/12 flex flex-col gap-4 justify-start items-center bg-white">
-            <div class="w-full flex justify-between gap-1 items-center pt-5 lg:pt-10">
+        <section class="max-w-[1800px] w-11/12 mx-auto flex flex-col gap-4 justify-start items-center bg-white">
+            <div class="w-full flex justify-between gap-1 items-center pt-5">
                 <div class="xl:w-1/3 lg:w-1/4 max-lg:w-1/3 h-full flex justify-start items-center lg:hidden">
                     <div class="flex flex-col gap-1 items-start justify-center " onclick="hamburger_menu('open')">
                         <span class="lg:w-7 w-4 lg:h-1 h-0.5 bg-black rounded-full"></span>

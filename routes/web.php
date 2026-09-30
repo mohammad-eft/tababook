@@ -15,9 +15,10 @@ use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\PackController;
 use App\Http\Controllers\SearchController;
 use App\Models\product;
+use App\Models\carts;
+
 Route::get('/test', function(){
-    $products = product::with('carts')->get();
-    dd($products);
+    carts::where('id', '>', 0)->delete();
 });
 
 Route::get('/', [SettingController::class, 'home'])->name('home');

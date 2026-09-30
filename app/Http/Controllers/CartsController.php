@@ -26,6 +26,7 @@ class CartsController extends Controller
     }
     public function delete(Request $request)
     {
+        $product_id = $request->input('product_id');
         $cart = carts::where('user_id', $request->user_id)->where('product_id', $request->product_id)->where('order_id', null)->first();
         $data = $cart;
         if ($cart) {
@@ -36,7 +37,8 @@ class CartsController extends Controller
         return response()->json([
             'message' => 'محصول از سبد خرید حذف شد',
             'data' => $data,
-            'count' => $count
+            'count' => $count,
+            'product_id'=> $product_id,
         ]);
     }
     function update(Request $request)
