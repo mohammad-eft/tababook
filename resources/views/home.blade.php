@@ -211,7 +211,7 @@
         <!-- likly -->
         <section class="max-w-[1800px] w-11/12 mx-auto flex flex-col gap-4 justify-start items-start">
             <div class="w-full flex flex-row gap-1 justify-between items-center">
-                <h3 class="text-xl font-bold">محبوب ترین های این روز ها</h3>
+                <h3 class="text-xl font-bold text-(--primary-text-color)">محبوب ترین های این روز ها</h3>
 {{--                <p class="text-[#ADB4B2] max-lg:text-center max-lg:text-sm">انتخاب هایی که بیشتر از همه مورد توجه--}}
 {{--                    کاربران قرار گرفته است</p>--}}
                 <a href="#" class="text-sm text-(--secondary-text-color)">مشاهده همه</a>
@@ -354,7 +354,7 @@
         <!-- new product -->
         <section class="max-w-[1800px] w-11/12 mx-auto flex flex-col gap-4 justify-start items-start">
             <div class="w-full flex flex-row justify-between items-center">
-                <h3 class="text-xl font-bold">تازه به قفسه ها اضافه شده</h3>
+                <h3 class="text-xl font-bold text-(--primary-text-color)">تازه به قفسه ها اضافه شده</h3>
 {{--                <p class="text-[#ADB4B2] max-lg:text-center max-lg:text-sm">جدید ترین کتاب ها و محصولات فروشگاه را--}}
 {{--                    زودتر از بقیه ببین</p>--}}
                 <a href="#" class="text-sm text-(--secondary-text-color)">مشاهده همه</a>
