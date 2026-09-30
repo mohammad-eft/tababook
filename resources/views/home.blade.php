@@ -282,7 +282,7 @@
                             <div class="w-full h-12">
                                 @if (Auth::check() && in_array($product->id, $cartProIds) && count($product->carts))
 
-                                    <div class="w-full h-full px-4 bg-(--color-purple) flex gap-2 justify-center items-center rounded-xl"
+                                    <div class="w-full h-full px-4 transition-all duration-300 hover:bg-(--green-btn) cursor-pointer group flex gap-2 justify-center items-center rounded-xl"
                                          data-product-id="{{ $product->id }}">
                                         <button onclick="setCount(this)"
                                                 class="w-1/3 text-lg font-bold text-white cursor-pointer"
@@ -297,7 +297,7 @@
                                     </div>
                                 @else
                                     <button onclick="addToCart(this)"
-                                            class="w-full px-4 h-full bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl cursor-pointer transition-all duration-300 hover:bg-(--green-btn) group"
+                                            class="w-full px-4 h-full bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl cursor-pointer transition-all duration-300 hover:bg-(--green-btn) cursor-pointer group"
                                             data-product-id="{{ $product->id }}">
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
@@ -423,7 +423,7 @@
                             </div>
                             <div class="w-full h-12">
                                 @if (Auth::check() && in_array($product->id, $cartProIds) && count($product->carts))
-                                    <div class="w-full h-full px-4 bg-(--color-purple) flex gap-2 justify-center items-center rounded-xl"
+                                    <div class="w-full h-full px-4 transition-all duration-300 hover:bg-(--green-btn) cursor-pointer group bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl"
                                          data-product-id="{{ $product->id }}">
                                         <button onclick="setCount(this)"
                                                 class="w-1/3 text-lg font-bold text-white flex justify-center items-center cursor-pointer"
@@ -438,7 +438,7 @@
                                     </div>
                                 @else
                                     <button onclick="addToCart(this)"
-                                            class="w-full px-4 h-full bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl cursor-pointer transition-all duration-300 hover:bg-(--green-btn) group"
+                                            class="w-full px-4 h-full bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl cursor-pointer transition-all duration-300 hover:bg-(--green-btn) cursor-pointer group"
                                             data-product-id="{{ $product->id }}">
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"

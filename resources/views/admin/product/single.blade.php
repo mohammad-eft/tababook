@@ -378,7 +378,7 @@ input[type="checkbox"]:checked::after {
                         </svg>
                     </div>
                 </div> --}}
-                <div
+                {{-- <div
                     class="lg:flex gap-3 items-center justify-between px-2 py-2 lg:mb-5 bg-(--color-primary)/20 text-(--color-discount-bg) hidden">
                     <div>
                         <span class="font-bold">
@@ -392,7 +392,7 @@ input[type="checkbox"]:checked::after {
                                 d="M480 256A224 224 0 1 1 32 256a224 224 0 1 1 448 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM240 112V256c0 5.3 2.7 10.3 7.1 13.3l96 64c7.4 4.9 17.3 2.9 22.2-4.4s2.9-17.3-4.4-22.2L272 247.4V112c0-8.8-7.2-16-16-16s-16 7.2-16 16z" />
                         </svg>
                     </div>
-                </div>
+                </div> --}}
                 <div class="flex flex-col items-center lg:items-start lg:max-w-[368px] xl:max-w-[580px]">
                     <div class="w-full flex justify-center relative bg-(--color-primary-btn) lg:bg-white">
                         {{-- <div class="hidden lg:flex lg:flex-col lg:gap-y-4 self-end lg:self-start">
@@ -1247,7 +1247,7 @@ input[type="checkbox"]:checked::after {
                 <div class="hidden lg:block lg:w-1/2 xl:w-5/12">
                     <div class="sticky top-10">
                         <div
-                            class=" bg-[var(--color-secondary-bg)] rounded-md border border-(--color-border) p-5 text-[var(--color=-text)]">
+                            class=" bg-(--second-cream-color) rounded-md border border-(--color-border) p-5 text-[var(--color=-text)]">
                             <h3 class="pb-2 font-medium">
                                 فروشنده
                             </h3>
@@ -1315,13 +1315,13 @@ input[type="checkbox"]:checked::after {
                                 </div> --}}
                                 <div class="h-12">
                                     @if(Auth::check() && in_array($product->id, $cartProIds))
-                                    <div class="w-full px-2 h-full bg-(--color-purple) flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
+                                    <div class="w-full px-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
                                         <button onclick="setCount(this)" class="w-1/3 text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="+">+</button>
                                         <input type="number" class="w-1/3 text-white text-sm text-center outline-none" readonly="" value="{{ $product->carts[0]->quantity }}">
                                         <button onclick="setCount(this)" class="w-1/3 text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="-">-</button>
                                     </div>
                                     @else
-                                    <button onclick="addToCart(this)" class="w-full px-2 h-full bg-(--color-purple) flex gap-2 justify-center items-center rounded-xl" data-product-id="3">
+                                    <button onclick="addToCart(this)" class="w-full px-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl" data-product-id="3">
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3" fill="white">
                                                 <path d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
@@ -3185,13 +3185,13 @@ input[type="checkbox"]:checked::after {
         <div class="flex flex-row justify-between items-center py-2">
             <div class="w-1/2 h-12">
                 @if(Auth::check() && in_array($product->id, $cartProIds))
-                <div class="w-full px-2 h-full bg-(--color-purple) flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
+                <div class="w-full px-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
                     <button onclick="setCount(this)" class="w-1/3 text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="+">+</button>
                     <input type="number" class="w-1/3 text-white text-sm text-center outline-none" readonly="" value="{{ $product->carts[0]->quantity }}">
                     <button onclick="setCount(this)" class="w-1/3 text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="-">-</button>
                 </div>
                 @else
-                <button onclick="addToCart(this)" class="w-full px-2 h-full bg-(--color-purple) flex gap-2 justify-center items-center rounded-xl" data-product-id="3">
+                <button onclick="addToCart(this)" class="w-full px-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl" data-product-id="3">
                     <div>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3" fill="white">
                             <path d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
