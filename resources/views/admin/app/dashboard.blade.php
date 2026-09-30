@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ url('css/style.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url('css/MultiSelect.css') }}" type="text/css">
     <title>@yield('title')</title>
-    <link rel="icon" type="image/x-icon" href="{{ asset('img/IMG_20251225_131334_688.png') }}">
+    <link rel="shortcut icon" href="{{ asset('img/faveicon.png') }}" type="image/x-icon">
     <script src="{{ asset('js/tailwind.js') }}"></script>
     <script src="{{ asset('js/jquery.js') }}"></script>
     

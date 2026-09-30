@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="{{ asset('js/tailwind.js') }}"></script>
     <script src="{{ asset('js/jquery.js') }}"></script>
+    <link rel="shortcut icon" href="{{ asset('img/faveicon.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
     <style>
         .ellipsis-2 {
@@ -33,7 +34,7 @@
 <body>
     <header class="w-full flex flex-col justify-start items-center">
         <a href="{{ $setting['topBannerLink'] }}" class="w-full py-2 bg-green-700 flex justify-center items-center">
-            <img src="{{ asset('storage/' . $setting['topBanner']) }}" class="w-full" alt="">
+            <img src="{{ asset('storage/' . $setting['topBanner']) }}" class="w-full max-h-10 object-cover" alt="">
         </a>
         <section class="max-w-[1800px] w-11/12 mx-auto flex flex-col gap-4 justify-start items-center bg-white">
             <div class="w-full flex justify-between gap-1 items-center pt-5">
@@ -66,45 +67,45 @@
                     <li>
                         <a href="{{ route('home') }}"
                            class="flex justify-center flex-col items-center cursor-pointer py-1 group transition-all duration-300">
-                            <span>خانه</span>
+                            <span class="text-(--primary-text-color)">خانه</span>
                             <div
-                                    class="rounded-md group-hover:w-full @if (Route::is('home')) w-full @else w-0 @endif bg-[#fcd7a4] h-[2px] transition-all duration-300">
+                                    class="rounded-md group-hover:w-full @if (Route::is('home')) w-full @else w-0 @endif bg-(--pastel-pink) h-[2px] transition-all duration-300">
                             </div>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('product.index') }}"
                            class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
-                            <span>محصولات</span>
+                            <span class="text-(--primary-text-color)">محصولات</span>
                             <div
-                                    class="rounded-md group-hover:w-full @if (Route::is('product.index')) w-full @else w-0 @endif bg-[#fcd7a4] h-[2px] transition-all duration-300">
+                                    class="rounded-md group-hover:w-full @if (Route::is('product.index')) w-full @else w-0 @endif bg-(--pastel-pink) h-[2px] transition-all duration-300">
                             </div>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('category.index') }}"
                            class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
-                            <span>دسته بندی ها</span>
+                            <span class="text-(--primary-text-color)">دسته بندی ها</span>
                             <div
-                                    class="rounded-md group-hover:w-full @if (Route::is('category.index')) w-full @else w-0 @endif bg-[#fcd7a4] h-[2px] transition-all duration-300">
+                                    class="rounded-md group-hover:w-full @if (Route::is('category.index')) w-full @else w-0 @endif bg-(--pastel-pink) h-[2px] transition-all duration-300">
                             </div>
                         </a>
                     </li>
                     <li>
                         <a href="{{route('contactUs.create')}}"
                            class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
-                            <span>تماس باما</span>
+                            <span class="text-(--primary-text-color)">تماس باما</span>
                             <div
-                                    class="rounded-md group-hover:w-full @if (Route::is('contactUs.*')) w-full @else w-0 @endif bg-[#fcd7a4] h-[2px] transition-all duration-300">
+                                    class="rounded-md group-hover:w-full @if (Route::is('contactUs.*')) w-full @else w-0 @endif bg-(--pastel-pink) h-[2px] transition-all duration-300">
                             </div>
                         </a>
                     </li>
                     <li>
                         <a href="{{route('aboutUs.clientList')}}"
                            class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">
-                            <span>درباره ما</span>
+                            <span class="text-(--primary-text-color)">درباره ما</span>
                             <div
-                                    class="rounded-md group-hover:w-full @if (Route::is('aboutUs.*')) w-full @else w-0 @endif bg-[#fcd7a4] h-[2px] transition-all duration-300">
+                                    class="rounded-md group-hover:w-full @if (Route::is('aboutUs.*')) w-full @else w-0 @endif bg-(--pastel-pink) h-[2px] transition-all duration-300">
                             </div>
                         </a>
                     </li>
@@ -157,9 +158,9 @@
                                     $quantity += $cart->quantity;
                                 }
                             @endphp
-                            <span class="absolute text-xs size-4 -top-3 in-fa right-0 flex items-center justify-center rounded-full bg-red-500 text-white">{{ $quantity }}</span>
+                            <span class="absolute text-xs size-4 -top-3 in-fa right-0 flex items-center justify-center rounded-full bg-(--discount-color) text-white">{{ $quantity }}</span>
                         @else
-                            <span class="absolute text-xs size-4 -top-3 in-fa right-0 flex items-center justify-center rounded-full bg-red-500 text-white"></span>
+                            <span class="absolute text-xs size-4 -top-3 in-fa right-0 flex items-center justify-center rounded-full bg-(--discount-color) text-white"></span>
                         @endif
                     </a>
                     @else
@@ -167,7 +168,7 @@
                         <svg class="w-[29px] h-[29px] text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
                         </svg>
-                        <span class="absolute text-xs size-4 -top-3 in-fa right-0 flex items-center justify-center rounded-full bg-red-500 text-white">0</span>
+                        <span class="absolute text-xs size-4 -top-3 in-fa right-0 flex items-center justify-center rounded-full bg-(--discount-color) text-white">0</span>
                     </div>
                     @endif
                     {{-- <div class="relative sm:p-2.5 p-1.5 flex items-center gap-4">
@@ -206,7 +207,7 @@
 {{--                            class="flex justify-center flex-col items-center cursor-pointer py-1 group transition-all duration-300">--}}
 {{--                            <span>خانه</span>--}}
 {{--                            <div--}}
-{{--                                class="rounded-md group-hover:w-full @if (Route::is('home')) w-full @else w-0 @endif bg-[#fcd7a4] h-[2px] transition-all duration-300">--}}
+{{--                                class="rounded-md group-hover:w-full @if (Route::is('home')) w-full @else w-0 @endif bg-(--pastel-pink) h-[2px] transition-all duration-300">--}}
 {{--                            </div>--}}
 {{--                        </a>--}}
 {{--                    </li>--}}
@@ -215,7 +216,7 @@
 {{--                            class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">--}}
 {{--                            <span>محصولات</span>--}}
 {{--                            <div--}}
-{{--                                class="rounded-md group-hover:w-full w-0 bg-[#fcd7a4] h-[2px] transition-all duration-300">--}}
+{{--                                class="rounded-md group-hover:w-full w-0 bg-(--pastel-pink) h-[2px] transition-all duration-300">--}}
 {{--                            </div>--}}
 {{--                        </a>--}}
 {{--                    </li>--}}
@@ -224,7 +225,7 @@
 {{--                            class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">--}}
 {{--                            <span>دسته بندی ها</span>--}}
 {{--                            <div--}}
-{{--                                class="rounded-md group-hover:w-full w-[0px] bg-[#fcd7a4] h-[2px] transition-all duration-300">--}}
+{{--                                class="rounded-md group-hover:w-full w-[0px] bg-(--pastel-pink) h-[2px] transition-all duration-300">--}}
 {{--                            </div>--}}
 {{--                        </a>--}}
 {{--                    </li>--}}
@@ -233,7 +234,7 @@
 {{--                            class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">--}}
 {{--                            <span>تماس باما</span>--}}
 {{--                            <div--}}
-{{--                                class="rounded-md group-hover:w-full w-[0px] bg-[#fcd7a4] h-[2px] transition-all duration-300">--}}
+{{--                                class="rounded-md group-hover:w-full w-[0px] bg-(--pastel-pink) h-[2px] transition-all duration-300">--}}
 {{--                            </div>--}}
 {{--                        </a>--}}
 {{--                    </li>--}}
@@ -242,7 +243,7 @@
 {{--                            class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300">--}}
 {{--                            <span>درباره ما</span>--}}
 {{--                            <div--}}
-{{--                                class="rounded-md group-hover:w-full w-[0px] bg-[#fcd7a4] h-[2px] transition-all duration-300">--}}
+{{--                                class="rounded-md group-hover:w-full w-[0px] bg-(--pastel-pink) h-[2px] transition-all duration-300">--}}
 {{--                            </div>--}}
 {{--                        </a>--}}
 {{--                    </li>--}}

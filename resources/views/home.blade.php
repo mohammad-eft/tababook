@@ -4,20 +4,20 @@
     <main class="w-full flex flex-col gap-10 justify-start items-center my-3 lg:my-5">
         <!-- hero -->
         <section
-                class="max-w-[1800px] w-full mx-auto xl:h-90 lg:h-80 flex max-lg:flex-col xl:gap-20 lg:gap-15 gap-5 justify-start items-center bg-(--second-cream-color) max-lg:pb-5">
+                class="max-w-[1800px] w-full mx-auto xl:h-90 bg-[url('{{ asset('storage/' . $setting['heroBanner']) }}')] bg-cover bg-no-repeat bg-center lg:h-80 flex max-lg:flex-col xl:gap-20 lg:gap-15 gap-5 justify-start items-center bg-(--second-cream-color) max-lg:pb-5">
             <div class="lg:w-1/2 w-full h-full flex justify-center items-center">
                 <img src="{{ asset('storage/' . $setting['heroBanner']) }}" alt=""
-                     class="w-full lg:h-full max-h-full">
+                     class="w-full lg:h-full max-h-full hidden">
             </div>
-            <div class="lg:w-1/2 w-full h-full  flex lg:justify-start justify-center items-center">
+            <div class="lg:w-1/2 w-full h-full  flex lg:justify-start justify-end pl-5 lg:pl-0 items-center">
                 <div
-                        class="xl:w-9/12 lg:w-10/12 w-11/12 h-full flex flex-col gap-5 justify-center lg:items-start items-center">
+                        class="xl:w-9/12 lg:w-10/12 w-11/12 h-full flex flex-col gap-5 justify-center lg:items-start items-end">
                     <div
-                            class="flex flex-col gap-2 justify-start items-start max-lg:items-center text-lg xl:text-4xl lg:text-4xl font-bold max-lg:text-center">
+                            class="flex flex-col gap-2 justify-start items-end max-lg:items-center text-lg xl:text-4xl lg:text-4xl font-bold text-center lg:text-start">
                         <h1 class="text-(--primary-text-color)">{{ $setting['heroTitle'] }}</h1>
 
                     </div>
-                    <p class="max-xl:text-sm max-lg:text-center text-(--secondary-text-color)">{{ $setting['heroSubtitle'] }}</p>
+                    <p class="max-xl:text-sm w-2/3 max-lg:text-center text-(--secondary-text-color)">{{ $setting['heroSubtitle'] }}</p>
                     <div class="w-full flex lg:gap-6 gap-3 justify-between items-center">
                         <a href="{{ $setting['heroPrimaryButtonLink'] }}"
                            class="w-1/2 lg:py-4 py-3 bg-(--purple-btn) xl:text-lg max-lg:text-sm text-white font-bold rounded-xl flex justify-center items-center">
@@ -43,177 +43,165 @@
                         <div class="w-[50px] h-1 bg-(--primary-text-color)"></div>
                         <span class="text-sm lg:text-lg text-(--secondary-text-color)">پک های پیشنهادی</span>
                     </div>
-                    <div class="w-full flex flex-col gap-1">
+                    <div class="w-full flex flex-row justify-between items-center">
                         <span class="lg:text-[30px] text-(--primary-text-color) font-bold">پک های آماده برای هر موقعیت</span>
 {{--                        <span class="text-gray-400 text-right">با انتخاب هر یک از محصولات کاربردی و مرتبط با موضوع را در یک بسته دریافت کنید. پک ها انتخابی هوشمندانه برای مطالعه ، یادگیری و هدیه دادن هستند.</span>--}}
+                        <a href="#" class="text-sm text-(--secondary-text-color)">مشاهده همه</a>
                     </div>
                 </div>
-                <div class="w-full grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 gap-8 mt-5">
+                <div class="w-full grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 gap-4 lg:gap-8 mt-5">
 
-                    <div class="w-full rounded-[20px] h-[250px] bg-[url('{{ asset('img/030.png') }}')]  bg-center bg-no-repeat bg-cover flex flex-col justify-end overflow-hidden">
-                        <div class="w-full h-[130px] flex items-center down_hero rounded-[15px] p-3 bg-black/70">
-                            <div class="w-[20%] flex items-center justify-center">
-
-
-                                <svg class="w-10 h-10 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                     fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                          stroke-width="2"
-                                          d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023"/>
-                                </svg>
-
+                    <div class="relative overflow-hidden rounded-2xl bg-[#f8f3e8]">
+                        <div class="relative h-[180px] lg:h-[250px] w-full">
+                            <img src="{{ asset('img/01.png') }}" class="h-full w-full object-cover" alt="">
+                            <div class="absolute inset-y-0 right-0 w-[45%] bg-[#f8f3e8]">
+                                <div class="absolute -left-3 -top-8 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-5 lg:-left-8 top-4 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-2 lg:-left-8 top-1/2 h-40 w-40 -translate-y-1/2 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-5 bottom-2 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-3 -bottom-8 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
                             </div>
-                            <div class="w-[60%] flex flex-col gap-2 text-white ">
-                                <span class="text-xl font-bold">پک کتاب شبانه</span>
-                                <span class="text-gray-400">شامل یک عدد ماگ و دو رمان</span>
+                        </div>
+                        <div class="absolute right-0 top-0 flex h-full w-[45%] items-center justify-center px-3 py-4 lg:py-8">
+                            <div class="text-right">
+                                <h3 class="text-lg lg:text-2xl font-bold text-[#315c50]">
+                                    پک کتاب هدیه
+                                </h3>
+                                <p class="mt-3 text-sm leading-7 text-gray-500">
+                                    انواع کتاب با موضوعات مختلف
+                                </p>
+                                <button class="mt-5 rounded-full bg-[#8eae9f] px-6 py-2 text-white text-sm lg:text-base">
+                                    مشاهده
+                                </button>
                             </div>
-                            <div class="w-1/5 flex items-center justify-center">
-                                <a href="#" class="size-12 bg-(--green-btn)  rounded-full flex items-center justify-center">
-                                    <svg class="size-5 rotate-y-180 fill-white" xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 448 512">
-                                        <!--! Font Awesome Pro 6.5.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                                        <path d="M440.6 273.4c4.7-4.5 7.4-10.8 7.4-17.4s-2.7-12.8-7.4-17.4l-176-168c-9.6-9.2-24.8-8.8-33.9 .8s-8.8 24.8 .8 33.9L364.1 232 24 232c-13.3 0-24 10.7-24 24s10.7 24 24 24l340.1 0L231.4 406.6c-9.6 9.2-9.9 24.3-.8 33.9s24.3 9.9 33.9 .8l176-168z"/>
-                                    </svg>
+                        </div>
+                    </div>
+                    <div class="relative overflow-hidden rounded-2xl bg-[#f8f3e8]">
+                        <div class="relative h-[180px] lg:h-[250px] w-full">
+                            <img src="{{ asset('img/02.png') }}" class="h-full w-full object-cover" alt="">
+                            <div class="absolute inset-y-0 right-0 w-[45%] bg-[#f8f3e8]">
+                                <div class="absolute -left-3 -top-8 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-5 lg:-left-8 top-4 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-2 lg:-left-8 top-1/2 h-40 w-40 -translate-y-1/2 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-5 bottom-2 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-3 -bottom-8 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                            </div>
+                        </div>
+                        <div class="absolute right-0 top-0 flex h-full w-[45%] items-center justify-center px-3 py-4 lg:py-8">
+                            <div class="text-right">
+                                <h3 class="text-lg lg:text-2xl font-bold text-[#315c50]">
+                                    پک مدرسه
+                                </h3>
+                                <p class="mt-3 text-sm leading-7 text-gray-500">
+                                    تمامی وسایل لازم برای تحصیل
+                                </p>
+                                <button class="mt-5 rounded-full bg-[#8eae9f] px-6 py-2 text-white text-sm lg:text-base">
+                                    مشاهده
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative overflow-hidden rounded-2xl bg-[#f8f3e8]">
+                        <div class="relative h-[180px] lg:h-[250px] w-full">
+                            <img src="{{ asset('img/030.png') }}" class="h-full w-full object-cover" alt="">
+                            <div class="absolute inset-y-0 right-0 w-[45%] bg-[#f8f3e8]">
+                                <div class="absolute -left-3 -top-8 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-5 lg:-left-8 top-4 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-2 lg:-left-8 top-1/2 h-40 w-40 -translate-y-1/2 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-5 bottom-2 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-3 -bottom-8 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                            </div>
+                        </div>
+                        <div class="absolute right-0 top-0 flex h-full w-[45%] items-center justify-center px-3 py-4 lg:py-8">
+                            <div class="text-right">
+                                <h3 class="text-lg lg:text-2xl font-bold text-[#315c50]">
+                                    پک کتاب شبانه
+                                </h3>
+                                <p class="mt-3 text-sm leading-7 text-gray-500">
+                                    شامل یک عدد ماگ و دو جلد رمان
+                                </p>
+                                <button class="mt-5 rounded-full bg-[#8eae9f] px-6 py-2 text-white text-sm lg:text-base">
+                                    مشاهده
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative overflow-hidden rounded-2xl bg-[#f8f3e8]">
+                        <div class="relative h-[180px] lg:h-[250px] w-full">
+                            <img src="{{ asset('img/01.png') }}" class="h-full w-full object-cover" alt="">
+                            <div class="absolute inset-y-0 right-0 w-[45%] bg-[#f8f3e8]">
+                                <div class="absolute -left-3 -top-8 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-5 lg:-left-8 top-4 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-2 lg:-left-8 top-1/2 h-40 w-40 -translate-y-1/2 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-5 bottom-2 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-3 -bottom-8 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                            </div>
+                        </div>
+                        <div class="absolute right-0 top-0 flex h-full w-[45%] items-center justify-center px-3 py-4 lg:py-8">
+                            <div class="text-right">
+                                <h3 class="text-lg lg:text-2xl font-bold text-[#315c50]">
+                                    پک کتاب هدیه
+                                </h3>
+                                <p class="mt-3 text-sm leading-7 text-gray-500">
+                                    انواع کتاب با موضوعات مختلف
+                                </p>
+                                <button class="mt-5 rounded-full bg-[#8eae9f] px-6 py-2 text-white text-sm lg:text-base">
+                                    مشاهده
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative overflow-hidden rounded-2xl bg-[#f8f3e8]">
+                        <div class="relative h-[180px] lg:h-[250px] w-full">
+                            <img src="{{ asset('img/02.png') }}" class="h-full w-full object-cover" alt="">
+                            <div class="absolute inset-y-0 right-0 w-[45%] bg-[#f8f3e8]">
+                                <div class="absolute -left-3 -top-8 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-5 lg:-left-8 top-4 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-2 lg:-left-8 top-1/2 h-40 w-40 -translate-y-1/2 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-5 bottom-2 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-3 -bottom-8 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                            </div>
+                        </div>
+                        <div class="absolute right-0 top-0 flex h-full w-[45%] items-center justify-center px-3 py-4 lg:py-8">
+                            <div class="text-right">
+                                <h3 class="text-lg lg:text-2xl font-bold text-[#315c50]">
+                                    پک مدرسه
+                                </h3>
+                                <p class="mt-3 text-sm leading-7 text-gray-500">
+                                    تمامی وسایل لازم برای تحصیل
+                                </p>
+                                <button class="mt-5 rounded-full bg-[#8eae9f] px-6 py-2 text-white text-sm lg:text-base">
+                                    مشاهده
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative overflow-hidden rounded-2xl bg-[#f8f3e8]">
+                        <div class="relative h-[180px] lg:h-[250px] w-full">
+                            <img src="{{ asset('img/030.png') }}" class="h-full w-full object-cover" alt="">
+                            <div class="absolute inset-y-0 right-0 w-[45%] bg-[#f8f3e8]">
+                                <div class="absolute -left-3 -top-8 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-5 lg:-left-8 top-4 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-2 lg:-left-8 top-1/2 h-40 w-40 -translate-y-1/2 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-5 bottom-2 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                <div class="absolute -left-3 -bottom-8 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                            </div>
+                        </div>
+                        <div class="absolute right-0 top-0 flex h-full w-[45%] items-center justify-center px-3 py-4 lg:py-8">
+                            <div class="text-right">
+                                <h3 class="text-lg lg:text-2xl font-bold text-[#315c50]">
+                                    پک کتاب شبانه
+                                </h3>
+                                <p class="mt-3 text-sm leading-7 text-gray-500">
+                                    شامل یک عدد ماگ و دو جلد رمان
+                                </p>
+                                <a href="#" class="mt-5 rounded-full bg-[#8eae9f] px-6 py-2 text-white text-sm lg:text-base">
+                                    مشاهده
                                 </a>
                             </div>
                         </div>
                     </div>
-                    <div class="w-full rounded-[20px] h-[250px] bg-[url('{{ asset('img/01.png') }}')]  bg-center bg-no-repeat bg-cover flex flex-col justify-end overflow-hidden">
-                        <div class="w-full h-[130px] flex items-center down_hero rounded-[15px] p-3 bg-black/70">
-                            <div class="w-[20%] flex items-center justify-center">
 
-
-                                <svg class="w-10 h-10 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                     fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                          stroke-width="2"
-                                          d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28"/>
-                                </svg>
-
-                            </div>
-                            <div class="w-[60%] flex flex-col gap-2 text-white ">
-                                <span class="text-xl font-bold">پک مدرسه</span>
-                                <span class="text-gray-400">تمامی وسایل لازم برای تحصیل</span>
-                            </div>
-                            <div class="w-1/5 flex items-center justify-center">
-                                <a href="#" class="size-12 bg-(--green-btn)  rounded-full flex items-center justify-center">
-                                    <svg class="size-5 rotate-y-180 fill-white" xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 448 512">
-                                        <path d="M440.6 273.4c4.7-4.5 7.4-10.8 7.4-17.4s-2.7-12.8-7.4-17.4l-176-168c-9.6-9.2-24.8-8.8-33.9 .8s-8.8 24.8 .8 33.9L364.1 232 24 232c-13.3 0-24 10.7-24 24s10.7 24 24 24l340.1 0L231.4 406.6c-9.6 9.2-9.9 24.3-.8 33.9s24.3 9.9 33.9 .8l176-168z"/>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-full rounded-[20px] h-[250px] bg-[url('{{ asset('img/02.png') }}')]  bg-center bg-no-repeat bg-cover flex flex-col justify-end overflow-hidden">
-                        <div class="w-full h-[130px] flex items-center down_hero rounded-[15px] p-3 bg-black/70">
-                            <div class="w-[20%] flex items-center justify-center">
-
-                                <svg class="w-10 h-10 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                     fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                          stroke-width="2"
-                                          d="M10 21v-9m3-4H7.5a2.5 2.5 0 1 1 0-5c1.5 0 2.875 1.25 3.875 2.5M14 21v-9m-9 0h14v8a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-8ZM4 8h16a1 1 0 0 1 1 1v3H3V9a1 1 0 0 1 1-1Zm12.155-5c-3 0-5.5 5-5.5 5h5.5a2.5 2.5 0 0 0 0-5Z"/>
-                                </svg>
-
-                            </div>
-                            <div class="w-[60%] flex flex-col gap-2 text-white ">
-                                <span class="text-xl font-bold">پک کتاب هدیه</span>
-                                <span class="text-gray-400">انواع کتاب با موضوعات مختلف</span>
-                            </div>
-                            <div class="w-1/5 flex items-center justify-center">
-                                <a href="#" class="size-12 bg-(--green-btn)  rounded-full flex items-center justify-center">
-                                    <svg class="size-5 rotate-y-180 fill-white" xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 448 512">
-                                        <!--! Font Awesome Pro 6.5.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                                        <path d="M440.6 273.4c4.7-4.5 7.4-10.8 7.4-17.4s-2.7-12.8-7.4-17.4l-176-168c-9.6-9.2-24.8-8.8-33.9 .8s-8.8 24.8 .8 33.9L364.1 232 24 232c-13.3 0-24 10.7-24 24s10.7 24 24 24l340.1 0L231.4 406.6c-9.6 9.2-9.9 24.3-.8 33.9s24.3 9.9 33.9 .8l176-168z"/>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-full rounded-[20px] h-[250px] bg-[url('{{ asset('img/030.png') }}')]  bg-center bg-no-repeat bg-cover flex flex-col justify-end overflow-hidden">
-                        <div class="w-full h-[130px] flex items-center down_hero rounded-[15px] p-3 bg-black/70">
-                            <div class="w-[20%] flex items-center justify-center">
-
-
-                                <svg class="w-10 h-10 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                     fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                          stroke-width="2"
-                                          d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023"/>
-                                </svg>
-
-                            </div>
-                            <div class="w-[60%] flex flex-col gap-2 text-white ">
-                                <span class="text-xl font-bold">پک کتاب شبانه</span>
-                                <span class="text-gray-400">شامل یک عدد ماگ و دو رمان</span>
-                            </div>
-                            <div class="w-1/5 flex items-center justify-center">
-                                <a href="#" class="size-12 bg-(--green-btn)  rounded-full flex items-center justify-center">
-                                    <svg class="size-5 rotate-y-180 fill-white" xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 448 512">
-                                        <!--! Font Awesome Pro 6.5.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                                        <path d="M440.6 273.4c4.7-4.5 7.4-10.8 7.4-17.4s-2.7-12.8-7.4-17.4l-176-168c-9.6-9.2-24.8-8.8-33.9 .8s-8.8 24.8 .8 33.9L364.1 232 24 232c-13.3 0-24 10.7-24 24s10.7 24 24 24l340.1 0L231.4 406.6c-9.6 9.2-9.9 24.3-.8 33.9s24.3 9.9 33.9 .8l176-168z"/>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-full rounded-[20px] h-[250px] bg-[url('{{ asset('img/01.png') }}')]  bg-center bg-no-repeat bg-cover flex flex-col justify-end overflow-hidden">
-                        <div class="w-full h-[130px] flex items-center down_hero rounded-[15px] p-3 bg-black/70">
-                            <div class="w-[20%] flex items-center justify-center">
-
-
-                                <svg class="w-10 h-10 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                     fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                          stroke-width="2"
-                                          d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28"/>
-                                </svg>
-
-                            </div>
-                            <div class="w-[60%] flex flex-col gap-2 text-white ">
-                                <span class="text-xl font-bold">پک مدرسه</span>
-                                <span class="text-gray-400">تمامی وسایل لازم برای تحصیل</span>
-                            </div>
-                            <div class="w-1/5 flex items-center justify-center">
-                                <a href="#" class="size-12 bg-(--green-btn)  rounded-full flex items-center justify-center">
-                                    <svg class="size-5 rotate-y-180 fill-white" xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 448 512">
-                                        <path d="M440.6 273.4c4.7-4.5 7.4-10.8 7.4-17.4s-2.7-12.8-7.4-17.4l-176-168c-9.6-9.2-24.8-8.8-33.9 .8s-8.8 24.8 .8 33.9L364.1 232 24 232c-13.3 0-24 10.7-24 24s10.7 24 24 24l340.1 0L231.4 406.6c-9.6 9.2-9.9 24.3-.8 33.9s24.3 9.9 33.9 .8l176-168z"/>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-full rounded-[20px] h-[250px] bg-[url('{{ asset('img/02.png') }}')]  bg-center bg-no-repeat bg-cover flex flex-col justify-end overflow-hidden">
-                        <div class="w-full h-[130px] flex items-center down_hero rounded-[15px] p-3 bg-black/70">
-                            <div class="w-[20%] flex items-center justify-center">
-
-                                <svg class="w-10 h-10 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                     fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                          stroke-width="2"
-                                          d="M10 21v-9m3-4H7.5a2.5 2.5 0 1 1 0-5c1.5 0 2.875 1.25 3.875 2.5M14 21v-9m-9 0h14v8a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-8ZM4 8h16a1 1 0 0 1 1 1v3H3V9a1 1 0 0 1 1-1Zm12.155-5c-3 0-5.5 5-5.5 5h5.5a2.5 2.5 0 0 0 0-5Z"/>
-                                </svg>
-
-                            </div>
-                            <div class="w-[60%] flex flex-col gap-2 text-white ">
-                                <span class="text-xl font-bold">پک کتاب هدیه</span>
-                                <span class="text-gray-400">انواع کتاب با موضوعات مختلف</span>
-                            </div>
-                            <div class="w-1/5 flex items-center justify-center">
-                                <a href="#" class="size-12 bg-(--green-btn)  rounded-full flex items-center justify-center">
-                                    <svg class="size-5 rotate-y-180 fill-white" xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 448 512">
-                                        <!--! Font Awesome Pro 6.5.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                                        <path d="M440.6 273.4c4.7-4.5 7.4-10.8 7.4-17.4s-2.7-12.8-7.4-17.4l-176-168c-9.6-9.2-24.8-8.8-33.9 .8s-8.8 24.8 .8 33.9L364.1 232 24 232c-13.3 0-24 10.7-24 24s10.7 24 24 24l340.1 0L231.4 406.6c-9.6 9.2-9.9 24.3-.8 33.9s24.3 9.9 33.9 .8l176-168z"/>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -222,12 +210,13 @@
         <!-- category -->
         <!-- likly -->
         <section class="max-w-[1800px] w-11/12 mx-auto flex flex-col gap-4 justify-start items-start">
-            <div class="flex flex-col gap-1 justify-start lg:items-start items-center">
+            <div class="w-full flex flex-row gap-1 justify-between items-center">
                 <h3 class="text-xl font-bold">محبوب ترین های این روز ها</h3>
 {{--                <p class="text-[#ADB4B2] max-lg:text-center max-lg:text-sm">انتخاب هایی که بیشتر از همه مورد توجه--}}
 {{--                    کاربران قرار گرفته است</p>--}}
+                <a href="#" class="text-sm text-(--secondary-text-color)">مشاهده همه</a>
             </div>
-            <div class="max-w-full w-full overflow-x-auto py-2 px-1 flex gap-4 justify-start">
+            <div class="max-w-full w-full py-2 px-1 flex gap-4 justify-start overflow-x-auto lg:overflow-x-visible">
                 @foreach ($products as $product)
                     <div
                             class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  min-h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2">
@@ -308,17 +297,17 @@
                                     </div>
                                 @else
                                     <button onclick="addToCart(this)"
-                                            class="w-full px-4 h-full bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl"
+                                            class="w-full px-4 h-full bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl cursor-pointer transition-all duration-300 hover:bg-(--green-btn) group"
                                             data-product-id="{{ $product->id }}">
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
-                                                 class="lg:size-4 size-3" fill="var(--primary-text-color)">
+                                                 class="lg:size-4 size-3 fill-(--primary-text-color) transition-all duration-300 group-hover:fill-white">
                                                 <path
                                                         d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
                                                 </path>
                                             </svg>
                                         </div>
-                                        <span class="lg:text-sm text-[10px] text-(--primary-text-color) font-bold">افزودن به سبد خرید</span>
+                                        <span class="lg:text-sm text-[10px] text-(--primary-text-color) font-bold transition-all duration-300 group-hover:text-white">افزودن به سبد خرید</span>
                                     </button>
                                 @endif
                             </div>
@@ -364,12 +353,13 @@
         <!-- baner1 -->
         <!-- new product -->
         <section class="max-w-[1800px] w-11/12 mx-auto flex flex-col gap-4 justify-start items-start">
-            <div class="flex flex-col gap-1 justify-start lg:items-start items-center">
+            <div class="w-full flex flex-row justify-between items-center">
                 <h3 class="text-xl font-bold">تازه به قفسه ها اضافه شده</h3>
 {{--                <p class="text-[#ADB4B2] max-lg:text-center max-lg:text-sm">جدید ترین کتاب ها و محصولات فروشگاه را--}}
 {{--                    زودتر از بقیه ببین</p>--}}
+                <a href="#" class="text-sm text-(--secondary-text-color)">مشاهده همه</a>
             </div>
-            <div class="max-w-full w-full overflow-x-auto py-2 px-1 flex gap-4 justify-start">
+            <div class="max-w-full w-full py-2 px-1 flex gap-4 justify-start overflow-x-auto lg:overflow-x-visible">
 
                 @foreach ($newProducts as $product)
                     <div
@@ -450,17 +440,17 @@
                                     </div>
                                 @else
                                     <button onclick="addToCart(this)"
-                                            class="w-full px-4 h-full bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl"
+                                            class="w-full px-4 h-full bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl cursor-pointer transition-all duration-300 hover:bg-(--green-btn) group"
                                             data-product-id="{{ $product->id }}">
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
-                                                 class="lg:size-4 size-3" fill="var(--primary-text-color)">
+                                                 class="lg:size-4 size-3 transition-all duration-300 group-hover:fill-white fill-(--primary-text-color)">
                                                 <path
                                                         d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
                                                 </path>
                                             </svg>
                                         </div>
-                                        <span class="lg:text-sm text-[10px] text-(--primary-text-color) font-bold">افزودن به سبد خرید</span>
+                                        <span class="lg:text-sm text-[10px] text-(--primary-text-color) transition-all duration-300 group-hover:text-white font-bold">افزودن به سبد خرید</span>
                                     </button>
                                 @endif
                             </div>
@@ -567,7 +557,7 @@
                          src="{{ asset('storage/'.$setting['rightBanner']) }}" alt="">
                 </a>
                 <div class="lg:w-7/12 w-full h-full relative flex max-lg:flex-col items-center gap-3 bg-(--cream-color) rounded-xl">
-                    <img class="h-full lg:w-1/2 w-full rounded-r-xl object-cover max-h-40"
+                    <img class="h-full w-1/2 rounded-r-xl object-cover max-h-40"
                          src="{{ asset('storage/'.$setting['leftBanner']) }}" alt="">
                     <div class="lg:w-1/2 w-full flex flex-col gap-2 lg:items-start items-center p-3">
                         <span class="lg:text-xl text-md font-bold text-(--primary-text-color)">{{ $setting['leftBannerTitle'] }}</span>
@@ -723,17 +713,17 @@
                 class="max-w-[1800px] w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-center lg:py-4 sm:py-3 rounded-xl">
             <div
                     class="w-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2">
-                <div class="group w-full msx-sm:h-full flex max-lg:flex-col gap-2 justify-center items-center">
-                    <div class="group-hover:scale-[1.05] group-active:scale-[1.3] transition_normal">
+                <div class="group w-full flex flex-col gap-2 justify-center items-center">
+                    <div class="">
                         <img src="{{ asset('storage/'.$setting['serviceImage1']) }}"
-                             class="xl:size-13 xl:min-w-13 lg:size-9 lg:min-w-9 size-12 object-cover" alt="">
+                             class="lg:w-8 w-5 object-cover" alt="">
                     </div>
                     <div
-                            class="flex flex-col sm:gap-2 gap-1 lg:items-start items-center max-sm:items-center justify-center">
-                        <h5 class="text-lg font-bold text-[var(--text)]">{{ $setting['serviceTitle1'] }}</h5>
+                            class="flex flex-col sm:gap-2 gap-1 items-center max-sm:items-center justify-center">
+                        <h5 class="xl:text-lg text-md font-bold text-(--primary-text-color)">{{ $setting['serviceTitle1'] }}</h5>
                         <div
                                 class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px] sm:text-[10px] text-[11px] text-[var(--text-secondary)]">
-                            <span class="font-bold max-lg:text-center">{{ $setting['serviceSubTitle1'] }}</span>
+                            <span class="font-bold text-center text-(--secondary-text-color)">{{ $setting['serviceSubTitle1'] }}</span>
                         </div>
                     </div>
                 </div>
@@ -741,35 +731,35 @@
 
             <div
                     class="w-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2">
-                <div class="group w-full msx-sm:h-full flex max-lg:flex-col gap-2 justify-center items-center">
-                    <div class="group-hover:scale-[1.05] group-active:scale-[1.3] transition_normal">
+                <div class="group w-full flex flex-col gap-2 justify-center items-center">
+                    <div class="">
                         <img src="{{ asset('storage/'.$setting['serviceImage2']) }}"
-                             class="xl:size-13 xl:min-w-13 lg:size-9 lg:min-w-9 size-12 object-cover" alt="">
+                             class="lg:w-8 w-5 object-cover" alt="">
                     </div>
                     <div
-                            class="flex flex-col sm:gap-2 gap-1 lg:items-start items-center max-sm:items-center justify-center">
-                        <h5 class="xl:text-lg text-md font-bold text-[var(--text)]">{{ $setting['serviceTitle2'] }}</h5>
+                            class="flex flex-col sm:gap-2 gap-1 items-center max-sm:items-center justify-center">
+                        <h5 class="xl:text-lg text-md font-bold text-(--primary-text-color)">{{ $setting['serviceTitle2'] }}</h5>
                         <div
                                 class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px] sm:text-[10px] text-[11px] text-[var(--text-secondary)]">
-                            <span class="font-bold max-lg:text-center">{{ $setting['serviceSubTitle2'] }}</span>
+                            <span class="font-bold text-center text-(--secondary-text-color)">{{ $setting['serviceSubTitle2'] }}</span>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div
-                    class="w-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2 max-lg:col-span-2 max-sm:col-span-1">
-                <div class="group w-full msx-sm:h-full flex max-lg:flex-col gap-2 justify-center items-center">
-                    <div class="group-hover:scale-[1.05] group-active:scale-[1.3] transition_normal">
+                    class="w-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2">
+                <div class="group w-full flex flex-col gap-2 justify-center items-center">
+                    <div class="">
                         <img src="{{ asset('storage/'.$setting['serviceImage3']) }}"
-                             class="xl:size-13 xl:min-w-13 lg:size-9 lg:min-w-9 size-12 object-cover" alt="">
+                             class="lg:w-8 w-5 object-cover" alt="">
                     </div>
                     <div
-                            class="flex flex-col sm:gap-2 gap-1 lg:items-start items-center max-sm:items-center justify-center">
-                        <h5 class="xl:text-lg text-md font-bold text-[var(--text)]">{{ $setting['serviceTitle3'] }}</h5>
+                            class="flex flex-col sm:gap-2 gap-1 items-center max-sm:items-center justify-center">
+                        <h5 class="xl:text-lg text-md font-bold text-(--primary-text-color)">{{ $setting['serviceTitle3'] }}</h5>
                         <div
                                 class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px]sm:text-[10px] text-[11px] text-[var(--text-secondary)]">
-                            <span class="font-bold max-lg:text-center">{{ $setting['serviceSubTitle3'] }}</span>
+                            <span class="font-bold text-center text-(--secondary-text-color)">{{ $setting['serviceSubTitle3'] }}</span>
                         </div>
                     </div>
                 </div>
@@ -777,17 +767,17 @@
 
             <div
                     class="w-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2">
-                <div class="group w-full msx-sm:h-full flex max-lg:flex-col gap-2 justify-center items-center">
-                    <div class="group-hover:scale-[1.05] group-active:scale-[1.3] transition_normal">
+                <div class="group w-full flex flex-col gap-2 justify-center items-center">
+                    <div class="">
                         <img src="{{ asset('storage/'.$setting['serviceImage4']) }}"
-                             class="xl:size-13 xl:min-w-13 lg:size-9 lg:min-w-9 size-12 object-cover" alt="">
+                             class="lg:w-8 w-5 object-cover" alt="">
                     </div>
                     <div
-                            class="flex flex-col sm:gap-2 gap-1 lg:items-start items-center max-sm:items-center justify-center">
-                        <h5 class="xl:text-lg text-md font-bold text-[var(--text)]">{{ $setting['serviceTitle4'] }}</h5>
+                            class="flex flex-col sm:gap-2 gap-1 items-center max-sm:items-center justify-center">
+                        <h5 class="xl:text-lg text-md font-bold text-(--primary-text-color)">{{ $setting['serviceTitle4'] }}</h5>
                         <div
                                 class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px] sm:text-[10px] text-[11px] text-[var(--text-secondary)]">
-                            <span class="font-bold max-lg:text-center">{{ $setting['serviceSubTitle4'] }}</span>
+                            <span class="font-bold text-center text-(--secondary-text-color)">{{ $setting['serviceSubTitle4'] }}</span>
                         </div>
                     </div>
                 </div>
@@ -795,17 +785,17 @@
 
             <div
                     class="w-full flex items-center justify-center max-lg:rounded-xl max-lg:py-2 max-lg:px-2">
-                <div class="group w-full msx-sm:h-full flex max-lg:flex-col gap-2 justify-center items-center">
-                    <div class="group-hover:scale-[1.05] group-active:scale-[1.3] transition_normal">
+                <div class="group w-full flex flex-col gap-2 justify-center items-center">
+                    <div class="">
                         <img src="{{ asset('storage/'.$setting['serviceImage5']) }}"
-                             class="xl:size-13 xl:min-w-13 lg:size-9 lg:min-w-9 size-12 object-cover" alt="">
+                             class="lg:w-8 w-5 object-cover" alt="">
                     </div>
                     <div
-                            class="flex flex-col sm:gap-2 gap-1 lg:items-start items-center max-sm:items-center justify-center">
-                        <h5 class="xl:text-lg text-md font-bold text-[var(--text)]">{{ $setting['serviceTitle5'] }}</h5>
+                            class="flex flex-col sm:gap-2 gap-1 items-center max-sm:items-center justify-center">
+                        <h5 class="xl:text-lg text-md font-bold text-(--primary-text-color)">{{ $setting['serviceTitle5'] }}</h5>
                         <div
                                 class="text-justify flex flex-col lg:items-start items-center max-sm:items-start justify-center xl:text-[11px] sm:text-[10px] text-[11px] text-[var(--text-secondary)]">
-                            <span class="font-bold max-lg:text-center">{{ $setting['serviceSubTitle5'] }}</span>
+                            <span class="font-bold text-center text-(--secondary-text-color)">{{ $setting['serviceSubTitle5'] }}</span>
                         </div>
                     </div>
                 </div>
