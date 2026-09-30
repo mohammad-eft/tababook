@@ -286,15 +286,15 @@ class ProductController extends Controller
         foreach ($products as $product) {
             if ($product->media->isNotEmpty()) {
                 foreach ($product->media as $media) {
-                    if ($media['is_main']) {
-                        $product['mainImg']  = $media['media_path'];
+                    if ($media->is_main) {
+                        $product->image  = $media->media_path;
                         break;
                     } else {
-                        $product['mainImg'] = 'default.jpg';
+                        $product->image = 'default.jpg';
                     }
                 }
             } else {
-                $product['mainImg'] = 'default.jpg';
+                $product->image = 'default.jpg';
             }
         }
         $cartCount = 0;

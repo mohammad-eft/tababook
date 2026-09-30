@@ -355,8 +355,6 @@
         <section class="max-w-[1800px] w-11/12 mx-auto flex flex-col gap-4 justify-start items-start">
             <div class="w-full flex flex-row justify-between items-center">
                 <h3 class="text-xl font-bold text-(--primary-text-color)">تازه به قفسه ها اضافه شده</h3>
-{{--                <p class="text-[#ADB4B2] max-lg:text-center max-lg:text-sm">جدید ترین کتاب ها و محصولات فروشگاه را--}}
-{{--                    زودتر از بقیه ببین</p>--}}
                 <a href="#" class="text-sm text-(--secondary-text-color)">مشاهده همه</a>
             </div>
             <div class="max-w-full w-full py-2 px-1 flex gap-4 justify-start overflow-x-auto lg:overflow-x-visible">
