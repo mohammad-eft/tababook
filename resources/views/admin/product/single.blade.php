@@ -197,7 +197,7 @@
                             @foreach ($product->media as $media)
                                 @if ($media->is_main)
                                     @if ($media->media_path)
-                                        <img class="w-full rounded-large overflow-hidden inline-block gallery_pack_single_primary_img"
+                                        <img class="w-full rounded-large overflow-hidden inline-block gallery_pack_single_primary_img h-full object-cover"
                                             src="{{ asset('/storage/' . $media->media_path) }}" alt="product image">
                                     @else
                                         <img class="w-full rounded-large overflow-hidden inline-block"
@@ -207,11 +207,11 @@
                             @endforeach
                         </div>
                         <div
-                            class="lg:hidden flex items-center cursor-pointer max-h-[250px] h-[250px] w-[250px] bg-(--cream-color) lg:bg-white">
+                            class="lg:hidden flex items-center cursor-pointer max-h-[250px] h-[250px] w-auto lg:w-[250px] bg-(--cream-color) lg:bg-white">
                             @foreach ($product->media as $media)
                                 @if ($media->is_main)
                                     @if ($media->media_path)
-                                        <img class="w-full rounded-large overflow-hidden inline-block gallery_pack_single_primary_img"
+                                        <img class="w-full rounded-large overflow-hidden inline-block gallery_pack_single_primary_img h-full object-cover"
                                             src="{{ asset('/storage/' . $media->media_path) }}" alt="product image">
                                     @else
                                         <img class="w-full rounded-large overflow-hidden inline-block"
