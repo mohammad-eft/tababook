@@ -79,6 +79,11 @@ class homeSetting{
         $footerServices = setting::where('meta_key', 'footerServices')->first();
         $footerCategories = setting::where('meta_key', 'footerCategories')->first();
 
+        $packTitle = setting::where('meta_key', 'packTitle')->first();
+        $packSubtitle = setting::where('meta_key', 'packSubtitle')->first();
+        $packLinkTitle = setting::where('meta_key', 'packLinkTitle')->first();
+        $packLinkUrl = setting::where('meta_key', 'packLinkUrl')->first();
+
         $setting['logo'] = $logo ? $logo->meta_value : null;
         $setting['heroBanner'] = $heroBanner ? $heroBanner->meta_value : null;
         $setting['heroTitle'] = $heroTitle ? $heroTitle->meta_value : null;
@@ -150,6 +155,12 @@ class homeSetting{
         $setting['footerDesignerUrl'] = $footerDesignerUrl ? $footerDesignerUrl->meta_value : null;
         $setting['footerServices'] = $footerServices ? json_decode($footerServices->meta_value) : null;
         $setting['footerCategories'] = $footerCategories ? json_decode($footerCategories->meta_value) : null;
+
+        $setting['packTitle'] = $packTitle ? $packTitle->meta_value : null;
+        $setting['packSubtitle'] = $packSubtitle ? $packSubtitle->meta_value : null;
+        $setting['packLinkTitle'] = $packLinkTitle ? $packLinkTitle->meta_value : null;
+        $setting['packLinkUrl'] = $packLinkUrl ? $packLinkUrl->meta_value : null;
+
         return $setting;
     }
     public static function document(){
