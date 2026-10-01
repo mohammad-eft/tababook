@@ -7,6 +7,7 @@ use App\classes\homeSetting;
 use App\Models\setting;
 use App\Models\category;
 use App\Models\product;
+use App\Models\pack;
 use Illuminate\Http\Request;
 use Symfony\Component\CssSelector\Node\FunctionNode;
 
@@ -324,8 +325,7 @@ class SettingController extends Controller
             'packLinkTitle' => $packLinkTitle,
             'packLinkUrl' => $packLinkUrl,
         ]);
-    }
-    
+    }   
     public function storePackSetting(Request $request){
         $settings = $request->setting;
         foreach ($settings as $key => $value) {

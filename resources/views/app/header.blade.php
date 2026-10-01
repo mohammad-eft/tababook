@@ -33,13 +33,13 @@
 
 <body>
     <header class="w-full flex flex-col justify-start items-center">
-        <a href="{{ $setting['topBannerLink'] }}" class="w-full py-2 bg-green-700 flex justify-center items-center">
+        <a href="{{ $setting['topBannerLink'] }}" class="w-full flex justify-center items-center">
             <img src="{{ asset('storage/' . $setting['topBanner']) }}" class="w-full max-h-10 object-cover"
                 alt="">
         </a>
         <section class="max-w-[1800px] w-11/12 mx-auto flex flex-col gap-4 justify-start items-center bg-white">
             <div class="w-full flex justify-between gap-1 items-center pt-5">
-                <div class="w-7 h-5 flex flex-col items-start justify-between   " id="openHamburgerMenu">
+                <div class="w-7 h-5 flex flex-col items-start justify-between lg:hidden" id="openHamburgerMenu">
                     <span class="w-full h-0.5 bg-black rounded-full"></span>
                     <span class="w-full h-0.5 bg-black rounded-full"></span>
                     <span class="w-full h-0.5 bg-black rounded-full"></span>
