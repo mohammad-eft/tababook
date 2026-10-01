@@ -135,7 +135,7 @@
                                 </svg>
                                 <span class="text-sm text-[#5b5c75]">حساب کاربری</span>
                             </a>
-                            <a href=""
+                            <a href="{{ route('logout') }}"
                                 class="w-full rounded-lg cursor-pointer px-4 py-2 hover:bg-[#F9FAFC] flex gap-5 items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                     viewBox="0 0 20 20" id="entypo-log-out" class="w-4 fill-red-500">
