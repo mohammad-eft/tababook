@@ -211,7 +211,7 @@
         <!-- likly -->
         <section class="max-w-[1800px] w-11/12 mx-auto flex flex-col gap-4 justify-start items-start">
             <div class="w-full flex flex-row gap-1 justify-between items-center">
-                <h3 class="text-xl font-bold">محبوب ترین های این روز ها</h3>
+                <h3 class="text-xl font-bold text-(--primary-text-color)">محبوب ترین های این روز ها</h3>
 {{--                <p class="text-[#ADB4B2] max-lg:text-center max-lg:text-sm">انتخاب هایی که بیشتر از همه مورد توجه--}}
 {{--                    کاربران قرار گرفته است</p>--}}
                 <a href="#" class="text-sm text-(--secondary-text-color)">مشاهده همه</a>
@@ -282,7 +282,7 @@
                             <div class="w-full h-12">
                                 @if (Auth::check() && in_array($product->id, $cartProIds) && count($product->carts))
 
-                                    <div class="w-full h-full px-4 bg-(--color-purple) flex gap-2 justify-center items-center rounded-xl"
+                                    <div class="w-full h-full px-4 transition-all duration-300 hover:bg-(--green-btn) cursor-pointer group flex gap-2 justify-center items-center rounded-xl"
                                          data-product-id="{{ $product->id }}">
                                         <button onclick="setCount(this)"
                                                 class="w-1/3 text-lg font-bold text-white cursor-pointer"
@@ -297,7 +297,7 @@
                                     </div>
                                 @else
                                     <button onclick="addToCart(this)"
-                                            class="w-full px-4 h-full bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl cursor-pointer transition-all duration-300 hover:bg-(--green-btn) group"
+                                            class="w-full px-4 h-full bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl cursor-pointer transition-all duration-300 hover:bg-(--green-btn) cursor-pointer group"
                                             data-product-id="{{ $product->id }}">
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
@@ -354,9 +354,7 @@
         <!-- new product -->
         <section class="max-w-[1800px] w-11/12 mx-auto flex flex-col gap-4 justify-start items-start">
             <div class="w-full flex flex-row justify-between items-center">
-                <h3 class="text-xl font-bold">تازه به قفسه ها اضافه شده</h3>
-{{--                <p class="text-[#ADB4B2] max-lg:text-center max-lg:text-sm">جدید ترین کتاب ها و محصولات فروشگاه را--}}
-{{--                    زودتر از بقیه ببین</p>--}}
+                <h3 class="text-xl font-bold text-(--primary-text-color)">تازه به قفسه ها اضافه شده</h3>
                 <a href="#" class="text-sm text-(--secondary-text-color)">مشاهده همه</a>
             </div>
             <div class="max-w-full w-full py-2 px-1 flex gap-4 justify-start overflow-x-auto lg:overflow-x-visible">
@@ -425,7 +423,7 @@
                             </div>
                             <div class="w-full h-12">
                                 @if (Auth::check() && in_array($product->id, $cartProIds) && count($product->carts))
-                                    <div class="w-full h-full px-4 bg-(--color-purple) flex gap-2 justify-center items-center rounded-xl"
+                                    <div class="w-full h-full px-4 transition-all duration-300 hover:bg-(--green-btn) cursor-pointer group bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl"
                                          data-product-id="{{ $product->id }}">
                                         <button onclick="setCount(this)"
                                                 class="w-1/3 text-lg font-bold text-white flex justify-center items-center cursor-pointer"
@@ -440,7 +438,7 @@
                                     </div>
                                 @else
                                     <button onclick="addToCart(this)"
-                                            class="w-full px-4 h-full bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl cursor-pointer transition-all duration-300 hover:bg-(--green-btn) group"
+                                            class="w-full px-4 h-full bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl cursor-pointer transition-all duration-300 hover:bg-(--green-btn) cursor-pointer group"
                                             data-product-id="{{ $product->id }}">
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"

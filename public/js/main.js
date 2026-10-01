@@ -1,22 +1,6 @@
 //! new codes
 //! home page
-let hamburger_menu_item = document.getElementById('hamburger_menu_item')
-let close_hamburger_document = document.getElementById('close_hamburger_document')
 
-function hamburger_menu(item) {
-    if (item == 'open') {
-        hamburger_menu_item.classList.remove('translate-x-full')
-        hamburger_menu_item.classList.add('translate-x-0')
-        close_hamburger_document.classList.remove('invisible')
-        close_hamburger_document.classList.remove('opacity-0')
-    }
-    if (item == 'close') {
-        hamburger_menu_item.classList.add('translate-x-full')
-        hamburger_menu_item.classList.remove('translate-x-0')
-        close_hamburger_document.classList.add('invisible')
-        close_hamburger_document.classList.add('opacity-0')
-    }
-}
 ////////
 let servis_pup_up_hover = document.querySelectorAll('.servis_pup_up_hover')
 let servis_pup_up_item = document.querySelectorAll('.servis_pup_up_item')

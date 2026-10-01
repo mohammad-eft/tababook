@@ -1,18 +1,19 @@
-let hamburger_menu_item = document.getElementById('hamburger_menu_item')
-        let hamburger_menu_item_close = document.getElementById('hamburger_menu_item_close')
+let hamburgerMenu = document.getElementById('hamburgerMenu')
+let openHamburgerMenu = document.getElementById('openHamburgerMenu')
+document.getElementById('openHamburgerMenu').addEventListener('click', () => {
+    hamburgerMenu.classList.remove('invisible')
+    hamburgerMenu.classList.remove('opacity-0')
+    hamburgerMenu.children[0].classList.remove('translate-x-full')
+})
 
-        function hamburger_menu(type) {
-            if (type == 'open') {
-                hamburger_menu_item.classList.remove('translate-x-full')
-                hamburger_menu_item_close.classList.remove('invisible')
-                hamburger_menu_item_close.classList.remove('opacity-0')
-            }
-            if (type == 'close') {
-                hamburger_menu_item.classList.add('translate-x-full')
-                hamburger_menu_item_close.classList.add('invisible')
-                hamburger_menu_item_close.classList.add('opacity-0')
-            }
-        }
+document.addEventListener('click', (e) => {
+    if (!hamburgerMenu.children[0].contains(e.target) && !openHamburgerMenu.contains(e.target)) {
+        hamburgerMenu.classList.add('invisible')
+        hamburgerMenu.classList.add('opacity-0')
+        hamburgerMenu.children[0].classList.add('translate-x-full')
+    }
+})
+        
 
         let change_like_svh = document.querySelectorAll('.change_like_svh')
         change_like_svh.forEach((item)=>{
