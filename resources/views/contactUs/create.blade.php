@@ -7,7 +7,7 @@
                ارسال تیکت به ادمین
             </h1>
         </div>
-        @if (Auth::user()->contactUs && count(Auth::user()->contactUs))
+        @if (Auth::check() && (Auth::user()->contactUs && count(Auth::user()->contactUs)))
             <a href="{{ route('contactUs.myMessage') }}" class="text-sky-700 inline-block mb-5">لیست تیکت ها</a>
         @endif
         <form action="{{ route('contactUs.store') }}" method="post">

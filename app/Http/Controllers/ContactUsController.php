@@ -15,13 +15,20 @@ class ContactUsController extends Controller
 
     public function store(Request $request)
     {
+        $userId = null;
+        if(Auth::check()){
+            $userId = Auth::id();
+        }
         contactUs::create([
-            'user_id'=>Auth::id(),
+            'user_id'=>$userId,
             'title' => $request->title,
             'description' => $request->description,
             'phoneNumber' => $request->phoneNumber
         ]);
-        return to_route('contactUs.myMessage');
+        if(Auth::check())
+            return to_route('contactUs.myMessage');
+        if(!Auth::check())
+            return to_route('home');
     }
 
     public function index()

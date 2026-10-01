@@ -41,11 +41,10 @@
                 <div class="w-full flex flex-col items-center">
                     <div class="w-full flex gap-2 items-center">
                         <div class="w-[50px] h-1 bg-(--primary-text-color)"></div>
-                        <span class="text-sm lg:text-lg text-(--secondary-text-color)">پک های پیشنهادی</span>
+                        <span class="text-sm lg:text-lg text-(--secondary-text-color)">{{ $setting['packSubtitle'] }}</span>
                     </div>
                     <div class="w-full flex flex-row justify-between items-center">
-                        <span class="lg:text-[30px] text-(--primary-text-color) font-bold">پک های آماده برای هر موقعیت</span>
-{{--                        <span class="text-gray-400 text-right">با انتخاب هر یک از محصولات کاربردی و مرتبط با موضوع را در یک بسته دریافت کنید. پک ها انتخابی هوشمندانه برای مطالعه ، یادگیری و هدیه دادن هستند.</span>--}}
+                        <span class="lg:text-[30px] text-(--primary-text-color) font-bold">{{ $setting['packTitle'] }}</span>
                         <a href="#" class="text-sm text-(--secondary-text-color)">مشاهده همه</a>
                     </div>
                 </div>

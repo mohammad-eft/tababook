@@ -16,9 +16,15 @@ use App\Http\Controllers\PackController;
 use App\Http\Controllers\SearchController;
 use App\Models\product;
 use App\Models\carts;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 Route::get('/test', function(){
-    carts::where('id', '>', 0)->delete();
+    // carts::where('id', '>', 0)->delete();
+    Schema::table('contact_us', function (Blueprint $table) {
+        $table->string('phoneNumber')->nullable()->change();
+        $table->string('user_id')->nullable()->change();
+    });
 });
 
 Route::get('/', [SettingController::class, 'home'])->name('home');
@@ -26,6 +32,7 @@ Route::get('/', [SettingController::class, 'home'])->name('home');
 Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::get('/signup', [UserController::class, "create"])->name('signup');
 Route::post('/check', [UserController::class, "checkAuth"])->name('checkAuth');
+Route::get('/logout', [UserController::class, "logout"])->name('logout');
 
 Route::group([
     'prefix' => 'users',
@@ -168,8 +175,8 @@ Route::group([
     'as' => 'contactUs.',
     'middleware' => [AuthMiddleware::class]
 ], function () {
-    Route::get('/create', 'create')->name('create');
-    Route::post('/store', 'store')->name('store');
+    Route::get('/create', 'create')->name('create')->withoutMiddleware([AuthMiddleware::class]);
+    Route::post('/store', 'store')->name('store')->withoutMiddleware([AuthMiddleware::class]);
     Route::get('/myMessage', 'myMessage')->name('myMessage');
     Route::get('/contactUs', 'index')->name('list');
     Route::get('/single/{contactUs}', 'single')->name('single');

@@ -30,7 +30,7 @@
 
                     <!-- عنوان هیرو -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-                        <label for="packTitle" class="text-sm font-medium text-gray-700 md:pt-2.5">عنوان پک</label>
+                        <label for="packTitle" class="text-sm font-medium text-gray-700 md:pt-2.5">عنوان اصلی</label>
                         <div class="md:col-span-2">
                             <input type="text" id="packTitle" name="setting[packTitle]" placeholder="پک های آماده برای هر موقعیت" value="{{ $packTitle->meta_value }}"
                                 class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition">
@@ -39,15 +39,29 @@
 
                     <!-- زیرعنوان -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-                        <label for="packSubtitle" class="text-sm font-medium text-gray-700 md:pt-2.5">زیرعنوان</label>
+                        <label for="packSubtitle" class="text-sm font-medium text-gray-700 md:pt-2.5">عنوان فرعی</label>
                         <div class="md:col-span-2">
-                            <textarea id="packSubtitle" rows="3" name="setting[packSubtitle]" placeholder="با انتخاب هر پک، مجموعه ای از محصولات کاربردی و مرتبط با موضوع را در یک بسته دریافت کنید"
-                                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition resize-none">{{ $packSubtitle->meta_value }}</textarea>
+                            <input type="text" id="packSubtitle" name="setting[packSubtitle]" placeholder="با انتخاب هر پک، مجموعه ای از محصولات کاربردی و مرتبط با موضوع را در یک بسته دریافت کنید"
+                                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition resize-none" value="{{ $packSubtitle->meta_value }}">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
+                        <label for="packLinkTitle" class="text-sm font-medium text-gray-700 md:pt-2.5">متن دکمه</label>
+                        <div class="md:col-span-2">
+                            <input type="text" id="packLinkTitle" placeholder="مشاهده همه"
+                                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition resize-none" value="{{ $packLinkTitle->meta_value }}">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
+                        <label for="packLinkUrl" class="text-sm font-medium text-gray-700 md:pt-2.5">متن دکمه</label>
+                        <div class="md:col-span-2">
+                            <input type="text" dir="ltr" id="packLinkUrl" name="setting[packLinkUrl]" placeholder="مشاهده همه"
+                                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition resize-none" value="{{ $packLinkUrl->meta_value }}">
                         </div>
                     </div>
 
                     <!-- تصویر هیرو -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
+                    {{-- <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
                         <label class="text-sm font-medium text-gray-700 md:pt-2.5">تصویر سکشن پک</label>
                         <div class="md:col-span-2">
                             <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-indigo-400 transition">
@@ -62,10 +76,10 @@
                                 <p class="text-xs text-gray-500 mt-2">JPG, PNG - حداکثر ۲ مگابایت</p>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <!-- متن دکمه -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+                    {{-- <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
                         <label for="packLabelText" class="text-sm font-medium text-gray-700">متن لیبل </label>
                         <div class="md:col-span-2">
                             <input type="text" id="packLabelText" name="setting[packLabelText]" value="{{ $packLabelText->meta_value }}" placeholder="پک های پیشنهادی"
@@ -116,7 +130,7 @@
                                 class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition">
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
 
             <!-- ==================== دکمه‌های عملیات ==================== -->
