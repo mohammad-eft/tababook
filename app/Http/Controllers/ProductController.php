@@ -265,8 +265,8 @@ class ProductController extends Controller
             $product->load(['carts'=>function($q){
                 $q->where('user_id', Auth::id())->whereNull('order_id')->first();
             }]);
-            
         }
+        // dd(Auth::user(), in_array($product->id, $cartProIds), $product->id);
         $setting = homeSetting::document();
         return view('admin.product.single', [
             'product' => $product,
@@ -279,8 +279,6 @@ class ProductController extends Controller
     }
     public function index()
     {
-        // $logo = logo::first();
-        // $services = service::all();
         $categories = category::with('products')->has('products')->get();
         $products = product::all();
         foreach ($products as $product) {
@@ -310,14 +308,10 @@ class ProductController extends Controller
         //     }
         // }
         return view('user.product.index', [
-            // 'logo' => $logo,
-            // 'services' => $services,
             'categories' => $categories,
             'products' => $products,
             'cartCount' => $cartCount,
             'setting' => $setting,
-            // 'cart' => $cart,
-            // 'allCartCount' => $allCartCount
         ]);
     }
     public function filter(Request $request)
@@ -349,8 +343,6 @@ class ProductController extends Controller
         }
         $setting = homeSetting::document();
         return view('user.product.index', [
-            // 'logo' => $logo,
-            // 'services' => $services,
             'categories' => $categories,
             'products' => $products,
             'catIds' => $request['selectedCats'],
@@ -359,7 +351,6 @@ class ProductController extends Controller
     }
     public function search(Request $request)
     {
-        // $product = product::where('title', 'like', '%' . $request['title'] . '%')->orWhere('summary', 'like', '%' . $request['title'] . '%')->orWhere('description', 'like', '%' . $request['title'] . '%')->get();
         $products = product::where('title', 'like', '%' . $request['title'] . '%')->with('media')->get();
         return response()->json($products);
     }

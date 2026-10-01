@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\carts;
 use App\Models\category;
+use Log;
 
 class CartsController extends Controller
 {

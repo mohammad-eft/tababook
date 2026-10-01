@@ -1,5 +1,7 @@
 
 function addToCart(btn){
+    btn.innerHTML = `<div class="w-5 h-5 border-2 border-white border-t-(--primary-text-color) rounded-full animate-spin"></div>`
+    console.log(btn)
     if (!flag) {
         location.assign(url + 'login')
     } else {
@@ -16,10 +18,10 @@ function addToCart(btn){
                 console.log(response)
                 orderBasket.children[1].innerText += 1
                 btn.parentElement.innerHTML = `
-                    <div class="w-full h-12 px-2 transition-all duration-300 hover:bg-(--green-btn) cursor-pointer group bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl" data-product-id="${response.product_id}">
-                        <button onclick="setCount(this)" class="w-1/3 text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="+">+</button>
-                        <input type="number" class="w-1/3 text-white text-sm text-center outline-none" readonly value="${response.quantity}">
-                        <button onclick="setCount(this)" class="w-1/3 text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="-">-</button>
+                    <div class="w-full px-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl" data-product-id="${response.product_id}">
+                        <button onclick="setCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="+">+</button>
+                        <input type="number" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white text-sm text-center outline-none" readonly value="${response.quantity}">
+                        <button onclick="setCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="-">-</button>
                     </div>
                     `
             },
@@ -33,9 +35,8 @@ function addToCart(btn){
 function setCount(btn){
     product_id = btn.parentElement.dataset.productId
     btn.parentElement.parentElement.removeAttribute('onclick')
-    btn.setAttribute('disabled', true)
-    btn.innerHTML =
-        `<div class="w-5 h-5 border-2 border-white border-t-(--primary-color) rounded-full animate-spin"></div>`
+    btn.disabled = true
+    btn.innerHTML =`<div class="w-5 h-5 border-2 border-white border-t-(--primary-text-color) rounded-full animate-spin"></div>`
 
     if (btn.dataset.state == "+") {
         // if (flag) {
@@ -108,7 +109,7 @@ function setCount(btn){
             },
             success: function (data) {
                 console.log(data)
-                btn.removeAttribute('disabled')
+                btn.disabled = false
                 let currentQuantity = data.quantity || 0
                 btn.parentElement.children[1].value = currentQuantity
                 if (btn.dataset.state == "+") {
@@ -132,7 +133,7 @@ function setCount(btn){
                 }
                 if (btn.parentElement.children[1].value == 0) {
                     btn.parentElement.parentElement.innerHTML = `
-                                <button class="addToCart w-full p-2 transition-all duration-300 hover:bg-(--green-btn) cursor-pointer group bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl" data-product-id="${data.data.product_id}">
+                                <button onclick="addToCart(this)" class="w-full px-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl" data-product-id="${data.data.product_id}">
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
                                                 class="lg:size-4 size-3 fill-(--primary-text-color) transition-all duration-300 group-hover:fill-white">
