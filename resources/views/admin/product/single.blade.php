@@ -1,231 +1,20 @@
 @extends('app.document')
-@section('title', 'جست و جو')
+@section('title')
+    طبابوک | {{ $product->title }}
+@endsection
 @section('content')
     <!-- address navbar -->
 
 
 
     <style>
-        .heder_hover_item:hover .heder_hover_items_item{
-    visibility: visible;
-    opacity: 1;
-    top:60px;
-    transition: all 250ms ease-in 250ms;
-
-}
-
-.heder_hover_item:hover .dark_background{
-    display: flex;
-    visibility: visible;
-    opacity: 1;
-    position: fixed;
-    top:80px;
-    transition: all 250ms ease-in 250ms ;
-
-}
-
-.gradient{
-background: linear-gradient(to bottom, #00000000 0px, rgb(255 255 255) 45px);
-}
-/* .dark_background:hover{
-    visibility: invisible;
-    display: none;
-    opacity: 0;
-
-    transition: all 250ms ease-in 250ms;
-} /
-/ .mahdi:hover{
-
-    height: 700px;
-
-} */
-@media screen and (min-width:1024px){
-
-
-    .product_box:hover .product_hover_box{
-        height: auto;
-         transition: all 250ms ease-in 100ms;
-        transform: translate(0px,-50px);
-    }
-
-    .product_box:hover .product_hover_button_box {   
-        visibility: visible;
-        opacity: 1;
-        transition: all 250ms ease-in 100ms;
-
-    }
-    .product_hover_button_box{
-        transition: all 250ms ease-in 100ms;
-        transform: translate(0px,0px);
-    }
-}
-
-
-
-.product_box_button_hover:hover .product_box_button_hover_change_items1{
-    opacity: 0;
-    visibility: hidden;
-     transition: all 250ms ease-in 100ms;
-    transform: translate(0px,-23px);
-
-}
-
-.product_box_button_hover:hover .product_box_button_hover_change_items2{
-
-    bottom: 0;
-    opacity: 1;
-    display: flex;
-    justify-self: center;
-    visibility: visible;
-     transition: all 500ms ease-in 100ms;
-    transform: translate(0px,-5px);
-
-}
-:root {
-    --color-primary: #FD9636;
-    --color-subheader-btn: #FD9636;
-    --color-text: #425A8B;
-    --color-secondary-text: #8C9EC5;
-    --color-primary-text: #ffffff;
-    --color-bg-card-btn: #425A8B;
-    --color-bg-hover-btn: #425A8B;
-    --color-primary-btn: #F0F3F8;
-    --color-primary-btn-hover: #F0F3F8;
-    --color-bg-contact-section: #425A8B;
-    --color-btn-contact: #425A8B;
-    --color-btn-contact-hover: #334a76;
-    --color-border: #D5DFE4;
-    --color-discount-bg: #D36B0B;
-    --color-fill: #425A8B;
-    --color-secondary: #0dcaf0;
-    --color-success-bg: #00a049;
-    --color-danger: #e6123d;
-    --color-info: #1028ff;
-    --color-secondary-bg: #efeff0;
-}
-@import url("fontiran.css");
-/* @import url("primary_colors.css"); */
-
-
-
+  
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   margin: 0;
-}
-
- {
-  font-family: 'IRANSansX';
-  scroll-behavior: smooth;
-}
-
-.samim {
-  font-family: 'Samim';
-}
-
-.DimaShekasteh {
-  font-family: 'DimaShekasteh';
-}
-
-.yekan {
-  font-family: 'Yekan';
-}
-
-.menuLink svg path {
-  transition: all 300ms;
-}
-
-.menuLink:hover {
-  color: var(--color-primary);
-}
-
-.menuLink:hover svg>path {
-  fill: var(--color-primary);
-}
-
-.menuItemParent:hover>.menuItemChild {
-  margin-top: 0;
-  opacity: 1;
-  visibility: visible;
-  pointer-events: visible;
-  top: 56px;
-}
-
-.menuItemParent:hover>div {
-  margin-top: 0;
-  opacity: 1;
-  visibility: visible;
-  pointer-events: visible;
-  max-height: 575px;
-}
-
-
-.activeSubMenuCat {
-  background-color: #FD9636;
-  color: white;
-}
-
-.productItem:hover div .buttonProduct {
-  transform: translateX(16px);
-  opacity: 1;
-}
-
-
-.productItem>div>.buttonProduct.btnAnimation,
-.productItem>div>.buttonProduct.btnAnimation>svg>path,
-.productAnimation,
-.productAnimation>svg>path {
-  animation: itemProduct 1s infinite;
-}
-
-.productItemNone:hover div.showMetric {
-  display: block;
-}
-
-@keyframes itemProduct {
-  0% {
-    background-color: var(--color-primary);
-    border-color: var(--color-primary);
-    fill: white;
-
-  }
-
-  50% {
-    background-color: white;
-    border-color: #D5DFE4;
-    fill: #425A8B;
-  }
-
-  100% {
-    background-color: var(--color-primary);
-    border-color: var(--color-primary);
-    fill: white;
-  }
-}
-
-.styles_Tooltip__tooltip___Mj8o {
-  max-width: 320px;
-  width: max-content;
-  word-wrap: break-word;
-  border: 1px solid black;
-  background: var(--color-bg-card-btn);
-  color: var(--color-primary-text);
-  border-radius: 4px;
-  padding: calc(2  4px) calc(3  4px);
-  margin: calc(2  4px);
-  display: none;
-}
-
-.hoverIcon:hover .styles_Tooltip__tooltip___Mj8o {
-  display: block;
-}
-
-
-.productGrid:hover {
-  z-index: 1;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, .2);
 }
 
 input[type="checkbox"] {
@@ -245,77 +34,13 @@ input[type="checkbox"]:checked {
 
 input[type="checkbox"]:checked::after {
   content: "✔️";
-  color: var(--color-primary-text);
+  color: var(--discount-color-text);
   position: absolute;
   left: 3px;
   top: 0;
   font-size: 12px;
 }
 
-/ new /
-
-.kt-card {
-  border-radius: 12px;
-  border: 1px solid white;
-  box-shadow: 0 1px 2px 0 #0000000d;
-}
-
-.kt-btn {
-  height: calc(.25rem  8.5);
-  gap: calc(.25rem  1.5);
-  border-radius: calc(.5rem - 2px);
-  padding-inline: calc(.25rem  3);
-  font-size: .8125rem;
-  line-height: calc(1.25/.875);
-}
-
-.kt-btn-outline {
-  border: 1px solid #e7e3e4;
-  color: #1b1718;
-  box-shadow: 0 0 #0000;
-}
-
-.kt-btn-outline:hover {
-  background-color: #f5f4f4;
-  color: #1b1718;
-}
-
-.kt-form-label {
-  align-items: center;
-  gap: calc(.25rem  2);
-  width: 100%;
-  font-size: .875rem;
-  line-height: 1;
-  font-weight: 500;
-  display: flex;
-}
-
-.kt-input {
-  width: 100%;
-  height: calc(.25rem  8.5);
-  border-radius: calc(.5rem - 2px);
-  padding-inline: calc(.25rem * 3);
-  font-size: .8125rem;
-  line-height: calc(1.25/.875);
-  outline: none;
-  border: 1px solid #e7e3e4;
-  color: #0b0809;
-  box-shadow: 0 0 #0000;
-  transition: all .15s;
-}
-
-.kt-input:focus-visible {
-  border: 1px solid #9f9fa9;
-  box-shadow: 0px 0px 3px 2px #b2b2ca;
-}
-
-.shadowHeader {
-  box-shadow: -5px 2px 5px rgb(216 217 229);
-}
-
-.responsive-menu-shadow {
-  box-shadow: 0px 0px 8px #888888;
-}
     </style>
 
 
@@ -325,33 +50,33 @@ input[type="checkbox"]:checked::after {
         <nav class="flex flex-row items-center text-xs lg:text-base">
             <div>
                 <a href="#" class="leading-[2.17]">
-                    <span class="border-b border-[#beb1d6] lg:border-none">
+                    <span class="border-b border-[#beb1d6] lg:border-none text-(--pastel-purple)">
                         طبابوک
                     </span>
-                    <span class="mx-3">/</span>
+                    <span class="mx-3 text-(--primary-text-color)">/</span>
                 </a>
             </div>
             <div>
                 <a href="#" class="leading-[2.17]">
-                    <span class="border-b border-[#beb1d6] lg:border-none">
+                    <span class="border-b border-[#beb1d6] lg:border-none text-(--pastel-purple)">
                         {{ $product->categories[0]->title ?? 'بدون دسته بندی' }}
                     </span>
-                    <span class="mx-3">/</span>
+                    <span class="mx-3 text-(--primary-text-color)">/</span>
                 </a>
             </div>
             <div>
                 <a href="#" class="leading-[2.17]">
-                    <span class="border-b border-[#beb1d6] lg:border-none">
+                    <span class="border-b border-[#beb1d6] lg:border-none text-(--pastel-purple)">
                         {{ $product->title }}
                     </span>
                 </a>
             </div>
         </nav>
         <div class="hidden lg:block">
-            <a href="#" class="flex flex-row gap-2 items-center">
+            <a href="#" class="flex flex-row gap-2 items-center text-(--secondary-text-color)">
                 فروش در طبابوک
                 <svg xmlns="http://www.w3.org/2000/svg" class="size-[18px]" viewBox="0 0 640 512">
-                    <path fill="var(--color-fill)"
+                    <path fill="var(--secondary-text-color)"
                         d="M0 185.8c0-6.4 1.6-12.7 4.7-18.3L82.4 25C90.8 9.6 106.9 0 124.5 0h391c17.6 0 33.7 9.6 42.1 25l77.7 142.4c3.1 5.6 4.7 11.9 4.7 18.3c0 21.1-17.1 38.2-38.2 38.2H576V496c0 8.8-7.2 16-16 16s-16-7.2-16-16V224H96V352H352V272 256h32v16V464c0 26.5-21.5 48-48 48H112c-26.5 0-48-21.5-48-48V224H38.2C17.1 224 0 206.9 0 185.8zM80 192H560h41.8c3.4 0 6.2-2.8 6.2-6.2c0-1-.3-2.1-.8-3L529.6 40.3c-2.8-5.1-8.2-8.3-14-8.3h-391c-5.9 0-11.2 3.2-14 8.3L32.8 182.8c-.5 .9-.8 1.9-.8 3c0 3.4 2.8 6.2 6.2 6.2H80zM96 464c0 8.8 7.2 16 16 16H336c8.8 0 16-7.2 16-16V384H96v80z" />
                 </svg>
             </a>
@@ -360,11 +85,11 @@ input[type="checkbox"]:checked::after {
     <!-- address navbar -->
 
     <!-- single product -->
-    <section class="w-11/12 text-(--color-text) mx-auto">
+    <section class="w-11/12 text-(--primary-text-color) mx-auto">
         <div class="flex flex-col lg:flex-row">
             <div class="lg:ml-4 shrink-0 flex flex-col-reverse lg:flex-col lg:w-[36%] overflow-hidden">
                 {{-- <div
-                    class="flex gap-3 items-center justify-between px-2 py-2 lg:mb-5 bg-(--color-primary)/20 text-(--color-discount-bg) border-t-2 rounded-t-[19px] lg:hidden border-[--color-discount-bg]">
+                    class="flex gap-3 items-center justify-between px-2 py-2 lg:mb-5 bg-(--discount-color)/20 text-(--color-discount-bg) border-t-2 rounded-t-[19px] lg:hidden border-[--color-discount-bg]">
                     <div>
                         <span class="font-bold">
                             پیشنهاد شگفت انگیز
@@ -379,7 +104,7 @@ input[type="checkbox"]:checked::after {
                     </div>
                 </div> --}}
                 {{-- <div
-                    class="lg:flex gap-3 items-center justify-between px-2 py-2 lg:mb-5 bg-(--color-primary)/20 text-(--color-discount-bg) hidden">
+                    class="lg:flex gap-3 items-center justify-between px-2 py-2 lg:mb-5 bg-(--discount-color)/20 text-(--color-discount-bg) hidden">
                     <div>
                         <span class="font-bold">
                             پیشنهاد شگفت انگیز
@@ -394,7 +119,7 @@ input[type="checkbox"]:checked::after {
                     </div>
                 </div> --}}
                 <div class="flex flex-col items-center lg:items-start lg:max-w-[368px] xl:max-w-[580px]">
-                    <div class="w-full flex justify-center relative bg-(--color-primary-btn) lg:bg-white">
+                    <div class="w-full flex justify-center relative bg-(--cream-color) lg:bg-white">
                         {{-- <div class="hidden lg:flex lg:flex-col lg:gap-y-4 self-end lg:self-start">
                             <div class="hoverIcon">
                                 <div
@@ -490,7 +215,7 @@ input[type="checkbox"]:checked::after {
                             @endforeach
                         </div>
                         <div
-                            class="lg:hidden flex items-center cursor-pointer max-h-[250px] h-[250px] w-[250px] bg-(--color-primary-btn) lg:bg-white">
+                            class="lg:hidden flex items-center cursor-pointer max-h-[250px] h-[250px] w-[250px] bg-(--cream-color) lg:bg-white">
                             @foreach ($product->media as $media)
                                 @if ($media->is_main)
                                     @if ($media->media_path)
@@ -522,7 +247,7 @@ input[type="checkbox"]:checked::after {
                     </div>
                     {{-- <div class="hidden w-full lg:flex items-center justify-start text-xs xl:text-sm">
                         <span
-                            class="flex justify-center pt-1 items-center size-4 border border-[var(--color-text)] rounded-full">!</span>
+                            class="flex justify-center pt-1 items-center size-4 border border-[var(--primary-text-color)] rounded-full">!</span>
                         <span class="mr-2 ml-5 xl:ml-9">
                             گزارش مشخصات کالا یا موارد قانونی
                         </span>
@@ -535,20 +260,20 @@ input[type="checkbox"]:checked::after {
                     <div class="flex items-center w-full lg:px-0 pt-4 lg:pt-0 px-2">
                         <nav class="flex items-center text-sm lg:text-base">
                             <a href="#"
-                                class="text-(--color-text) border-b border-(--color-border) lg:border-none lg:text-(--color-primary) text-xs lg:text-base">{{ $product->categories[0]->title ?? 'بدون دسته بندی' }}</a>
-                            <span class="text-(--color-text) mx-2 hidden lg:inline-block">/</span>
+                                class="text-(--primary-text-color) border-b border-(--color-border) lg:border-none lg:text-(--discount-color) text-xs lg:text-base">{{ $product->categories[0]->title ?? 'بدون دسته بندی' }}</a>
+                            <span class="text-(--primary-text-color) mx-2 hidden lg:inline-block">/</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="size-3 mx-2 lg:hidden" viewBox="0 0 320 512">
-                                <path fill="var(--color-text)"
+                                <path fill="var(--primary-text-color)"
                                     d="M52.7 267.3c-6.2-6.2-6.2-16.4 0-22.6l160-160c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6L86.6 256 235.3 404.7c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0l-160-160z" />
                             </svg>
                             <a href="#"
-                                class="text-(--color-text) border-b border-(--color-border) lg:border-none lg:text-(--color-primary) text-xs lg:text-base">
+                                class="text-(--primary-text-color) border-b border-(--color-border) lg:border-none lg:text-(--discount-color) text-xs lg:text-base">
                                 {{ $product->title }}
                             </a>
                         </nav>
                     </div>
                     <h1
-                        class="text-md xl:text-3xl text-(--color-text) font-bold mt-3 mb-2 pointer-events-none px-2 lg:px-0">
+                        class="text-md xl:text-3xl text-(--primary-text-color) font-bold mt-3 mb-2 pointer-events-none px-2 lg:px-0">
                         {{ $product->title }}
                     </h1>
                     <div class="lg:pb-5 mb-5 lg:border-b border-(--color-border)  px-2 lg:px-0">
@@ -569,9 +294,9 @@ input[type="checkbox"]:checked::after {
                         <div class="w-full overflow-x-auto" style="scrollbar-width: none;">
                             <div class="flex flex-row items-center gap-1 text-xs mb-3 lg:mb-0">
                                 <div
-                                    class="flex flex-row items-center gap-1 bg-(--color-primary-btn) rounded-full px-2 py-1 cursor-pointer">
+                                    class="flex flex-row items-center gap-1 bg-(--discount-color-btn) rounded-full px-2 py-1 cursor-pointer">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
-                                        <path fill="var(--color-primary)"
+                                        <path fill="var(--discount-color)"
                                             d="M356 60L336 0 316 60 256 80l60 20 20 60 20-60 60-20L356 60zM464 208l-16-48-16 48-48 16 48 16 16 48 16-48 48-16-48-16zM253.3 265.1L193.5 144 133.7 265.1 0 284.6l96.7 94.3L73.9 512l119.6-62.9L313 512 290.2 378.9l96.7-94.3L253.3 265.1z" />
                                     </svg>
                                     <span class="block w-[90px]">
@@ -579,7 +304,7 @@ input[type="checkbox"]:checked::after {
                                     </span>
                                 </div>
                                 <div
-                                    class="flex flex-row items-center gap-1 bg-(--color-primary-btn) rounded-full px-2 py-1 cursor-pointer">
+                                    class="flex flex-row items-center gap-1 bg-(--discount-color-btn) rounded-full px-2 py-1 cursor-pointer">
                                     <span class="block w-[90px]">
                                         213 دیدگاه
                                     </span>
@@ -590,7 +315,7 @@ input[type="checkbox"]:checked::after {
 
                                 </div>
                                 <div
-                                    class="flex flex-row items-center gap-1 bg-(--color-primary-btn) rounded-full px-2 py-1 cursor-pointer">
+                                    class="flex flex-row items-center gap-1 bg-(--discount-color-btn) rounded-full px-2 py-1 cursor-pointer">
                                     <span class="block w-[90px]">
                                         98 پرسش
                                     </span>
@@ -603,21 +328,21 @@ input[type="checkbox"]:checked::after {
                             </div>
                         </div>
                     </div> --}}
-                    <div class="lg:hidden border-b border-(--color-border)  px-2 lg:px-0">
+                    {{-- <div class="lg:hidden border-b border-(--color-border)  px-2 lg:px-0">
                         <div
-                            class="relative mb-5 py-3 sm:py-4 pr-3 gap-1.5 overflow-hidden rounded-md bg-(--color-primary-btn) flex flex-row items-center before:absolute before:content-[''] before:right-0 before:top-0 before:h-full before:w-1 before:bg-(--color-primary) ">
+                            class="relative mb-5 py-3 sm:py-4 pr-3 gap-1.5 overflow-hidden rounded-md bg-(--discount-color-btn) flex flex-row items-center before:absolute before:content-[''] before:right-0 before:top-0 before:h-full before:w-1 before:bg-(--discount-color) ">
                             <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 512 512">
-                                <path fill="var(--color-primary)"
+                                <path fill="var(--discount-color)"
                                     d="M480 256A224 224 0 1 1 32 256a224 224 0 1 1 448 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM240 112V256c0 5.3 2.7 10.3 7.1 13.3l96 64c7.4 4.9 17.3 2.9 22.2-4.4s2.9-17.3-4.4-22.2L272 247.4V112c0-8.8-7.2-16-16-16s-16 7.2-16 16z" />
                             </svg>
-                            <span class="text-(--color-text) text-xs">
+                            <span class="text-(--primary-text-color) text-xs">
                                 تحویل امروز با ارسال سریع
                             </span>
                         </div>
 
-                    </div>
+                    </div> --}}
                     {{-- <div
-                        class="py-3 flex flex-col gap-3 font-bold text-(--color-text) border-b border-(--color-border) lg:border-none  px-2 lg:px-0">
+                        class="py-3 flex flex-col gap-3 font-bold text-(--primary-text-color) border-b border-(--color-border) lg:border-none  px-2 lg:px-0">
                         <div class="flex flex-row items-center text-sm lg:text-base">
                             <span>رنگ : </span>
                             <div class="flex flex-row items-center gap-1.5">
@@ -629,14 +354,14 @@ input[type="checkbox"]:checked::after {
                             <span
                                 class="w-fit flex flex-row items-center lg:mt-3 gap-1.5 border border-black lg:border-none rounded-md px-3 py-1.5 lg:px-0 lg:py-0 cursor-pointer">
                                 <span
-                                    class="size-5 lg:size-[30px] bg-black rounded-full flex justify-center items-center lg:ring-4 lg:ring-[var(--color-primary)] lg:ring-offset-2">
+                                    class="size-5 lg:size-[30px] bg-black rounded-full flex justify-center items-center lg:ring-4 lg:ring-[var(--discount-color)] lg:ring-offset-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="size-4 lg:size-6"
                                         viewBox="0 0 448 512">
                                         <path fill="white"
                                             d="M443.3 100.7c6.2 6.2 6.2 16.4 0 22.6l-272 272c-6.2 6.2-16.4 6.2-22.6 0l-144-144c-6.2-6.2-6.2-16.4 0-22.6s16.4-6.2 22.6 0L160 361.4 420.7 100.7c6.2-6.2 16.4-6.2 22.6 0z" />
                                     </svg>
                                 </span>
-                                <span class="text-xs text-(--color-text) lg:hidden">
+                                <span class="text-xs text-(--primary-text-color) lg:hidden">
                                     مشکی
                                 </span>
                             </span>
@@ -644,7 +369,7 @@ input[type="checkbox"]:checked::after {
                     </div> --}}
                     <div class="flex flex-col-reverse lg:flex-col">
                         {{-- <div class="mb-4 lg:mb-2  px-2 lg:px-0">
-                            <p class="py-3 text-md font-bold text-(--color-text)">بیمه</p>
+                            <p class="py-3 text-md font-bold text-(--primary-text-color)">بیمه</p>
                             <div class="flex flex-row items-center border border-(--color-border) rounded-md">
                                 <div>
                                     <label class="flex items-center cursor-pointer py-1 pl-1 pr-3">
@@ -660,7 +385,7 @@ input[type="checkbox"]:checked::after {
                                         <div class="flex items-center ml-auto">
                                             <div class="flex flex-row items-center ml-1">
                                                 <div
-                                                    class="px-1.5 flex flex-row items-center bg-[var(--color-discount-bg)] rounded-full text-(--color-primary-text) ml-1">
+                                                    class="px-1.5 flex flex-row items-center bg-[var(--color-discount-bg)] rounded-full text-(--discount-color-text) ml-1">
                                                     <span class="leading-normal text-xs">50%</span>
                                                 </div>
                                                 <div
@@ -669,7 +394,7 @@ input[type="checkbox"]:checked::after {
                                                 </div>
                                             </div>
                                             <div
-                                                class="flex items-center gap-1  text-(--color-text) text-xs md:text-sm grow">
+                                                class="flex items-center gap-1  text-(--primary-text-color) text-xs md:text-sm grow">
                                                 <span class="font-bold">15,400</span>
                                                 <span class="text-xs">تومان</span>
                                             </div>
@@ -693,7 +418,7 @@ input[type="checkbox"]:checked::after {
                             </div>
                         </div> --}}
                         <div
-                            class="w-full pb-3 lg:pb-0 border-b border-(--color-border) lg:border-none text-(--color-text)  px-2 lg:px-0">
+                            class="w-full pb-3 lg:pb-0 border-b border-(--color-border) lg:border-none text-(--primary-text-color)  px-2 lg:px-0">
                             <h3 class="text-lg font-bold py-3 hidden lg:block">
                                 ویژگی ها
                             </h3>
@@ -710,9 +435,9 @@ input[type="checkbox"]:checked::after {
                             <ul class="w-full flex flex-row items-center lg:grid lg:grid-cols-3 gap-1 overflow-x-scroll"
                                 style="scrollbar-width:none;">
                                 @foreach($product->attributes as $attr)
-                                <li class="w-fit lg:w-full bg-(--color-primary-btn) p-2 rounded-md h-full">
+                                <li class="w-fit lg:w-full bg-(--cream-color) p-2 rounded-md h-full">
                                     <div class="flex flex-row items-center">
-                                        <p class="text-sm text-[var(--color-text-secondary)]">
+                                        <p class="text-sm text-[var(--primary-text-color-secondary)]">
                                            {{ $attr->attribute_key }}
                                         </p>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="size-3 mr-2 lg:hidden"
@@ -721,7 +446,7 @@ input[type="checkbox"]:checked::after {
                                                 d="M52.7 267.3c-6.2-6.2-6.2-16.4 0-22.6l160-160c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6L86.6 256 235.3 404.7c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0l-160-160z" />
                                         </svg>
                                     </div>
-                                    <p class="text-sm text-(--color-text) font-bold">
+                                    <p class="text-sm text-(--primary-text-color) font-bold">
                                         {{ $attr->attribute_value }}
                                     </p>
                                 </li>
@@ -733,7 +458,7 @@ input[type="checkbox"]:checked::after {
                             <hr class="border-t border-(--color-border) w-1/6 xl:w-full">
                             <a href="#attrDesktop"
                                 class="px-4 py-2 rounded-md flex flex-row gap-2 items-center justify-center border border-(--color-border) cursor-pointer w-4/6 xl:w-full">
-                                <span class="text-(--color-text) text-sm font-bold w-[120px]">
+                                <span class="text-(--primary-text-color) text-sm font-bold w-[120px]">
                                     مشاهده ویژگی ها
                                 </span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 320 512">
@@ -747,9 +472,9 @@ input[type="checkbox"]:checked::after {
 
 
                     <div class="my-3 hidden lg:flex flex-row gap-2">
-                        <span class="size-[18px] flex justify-center items-center bg-[var(--color-text)] rounded-full">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="size-[18px]" viewBox="0 0 192 512">
-                                <path fill="var(--color-primary-text)"
+                        <span class="size-[18px] flex justify-center items-center bg-(--pastel-purple) rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="size-[18px] fill-white" viewBox="0 0 192 512">
+                                <path
                                     d="M64 64a32 32 0 1 1 64 0A32 32 0 1 1 64 64zM16 176c0-8.8 7.2-16 16-16H96c8.8 0 16 7.2 16 16V448h64c8.8 0 16 7.2 16 16s-7.2 16-16 16H16c-8.8 0-16-7.2-16-16s7.2-16 16-16H80V192H32c-8.8 0-16-7.2-16-16z" />
                             </svg>
                         </span>
@@ -760,7 +485,7 @@ input[type="checkbox"]:checked::after {
 
                     <hr class="w-full border-none h-2 bg-[var(--color-border)] lg:hidden">
 {{-- py-5 --}}
-                    <div class="lg:hidden  px-2 text-(--color-text)">
+                    <div class="lg:hidden  px-2 text-(--primary-text-color)">
                         {{-- <h3 class="text-md font-bold leading-[180%]">
                             فروشنده
                         </h3> --}}
@@ -768,7 +493,7 @@ input[type="checkbox"]:checked::after {
 
                         {{-- <a href="#" class="flex flex-row gap-3 items-center">
                             <!-- logo -->
-                            <div class="size-9 p-2 bg-(--color-primary) rounded-full">
+                            <div class="size-9 p-2 bg-(--discount-color) rounded-full">
                                 <!-- logo content -->
                             </div>
                             <!-- logo -->
@@ -784,11 +509,11 @@ input[type="checkbox"]:checked::after {
                                     </svg>
 
                                     <span
-                                        class="rounded-full bg-(--color-primary-btn) text-xs text-(--color-primary) leading-[180%] px-2 mr-2 font-bold">
+                                        class="rounded-full bg-(--discount-color-btn) text-xs text-(--discount-color) leading-[180%] px-2 mr-2 font-bold">
                                         رسمی
                                     </span>
                                     <span
-                                        class="rounded-full bg-(--color-primary-btn) text-xs text-(--color-primary) leading-[180%] px-2 mr-2 font-bold">
+                                        class="rounded-full bg-(--discount-color-btn) text-xs text-(--discount-color) leading-[180%] px-2 mr-2 font-bold">
                                         منتخب
                                     </span>
                                 </div>
@@ -797,13 +522,13 @@ input[type="checkbox"]:checked::after {
                                         class="flex flex-row items-center gap-1.5 py-0.5 pr-2 pl-0.5 border border-(--color-border) rounded-full text-xs font-bold">
                                         رضایت از کالا
                                         <span
-                                            class="text-xs leading-[125%] rounded-full bg-(--color-primary) text-(--color-primary-text) px-2 py-0.5">77.8%</span>
+                                            class="text-xs leading-[125%] rounded-full bg-(--discount-color) text-(--discount-color-text) px-2 py-0.5">77.8%</span>
                                     </div>
                                     <div
                                         class="flex flex-row items-center gap-1.5 py-0.5 pr-2 pl-0.5 border border-(--color-border) rounded-full text-xs font-bold">
                                         عملکرد
                                         <span
-                                            class="text-xs leading-[125%] rounded-full bg-[var(--color-success-bg)] text-(--color-primary-text) px-2 py-0.5">
+                                            class="text-xs leading-[125%] rounded-full bg-[var(--color-success-bg)] text-(--discount-color-text) px-2 py-0.5">
                                             عالی
                                         </span>
                                     </div>
@@ -813,7 +538,7 @@ input[type="checkbox"]:checked::after {
 
                         {{-- <div class="flex flex-row gap-3 items-center">
 
-                            <div class="size-9 p-2 bg-(--color-primary-btn) flex justify-center items-center rounded-full">
+                            <div class="size-9 p-2 bg-(--discount-color-btn) flex justify-center items-center rounded-full">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 512 512">
                                     <path fill="var(--color-fill)"
                                         d="M243.5 37.3c8-3.4 17-3.4 25 0l176.7 75c11.3 4.8 18.9 15.5 18.8 27.6c-.5 94-39.4 259.8-195.5 334.5c-7.9 3.8-17.2 3.8-25.1 0C87.3 399.6 48.5 233.8 48 139.8c-.1-12.1 7.5-22.8 18.8-27.6l176.7-75zM281 7.8c-16-6.8-34-6.8-50 0L54.3 82.8c-22 9.3-38.4 31-38.3 57.2c.5 99.2 41.3 280.7 213.6 363.2c16.7 8 36.1 8 52.8 0C454.7 420.7 495.5 239.2 496 140c.1-26.2-16.3-47.9-38.3-57.2L281 7.8zm82.3 195.5c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L224 297.4l-52.7-52.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6l64 64c6.2 6.2 16.4 6.2 22.6 0l128-128z" />
@@ -832,7 +557,7 @@ input[type="checkbox"]:checked::after {
 
                             <div class="pt-2">
                                 <div
-                                    class="size-9 p-2 bg-(--color-primary-btn) flex justify-center items-center rounded-full">
+                                    class="size-9 p-2 bg-(--discount-color-btn) flex justify-center items-center rounded-full">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 448 512">
                                         <path fill="var(--color-fill)"
                                             d="M240 64H342.4c12.6 0 24.1 7.4 29.2 19l34.2 77H240V64zm0 128H416V416c0 17.7-14.3 32-32 32H64c-17.7 0-32-14.3-32-32V192H208h32zm-32-32H42.1L76.3 83c5.1-11.6 16.6-19 29.2-19H208v96zM400.9 70c-10.3-23.1-33.2-38-58.5-38H105.6C80.3 32 57.4 46.9 47.1 70L5.5 163.6c-3.6 8.2-5.5 17-5.5 26V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V189.6c0-9-1.9-17.8-5.5-26L400.9 70zM331.3 251.3c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L192 345.4l-52.7-52.7c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6l64 64c6.2 6.2 16.4 6.2 22.6 0l128-128z" />
@@ -879,7 +604,7 @@ input[type="checkbox"]:checked::after {
 
 
                         {{-- <div class="flex flex-row gap-3 items-center">
-                            <div class="size-9 p-2 bg-(--color-primary-btn) flex justify-center items-center rounded-full">
+                            <div class="size-9 p-2 bg-(--discount-color-btn) flex justify-center items-center rounded-full">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 448 512">
                                     <path fill="var(--color-fill)"
                                         d="M224 32c6.2 0 11.9 3.6 14.5 9.3l63.2 136.9 136.9 63.2c5.7 2.6 9.3 8.3 9.3 14.5s-3.6 11.9-9.3 14.5L301.8 333.8 238.5 470.7c-2.6 5.7-8.3 9.3-14.5 9.3s-11.9-3.6-14.5-9.3L146.2 333.8 9.3 270.5C3.6 267.9 0 262.2 0 256s3.6-11.9 9.3-14.5l136.9-63.2L209.5 41.3c2.6-5.7 8.3-9.3 14.5-9.3zm0 54.2L172.8 197c-1.6 3.5-4.4 6.2-7.8 7.8L54.2 256 165 307.2c3.5 1.6 6.2 4.4 7.8 7.8L224 425.8 275.2 315c1.6-3.5 4.4-6.2 7.8-7.8L393.8 256 283 204.8c-3.5-1.6-6.2-4.4-7.8-7.8L224 86.2z" />
@@ -900,7 +625,7 @@ input[type="checkbox"]:checked::after {
 
 {{-- 
                         <div class="flex flex-row gap-3 items-center">
-                            <div class="size-9 p-2 bg-(--color-primary-btn) flex justify-center items-center rounded-full">
+                            <div class="size-9 p-2 bg-(--discount-color-btn) flex justify-center items-center rounded-full">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 448 512">
                                     <path fill="var(--color-fill)"
                                         d="M320 128a96 96 0 1 0 -192 0 96 96 0 1 0 192 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM32 480H416c-1.2-79.7-66.2-144-146.3-144H178.3c-80 0-145 64.3-146.3 144zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z" />
@@ -932,10 +657,10 @@ input[type="checkbox"]:checked::after {
 
                                 <div class="flex flex-row items-center gap-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 448 512">
-                                        <path fill="var(--color-primary)"
+                                        <path fill="var(--discount-color)"
                                             d="M224 32c6.2 0 11.9 3.6 14.5 9.3l63.2 136.9 136.9 63.2c5.7 2.6 9.3 8.3 9.3 14.5s-3.6 11.9-9.3 14.5L301.8 333.8 238.5 470.7c-2.6 5.7-8.3 9.3-14.5 9.3s-11.9-3.6-14.5-9.3L146.2 333.8 9.3 270.5C3.6 267.9 0 262.2 0 256s3.6-11.9 9.3-14.5l136.9-63.2L209.5 41.3c2.6-5.7 8.3-9.3 14.5-9.3zm0 54.2L172.8 197c-1.6 3.5-4.4 6.2-7.8 7.8L54.2 256 165 307.2c3.5 1.6 6.2 4.4 7.8 7.8L224 425.8 275.2 315c1.6-3.5 4.4-6.2 7.8-7.8L393.8 256 283 204.8c-3.5-1.6-6.2-4.4-7.8-7.8L224 86.2z" />
                                     </svg>
-                                    <span class="font-medium text-(--color-primary) text-sm">
+                                    <span class="font-medium text-(--discount-color) text-sm">
                                         ارسال
                                         <b> رایگان </b>
                                         سفارش ها برای اعضای پلاس
@@ -946,23 +671,23 @@ input[type="checkbox"]:checked::after {
                                 <ul
                                     class="pr-5 relative lg:before:absolute lg:before:content-[''] lg:before:right-0 lg:before:top-0 lg:before:w-0.5 lg:before:h-full lg:before:bg-[var(--color-border)] mr-2">
                                     <li
-                                        class="text-xs text-[#beb1d6] lg:py-1 leading-[1.7] lg:leading-[2.17] lg:relative lg:before:absolute lg:before:content-[''] lg:before:w-1.5 lg:before:h-1.5 lg:before:rounded-full lg:before:bg-(--color-primary) lg:before:-right-[22px] lg:before:top-[38%]">
+                                        class="text-xs text-[#beb1d6] lg:py-1 leading-[1.7] lg:leading-[2.17] lg:relative lg:before:absolute lg:before:content-[''] lg:before:w-1.5 lg:before:h-1.5 lg:before:rounded-full lg:before:bg-(--discount-color) lg:before:-right-[22px] lg:before:top-[38%]">
                                         4 ارسال رایگاه عادی
                                     </li>
                                     <li
-                                        class="text-xs text-[#beb1d6] lg:py-1 leading-[1.7] lg:leading-[2.17] lg:relative lg:before:absolute lg:before:content-[''] lg:before:w-1.5 lg:before:h-1.5 lg:before:rounded-full lg:before:bg-(--color-primary) lg:before:-right-[22px] lg:before:top-[38%]">
+                                        class="text-xs text-[#beb1d6] lg:py-1 leading-[1.7] lg:leading-[2.17] lg:relative lg:before:absolute lg:before:content-[''] lg:before:w-1.5 lg:before:h-1.5 lg:before:rounded-full lg:before:bg-(--discount-color) lg:before:-right-[22px] lg:before:top-[38%]">
                                         2 ارسال سوپر مارکت
                                     </li>
                                     <li
-                                        class="text-xs text-[#beb1d6] lg:py-1 leading-[1.7] lg:leading-[2.17] lg:relative lg:before:absolute lg:before:content-[''] lg:before:w-1.5 lg:before:h-1.5 lg:before:rounded-full lg:before:bg-(--color-primary) lg:before:-right-[22px] lg:before:top-[38%]">
+                                        class="text-xs text-[#beb1d6] lg:py-1 leading-[1.7] lg:leading-[2.17] lg:relative lg:before:absolute lg:before:content-[''] lg:before:w-1.5 lg:before:h-1.5 lg:before:rounded-full lg:before:bg-(--discount-color) lg:before:-right-[22px] lg:before:top-[38%]">
                                         4 ارسال رایگان 45 دقیقه ای
                                     </li>
                                     <li
-                                        class="text-xs text-[#beb1d6] lg:py-1 leading-[1.7] lg:leading-[2.17] lg:relative lg:before:absolute lg:before:content-[''] lg:before:w-1.5 lg:before:h-1.5 lg:before:rounded-full lg:before:bg-(--color-primary) lg:before:-right-[22px] lg:before:top-[38%]">
+                                        class="text-xs text-[#beb1d6] lg:py-1 leading-[1.7] lg:leading-[2.17] lg:relative lg:before:absolute lg:before:content-[''] lg:before:w-1.5 lg:before:h-1.5 lg:before:rounded-full lg:before:bg-(--discount-color) lg:before:-right-[22px] lg:before:top-[38%]">
                                         پشتیبانی اختصاصی
                                     </li>
                                     <li
-                                        class="text-xs text-[#beb1d6] lg:py-1 leading-[1.7] lg:leading-[2.17] lg:relative lg:before:absolute lg:before:content-[''] lg:before:w-1.5 lg:before:h-1.5 lg:before:rounded-full lg:before:bg-(--color-primary) lg:before:-right-[22px] lg:before:top-[38%]">
+                                        class="text-xs text-[#beb1d6] lg:py-1 leading-[1.7] lg:leading-[2.17] lg:relative lg:before:absolute lg:before:content-[''] lg:before:w-1.5 lg:before:h-1.5 lg:before:rounded-full lg:before:bg-(--discount-color) lg:before:-right-[22px] lg:before:top-[38%]">
                                         ارسال سریع و رایگان طبابوک (فقط تهران و کرج)
                                     </li>
                                 </ul>
@@ -980,12 +705,12 @@ input[type="checkbox"]:checked::after {
 
                                 <div class="flex">
                                     <div
-                                        class="mr-8 mt-2 flex lg:hidden flex-row items-center text-(--color-primary) leading-[2.17] border-2 rounded-full border-(--color-primary) px-4 py-1">
+                                        class="mr-8 mt-2 flex lg:hidden flex-row items-center text-(--discount-color) leading-[2.17] border-2 rounded-full border-(--discount-color) px-4 py-1">
                                         <span class="font-medium text-xs ml-2">
                                             خرید اشتراک
                                         </span>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="size-3" viewBox="0 0 320 512">
-                                            <path fill="var(--color-primary)"
+                                            <path fill="var(--discount-color)"
                                                 d="M52.7 267.3c-6.2-6.2-6.2-16.4 0-22.6l160-160c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6L86.6 256 235.3 404.7c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0l-160-160z" />
                                         </svg>
                                     </div>
@@ -1011,7 +736,7 @@ input[type="checkbox"]:checked::after {
 
                             <a href="#"
                                 class="py-3 px-4 rounded-md border border-(--color-border) flex flex-row items-start gap-3">
-                                <div class="size-9 rounded-full bg-(--color-primary-btn) flex justify-center items-center">
+                                <div class="size-9 rounded-full bg-(--discount-color-btn) flex justify-center items-center">
                                     <img class="size-5"
                                         src="https://dkstatics-public.digikala.com/digikala-static/d56c45d1fd0d9ea7e7141783af11125f67b50895_1737802814.svg"
                                         alt="">
@@ -1026,12 +751,12 @@ input[type="checkbox"]:checked::after {
                                     </span>
                                     <div class="flex">
                                         <div
-                                            class="flex flex-row items-center text-(--color-primary) leading-[180%] rounded-full border border-(--color-primary) py-0.5 pr-2 pl-1">
+                                            class="flex flex-row items-center text-(--discount-color) leading-[180%] rounded-full border border-(--discount-color) py-0.5 pr-2 pl-1">
                                             <span class="text-xs">
                                                 تماس با مشاور ها
                                             </span>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="size-3" viewBox="0 0 320 512">
-                                                <path fill="var(--color-primary)"
+                                                <path fill="var(--discount-color)"
                                                     d="M52.7 267.3c-6.2-6.2-6.2-16.4 0-22.6l160-160c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6L86.6 256 235.3 404.7c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0l-160-160z" />
                                             </svg>
                                         </div>
@@ -1042,7 +767,7 @@ input[type="checkbox"]:checked::after {
 
                             <a href="#"
                                 class="py-3 px-4 rounded-md border border-(--color-border) flex flex-row items-start gap-3">
-                                <div class="size-9 rounded-full bg-(--color-primary-btn) flex justify-center items-center">
+                                <div class="size-9 rounded-full bg-(--discount-color-btn) flex justify-center items-center">
                                     <img class="size-5"
                                         src="https://dkstatics-public.digikala.com/digikala-static/9cb7c2523f795dea8081970865d89faff08ffab4_1738589893.svg"
                                         alt="">
@@ -1086,7 +811,7 @@ input[type="checkbox"]:checked::after {
 
 
 
-                    {{-- <div class="lg:hidden py-5 px-2 text-(--color-text)">
+                    {{-- <div class="lg:hidden py-5 px-2 text-(--primary-text-color)">
                         <h3 class="text-base font-bold leading-[180%]">
                             شرایط و قوانین
                         </h3>
@@ -1095,7 +820,7 @@ input[type="checkbox"]:checked::after {
                         <div class="flex flex-row gap-3 items-start">
 
                             <div class="pt-3">
-                                <div class="size-9 bg-(--color-primary-btn) flex justify-center items-center rounded-full">
+                                <div class="size-9 bg-(--discount-color-btn) flex justify-center items-center rounded-full">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 512 512">
                                         <path fill="var(--color-fill)"
                                             d="M256 32a224 224 0 1 1 0 448 224 224 0 1 1 0-448zm0 480A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM208 352c-8.8 0-16 7.2-16 16s7.2 16 16 16h96c8.8 0 16-7.2 16-16s-7.2-16-16-16H272V240c0-8.8-7.2-16-16-16H216c-8.8 0-16 7.2-16 16s7.2 16 16 16h24v96H208zm48-168a24 24 0 1 0 0-48 24 24 0 1 0 0 48z" />
@@ -1128,7 +853,7 @@ input[type="checkbox"]:checked::after {
 
                         <a href="#" class="flex flex-row gap-3 items-center">
 
-                            <div class="size-9 p-2 bg-(--color-primary-btn) flex justify-center items-center rounded-full">
+                            <div class="size-9 p-2 bg-(--discount-color-btn) flex justify-center items-center rounded-full">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5 rotate-y-180"
                                     viewBox="0 0 448 512">
                                     <path fill="var(--color-fill)"
@@ -1152,7 +877,7 @@ input[type="checkbox"]:checked::after {
 
                         <a href="#" class="flex flex-row gap-3 items-center">
 
-                            <div class="size-9 p-2 bg-(--color-primary-btn) flex justify-center items-center rounded-full">
+                            <div class="size-9 p-2 bg-(--discount-color-btn) flex justify-center items-center rounded-full">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 512 512">
                                     <path fill="var(--color-fill)"
                                         d="M256 32a224 224 0 1 1 0 448 224 224 0 1 1 0-448zm0 480A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM208 352c-8.8 0-16 7.2-16 16s7.2 16 16 16h96c8.8 0 16-7.2 16-16s-7.2-16-16-16H272V240c0-8.8-7.2-16-16-16H216c-8.8 0-16 7.2-16 16s7.2 16 16 16h24v96H208zm48-168a24 24 0 1 0 0-48 24 24 0 1 0 0 48z" />
@@ -1175,7 +900,7 @@ input[type="checkbox"]:checked::after {
 
                         <a href="#" class="flex flex-row gap-3 items-center">
 
-                            <div class="size-9 p-2 bg-(--color-primary-btn) flex justify-center items-center rounded-full">
+                            <div class="size-9 p-2 bg-(--discount-color-btn) flex justify-center items-center rounded-full">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 576 512">
                                     <path fill="var(--color-fill)"
                                         d="M480 96c0 35.3 28.7 64 64 64V128c0-17.7-14.3-32-32-32H480zm-32 0H128c0 53-43 96-96 96V320c53 0 96 43 96 96H448c0-53 43-96 96-96V192c-53 0-96-43-96-96zM32 384c0 17.7 14.3 32 32 32H96c0-35.3-28.7-64-64-64v32zm512-32c-35.3 0-64 28.7-64 64h32c17.7 0 32-14.3 32-32V352zM64 96c-17.7 0-32 14.3-32 32v32c35.3 0 64-28.7 64-64H64zM0 128C0 92.7 28.7 64 64 64H512c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128zM352 256a64 64 0 1 0 -128 0 64 64 0 1 0 128 0zm-160 0a96 96 0 1 1 192 0 96 96 0 1 1 -192 0z" />
@@ -1200,7 +925,7 @@ input[type="checkbox"]:checked::after {
                         <div class="flex flex-row gap-3 items-start">
 
                             <div class="pt-3">
-                                <div class="size-9 bg-(--color-primary-btn) flex justify-center items-center rounded-full">
+                                <div class="size-9 bg-(--discount-color-btn) flex justify-center items-center rounded-full">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 512 512">
                                         <path fill="var(--color-fill)"
                                             d="M256 32a224 224 0 1 1 0 448 224 224 0 1 1 0-448zm0 480A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM208 352c-8.8 0-16 7.2-16 16s7.2 16 16 16h96c8.8 0 16-7.2 16-16s-7.2-16-16-16H272V240c0-8.8-7.2-16-16-16H216c-8.8 0-16 7.2-16 16s7.2 16 16 16h24v96H208zm48-168a24 24 0 1 0 0-48 24 24 0 1 0 0 48z" />
@@ -1247,12 +972,12 @@ input[type="checkbox"]:checked::after {
                 <div class="hidden lg:block lg:w-1/2 xl:w-5/12">
                     <div class="sticky top-10">
                         <div
-                            class=" bg-(--second-cream-color) rounded-md border border-(--color-border) p-5 text-[var(--color=-text)]">
+                            class=" bg-(--second-cream-color) rounded-md p-5 text-(--primary-text-color) cart_shdow">
                             <h3 class="pb-2 font-medium">
                                 فروشنده
                             </h3>
                             <div class="flex flex-row items-start gap-4 py-4 border-b border-(--color-border)">
-                                <div class="size-6 rounded-full bg-(--color-primary) mt-[5px]"></div>
+                                <div class="size-6 rounded-full bg-(--discount-color) mt-[5px]"></div>
                                 <div>
                                     <h3 class="leading-[2.15] mb-1">طبابوک</h3>
                                     {{-- <div class="flex flex-row items-center">
@@ -1283,7 +1008,7 @@ input[type="checkbox"]:checked::after {
                                             <span
                                                 class="text-xs text-[#beb1d6] line-through in-fa">{{ number_format($product->primary_price) }}</span>
                                             <span
-                                                class="px-2 leading-[1.9] bg-[var(--color-discount-bg)] text-(--color-primary-text) text-xs font-medium rounded-full">
+                                                class="px-2 leading-[1.9] bg-[var(--color-discount-bg)] text-(--discount-color-text) text-xs font-medium rounded-full">
                                                 
                                             </span>
                                         </div>
@@ -1309,7 +1034,7 @@ input[type="checkbox"]:checked::after {
                                     <img class="size-[18px]"
                                         src="https://dkstatics-public.digikala.com/digikala-static/54419b9303246cde131fcb5b251b86f2ab4aeb71_1716833765.svg"
                                         alt="">
-                                    <span class="text-xs text-(--color-text) leading-[2.17]">
+                                    <span class="text-xs text-(--primary-text-color) leading-[2.17]">
                                         + 200 فروش در هفته گذشته
                                     </span>
                                 </div> --}}
@@ -1323,12 +1048,12 @@ input[type="checkbox"]:checked::after {
                                     @else
                                     <button onclick="addToCart(this)" class="w-full px-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl" data-product-id="3">
                                         <div>
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3" fill="white">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3 fill-(--primary-text-color) group-hover:fill-white transition-all duration-300">
                                                 <path d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
                                                 </path>
                                             </svg>
                                         </div>
-                                        <span class="lg:text-sm text-[10px] text-white font-bold">افزودن به سبد خرید</span>
+                                        <span class="lg:text-sm text-[10px] text-(--primary-text-color) font-bold transition-all duration-300 group-hover:text-white">افزودن به سبد خرید</span>
                                     </button>
                                     @endif
                                 </div>
@@ -1396,7 +1121,7 @@ input[type="checkbox"]:checked::after {
                                 <div class="flex flex-row gap-4 items-center">
 
                                     <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 448 512">
-                                        <path fill="var(--color-primary)"
+                                        <path fill="var(--discount-color)"
                                             d="M224 32c6.2 0 11.9 3.6 14.5 9.3l63.2 136.9 136.9 63.2c5.7 2.6 9.3 8.3 9.3 14.5s-3.6 11.9-9.3 14.5L301.8 333.8 238.5 470.7c-2.6 5.7-8.3 9.3-14.5 9.3s-11.9-3.6-14.5-9.3L146.2 333.8 9.3 270.5C3.6 267.9 0 262.2 0 256s3.6-11.9 9.3-14.5l136.9-63.2L209.5 41.3c2.6-5.7 8.3-9.3 14.5-9.3zm0 54.2L172.8 197c-1.6 3.5-4.4 6.2-7.8 7.8L54.2 256 165 307.2c3.5 1.6 6.2 4.4 7.8 7.8L224 425.8 275.2 315c1.6-3.5 4.4-6.2 7.8-7.8L393.8 256 283 204.8c-3.5-1.6-6.2-4.4-7.8-7.8L224 86.2z" />
                                     </svg>
 
@@ -1408,7 +1133,7 @@ input[type="checkbox"]:checked::after {
                                 <div class="pr-5 border-r-2 mr-2 border-(--color-border)">
 
                                     <div
-                                        class="text-sm font-bold leading-[180%] flex flex-row justify-start items-center py-1 relative before:absolute before:content-[''] before:size-1.5 before:rounded-full before:bg-(--color-primary) before:-right-[24px]">
+                                        class="text-sm font-bold leading-[180%] flex flex-row justify-start items-center py-1 relative before:absolute before:content-[''] before:size-1.5 before:rounded-full before:bg-(--discount-color) before:-right-[24px]">
 
                                         <svg xmlns="http://www.w3.org/2000/svg" class="size-3" viewBox="0 0 512 512">
                                             <path fill="var(--color-info)"
@@ -1426,7 +1151,7 @@ input[type="checkbox"]:checked::after {
                             <div class="pt-4 flex flex-row items-center">
                                 <img class="size-6" src="https://www.digikala.com/statics/img/svg/club-point.svg"
                                     alt="">
-                                <span class="text-xs font-bold text-(--color-text) mr-5">
+                                <span class="text-xs font-bold text-(--primary-text-color) mr-5">
                                     83 امتیاز دیجی کلاب
                                 </span>
                                 <div
@@ -1533,13 +1258,13 @@ input[type="checkbox"]:checked::after {
     <!-- single product -->
 
     <!-- related product desktop -->
-    {{-- <section class="text-(--color-text) ">
+    {{-- <section class="text-(--primary-text-color) ">
         <div class="hidden lg:block pt-2 pb-3 mt-4 rounded-lg border border-b-4 border-(--color-border) px-2">
             <div class="py-3">
                 <h2 class="font-bold leading-[2.17]">
                     کالا های مشابه
                 </h2>
-                <div class="w-[70px] h-0.5 bg-(--color-primary) mt-2"></div>
+                <div class="w-[70px] h-0.5 bg-(--discount-color) mt-2"></div>
             </div>
             <div class="w-full">
                 <div class="flex flex-row items-center overflow-x-auto touch-pan-x hide-scrollbar"
@@ -1893,7 +1618,7 @@ input[type="checkbox"]:checked::after {
 
     <!-- related video desktop -->
 
-    {{-- <section class="text-(--color-text) ">
+    {{-- <section class="text-(--primary-text-color) ">
         <div class="hidden lg:block pt-2 pb-3 mt-4 rounded-lg border border-b-4 border-(--color-border) px-2">
             <div class="py-3">
                 <h2 class="font-bold leading-[2.17]">
@@ -1953,7 +1678,7 @@ input[type="checkbox"]:checked::after {
 
     <!-- specifications table mobile -->
 
-    <section class="w-11/12 lg:hidden text-(--color-text)" id="phoneDetails">
+    <section class="w-11/12 lg:hidden text-(--primary-text-color)" id="phoneDetails">
         <div class="py-5 px-2">
             <h3 class="text-lg font-bold leading-[180%] mb-4">
                 جدول مشخصات
@@ -1991,11 +1716,11 @@ input[type="checkbox"]:checked::after {
 
     <!-- specifications table desktop -->
 
-    <section class="w-11/12 mx-auto text-(--color-text) mt-4 lg:pb-10">
+    <section class="w-11/12 mx-auto text-(--primary-text-color) mt-4 lg:pb-10">
         <div class="hidden lg:block sticky top-0 bg-white z-[555]">
             <ul class="flex flex-row border-b border-(--color-border)">
                 <li
-                    class="text-sm font-medium leading-[180%] py-2 px-4 text-(--color-primary) border-b-4 border-(--color-primary) rounded-b-sm cursor-pointer">
+                    class="text-sm font-medium leading-[180%] py-2 px-4 text-(--discount-color) border-b-4 border-(--discount-color) rounded-b-sm cursor-pointer">
                     مشخصات
                 </li>
                 {{-- <li class="text-sm font-medium leading-[180%] py-2 px-4 cursor-pointer">
@@ -2019,7 +1744,7 @@ input[type="checkbox"]:checked::after {
                             <h2 class="font-bold leading-[2.17]">
                                 مشخصات
                             </h2>
-                            <div class="w-[70px] h-0.5 bg-(--color-primary) mt-2"></div>
+                            <div class="w-[70px] h-0.5 bg-(--discount-color) mt-2"></div>
                         </div>
                         <div class="mt-4 pt-4 flex flex-row items-start" id="attrDesktop">
                             
@@ -2082,7 +1807,7 @@ input[type="checkbox"]:checked::after {
                             <h2 class="font-bold leading-[2.17]">
                                 امتیاز و دیدگاه کاربران
                             </h2>
-                            <div class="w-[70px] h-0.5 bg-(--color-primary) mt-2"></div>
+                            <div class="w-[70px] h-0.5 bg-(--discount-color) mt-2"></div>
                         </div>
                         <div class="lg:hidden block px-2">
                             <div class="flex flex-row items-center justify-between pb-3">
@@ -2161,7 +1886,7 @@ input[type="checkbox"]:checked::after {
                                 </div>
                                 <div class="mt-2">
                                     <button
-                                        class="block w-full rounded-lg px-4 py-2 border border-(--color-primary) text-(--color-primary) text-xs leading-[2.17] cursor-pointer"
+                                        class="block w-full rounded-lg px-4 py-2 border border-(--discount-color) text-(--discount-color) text-xs leading-[2.17] cursor-pointer"
                                         @if (Auth::check()) onclick="comment('open')" @else onclick="login('open')" @endif>
                                         ثبت دیدگاه
                                     </button>
@@ -2207,7 +1932,7 @@ input[type="checkbox"]:checked::after {
                                             <a href="#" class="text-xs text-[#beb1d6] font-medium">
                                                 دیدگاه کاربران
                                             </a>
-                                            <a href="#" class="text-xs text-(--color-primary) font-medium">
+                                            <a href="#" class="text-xs text-(--discount-color) font-medium">
                                                 مفید ترین
                                             </a>
                                         </div>
@@ -2327,7 +2052,7 @@ input[type="checkbox"]:checked::after {
                         <h2 class="font-bold leading-[2.17]">
                             پرسش ها
                         </h2>
-                        <div class="w-[70px] h-0.5 bg-(--color-primary) mt-2"></div>
+                        <div class="w-[70px] h-0.5 bg-(--discount-color) mt-2"></div>
                     </div>
                     <div class="py-3 lg:hidden flex flex-row items-center justify-between px-2">
                         <h2 class="font-medium leading-[2.17]">
@@ -2359,7 +2084,7 @@ input[type="checkbox"]:checked::after {
                             </div>
                             <div class="mt-2">
                                 <button
-                                    class="block w-full rounded-lg px-4 py-2 border border-(--color-primary) text-(--color-primary) text-xs leading-[2.17] cursor-pointer"
+                                    class="block w-full rounded-lg px-4 py-2 border border-(--discount-color) text-(--discount-color) text-xs leading-[2.17] cursor-pointer"
                                     @if (Auth::check()) onclick="question('open')" @else onclick="login('open')" @endif>
                                     ثبت پرسش
                                 </button>
@@ -2484,7 +2209,7 @@ input[type="checkbox"]:checked::after {
                         </div>
                     </div>
                     <div class="flex flex-row items-center gap-2 mb-2">
-                        <div class="size-6 rounded-full bg-(--color-primary)"></div>
+                        <div class="size-6 rounded-full bg-(--discount-color)"></div>
                         <span class="text-xs leading-[2.17]">
                             طبابوک
                         </span>
@@ -2514,7 +2239,7 @@ input[type="checkbox"]:checked::after {
                                 <span
                                     class="text-xs text-[#beb1d6] line-through in-fa">{{ $product->primary_price }}</span>
                                 <span
-                                    class="px-2 leading-[1.9] bg-[var(--color-discount-bg)] text-(--color-primary-text) text-xs font-medium rounded-full">
+                                    class="px-2 leading-[1.9] bg-[var(--color-discount-bg)] text-(--discount-color-text) text-xs font-medium rounded-full">
                                     
                                 </span>
                             </div>
@@ -2537,7 +2262,7 @@ input[type="checkbox"]:checked::after {
                     <div>
                         <button
                             onclick="addToShoppingCart()"
-                            class="rounded-lg leading-[2.17] bg-(--color-primary) text-(--color-primary-text) block text-center w-full py-2 cursor-pointer">
+                            class="rounded-lg leading-[2.17] bg-(--discount-color) text-(--discount-color-text) block text-center w-full py-2 cursor-pointer">
                             افزودن به سبد خرید
                         </button>
                     </div>
@@ -2579,12 +2304,12 @@ input[type="checkbox"]:checked::after {
 
     <!-- related video mobile -->
 
-    {{-- <section class="p-5 text-(--color-text) lg:hidden">
+    {{-- <section class="p-5 text-(--primary-text-color) lg:hidden">
         <div class="pb-3">
             <a href="#" class="flex flex-row justify-between items-center">
                 <div class="flex flex-row items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 576 512">
-                        <path fill="var(--color-text)"
+                        <path fill="var(--primary-text-color)"
                             d="M64 96c-17.7 0-32 14.3-32 32V384c0 17.7 14.3 32 32 32H320c17.7 0 32-14.3 32-32V128c0-17.7-14.3-32-32-32H64zM0 128C0 92.7 28.7 64 64 64H320c35.3 0 64 28.7 64 64v47.2V336.8 384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128zM519.4 411.3L416 354.4V317.9l118.8 65.4c.9 .5 1.9 .8 3 .8c3.4 0 6.2-2.8 6.2-6.2V134.2c0-3.4-2.8-6.2-6.2-6.2c-1 0-2.1 .3-3 .8L416 194.1V157.6l103.4-56.9c5.6-3.1 12-4.7 18.4-4.7c21.1 0 38.2 17.1 38.2 38.2V377.8c0 21.1-17.1 38.2-38.2 38.2c-6.4 0-12.8-1.6-18.4-4.7z" />
 
                     </svg>
@@ -2593,7 +2318,7 @@ input[type="checkbox"]:checked::after {
                     </h3>
                 </div>
                 <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 320 512">
-                    <path fill="var(--color-text)"
+                    <path fill="var(--primary-text-color)"
                         d="M52.7 267.3c-6.2-6.2-6.2-16.4 0-22.6l160-160c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6L86.6 256 235.3 404.7c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0l-160-160z" />
 
                 </svg>
@@ -2656,7 +2381,7 @@ input[type="checkbox"]:checked::after {
 
     <!-- related products mobile -->
 
-    {{-- <section class="lg:hidden p-5 text-(--color-text)">
+    {{-- <section class="lg:hidden p-5 text-(--primary-text-color)">
         <div class="py-2">
             <div class="mb-3">
                 <h3 class="text-lg font-bold leading-[180%]">
@@ -2667,7 +2392,7 @@ input[type="checkbox"]:checked::after {
                 <div class="flex justify-start items-center gap-2 w-full overflow-auto hide-scrollbar"
                     style="scrollbar-width:none;">
                     <a href="#"
-                        class="rounded-full px-3 whitespace-nowrap max-w-[300px] ellipsis-1 py-1 select-none leading-[180%] text-xs !flex items-center justify-center text-white bg-[var(--color-text)]">
+                        class="rounded-full px-3 whitespace-nowrap max-w-[300px] ellipsis-1 py-1 select-none leading-[180%] text-xs !flex items-center justify-center text-white bg-[var(--primary-text-color)]">
                         کالا های مشابه
                     </a>
                     <a href="#"
@@ -2850,7 +2575,7 @@ input[type="checkbox"]:checked::after {
 
     <!-- comment form -->
 
-    {{-- <div class="fixed bg-black/30 inset-0 z-[1111] text-(--color-text) transition-all duration-500 opacity-0 invisible"
+    {{-- <div class="fixed bg-black/30 inset-0 z-[1111] text-(--primary-text-color) transition-all duration-500 opacity-0 invisible"
         id="commentModal">
         <div
             class="relative max-w-[460px] m-auto bg-white rounded-lg mt-[4%] scale-50 opacity-0 transition-all duration-500 delay-300">
@@ -2899,7 +2624,7 @@ input[type="checkbox"]:checked::after {
                     </div>
                     <div class="py-4">
                         <button
-                            class="rounded-lg block w-full leading-[2.17] text-(--color-primary-text) bg-(--color-primary) text-center py-3 px-2 cursor-pointer">
+                            class="rounded-lg block w-full leading-[2.17] text-(--discount-color-text) bg-(--discount-color) text-center py-3 px-2 cursor-pointer">
                             ثبت دیدگاه
                         </button>
                     </div>
@@ -2916,7 +2641,7 @@ input[type="checkbox"]:checked::after {
     <!-- question form -->
 
 
-    {{-- <div class="fixed bg-black/30 inset-0 z-[1111] text-(--color-text) transition-all duration-500 opacity-0 invisible"
+    {{-- <div class="fixed bg-black/30 inset-0 z-[1111] text-(--primary-text-color) transition-all duration-500 opacity-0 invisible"
         id="questionModal">
         <div
             class="relative max-w-[460px] m-auto bg-white rounded-lg mt-[4%] scale-50 opacity-0 transition-all duration-500 delay-300">
@@ -2972,7 +2697,7 @@ input[type="checkbox"]:checked::after {
                     </div>
                     <div class="py-4">
                         <button
-                            class="rounded-lg block w-full leading-[2.17] text-(--color-primary-text) bg-(--color-primary) text-center py-3 px-2 cursor-pointer">
+                            class="rounded-lg block w-full leading-[2.17] text-(--discount-color-text) bg-(--discount-color) text-center py-3 px-2 cursor-pointer">
                             ثبت پرسش
                         </button>
                     </div>
@@ -2986,7 +2711,7 @@ input[type="checkbox"]:checked::after {
 
     <!-- comment form mobile -->
 
-    {{-- <div class="fixed w-full -bottom-full z-[1111] text-(--color-text) transition-all duration-500"
+    {{-- <div class="fixed w-full -bottom-full z-[1111] text-(--primary-text-color) transition-all duration-500"
         id="commentModalMobile">
         <div class="relative w-full h-svh m-auto bg-white rounded-lg">
             <div class="w-full px-2 py-3 border-b-2 border-(--color-border)">
@@ -3032,7 +2757,7 @@ input[type="checkbox"]:checked::after {
                     </div>
                     <div class="py-4">
                         <button
-                            class="rounded-lg block w-full leading-[2.17] text-(--color-primary-text) bg-(--color-primary) text-center py-3 px-2 cursor-pointer">
+                            class="rounded-lg block w-full leading-[2.17] text-(--discount-color-text) bg-(--discount-color) text-center py-3 px-2 cursor-pointer">
                             ثبت دیدگاه
                         </button>
                     </div>
@@ -3046,7 +2771,7 @@ input[type="checkbox"]:checked::after {
 
     <!-- question form mobile -->
 
-    {{-- <div class="fixed w-full -bottom-full z-[1111] text-(--color-text) transition-all duration-500"
+    {{-- <div class="fixed w-full -bottom-full z-[1111] text-(--primary-text-color) transition-all duration-500"
         id="questionModalMobile">
         <div class="relative w-full h-svh m-auto bg-white rounded-lg">
             <div class="w-full px-2 py-3 border-b-2 border-(--color-border)">
@@ -3091,7 +2816,7 @@ input[type="checkbox"]:checked::after {
                     </div>
                     <div class="py-4">
                         <button
-                            class="rounded-lg block w-full leading-[2.17] text-(--color-primary-text) bg-(--color-primary) text-center py-3 px-2 cursor-pointer">
+                            class="rounded-lg block w-full leading-[2.17] text-(--discount-color-text) bg-(--discount-color) text-center py-3 px-2 cursor-pointer">
                             ثبت پرسش
                         </button>
                     </div>
@@ -3181,7 +2906,7 @@ input[type="checkbox"]:checked::after {
     <!-- buy button mobile -->
 
     <div
-        class="w-full px-2 py-3 bg-white fixed bottom-0 right-0 lg:hidden border-t border-(--color-border) text-(--color-text)">
+        class="w-full px-2 py-3 bg-white fixed bottom-0 right-0 lg:hidden border-t border-(--color-border) text-(--primary-text-color)">
         <div class="flex flex-row justify-between items-center py-2">
             <div class="w-1/2 h-12">
                 @if(Auth::check() && in_array($product->id, $cartProIds))
@@ -3193,12 +2918,12 @@ input[type="checkbox"]:checked::after {
                 @else
                 <button onclick="addToCart(this)" class="w-full px-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl" data-product-id="3">
                     <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3" fill="white">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3 fill-(--primary-text-color) transition-all duration-300 group-hover:fill-white">
                             <path d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
                             </path>
                         </svg>
                     </div>
-                    <span class="lg:text-sm text-[10px] text-white font-bold">افزودن به سبد خرید</span>
+                    <span class="lg:text-sm text-[10px] text-(--primary-text-color) font-bold transition-all duration-300 group-hover:text-white">افزودن به سبد خرید</span>
                 </button>
                 @endif
             </div>
@@ -3488,15 +3213,15 @@ function getCookies() {
                                                 <img src="${array['shahkarProduct' + i + 'image']}" class="size-full" alt="">
                                             </div>
                                             <div class="flex flex-col gap-2 w-2/3 h-full">
-                                                <span class="font-bold text-(--color-text)">${array['shahkarProduct' + i + 'title']}</span>
-                                                <span class="text-sm font-light text-(--color-secondary-text)">${array['shahkarProduct' + i + 'description']}</span>
-                                                <span class="text-sm font-light text-(--color-secondary-text)">
+                                                <span class="font-bold text-(--primary-text-color)">${array['shahkarProduct' + i + 'title']}</span>
+                                                <span class="text-sm font-light text-(--secondary-text-color)">${array['shahkarProduct' + i + 'description']}</span>
+                                                <span class="text-sm font-light text-(--secondary-text-color)">
                                                     <span>${array['shahkarProduct' + i + 'price']}</span>
                                                     <span>تومان</span>
                                                 </span>
                                             </div>
                                         </div>
-                                        <div class="absolute left-0 bottom-3 font-light text-(--color-secondary-text)">
+                                        <div class="absolute left-0 bottom-3 font-light text-(--secondary-text-color)">
                                             <div
                                                 class="w-18 flex flex-row justify-between items-center border border-(--color-border) rounded-md p-0.5">
                                                 <button class="rounded-md w-5 h-7 flex items-center justify-center cursor-pointer" onclick="changeProductCount(this, 'minus')">
@@ -3511,7 +3236,7 @@ function getCookies() {
                                                 <input type="number" class="w-7 outline-none text-center"
                                                     value="1" min="0" name="" id="">
                                                 <button
-                                                    class="bg-(--color-primary-btn) rounded-md w-5 h-7 flex items-center justify-center cursor-pointer" onclick="changeProductCount(this, 'plus')">+</button>
+                                                    class="bg-(--discount-color) rounded-md w-5 h-7 flex items-center justify-center cursor-pointer" onclick="changeProductCount(this, 'plus')">+</button>
                                             </div>
                                         </div>
                                 </div>
@@ -3566,7 +3291,7 @@ function changeProductCount(el, state) {
         document.getElementById('mobileShoppingCartTotalPrice').innerHTML = totalPrice
         el.parentElement.children[1].value++
         if (el.parentElement.children[1].value > 1) {
-            el.parentElement.children[0].classList.add('bg-(--color-primary-btn)')
+            el.parentElement.children[0].classList.add('bg-(--discount-color)')
             el.parentElement.children[0].innerHTML = '-'
         }
     }
@@ -3580,7 +3305,7 @@ function changeProductCount(el, state) {
             el.parentElement.children[1].value--
         }
         if (el.parentElement.children[1].value == 1) {
-            el.parentElement.children[0].classList.remove('bg-(--color-primary-btn)')
+            el.parentElement.children[0].classList.remove('bg-(--discount-color)')
             el.parentElement.children[0].innerHTML = `
                                                     <div class="cursor-pointer" onclick="removeProductFromShoppingCart(this,${array['shahkarProduct' + i + 'id']})">
                                                                                                             <svg xmlns="http://www.w3.org/2000/
@@ -3601,10 +3326,10 @@ let categoryTitles = document.querySelectorAll('.category-title')
 categoryTitles.forEach((item) => {
     item.addEventListener('click', () => {
         categoryTitles.forEach((el) => {
-            el.classList.remove('text-(--color-text)')
-            el.classList.add('text-(--color-secondary-text)')
+            el.classList.remove('text-(--primary-text-color)')
+            el.classList.add('text-(--secondary-text-color)')
         })
-        item.classList.add('text-(--color-text)')
+        item.classList.add('text-(--primary-text-color)')
     })
 })
 
@@ -3648,7 +3373,7 @@ function getRelatedProducts(param, section) {
                             <div class="flex flex-col">
                                 <div class="mb-2 font-bold text-[14px] lg:text-base">
                                     <a href=""
-                                        class="text-[12px] lg:text-[14px] text-(--color-text)">${title}</a>
+                                        class="text-[12px] lg:text-[14px] text-(--primary-text-color)">${title}</a>
                                 </div>
                                 <div class="mb-1">
                                     <a href="">${description}</a>
@@ -3656,7 +3381,7 @@ function getRelatedProducts(param, section) {
                             </div>
                             <div class="flex flex-row items-center mb-3 gap-3">
                                 <div class="lg:w-1/2 flex flex-row items-center text-[12px]">
-                                    <div class="text-(--color-secondary-text) flex flex-row items-center">
+                                    <div class="text-(--secondary-text-color) flex flex-row items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="size-3 lg:size-4"
 
 viewBox="0 0 576 512">
@@ -3691,11 +3416,11 @@ viewBox="0 0 576 512">
                             </div>
                             <div class="">
                                 <div
-                                    class="hidden lg:flex flex-row items-center gap-2 text-(--color-text) mb-3 text-[18px] font-bold">
+                                    class="hidden lg:flex flex-row items-center gap-2 text-(--primary-text-color) mb-3 text-[18px] font-bold">
                                     <span class="font-bold text-lg">${price}</span>
                                     <span class="text-sm">تومان</span>
                                 </div>
-                                <div class="flex lg:hidden flex-row items-start gap-2 text-(--color-text) mb-3 font-bold">
+                                <div class="flex lg:hidden flex-row items-start gap-2 text-(--primary-text-color) mb-3 font-bold">
                                     <span class="font-bold text-lg">${price}</span>
                                     <span class="text-sm">تومان</span>
                                 </div>
@@ -3704,7 +3429,7 @@ viewBox="0 0 576 512">
                                 <div class="w-full h-12">
                                     <button
                                         onclick="addToShoppingCart(this,'${id}', '${title}', '${description}', '${image}', '${price}')"
-                                        class="w-full h-full py-3 lg:py-1 text-[12px] lg:text-[14px] text-(--color-primary-text) bg-(--color-bg-card-btn) leading-5 rounded-[10px] cursor-pointer">افزودن
+                                        class="w-full h-full py-3 lg:py-1 text-[12px] lg:text-[14px] text-(--discount-color-text) bg-(--color-bg-card-btn) leading-5 rounded-[10px] cursor-pointer">افزودن
                                         به سبد خرید</button>
                                 </div>
                             </div>
@@ -3728,7 +3453,7 @@ viewBox="0 0 576 512">
                                     <span
                                         class="inline-block w-full text-center pt-3">${product.title}</span>
                                     <span
-                                        class="block text-center text-[14px] text-(--color-secondary-text)">${product.description}</span>
+                                        class="block text-center text-[14px] text-(--secondary-text-color)">${product.description}</span>
                             </a>
                         `
                         div.innerHTML = element;
