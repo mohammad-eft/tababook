@@ -39,12 +39,10 @@
         </a>
         <section class="max-w-[1800px] w-11/12 mx-auto flex flex-col gap-4 justify-start items-center bg-white">
             <div class="w-full flex justify-between gap-1 items-center pt-5">
-                <div class="xl:w-1/3 lg:w-1/4 max-lg:w-1/3 h-full flex justify-start items-center lg:hidden">
-                    <div class="flex flex-col gap-1 items-start justify-center" id="openHamburgerMenu">
-                        <span class="lg:w-7 w-4 lg:h-1 h-0.5 bg-black rounded-full"></span>
-                        <span class="lg:w-7 w-4 lg:h-1 h-0.5 bg-black rounded-full"></span>
-                        <span class="lg:w-7 w-4 lg:h-1 h-0.5 bg-black rounded-full"></span>
-                    </div>
+                <div class="w-7 h-5 flex flex-col items-start justify-between   " id="openHamburgerMenu">
+                    <span class="w-full h-0.5 bg-black rounded-full"></span>
+                    <span class="w-full h-0.5 bg-black rounded-full"></span>
+                    <span class="w-full h-0.5 bg-black rounded-full"></span>
                 </div>
                 <a href="{{ route('home') }}"
                     class="hidden xl:w-1/6 lg:w-1/4 max-lg:w-1/3 h-full lg:flex lg:justify-start justify-center items-center">
@@ -111,16 +109,16 @@
                         </a>
                     </li>
                 </ul>
-                <div class="w-1/6 h-full flex justify-end items-center lg:gap-5 gap-2">
+                <div class="w-1/6 h-full flex justify-end items-center gap-5">
                     <div class="relative cursor-pointer" onclick="search_pupup('open')">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
-                            class="lg:size-5 size-4 fill-gray-800">
+                            class="size-5 fill-gray-800">
                             <path
                                 d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
                         </svg>
                     </div>
                     <div class="block relative group cursor-pointer" onclick="account_pupup('open')">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="lg:size-5 size-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="size-5">
                             <path
                                 d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464H398.7c-8.9-63.3-63.3-112-129-112H178.3c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z" />
                         </svg>
@@ -129,7 +127,7 @@
 
                             <a @if (!Auth::check()) href="{{ route('login') }}" @else href="{{ route('user.profile') }}" @endif
                                 class="w-full rounded-lg cursor-pointer px-4 py-2 hover:bg-[#F9FAFC] flex gap-5 items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-5">
                                     <!--! Font Awesome Pro 6.5.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                                     <path
                                         d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464H398.7c-8.9-63.3-63.3-112-129-112H178.3c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z">
@@ -286,7 +284,7 @@
 
         <!-- hamburger_menu_item -->
         <div class="w-full h-dvh bg-black/50 invisible opacity-0 fixed top-0 right-0 transition_normal lg:hidden z-3" id="hamburgerMenu">
-            <div class="w-2/3 bg-white h-dvh flex flex-col justify-start items-center relative transition-all duration-300 z-3 lg:hidden translate-x-full">
+            <div class="w-2/3 bg-white h-dvh flex flex-col justify-start items-center relative transition-all duration-300 z-3 lg:hidden ease-in-out translate-x-full">
                 <div class="w-11/12 h-full flex flex-col gap-6 justify-start items-start relative">
                     <div class="w-full h-20 flex gap-3 justify-center items-center">
                         <a href="{{ route('home') }}" class="w-2/3 h-full">
@@ -303,25 +301,25 @@
                     <!-- item -->
                     <div class="w-full flex flex-col gap-2 justify-start items-center">
                         <a href="{{ route('home') }}"
-                            class="w-full py-2 bg-green-300/50 rounded-xl gradient_item flex gap-3 justify-start items-center px-4">
+                            class="w-full py-2 bg-(--green-btn) rounded-xl gradient_item flex gap-3 justify-start items-center px-4">
 
-                            <span class="xl:text-lg text-green-700 font-bold">صفحه اصلی</span>
+                            <span class="xl:text-lg text-white font-bold">صفحه اصلی</span>
                         </a>
                         <a href="{{ route('product.index') }}"
-                            class="w-full py-2 bg-green-300/50 rounded-xl gradient_item flex gap-3 justify-start items-center px-4">
-                            <span class="xl:text-lg text-green-700 font-bold"> محصولات</span>
+                            class="w-full py-2 bg-(--green-btn) rounded-xl gradient_item flex gap-3 justify-start items-center px-4">
+                            <span class="xl:text-lg text-white font-bold"> محصولات</span>
                         </a>
                         <a href="{{ route('category.index') }}"
-                            class="w-full py-2 bg-green-300/50 rounded-xl gradient_item flex gap-3 justify-start items-center px-4">
-                            <span class="xl:text-lg text-green-700 font-bold"> دسته بندی ها</span>
+                            class="w-full py-2 bg-(--green-btn) rounded-xl gradient_item flex gap-3 justify-start items-center px-4">
+                            <span class="xl:text-lg text-white font-bold"> دسته بندی ها</span>
                         </a>
                         <a href="{{ route('contactUs.list') }}"
-                            class="w-full py-2 bg-green-300/50 rounded-xl gradient_item flex gap-3 justify-start items-center px-4">
-                            <span class="xl:text-lg text-green-700 font-bold">تماس باما</span>
+                            class="w-full py-2 bg-(--green-btn) rounded-xl gradient_item flex gap-3 justify-start items-center px-4">
+                            <span class="xl:text-lg text-white font-bold">تماس باما</span>
                         </a>
                         <a href="{{ route('aboutUs.clientList') }}"
-                            class="w-full py-2 bg-green-300/50 rounded-xl gradient_item flex gap-3 justify-start items-center px-4">
-                            <span class="xl:text-lg text-green-700 font-bold">درباره ما</span>
+                            class="w-full py-2 bg-(--green-btn) rounded-xl gradient_item flex gap-3 justify-start items-center px-4">
+                            <span class="xl:text-lg text-white font-bold">درباره ما</span>
                         </a>
 
                     </div>
@@ -353,7 +351,7 @@
                         class="w-full py-2 flex justify-between items-center px-4 max-sm:px-2 cart_shdow bg-white rounded-lg">
                         <input type="text" name="title" class="outline-none w-full h-full max-sm:text-[15px]"
                             placeholder="کتاب یا نویسنده یا محصول خود را جستجو کنید">
-                        <button class="cursor-pointer">
+                        <button class="cursor-pointer size-10 flex justify-center items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
                                 class="sm:size-5 size-4 fill-[#929391]">
                                 <path
