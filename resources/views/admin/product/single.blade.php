@@ -1685,20 +1685,8 @@
                             {{ $attribute->attribute_value }}
                         </div>
                     </div>
+                    @endforeach
             </div>
-            @endforeach
-            {{-- <div class="my-3 flex justify-center items-center">
-                <button
-                    class="flex flex-row gap-2 items-center pr-4 pl-3 py-2 bg-[var(--color-secondary-bg)] rounded-full">
-                    <span class="text-xs leading-[180%] font-medium">
-                        مشاهده ادامه مشخصات
-                    </span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="size-3" viewBox="0 0 320 512">
-                        <path fill="var(--color-fill)"
-                            d="M52.7 267.3c-6.2-6.2-6.2-16.4 0-22.6l160-160c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6L86.6 256 235.3 404.7c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0l-160-160z" />
-                    </svg>
-                </button>
-            </div> --}}
         </div>
     </section>
 
