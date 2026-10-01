@@ -282,16 +282,16 @@
                             <div class="w-full h-12">
                                 @if (Auth::check() && in_array($product->id, $cartProIds) && count($product->carts))
 
-                                    <div class="w-full h-full px-4 transition-all duration-300 hover:bg-(--green-btn) cursor-pointer group flex gap-2 justify-center items-center rounded-xl"
+                                    <div class="w-full h-full px-4 transition-all bg-(--light-green-btn) duration-300 hover:bg-(--green-btn) cursor-pointer group flex gap-2 justify-center items-center rounded-xl"
                                          data-product-id="{{ $product->id }}">
                                         <button onclick="setCount(this)"
-                                                class="w-1/3 text-lg font-bold text-white cursor-pointer"
+                                                class="w-1/3 text-lg font-bold transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex itmes-center justify-center cursor-pointer"
                                                 data-state="+">+
                                         </button>
-                                        <input type="number" class="w-1/3 text-sm text-center outline-none text-white"
+                                        <input type="number" class="w-1/3 text-sm text-center outline-none transition-all duration-300 text-(--primary-text-color) group-hover:text-white"
                                                readonly value="{{ $product->carts[0]->quantity }}">
                                         <button onclick="setCount(this)"
-                                                class="w-1/3 text-lg font-bold text-white cursor-pointer"
+                                                class="w-1/3 text-lg font-bold transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex itmes-center justify-center cursor-pointer"
                                                 data-state="-">-
                                         </button>
                                     </div>

@@ -4,39 +4,6 @@
 @endsection
 @section('content')
     <!-- address navbar -->
-
-
-
-    <style>
-        input[type=number]::-webkit-inner-spin-button,
-        input[type=number]::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            margin: 0;
-        }
-        input[type="checkbox"] {
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #555;
-            border-radius: 4px;
-            cursor: pointer;
-            position: relative;
-        }
-        input[type="checkbox"]:checked {
-            background-color: var(--color-secondary);
-            border-color: var(--color-secondary);
-        }
-        input[type="checkbox"]:checked::after {
-            content: "✔️";
-            color: var(--discount-color-text);
-            position: absolute;
-            left: 3px;
-            top: 0;
-            font-size: 12px;
-        }
-    </style>
     <section
         class="w-11/12 mx-auto lg:mb-5 py-5 flex flex-row justify-between items-center text-[#beb1d6] text-xs lg:text-sm">
         <nav class="flex flex-row items-center text-xs lg:text-base">
