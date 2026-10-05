@@ -58,7 +58,31 @@ class PackController extends Controller
     public function single(pack $pack)
     {
         $setting = homeSetting::document();
-        return view('user.pack.single', ['setting'=>$setting]);
+        foreach ($pack->products as $product) {
+            if ($product->media->isNotEmpty()) {
+                foreach ($product->media as $media) {
+                    if ($media->is_main) {
+                        $product->image  = $media->media_path;
+                        break;
+                    } else {
+                        $product->image = 'default.jpg';
+                    }
+                }
+            } else {
+                $product->image = 'default.jpg';
+            }
+            if ($product->secondary_price) {
+                $campare = $product->primary_price - $product->secondary_price;
+                $x = $campare / $product->primary_price;
+                $product->percent = intval($x * 100);
+            }
+        }
+        if ($pack->secondary_price) {
+            $campare = $pack->primary_price - $pack->secondary_price;
+            $x = $campare / $pack->primary_price;
+            $pack->percent = intval($x * 100);
+        }
+        return view('user.pack.single', ['setting'=>$setting, 'pack'=>$pack]);
     }
 
     public function list()

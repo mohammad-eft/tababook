@@ -304,12 +304,14 @@ class SettingController extends Controller
             }
         }
         $setting = homeSetting::all();
+        $packs = pack::all();
         return view('home', [
             'setting'=>$setting, 
             'categories'=>$categories, 
             'products'=>$products, 
             'newProducts'=>$newProducts, 
             'cartProIds'=>$cartProIds,
+            'packs'=>$packs
         ]);
     }
     public function packSetting(){
