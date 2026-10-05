@@ -32,19 +32,19 @@
                 <section class="p-[18px] border-b border-[#e4e4e7]">
                     <div class="font-semibold text-sm mb-[15px]">محدوده قیمت</div>
                     <div class="grid grid-cols-2 gap-2">
-                        <input id="minPrice" type="number" placeholder="حداقل" value="0"
+                        <input id="minPrice" type="number" placeholder="حداقل"
                             class="w-full border border-[#e4e4e7] rounded-lg p-[9px] outline-none text-[11px]">
-                        <input id="maxPrice" type="number" placeholder="حداکثر" value=""
+                        <input id="maxPrice" type="number" placeholder="حداکثر"
                             class="w-full border border-[#e4e4e7] rounded-lg p-[9px] outline-none text-[11px]">
                     </div>
                 </section>
-                <section class="p-[18px]">
+                <section class="px-[18px]">
                     <label class="flex items-center gap-2 my-3 text-[13px] text-[#52525b]">
                         <input id="hasDescount" class="accent-[#ef394e] w-[17px] h-[17px]" type="checkbox">
                         تخفیف خورده
                     </label>
                 </section>
-                <section class="p-[18px]">
+                <section class="px-[18px]">
                     <label class="flex items-center gap-2 my-3 text-[13px] text-[#52525b]">
                         <input id="exists" class="accent-[#ef394e] w-[17px] h-[17px]" type="checkbox">
                         فقط کالاهای موجود
@@ -53,6 +53,12 @@
             </aside>
 
             <section class="min-w-0">
+                <div class="w-full flex items-center gap-3 border-1 border-gray-200 rounded-xl mb-3">
+                    <input type="text" class="w-full px-3.5 py-3 outline-none" id="searchInp">
+                    <svg class="w-6 h-6 text-(--purple-btn) ml-2.5 cursor-pointer" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
+                    </svg>
+                </div>
                 <div
                     class="bg-white border border-[#e4e4e7] rounded-xl p-3 md:px-[15px] flex flex-col md:flex-row md:items-center justify-between gap-3 mb-3.5">
                     <div class="flex items-center gap-2 flex-wrap">
