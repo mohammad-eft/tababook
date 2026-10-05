@@ -22,4 +22,8 @@ class pack extends Model
     public function products(){
         return $this->belongsToMany(product::class, 'product_packs');
     }
+
+    public function carts(){
+        return $this->hasMany(carts::class);
+    }
 }

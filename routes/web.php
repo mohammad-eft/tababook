@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\CartsController;
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
@@ -14,16 +13,13 @@ use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\PackController;
 use App\Http\Controllers\SearchController;
-use App\Models\product;
-use App\Models\carts;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 Route::get('/test', function(){
-    // carts::where('id', '>', 0)->delete();
-    Schema::table('contact_us', function (Blueprint $table) {
-        $table->string('phoneNumber')->nullable()->change();
-        $table->string('user_id')->nullable()->change();
+    Schema::table('carts', function (Blueprint $table) {
+        $table->integer('product_id')->nullable()->change();
+        $table->integer('pack_id')->after('product_id')->nullable();
     });
 });
 
