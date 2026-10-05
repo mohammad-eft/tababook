@@ -47,9 +47,9 @@ input[type="checkbox"]:checked {
 }
 input[type="checkbox"]:checked::after {
     content: "✔️";
-    color: var(--discount-color-text);
+    color: var(--pastel-purple);
     position: absolute;
-    left: 3px;
+    left: 0;
     top: 0;
     font-size: 12px;
 }

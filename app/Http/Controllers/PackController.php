@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\classes\homeSetting;
 use App\Models\pack;
 use App\Models\packGallery;
+use Illuminate\Support\Facades\Auth;
 use App\Models\product;
 use App\Models\product_pack;
+use App\Models\carts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -58,7 +60,35 @@ class PackController extends Controller
     public function single(pack $pack)
     {
         $setting = homeSetting::document();
-        return view('user.pack.single', ['setting'=>$setting]);
+        foreach ($pack->products as $product) {
+            if ($product->media->isNotEmpty()) {
+                foreach ($product->media as $media) {
+                    if ($media->is_main) {
+                        $product->image  = $media->media_path;
+                        break;
+                    } else {
+                        $product->image = 'default.jpg';
+                    }
+                }
+            } else {
+                $product->image = 'default.jpg';
+            }
+            if ($product->secondary_price) {
+                $campare = $product->primary_price - $product->secondary_price;
+                $x = $campare / $product->primary_price;
+                $product->percent = intval($x * 100);
+            }
+        }
+        if ($pack->secondary_price) {
+            $campare = $pack->primary_price - $pack->secondary_price;
+            $x = $campare / $pack->primary_price;
+            $pack->percent = intval($x * 100);
+        }
+        $cart = null;
+        if(Auth::check()){
+            $cart = carts::where('user_id', Auth::id())->where('pack_id', $pack->id)->whereNull('order_id')->first();
+        }
+        return view('user.pack.single', ['setting'=>$setting, 'pack'=>$pack, 'cart'=>$cart]);
     }
 
     public function list()

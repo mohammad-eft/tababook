@@ -49,33 +49,42 @@
                     </div>
                 </div>
                 <div class="w-full grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 gap-4 lg:gap-8 mt-5">
+                    @foreach ($packs as $pack)
+                        <div class="relative overflow-hidden rounded-2xl bg-[#f8f3e8]">
+                            <div class="relative h-[180px] lg:h-[250px] w-full">
+                                <img src="{{ asset('storage/'.$pack->image) }}" class="h-full w-full object-cover" alt="">
+                                <div class="absolute inset-y-0 right-0 w-[45%] bg-[#f8f3e8]">
+                                    <div class="absolute -left-3 -top-8 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                    <div class="absolute -left-5 lg:-left-8 top-4 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                    <div class="absolute -left-2 lg:-left-8 top-1/2 h-40 w-40 -translate-y-1/2 rounded-full bg-[#f8f3e8]"></div>
+                                    <div class="absolute -left-5 bottom-2 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                    <div class="absolute -left-3 -bottom-8 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
+                                </div>
+                            </div>
+                            <div class="absolute right-0 top-0 flex h-full w-[45%] items-center justify-center px-3 py-4 lg:py-8">
+                                <div class="text-right flex flex-col gap-3">
+                                    <h3 class="text-lg lg:text-2xl font-bold text-[#315c50]">
+                                       {{ $pack->title }}
+                                    </h3>
+                                    <p class="text-sm leading-7 text-gray-500">
+                                       {{ $pack->summary }}
+                                    </p>
+                                    <div class="flex">
+                                        <a href="{{ route('pack.single', $pack->id) }}" class="mt-3 rounded-full bg-[#8eae9f] px-6 py-2 text-white text-sm lg:text-base">
+                                            مشاهده
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
 
-                    <div class="relative overflow-hidden rounded-2xl bg-[#f8f3e8]">
-                        <div class="relative h-[180px] lg:h-[250px] w-full">
-                            <img src="{{ asset('img/01.png') }}" class="h-full w-full object-cover" alt="">
-                            <div class="absolute inset-y-0 right-0 w-[45%] bg-[#f8f3e8]">
-                                <div class="absolute -left-3 -top-8 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
-                                <div class="absolute -left-5 lg:-left-8 top-4 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
-                                <div class="absolute -left-2 lg:-left-8 top-1/2 h-40 w-40 -translate-y-1/2 rounded-full bg-[#f8f3e8]"></div>
-                                <div class="absolute -left-5 bottom-2 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
-                                <div class="absolute -left-3 -bottom-8 h-28 w-28 rounded-full bg-[#f8f3e8]"></div>
-                            </div>
-                        </div>
-                        <div class="absolute right-0 top-0 flex h-full w-[45%] items-center justify-center px-3 py-4 lg:py-8">
-                            <div class="text-right">
-                                <h3 class="text-lg lg:text-2xl font-bold text-[#315c50]">
-                                    پک کتاب هدیه
-                                </h3>
-                                <p class="mt-3 text-sm leading-7 text-gray-500">
-                                    انواع کتاب با موضوعات مختلف
-                                </p>
-                                <button class="mt-5 rounded-full bg-[#8eae9f] px-6 py-2 text-white text-sm lg:text-base">
-                                    مشاهده
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="relative overflow-hidden rounded-2xl bg-[#f8f3e8]">
+
+
+
+
+
+                    {{-- <div class="relative overflow-hidden rounded-2xl bg-[#f8f3e8]">
                         <div class="relative h-[180px] lg:h-[250px] w-full">
                             <img src="{{ asset('img/02.png') }}" class="h-full w-full object-cover" alt="">
                             <div class="absolute inset-y-0 right-0 w-[45%] bg-[#f8f3e8]">
@@ -199,7 +208,7 @@
                                 </a>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                 </div>
             </div>
@@ -425,19 +434,19 @@
                                     <div class="w-full h-full px-4 transition-all duration-300 hover:bg-(--green-btn) cursor-pointer group bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl"
                                          data-product-id="{{ $product->id }}">
                                         <button onclick="setCount(this)"
-                                                class="w-1/3 text-lg font-bold text-white flex justify-center items-center cursor-pointer"
+                                                class="w-1/3 text-lg font-bold text-(--primary-text-color) flex justify-center items-center cursor-pointer group-hover:text-white"
                                                 data-state="+">+
                                         </button>
-                                        <input type="number" class="w-1/3 text-sm text-center outline-none text-white"
+                                        <input type="number" class="w-1/3 text-sm text-center outline-none text-(--primary-text-color) group-hover:text-white"
                                                readonly value="{{ $product->carts[0]->quantity }}">
                                         <button onclick="setCount(this)"
-                                                class="w-1/3 text-lg font-bold text-white flex justify-center items-center cursor-pointer"
+                                                class="w-1/3 text-lg font-bold text-(--primary-text-color) flex justify-center items-center cursor-pointer group-hover:text-white"
                                                 data-state="-">-
                                         </button>
                                     </div>
                                 @else
                                     <button onclick="addToCart(this)"
-                                            class="w-full px-4 h-full bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl cursor-pointer transition-all duration-300 hover:bg-(--green-btn) cursor-pointer group"
+                                            class="w-full px-4 h-full bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl transition-all duration-300 hover:bg-(--green-btn) cursor-pointer group"
                                             data-product-id="{{ $product->id }}">
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"

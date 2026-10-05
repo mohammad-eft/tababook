@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\CartsController;
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
@@ -14,16 +13,13 @@ use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\PackController;
 use App\Http\Controllers\SearchController;
-use App\Models\product;
-use App\Models\carts;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 Route::get('/test', function(){
-    // carts::where('id', '>', 0)->delete();
-    Schema::table('contact_us', function (Blueprint $table) {
-        $table->string('phoneNumber')->nullable()->change();
-        $table->string('user_id')->nullable()->change();
+    Schema::table('carts', function (Blueprint $table) {
+        $table->integer('product_id')->nullable()->change();
+        $table->integer('pack_id')->after('product_id')->nullable();
     });
 });
 
@@ -201,7 +197,7 @@ Route::group([
 Route::group([
     'prefix'=>'pack',
     'controller'=>PackController::class,
-    'middleware'=>AuthMiddleware::class,
+    'middleware'=>[AuthMiddleware::class],
     'as'=>'pack.'
 ], function(){
     Route::get('/create', 'create')->name('create');
@@ -209,6 +205,6 @@ Route::group([
     Route::get('/edit/{pack}', 'edit')->name('edit');
     Route::post('/update/{pack}', 'update')->name('update');
     Route::get('/delete/{pack}', 'delete')->name('delete');
-    Route::get('/list', 'list')->name('list');
-    Route::get('/single/{pack}', 'single')->name('single');
+    Route::get('/list', 'list')->name('list')->withoutMiddleware([AuthMiddleware::class]);
+    Route::get('/single/{pack}', 'single')->name('single')->withoutMiddleware([AuthMiddleware::class]);
 });
