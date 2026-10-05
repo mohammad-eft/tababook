@@ -1,5 +1,6 @@
 
 let totalPriceEl = document.getElementById('totalPriceEl')
+let discountEl = document.getElementById('discountEl')
 function addToCart(btn){
     btn.innerHTML = `<div class="w-5 h-5 border-2 border-white border-t-(--primary-text-color) rounded-full animate-spin"></div>`
     console.log(btn)
@@ -107,6 +108,8 @@ function setCount(btn){
                 if (totalPriceEl) {
                     if (data.data.product.secondary_price) {
                         totalPriceEl.innerText = parseInt(totalPriceEl.innerText) - parseInt(data.data.product.secondary_price)
+                        let onceDiscount = parseInt(data.data.product.primary_price) - parseInt(data.data.product.secondary_price)
+                        discountEl.innerText = (parseInt(discountEl.innerText) - parseInt(onceDiscount)) + 'تومان'
                     } else {
                         totalPriceEl.innerText = parseInt(totalPriceEl.innerText) - parseInt(data.data.product.primary_price)
                     }
@@ -143,6 +146,8 @@ function setCount(btn){
                     if(totalPriceEl){
                         if (data.product.secondary_price) {
                             totalPriceEl.innerText = parseInt(totalPriceEl.innerText) + parseInt(data.product.secondary_price)
+                            let onceDiscount = parseInt(data.product.primary_price) - parseInt(data.product.secondary_price)
+                            discountEl.innerText = (parseInt(discountEl.innerText) + parseInt(onceDiscount)) + 'تومان'
                         } else {
                             totalPriceEl.innerText = parseInt(totalPriceEl.innerText) + parseInt(data.product.primary_price)
                         }
@@ -159,6 +164,8 @@ function setCount(btn){
                     if(totalPriceEl){
                         if (data.product.secondary_price) {
                             totalPriceEl.innerText = parseInt(totalPriceEl.innerText) - parseInt(data.product.secondary_price)
+                            let onceDiscount = parseInt(data.product.primary_price) - parseInt(data.product.secondary_price)
+                            discountEl.innerText = (parseInt(discountEl.innerText) - parseInt(onceDiscount)) + 'تومان'
                         } else {
                             totalPriceEl.innerText = parseInt(totalPriceEl.innerText) - parseInt(data.product.primary_price)
                         }
@@ -239,6 +246,8 @@ function setPackCount(btn){
                 if (totalPriceEl) {
                     if (data.data.pack.secondary_price) {
                         totalPriceEl.innerText = parseInt(totalPriceEl.innerText) - parseInt(data.data.pack.secondary_price)
+                        let onceDiscount = parseInt(data.data.pack.primary_price) - parseInt(data.data.pack.secondary_price)
+                        discountEl.innerText = (parseInt(discountEl.innerText) - parseInt(onceDiscount)) + 'تومان'
                     } else {
                         totalPriceEl.innerText = parseInt(totalPriceEl.innerText) - parseInt(data.data.pack.primary_price)
                     }
@@ -275,10 +284,13 @@ function setPackCount(btn){
                     if(totalPriceEl){
                         if(data.pack.secondary_price){
                             totalPriceEl.innerText = parseInt(totalPriceEl.innerText) + parseInt(data.pack.secondary_price)
+                            let onceDiscount = parseInt(data.pack.primary_price) + parseInt(data.pack.secondary_price)
+                            discountEl.innerText = (parseInt(discountEl.innerText) - parseInt(onceDiscount)) + 'تومان'
                         } else {
                             totalPriceEl.innerText = parseInt(totalPriceEl.innerText) + parseInt(data.pack.primary_price)
                         }
                     }
+                    
                 }
                 if (btn.dataset.state == "-") {
                     btn.innerHTML = "<button class='w-1/3 text-lg font-bold quantityBtn text-white cursor-pointer'>-</button>"
@@ -291,6 +303,8 @@ function setPackCount(btn){
                     if(totalPriceEl){
                         if (data.pack.secondary_price) {
                             totalPriceEl.innerText = parseInt(totalPriceEl.innerText) - parseInt(data.pack.secondary_price)
+                            let onceDiscount = parseInt(data.pack.primary_price) - parseInt(data.pack.secondary_price)
+                            discountEl.innerText = (parseInt(discountEl.innerText) - parseInt(onceDiscount)) + 'تومان'
                         } else {
                             totalPriceEl.innerText = parseInt(totalPriceEl.innerText) - parseInt(data.pack.primary_price)
                         }

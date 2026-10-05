@@ -82,7 +82,7 @@
                             @if ($totalDiscount)
                                 <div class="flex justify-between text-emerald-600">
                                     <span>تخفیف</span>
-                                    <span class="in-fa">− {{ $totalDiscount }} تومان</span>
+                                    <span class="in-fa" id="discountEl">{{ $totalDiscount }} تومان</span>
                                 </div>
                             @endif
                         </div>
