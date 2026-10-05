@@ -197,7 +197,7 @@ Route::group([
 Route::group([
     'prefix'=>'pack',
     'controller'=>PackController::class,
-    'middleware'=>AuthMiddleware::class,
+    'middleware'=>[AuthMiddleware::class],
     'as'=>'pack.'
 ], function(){
     Route::get('/create', 'create')->name('create');
@@ -205,6 +205,6 @@ Route::group([
     Route::get('/edit/{pack}', 'edit')->name('edit');
     Route::post('/update/{pack}', 'update')->name('update');
     Route::get('/delete/{pack}', 'delete')->name('delete');
-    Route::get('/list', 'list')->name('list');
-    Route::get('/single/{pack}', 'single')->name('single');
+    Route::get('/list', 'list')->name('list')->withoutMiddleware([AuthMiddleware::class]);
+    Route::get('/single/{pack}', 'single')->name('single')->withoutMiddleware([AuthMiddleware::class]);
 });

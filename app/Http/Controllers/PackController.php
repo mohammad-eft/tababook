@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\classes\homeSetting;
 use App\Models\pack;
 use App\Models\packGallery;
+use Illuminate\Support\Facades\Auth;
 use App\Models\product;
 use App\Models\product_pack;
+use App\Models\carts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -82,7 +84,11 @@ class PackController extends Controller
             $x = $campare / $pack->primary_price;
             $pack->percent = intval($x * 100);
         }
-        return view('user.pack.single', ['setting'=>$setting, 'pack'=>$pack]);
+        $cart = null;
+        if(Auth::check()){
+            $cart = carts::where('user_id', Auth::id())->where('pack_id', $pack->id)->whereNull('order_id')->first();
+        }
+        return view('user.pack.single', ['setting'=>$setting, 'pack'=>$pack, 'cart'=>$cart]);
     }
 
     public function list()

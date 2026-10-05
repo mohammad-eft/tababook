@@ -77,23 +77,10 @@
                             </div>
                         </div>
                     @endforeach
-                   
-
                 </div>
             </div>
             <div class="w-full flex flex-col gap-5 justify-between items-center">
-                <button onclick="addPackToCart(this)" class="w-full px-2 h-12 transition-all duration-300 hover:bg-(--green-btn) cursor-pointer group bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl" data-pack-id="{{ $pack->id }}">
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
-                            class="lg:size-4 size-3 fill-(--primary-text-color) transition-all duration-300 group-hover:fill-white">
-                            <path
-                                d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
-                            </path>
-                        </svg>
-                    </div>
-                    <span class="lg:text-sm text-[10px] text-(--primary-text-color) font-bold transition-all duration-300 group-hover:text-white">افزودن به سبد خرید</span>
-                </button>
-                <div class="max-lg:w-full flex flex-col gap-2 justify-center items-end max-lg:order-1">
+                 <div class="w-full flex flex-col gap-2 justify-center items-end max-lg:order-1">
                     @if ($pack->secondary_price)
                         <div class="flex gap-1 justify-start items-start text-[#0B4D32] font-bold">
                             <span class="in-fa">{{ number_format($pack->secondary_price) }}</span>
@@ -117,6 +104,30 @@
                         </div>
                     @endif
                 </div>
+                @if ($cart)
+                <div class="w-full">
+                    <div class="w-full px-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl py-2.5" data-pack-id="{{ $pack->id }}}">
+                        <button onclick="setPackCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="+">+</button>
+                        <input type="number" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white text-sm text-center outline-none" readonly value="{{ $cart->quantity }}">
+                        <button onclick="setPackCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="-">-</button>
+                    </div>
+                </div>
+                @else
+                <div class="w-full">
+                    <button onclick="addPackToCart(this)" class="w-full px-2 h-12 transition-all duration-300 hover:bg-(--green-btn) cursor-pointer group bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl" data-pack-id="{{ $pack->id }}">
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                class="lg:size-4 size-3 fill-(--primary-text-color) transition-all duration-300 group-hover:fill-white">
+                                <path
+                                    d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
+                                </path>
+                            </svg>
+                        </div>
+                        <span class="lg:text-sm text-[10px] text-(--primary-text-color) font-bold transition-all duration-300 group-hover:text-white">افزودن به سبد خرید</span>
+                    </button>
+                </div>
+                @endif
+               
             </div>
         </div>
         <div class="lg:w-1/2 w-full lg:min-h-full flex flex-col lg:gap-10 gap-4 justify-start items-center max-lg:order-1">

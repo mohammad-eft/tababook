@@ -24,6 +24,7 @@
         let flag = "{{ Auth::check() }}"
         let userId = null;
         let user = null
+        let routeIsCart = "{{ Route::is('cart.list') }}"
         if (flag) {
             userId = "{{ Auth::id() }}"
             user = "{{ Auth::user() }}"

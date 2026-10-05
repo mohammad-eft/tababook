@@ -31,6 +31,7 @@ class CartsController extends Controller
     {
         $product_id = $request->input('product_id');
         $cart = carts::where('user_id', $request->user_id)->where('product_id', $request->product_id)->where('order_id', null)->first();
+        $cart->product;
         $data = $cart;
         if ($cart) {
             $cart->delete();
@@ -54,7 +55,7 @@ class CartsController extends Controller
         $cart = carts::where(['product_id' => $request->product_id, 'user_id' => $user_id, 'order_id' => null])->first();
         $cart->quantity = $request->quantity ? $request->quantity : 1;
         $cart->save();
-
+        $cart->product;
         return response()->json($cart);
     }
 
@@ -115,23 +116,36 @@ class CartsController extends Controller
         $totalPrice = 0;
         $totalDiscount = 0;
         foreach (Auth::user()->carts as $cart) {
-            if ($cart->product->secondary_price) {
-                $totalPrice += $cart->product->secondary_price;
-                $totalDiscount += $cart->product->primary_price - $cart->product->secondary_price;
-            } else {
-                $totalPrice += $cart->product->primary_price;
-            }
-            if ($cart->product->media->isNotEmpty()) {
-                foreach ($cart->product->media as $media) {
-                    if ($media->is_main) {
-                        $cart->product->image = $media->media_path;
-                        break;
-                    } else {
-                        $cart->product->image = 'default.jpg';
-                    }
+            if($cart->product_id){
+                if ($cart->product->secondary_price) {
+                    $totalPrice += $cart->product->secondary_price;
+                    $totalDiscount += $cart->product->primary_price - $cart->product->secondary_price;
+                } else {
+                    $totalPrice += $cart->product->primary_price;
                 }
-            } else {
-                $cart->product->image = 'default.jpg';
+                if ($cart->product->media->isNotEmpty()) {
+                    foreach ($cart->product->media as $media) {
+                        if ($media->is_main) {
+                            $cart->product->image = $media->media_path;
+                            break;
+                        } else {
+                            $cart->product->image = 'default.jpg';
+                        }
+                    }
+                } else {
+                    $cart->product->image = 'default.jpg';
+                }
+            } elseif($cart->pack_id){
+                if ($cart->pack->secondary_price) {
+                    $totalPrice += $cart->pack->secondary_price * $cart->quantity;
+                    $totalDiscount += $cart->pack->primary_price - $cart->pack->secondary_price * $cart->quantity;
+                } else {
+                    $totalPrice += $cart->pack->primary_price * $cart->quantity;
+                }
+                if (!$cart->pack->image) {
+                    $cart->pack->image = 'default.jpg';
+                }
+                    
             }
         }
         return view('user.cart.cart', ['categories' => $categories, 'setting' => $setting, 'totalPrice' => $totalPrice, 'totalDiscount' => $totalDiscount]);
@@ -158,6 +172,7 @@ class CartsController extends Controller
         }
         $cart = carts::where(['pack_id' => $request->packId, 'user_id' => $user_id, 'order_id' => null])->first();
         $cart->quantity = $request->quantity ? $request->quantity : 1;
+        $cart->pack;
         $cart->save();
 
         return response()->json($cart);
@@ -166,6 +181,7 @@ class CartsController extends Controller
     {
         $packId = $request->input('packId');
         $cart = carts::where('user_id', $request->userId)->where('pack_id', $packId)->where('order_id', null)->first();
+        $cart->pack;
         $data = $cart;
         if ($cart) {
             $cart->delete();
