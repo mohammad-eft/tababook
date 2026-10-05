@@ -434,19 +434,19 @@
                                     <div class="w-full h-full px-4 transition-all duration-300 hover:bg-(--green-btn) cursor-pointer group bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl"
                                          data-product-id="{{ $product->id }}">
                                         <button onclick="setCount(this)"
-                                                class="w-1/3 text-lg font-bold text-white flex justify-center items-center cursor-pointer"
+                                                class="w-1/3 text-lg font-bold text-(--primary-text-color) flex justify-center items-center cursor-pointer group-hover:text-white"
                                                 data-state="+">+
                                         </button>
-                                        <input type="number" class="w-1/3 text-sm text-center outline-none text-white"
+                                        <input type="number" class="w-1/3 text-sm text-center outline-none text-(--primary-text-color) group-hover:text-white"
                                                readonly value="{{ $product->carts[0]->quantity }}">
                                         <button onclick="setCount(this)"
-                                                class="w-1/3 text-lg font-bold text-white flex justify-center items-center cursor-pointer"
+                                                class="w-1/3 text-lg font-bold text-(--primary-text-color) flex justify-center items-center cursor-pointer group-hover:text-white"
                                                 data-state="-">-
                                         </button>
                                     </div>
                                 @else
                                     <button onclick="addToCart(this)"
-                                            class="w-full px-4 h-full bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl cursor-pointer transition-all duration-300 hover:bg-(--green-btn) cursor-pointer group"
+                                            class="w-full px-4 h-full bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl transition-all duration-300 hover:bg-(--green-btn) cursor-pointer group"
                                             data-product-id="{{ $product->id }}">
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
