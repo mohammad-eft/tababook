@@ -1,15 +1,34 @@
 
 let totalPriceEl = document.getElementById('totalPriceEl')
 let discountEl = document.getElementById('discountEl')
+dropdownCart = document.getElementById('dropdownCart')
 function addToCart(btn){
-    let html = btn.innerHTML
     btn.innerHTML = `<div class="w-5 h-5 border-2 border-white border-t-(--primary-text-color) rounded-full animate-spin"></div>`
-    console.log(btn)
     if (!flag) {
-        // location.assign(url + 'login')
-        btn.innerHTML = html
-        localStorage.setItem('name',  'ahbar')
-        console.log(localStorage.getItem('name'))
+        $.ajax({
+            url: api+'findProduct/'+btn.dataset.productId,
+            type: "GET",
+            dataType: "json",
+            success: function(response){
+                btn.classList = 'w-full px-4 h-full bg-(--peach-color) flex gap-2 justify-center items-center rounded-xl transition-all duration-300 hover:bg-(--pastel-pink) hover:text-white text-xs font-bold text-(--primary-text-color) cursor-pointer group'
+                btn.innerHTML = 'افزوده شد'
+                let products = []
+                if (localStorage.getItem('products')){
+                    products = JSON.parse(localStorage.getItem('products'))
+                }
+                let existing = products.find(pro => pro.id == response.id)
+                if (existing) {
+                    existing.quantity = (existing.quantity || 1) + 1
+                } else {
+                    response.quantity = 1
+                    products.push(response)
+                }
+                localStorage.setItem('products', JSON.stringify(products))
+            },
+            error: function(){
+                console.log('failed to load data')
+            }
+        })
     } else {
         $.ajax({
             url: api + 'cart/store',
@@ -343,3 +362,19 @@ function setPackCount(btn){
         })
     }
 }
+dropdownCart.addEventListener('click', ()=>{
+    if (dropdownCart.parentElement.children[1].classList.contains('invisible')){
+        dropdownCart.parentElement.children[1].classList.remove('invisible')
+        dropdownCart.parentElement.children[1].classList.remove('opacity-0')
+        console.log(JSON.parse(localStorage.getItem('products')))
+    } else {
+        dropdownCart.parentElement.children[1].classList.add('invisible')
+        dropdownCart.parentElement.children[1].classList.add('opacity-0')
+    }
+})
+document.addEventListener('click', (e)=>{
+    if (!dropdownCart.contains(e.target) && !dropdownCart.parentElement.children[1].contains(e.target)){
+        dropdownCart.parentElement.children[1].classList.add('invisible')
+        dropdownCart.parentElement.children[1].classList.add('opacity-0')
+    }
+})

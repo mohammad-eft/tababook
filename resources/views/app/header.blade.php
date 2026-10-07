@@ -112,8 +112,7 @@
                 </ul>
                 <div class="w-1/6 h-full flex justify-end items-center gap-5">
                     <div class="relative cursor-pointer" onclick="search_pupup('open')">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
-                            class="size-5 fill-gray-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-5 fill-gray-800">
                             <path
                                 d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
                         </svg>
@@ -181,15 +180,62 @@
                         </a>
                     @else
                         <div class="relative">
-                            <svg class="w-[29px] h-[29px] text-gray-800" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="1.5"
-                                    d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312" />
-                            </svg>
-                            <span
-                                class="absolute text-xs size-4 -top-3 in-fa right-0 flex items-center justify-center rounded-full bg-(--discount-color) text-white">0</span>
+                            <button class="block relative cursor-pointer" id="dropdownCart">
+                                <svg class="w-[29px] h-[29px] text-gray-800" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                    viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="1.5"
+                                        d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312" />
+                                </svg>
+                                <span
+                                    class="absolute text-xs size-4 -top-3 in-fa right-0 flex items-center justify-center rounded-full bg-(--discount-color) text-white">0</span>
+                            </button>
+                            <div
+                                class="absolute lg:w-80 -left-3 top-full invisible opacity-0 transition-all duration-300">
+                                <div
+                                    class="rounded-xl px-3 pt-3 pb-1.5 border bg-white border-gray-300 translate-y-2.5">
+                                    <div class="w-full flex flex-col gap-2">
+                                        <div
+                                            class="bg-white rounded-2xl p-4 flex gap-4 items-center shadow-sm border border-gray-100 parentItem">
+                                            <div
+                                                class="w-16 h-20 sm:w-20 sm:h-24 bg-gradient-to-br from-indigo-100 to-indigo-200 rounded-xl flex items-center justify-center text-2xl shrink-0">
+                                                <img src="http://localhost/tababook/public/storage/productImgs/33ehHBcvUUKJ2SxeNjvT3syKHbn9WqEQRuDf216f.jpg"
+                                                    class="size-full object-cover" alt="">
+                                            </div>
+                                            <div class="flex-1 min-w-0">
+                                                <h3 class="font-semibold text-gray-800 text-sm sm:text-base truncate">
+                                                    کتاب ملت عشق</h3>
+                                                <p class="text-xs text-gray-500 mt-0.5 mb-5 max-w-full h-8 max-h-8 overflow-hidden ellipsis-2">الیف شافاک در کتاب ملت عشق
+                                                    دو داستان را به‌صورت موازی پیش می‌برد؛ یکی روایت شمس و مولانا در
+                                                    قونیه قرن هفتم به‌عنوان مرشد و مرید و دیگری روایت اللا روبینشتان،
+                                                    زنی ۴۰ساله ساکن بوستون آمریکا.</p>
+                                                <div class="w-full p-2 bg-(--light-green-btn) hover:bg-(--green-btn) transition-all duration-300 group flex gap-2 justify-center items-center rounded-xl"
+                                                    data-product-id="6">
+                                                    <button onclick="setCount(this)"
+                                                        class="w-1/3 text-lg font-bold text-(--primary-text-color) transition-all duration-300 group-hover:text-white flex justify-center items-center cursor-pointer"
+                                                        data-state="+">+</button>
+                                                    <input type="number"
+                                                        class="w-1/3 text-sm text-center outline-none text-(--primary-text-color) transition-all duration-300 group-hover:text-white"
+                                                        readonly="" value="3">
+                                                    <button onclick="setCount(this)"
+                                                        class="w-1/3 text-lg font-bold text-(--primary-text-color) transition-all duration-300 group-hover:text-white flex justify-center items-center cursor-pointer"
+                                                        data-state="-">-</button>
+                                                </div>
+                                            </div>
+                                            <div class="text-left shrink-0">
+                                                <p class="font-bold text-gray-800 text-sm sm:text-base in-fa price">
+                                                    840000</p>
+                                                <p class="text-xs text-gray-400">تومان</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="w-full text-end mt-1.5">
+                                        <a href="{{ route('cart.list') }}"
+                                            class="text-blue-500 text-sm font-bold">مشاهده همه</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     @endif
                     {{-- <div class="relative sm:p-2.5 p-1.5 flex items-center gap-4">
@@ -284,13 +330,16 @@
         </section>
 
         <!-- hamburger_menu_item -->
-        <div class="w-full h-dvh bg-black/50 invisible opacity-0 fixed top-0 right-0 transition_normal lg:hidden z-3" id="hamburgerMenu">
-            <div class="w-2/3 bg-white h-dvh flex flex-col justify-start items-center relative transition-all duration-300 z-3 lg:hidden ease-in-out translate-x-full">
+        <div class="w-full h-dvh bg-black/50 invisible opacity-0 fixed top-0 right-0 transition_normal lg:hidden z-3"
+            id="hamburgerMenu">
+            <div
+                class="w-2/3 bg-white h-dvh flex flex-col justify-start items-center relative transition-all duration-300 z-3 lg:hidden ease-in-out translate-x-full">
                 <div class="w-11/12 h-full flex flex-col gap-6 justify-start items-start relative">
                     <div class="w-full h-20 flex gap-3 justify-center items-center">
                         <a href="{{ route('home') }}" class="w-2/3 h-full">
 
-                            <img src="{{ asset('storage/' . $setting['logo']) }}" alt="" class="w-full h-full">
+                            <img src="{{ asset('storage/' . $setting['logo']) }}" alt=""
+                                class="w-full h-full">
                         </a>
                     </div>
                     <div onclick="hamburger_menu('close')" class="hidden">

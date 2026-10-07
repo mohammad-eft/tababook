@@ -227,7 +227,7 @@
             <div class="max-w-full w-full py-2 px-1 flex gap-4 justify-start overflow-x-auto lg:overflow-x-visible">
                 @foreach ($products as $product)
                     <div
-                            class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  min-h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2">
+                            class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  min-h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2 products" data-product-id="{{ $product->id }}">
                         <div class="w-full flex justify-center items-center relative py-7">
                             <a href={{ route('product.show', [$product->id]) }} class="block">
                                 <img src="{{ asset('storage/' . $product->image) }}" alt=""
@@ -305,7 +305,7 @@
                                     </div>
                                 @else
                                     <button onclick="addToCart(this)"
-                                            class="w-full px-4 h-full bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl cursor-pointer transition-all duration-300 hover:bg-(--green-btn) cursor-pointer group"
+                                            class="w-full px-4 h-full bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl cursor-pointer transition-all duration-300 hover:bg-(--green-btn) group addToCartBtns"
                                             data-product-id="{{ $product->id }}">
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
@@ -369,7 +369,7 @@
 
                 @foreach ($newProducts as $product)
                     <div
-                            class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  min-h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2 pb-5">
+                            class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  min-h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2 pb-5 products" data-product-id="{{ $product->id }}">
                         <div class="w-full flex justify-center items-center relative py-7">
                             <a href={{ route('product.show', [$product->id]) }} class="block">
                                 <img src="{{ asset('storage/' . $product->image) }}" alt=""
@@ -446,7 +446,7 @@
                                     </div>
                                 @else
                                     <button onclick="addToCart(this)"
-                                            class="w-full px-4 h-full bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl transition-all duration-300 hover:bg-(--green-btn) cursor-pointer group"
+                                            class="w-full px-4 h-full bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl transition-all duration-300 hover:bg-(--green-btn) cursor-pointer group addToCartBtns"
                                             data-product-id="{{ $product->id }}">
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
@@ -831,5 +831,5 @@
         </section> --}}
         <!-- prapery -->
     </main>
-
+    <script src="{{ asset('js/home.js') }}"></script>
 @endsection
