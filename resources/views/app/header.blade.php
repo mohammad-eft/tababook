@@ -183,7 +183,7 @@
                                 class="absolute lg:w-80 -left-3 top-full invisible opacity-0 transition-all duration-300">
                                 <div
                                     class="rounded-xl px-3 pt-3 pb-1.5 border bg-white border-gray-300 translate-y-2.5">
-                                    <div class="w-full flex flex-col gap-2">
+                                    <div class="w-full flex flex-col gap-2 parentHeaderCarts">
                                         <div
                                             class="bg-white rounded-2xl p-4 flex gap-4 items-center shadow-sm border border-gray-100 parentItem">
                                             <div

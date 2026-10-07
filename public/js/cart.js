@@ -350,7 +350,46 @@ orderBasket.addEventListener('click', ()=>{
     if (orderBasket.parentElement.children[1].classList.contains('invisible')){
         orderBasket.parentElement.children[1].classList.remove('invisible')
         orderBasket.parentElement.children[1].classList.remove('opacity-0')
+        let parentCart = orderBasket.parentElement.querySelector('.parentHeaderCarts')
+        parentCart.innerHTML = ''
+        let localCarts = JSON.parse(localStorage.getItem('products'))
+        localCarts.find((prod)=>{
+            let element = document.createElement('div')
+            element.classList = 'bg-white rounded-2xl p-4 flex gap-4 items-center shadow-sm border border-gray-100 parentItem'
+            let html = `
+            
+            
+                <div
+                    class="w-16 h-20 sm:w-20 sm:h-24 bg-gradient-to-br from-indigo-100 to-indigo-200 rounded-xl flex items-center justify-center text-2xl shrink-0">
+                    <img src="${ imgPath+prod.mainImg }"
+                        class="size-full object-cover" alt="">
+                </div>
+                <div class="flex-1 min-w-0">
+                    <h3 class="font-semibold text-gray-800 text-sm sm:text-base truncate">${ prod.title }</h3>
+                    <p
+                        class="text-xs text-gray-500 mt-0.5 mb-5 max-w-full h-8 max-h-8 overflow-hidden ellipsis-2">${ prod.summary }</p>
+                    <div class="w-full p-2 bg-(--light-green-btn) hover:bg-(--green-btn) transition-all duration-300 group flex gap-2 justify-center items-center rounded-xl"
+                        data-product-id="6">
+                        <button onclick="setCount(this)"
+                            class="w-1/3 text-lg font-bold text-(--primary-text-color) transition-all duration-300 group-hover:text-white flex justify-center items-center cursor-pointer"
+                            data-state="+">+</button>
+                        <input type="number"
+                            class="w-1/3 text-sm text-center outline-none text-(--primary-text-color) transition-all duration-300 group-hover:text-white"
+                            readonly="" value="${ prod.quantity }">
+                        <button onclick="setCount(this)"
+                            class="w-1/3 text-lg font-bold text-(--primary-text-color) transition-all duration-300 group-hover:text-white flex justify-center items-center cursor-pointer"
+                            data-state="-">-</button>
+                    </div>
+                </div>
+                <div class="text-left shrink-0">
+                    <p class="font-bold text-gray-800 text-sm sm:text-base in-fa price">${ prod.secondary_price ? prod.secondary_price : prod.primary_price }</p>
+                    <p class="text-xs text-gray-400">تومان</p>
+                </div>`
+            element.innerHTML = html
+            parentCart.append(element)
+        })
         console.log(JSON.parse(localStorage.getItem('products')))
+        console.log(orderBasket.parentElement.querySelector('.parentHeaderCarts'))
     } else {
         orderBasket.parentElement.children[1].classList.add('invisible')
         orderBasket.parentElement.children[1].classList.add('opacity-0')
