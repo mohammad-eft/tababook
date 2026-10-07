@@ -150,37 +150,9 @@
 
                         </div>
                     </div>
-                    @if (Auth::check())
-                        <a href="{{ route('cart.list') }}" class="block relative" id="orderBasket">
-                            <svg class="w-[29px] h-[29px] text-gray-800" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="1.5"
-                                    d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312" />
-                            </svg>
-                            @if (count(Auth::user()->carts))
-                                @php
-                                    $quantity = 0;
-                                    Auth::user()->load([
-                                        'carts' => function ($query) {
-                                            $query->whereNull('order_id')->get();
-                                        },
-                                    ]);
-                                    foreach (Auth::user()->carts as $cart) {
-                                        $quantity += $cart->quantity;
-                                    }
-                                @endphp
-                                <span
-                                    class="absolute text-xs size-4 -top-3 in-fa right-0 flex items-center justify-center rounded-full bg-(--discount-color) text-white">{{ $quantity }}</span>
-                            @else
-                                <span
-                                    class="absolute text-xs size-4 -top-3 in-fa right-0 flex items-center justify-center rounded-full bg-(--discount-color) text-white"></span>
-                            @endif
-                        </a>
-                    @else
+                    {{-- @if (Auth::check()) --}}
                         <div class="relative">
-                            <button class="block relative cursor-pointer" id="dropdownCart">
+                            <button class="block relative" id="orderBasket">
                                 <svg class="w-[29px] h-[29px] text-gray-800" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                     viewBox="0 0 24 24">
@@ -188,8 +160,24 @@
                                         stroke-width="1.5"
                                         d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312" />
                                 </svg>
-                                <span
-                                    class="absolute text-xs size-4 -top-3 in-fa right-0 flex items-center justify-center rounded-full bg-(--discount-color) text-white">0</span>
+                                {{-- @if (count(Auth::user()->carts))
+                                    @php
+                                        $quantity = 0;
+                                        Auth::user()->load([
+                                            'carts' => function ($query) {
+                                                $query->whereNull('order_id')->get();
+                                            },
+                                        ]);
+                                        foreach (Auth::user()->carts as $cart) {
+                                            $quantity += $cart->quantity;
+                                        }
+                                    @endphp
+                                    <span
+                                        class="absolute text-xs size-4 -top-3 in-fa right-0 flex items-center justify-center rounded-full bg-(--discount-color) text-white">{{ $quantity }}</span>
+                                @else --}}
+                                    <span
+                                        class="absolute text-xs size-4 -top-3 in-fa right-0 flex items-center justify-center rounded-full bg-(--discount-color) text-white"></span>
+                                {{-- @endif --}}
                             </button>
                             <div
                                 class="absolute lg:w-80 -left-3 top-full invisible opacity-0 transition-all duration-300">
@@ -206,7 +194,9 @@
                                             <div class="flex-1 min-w-0">
                                                 <h3 class="font-semibold text-gray-800 text-sm sm:text-base truncate">
                                                     کتاب ملت عشق</h3>
-                                                <p class="text-xs text-gray-500 mt-0.5 mb-5 max-w-full h-8 max-h-8 overflow-hidden ellipsis-2">الیف شافاک در کتاب ملت عشق
+                                                <p
+                                                    class="text-xs text-gray-500 mt-0.5 mb-5 max-w-full h-8 max-h-8 overflow-hidden ellipsis-2">
+                                                    الیف شافاک در کتاب ملت عشق
                                                     دو داستان را به‌صورت موازی پیش می‌برد؛ یکی روایت شمس و مولانا در
                                                     قونیه قرن هفتم به‌عنوان مرشد و مرید و دیگری روایت اللا روبینشتان،
                                                     زنی ۴۰ساله ساکن بوستون آمریکا.</p>
@@ -237,7 +227,68 @@
                                 </div>
                             </div>
                         </div>
-                    @endif
+                    {{-- @else --}}
+                        {{-- <div class="relative">
+                            <button class="block relative cursor-pointer" id="dropdownCart">
+                                <svg class="w-[29px] h-[29px] text-gray-800" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                    viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="1.5"
+                                        d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312" />
+                                </svg>
+                                <span
+                                    class="absolute text-xs size-4 -top-3 in-fa right-0 flex items-center justify-center rounded-full bg-(--discount-color) text-white">0</span>
+                            </button>
+                            <div
+                                class="absolute lg:w-80 -left-3 top-full invisible opacity-0 transition-all duration-300">
+                                <div
+                                    class="rounded-xl px-3 pt-3 pb-1.5 border bg-white border-gray-300 translate-y-2.5">
+                                    <div class="w-full flex flex-col gap-2">
+                                        <div
+                                            class="bg-white rounded-2xl p-4 flex gap-4 items-center shadow-sm border border-gray-100 parentItem">
+                                            <div
+                                                class="w-16 h-20 sm:w-20 sm:h-24 bg-gradient-to-br from-indigo-100 to-indigo-200 rounded-xl flex items-center justify-center text-2xl shrink-0">
+                                                <img src="http://localhost/tababook/public/storage/productImgs/33ehHBcvUUKJ2SxeNjvT3syKHbn9WqEQRuDf216f.jpg"
+                                                    class="size-full object-cover" alt="">
+                                            </div>
+                                            <div class="flex-1 min-w-0">
+                                                <h3 class="font-semibold text-gray-800 text-sm sm:text-base truncate">
+                                                    کتاب ملت عشق</h3>
+                                                <p
+                                                    class="text-xs text-gray-500 mt-0.5 mb-5 max-w-full h-8 max-h-8 overflow-hidden ellipsis-2">
+                                                    الیف شافاک در کتاب ملت عشق
+                                                    دو داستان را به‌صورت موازی پیش می‌برد؛ یکی روایت شمس و مولانا در
+                                                    قونیه قرن هفتم به‌عنوان مرشد و مرید و دیگری روایت اللا روبینشتان،
+                                                    زنی ۴۰ساله ساکن بوستون آمریکا.</p>
+                                                <div class="w-full p-2 bg-(--light-green-btn) hover:bg-(--green-btn) transition-all duration-300 group flex gap-2 justify-center items-center rounded-xl"
+                                                    data-product-id="6">
+                                                    <button onclick="setCount(this)"
+                                                        class="w-1/3 text-lg font-bold text-(--primary-text-color) transition-all duration-300 group-hover:text-white flex justify-center items-center cursor-pointer"
+                                                        data-state="+">+</button>
+                                                    <input type="number"
+                                                        class="w-1/3 text-sm text-center outline-none text-(--primary-text-color) transition-all duration-300 group-hover:text-white"
+                                                        readonly="" value="3">
+                                                    <button onclick="setCount(this)"
+                                                        class="w-1/3 text-lg font-bold text-(--primary-text-color) transition-all duration-300 group-hover:text-white flex justify-center items-center cursor-pointer"
+                                                        data-state="-">-</button>
+                                                </div>
+                                            </div>
+                                            <div class="text-left shrink-0">
+                                                <p class="font-bold text-gray-800 text-sm sm:text-base in-fa price">
+                                                    840000</p>
+                                                <p class="text-xs text-gray-400">تومان</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="w-full text-end mt-1.5">
+                                        <a href="{{ route('cart.list') }}"
+                                            class="text-blue-500 text-sm font-bold">مشاهده همه</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> --}}
+                    {{-- @endif --}}
                     {{-- <div class="relative sm:p-2.5 p-1.5 flex items-center gap-4">
 
                             <a href="{{ route('search.page') }}">

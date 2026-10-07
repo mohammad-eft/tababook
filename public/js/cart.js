@@ -1,17 +1,24 @@
 
 let totalPriceEl = document.getElementById('totalPriceEl')
 let discountEl = document.getElementById('discountEl')
-dropdownCart = document.getElementById('dropdownCart')
+orderBasket = document.getElementById('orderBasket')
 function addToCart(btn){
     btn.innerHTML = `<div class="w-5 h-5 border-2 border-white border-t-(--primary-text-color) rounded-full animate-spin"></div>`
-    if (!flag) {
         $.ajax({
-            url: api+'findProduct/'+btn.dataset.productId,
+            url: api+'findProduct/'+btn.parentElement.dataset.productId,
             type: "GET",
             dataType: "json",
             success: function(response){
-                btn.classList = 'w-full px-4 h-full bg-(--peach-color) flex gap-2 justify-center items-center rounded-xl transition-all duration-300 hover:bg-(--pastel-pink) hover:text-white text-xs font-bold text-(--primary-text-color) cursor-pointer group'
-                btn.innerHTML = 'افزوده شد'
+                console.log(response)
+                orderBasket.children[1].innerText += 1
+                response.quantity = 1
+                btn.innerHTML = `
+                <div class="w-full px-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl" data-product-id="${response.product_id}">
+                    <button onclick="setCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="+">+</button>
+                    <input type="number" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white text-sm text-center outline-none" readonly value="${response.quantity}">
+                    <button onclick="setCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="-">-</button>
+                </div>
+                `
                 let products = []
                 if (localStorage.getItem('products')){
                     products = JSON.parse(localStorage.getItem('products'))
@@ -29,33 +36,10 @@ function addToCart(btn){
                 console.log('failed to load data')
             }
         })
-    } else {
-        $.ajax({
-            url: api + 'cart/store',
-            type: "POST",
-            dataType: "json",
-            data: {
-                'product_id': btn.dataset.productId,
-                'quantity': 1,
-                'user_id': userId
-            },
-            success: function (response) {
-                console.log(response)
-                orderBasket.children[1].innerText += 1
-                btn.parentElement.innerHTML = `
-                    <div class="w-full px-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl" data-product-id="${response.product_id}">
-                        <button onclick="setCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="+">+</button>
-                        <input type="number" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white text-sm text-center outline-none" readonly value="${response.quantity}">
-                        <button onclick="setCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="-">-</button>
-                    </div>
-                    `
-            },
-            error: function () {
-                console.log('error')
-            }
-        })
-    }
+    
 }
+
+
 function addPackToCart(btn){
     btn.innerHTML = `<div class="w-5 h-5 border-2 border-white border-t-(--primary-text-color) rounded-full animate-spin"></div>`
     console.log(btn)
@@ -92,7 +76,7 @@ function setCount(btn){
     btn.parentElement.parentElement.removeAttribute('onclick')
     btn.disabled = true
     btn.innerHTML =`<div class="w-5 h-5 border-2 border-white border-t-(--primary-text-color) rounded-full animate-spin"></div>`
-
+   
     if (btn.dataset.state == "+") {
         btn.parentElement.children[1].value++
         orderBasket.children[1].innerText++
@@ -362,19 +346,19 @@ function setPackCount(btn){
         })
     }
 }
-dropdownCart.addEventListener('click', ()=>{
-    if (dropdownCart.parentElement.children[1].classList.contains('invisible')){
-        dropdownCart.parentElement.children[1].classList.remove('invisible')
-        dropdownCart.parentElement.children[1].classList.remove('opacity-0')
+orderBasket.addEventListener('click', ()=>{
+    if (orderBasket.parentElement.children[1].classList.contains('invisible')){
+        orderBasket.parentElement.children[1].classList.remove('invisible')
+        orderBasket.parentElement.children[1].classList.remove('opacity-0')
         console.log(JSON.parse(localStorage.getItem('products')))
     } else {
-        dropdownCart.parentElement.children[1].classList.add('invisible')
-        dropdownCart.parentElement.children[1].classList.add('opacity-0')
+        orderBasket.parentElement.children[1].classList.add('invisible')
+        orderBasket.parentElement.children[1].classList.add('opacity-0')
     }
 })
 document.addEventListener('click', (e)=>{
-    if (!dropdownCart.contains(e.target) && !dropdownCart.parentElement.children[1].contains(e.target)){
-        dropdownCart.parentElement.children[1].classList.add('invisible')
-        dropdownCart.parentElement.children[1].classList.add('opacity-0')
+    if (!orderBasket.contains(e.target) && !orderBasket.parentElement.children[1].contains(e.target)){
+        orderBasket.parentElement.children[1].classList.add('invisible')
+        orderBasket.parentElement.children[1].classList.add('opacity-0')
     }
 })
