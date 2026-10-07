@@ -2,10 +2,14 @@
 let totalPriceEl = document.getElementById('totalPriceEl')
 let discountEl = document.getElementById('discountEl')
 function addToCart(btn){
+    let html = btn.innerHTML
     btn.innerHTML = `<div class="w-5 h-5 border-2 border-white border-t-(--primary-text-color) rounded-full animate-spin"></div>`
     console.log(btn)
     if (!flag) {
-        location.assign(url + 'login')
+        // location.assign(url + 'login')
+        btn.innerHTML = html
+        localStorage.setItem('name',  'ahbar')
+        console.log(localStorage.getItem('name'))
     } else {
         $.ajax({
             url: api + 'cart/store',

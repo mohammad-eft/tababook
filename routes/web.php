@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Schema;
 Route::get('/test', function(){
     Schema::table('carts', function (Blueprint $table) {
         $table->integer('product_id')->nullable()->change();
+        $table->integer('user_id')->nullable()->change();
         $table->integer('pack_id')->after('product_id')->nullable();
     });
 });
