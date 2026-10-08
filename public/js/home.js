@@ -1,5 +1,6 @@
 let addToCartBtns = document.querySelectorAll('.addToCartBtns')
 let cartProducts = JSON.parse(localStorage.getItem('products'))
+console.log(cartProducts)
 orderBasket = document.getElementById('orderBasket')
 addToCartBtns.forEach(product=>{
     if(cartProducts){
