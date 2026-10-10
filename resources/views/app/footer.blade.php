@@ -135,6 +135,7 @@
     <script src="{{ asset('js/custom.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
     <script src="{{ asset('js/cart.js') }}"></script>
+    <script src="{{ asset('js/home.js') }}"></script>
 </body>
 
 </html>

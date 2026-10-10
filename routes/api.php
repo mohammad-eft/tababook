@@ -6,6 +6,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\CartsController;
 use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PackController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -30,3 +32,7 @@ Route::post('/cart/saveOrder', [CartsController::class, 'saveOrder']);
 Route::post('/order/store', [OrdersController::class, 'store']);
 Route::get('/order/cancelAll/{user}', [OrdersController::class, 'cancelAll']);
 Route::get('/order/showItems/{order}', [OrdersController::class, 'showItems']);
+
+Route::get('/findProduct/{product}', [ProductController::class, 'findProduct']);
+Route::get('/findPack/{pack}', [PackController::class, 'findPack']);
+Route::post('/cities', [CartsController::class, 'showCities']);

@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Schema;
 Route::get('/test', function(){
     Schema::table('carts', function (Blueprint $table) {
         $table->integer('product_id')->nullable()->change();
+        $table->integer('user_id')->nullable()->change();
         $table->integer('pack_id')->after('product_id')->nullable();
     });
 });
@@ -29,6 +30,8 @@ Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::get('/signup', [UserController::class, "create"])->name('signup');
 Route::post('/check', [UserController::class, "checkAuth"])->name('checkAuth');
 Route::get('/logout', [UserController::class, "logout"])->name('logout');
+
+Route::get('/checkout', [CartsController::class, 'checkout'])->name('checkout');
 
 Route::group([
     'prefix' => 'users',
@@ -190,7 +193,7 @@ Route::group([
     'as'=>'order.'
 ], function(){
     Route::get('/create', 'create')->name('create');
-    Route::post('/store', 'store')->name('store');
+    Route::post('/store', 'store')->name('store')->withoutMiddleware([AuthMiddleware::class]);
     Route::get('/index', 'index')->name('index');
 });
 

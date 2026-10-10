@@ -379,4 +379,20 @@ class ProductController extends Controller
             'setting'=>$setting
         ]);
     }
+
+    public function findProduct(product $product){
+        if ($product->media->isNotEmpty()) {
+            foreach ($product->media as $media) {
+                if ($media['is_main']) {
+                    $product['mainImg']  = $media['media_path'];
+                    break;
+                } else {
+                    $product['mainImg'] = 'default.jpg';
+                }
+            }
+        } else {
+            $product['mainImg'] = 'default.jpg';
+        }
+        return response()->json($product);
+    }
 }
