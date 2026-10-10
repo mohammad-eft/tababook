@@ -44,16 +44,30 @@ function setCount(btn) {
     localCarts = JSON.parse(localStorage.getItem('products'))
     productId = btn.closest('.addToCartBtns').dataset.productId
     localCarts.find(product=>{
+        let finalPrice = 0
+        if(product.secondary_price){
+            finalPrice = product.secondary_price
+        } else {
+            finalPrice = product.primary_price
+        }
         if (product.id == productId){
             if (btn.dataset.state == "+") {
                 btn.parentElement.children[1].value++
                 orderBasket.children[1].innerText++
                 product.quantity++
+                if (totalPriceEl) {
+                    let currentPrice = parseInt(totalPriceEl.innerText)
+                    totalPriceEl.innerText = currentPrice+=finalPrice
+                }
             }
             if (btn.dataset.state == "-") {
                 btn.parentElement.children[1].value--
                 orderBasket.children[1].innerText--
                 product.quantity--
+                if (totalPriceEl) {
+                    let currentPrice = parseInt(totalPriceEl.innerText)
+                    totalPriceEl.innerText = currentPrice -= finalPrice
+                }
             }
         }
     })
@@ -61,6 +75,9 @@ function setCount(btn) {
     localStorage.removeItem('products')
     localStorage.setItem('products', newItems)
     if (btn.parentElement.children[1].value == 0) {
+        if (totalPriceEl) {
+            btn.closest('.parentItem').parentElement.remove()
+        }
         localCarts = localCarts.filter(cart => cart.id != productId )
         let newItems = JSON.stringify(localCarts)
         localStorage.removeItem('products')
@@ -79,6 +96,7 @@ function setCount(btn) {
         } else {
             btn.closest('.parentItem').remove()
         }
+        
     }
 }
 function addPackToCart(btn){
@@ -304,34 +322,4 @@ document.addEventListener('click', (e)=>{
         orderBasket.parentElement.children[1].classList.add('invisible')
         orderBasket.parentElement.children[1].classList.add('opacity-0')
     }
-})
-
-localCarts.find(cart=>{
-    let parentDiv = document.createElement('div')
-    parentDiv.classList = 'lg:col-span-2 space-y-3 products'
-    parentDiv.dataset.productId = cart.id
-    let html = ''
-    html += `
-        <div class="bg-white rounded-2xl p-4 flex gap-4 items-center shadow-sm border border-gray-100 parentItem">
-            <div
-                class="w-16 h-20 sm:w-20 sm:h-24 bg-gradient-to-br from-indigo-100 to-indigo-200 rounded-xl flex items-center justify-center text-2xl shrink-0">
-                <img src="${ imgPath+cart.mainImg }" class="size-full object-cover" alt="">
-            </div>
-            <div class="flex-1 min-w-0">
-                <h3 class="font-semibold text-gray-800 text-sm sm:text-base truncate">${ cart.title }</h3>
-                <p class="text-xs text-gray-500 mt-0.5 mb-5">${ cart.summary }</p>
-                <div class="w-full lg:w-1/4 p-2 flex gap-2 justify-center items-center rounded-xl addToCartBtns" data-product-id="${ cart.id }">
-                    <button onclick="setCount(this)" class="w-1/3 text-lg font-bold text-white flex justify-center items-center cursor-pointer" data-state="+">+</button>
-                    <input type="number" class="w-1/3 text-sm text-center outline-none text-white" readonly value="${ cart.quantity }">
-                    <button onclick="setCount(this)" class="w-1/3 text-lg font-bold text-white flex justify-center items-center cursor-pointer" data-state="-">-</button>
-                </div>
-            </div>
-            <div class="text-left shrink-0">
-                <p class="font-bold text-gray-800 text-sm sm:text-base in-fa price">${ cart.secondary_price ? cart.secondary_price*cart.quantity : cart.primary_price*cart.quantity }</p>
-                <p class="text-xs text-gray-400">تومان</p>
-            </div>
-        </div>
-    `
-    parentDiv.innerHTML = html
-    cartItemsBlock.append(parentDiv)
 })
