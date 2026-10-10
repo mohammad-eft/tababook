@@ -21,6 +21,7 @@ class OrdersController extends Controller
     }
     public function store(Request $request)
     {
+        dd($request->all());
         $user_id = Auth::id();
         if (isset($request->user_id)) {
             $user_id = $request->user_id;

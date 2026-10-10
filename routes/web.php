@@ -193,7 +193,7 @@ Route::group([
     'as'=>'order.'
 ], function(){
     Route::get('/create', 'create')->name('create');
-    Route::post('/store', 'store')->name('store');
+    Route::post('/store', 'store')->name('store')->withoutMiddleware([AuthMiddleware::class]);
     Route::get('/index', 'index')->name('index');
 });
 

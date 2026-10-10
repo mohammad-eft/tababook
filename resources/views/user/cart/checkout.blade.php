@@ -4,7 +4,7 @@
 
 
 
-    <form action="{{ route('order.create') }}" method="POST" class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 mt-5">
+    <form action="{{ route('order.store') }}" method="POST" class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 mt-5">
 
         <div class="lg:col-span-7 xl:col-span-8 bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
             <h2 class="text-lg font-bold mb-6 text-gray-700">صورت حساب و حمل و نقل</h2>
@@ -121,12 +121,12 @@
                         </div>
                         <div class="space-y-2 text-gray-600">
                             <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="radio" name="shipping" class="text-blue-600 focus:ring-(--bg-dark-green)" checked>
-                                <span>پس از تحویل پرداخت می‌کنم</span>
+                                <input type="radio" name="onlinePaymenu" value="0" class="text-blue-600 focus:ring-(--bg-dark-green)" checked>
+                                <span>پرداخت درب منزل</span>
                             </label>
                             <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="radio" name="shipping" class="text-blue-600 focus:ring-(--bg-dark-green)">
-                                <span>از فروشگاه تحویل می‌گیرم.</span>
+                                <input type="radio" name="onlinePaymenu" value="1" class="text-blue-600 focus:ring-(--bg-dark-green)">
+                                <span>پرداخت آنلاین</span>
                             </label>
                         </div>
                     </div>
