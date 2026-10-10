@@ -8,6 +8,7 @@ class carts extends Model
 {
     protected $fillable = [
         'user_id',
+        'customer_id',
         'product_id',
         'pack_id',
         'quantity',
