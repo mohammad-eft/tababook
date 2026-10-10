@@ -536,7 +536,6 @@
 
 localCarts = JSON.parse(localStorage.getItem('products'))
 addToCartBtns = document.querySelectorAll('.addToCartBtns')
-console.log(addToCartBtns)
 addToCartBtns.forEach(btn => {
     localCarts.forEach(cartItem => {
         if (cartItem.id == productId) {

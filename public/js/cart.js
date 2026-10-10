@@ -1,8 +1,9 @@
 
 let totalPriceEl = document.getElementById('totalPriceEl')
 let discountEl = document.getElementById('discountEl')
+let cartItemsBlock = document.getElementById('cartItemsBlock')
 orderBasket = document.getElementById('orderBasket')
-let localCarts
+let localCarts = JSON.parse(localStorage.getItem('products'))
 let popupFlag = false
 function addToCart(btn){
     btn.removeAttribute('onclick')
@@ -16,7 +17,7 @@ function addToCart(btn){
             orderBasket.children[1].innerText += 1
             response.quantity = 1
             btn.innerHTML = `
-            <div class="w-full px-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl" data-product-id="${response.product_id}">
+            <div class="w-full p-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl" data-product-id="${response.product_id}">
                 <button onclick="setCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="+">+</button>
                 <input type="number" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white text-sm text-center outline-none in-fa" readonly value="${response.quantity}">
                 <button onclick="setCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="-">-</button>
@@ -99,7 +100,7 @@ function addPackToCart(btn){
                 console.log(response)
                 orderBasket.children[1].innerText += 1
                 btn.parentElement.innerHTML = `
-                <div class="w-full px-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl py-2.5" data-pack-id="${response.pack_id}">
+                <div class="w-full p-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl py-2.5" data-pack-id="${response.pack_id}">
                     <button onclick="setPackCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="+">+</button>
                     <input type="number" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white text-sm text-center outline-none in-fa" readonly value="${response.quantity}">
                     <button onclick="setPackCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="-">-</button>
@@ -231,17 +232,17 @@ function setPackCount(btn){
                 }
                 if (btn.parentElement.children[1].value == 0) {
                     btn.parentElement.parentElement.innerHTML = `
-                                <button onclick="addPackToCart(this)" class="w-full px-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl" data-pack-id="${data.data.pack_id}">
-                                        <div>
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
-                                                class="lg:size-4 size-3 fill-(--primary-text-color) transition-all duration-300 group-hover:fill-white">
-                                                <path
-                                                    d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
-                                                </path>
-                                            </svg>
-                                        </div>
-                                        <span class="lg:text-sm text-[10px] text-(--primary-text-color) font-bold transition-all duration-300 group-hover:text-white">افزودن به سبد خرید</span>
-                                    </button>`
+                        <button onclick="addPackToCart(this)" class="w-full p-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl" data-pack-id="${data.data.pack_id}">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                    class="lg:size-4 size-3 fill-(--primary-text-color) transition-all duration-300 group-hover:fill-white">
+                                    <path
+                                        d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <span class="lg:text-sm text-[10px] text-(--primary-text-color) font-bold transition-all duration-300 group-hover:text-white">افزودن به سبد خرید</span>
+                        </button>`
                 }
             },
             error: function () {
@@ -303,4 +304,34 @@ document.addEventListener('click', (e)=>{
         orderBasket.parentElement.children[1].classList.add('invisible')
         orderBasket.parentElement.children[1].classList.add('opacity-0')
     }
+})
+
+localCarts.find(cart=>{
+    let parentDiv = document.createElement('div')
+    parentDiv.classList = 'lg:col-span-2 space-y-3 products'
+    parentDiv.dataset.productId = cart.id
+    let html = ''
+    html += `
+        <div class="bg-white rounded-2xl p-4 flex gap-4 items-center shadow-sm border border-gray-100 parentItem">
+            <div
+                class="w-16 h-20 sm:w-20 sm:h-24 bg-gradient-to-br from-indigo-100 to-indigo-200 rounded-xl flex items-center justify-center text-2xl shrink-0">
+                <img src="${ imgPath+cart.mainImg }" class="size-full object-cover" alt="">
+            </div>
+            <div class="flex-1 min-w-0">
+                <h3 class="font-semibold text-gray-800 text-sm sm:text-base truncate">${ cart.title }</h3>
+                <p class="text-xs text-gray-500 mt-0.5 mb-5">${ cart.summary }</p>
+                <div class="w-full lg:w-1/4 p-2 flex gap-2 justify-center items-center rounded-xl addToCartBtns" data-product-id="${ cart.id }">
+                    <button onclick="setCount(this)" class="w-1/3 text-lg font-bold text-white flex justify-center items-center cursor-pointer" data-state="+">+</button>
+                    <input type="number" class="w-1/3 text-sm text-center outline-none text-white" readonly value="${ cart.quantity }">
+                    <button onclick="setCount(this)" class="w-1/3 text-lg font-bold text-white flex justify-center items-center cursor-pointer" data-state="-">-</button>
+                </div>
+            </div>
+            <div class="text-left shrink-0">
+                <p class="font-bold text-gray-800 text-sm sm:text-base in-fa price">${ cart.secondary_price ? cart.secondary_price*cart.quantity : cart.primary_price*cart.quantity }</p>
+                <p class="text-xs text-gray-400">تومان</p>
+            </div>
+        </div>
+    `
+    parentDiv.innerHTML = html
+    cartItemsBlock.append(parentDiv)
 })

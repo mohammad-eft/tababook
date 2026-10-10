@@ -103,52 +103,60 @@ class CartsController extends Controller
         ]);
     }
 
+    // public function list()
+    // {
+    //     $categories = category::all();
+    //     $setting = homeSetting::document();
+
+    //     Auth::user()->load(['carts' => function ($query) {
+    //         $query->whereNull('order_id')->with(['product' => function ($query) {
+    //             $query->get();
+    //         }]);
+    //     }]);
+    //     $totalPrice = 0;
+    //     $totalDiscount = 0;
+    //     foreach (Auth::user()->carts as $cart) {
+    //         if($cart->product_id){
+    //             if ($cart->product->secondary_price) {
+    //                 $totalPrice += $cart->product->secondary_price * $cart->quantity;
+    //                 $totalDiscount += ($cart->product->primary_price - $cart->product->secondary_price)*$cart->quantity;
+    //             } else {
+    //                 $totalPrice += $cart->product->primary_price * $cart->quantity;
+    //             }
+    //             if ($cart->product->media->isNotEmpty()) {
+    //                 foreach ($cart->product->media as $media) {
+    //                     if ($media->is_main) {
+    //                         $cart->product->image = $media->media_path;
+    //                         break;
+    //                     } else {
+    //                         $cart->product->image = 'default.jpg';
+    //                     }
+    //                 }
+    //             } else {
+    //                 $cart->product->image = 'default.jpg';
+    //             }
+    //         } elseif($cart->pack_id){
+    //             if ($cart->pack->secondary_price) {
+    //                 $totalPrice += $cart->pack->secondary_price * $cart->quantity;
+    //                 $totalDiscount += ($cart->pack->primary_price - $cart->pack->secondary_price)*$cart->quantity;
+    //             } else {
+    //                 $totalPrice += $cart->pack->primary_price * $cart->quantity;
+    //             }
+    //             if (!$cart->pack->image) {
+    //                 $cart->pack->image = 'default.jpg';
+    //             }
+                    
+    //         }
+    //     }
+    //     return view('user.cart.cart', ['categories' => $categories, 'setting' => $setting, 'totalPrice' => $totalPrice, 'totalDiscount' => $totalDiscount]);
+    // }
     public function list()
     {
         $categories = category::all();
         $setting = homeSetting::document();
 
-        Auth::user()->load(['carts' => function ($query) {
-            $query->whereNull('order_id')->with(['product' => function ($query) {
-                $query->get();
-            }]);
-        }]);
-        $totalPrice = 0;
-        $totalDiscount = 0;
-        foreach (Auth::user()->carts as $cart) {
-            if($cart->product_id){
-                if ($cart->product->secondary_price) {
-                    $totalPrice += $cart->product->secondary_price * $cart->quantity;
-                    $totalDiscount += ($cart->product->primary_price - $cart->product->secondary_price)*$cart->quantity;
-                } else {
-                    $totalPrice += $cart->product->primary_price * $cart->quantity;
-                }
-                if ($cart->product->media->isNotEmpty()) {
-                    foreach ($cart->product->media as $media) {
-                        if ($media->is_main) {
-                            $cart->product->image = $media->media_path;
-                            break;
-                        } else {
-                            $cart->product->image = 'default.jpg';
-                        }
-                    }
-                } else {
-                    $cart->product->image = 'default.jpg';
-                }
-            } elseif($cart->pack_id){
-                if ($cart->pack->secondary_price) {
-                    $totalPrice += $cart->pack->secondary_price * $cart->quantity;
-                    $totalDiscount += ($cart->pack->primary_price - $cart->pack->secondary_price)*$cart->quantity;
-                } else {
-                    $totalPrice += $cart->pack->primary_price * $cart->quantity;
-                }
-                if (!$cart->pack->image) {
-                    $cart->pack->image = 'default.jpg';
-                }
-                    
-            }
-        }
-        return view('user.cart.cart', ['categories' => $categories, 'setting' => $setting, 'totalPrice' => $totalPrice, 'totalDiscount' => $totalDiscount]);
+        
+        return view('user.cart.cart', ['categories' => $categories, 'setting' => $setting]);
     }
 
     public function packStore(Request $request)

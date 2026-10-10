@@ -13,10 +13,10 @@
         <main class="max-w-5xl mx-auto px-4 py-8">
             <h1 class="text-2xl font-bold text-gray-800 mb-6">سبد خرید</h1>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6" id="cartItemsBlock">
 
                 <!-- Cart Items -->
-                <div class="lg:col-span-2 space-y-3">
+                {{-- <div class="lg:col-span-2 space-y-3">
                     @foreach(Auth::user()->carts as $cart)
                     <!-- Item 1 -->
                         @if ($cart->product)
@@ -62,10 +62,10 @@
                             </div>
                         @endif
                     @endforeach
-                </div>
+                </div> --}}
 
                 <!-- Summary -->
-                @if(count(Auth::user()->carts))
+                {{-- @if(count(Auth::user()->carts))
                 <aside class="lg:col-span-1">
                     <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 lg:sticky lg:top-6">
                         <h2 class="font-bold text-gray-800 mb-4">خلاصه سفارش</h2>
@@ -74,11 +74,11 @@
                             {{-- <div class="flex justify-between text-gray-600">
                                 <span>جمع کالاها</span>
                                 <span class="in-fa">{{ $totalPrice }} تومان</span>
-                            </div> --}}
+                            </div> 
                             {{-- <div class="flex justify-between text-gray-600">
                                 <span>هزینه ارسال</span>
                                 <span>۳۵,۰۰۰ تومان</span>
-                            </div> --}}
+                            </div> 
                             @if ($totalDiscount)
                                 <div class="flex justify-between text-emerald-600">
                                     <span>تخفیف</span>
@@ -107,12 +107,9 @@
                         </p>
                     </div>
                 </aside>
-                 {{-- @else
-                    <span class="w-full block text-center bg-gray-900 hover:bg-gray-800 text-white font-medium py-3 rounded-xl transition"> سبد خرید خالی است </span> --}}
-                @endif
+                @endif --}}
 
             </div>
         </main>
 
-    
 @endsection
