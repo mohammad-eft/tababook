@@ -33,5 +33,6 @@ Route::post('/order/store', [OrdersController::class, 'store']);
 Route::get('/order/cancelAll/{user}', [OrdersController::class, 'cancelAll']);
 Route::get('/order/showItems/{order}', [OrdersController::class, 'showItems']);
 
-Route::get('findProduct/{product}', [ProductController::class, 'findProduct']);
-Route::get('findPack/{pack}', [PackController::class, 'findPack']);
+Route::get('/findProduct/{product}', [ProductController::class, 'findProduct']);
+Route::get('/findPack/{pack}', [PackController::class, 'findPack']);
+Route::post('/cities', [CartsController::class, 'showCities']);

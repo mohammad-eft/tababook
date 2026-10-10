@@ -4,27 +4,27 @@
 
 
 
-    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 mt-5">
+    <form action="{{ route('order.create') }}" method="POST" class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 mt-5">
 
         <div class="lg:col-span-7 xl:col-span-8 bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
             <h2 class="text-lg font-bold mb-6 text-gray-700">صورت حساب و حمل و نقل</h2>
             
-            <form class="space-y-5" action="{{ route('order.create') }}" method="POST">
+            <div class="space-y-5">
                 @csrf
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium mb-2">نام <span class="text-red-500">*</span></label>
-                        <input type="text" class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none" required>
+                        <input type="text" name="name" class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none" required>
                     </div>
                     <div>
                         <label class="block text-sm font-medium mb-2">نام خانوادگی <span class="text-red-500">*</span></label>
-                        <input type="text" class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none" required>
+                        <input type="text" name="family" class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none" required>
                     </div>
                 </div>
                 <div>
                     <label class="block text-sm font-medium mb-2">کشور / منطقه <span class="text-red-500">*</span></label>
                     <div class="relative">
-                        <select class="w-full bg-gray-100 border-none rounded-lg p-3 appearance-none focus:ring-2 focus:ring-blue-500 outline-none cursor-pointer">
+                        <select name="country" class="w-full bg-gray-100 border-none rounded-lg p-3 appearance-none focus:ring-2 focus:ring-(--bg-dark-green) outline-none cursor-pointer">
                             <option>ایران</option>
                         </select>
                         <div class="absolute left-3 top-3.5 pointer-events-none text-gray-500">
@@ -39,7 +39,8 @@
                     <div>
                         <label class="block text-sm font-medium mb-2">استان <span class="text-red-500">*</span></label>
                         <div class="relative">
-                            <select class="w-full bg-gray-100 border-none rounded-lg p-3 appearance-none focus:ring-2 focus:ring-blue-500 outline-none cursor-pointer">
+                            <select id="province" class="w-full bg-gray-100 border-none rounded-lg p-3 appearance-none focus:ring-2 focus:ring-(--bg-dark-green) focus:ring-(--bg-dark-green) outline-none cursor-pointer
+               [&>option]:bg-(--bg-dark-green) [&>option]:text-white">
                                 @foreach ($provinces as $province)
                                     <option value="{{ $province->id }}" @if($province->id == 1) selected @endif>{{ $province->title }}</option>
                                 @endforeach
@@ -54,7 +55,8 @@
                     <div>
                         <label class="block text-sm font-medium mb-2">شهر <span class="text-red-500">*</span></label>
                         <div class="relative">
-                            <select class="w-full bg-gray-100 border-none rounded-lg p-3 appearance-none focus:ring-2 focus:ring-blue-500 outline-none cursor-pointer text-gray-500">
+                            <select name="cityId" id="city" class="w-full bg-gray-100 border-none rounded-lg p-3 appearance-none focus:ring-2 focus:ring-(--bg-dark-green) focus:ring-(--bg-dark-green) outline-none cursor-pointer
+               [&>option]:bg-(--bg-dark-green) [&>option]:text-white">
                                 <option disabled>یک شهر انتخاب کنید</option>
                                 @foreach ($cities as $city)
                                     <option value="{{ $city->id }}" @if ($city->id == 43) selected @endif>{{ $city->title }}</option>
@@ -71,34 +73,34 @@
 
                 <div>
                     <label class="block text-sm font-medium mb-2">جزئیات آدرس <span class="text-red-500">*</span></label>
-                    <input type="text" placeholder="نام خیابان و پلاک خانه" class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none" required>
+                    <input type="text" name="address" placeholder="نام خیابان و پلاک خانه" class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none" required>
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium mb-2">کد پستی (اختیاری)</label>
-                    <input type="text" class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none">
+                    <input type="text" name="postalCode" class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium mb-2">تلفن <span class="text-red-500">*</span></label>
-                    <input type="tel" class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none" required>
+                    <input type="tel" name="phoneNumber" class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none" required>
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium mb-2">آدرس ایمیل (اختیاری)</label>
-                    <input type="email" class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none">
+                    <input type="email" name="email" class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium mb-2">کد ملی (اختیاری)</label>
-                    <input type="text" class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none">
+                    <input type="text" name="nationalCode" class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium mb-2">توضیحات تکمیلی</label>
-                    <textarea rows="4" placeholder="یادداشت‌ها درباره سفارش شما، برای مثال نکات مهم درباره نحوه تحویل سفارش." class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none resize-none"></textarea>
+                    <textarea rows="4" name="description" placeholder="یادداشت‌ها درباره سفارش شما، برای مثال نکات مهم درباره نحوه تحویل سفارش." class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none resize-none"></textarea>
                 </div>
-            </form>
+            </div>
         </div>
 
         <div class="lg:col-span-5 xl:col-span-4">
@@ -113,19 +115,17 @@
 
                     <div id="parentCheckout"></div>
 
-                   
-
                     <div class="p-3 border-b border-gray-200 text-sm">
                         <div class="flex justify-between mb-2">
                             <span class="font-bold">مرسوله</span>
                         </div>
                         <div class="space-y-2 text-gray-600">
                             <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="radio" name="shipping" class="text-blue-600 focus:ring-blue-500" checked>
+                                <input type="radio" name="shipping" class="text-blue-600 focus:ring-(--bg-dark-green)" checked>
                                 <span>پس از تحویل پرداخت می‌کنم</span>
                             </label>
                             <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="radio" name="shipping" class="text-blue-600 focus:ring-blue-500">
+                                <input type="radio" name="shipping" class="text-blue-600 focus:ring-(--bg-dark-green)">
                                 <span>از فروشگاه تحویل می‌گیرم.</span>
                             </label>
                         </div>
@@ -164,7 +164,7 @@
             </div>
         </div>
 
-    </div>
+    </form>
 
     <script src="{{ asset('js/checkout.js') }}"></script>
 @endsection

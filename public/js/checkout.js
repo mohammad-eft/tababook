@@ -1,9 +1,8 @@
 let parentCheckout = document.getElementById('parentCheckout')
 let totalPriceCheckout = document.getElementById('totalPriceCheckout')
 let totalDiscountCheckout = document.getElementById('totalDiscountCheckout')
-localCarts = JSON.parse(localStorage.getItem('products'))
-
 let totalPrice = 0
+localCarts = JSON.parse(localStorage.getItem('products'))
 localCarts.find(cart=>{
     let price = 0
     let discount = 0
@@ -21,8 +20,30 @@ localCarts.find(cart=>{
         <span class="font-medium in-fa">${ price.toLocaleString('fa-IR') } تومان</span>
     `
     parentCheckout.append(parent)
-
-    
     totalPriceCheckout.innerText = totalPrice.toLocaleString('fa-IR') + ' تومان'
     totalDiscountCheckout.innerText = discount.toLocaleString('fa-IR') + ' تومان'
+})
+let province = document.getElementById('province')
+let city = document.getElementById('city')
+province.addEventListener('change', ()=>{
+    $.ajax({
+        url: api +'cities',
+        type: "POST",
+        dataType: "json",
+        data: {
+            'provinceId': province.value 
+        },
+        success: function(response){
+            city.innerHTML = ""
+            response.forEach(cityModel=>{
+                let option = document.createElement('option')
+                option.value = cityModel.id
+                option.innerText = cityModel.title
+                city.append(option)
+            })
+        },
+        error: function(){
+            console.log('failed to load data')
+        }
+    })
 })

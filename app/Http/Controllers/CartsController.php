@@ -212,4 +212,10 @@ class CartsController extends Controller
         $cities = province_cities::where('parent', 1)->get();
         return view('user.cart.checkout', ['categories' => $categories, 'setting' => $setting, 'provinces'=>$provinces, 'cities'=>$cities]);
     }
+
+    public function showCities(Request $request){
+        $provinceId = $request->input('provinceId');
+        $cities = province_cities::where('parent', $provinceId)->get();
+        return response()->json($cities);
+    }
 }
