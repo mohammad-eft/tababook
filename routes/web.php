@@ -31,6 +31,8 @@ Route::get('/signup', [UserController::class, "create"])->name('signup');
 Route::post('/check', [UserController::class, "checkAuth"])->name('checkAuth');
 Route::get('/logout', [UserController::class, "logout"])->name('logout');
 
+Route::get('/checkout', [CartsController::class, 'checkout'])->name('checkout');
+
 Route::group([
     'prefix' => 'users',
     'controller' => UserController::class,

@@ -7,6 +7,7 @@ use App\Models\carts;
 use App\Models\category;
 use App\Models\pack;
 use Illuminate\Http\Request;
+use App\Models\province_cities;
 use Illuminate\Support\Facades\Auth;
 use Log;
 
@@ -202,5 +203,13 @@ class CartsController extends Controller
             'count' => $count,
             'pack_id' => $packId,
         ]);
+    }
+
+    public function checkout(){
+        $categories = category::all();
+        $setting = homeSetting::document();
+        $provinces = province_cities::where('parent', 0)->get();
+        $cities = province_cities::where('parent', 1)->get();
+        return view('user.cart.checkout', ['categories' => $categories, 'setting' => $setting, 'provinces'=>$provinces, 'cities'=>$cities]);
     }
 }

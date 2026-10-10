@@ -1,5 +1,5 @@
 @extends('app.document')
-@section('title', 'دسته بندی ها')
+@section('title', 'سبد خرید')
 @section('content')
         <!-- Header -->
         <header class="bg-white border-b border-gray-100">
@@ -97,7 +97,7 @@
                             </div>
                         </div>
                         
-                        <a href="{{ route('order.create') }}"
+                        <a href="{{ route('checkout') }}"
                             class="w-full block text-center bg-gray-900 hover:bg-gray-800 text-white font-medium py-3 rounded-xl transition">
                             تکمیل خرید
                         </a>
