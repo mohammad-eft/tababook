@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('order_status_id')->nullable();
             $table->integer('order_code')->nullable();
             $table->text('description')->nullable();
+            $table->tinyInteger('onlinePayment')->default(0);
             $table->string('date')->nullable();
             $table->string('time')->nullable();
             $table->timestamps();

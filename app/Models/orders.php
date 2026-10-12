@@ -12,6 +12,7 @@ class orders extends Model
         'order_status_id',
         'order_code',
         'description',
+        'onlinePayment',
         'date',
         'time'
     ];

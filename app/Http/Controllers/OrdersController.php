@@ -22,7 +22,16 @@ class OrdersController extends Controller
     public function store(Request $request)
     {
         dd($request->all());
-        
+        $name = $request->input('name');
+        $family = $request->input('family');
+        $cityId = $request->input('cityId');
+        $address = $request->input('address');
+        $postalCode = $request->input('postalCode');
+        $phoneNumber = $request->input('phoneNumber');
+        $email = $request->input('email');
+        $nationalCode = $request->input('nationalCode');
+        $descriptoin = $request->input('descriptoin');
+        $onlinePayment = $request->input('onlinePayment');
         // $user_id = Auth::id();
         // if (isset($request->user_id)) {
         //     $user_id = $request->user_id;

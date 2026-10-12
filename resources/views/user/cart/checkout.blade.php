@@ -21,19 +21,7 @@
                         <input type="text" name="family" class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none" required>
                     </div>
                 </div>
-                <div>
-                    <label class="block text-sm font-medium mb-2">کشور / منطقه <span class="text-red-500">*</span></label>
-                    <div class="relative">
-                        <select name="country" class="w-full bg-gray-100 border-none rounded-lg p-3 appearance-none focus:ring-2 focus:ring-(--bg-dark-green) outline-none cursor-pointer">
-                            <option>ایران</option>
-                        </select>
-                        <div class="absolute left-3 top-3.5 pointer-events-none text-gray-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                            </svg>
-                        </div>
-                    </div>
-                </div>
+               
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
@@ -121,11 +109,11 @@
                         </div>
                         <div class="space-y-2 text-gray-600">
                             <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="radio" name="onlinePaymenu" value="0" class="text-blue-600 focus:ring-(--bg-dark-green)" checked>
+                                <input type="radio" name="onlinePayment" value="0" class="text-blue-600 focus:ring-(--bg-dark-green)" checked>
                                 <span>پرداخت درب منزل</span>
                             </label>
                             <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="radio" name="onlinePaymenu" value="1" class="text-blue-600 focus:ring-(--bg-dark-green)">
+                                <input type="radio" name="onlinePayment" value="1" class="text-blue-600 focus:ring-(--bg-dark-green)">
                                 <span>پرداخت آنلاین</span>
                             </label>
                         </div>
