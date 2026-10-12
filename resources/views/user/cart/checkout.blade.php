@@ -1,8 +1,6 @@
 @extends('app.document')
 @section('title', 'پرداخت')
 @section('content')
-
-
     <form action="{{ route('order.store') }}" method="POST" class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 mt-5">
 
         <div class="lg:col-span-7 xl:col-span-8 bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
@@ -14,11 +12,11 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium mb-2">نام <span class="text-red-500">*</span></label>
-                        <input type="text" name="name" class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none" required>
+                        <input type="text" name="name" value="{{ Auth::check() ? Auth::user()->name : "" }}" class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none" required>
                     </div>
                     <div>
                         <label class="block text-sm font-medium mb-2">نام خانوادگی <span class="text-red-500">*</span></label>
-                        <input type="text" name="family" class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none" required>
+                        <input type="text" name="family" value="{{ Auth::check() ? Auth::user()->family : "" }}" class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none" required>
                     </div>
                 </div>
                
@@ -30,7 +28,7 @@
                             <select id="province" class="w-full bg-gray-100 border-none rounded-lg p-3 appearance-none focus:ring-2 focus:ring-(--bg-dark-green) focus:ring-(--bg-dark-green) outline-none cursor-pointer
                [&>option]:bg-(--bg-dark-green) [&>option]:text-white">
                                 @foreach ($provinces as $province)
-                                    <option value="{{ $province->id }}" @if($province->id == 1) selected @endif>{{ $province->title }}</option>
+                                    <option value="{{ $province->id }}" @if (Auth::check() && (count(Auth::user()->addresses) && Auth::user()->addresses[0]->city->province->id == $province->id)) selected @endif>{{ $province->title }}</option>
                                 @endforeach
                             </select>
                             <div class="absolute left-3 top-3.5 pointer-events-none text-gray-500">
@@ -47,7 +45,7 @@
                [&>option]:bg-(--bg-dark-green) [&>option]:text-white">
                                 <option disabled>یک شهر انتخاب کنید</option>
                                 @foreach ($cities as $city)
-                                    <option value="{{ $city->id }}" @if ($city->id == 43) selected @endif>{{ $city->title }}</option>
+                                    <option value="{{ $city->id }}" @if (Auth::check() && (count(Auth::user()->addresses) && Auth::user()->addresses[0]->city->id == $city->id)) selected @endif>{{ $city->title }}</option>
                                 @endforeach
                             </select>
                             <div class="absolute left-3 top-3.5 pointer-events-none text-gray-500">
@@ -61,27 +59,27 @@
 
                 <div>
                     <label class="block text-sm font-medium mb-2">جزئیات آدرس <span class="text-red-500">*</span></label>
-                    <input type="text" name="address" placeholder="نام خیابان و پلاک خانه" class="in-fa w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none" required>
+                    <input type="text" name="address" value="{{ Auth::check() ? (count(Auth::user()->addresses) ? Auth::user()->addresses[0]->address : '') : "" }}" placeholder="نام خیابان و پلاک خانه" class="in-fa w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none" required>
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium mb-2">کد پستی (اختیاری)</label>
-                    <input type="text" name="postalCode" class="in-fa w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none">
+                    <input type="text" name="postalCode" value="{{ Auth::check() ? (count(Auth::user()->addresses) ? Auth::user()->addresses[0]->postalCode : '') : "" }}" class="in-fa w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none" dir="ltr">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium mb-2">تلفن <span class="text-red-500">*</span></label>
-                    <input type="tel" name="phoneNumber" class="in-fa w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none" required>
+                    <input type="tel" name="phoneNumber" value="{{ Auth::check() ? Auth::user()->phoneNumber : "" }}" class="in-fa w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none" required>
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium mb-2">آدرس ایمیل (اختیاری)</label>
-                    <input type="email" name="email" class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none">
+                    <input type="email" name="email" value="{{ Auth::check() ? Auth::user()->email : "" }}" class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none" dir="ltr">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium mb-2">کد ملی (اختیاری)</label>
-                    <input type="text" name="nationalCode" class="in-fa w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none">
+                    <input type="text" name="nationalCode" value="{{ Auth::check() ? Auth::user()->nationalCode : "" }}" class="in-fa w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none" dir="ltr">
                 </div>
 
                 <div>

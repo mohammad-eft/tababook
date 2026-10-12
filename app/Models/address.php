@@ -20,4 +20,8 @@ class address extends Model
     public function carts(){
         return $this->hasMany(carts::class);
     }
+
+    public function city(){
+        return $this->belongsTo(province_cities::class, 'city_id');
+    }
 }

@@ -181,8 +181,7 @@ class OrdersController extends Controller
     }
 
     public function index(){
-        $orders = orders::all();
-        
+        $orders = orders::orderBy('date', 'desc')->orderBy('time', 'desc')->get();
         $categories = category::with('products')->has('products')->get();
         $products = product::where('show_in_home', 1)->get();
    
