@@ -534,10 +534,10 @@
 
 // usage codes
 
-localCarts = JSON.parse(localStorage.getItem('products'))
+localProducts = JSON.parse(localStorage.getItem('products'))
 addToCartBtns = document.querySelectorAll('.addToCartBtns')
 addToCartBtns.forEach(btn => {
-    localCarts.forEach(cartItem => {
+    localProducts.forEach(cartItem => {
         if (cartItem.id == productId) {
             btn.parentElement.innerHTML = `
             <div class="w-full px-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl" data-product-id="${productId}">

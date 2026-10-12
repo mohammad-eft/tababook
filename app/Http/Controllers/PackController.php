@@ -236,4 +236,11 @@ class PackController extends Controller
         $pack->delete();
         return to_route('pack.list');
     }
+
+    public function findPack(pack $pack){
+        if(!$pack->image){
+            $pack->image = 'default.png';
+        }
+        return response()->json($pack);
+    }
 }

@@ -133,6 +133,7 @@ class OrdersController extends Controller
         $descriptoin = $request->input('descriptoin');
         $onlinePayment = $request->input('onlinePayment');
         $products = json_decode($request->products);
+        $packs = json_decode($request->packs);
 
         User::upsert([
             'name'=>$name,
@@ -144,7 +145,7 @@ class OrdersController extends Controller
 
         $user = User::where('phoneNumber', $phoneNumber)->first();
 
-        $address = address::create([
+        $address = address::firstOrCreate([
             'user_id'=>$user->id,
             'address'=>$addressText,
             'city_id'=>$cityId,
@@ -161,6 +162,8 @@ class OrdersController extends Controller
             'user_id'=>$user->id,
             'description'=>$descriptoin,
             'onlinePayment'=>$onlinePayment,
+            'address_id'=>$address->id,
+            'order_status_id'=>1,
             'date'=>$date,
             'time'=>$time,
         ]);
@@ -168,13 +171,25 @@ class OrdersController extends Controller
         $order_code = "100" . $order->id;
         orders::where('id', $order->id)->update(['order_code'=>$order_code]);
 
-        foreach($products as $product){
-            carts::create([
-                'product_id'=>$product->id,
-                'user_id'=>$user->id,
-                'order_id'=>$order->id,
-                'quantity'=>$product->quantity
-            ]);
+        if($products){
+            foreach($products as $product){
+                carts::create([
+                    'product_id'=>$product->id,
+                    'user_id'=>$user->id,
+                    'order_id'=>$order->id,
+                    'quantity'=>$product->quantity
+                ]);
+            }
+        }
+        if($packs){
+            foreach($packs as $pack){
+                carts::create([
+                    'pack_id'=>$pack->id,
+                    'user_id'=>$user->id,
+                    'order_id'=>$order->id,
+                    'quantity'=>$pack->quantity
+                ]);
+            }
         }
        
         return redirect('/')->with('clearStorage', true);
@@ -215,6 +230,7 @@ class OrdersController extends Controller
                     $qr->where('is_main', 1)->get();
                 }]);
             }]);
+            $query->with('pack');
         }]);
         return response()->json($order);
     }
