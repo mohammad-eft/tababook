@@ -104,7 +104,8 @@
                         </div>
                     @endif
                 </div>
-                @if ($cart)
+                
+                {{-- @if ($cart)
                 <div class="w-full">
                     <div class="w-full px-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl py-2.5" data-pack-id="{{ $pack->id }}}">
                         <button onclick="setPackCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="+">+</button>
@@ -112,8 +113,8 @@
                         <button onclick="setPackCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="-">-</button>
                     </div>
                 </div>
-                @else
-                <div class="w-full">
+                @else --}}
+                <div class="w-full" id="addPackToCartBtn" data-pack-id="{{ $pack->id }}">
                     <button onclick="addPackToCart(this)" class="w-full px-2 h-12 transition-all duration-300 hover:bg-(--green-btn) cursor-pointer group bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl" data-pack-id="{{ $pack->id }}">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
@@ -126,7 +127,7 @@
                         <span class="lg:text-sm text-[10px] text-(--primary-text-color) font-bold transition-all duration-300 group-hover:text-white">افزودن به سبد خرید</span>
                     </button>
                 </div>
-                @endif
+                {{-- @endif --}}
                
             </div>
         </div>
@@ -149,7 +150,7 @@
                 </div>
                 @endif
             </div>
-            <div class="w-full xl:h-35 lg:h-30 h-25 bg-[#EAEFE9] rounded-xl flex justify-center items-center relative">
+            {{-- <div class="w-full xl:h-35 lg:h-30 h-25 bg-[#EAEFE9] rounded-xl flex justify-center items-center relative">
                 <div class="absolute lg:top-5 top-2 lg:left-3 left-3">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
                         class="lg:size-5 size-3 fill-[#0B2116]">
@@ -159,7 +160,7 @@
                 </div>
                 <p class="font-bold xl:text-xl lg:text-lg text-sm text-center text-[#0B2116]">"هر کتاب ، بک قدم به سوی
                     آینده ای روشن تر است"</p>
-            </div>
+            </div> --}}
         </div>
     </div>
 
@@ -172,9 +173,10 @@
         gallery_pack_single.forEach((item) => {
             item.addEventListener('click', function() {
                 let src = item.children[0].getAttribute('src')
-                // console.log(src)
                 gallery_pack_single_primary_img.children[0].setAttribute('src', src)
             })
         })
+        let packId = "{{ $pack->id }}"
     </script>
+    <script src="{{ asset('js/singlePack.js') }}"></script>
 @endsection

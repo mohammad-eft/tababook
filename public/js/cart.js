@@ -1,9 +1,10 @@
 
 let totalPriceEl = document.getElementById('totalPriceEl')
 let discountEl = document.getElementById('discountEl')
+let addPackToCartBtn = document.getElementById('addPackToCartBtn')
 let cartItemsBlock = document.getElementById('cartItemsBlock')
 orderBasket = document.getElementById('orderBasket')
-let localCarts = JSON.parse(localStorage.getItem('products'))
+let localProducts = JSON.parse(localStorage.getItem('products'))
 let popupFlag = false
 function addToCart(btn) {
     btn.removeAttribute('onclick')
@@ -40,9 +41,9 @@ function addToCart(btn) {
     })
 }
 function setCount(btn) {
-    localCarts = JSON.parse(localStorage.getItem('products'))
+    localProducts = JSON.parse(localStorage.getItem('products'))
     productId = btn.closest('.addToCartBtns').dataset.productId
-    localCarts.find(product => {
+    localProducts.find(product => {
         let finalPrice = 0
         if (product.secondary_price) {
             finalPrice = product.secondary_price
@@ -70,15 +71,15 @@ function setCount(btn) {
             }
         }
     })
-    let newItems = JSON.stringify(localCarts)
+    let newItems = JSON.stringify(localProducts)
     localStorage.removeItem('products')
     localStorage.setItem('products', newItems)
     if (btn.parentElement.children[1].value == 0) {
         if (totalPriceEl) {
             btn.closest('.parentItem').parentElement.remove()
         }
-        localCarts = localCarts.filter(cart => cart.id != productId)
-        let newItems = JSON.stringify(localCarts)
+        localProducts = localProducts.filter(cart => cart.id != productId)
+        let newItems = JSON.stringify(localProducts)
         localStorage.removeItem('products')
         localStorage.setItem('products', newItems)
         if (!popupFlag) {
@@ -100,32 +101,62 @@ function setCount(btn) {
 }
 function addPackToCart(btn) {
     btn.innerHTML = `<div class="w-5 h-5 border-2 border-white border-t-(--primary-text-color) rounded-full animate-spin"></div>`
-    if (!flag) {
-        location.assign(url + 'login')
-    } else {
-        $.ajax({
-            url: api + 'cart/pack/store',
-            type: "POST",
-            dataType: "json",
-            data: {
-                'packId': btn.dataset.packId,
-                'quantity': 1,
-                'userId': userId
-            },
-            success: function (response) {
-                orderBasket.children[1].innerText += 1
-                btn.parentElement.innerHTML = `
-                <div class="w-full p-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl py-2.5" data-pack-id="${response.pack_id}">
-                    <button onclick="setPackCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="+">+</button>
-                    <input type="number" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white text-sm text-center outline-none in-fa" readonly value="${response.quantity}">
-                    <button onclick="setPackCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="-">-</button>
-                </div>`
-            },
-            error: function () {
-                console.log('error')
+    $.ajax({
+        url: api + 'findPack/' + btn.closest('#addPackToCartBtn').dataset.packId,
+        type: "GET",
+        dataType: "json",
+        success: function (response) {
+            orderBasket.children[1].innerText += 1
+            response.quantity = 1
+            btn.innerHTML = `
+            <div class="w-full p-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl" data-pack-id="${response.pack_id}">
+                <button onclick="setPackCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="+">+</button>
+                <input type="number" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white text-sm text-center outline-none in-fa" readonly value="${response.quantity}">
+                <button onclick="setPackCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="-">-</button>
+            </div>`
+            let packs = []
+            if (localStorage.getItem('packs')) {
+                packs = JSON.parse(localStorage.getItem('packs'))
             }
-        })
-    }
+            let existing = packs.find(pck => pck.id == response.id)
+            if (existing) {
+                existing.quantity = (existing.quantity || 1) + 1
+            } else {
+                response.quantity = 1
+                packs.push(response)
+            }
+            localStorage.setItem('packs', JSON.stringify(packs))
+        },
+        error: function () {
+            console.log('failed to load data')
+        }
+    })
+    // if (!flag) {
+    //     location.assign(url + 'login')
+    // } else {
+    //     $.ajax({
+    //         url: api + 'cart/pack/store',
+    //         type: "POST",
+    //         dataType: "json",
+    //         data: {
+    //             'packId': btn.dataset.packId,
+    //             'quantity': 1,
+    //             'userId': userId
+    //         },
+    //         success: function (response) {
+    //             orderBasket.children[1].innerText += 1
+    //             btn.parentElement.innerHTML = `
+    //             <div class="w-full p-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl py-2.5" data-pack-id="${response.pack_id}">
+    //                 <button onclick="setPackCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="+">+</button>
+    //                 <input type="number" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white text-sm text-center outline-none in-fa" readonly value="${response.quantity}">
+    //                 <button onclick="setPackCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="-">-</button>
+    //             </div>`
+    //         },
+    //         error: function () {
+    //             console.log('error')
+    //         }
+    //     })
+    // }
 }
 function setPackCount(btn) {
     packId = btn.parentElement.dataset.packId
@@ -266,47 +297,85 @@ function setPackCount(btn) {
     }
 }
 orderBasket.addEventListener('click', () => {
-    if (localStorage.getItem('products') && JSON.parse(localStorage.getItem('products')).length) {
+    if ((localStorage.getItem('products') && JSON.parse(localStorage.getItem('products')).length) || localStorage.getItem('packs') && JSON.parse(localStorage.getItem('packs')).length) {
         if (orderBasket.parentElement.children[1].classList.contains('invisible')) {
             popupFlag = true
             orderBasket.parentElement.children[1].classList.remove('invisible')
             orderBasket.parentElement.children[1].classList.remove('opacity-0')
             let parentCart = orderBasket.parentElement.querySelector('.parentHeaderCarts')
             parentCart.innerHTML = ''
-            localCarts = JSON.parse(localStorage.getItem('products'))
-            localCarts.find((prod) => {
-                let element = document.createElement('div')
-                element.classList = 'bg-white rounded-2xl p-4 flex gap-4 items-center shadow-sm border border-gray-100 parentItem'
-                let html = `
-                    <div
-                        class="w-16 h-20 sm:w-20 sm:h-24 bg-gradient-to-br from-indigo-100 to-indigo-200 rounded-xl flex items-center justify-center text-2xl shrink-0">
-                        <img src="${imgPath + prod.mainImg}"
-                            class="size-full object-cover" alt="">
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <h3 class="font-semibold text-gray-800 text-sm sm:text-base truncate">${prod.title}</h3>
-                        <p
-                            class="text-xs text-gray-500 mt-0.5 mb-5 max-w-full h-8 max-h-8 overflow-hidden ellipsis-2">${prod.summary}</p>
-                        <div class="w-full p-2 bg-(--light-green-btn) hover:bg-(--green-btn) transition-all duration-300 group flex gap-2 justify-center items-center rounded-xl addToCartBtns"
-                            data-product-id="${prod.id}">
-                            <button onclick="setCount(this)"
-                                class="w-1/3 text-lg font-bold text-(--primary-text-color) transition-all duration-300 group-hover:text-white flex justify-center items-center cursor-pointer"
-                                data-state="+">+</button>
-                            <input type="number"
-                                class="w-1/3 text-sm text-center outline-none text-(--primary-text-color) transition-all duration-300 group-hover:text-white in-fa"
-                                readonly="" value="${prod.quantity}">
-                            <button onclick="setCount(this)"
-                                class="w-1/3 text-lg font-bold text-(--primary-text-color) transition-all duration-300 group-hover:text-white flex justify-center items-center cursor-pointer"
-                                data-state="-">-</button>
+            localProducts = JSON.parse(localStorage.getItem('products'))
+            if (localProducts && localProducts.length){
+                localProducts.find((prod) => {
+                    let element = document.createElement('div')
+                    element.classList = 'bg-white rounded-2xl p-4 flex gap-4 items-center shadow-sm border border-gray-100 parentItem'
+                    let html = `
+                        <div
+                            class="w-16 h-20 sm:w-20 sm:h-24 bg-gradient-to-br from-indigo-100 to-indigo-200 rounded-xl flex items-center justify-center text-2xl shrink-0">
+                            <img src="${imgPath + prod.mainImg}"
+                                class="size-full object-cover" alt="">
                         </div>
-                    </div>
-                    <div class="text-left shrink-0">
-                        <p class="font-bold text-gray-800 text-sm sm:text-base in-fa price">${prod.secondary_price ? prod.secondary_price : prod.primary_price}</p>
-                        <p class="text-xs text-gray-400">تومان</p>
-                    </div>`
-                element.innerHTML = html
-                parentCart.append(element)
-            })
+                        <div class="flex-1 min-w-0">
+                            <h3 class="font-semibold text-gray-800 text-sm sm:text-base truncate">${prod.title}</h3>
+                            <p
+                                class="text-xs text-gray-500 mt-0.5 mb-5 max-w-full h-8 max-h-8 overflow-hidden ellipsis-2">${prod.summary}</p>
+                            <div class="w-full p-2 bg-(--light-green-btn) hover:bg-(--green-btn) transition-all duration-300 group flex gap-2 justify-center items-center rounded-xl addToCartBtns"
+                                data-product-id="${prod.id}">
+                                <button onclick="setCount(this)"
+                                    class="w-1/3 text-lg font-bold text-(--primary-text-color) transition-all duration-300 group-hover:text-white flex justify-center items-center cursor-pointer"
+                                    data-state="+">+</button>
+                                <input type="number"
+                                    class="w-1/3 text-sm text-center outline-none text-(--primary-text-color) transition-all duration-300 group-hover:text-white in-fa"
+                                    readonly="" value="${prod.quantity}">
+                                <button onclick="setCount(this)"
+                                    class="w-1/3 text-lg font-bold text-(--primary-text-color) transition-all duration-300 group-hover:text-white flex justify-center items-center cursor-pointer"
+                                    data-state="-">-</button>
+                            </div>
+                        </div>
+                        <div class="text-left shrink-0">
+                            <p class="font-bold text-gray-800 text-sm sm:text-base in-fa price">${prod.secondary_price ? prod.secondary_price : prod.primary_price}</p>
+                            <p class="text-xs text-gray-400">تومان</p>
+                        </div>`
+                    element.innerHTML = html
+                    parentCart.append(element)
+                })
+            }
+            localPacks = JSON.parse(localStorage.getItem('packs'))
+            if(localPacks && localPacks.length){
+                localPacks.find((pack) => {
+                    let element = document.createElement('div')
+                    element.classList = 'bg-white rounded-2xl p-4 flex gap-4 items-center shadow-sm border border-gray-100 parentItem'
+                    let html = `
+                        <div
+                            class="w-16 h-20 sm:w-20 sm:h-24 bg-gradient-to-br from-indigo-100 to-indigo-200 rounded-xl flex items-center justify-center text-2xl shrink-0">
+                            <img src="${imgPath + pack.image}"
+                                class="size-full object-cover" alt="">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="font-semibold text-gray-800 text-sm sm:text-base truncate">${pack.title}</h3>
+                            <p
+                                class="text-xs text-gray-500 mt-0.5 mb-5 max-w-full h-8 max-h-8 overflow-hidden ellipsis-2">${pack.summary}</p>
+                            <div class="w-full p-2 bg-(--light-green-btn) hover:bg-(--green-btn) transition-all duration-300 group flex gap-2 justify-center items-center rounded-xl addToCartBtns"
+                                data-pack-id="${pack.id}">
+                                <button onclick="setCount(this)"
+                                    class="w-1/3 text-lg font-bold text-(--primary-text-color) transition-all duration-300 group-hover:text-white flex justify-center items-center cursor-pointer"
+                                    data-state="+">+</button>
+                                <input type="number"
+                                    class="w-1/3 text-sm text-center outline-none text-(--primary-text-color) transition-all duration-300 group-hover:text-white in-fa"
+                                    readonly="" value="${pack.quantity}">
+                                <button onclick="setCount(this)"
+                                    class="w-1/3 text-lg font-bold text-(--primary-text-color) transition-all duration-300 group-hover:text-white flex justify-center items-center cursor-pointer"
+                                    data-state="-">-</button>
+                            </div>
+                        </div>
+                        <div class="text-left shrink-0">
+                            <p class="font-bold text-gray-800 text-sm sm:text-base in-fa price">${pack.secondary_price ? pack.secondary_price : pack.primary_price}</p>
+                            <p class="text-xs text-gray-400">تومان</p>
+                        </div>`
+                    element.innerHTML = html
+                    parentCart.append(element)
+                })
+            }
         } else {
             orderBasket.parentElement.children[1].classList.add('invisible')
             orderBasket.parentElement.children[1].classList.add('opacity-0')

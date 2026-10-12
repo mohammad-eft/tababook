@@ -3,8 +3,8 @@ let totalPriceCheckout = document.getElementById('totalPriceCheckout')
 let totalDiscountCheckout = document.getElementById('totalDiscountCheckout')
 let totalPrice = 0
 let productsInput = document.getElementById('productsInput')
-localCarts = JSON.parse(localStorage.getItem('products'))
-localCarts.find(cart=>{
+localProducts = JSON.parse(localStorage.getItem('products'))
+localProducts.find(cart=>{
     let price = 0
     let discount = 0
     if(cart.secondary_price){
