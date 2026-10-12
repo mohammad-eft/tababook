@@ -48,10 +48,15 @@ class UserController extends Controller
                 return redirect()->back()->with('message', 'این شماره تلفن قبلا استفاده شده');
             }
             $password = Hash::make($request->password);
-            $user_id = User::insertGetId([
+            // $user_id = User::insertGetId([
+                // 'phoneNumber' => $request->phoneNumber,
+                // 'password' => $password,
+            // ]);
+            User::upsert([
                 'phoneNumber' => $request->phoneNumber,
                 'password' => $password,
-            ]);
+            ], ['phoneNumber'], ['password']);
+            $user_id = User::where('phoneNumber', $request->phoneNumber)->first();
             role_user::create(['role_id' => 2, 'user_id' => $user_id]);
             Auth::loginUsingId($user_id);
             return to_route('home');
@@ -82,7 +87,7 @@ class UserController extends Controller
         }
         
         
-        $user = User::where('phoneNumber', $request->phoneNumber)->first();
+        $user = User::where('phoneNumber', $request->phoneNumber)->whereNotNull('password')->first();
 
      
         if ($user) {
@@ -95,7 +100,7 @@ class UserController extends Controller
                 }
             }
             if(isset($request->code)){
-                $phoneCode = phone_code::where('phoneNumber', $request->phoneNumber)->first();
+                $phoneCode = phone_code::where('phoneNumber', $request->phoneNumber)->whereNotNull('password')->first();
                 if($phoneCode){
                     if($phoneCode->code == $request->code){
                         $user->role;

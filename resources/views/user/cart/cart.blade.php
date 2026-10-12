@@ -66,7 +66,7 @@
 
                 <!-- Summary -->
                 {{-- @if(count(Auth::user()->carts)) --}}
-                <aside class="lg:col-span-1" id="totalBlock">
+                <aside class="lg:col-span-1 hidden" id="totalBlock">
                     <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 lg:sticky lg:top-6">
                         <h2 class="font-bold text-gray-800 mb-4">خلاصه سفارش</h2>
 

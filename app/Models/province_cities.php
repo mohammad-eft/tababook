@@ -18,4 +18,8 @@ class province_cities extends Model
     public function cities(){
         return $this->hasMany(province_cities::class, 'parent');
     }
+
+    public function addresses(){
+        return $this->hasMany(address::class, 'city_id');
+    }
 }

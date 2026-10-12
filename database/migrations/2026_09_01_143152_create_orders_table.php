@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('address_id')->nullable();
             $table->integer('user_id')->nullable();
-            $table->integer('customer_id')->nullable();
             $table->integer('order_status_id')->nullable();
             $table->integer('order_code')->nullable();
+            $table->text('description')->nullable();
+            $table->tinyInteger('onlinePayment')->default(0);
             $table->string('date')->nullable();
             $table->string('time')->nullable();
             $table->timestamps();
