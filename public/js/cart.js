@@ -101,6 +101,7 @@ function setCount(btn) {
     }
 }
 function addPackToCart(btn) {
+    btn.removeAttribute('onclick')
     btn.innerHTML = `<div class="w-5 h-5 border-2 border-white border-t-(--primary-text-color) rounded-full animate-spin"></div>`
     $.ajax({
         url: api + 'findPack/' + btn.closest('.addPackToCartBtn').dataset.packId,
@@ -109,8 +110,8 @@ function addPackToCart(btn) {
         success: function (response) {
             orderBasket.children[1].innerText += 1
             response.quantity = 1
-            btn.innerHTML = `
-            <div class="w-full p-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl" data-pack-id="${response.pack_id}">
+            btn.parentElement.innerHTML = `
+            <div class="w-full p-3 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl" data-pack-id="${response.pack_id}">
                 <button onclick="setPackCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="+">+</button>
                 <input type="number" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white text-sm text-center outline-none in-fa" readonly value="${response.quantity}">
                 <button onclick="setPackCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="-">-</button>
@@ -132,32 +133,6 @@ function addPackToCart(btn) {
             console.log('failed to load data')
         }
     })
-    // if (!flag) {
-    //     location.assign(url + 'login')
-    // } else {
-    //     $.ajax({
-    //         url: api + 'cart/pack/store',
-    //         type: "POST",
-    //         dataType: "json",
-    //         data: {
-    //             'packId': btn.dataset.packId,
-    //             'quantity': 1,
-    //             'userId': userId
-    //         },
-    //         success: function (response) {
-    //             orderBasket.children[1].innerText += 1
-    //             btn.parentElement.innerHTML = `
-    //             <div class="w-full p-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl py-2.5" data-pack-id="${response.pack_id}">
-    //                 <button onclick="setPackCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="+">+</button>
-    //                 <input type="number" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white text-sm text-center outline-none in-fa" readonly value="${response.quantity}">
-    //                 <button onclick="setPackCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="-">-</button>
-    //             </div>`
-    //         },
-    //         error: function () {
-    //             console.log('error')
-    //         }
-    //     })
-    // }
 }
 // function setPackCount(btn) {
 //     packId = btn.parentElement.dataset.packId
@@ -340,8 +315,8 @@ function setPackCount(btn) {
         localStorage.removeItem('packs')
         localStorage.setItem('packs', newItems)
         if (!popupFlag) {
-            btn.closest('.addToCartBtns').innerHTML = `
-                <button onclick="addToCart(this)" class="w-full px-4 h-full bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl cursor-pointer transition-all duration-300 hover:bg-(--green-btn) group">
+            btn.closest('.addPackToCartBtn').innerHTML = `
+                <button onclick="addPackToCart(this)" class="w-full p-4 h-full bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl cursor-pointer transition-all duration-300 hover:bg-(--green-btn) group">
                     <div>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3 fill-(--primary-text-color) transition-all duration-300 group-hover:fill-white">
                             <path d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
