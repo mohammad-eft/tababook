@@ -16,7 +16,7 @@ localCarts.find(cart=>{
     let parent = document.createElement('div')
     parent.classList = 'flex justify-between p-3 border-b border-gray-200 text-sm'
     parent.innerHTML = `
-        <span class="text-gray-600">${ cart.title } <span class="text-xs text-gray-400 mx-1">× ${ cart.quantity }</span></span>
+        <span class="text-gray-600">${ cart.title } <span class="text-xs text-gray-400 mx-1 in-fa">× ${ cart.quantity }</span></span>
         <span class="font-medium in-fa">${ price.toLocaleString('fa-IR') } تومان</span>
     `
     parentCheckout.append(parent)

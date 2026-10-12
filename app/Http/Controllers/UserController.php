@@ -82,7 +82,7 @@ class UserController extends Controller
         }
         
         
-        $user = User::where('phoneNumber', $request->phoneNumber)->first();
+        $user = User::where('phoneNumber', $request->phoneNumber)->whereNotNull('password')->first();
 
      
         if ($user) {
@@ -95,7 +95,7 @@ class UserController extends Controller
                 }
             }
             if(isset($request->code)){
-                $phoneCode = phone_code::where('phoneNumber', $request->phoneNumber)->first();
+                $phoneCode = phone_code::where('phoneNumber', $request->phoneNumber)->whereNotNull('password')->first();
                 if($phoneCode){
                     if($phoneCode->code == $request->code){
                         $user->role;

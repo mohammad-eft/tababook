@@ -73,17 +73,17 @@
 
                 <div>
                     <label class="block text-sm font-medium mb-2">جزئیات آدرس <span class="text-red-500">*</span></label>
-                    <input type="text" name="address" placeholder="نام خیابان و پلاک خانه" class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none" required>
+                    <input type="text" name="address" placeholder="نام خیابان و پلاک خانه" class="in-fa w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none" required>
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium mb-2">کد پستی (اختیاری)</label>
-                    <input type="text" name="postalCode" class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none">
+                    <input type="text" name="postalCode" class="in-fa w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium mb-2">تلفن <span class="text-red-500">*</span></label>
-                    <input type="tel" name="phoneNumber" class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none" required>
+                    <input type="tel" name="phoneNumber" class="in-fa w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none" required>
                 </div>
 
                 <div>
@@ -93,12 +93,12 @@
 
                 <div>
                     <label class="block text-sm font-medium mb-2">کد ملی (اختیاری)</label>
-                    <input type="text" name="nationalCode" class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none">
+                    <input type="text" name="nationalCode" class="in-fa w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium mb-2">توضیحات تکمیلی</label>
-                    <textarea rows="4" name="description" placeholder="یادداشت‌ها درباره سفارش شما، برای مثال نکات مهم درباره نحوه تحویل سفارش." class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none resize-none"></textarea>
+                    <textarea rows="4" name="description" placeholder="یادداشت‌ها درباره سفارش شما، برای مثال نکات مهم درباره نحوه تحویل سفارش." class="in-fa w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none resize-none"></textarea>
                 </div>
             </div>
         </div>
@@ -158,7 +158,7 @@
                     </p>
                 </div>
 
-                <button class="w-full bg-(--purple-btn) text-white font-bold py-3 px-4 rounded-lg transition duration-200 shadow-md">
+                <button class="w-full bg-(--purple-btn) text-white font-bold py-3 px-4 rounded-lg transition duration-200 shadow-md cursor-pointer">
                     پرداخت با زرین‌پال
                 </button>
             </div>

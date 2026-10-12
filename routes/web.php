@@ -17,11 +17,14 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 Route::get('/test', function(){
-    Schema::table('carts', function (Blueprint $table) {
-        $table->integer('product_id')->nullable()->change();
-        $table->integer('user_id')->nullable()->change();
-        $table->integer('pack_id')->after('product_id')->nullable();
-    });
+    // Schema::table('carts', function (Blueprint $table) {
+    //     $table->integer('product_id')->nullable()->change();
+    //     $table->integer('user_id')->nullable()->change();
+    //     $table->integer('pack_id')->after('product_id')->nullable();
+    // });
+    // Schema::table('users', function(Blueprint $table){
+    //     $table->string('password')->nullable()->change();
+    // });
 });
 
 Route::get('/', [SettingController::class, 'home'])->name('home');
