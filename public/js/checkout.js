@@ -2,6 +2,7 @@ let parentCheckout = document.getElementById('parentCheckout')
 let totalPriceCheckout = document.getElementById('totalPriceCheckout')
 let totalDiscountCheckout = document.getElementById('totalDiscountCheckout')
 let totalPrice = 0
+let productsInput = document.getElementById('productsInput')
 localCarts = JSON.parse(localStorage.getItem('products'))
 localCarts.find(cart=>{
     let price = 0
@@ -47,3 +48,4 @@ province.addEventListener('change', ()=>{
         }
     })
 })
+productsInput.value = localStorage.getItem('products')

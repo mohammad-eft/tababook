@@ -1,6 +1,13 @@
 @extends('app.document')
 @section('title', 'طبابوک | فروشگاه کتاب و لوازم تحریر')
 @section('content')
+
+
+@session('clearStorage')
+    <script>
+        localStorage.clear();
+    </script>
+@endsession
     <main class="w-full flex flex-col gap-10 justify-start items-center my-3 lg:my-5">
         <!-- hero -->
         <section

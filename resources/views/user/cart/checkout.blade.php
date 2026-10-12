@@ -3,7 +3,6 @@
 @section('content')
 
 
-
     <form action="{{ route('order.store') }}" method="POST" class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 mt-5">
 
         <div class="lg:col-span-7 xl:col-span-8 bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
@@ -11,6 +10,7 @@
             
             <div class="space-y-5">
                 @csrf
+                <input type="hidden" name="products" id="productsInput">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium mb-2">نام <span class="text-red-500">*</span></label>
