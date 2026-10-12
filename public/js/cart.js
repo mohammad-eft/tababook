@@ -5,15 +5,14 @@ let cartItemsBlock = document.getElementById('cartItemsBlock')
 orderBasket = document.getElementById('orderBasket')
 let localCarts = JSON.parse(localStorage.getItem('products'))
 let popupFlag = false
-function addToCart(btn){
+function addToCart(btn) {
     btn.removeAttribute('onclick')
     btn.innerHTML = `<div class="w-5 h-5 border-2 border-white border-t-(--primary-text-color) rounded-full animate-spin"></div>`
     $.ajax({
         url: api + 'findProduct/' + btn.closest('.addToCartBtns').dataset.productId,
         type: "GET",
         dataType: "json",
-        success: function(response){
-            console.log(response)
+        success: function (response) {
             orderBasket.children[1].innerText += 1
             response.quantity = 1
             btn.innerHTML = `
@@ -23,7 +22,7 @@ function addToCart(btn){
                 <button onclick="setCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="-">-</button>
             </div>`
             let products = []
-            if (localStorage.getItem('products')){
+            if (localStorage.getItem('products')) {
                 products = JSON.parse(localStorage.getItem('products'))
             }
             let existing = products.find(pro => pro.id == response.id)
@@ -35,7 +34,7 @@ function addToCart(btn){
             }
             localStorage.setItem('products', JSON.stringify(products))
         },
-        error: function(){
+        error: function () {
             console.log('failed to load data')
         }
     })
@@ -43,21 +42,21 @@ function addToCart(btn){
 function setCount(btn) {
     localCarts = JSON.parse(localStorage.getItem('products'))
     productId = btn.closest('.addToCartBtns').dataset.productId
-    localCarts.find(product=>{
+    localCarts.find(product => {
         let finalPrice = 0
-        if(product.secondary_price){
+        if (product.secondary_price) {
             finalPrice = product.secondary_price
         } else {
             finalPrice = product.primary_price
         }
-        if (product.id == productId){
+        if (product.id == productId) {
             if (btn.dataset.state == "+") {
                 btn.parentElement.children[1].value++
                 orderBasket.children[1].innerText++
                 product.quantity++
                 if (totalPriceEl) {
                     let currentPrice = parseInt(totalPriceEl.innerText)
-                    totalPriceEl.innerText = currentPrice+=finalPrice
+                    totalPriceEl.innerText = currentPrice += finalPrice
                 }
             }
             if (btn.dataset.state == "-") {
@@ -78,11 +77,11 @@ function setCount(btn) {
         if (totalPriceEl) {
             btn.closest('.parentItem').parentElement.remove()
         }
-        localCarts = localCarts.filter(cart => cart.id != productId )
+        localCarts = localCarts.filter(cart => cart.id != productId)
         let newItems = JSON.stringify(localCarts)
         localStorage.removeItem('products')
         localStorage.setItem('products', newItems)
-        if(!popupFlag){
+        if (!popupFlag) {
             btn.closest('.addToCartBtns').innerHTML = `
                 <button onclick="addToCart(this)" class="w-full px-4 h-full bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl cursor-pointer transition-all duration-300 hover:bg-(--green-btn) group">
                     <div>
@@ -96,12 +95,11 @@ function setCount(btn) {
         } else {
             btn.closest('.parentItem').remove()
         }
-        
+
     }
 }
-function addPackToCart(btn){
+function addPackToCart(btn) {
     btn.innerHTML = `<div class="w-5 h-5 border-2 border-white border-t-(--primary-text-color) rounded-full animate-spin"></div>`
-    console.log(btn)
     if (!flag) {
         location.assign(url + 'login')
     } else {
@@ -115,7 +113,6 @@ function addPackToCart(btn){
                 'userId': userId
             },
             success: function (response) {
-                console.log(response)
                 orderBasket.children[1].innerText += 1
                 btn.parentElement.innerHTML = `
                 <div class="w-full p-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl py-2.5" data-pack-id="${response.pack_id}">
@@ -130,24 +127,24 @@ function addPackToCart(btn){
         })
     }
 }
-function setPackCount(btn){
+function setPackCount(btn) {
     packId = btn.parentElement.dataset.packId
     btn.parentElement.parentElement.removeAttribute('onclick')
     btn.disabled = true
-    btn.innerHTML =`<div class="w-5 h-5 border-2 border-white border-t-(--primary-text-color) rounded-full animate-spin"></div>`
+    btn.innerHTML = `<div class="w-5 h-5 border-2 border-white border-t-(--primary-text-color) rounded-full animate-spin"></div>`
 
     if (btn.dataset.state == "+") {
-       
+
         btn.parentElement.children[1].value++
         orderBasket.children[1].innerText++
     }
     if (btn.dataset.state == "-") {
-       
+
         btn.parentElement.children[1].value--
         orderBasket.children[1].innerText--
     }
     if (btn.parentElement.children[1].value == 0) {
-      
+
         $.ajax({
             url: api + "cart/pack/delete",
             type: "POST",
@@ -198,7 +195,6 @@ function setPackCount(btn){
                 'userId': userId
             },
             success: function (data) {
-                console.log(data)
                 btn.disabled = false
                 let currentQuantity = data.quantity || 0
                 btn.parentElement.children[1].value = currentQuantity
@@ -211,8 +207,8 @@ function setPackCount(btn){
                     }
                     btn.parentElement.children[2].innerHTML =
                         "<button class='w-1/3 text-lg font-bold quantityBtn text-white cursor-pointer'>-</button>"
-                    if(totalPriceEl){
-                        if(data.pack.secondary_price){
+                    if (totalPriceEl) {
+                        if (data.pack.secondary_price) {
                             totalPriceEl.innerText = parseInt(totalPriceEl.innerText) + parseInt(data.pack.secondary_price)
                             let onceDiscount = parseInt(data.pack.primary_price) + parseInt(data.pack.secondary_price)
                             discountEl.innerText = (parseInt(discountEl.innerText) - parseInt(onceDiscount)) + 'تومان'
@@ -220,7 +216,7 @@ function setPackCount(btn){
                             totalPriceEl.innerText = parseInt(totalPriceEl.innerText) + parseInt(data.pack.primary_price)
                         }
                     }
-                    
+
                 }
                 if (btn.dataset.state == "-") {
                     btn.innerHTML = "<button class='w-1/3 text-lg font-bold quantityBtn text-white cursor-pointer'>-</button>"
@@ -230,7 +226,7 @@ function setPackCount(btn){
                             "<button class='w-1/3 text-lg font-bold quantityBtn text-white cursor-pointer'>+</button>"
                         btn.parentElement.children[0].disabled = false
                     }
-                    if(totalPriceEl){
+                    if (totalPriceEl) {
                         if (data.pack.secondary_price) {
                             totalPriceEl.innerText = parseInt(totalPriceEl.innerText) - parseInt(data.pack.secondary_price)
                             let onceDiscount = parseInt(data.pack.primary_price) - parseInt(data.pack.secondary_price)
@@ -269,55 +265,57 @@ function setPackCount(btn){
         })
     }
 }
-orderBasket.addEventListener('click', ()=>{
-    if (orderBasket.parentElement.children[1].classList.contains('invisible')){
-        popupFlag = true
-        orderBasket.parentElement.children[1].classList.remove('invisible')
-        orderBasket.parentElement.children[1].classList.remove('opacity-0')
-        let parentCart = orderBasket.parentElement.querySelector('.parentHeaderCarts')
-        parentCart.innerHTML = ''
-        localCarts = JSON.parse(localStorage.getItem('products'))
-        localCarts.find((prod)=>{
-            let element = document.createElement('div')
-            element.classList = 'bg-white rounded-2xl p-4 flex gap-4 items-center shadow-sm border border-gray-100 parentItem'
-            let html = `
-                <div
-                    class="w-16 h-20 sm:w-20 sm:h-24 bg-gradient-to-br from-indigo-100 to-indigo-200 rounded-xl flex items-center justify-center text-2xl shrink-0">
-                    <img src="${ imgPath+prod.mainImg }"
-                        class="size-full object-cover" alt="">
-                </div>
-                <div class="flex-1 min-w-0">
-                    <h3 class="font-semibold text-gray-800 text-sm sm:text-base truncate">${ prod.title }</h3>
-                    <p
-                        class="text-xs text-gray-500 mt-0.5 mb-5 max-w-full h-8 max-h-8 overflow-hidden ellipsis-2">${ prod.summary }</p>
-                    <div class="w-full p-2 bg-(--light-green-btn) hover:bg-(--green-btn) transition-all duration-300 group flex gap-2 justify-center items-center rounded-xl addToCartBtns"
-                        data-product-id="${prod.id}">
-                        <button onclick="setCount(this)"
-                            class="w-1/3 text-lg font-bold text-(--primary-text-color) transition-all duration-300 group-hover:text-white flex justify-center items-center cursor-pointer"
-                            data-state="+">+</button>
-                        <input type="number"
-                            class="w-1/3 text-sm text-center outline-none text-(--primary-text-color) transition-all duration-300 group-hover:text-white in-fa"
-                            readonly="" value="${ prod.quantity }">
-                        <button onclick="setCount(this)"
-                            class="w-1/3 text-lg font-bold text-(--primary-text-color) transition-all duration-300 group-hover:text-white flex justify-center items-center cursor-pointer"
-                            data-state="-">-</button>
+orderBasket.addEventListener('click', () => {
+    if (localStorage.getItem('products') && JSON.parse(localStorage.getItem('products')).length) {
+        if (orderBasket.parentElement.children[1].classList.contains('invisible')) {
+            popupFlag = true
+            orderBasket.parentElement.children[1].classList.remove('invisible')
+            orderBasket.parentElement.children[1].classList.remove('opacity-0')
+            let parentCart = orderBasket.parentElement.querySelector('.parentHeaderCarts')
+            parentCart.innerHTML = ''
+            localCarts = JSON.parse(localStorage.getItem('products'))
+            localCarts.find((prod) => {
+                let element = document.createElement('div')
+                element.classList = 'bg-white rounded-2xl p-4 flex gap-4 items-center shadow-sm border border-gray-100 parentItem'
+                let html = `
+                    <div
+                        class="w-16 h-20 sm:w-20 sm:h-24 bg-gradient-to-br from-indigo-100 to-indigo-200 rounded-xl flex items-center justify-center text-2xl shrink-0">
+                        <img src="${imgPath + prod.mainImg}"
+                            class="size-full object-cover" alt="">
                     </div>
-                </div>
-                <div class="text-left shrink-0">
-                    <p class="font-bold text-gray-800 text-sm sm:text-base in-fa price">${ prod.secondary_price ? prod.secondary_price : prod.primary_price }</p>
-                    <p class="text-xs text-gray-400">تومان</p>
-                </div>`
-            element.innerHTML = html
-            parentCart.append(element)
-        })
-    } else {
-        orderBasket.parentElement.children[1].classList.add('invisible')
-        orderBasket.parentElement.children[1].classList.add('opacity-0')
-        popupFlag = false
+                    <div class="flex-1 min-w-0">
+                        <h3 class="font-semibold text-gray-800 text-sm sm:text-base truncate">${prod.title}</h3>
+                        <p
+                            class="text-xs text-gray-500 mt-0.5 mb-5 max-w-full h-8 max-h-8 overflow-hidden ellipsis-2">${prod.summary}</p>
+                        <div class="w-full p-2 bg-(--light-green-btn) hover:bg-(--green-btn) transition-all duration-300 group flex gap-2 justify-center items-center rounded-xl addToCartBtns"
+                            data-product-id="${prod.id}">
+                            <button onclick="setCount(this)"
+                                class="w-1/3 text-lg font-bold text-(--primary-text-color) transition-all duration-300 group-hover:text-white flex justify-center items-center cursor-pointer"
+                                data-state="+">+</button>
+                            <input type="number"
+                                class="w-1/3 text-sm text-center outline-none text-(--primary-text-color) transition-all duration-300 group-hover:text-white in-fa"
+                                readonly="" value="${prod.quantity}">
+                            <button onclick="setCount(this)"
+                                class="w-1/3 text-lg font-bold text-(--primary-text-color) transition-all duration-300 group-hover:text-white flex justify-center items-center cursor-pointer"
+                                data-state="-">-</button>
+                        </div>
+                    </div>
+                    <div class="text-left shrink-0">
+                        <p class="font-bold text-gray-800 text-sm sm:text-base in-fa price">${prod.secondary_price ? prod.secondary_price : prod.primary_price}</p>
+                        <p class="text-xs text-gray-400">تومان</p>
+                    </div>`
+                element.innerHTML = html
+                parentCart.append(element)
+            })
+        } else {
+            orderBasket.parentElement.children[1].classList.add('invisible')
+            orderBasket.parentElement.children[1].classList.add('opacity-0')
+            popupFlag = false
+        }
     }
 })
-document.addEventListener('click', (e)=>{
-    if (!orderBasket.contains(e.target) && !orderBasket.parentElement.children[1].contains(e.target)){
+document.addEventListener('click', (e) => {
+    if (!orderBasket.contains(e.target) && !orderBasket.parentElement.children[1].contains(e.target)) {
         popupFlag = false
         orderBasket.parentElement.children[1].classList.add('invisible')
         orderBasket.parentElement.children[1].classList.add('opacity-0')
