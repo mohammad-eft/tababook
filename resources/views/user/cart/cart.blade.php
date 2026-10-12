@@ -10,8 +10,8 @@
         </header>
 
         <!-- Main -->
-        <main class="max-w-5xl mx-auto px-4 py-8">
-            <h1 class="text-2xl font-bold text-gray-800 mb-6">سبد خرید</h1>
+        <main class="max-w-5xl mx-auto px-4 py-4 lg:py-8">
+            <h1 class="text-lg lg:text-2xl font-bold text-gray-800 mb-3 lg:mb-6">سبد خرید</h1>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6" >
 
