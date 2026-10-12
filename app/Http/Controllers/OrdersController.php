@@ -133,6 +133,7 @@ class OrdersController extends Controller
         $descriptoin = $request->input('descriptoin');
         $onlinePayment = $request->input('onlinePayment');
         $products = json_decode($request->products);
+        $packs = json_decode($request->packs);
 
         User::upsert([
             'name'=>$name,
@@ -161,6 +162,8 @@ class OrdersController extends Controller
             'user_id'=>$user->id,
             'description'=>$descriptoin,
             'onlinePayment'=>$onlinePayment,
+            'address_id'=>$address->id,
+            'data_status_id'=>1,
             'date'=>$date,
             'time'=>$time,
         ]);
@@ -168,13 +171,25 @@ class OrdersController extends Controller
         $order_code = "100" . $order->id;
         orders::where('id', $order->id)->update(['order_code'=>$order_code]);
 
-        foreach($products as $product){
-            carts::create([
-                'product_id'=>$product->id,
-                'user_id'=>$user->id,
-                'order_id'=>$order->id,
-                'quantity'=>$product->quantity
-            ]);
+        if(count($products)){
+            foreach($products as $product){
+                carts::create([
+                    'product_id'=>$product->id,
+                    'user_id'=>$user->id,
+                    'order_id'=>$order->id,
+                    'quantity'=>$product->quantity
+                ]);
+            }
+        }
+        if(count($packs)){
+            foreach($packs as $pack){
+                carts::create([
+                    'pack_id'=>$pack->id,
+                    'user_id'=>$user->id,
+                    'order_id'=>$order->id,
+                    'quantity'=>$pack->quantity
+                ]);
+            }
         }
        
         return redirect('/')->with('clearStorage', true);

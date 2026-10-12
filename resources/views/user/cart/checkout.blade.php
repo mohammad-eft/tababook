@@ -9,6 +9,7 @@
             <div class="space-y-5">
                 @csrf
                 <input type="hidden" name="products" id="productsInput">
+                <input type="hidden" name="packs" id="packsInput">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium mb-2">نام <span class="text-red-500">*</span></label>
