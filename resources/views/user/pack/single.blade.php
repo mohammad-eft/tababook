@@ -114,7 +114,7 @@
                     </div>
                 </div>
                 @else --}}
-                <div class="w-full" id="addPackToCartBtn" data-pack-id="{{ $pack->id }}">
+                <div class="w-full addPackToCartBtn" data-pack-id="{{ $pack->id }}">
                     <button onclick="addPackToCart(this)" class="w-full px-2 h-12 transition-all duration-300 hover:bg-(--green-btn) cursor-pointer group bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl" data-pack-id="{{ $pack->id }}">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
