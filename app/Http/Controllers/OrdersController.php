@@ -22,47 +22,48 @@ class OrdersController extends Controller
     public function store(Request $request)
     {
         dd($request->all());
-        $user_id = Auth::id();
-        if (isset($request->user_id)) {
-            $user_id = $request->user_id;
-        }
+        
+        // $user_id = Auth::id();
+        // if (isset($request->user_id)) {
+        //     $user_id = $request->user_id;
+        // }
 
-        // همه آیتم‌های سبد خرید کاربر که هنوز سفارش نشدن
-        $cartItems = carts::where('user_id', $user_id)
-            ->where('order_id', null)
-            ->get();
+        // // همه آیتم‌های سبد خرید کاربر که هنوز سفارش نشدن
+        // $cartItems = carts::where('user_id', $user_id)
+        //     ->where('order_id', null)
+        //     ->get();
 
-        if ($cartItems->isEmpty()) {
-            return response()->json(['message' => 'سبد خرید خالی است'], 400);
-        }
-        $address_id = address::create([
-            'user_id'=>Auth::id(),
-            'address'=>$request->address
-        ]);
-        $createdOrders = [];
-        $dateTime = explode(' ', verta());
-        $date = implode('/', explode('-', $dateTime[0]));
-        $time = $dateTime[1];
-        $order_id = orders::insertGetId([
-            'address_id' => $address_id,
-            'user_id' => $user_id,
-            'order_status_id' => 1,
-            'date'=>$date,
-            'time'=>$time
-        ]);
-        foreach ($cartItems as $cartItem) {
+        // if ($cartItems->isEmpty()) {
+        //     return response()->json(['message' => 'سبد خرید خالی است'], 400);
+        // }
+        // $address_id = address::create([
+        //     'user_id'=>Auth::id(),
+        //     'address'=>$request->address
+        // ]);
+        // $createdOrders = [];
+        // $dateTime = explode(' ', verta());
+        // $date = implode('/', explode('-', $dateTime[0]));
+        // $time = $dateTime[1];
+        // $order_id = orders::insertGetId([
+        //     'address_id' => $address_id,
+        //     'user_id' => $user_id,
+        //     'order_status_id' => 1,
+        //     'date'=>$date,
+        //     'time'=>$time
+        // ]);
+        // foreach ($cartItems as $cartItem) {
 
-            $order_code = "100" . $order_id;
-            orders::where('id', $order_id)->update(['order_code' => $order_code]);
+        //     $order_code = "100" . $order_id;
+        //     orders::where('id', $order_id)->update(['order_code' => $order_code]);
 
-            $cartItem->order_id = $order_id;
-            $cartItem->save();
+        //     $cartItem->order_id = $order_id;
+        //     $cartItem->save();
 
-            $createdOrders[] = [
-                'order_id' => $order_id,
-                'product_id' => $cartItem->product_id,
-            ];
-        }
+        //     $createdOrders[] = [
+        //         'order_id' => $order_id,
+        //         'product_id' => $cartItem->product_id,
+        //     ];
+        // }
 
         // return response()->json($createdOrders);
         return to_route('home');
