@@ -245,9 +245,9 @@
                 url: "{{ url('api/order/showItems') }}/"+orderId,
                 type: "GET",
                 success: function (data) {
-                    console.log(data)
+                    
                     let formatter = new Intl.NumberFormat('en-US')
-                    console.log(data)
+                    
                     itemList.innerHTML = ""
                     orderBlock.classList.remove('invisible')
                     orderBlock.classList.remove('opacity-0')
@@ -272,43 +272,83 @@
                         <div class="w-full flex gap-3 items-center relative">
                             <div class="w-7/12 relative">
                     `
-
-                    inner+= `
-                    <img src='${cart.product.media[0].media_path ? "{{ asset('storage/') }}/" + cart.product.media[0].media_path : "{{ asset('storage/resturan_img/807c88cc-7948-4f75-88e5-4c4598ab8175_1767800481_6872954f6e4630ba6c0eda84b2ca1882.jpg') }}"}'
-                            alt="" class="w-full min-h-24 max-h-24 rounded-xl">
-                   </div>
-                    <div class="w-full flex h-full flex-col gap-1 items-start">
-                        <div class="w-full flex gap-1 items-center">
-                            <span class="w-[7px] h-[7px] rounded-full bg-[#f6911e]"></span>
-                            <h3 class="text-[14px] font-bold">${ cart.product.title }</h3>
-                        </div>
-                        <div class="flex flex-row items-center gap-2">
-                            <div class="flex gap-1 relative ${ cart.product.secondary_price ? 'through' : '' }">
-                                <span class="text-[10px] text-[#f6911e] in-fa">${ formatter.format(cart.product.primary_price) }</span>
-                                <span class='text-[10px] text-[#f6911e] ${ cart.product.secondary_price ? '' : 'hidden' } '></span>
+                    if(cart.product){
+                        inner+= `
+                        <img src='${cart.product.media[0].media_path ? "{{ asset('storage/') }}/" + cart.product.media[0].media_path : "{{ asset('storage/resturan_img/807c88cc-7948-4f75-88e5-4c4598ab8175_1767800481_6872954f6e4630ba6c0eda84b2ca1882.jpg') }}"}'
+                                alt="" class="w-full min-h-24 max-h-24 rounded-xl">
+                       </div>
+                        <div class="w-full flex h-full flex-col gap-1 items-start">
+                            <div class="w-full flex gap-1 items-center">
+                                <span class="w-[7px] h-[7px] rounded-full bg-[#f6911e]"></span>
+                                <h3 class="text-[14px] font-bold">${ cart.product.title }</h3>
                             </div>
-                            <div class="flex gap-1 relative ${ cart.product.secondary_price ? '' : 'hidden' }">
-                                <span class="text-[10px] text-[#f6911e] font-bold in-fa">${ formatter.format(cart.product.secondary_price) }</span>
-                                <span class="text-[10px] text-[#f6911e]">تومان</span>
+                            <div class="flex flex-row items-center gap-2">
+                                <div class="flex gap-1 relative ${ cart.product.secondary_price ? 'through' : '' }">
+                                    <span class="text-[10px] text-[#f6911e] in-fa">${ formatter.format(cart.product.primary_price) }</span>
+                                    <span class='text-[10px] text-[#f6911e] ${ cart.product.secondary_price ? '' : 'hidden' } '></span>
+                                </div>
+                                <div class="flex gap-1 relative ${ cart.product.secondary_price ? '' : 'hidden' }">
+                                    <span class="text-[10px] text-[#f6911e] font-bold in-fa">${ formatter.format(cart.product.secondary_price) }</span>
+                                    <span class="text-[10px] text-[#f6911e]">تومان</span>
+                                </div>
                             </div>
-                        </div>
-                        <p class="text-[10px] text-[#6B7280] mt-0.5">${ cart.product.description ?? "" }</p>
-                        <div class="flex flex-wrap gap-1">
-                            <span class="px-1.5 py-0.5 rounded-full text-[9px] bg-[#f5d4ae] text-[#f6911e]">محبوب ها</span>
-                            <span class="px-1.5 py-0.5 rounded-full text-[9px] bg-[#F3F3F3] ">محبوب ها</span>
-                            <span class="px-1.5 py-0.5 rounded-full text-[9px] bg-[#F3F3F3] ">محبوب ها</span>
+                            <p class="text-[10px] text-[#6B7280] mt-0.5">${ cart.product.description ?? "" }</p>
+                            <div class="flex flex-wrap gap-1">
+                                <span class="px-1.5 py-0.5 rounded-full text-[9px] bg-[#f5d4ae] text-[#f6911e]">محبوب ها</span>
+                                <span class="px-1.5 py-0.5 rounded-full text-[9px] bg-[#F3F3F3] ">محبوب ها</span>
+                                <span class="px-1.5 py-0.5 rounded-full text-[9px] bg-[#F3F3F3] ">محبوب ها</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                    <div class="flex gap-1 items-center">
-                        <div class="h-full flex flex-col gap-2 items-center justify-center px-1" data-item-id="${ cart.product_id }">
-
-                            <span class="text-xs text-(--secondary-text-color)">تعداد</span>
-                            <span class="text-xs text-(--primary-text-color) font-bold in-fa">${cart.quantity}</span>
-
+                        <div class="flex gap-1 items-center">
+                            <div class="h-full flex flex-col gap-2 items-center justify-center px-1" data-item-id="${ cart.product_id }">
+    
+                                <span class="text-xs text-(--secondary-text-color)">تعداد</span>
+                                <span class="text-xs text-(--primary-text-color) font-bold in-fa">${cart.quantity}</span>
+    
+                            </div>
+                        </div>
+                    `
+                    }
+                    console.log(cart)
+                    if(cart.pack){
+                        inner+= `
+                        <img src='${cart.pack.image ? "{{ asset('storage/') }}/" + cart.pack.image : "{{ asset('storage/resturan_img/807c88cc-7948-4f75-88e5-4c4598ab8175_1767800481_6872954f6e4630ba6c0eda84b2ca1882.jpg') }}"}'
+                                alt="" class="w-full min-h-24 max-h-24 rounded-xl">
+                       </div>
+                        <div class="w-full flex h-full flex-col gap-1 items-start">
+                            <div class="w-full flex gap-1 items-center">
+                                <span class="w-[7px] h-[7px] rounded-full bg-[#f6911e]"></span>
+                                <h3 class="text-[14px] font-bold">${ cart.pack.title }</h3>
+                            </div>
+                            <div class="flex flex-row items-center gap-2">
+                                <div class="flex gap-1 relative ${ cart.pack.secondary_price ? 'through' : '' }">
+                                    <span class="text-[10px] text-[#f6911e] in-fa">${ formatter.format(cart.pack.primary_price) }</span>
+                                    <span class='text-[10px] text-[#f6911e] ${ cart.pack.secondary_price ? '' : 'hidden' } '></span>
+                                </div>
+                                <div class="flex gap-1 relative ${ cart.pack.secondary_price ? '' : 'hidden' }">
+                                    <span class="text-[10px] text-[#f6911e] font-bold in-fa">${ formatter.format(cart.pack.secondary_price) }</span>
+                                    <span class="text-[10px] text-[#f6911e]">تومان</span>
+                                </div>
+                            </div>
+                            <p class="text-[10px] text-[#6B7280] mt-0.5">${ cart.pack.description ?? "" }</p>
+                            <div class="flex flex-wrap gap-1">
+                                <span class="px-1.5 py-0.5 rounded-full text-[9px] bg-[#f5d4ae] text-[#f6911e]">محبوب ها</span>
+                                <span class="px-1.5 py-0.5 rounded-full text-[9px] bg-[#F3F3F3] ">محبوب ها</span>
+                                <span class="px-1.5 py-0.5 rounded-full text-[9px] bg-[#F3F3F3] ">محبوب ها</span>
+                            </div>
                         </div>
                     </div>
-                `
+                        <div class="flex gap-1 items-center">
+                            <div class="h-full flex flex-col gap-2 items-center justify-center px-1" data-item-id="${ cart.pack_id }">
+    
+                                <span class="text-xs text-(--secondary-text-color)">تعداد</span>
+                                <span class="text-xs text-(--primary-text-color) font-bold in-fa">${cart.quantity}</span>
+    
+                            </div>
+                        </div>
+                    `
+                    }
                         item.innerHTML = inner
                         itemList.appendChild(item)
 

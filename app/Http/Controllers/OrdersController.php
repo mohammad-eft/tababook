@@ -145,7 +145,7 @@ class OrdersController extends Controller
 
         $user = User::where('phoneNumber', $phoneNumber)->first();
 
-        $address = address::create([
+        $address = address::firstOrCreate([
             'user_id'=>$user->id,
             'address'=>$addressText,
             'city_id'=>$cityId,
@@ -163,7 +163,7 @@ class OrdersController extends Controller
             'description'=>$descriptoin,
             'onlinePayment'=>$onlinePayment,
             'address_id'=>$address->id,
-            'data_status_id'=>1,
+            'order_status_id'=>1,
             'date'=>$date,
             'time'=>$time,
         ]);
@@ -171,7 +171,7 @@ class OrdersController extends Controller
         $order_code = "100" . $order->id;
         orders::where('id', $order->id)->update(['order_code'=>$order_code]);
 
-        if(count($products)){
+        if($products){
             foreach($products as $product){
                 carts::create([
                     'product_id'=>$product->id,
@@ -181,7 +181,7 @@ class OrdersController extends Controller
                 ]);
             }
         }
-        if(count($packs)){
+        if($packs){
             foreach($packs as $pack){
                 carts::create([
                     'pack_id'=>$pack->id,
@@ -230,6 +230,7 @@ class OrdersController extends Controller
                     $qr->where('is_main', 1)->get();
                 }]);
             }]);
+            $query->with('pack');
         }]);
         return response()->json($order);
     }
