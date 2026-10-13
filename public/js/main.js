@@ -172,3 +172,20 @@ modals.forEach(modal => {
         modal.classList.add('opacity-0', 'invisible')
     }, 3000)
 })
+
+
+let headerMenu = document.getElementById('headerMenu')
+let topBanner = document.getElementById('topBanner')
+let mt = 'mt-[' + topBanner.clientHeight + 'px]'
+headerMenu.classList.add(mt)
+
+window.addEventListener('scroll', () => {
+    const header = document.getElementById('headerMenu')
+    if (window.scrollY > 80) {
+        headerMenu.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)'
+        headerMenu.classList.remove(mt)
+    } else {
+        header.style.boxShadow = 'none'
+        headerMenu.classList.add(mt)
+    }
+})
