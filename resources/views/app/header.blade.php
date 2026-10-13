@@ -35,7 +35,7 @@
 <body>
     <header class="w-full flex flex-col justify-start items-center">
         <a href="{{ $setting['topBannerLink'] }}" class="w-full flex justify-center items-center">
-            <img src="{{ asset('storage/' . $setting['topBanner']) }}" class="w-full max-h-10 object-cover"
+            <img src="{{ asset('storage/' . $setting['topBanner']) }}" class="w-full max-h-20 object-cover"
                 alt="">
         </a>
         <section class="max-w-[1800px] w-11/12 mx-auto flex flex-col gap-4 justify-start items-center bg-white">
