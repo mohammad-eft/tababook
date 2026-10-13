@@ -81,7 +81,7 @@
                                             <path d="M28 24V36"/>
                                         </svg>
                                     </div>
-                                    <span class="font-bold text-xs text-(--primary-text-color) in-fa order-table">{{ $order->user->phoneNumber }}</span>
+                                    <span class="font-bold text-xs text-(--primary-text-color) in-fa order-table">{{ $order->user->name.' '.$order->user->family.' | '.$order->user->phoneNumber }}</span>
                                     <span class="text-[10px] px-2 py-0.5 bg-blue-500/10 rounded-full border-1 border-blue-500 order-status">در انتظار</span>
                                 </div>
                                 <div class="flex flex-col gap-1.5 items-end">
