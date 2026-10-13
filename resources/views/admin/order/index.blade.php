@@ -82,7 +82,7 @@
                                         </svg>
                                     </div>
                                     <span class="font-bold text-xs text-(--primary-text-color) in-fa order-table">{{ $order->user->name.' '.$order->user->family.' | '.$order->user->phoneNumber }}</span>
-                                    <span class="text-[10px] px-2 py-0.5 bg-blue-500/10 rounded-full border-1 border-blue-500 order-status">در انتظار</span>
+                                    <span class="text-[10px] px-2 py-0.5 bg-[{{ $order->state->color }}]/20 font-bold text-[{{ $order->state->color }}] rounded-full border-1 border-[{{ $order->state->color }}] order-status">{{ $order->state->title }}</span>
                                 </div>
                                 <div class="flex flex-col gap-1.5 items-end">
                                     <span class="text-[10px] text-(--secondary-text-color)">شماره سفارش</span>
@@ -144,8 +144,8 @@
                                 <div class="w-full flex flex-col gap-1">
 
                                     <div class="w-full flex flex-row items-center gap-2">
-                                        <button class="w-1/2 flex flex-row gap-1 items-center justify-center py-1.5 rounded-md border-1 border-blue-500 bg-blue-500 text-white text-xs cursor-pointer order-show-btn" onclick="showItems(this, {{ $order->id }})">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 fill-white"
+                                        <button class="w-1/2 flex flex-row gap-1 items-center justify-center py-1.5 rounded-md border-1 border-[{{ $order->state->color }}] bg-[{{ $order->state->color }}]/20 text-[{{ $order->state->color }}] text-xs cursor-pointer order-show-btn" onclick="showItems(this, {{ $order->id }})">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 fill-[{{ $order->state->color }}]"
                                                  viewBox="0 0 576 512">
                                                 <path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"/>
                                             </svg>
@@ -257,8 +257,8 @@
                     el.classList.add('cursor-pointer')
 
                     tableName.innerText = data.qr_code ? (data.qr_code.description ? data.qr_code.description : data.qr_code.slug) : "-"
-                    // orderStatus.innerText = data.status.title
-                    orderStatus.classList = `text-[10px] font-bold px-2 py-0.5 rounded-full border-1 border-blue-500 text-blue-500 bg-blue-500/10`
+                    orderStatus.classList = `text-[10px] font-bold px-2 py-0.5 rounded-full border-1 border-[${ data.state.color }] text-[${ data.state.color }] bg-[${ data.state.color }]/10`
+                    orderStatus.innerText = data.state.title
                     orderCode.innerText = '#'+data.order_code
                     if(data.address){
                         address.parentElement.classList.remove('hidden')
@@ -275,7 +275,7 @@
                     if(cart.product){
                         inner+= `
                         <img src='${cart.product.media[0].media_path ? "{{ asset('storage/') }}/" + cart.product.media[0].media_path : "{{ asset('storage/resturan_img/807c88cc-7948-4f75-88e5-4c4598ab8175_1767800481_6872954f6e4630ba6c0eda84b2ca1882.jpg') }}"}'
-                                alt="" class="w-full min-h-24 max-h-24 rounded-xl">
+                                alt="" class="w-full min-h-24 max-h-24 rounded-xl object-cover">
                        </div>
                         <div class="w-full flex h-full flex-col gap-1 items-start">
                             <div class="w-full flex gap-1 items-center">
@@ -314,7 +314,7 @@
                     if(cart.pack){
                         inner+= `
                         <img src='${cart.pack.image ? "{{ asset('storage/') }}/" + cart.pack.image : "{{ asset('storage/resturan_img/807c88cc-7948-4f75-88e5-4c4598ab8175_1767800481_6872954f6e4630ba6c0eda84b2ca1882.jpg') }}"}'
-                                alt="" class="w-full min-h-24 max-h-24 rounded-xl">
+                                alt="" class="w-full min-h-24 max-h-24 rounded-xl object-cover">
                        </div>
                         <div class="w-full flex h-full flex-col gap-1 items-start">
                             <div class="w-full flex gap-1 items-center">

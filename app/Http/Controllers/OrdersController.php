@@ -133,6 +133,7 @@ class OrdersController extends Controller
             }]);
             $query->with('pack');
         }]);
+        $order->state;
         return response()->json($order);
     }
     public function cancelAll(User $user)

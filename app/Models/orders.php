@@ -22,4 +22,7 @@ class orders extends Model
     public function carts(){
         return $this->hasMany(carts::class, 'order_id');
     }
+    public function state(){
+        return $this->belongsTo(order_status::class, 'order_status_id');
+    }
 }
