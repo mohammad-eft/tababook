@@ -11,4 +11,7 @@ class order_status extends Model
         'admin_title',
         'color'
     ];
+    public function orders(){
+        return $this->hasMany(orders::class, 'order_status_id');
+    }
 }
