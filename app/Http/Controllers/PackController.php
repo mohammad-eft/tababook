@@ -243,4 +243,10 @@ class PackController extends Controller
         }
         return response()->json($pack);
     }
+
+    public function index(){
+        $setting = HomeSetting::document();
+        $packs = pack::all();
+        return view('user.pack.list', ['setting'=>$setting, 'packs'=>$packs]);
+    }
 }
