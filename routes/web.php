@@ -216,6 +216,7 @@ Route::group([
     Route::get('/edit/{pack}', 'edit')->name('edit');
     Route::post('/update/{pack}', 'update')->name('update');
     Route::get('/delete/{pack}', 'delete')->name('delete');
+    Route::get('/', 'index')->name('index');
     Route::get('/list', 'list')->name('list')->withoutMiddleware([AuthMiddleware::class]);
     Route::get('/single/{pack}', 'single')->name('single')->withoutMiddleware([AuthMiddleware::class]);
 });

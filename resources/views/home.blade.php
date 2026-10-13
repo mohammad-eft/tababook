@@ -52,7 +52,7 @@
                     </div>
                     <div class="w-full flex flex-row justify-between items-center">
                         <span class="lg:text-[30px] text-(--primary-text-color) font-bold">{{ $setting['packTitle'] }}</span>
-                        <a href="#" class="text-sm text-(--secondary-text-color)">مشاهده همه</a>
+                        <a href="{{ route('pack.index') }}" class="text-sm text-(--secondary-text-color)">مشاهده همه</a>
                     </div>
                 </div>
                 <div class="w-full grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 gap-4 lg:gap-8 mt-5">
