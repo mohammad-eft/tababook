@@ -162,7 +162,7 @@
                         </div>
                         {{-- @if (Auth::check()) --}}
                         <div class="relative">
-                            <button class="block relative" id="orderBasket">
+                            <button class="block relative cursor-pointer" id="orderBasket">
                                 <svg class="w-[29px] h-[29px] text-gray-800" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                     viewBox="0 0 24 24">
@@ -197,7 +197,7 @@
                                         style="scrollbar-width: thin;"></div>
                                     <div class="w-full text-end mt-1.5">
                                         <a href="{{ route('cart.list') }}"
-                                            class="text-blue-500 text-sm font-bold pl-2.5">مشاهده همه</a>
+                                            class="text-blue-500 text-sm font-bold pl-2.5">مشاهده سبد خرید</a>
                                     </div>
                                 </div>
                             </div>
