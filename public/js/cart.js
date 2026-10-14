@@ -15,7 +15,9 @@ function addToCart(btn) {
         type: "GET",
         dataType: "json",
         success: function (response) {
-            orderBasket.children[1].innerText += 1
+            let quan = parseInt(orderBasket.children[1].innerText)
+            quan+=1
+            orderBasket.children[1].innerText = quan
             response.quantity = 1
             btn.innerHTML = `
             <div class="w-full p-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl" data-product-id="${response.product_id}">
@@ -54,7 +56,7 @@ function setCount(btn) {
         if (product.id == productId) {
             if (btn.dataset.state == "+") {
                 btn.parentElement.children[1].value++
-                orderBasket.children[1].innerText++
+                // orderBasket.children[1].innerText++
                 product.quantity++
                 if (totalPriceEl) {
                     let currentPrice = parseInt(totalPriceEl.innerText)
@@ -63,7 +65,7 @@ function setCount(btn) {
             }
             if (btn.dataset.state == "-") {
                 btn.parentElement.children[1].value--
-                orderBasket.children[1].innerText--
+                // orderBasket.children[1].innerText--
                 product.quantity--
                 if (totalPriceEl) {
                     let currentPrice = parseInt(totalPriceEl.innerText)
@@ -76,6 +78,7 @@ function setCount(btn) {
     localStorage.removeItem('products')
     localStorage.setItem('products', newItems)
     if (btn.parentElement.children[1].value == 0) {
+        orderBasket.children[1].innerText--
         if (totalPriceEl) {
             btn.closest('.parentItem').parentElement.remove()
         }
@@ -134,144 +137,6 @@ function addPackToCart(btn) {
         }
     })
 }
-// function setPackCount(btn) {
-//     packId = btn.parentElement.dataset.packId
-//     btn.parentElement.parentElement.removeAttribute('onclick')
-//     btn.disabled = true
-//     btn.innerHTML = `<div class="w-5 h-5 border-2 border-white border-t-(--primary-text-color) rounded-full animate-spin"></div>`
-
-//     if (btn.dataset.state == "+") {
-
-//         btn.parentElement.children[1].value++
-//         orderBasket.children[1].innerText++
-//     }
-//     if (btn.dataset.state == "-") {
-
-//         btn.parentElement.children[1].value--
-//         orderBasket.children[1].innerText--
-//     }
-//     if (btn.parentElement.children[1].value == 0) {
-
-//         $.ajax({
-//             url: api + "cart/pack/delete",
-//             type: "POST",
-//             dataType: "json",
-//             data: {
-//                 'userId': userId,
-//                 'packId': btn.parentElement.dataset.packId
-//             },
-//             success: function (data) {
-//                 if (routeIsCart) {
-//                     btn.closest('.parentItem').remove()
-//                 } else {
-//                     btn.parentElement.parentElement.innerHTML = `
-//                     <button onclick="addPackToCart(this)" class="w-full px-2 h-12 transition-all duration-300 hover:bg-(--green-btn) cursor-pointer group bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl" data-pack-id="${data.data.pack_id}">
-//                         <div>
-//                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
-//                                 class="lg:size-4 size-3 fill-(--primary-text-color) transition-all duration-300 group-hover:fill-white">
-//                                 <path
-//                                     d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
-//                                 </path>
-//                             </svg>
-//                         </div>
-//                         <span class="lg:text-sm text-[10px] text-(--primary-text-color) font-bold transition-all duration-300 group-hover:text-white">افزودن به سبد خرید</span>
-//                     </button>`
-//                 }
-//                 if (totalPriceEl) {
-//                     if (data.data.pack.secondary_price) {
-//                         totalPriceEl.innerText = parseInt(totalPriceEl.innerText) - parseInt(data.data.pack.secondary_price)
-//                         let onceDiscount = parseInt(data.data.pack.primary_price) - parseInt(data.data.pack.secondary_price)
-//                         discountEl.innerText = (parseInt(discountEl.innerText) - parseInt(onceDiscount)) + 'تومان'
-//                     } else {
-//                         totalPriceEl.innerText = parseInt(totalPriceEl.innerText) - parseInt(data.data.pack.primary_price)
-//                     }
-//                 }
-//             },
-//             error: function () {
-//                 console.log('error')
-//             }
-//         })
-//     } else {
-//         $.ajax({
-//             url: api + 'cart/pack/update',
-//             type: "POST",
-//             dataType: "json",
-//             data: {
-//                 'packId': btn.parentElement.dataset.packId,
-//                 'quantity': btn.parentElement.children[1].value,
-//                 'userId': userId
-//             },
-//             success: function (data) {
-//                 btn.disabled = false
-//                 let currentQuantity = data.quantity || 0
-//                 btn.parentElement.children[1].value = currentQuantity
-//                 if (btn.dataset.state == "+") {
-//                     btn.innerHTML = "<button class='w-1/3 text-lg font-bold quantityBtn text-white cursor-pointer'>+</bu>"
-//                     if (data.disabled) {
-
-//                         btn.innerHTML = "<button class='w-1/3 text-lg font-bold quantityBtn text-white cursor-pointer'>+</button>"
-//                         btn.disabled = true
-//                     }
-//                     btn.parentElement.children[2].innerHTML =
-//                         "<button class='w-1/3 text-lg font-bold quantityBtn text-white cursor-pointer'>-</button>"
-//                     if (totalPriceEl) {
-//                         if (data.pack.secondary_price) {
-//                             totalPriceEl.innerText = parseInt(totalPriceEl.innerText) + parseInt(data.pack.secondary_price)
-//                             let onceDiscount = parseInt(data.pack.primary_price) + parseInt(data.pack.secondary_price)
-//                             discountEl.innerText = (parseInt(discountEl.innerText) - parseInt(onceDiscount)) + 'تومان'
-//                         } else {
-//                             totalPriceEl.innerText = parseInt(totalPriceEl.innerText) + parseInt(data.pack.primary_price)
-//                         }
-//                     }
-
-//                 }
-//                 if (btn.dataset.state == "-") {
-//                     btn.innerHTML = "<button class='w-1/3 text-lg font-bold quantityBtn text-white cursor-pointer'>-</button>"
-//                     if (!data.disabled) {
-
-//                         btn.parentElement.children[0].innerHTML =
-//                             "<button class='w-1/3 text-lg font-bold quantityBtn text-white cursor-pointer'>+</button>"
-//                         btn.parentElement.children[0].disabled = false
-//                     }
-//                     if (totalPriceEl) {
-//                         if (data.pack.secondary_price) {
-//                             totalPriceEl.innerText = parseInt(totalPriceEl.innerText) - parseInt(data.pack.secondary_price)
-//                             let onceDiscount = parseInt(data.pack.primary_price) - parseInt(data.pack.secondary_price)
-//                             discountEl.innerText = (parseInt(discountEl.innerText) - parseInt(onceDiscount)) + 'تومان'
-//                         } else {
-//                             totalPriceEl.innerText = parseInt(totalPriceEl.innerText) - parseInt(data.pack.primary_price)
-//                         }
-//                     }
-//                 }
-//                 if (btn.closest('.parentItem') && btn.closest('.parentItem').querySelector('.price')) {
-//                     if (data.pack.secondary_price) {
-//                         btn.closest('.parentItem').querySelector('.price').innerText = data.pack.secondary_price * data.quantity
-//                     }
-//                     if (!data.pack.secondary_price) {
-//                         btn.closest('.parentItem').querySelector('.price').innerText = data.pack.primary_price * data.quantity
-//                     }
-//                 }
-//                 if (btn.parentElement.children[1].value == 0) {
-//                     btn.parentElement.parentElement.innerHTML = `
-//                         <button onclick="addPackToCart(this)" class="w-full p-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl" data-pack-id="${data.data.pack_id}">
-//                             <div>
-//                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
-//                                     class="lg:size-4 size-3 fill-(--primary-text-color) transition-all duration-300 group-hover:fill-white">
-//                                     <path
-//                                         d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
-//                                     </path>
-//                                 </svg>
-//                             </div>
-//                             <span class="lg:text-sm text-[10px] text-(--primary-text-color) font-bold transition-all duration-300 group-hover:text-white">افزودن به سبد خرید</span>
-//                         </button>`
-//                 }
-//             },
-//             error: function () {
-//                 console.log('error')
-//             }
-//         })
-//     }
-// }
 function setPackCount(btn) {
     localPacks = JSON.parse(localStorage.getItem('packs'))
     let packId = btn.closest('.addPackToCartBtn').dataset.packId
@@ -285,7 +150,7 @@ function setPackCount(btn) {
         if (pack.id == packId) {
             if (btn.dataset.state == "+") {
                 btn.parentElement.children[1].value++
-                orderBasket.children[1].innerText++
+                // orderBasket.children[1].innerText++
                 pack.quantity++
                 if (totalPriceEl) {
                     let currentPrice = parseInt(totalPriceEl.innerText)
@@ -294,7 +159,7 @@ function setPackCount(btn) {
             }
             if (btn.dataset.state == "-") {
                 btn.parentElement.children[1].value--
-                orderBasket.children[1].innerText--
+                // orderBasket.children[1].innerText--
                 pack.quantity--
                 if (totalPriceEl) {
                     let currentPrice = parseInt(totalPriceEl.innerText)
@@ -307,6 +172,7 @@ function setPackCount(btn) {
     localStorage.removeItem('packs')
     localStorage.setItem('packs', newItems)
     if (btn.parentElement.children[1].value == 0) {
+        orderBasket.children[1].innerText--
         if (totalPriceEl) {
             btn.closest('.parentItem').parentElement.remove()
         }
