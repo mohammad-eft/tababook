@@ -40,7 +40,7 @@
         </a>
         <div class="w-full bg-white fixed top-0 right-0 z-999 transition-all duration-300" id="headerMenu">
             <section class="max-w-[1800px] w-11/12 mx-auto flex flex-col gap-4 justify-start items-center bg-white">
-                <div class="w-full flex justify-between gap-1 items-center pt-5">
+                <div class="w-full flex justify-between gap-1 items-center pt-5 pb-2">
                     <div class="w-7 h-5 flex flex-col items-start justify-between lg:hidden" id="openHamburgerMenu">
                         <span class="w-full h-0.5 bg-black rounded-full"></span>
                         <span class="w-full h-0.5 bg-black rounded-full"></span>
@@ -162,7 +162,7 @@
                         </div>
                         {{-- @if (Auth::check()) --}}
                         <div class="relative">
-                            <button class="block relative" id="orderBasket">
+                            <button class="block relative cursor-pointer" id="orderBasket">
                                 <svg class="w-[29px] h-[29px] text-gray-800" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
                                     viewBox="0 0 24 24">
@@ -197,7 +197,7 @@
                                         style="scrollbar-width: thin;"></div>
                                     <div class="w-full text-end mt-1.5">
                                         <a href="{{ route('cart.list') }}"
-                                            class="text-blue-500 text-sm font-bold pl-2.5">مشاهده همه</a>
+                                            class="text-blue-500 text-sm font-bold pl-2.5">مشاهده سبد خرید</a>
                                     </div>
                                 </div>
                             </div>
