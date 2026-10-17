@@ -23,6 +23,8 @@ class OrdersController extends Controller
     }
     public function store(Request $request)
     {
+        $receipt = $request->file('receipt')->getClientOriginalName();
+        $path = $request->file('receipt')->storeAs('receipts', $receipt, 'public');
         $name = $request->input('name');
         $family = $request->input('family');
         $cityId = $request->input('cityId');
@@ -62,6 +64,7 @@ class OrdersController extends Controller
         $order = orders::create([
             'user_id' => $user->id,
             'description' => $descriptoin,
+            'receipt' => $path,
             'onlinePayment' => $onlinePayment,
             'address_id' => $address->id,
             'order_status_id' => 1,
@@ -144,7 +147,7 @@ class OrdersController extends Controller
             }
         }
         $setting = homeSetting::document();
-        return view('admin.order.index', [
+        return view('admin.order.userOrders', [
             'categories' => $categories,
             'products' => $products,
             'orders' => $orders,

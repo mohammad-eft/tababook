@@ -221,6 +221,19 @@
         </div>
     </div>
 
+    <div id="receiptBlock" class="fixed w-full h-dvh bg-black/50 top-0 right-0 z-9 invisible opacity-0 transition-all duration-300">
+        <div class="w-full lg:w-[calc(100%-265px)] float-end flex justify-center items-center h-full">
+            <div class="w-11/12 lg:w-1/2 p-5 flex justify-center items-center rounded-lg bg-white relative">
+                <span class="absolute top-3 right-6 cursor-pointer" onclick="closeReceipt()">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 fill-gray-600" viewBox="0 0 384 512">
+                        <path d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/>
+                    </svg>
+                </span>
+                <img src="" class="w-full h-100 mt-6" alt="">
+            </div>
+        </div>
+    </div>
+
         {{-- <script src="https://cdn.jsdeliver.net/npm/pusher-js8/dist/web/pusher.min.js"></script>
         <script src="{{ asset('assets/js/echo.js') }}"></script> --}}
     <script>
@@ -234,7 +247,7 @@
         let message = document.getElementById('message')
         let element = document.createElement('div')
         element.classList = "text-sm font-bold flex flex-row items-center justify-center py-3 gap-2 lg:gap-3"
-
+        let receiptBlock = document.getElementById('receiptBlock')
 
         function showItems(el, orderId) {
             el.disabled = true
@@ -390,6 +403,16 @@
                 message.classList.add('opacity-0')
                 message.classList.add('invisible')
             }
+        }
+
+        function showReceipt(el, img){
+            let path = "{{ asset('storage/') }}/"+img
+            receiptBlock.classList.remove('invisible', 'opacity-0')
+            receiptBlock.querySelector('img').src = path
+        }
+
+        function closeReceipt(){
+            receiptBlock.classList.add('invisible', 'opacity-0')
         }
  </script>
 

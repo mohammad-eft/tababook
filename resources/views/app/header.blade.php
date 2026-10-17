@@ -34,13 +34,13 @@
 
 <body>
     <header class="w-full flex flex-col justify-start items-center">
-        <a href="{{ $setting['topBannerLink'] }}" class="w-full flex justify-center items-center" id="topBanner">
+        <a href="{{ $setting['topBannerLink'] }}" class="w-full justify-center items-center hidden lg:flex" id="topBanner">
             <img src="{{ asset('storage/' . $setting['topBanner']) }}" class="w-full max-h-20 object-cover"
                 alt="">
         </a>
         <div class="w-full bg-white fixed top-0 right-0 z-999 transition-all duration-300" id="headerMenu">
             <section class="max-w-[1800px] w-11/12 mx-auto flex flex-col gap-4 justify-start items-center bg-white">
-                <div class="w-full flex justify-between gap-1 items-center pt-5 pb-2">
+                <div class="w-full flex justify-between gap-1 items-center pt-3 pb-3 lg:pt-5 lg:pb-2">
                     <div class="w-7 h-5 flex flex-col items-start justify-between lg:hidden" id="openHamburgerMenu">
                         <span class="w-full h-0.5 bg-black rounded-full"></span>
                         <span class="w-full h-0.5 bg-black rounded-full"></span>
@@ -186,7 +186,7 @@
                                             class="absolute text-xs size-4 -top-3 in-fa right-0 flex items-center justify-center rounded-full bg-(--discount-color) text-white">{{ $quantity }}</span>
                                     @else --}}
                                 <span
-                                    class="absolute text-xs size-4 -top-3 in-fa right-0 flex items-center justify-center rounded-full bg-(--discount-color) text-white"></span>
+                                    class="absolute text-xs size-4 -top-2 in-fa right-0 flex items-center justify-center rounded-full bg-(--discount-color) text-white"></span>
                                 {{-- @endif --}}
                             </button>
                             <div

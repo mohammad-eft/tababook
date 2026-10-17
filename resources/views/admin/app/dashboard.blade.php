@@ -358,11 +358,11 @@
                         <span class="w-full h-[1.5px] bg-white -rotate-45 -translate-y-1/2"></span>
                     </button>
                 </div>
-                <div class="flex justify-center pt-5">
+                <div class="flex justify-center">
                     <a href="{{ route('home') }}" class="right-0 mr-[15px]">
-                        {{-- @if ($logo)
-                            <img src="{{ asset('storage/' . $logo->logo) }}" alt="" class="w-40 h-15">
-                        @endif --}}
+                        @if (isset($setting['logo']))
+                            <img src="{{ asset('storage/' . $setting['logo']) }}" alt="" class="w-40 h-15">
+                        @endif
                     </a>
                 </div>
                 <hr class="text-[darkslategray] mt-2.5">
@@ -563,7 +563,7 @@
                                         <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
                                             <span class="size-1 bg-white rounded-sm"></span>
                                             <a href="{{ route('order.userOrders') }}"
-                                                class="py-1 @if (Route::is('order.userOrders')) text-[#FF0000] @endif">لیست سفارشات</a>
+                                                class="py-1 @if (Route::is('order.userOrders')) text-[#FF0000] @endif">لیست سفارشات من</a>
                                         </li>
                                 </ul>
                             </div>
@@ -688,7 +688,7 @@
             <div class="w-1/3 md:w-7/12" onclick="responsive_menu('close')"></div>
         </div>
         <!-- end responsive menu -->
-        <div class="w-full">
+        <div class="w-full pt-10 lg:pt-0">
             <div class="w-full lg:w-[calc(100%-265px)] float-end p-5 overflow-y-auto" style="scrollbar-width:none;">
                 @yield('content')
             </div>
