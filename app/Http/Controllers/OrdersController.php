@@ -123,6 +123,34 @@ class OrdersController extends Controller
             'setting' => $setting
         ]);
     }
+    public function userOrders()
+    {
+        $orders = Auth::user()->orders()->orderBy('date', 'desc')->orderBy('time', 'desc')->get();
+        $categories = category::with('products')->has('products')->get();
+        $products = product::where('show_in_home', 1)->get();
+
+        foreach ($products as $product) {
+            if ($product->media->isNotEmpty()) {
+                foreach ($product->media as $media) {
+                    if ($media['is_main']) {
+                        $product['mainImg'] = $media['media_path'];
+                        break;
+                    } else {
+                        $product['mainImg'] = 'default.jpg';
+                    }
+                }
+            } else {
+                $product['mainImg'] = 'default.jpg';
+            }
+        }
+        $setting = homeSetting::document();
+        return view('admin.order.index', [
+            'categories' => $categories,
+            'products' => $products,
+            'orders' => $orders,
+            'setting' => $setting
+        ]);
+    }
     public function showItems(orders $order)
     {
         $order->load(['carts' => function ($query) {

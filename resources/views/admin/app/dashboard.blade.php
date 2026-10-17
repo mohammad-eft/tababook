@@ -196,6 +196,7 @@
                             </ul>
                         </div>
                     </div>
+                @endcan
                     <div class="pb-3">
                         <div
                             class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('order.*')) bg-[#383c4d] @endif">
@@ -216,18 +217,25 @@
                         <div class="overflow-y-auto transition-all duration-300 @if (Route::is('order.*')) max-h-100 @else max-h-0 @endif"
                             style="scrollbar-width: none;">
                             <ul class="gap-2.5 pr-3">
-                           
-                                <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
-                                    <span class="size-1 bg-white rounded-sm"></span>
-                                    <a href="{{ route('order.index') }}"
-                                        class="py-1 @if (Route::is('order.index')) text-[#FF0000] @endif">لیست
-                                        سفارشات</a>
-                                </li>
+                                @can('access', ['admin'])
+                                    <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
+                                        <span class="size-1 bg-white rounded-sm"></span>
+                                        <a href="{{ route('order.index') }}"
+                                            class="py-1 @if (Route::is('order.index')) text-[#FF0000] @endif">لیست
+                                            سفارشات</a>
+                                    </li>
+                                @endcan
+                                    <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
+                                        <span class="size-1 bg-white rounded-sm"></span>
+                                        <a href="{{ route('order.userOrders') }}"
+                                            class="py-1 @if (Route::is('order.userOrders')) text-[#FF0000] @endif">لیست
+                                            سفارشات من</a>
+                                    </li>
                             </ul>
                         </div>
                     </div>
                    
-                @endcan
+                
                 <div class="pb-3">
                     <div
                         class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('user.*')) bg-[#383c4d] @endif">
@@ -523,6 +531,7 @@
                                 </ul>
                             </div>
                         </div>
+                        @endcan
                         <div class="pb-3">
                             <div
                                 class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('order.*')) bg-[#383c4d] @endif">
@@ -544,16 +553,23 @@
                             <div class="overflow-y-auto transition-all duration-300 @if (Route::is('order.*')) max-h-100 @else max-h-0 @endif"
                                 style="scrollbar-width: none;">
                                 <ul class="gap-2.5 pr-3">
-                                    <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
-                                        <span class="size-1 bg-white rounded-sm"></span>
-                                        <a href="{{ route('order.index') }}"
-                                            class="py-1 @if (Route::is('order.index')) text-[#FF0000] @endif">لیست سفارشات</a>
-                                    </li>
+                                    @can('access', ['admin'])
+                                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
+                                            <span class="size-1 bg-white rounded-sm"></span>
+                                            <a href="{{ route('order.index') }}"
+                                                class="py-1 @if (Route::is('order.index')) text-[#FF0000] @endif">لیست سفارشات</a>
+                                        </li>
+                                    @endcan
+                                        <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
+                                            <span class="size-1 bg-white rounded-sm"></span>
+                                            <a href="{{ route('order.userOrders') }}"
+                                                class="py-1 @if (Route::is('order.userOrders')) text-[#FF0000] @endif">لیست سفارشات</a>
+                                        </li>
                                 </ul>
                             </div>
                         </div>
                         
-                    @endcan
+                    
                     <div class="pb-3">
                         <div
                             class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('user.*')) bg-[#383c4d] @endif">
