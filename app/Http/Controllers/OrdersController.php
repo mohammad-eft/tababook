@@ -169,5 +169,41 @@ class OrdersController extends Controller
         carts::where('user_id', $user->id)->whereNull('order_id')->delete();
         return response()->json('ok');
     }
+    public function acceptOrder(Request $request)
+    {
+        $order = orders::with(['state', 'carts.product'])->find($request->order_id);
+
+        // if (!$order) {
+        //     return response()->json(['error' => 'سفارش یافت نشد'], 404);
+        // }
+
+        // return response()->json($order);
+
+        if ($request->status == 1) {
+            $order->order_status_id = 2;
+        }
+        if ($request->status == 2) {
+            $order->order_status_id = 3;
+        }
+        if ($request->status == 3) {
+            $order->order_status_id = 4;
+        }
+        // if ($request->status == 4) {
+        //     $order->order_status_id = 5;
+        // }
+        // if ($request->status == 5) {
+        //     $order->order_status_id = 6;
+        // }
+
+        $order->save();
+
+        // Log::info($order);
+
+        $order->load('state');
+
+
+        // return response()->json([$order, $request->all()]);
+        return response()->json($order);
+    }
    
 }

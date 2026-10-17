@@ -176,10 +176,10 @@
                                             </svg>
                                         </button>
                                     </div>
-                                    {{-- <div class="w-full flex justify-center">
-                                        <button class="min-w-full max-w-full flex items-center justify-center gap-0.5 bg-(--color-green) py-1 rounded-lg cursor-pointer order-accept-btn"
-                                                onclick='accept("{{ $order->id }}", this, "{{ $order->status->id }}")'>
-                                            <span class="text-white text-sm font-bold">{{ $order->status->admin_title }}</span>
+                                    <div class="w-full flex justify-center">
+                                        <button class="min-w-full max-w-full flex items-center justify-center gap-0.5 bg-green-500 py-1 rounded-lg cursor-pointer order-accept-btn"
+                                                onclick='accept("{{ $order->id }}", this, "{{ $order->state->id }}")'>
+                                            <span class="text-white text-sm font-bold">{{ $order->state->admin_title }}</span>
                                             <svg class="size-6 rounded-lg" viewBox="0 0 36 36" fill="white">
                                                 <path class="clr-i-outline clr-i-outline-path-1"
                                                       d="M18,6A12,12,0,1,0,30,18,12,12,0,0,0,18,6Zm0,22A10,10,0,1,1,28,18,10,10,0,0,1,18,28Z"></path>
@@ -189,7 +189,7 @@
                                                       style="display:none"></path>
                                             </svg>
                                         </button>
-                                    </div> --}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -392,7 +392,7 @@
             }
         }
 
-        {{-- function accept(orderId, element, status) {
+        function accept(orderId, el, status) {
             orders = document.querySelectorAll('.orders')
             $.ajax({
                 url: "{{ url('api/order/acceptOrder') }}",
@@ -403,38 +403,20 @@
                     'order_id': orderId
                 },
                 success: function (data) {
-                    console.log(data.status.title)
-                    orders.forEach((order) => {
-                        if (order.getAttribute('data-order-id') == data.id) {
-                            if (data.status.id === 5 || data.status.id === 6) {
-                                order.remove()
-                            } else {
-                                let table = order.querySelector('.order-table')
-                                let status = order.querySelector('.order-status')
-                                let show = order.querySelector('.order-show-btn')
-                                let accept = order.querySelector('.order-accept-btn')
-                                table.innerText = data.qr_code ? (data.qr_code.description ? data.qr_code.description : data.qr_code.slug) : "-"
-                                status.classList = `text-[10px] text-blue-500 px-2 py-0.5 bg-blue-500/10 rounded-full border-1 border-blue-500 order-status`
-                                status.innerText = data.status.title
-                                show.classList = `w-1/2 flex flex-row gap-1 items-center justify-center py-1.5 rounded-md border-1 border-blue-500 bg-blue-500 text-white text-xs cursor-pointer order-show-btn`
-                                accept.setAttribute('onclick', `accept(${data.id}, this, ${data.status.id})`)
-                                accept.innerHTML = `
-                                    <span class="text-white text-sm font-bold">${data.status.admin_title}</span>
-                                    <svg class="size-6 rounded-lg" viewBox="0 0 36 36" fill="white">
-                                        <path class="clr-i-outline clr-i-outline-path-1" d="M18,6A12,12,0,1,0,30,18,12,12,0,0,0,18,6Zm0,22A10,10,0,1,1,28,18,10,10,0,0,1,18,28Z"></path>
-                                        <path d="M16.34,23.74l-5-5a1,1,0,0,1,1.41-1.41l3.59,3.59,6.78-6.78a1,1,0,0,1,1.41,1.41Z"></path>
-                                        <path class="clr-i-solid clr-i-solid-path-1" d="M30,18A12,12,0,1,1,18,6,12,12,0,0,1,30,18Zm-4.77-2.16a1.4,1.4,0,0,0-2-2l-6.77,6.77L13,17.16a1.4,1.4,0,0,0-2,2l5.45,5.45Z" style="display:none"></path>
-                                    </svg>`
-                            }
-                        }
-                    })
-
+                    console.log(data.state)
+                    el.closest('.orders').querySelector('.order-status').classList = `text-[10px] px-2 py-0.5 bg-[${data.state.color}]/20 font-bold text-[${data.state.color}] rounded-full border-1 border-[${data.state.color}] order-status`
+                    el.closest('.orders').querySelector('.order-status').innerText = data.state.title
+                    el.closest('.orders').querySelector('.order-show-btn').classList = `w-1/2 flex flex-row gap-1 items-center justify-center py-1.5 rounded-md border-1 border-[${data.state.color}] bg-[${data.state.color}]/20 text-[${data.state.color}] text-xs cursor-pointer order-show-btn`
+                    el.closest('.orders').querySelector('.order-show-btn').querySelector('svg').classList = `size-4 fill-[${data.state.color}]`
+                    el.closest('.orders').querySelector('.order-accept-btn').children[0].innerText = data.state.admin_title
+                    el.setAttribute('onclick', `accept(${data.id}, this, ${data.state.id})`)
+                   
                 },
                 error: function () {
                     alert('error')
                 }
             })
-        } --}}
+        }
 
         {{-- function deleteOrder(el, id) {
             orders = document.querySelectorAll('.orders')
