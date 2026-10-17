@@ -1,7 +1,7 @@
 @extends('app.document')
 @section('title', 'پرداخت')
 @section('content')
-    <form action="{{ route('order.store') }}" method="POST" class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 mt-5">
+    <form action="{{ route('order.store') }}" method="POST" enctype="multipart/form-data" class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 mt-5">
 
         <div class="lg:col-span-7 xl:col-span-8 bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
             <h2 class="text-lg font-bold mb-6 text-gray-700">صورت حساب و حمل و نقل</h2>
@@ -18,6 +18,10 @@
                     <div>
                         <label class="block text-sm font-medium mb-2">نام خانوادگی <span class="text-red-500">*</span></label>
                         <input type="text" name="family" value="{{ Auth::check() ? Auth::user()->family : "" }}" class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">رسید پرداخت <span class="text-red-500">*</span></label>
+                        <input type="file" dir="ltr" name="receipt" class="w-full bg-gray-100 cursor-pointer border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none" required>
                     </div>
                 </div>
                

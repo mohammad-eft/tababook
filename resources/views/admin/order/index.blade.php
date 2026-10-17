@@ -151,7 +151,7 @@
                                             </svg>
                                             مشاهده آیتم ها
                                         </button>
-                                        <button class="w-[25%] flex flex-row gap-1 items-center justify-center py-1.5 rounded-md border-1 border-[#e4e5ea] text-(--secondary-text-color) text-xs cursor-pointer">
+                                        <button onclick="showReceipt(this, '{{ $order->receipt }}')" class="w-[25%] flex flex-row gap-1 items-center justify-center py-1.5 rounded-md border-1 border-[#e4e5ea] text-(--secondary-text-color) text-xs cursor-pointer">
                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                  class="size-4"
                                                  viewBox="0 0 24 24"
@@ -165,7 +165,7 @@
                                                 <rect x="8.2" y="13.2" width="7.6" height="6.8" rx="0.4"/>
                                                 <circle cx="17" cy="11.2" r="0.5" fill="currentColor" stroke="none"/>
                                             </svg>
-                                            چاپ فیش
+                                           مشاهده رسید
                                         </button>
                                         <button class="w-[20%] flex flex-row gap-1 items-center justify-center py-1.5 rounded-md border-1 border-rose-500 text-rose-500 text-xs cursor-pointer"
                                                 onclick='deleteOrder(this, "{{ $order->id }}")'>
@@ -176,10 +176,10 @@
                                             </svg>
                                         </button>
                                     </div>
-                                    {{-- <div class="w-full flex justify-center">
-                                        <button class="min-w-full max-w-full flex items-center justify-center gap-0.5 bg-(--color-green) py-1 rounded-lg cursor-pointer order-accept-btn"
-                                                onclick='accept("{{ $order->id }}", this, "{{ $order->status->id }}")'>
-                                            <span class="text-white text-sm font-bold">{{ $order->status->admin_title }}</span>
+                                    <div class="w-full flex justify-center">
+                                        <button class="min-w-full max-w-full flex items-center justify-center gap-0.5 bg-green-500 py-1 rounded-lg cursor-pointer order-accept-btn"
+                                                onclick='accept("{{ $order->id }}", this, "{{ $order->state->id }}")'>
+                                            <span class="text-white text-sm font-bold">{{ $order->state->admin_title }}</span>
                                             <svg class="size-6 rounded-lg" viewBox="0 0 36 36" fill="white">
                                                 <path class="clr-i-outline clr-i-outline-path-1"
                                                       d="M18,6A12,12,0,1,0,30,18,12,12,0,0,0,18,6Zm0,22A10,10,0,1,1,28,18,10,10,0,0,1,18,28Z"></path>
@@ -189,7 +189,7 @@
                                                       style="display:none"></path>
                                             </svg>
                                         </button>
-                                    </div> --}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -204,7 +204,7 @@
     <div id="orderBlock" class="fixed w-full h-dvh bg-black/50 top-0 right-0 z-999999 transition-all duration-300 invisible opacity-0">
         <div class="w-full h-full flex justify-center items-center lg:w-[calc(100%-265px)] lg:float-end">
             <div class="w-11/12 lg:w-3/4 p-3 lg:p-5 rounded-xl bg-white relative pt-5">
-                <span class="absolute -top-4 -right-2 text-md bg-white p-2 rounded-full cursor-pointer" onclick="hideItems()">❌</span>
+                {{-- <span class="absolute -top-4 -right-2 text-md bg-white p-2 rounded-full cursor-pointer" onclick="hideItems()">❌</span> --}}
                 <div class="w-full flex flex-row items-center">
                     <h2 class="w-1/3 text-sm font-bold text-(--primary-text-color) in-fa" id="tableName"></h2>
                     <div class="w-1/3 flex flex-row justify-center">
@@ -217,6 +217,19 @@
                     <p class="text-xs text-(--secondary-text-color) text-center my-2 in-fa" id="address"></p>
                 </div>
                 <div class="w-full flex flex-col gap-2 max-h-[500px] overflow-y-auto p-3 mt-3 border-t-1 border-gray-200" style="scrollbar-width: thin;" id="itemList"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="receiptBlock" class="fixed w-full h-dvh bg-black/50 top-0 right-0 z-9 invisible opacity-0 transition-all duration-300">
+        <div class="w-full lg:w-[calc(100%-265px)] float-end flex justify-center items-center h-full">
+            <div class="w-11/12 lg:w-1/2 p-5 flex justify-center items-center rounded-lg bg-white relative">
+                <span class="absolute top-3 right-6 cursor-pointer" onclick="closeReceipt()">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 fill-gray-600" viewBox="0 0 384 512">
+                        <path d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/>
+                    </svg>
+                </span>
+                <img src="" class="w-full h-100 mt-6" alt="">
             </div>
         </div>
     </div>
@@ -234,7 +247,7 @@
         let message = document.getElementById('message')
         let element = document.createElement('div')
         element.classList = "text-sm font-bold flex flex-row items-center justify-center py-3 gap-2 lg:gap-3"
-
+        let receiptBlock = document.getElementById('receiptBlock')
 
         function showItems(el, orderId) {
             el.disabled = true
@@ -256,7 +269,9 @@
                     el.classList.remove('opacity-50')
                     el.classList.add('cursor-pointer')
 
-                    tableName.innerText = data.qr_code ? (data.qr_code.description ? data.qr_code.description : data.qr_code.slug) : "-"
+                    tableName.innerHTML = data.qr_code ? (data.qr_code.description ? data.qr_code.description : data.qr_code.slug) : `<svg xmlns="http://www.w3.org/2000/svg" onclick="hideItems()" class="w-4 cursor-pointer fill-gray-600" viewBox="0 0 384 512">
+                        <path d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/>
+                    </svg>`
                     orderStatus.classList = `text-[10px] font-bold px-2 py-0.5 rounded-full border-1 border-[${ data.state.color }] text-[${ data.state.color }] bg-[${ data.state.color }]/10`
                     orderStatus.innerText = data.state.title
                     orderCode.innerText = '#'+data.order_code
@@ -392,7 +407,7 @@
             }
         }
 
-        {{-- function accept(orderId, element, status) {
+        function accept(orderId, el, status) {
             orders = document.querySelectorAll('.orders')
             $.ajax({
                 url: "{{ url('api/order/acceptOrder') }}",
@@ -403,38 +418,20 @@
                     'order_id': orderId
                 },
                 success: function (data) {
-                    console.log(data.status.title)
-                    orders.forEach((order) => {
-                        if (order.getAttribute('data-order-id') == data.id) {
-                            if (data.status.id === 5 || data.status.id === 6) {
-                                order.remove()
-                            } else {
-                                let table = order.querySelector('.order-table')
-                                let status = order.querySelector('.order-status')
-                                let show = order.querySelector('.order-show-btn')
-                                let accept = order.querySelector('.order-accept-btn')
-                                table.innerText = data.qr_code ? (data.qr_code.description ? data.qr_code.description : data.qr_code.slug) : "-"
-                                status.classList = `text-[10px] text-blue-500 px-2 py-0.5 bg-blue-500/10 rounded-full border-1 border-blue-500 order-status`
-                                status.innerText = data.status.title
-                                show.classList = `w-1/2 flex flex-row gap-1 items-center justify-center py-1.5 rounded-md border-1 border-blue-500 bg-blue-500 text-white text-xs cursor-pointer order-show-btn`
-                                accept.setAttribute('onclick', `accept(${data.id}, this, ${data.status.id})`)
-                                accept.innerHTML = `
-                                    <span class="text-white text-sm font-bold">${data.status.admin_title}</span>
-                                    <svg class="size-6 rounded-lg" viewBox="0 0 36 36" fill="white">
-                                        <path class="clr-i-outline clr-i-outline-path-1" d="M18,6A12,12,0,1,0,30,18,12,12,0,0,0,18,6Zm0,22A10,10,0,1,1,28,18,10,10,0,0,1,18,28Z"></path>
-                                        <path d="M16.34,23.74l-5-5a1,1,0,0,1,1.41-1.41l3.59,3.59,6.78-6.78a1,1,0,0,1,1.41,1.41Z"></path>
-                                        <path class="clr-i-solid clr-i-solid-path-1" d="M30,18A12,12,0,1,1,18,6,12,12,0,0,1,30,18Zm-4.77-2.16a1.4,1.4,0,0,0-2-2l-6.77,6.77L13,17.16a1.4,1.4,0,0,0-2,2l5.45,5.45Z" style="display:none"></path>
-                                    </svg>`
-                            }
-                        }
-                    })
-
+                    console.log(data.state)
+                    el.closest('.orders').querySelector('.order-status').classList = `text-[10px] px-2 py-0.5 bg-[${data.state.color}]/20 font-bold text-[${data.state.color}] rounded-full border-1 border-[${data.state.color}] order-status`
+                    el.closest('.orders').querySelector('.order-status').innerText = data.state.title
+                    el.closest('.orders').querySelector('.order-show-btn').classList = `w-1/2 flex flex-row gap-1 items-center justify-center py-1.5 rounded-md border-1 border-[${data.state.color}] bg-[${data.state.color}]/20 text-[${data.state.color}] text-xs cursor-pointer order-show-btn`
+                    el.closest('.orders').querySelector('.order-show-btn').querySelector('svg').classList = `size-4 fill-[${data.state.color}]`
+                    el.closest('.orders').querySelector('.order-accept-btn').children[0].innerText = data.state.admin_title
+                    el.setAttribute('onclick', `accept(${data.id}, this, ${data.state.id})`)
+                   
                 },
                 error: function () {
                     alert('error')
                 }
             })
-        } --}}
+        }
 
         {{-- function deleteOrder(el, id) {
             orders = document.querySelectorAll('.orders')
@@ -459,6 +456,16 @@
                 }
             })
         }--}}
+
+        function showReceipt(el, img){
+            let path = "{{ asset('storage/') }}/"+img
+            receiptBlock.classList.remove('invisible', 'opacity-0')
+            receiptBlock.querySelector('img').src = path
+        }
+
+        function closeReceipt(){
+            receiptBlock.classList.add('invisible', 'opacity-0')
+        }
         
  </script>
 

@@ -178,18 +178,19 @@ let headerMenu = document.getElementById('headerMenu')
 let topBanner = document.getElementById('topBanner')
 let main = document.getElementById('main')
 let header = document.querySelector('header')
-let mt = 'mt-[' + topBanner.clientHeight + 'px]'
+let mt = 'lg:mt-[' + topBanner.clientHeight + 'px]'
 headerMenu.classList.add(mt)
-main.classList.add('mt-[' + header.clientHeight + 'px]')
+console.log(headerMenu)
+main.classList.add('lg:mt-[' + header.clientHeight + 'px]', 'mt-[' + headerMenu.clientHeight + 'px]')
 
 window.addEventListener('scroll', () => {
     headerMenu = document.getElementById('headerMenu')
     if (window.scrollY > 80) {  
         headerMenu.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)'
-        main.classList.remove('mt-[' + headerMenu.clientHeight + 'px]')
+        main.classList.remove('lg:mt-[' + header.clientHeight + 'px]', 'mt-[' + headerMenu.clientHeight + 'px]')
         headerMenu.classList.remove(mt)
     } else {
-        main.classList.add('mt-[' + headerMenu.clientHeight+'px]')
+        main.classList.add('lg:mt-[' + header.clientHeight + 'px]', 'mt-[' + headerMenu.clientHeight + 'px]')
         header.style.boxShadow = 'none'
         headerMenu.classList.add(mt)
     }

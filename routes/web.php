@@ -17,19 +17,19 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 Route::get('/test', function(){
-    $dateTime = explode(' ', verta());
-    $date = implode('/', explode('-', $dateTime[0]));
-    $currentTime = explode(':', $dateTime[1]);
-    unset($currentTime[count($currentTime)-1]);
-    $time = implode(':', $currentTime);
+    // $dateTime = explode(' ', verta());
+    // $date = implode('/', explode('-', $dateTime[0]));
+    // $currentTime = explode(':', $dateTime[1]);
+    // unset($currentTime[count($currentTime)-1]);
+    // $time = implode(':', $currentTime);
     // Schema::table('carts', function (Blueprint $table) {
     //     $table->integer('product_id')->nullable()->change();
     //     $table->integer('user_id')->nullable()->change();
     //     $table->integer('pack_id')->after('product_id')->nullable();
     // });
-    // Schema::table('users', function(Blueprint $table){
-    //     $table->string('password')->nullable()->change();
-    // });
+    Schema::table('orders', function(Blueprint $table){
+        $table->string('receipt')->nullable()->after('description');
+    });
 });
 
 Route::get('/', [SettingController::class, 'home'])->name('home');
@@ -203,6 +203,7 @@ Route::group([
     Route::get('/create', 'create')->name('create');
     Route::post('/store', 'store')->name('store')->withoutMiddleware([AuthMiddleware::class]);
     Route::get('/index', 'index')->name('index');
+    Route::get('/userOrders', 'userOrders')->name('userOrders');
 });
 
 Route::group([

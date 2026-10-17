@@ -23,6 +23,8 @@ class OrdersController extends Controller
     }
     public function store(Request $request)
     {
+        $receipt = $request->file('receipt')->getClientOriginalName();
+        $path = $request->file('receipt')->storeAs('receipts', $receipt, 'public');
         $name = $request->input('name');
         $family = $request->input('family');
         $cityId = $request->input('cityId');
@@ -62,6 +64,7 @@ class OrdersController extends Controller
         $order = orders::create([
             'user_id' => $user->id,
             'description' => $descriptoin,
+            'receipt' => $path,
             'onlinePayment' => $onlinePayment,
             'address_id' => $address->id,
             'order_status_id' => 1,
@@ -123,6 +126,34 @@ class OrdersController extends Controller
             'setting' => $setting
         ]);
     }
+    public function userOrders()
+    {
+        $orders = Auth::user()->orders()->orderBy('date', 'desc')->orderBy('time', 'desc')->get();
+        $categories = category::with('products')->has('products')->get();
+        $products = product::where('show_in_home', 1)->get();
+
+        foreach ($products as $product) {
+            if ($product->media->isNotEmpty()) {
+                foreach ($product->media as $media) {
+                    if ($media['is_main']) {
+                        $product['mainImg'] = $media['media_path'];
+                        break;
+                    } else {
+                        $product['mainImg'] = 'default.jpg';
+                    }
+                }
+            } else {
+                $product['mainImg'] = 'default.jpg';
+            }
+        }
+        $setting = homeSetting::document();
+        return view('admin.order.userOrders', [
+            'categories' => $categories,
+            'products' => $products,
+            'orders' => $orders,
+            'setting' => $setting
+        ]);
+    }
     public function showItems(orders $order)
     {
         $order->load(['carts' => function ($query) {
@@ -140,6 +171,42 @@ class OrdersController extends Controller
     {
         carts::where('user_id', $user->id)->whereNull('order_id')->delete();
         return response()->json('ok');
+    }
+    public function acceptOrder(Request $request)
+    {
+        $order = orders::with(['state', 'carts.product'])->find($request->order_id);
+
+        // if (!$order) {
+        //     return response()->json(['error' => 'سفارش یافت نشد'], 404);
+        // }
+
+        // return response()->json($order);
+
+        if ($request->status == 1) {
+            $order->order_status_id = 2;
+        }
+        if ($request->status == 2) {
+            $order->order_status_id = 3;
+        }
+        if ($request->status == 3) {
+            $order->order_status_id = 4;
+        }
+        // if ($request->status == 4) {
+        //     $order->order_status_id = 5;
+        // }
+        // if ($request->status == 5) {
+        //     $order->order_status_id = 6;
+        // }
+
+        $order->save();
+
+        // Log::info($order);
+
+        $order->load('state');
+
+
+        // return response()->json([$order, $request->all()]);
+        return response()->json($order);
     }
    
 }
