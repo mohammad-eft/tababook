@@ -151,7 +151,7 @@
                                             </svg>
                                             مشاهده آیتم ها
                                         </button>
-                                        <button class="w-[25%] flex flex-row gap-1 items-center justify-center py-1.5 rounded-md border-1 border-[#e4e5ea] text-(--secondary-text-color) text-xs cursor-pointer">
+                                        <button onclick="showReceipt(this, '{{ $order->receipt }}')" class="w-[25%] flex flex-row gap-1 items-center justify-center py-1.5 rounded-md border-1 border-[#e4e5ea] text-(--secondary-text-color) text-xs cursor-pointer">
                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                  class="size-4"
                                                  viewBox="0 0 24 24"
@@ -165,7 +165,7 @@
                                                 <rect x="8.2" y="13.2" width="7.6" height="6.8" rx="0.4"/>
                                                 <circle cx="17" cy="11.2" r="0.5" fill="currentColor" stroke="none"/>
                                             </svg>
-                                            چاپ فیش
+                                           مشاهده رسید
                                         </button>
                                         <button class="w-[20%] flex flex-row gap-1 items-center justify-center py-1.5 rounded-md border-1 border-rose-500 text-rose-500 text-xs cursor-pointer"
                                                 onclick='deleteOrder(this, "{{ $order->id }}")'>
@@ -204,7 +204,7 @@
     <div id="orderBlock" class="fixed w-full h-dvh bg-black/50 top-0 right-0 z-999999 transition-all duration-300 invisible opacity-0">
         <div class="w-full h-full flex justify-center items-center lg:w-[calc(100%-265px)] lg:float-end">
             <div class="w-11/12 lg:w-3/4 p-3 lg:p-5 rounded-xl bg-white relative pt-5">
-                <span class="absolute -top-4 -right-2 text-md bg-white p-2 rounded-full cursor-pointer" onclick="hideItems()">❌</span>
+                {{-- <span class="absolute -top-4 -right-2 text-md bg-white p-2 rounded-full cursor-pointer" onclick="hideItems()">❌</span> --}}
                 <div class="w-full flex flex-row items-center">
                     <h2 class="w-1/3 text-sm font-bold text-(--primary-text-color) in-fa" id="tableName"></h2>
                     <div class="w-1/3 flex flex-row justify-center">
@@ -269,7 +269,9 @@
                     el.classList.remove('opacity-50')
                     el.classList.add('cursor-pointer')
 
-                    tableName.innerText = data.qr_code ? (data.qr_code.description ? data.qr_code.description : data.qr_code.slug) : "-"
+                    tableName.innerHTML = data.qr_code ? (data.qr_code.description ? data.qr_code.description : data.qr_code.slug) : `<svg xmlns="http://www.w3.org/2000/svg" onclick="hideItems()" class="w-4 cursor-pointer fill-gray-600" viewBox="0 0 384 512">
+                        <path d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/>
+                    </svg>`
                     orderStatus.classList = `text-[10px] font-bold px-2 py-0.5 rounded-full border-1 border-[${ data.state.color }] text-[${ data.state.color }] bg-[${ data.state.color }]/10`
                     orderStatus.innerText = data.state.title
                     orderCode.innerText = '#'+data.order_code
