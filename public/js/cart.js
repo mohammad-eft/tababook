@@ -62,6 +62,13 @@ function setCount(btn) {
                     let currentPrice = parseInt(totalPriceEl.innerText)
                     totalPriceEl.innerText = currentPrice += finalPrice
                 }
+                document.querySelectorAll('.addToCartBtns').forEach(button => {
+                    if (button !== btn.closest('.addToCartBtns')){
+                        if (button.dataset.productId == productId) {
+                            button.querySelector('input[type=number]').value++
+                        }
+                    }
+                })
             }
             if (btn.dataset.state == "-") {
                 btn.parentElement.children[1].value--
@@ -71,8 +78,16 @@ function setCount(btn) {
                     let currentPrice = parseInt(totalPriceEl.innerText)
                     totalPriceEl.innerText = currentPrice -= finalPrice
                 }
+                document.querySelectorAll('.addToCartBtns').forEach(button => {
+                    if (button !== btn.closest('.addToCartBtns')){
+                        if (button.dataset.productId == productId) {
+                            button.querySelector('input[type=number]').value--
+                        }
+                    }
+                })
             }
         }
+
     })
     let newItems = JSON.stringify(localProducts)
     localStorage.removeItem('products')
@@ -216,7 +231,7 @@ orderBasket.addEventListener('click', () => {
                             <img src="${imgPath + prod.mainImg}"
                                 class="size-full object-cover" alt="">
                         </div>
-                        <div class="flex-1 min-w-0">
+                        <div class="flex-1 min-w-0 products">
                             <h3 class="font-semibold text-gray-800 text-sm sm:text-base truncate">${prod.title}</h3>
                             <p
                                 class="text-xs text-gray-500 mt-0.5 mb-5 max-w-full h-8 max-h-8 overflow-hidden ellipsis-2">${prod.summary}</p>
@@ -252,7 +267,7 @@ orderBasket.addEventListener('click', () => {
                             <img src="${imgPath + pack.image}"
                                 class="size-full object-cover" alt="">
                         </div>
-                        <div class="flex-1 min-w-0">
+                        <div class="flex-1 min-w-0 products">
                             <h3 class="font-semibold text-gray-800 text-sm sm:text-base truncate">${pack.title}</h3>
                             <p
                                 class="text-xs text-gray-500 mt-0.5 mb-5 max-w-full h-8 max-h-8 overflow-hidden ellipsis-2">${pack.summary}</p>

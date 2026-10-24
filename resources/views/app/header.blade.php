@@ -408,9 +408,9 @@
 
 
         {{--        search_item --}}
-        <div class="w-full h-dvh bg-black/50 fixed top-0 right-0 z-1 invisible opacity-0 transition-all duration-400"
+        <div class="w-full h-dvh bg-black/50 fixed top-0 right-0 z-1111 invisible opacity-0 transition-all duration-400"
             onclick="search_pupup('close')" id="search_pupup_item_close"></div>
-        <div class="w-full h-0 bg-white fixed top-0 right-0 z-2 flex justify-center items-start overflow-y-hidden transition-all duration-400"
+        <div class="w-full h-0 bg-white fixed top-0 right-0 z-2222 flex justify-center items-start overflow-y-hidden transition-all duration-400"
             id="search_pupup_item">
             <div
                 class="w-11/12 flex max-sm:flex-col max-sm:gap-4 justify-between max-sm:justify-start items-center max-sm:items-start lg:pt-10 pt-6">

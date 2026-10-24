@@ -13,7 +13,6 @@ class homeSetting{
         $heroSubtitle = setting::where('meta_key', 'heroSubtitle')->first();
         $heroPrimaryButton = setting::where('meta_key', 'heroPrimaryButton')->first();
         $heroPrimaryButtonLink = setting::where('meta_key', 'heroPrimaryButtonLink')->first();
-        Log::info($heroPrimaryButton);
         $heroSecondaryButton = setting::where('meta_key', 'heroSecondaryButton')->first();
         $heroSecondaryButtonLink = setting::where('meta_key', 'heroSecondaryButtonLink')->first();
         $topBanner = setting::where('meta_key', 'topBanner')->first();

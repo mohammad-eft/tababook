@@ -82,13 +82,33 @@ class SearchController extends Controller
     public function page(Request $request)
     {
         $title = $request->input('title');
+        $categoryId = $request->input('categoryId');
+        
+    
         // $products = product::with('media')->with('categories')->get();
-        $products = product::with('media')->with('categories')->where('title', 'like', '%' . $title . '%')
-            ->orWhere('summary', 'like', '%' . $title . '%')
-            ->orWhere('description', 'like', '%' . $title . '%')
-            ->orWhere('writer', 'like', '%' . $title . '%')
-            ->orWhere('publication', 'like', '%' . $title . '%')
-            ->orderBy('created_at', 'desc')->get();
+        $query = product::with('media')->with('categories');
+
+        if(!empty($categoryId)){
+            $query->whereHas('categories', function($q) use ($categoryId){
+                $q->where('categories.id', $categoryId);
+            });
+            $cat = category::find($categoryId);
+            $title = $cat->titel;
+        }
+        
+        if(!empty($title)){
+            $query->where(function ($q) use ($title){
+                $q->where('title', 'like', '%' . $title . '%')
+                ->orWhere('summary', 'like', '%' . $title . '%')
+                ->orWhere('description', 'like', '%' . $title . '%')
+                ->orWhere('writer', 'like', '%' . $title . '%')
+                ->orWhere('publication', 'like', '%' . $title . '%')
+                ->orderBy('created_at', 'desc');
+            });
+        }
+
+        $products = $query->orderBy('created_at', "desc")->get();
+        
         $categories = category::all();
         foreach ($products as $product) {
             if ($product->media->isNotEmpty()) {

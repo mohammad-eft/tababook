@@ -5,7 +5,8 @@ orderBasket = document.getElementById('orderBasket')
 addToCartBtns.forEach(product=>{
     if(localProducts){
         localProducts.forEach(cartPro=>{
-            if(cartPro.id == product.closest('.products').dataset.productId){
+            console.log(product.closest('.products'))
+            if(cartPro.id == (product.closest('.products') && product.closest('.products').dataset.productId)){
                 orderBasket.children[1].innerText += 1
                 product.innerHTML = `
                 <div class="w-full p-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl">
@@ -18,7 +19,7 @@ addToCartBtns.forEach(product=>{
     }
     if(localPacks){
         localPacks.forEach(cartPro=>{
-            if(cartPro.id == product.closest('.products').dataset.productId){
+            if(cartPro.id == (product.closest('.products') && product.closest('.products').dataset.productId)){
                 orderBasket.children[1].innerText += 1
                 product.innerHTML = `
                 <div class="w-full p-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl">

@@ -156,12 +156,13 @@
                                         </button>
                                     </div>
                                 @else --}}
+                                @if ($product->count > 0)
                                     <button onclick="addToCart(this)"
                                             class="w-full px-4 h-full bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl cursor-pointer transition-all duration-300 hover:bg-(--green-btn) group"
                                             >
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
-                                                 class="lg:size-4 size-3 fill-(--primary-text-color) transition-all duration-300 group-hover:fill-white">
+                                                class="lg:size-4 size-3 fill-(--primary-text-color) transition-all duration-300 group-hover:fill-white">
                                                 <path
                                                         d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
                                                 </path>
@@ -169,6 +170,13 @@
                                         </div>
                                         <span class="lg:text-sm text-[10px] text-(--primary-text-color) font-bold transition-all duration-300 group-hover:text-white">افزودن به سبد خرید</span>
                                     </button>
+                                @else
+                                    <button
+                                            class="w-full px-4 h-full bg-(--pastel-pink) flex gap-2 justify-center items-center rounded-xl relative after:absolute after:w-full after:h-full after:content-[''] after:top-0 after:right-0 after:bg-white/30 after:rounded-xl transition-all duration-300 hover:bg-(--discount-color) cursor-no-drop group"
+                                            >
+                                        <span class="lg:text-sm text-[10px] text-white font-bold transition-all duration-300">عدم موجودی</span>
+                                    </button>     
+                                @endif
                                 {{-- @endif --}}
                             </div>
                         </div>
@@ -266,12 +274,13 @@
                                         </button>
                                     </div>
                                 @else --}}
+                                @if ($product->count > 0)
                                     <button onclick="addToCart(this)"
                                             class="w-full px-4 h-full bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl transition-all duration-300 hover:bg-(--green-btn) cursor-pointer group"
                                             >
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
-                                                 class="lg:size-4 size-3 transition-all duration-300 group-hover:fill-white fill-(--primary-text-color)">
+                                                class="lg:size-4 size-3 transition-all duration-300 group-hover:fill-white fill-(--primary-text-color)">
                                                 <path
                                                         d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
                                                 </path>
@@ -279,6 +288,13 @@
                                         </div>
                                         <span class="lg:text-sm text-[10px] text-(--primary-text-color) transition-all duration-300 group-hover:text-white font-bold">افزودن به سبد خرید</span>
                                     </button>
+                                @else
+                                    <button
+                                            class="w-full px-4 h-full bg-(--pastel-pink) flex gap-2 justify-center items-center rounded-xl relative after:absolute after:w-full after:h-full after:content-[''] after:top-0 after:right-0 after:bg-white/30 after:rounded-xl transition-all duration-300 hover:bg-(--discount-color) cursor-no-drop group"
+                                            >
+                                        <span class="lg:text-sm text-[10px] text-white font-bold transition-all duration-300">عدم موجودی</span>
+                                    </button>
+                                @endif
                                 {{-- @endif --}}
                             </div>
                         </div>
