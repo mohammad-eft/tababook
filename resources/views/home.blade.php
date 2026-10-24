@@ -100,10 +100,10 @@
 {{--                    کاربران قرار گرفته است</p>--}}
                 <a href="#" class="text-sm text-(--secondary-text-color)">مشاهده همه</a>
             </div>
-            <div class="max-w-full w-full py-2 px-1 flex gap-4 justify-start overflow-x-auto lg:overflow-x-visible">
+            <div class="max-w-full w-full py-2 px-1 grid grid-cols-2 lg:grid-cols-5 gap-4 justify-start overflow-x-auto lg:overflow-x-visible">
                 @foreach ($products as $product)
                     <div
-                            class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  min-h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2 products" data-product-id="{{ $product->id }}">
+                            class="w-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2 products" data-product-id="{{ $product->id }}">
                         <div class="w-full flex justify-center items-center relative py-7">
                             <a href={{ route('product.show', [$product->id]) }} class="block">
                                 <img src="{{ asset('storage/' . $product->image) }}" alt=""
@@ -218,11 +218,11 @@
                 <h3 class="text-xl font-bold text-(--primary-text-color)">تازه به قفسه ها اضافه شده</h3>
                 <a href="#" class="text-sm text-(--secondary-text-color)">مشاهده همه</a>
             </div>
-            <div class="max-w-full w-full py-2 px-1 flex gap-4 justify-start overflow-x-auto lg:overflow-x-visible">
+            <div class="max-w-full w-full py-2 px-1 grid grid-cols-2 lg:grid-cols-5 gap-4 justify-start overflow-x-auto lg:overflow-x-visible">
 
                 @foreach ($newProducts as $product)
                     <div
-                            class="xl:min-w-19/100 xl:max-w-19/100 lg:min-w-24/100 max-w-24/100 min-w-48/100 max-w-48/100  min-h-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2 pb-5 products" data-product-id="{{ $product->id }}">
+                            class="w-full bg-white flex flex-col gap-2 justify-start items-center rounded-xl cart_shdow p-2 pb-5 products" data-product-id="{{ $product->id }}">
                         <div class="w-full flex justify-center items-center relative py-7">
                             <a href={{ route('product.show', [$product->id]) }} class="block">
                                 <img src="{{ asset('storage/' . $product->image) }}" alt=""

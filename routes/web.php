@@ -16,6 +16,8 @@ use App\Http\Controllers\SearchController;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use App\Models\product;
+
 Route::get('/test', function(){
     // $dateTime = explode(' ', verta());
     // $date = implode('/', explode('-', $dateTime[0]));
@@ -27,9 +29,10 @@ Route::get('/test', function(){
     //     $table->integer('user_id')->nullable()->change();
     //     $table->integer('pack_id')->after('product_id')->nullable();
     // });
-    Schema::table('orders', function(Blueprint $table){
-        $table->string('receipt')->nullable()->after('description');
-    });
+    // Schema::table('orders', function(Blueprint $table){
+    //     $table->string('receipt')->nullable()->after('description');
+    // });
+    product::where('id', '>', 0)->update(['show_in_home'=>1]);
 });
 
 Route::get('/', [SettingController::class, 'home'])->name('home');
