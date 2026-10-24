@@ -81,7 +81,6 @@ let number_order_item = document.querySelector('.number_order_item')
 
 function number_order(item) {
     let value_input = number_order_item.getAttribute('value')
-    console.log(value_input)
     if (item == 'plus') {
         let plus_value = +value_input + 1
         number_order_item.setAttribute('value', plus_value)
@@ -180,7 +179,6 @@ let main = document.getElementById('main')
 let header = document.querySelector('header')
 let mt = 'lg:mt-[' + topBanner.clientHeight + 'px]'
 headerMenu.classList.add(mt)
-console.log(headerMenu)
 main.classList.add('lg:mt-[' + header.clientHeight + 'px]', 'mt-[' + headerMenu.clientHeight + 'px]')
 
 window.addEventListener('scroll', () => {
