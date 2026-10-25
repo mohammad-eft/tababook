@@ -25,6 +25,9 @@
         let userId = null;
         let user = null
         let routeIsCart = "{{ Route::is('cart.list') }}"
+        let orderBasket = document.getElementById('orderBasket')
+        let localProducts = JSON.parse(localStorage.getItem('products'))
+        let localPacks = JSON.parse(localStorage.getItem('packs'))
         if (flag) {
             userId = "{{ Auth::id() }}"
             user = "{{ Auth::user() }}"

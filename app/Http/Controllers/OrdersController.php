@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\order_status;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
 class OrdersController extends Controller
@@ -34,7 +35,9 @@ class OrdersController extends Controller
         $email = $request->input('email');
         $nationalCode = $request->input('nationalCode');
         $descriptoin = $request->input('descriptoin');
-        $onlinePayment = $request->input('onlinePayment');
+        // $onlinePayment = $request->input('onlinePayment');
+        $pass = $request->input('password');
+        $password = Hash::make($pass);
         $products = json_decode($request->products);
         $packs = json_decode($request->packs);
 
@@ -44,7 +47,8 @@ class OrdersController extends Controller
             'phoneNumber' => $phoneNumber,
             'email' => $email,
             'nationalCode' => $nationalCode,
-        ], ['phoneNumber'], ['name', 'family', 'email', 'nationalCode']);
+            'password' => $password,
+        ], ['phoneNumber'], ['name', 'family', 'email', 'nationalCode', 'password']);
 
         $user = User::where('phoneNumber', $phoneNumber)->first();
 
@@ -65,7 +69,7 @@ class OrdersController extends Controller
             'user_id' => $user->id,
             'description' => $descriptoin,
             'receipt' => $path,
-            'onlinePayment' => $onlinePayment,
+            'onlinePayment' => 0,
             'address_id' => $address->id,
             'order_status_id' => 1,
             'date' => $date,

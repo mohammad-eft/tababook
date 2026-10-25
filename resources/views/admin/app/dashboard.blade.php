@@ -11,7 +11,22 @@
     <link rel="shortcut icon" href="{{ asset('img/faveicon.png') }}" type="image/x-icon">
     <script src="{{ asset('js/tailwind.js') }}"></script>
     <script src="{{ asset('js/jquery.js') }}"></script>
-    
+    <script>
+        let url = "{{ url('/') }}/"
+        let api = "{{ url('api/') }}/"
+        let imgPath = "{{ asset('storage/') }}/"
+        let flag = "{{ Auth::check() }}"
+        let userId = null;
+        let user = null
+        let routeIsCart = "{{ Route::is('cart.list') }}"
+        let orderBasket = document.getElementById('orderBasket')
+        let localProducts = JSON.parse(localStorage.getItem('products'))
+        let localPacks = JSON.parse(localStorage.getItem('packs'))
+        if (flag) {
+            userId = "{{ Auth::id() }}"
+            user = "{{ Auth::user() }}"
+        }
+    </script>
 </head>
 
 <body>

@@ -406,9 +406,9 @@ let totalPriceEl = document.getElementById('totalPriceEl')
 let discountEl = document.getElementById('discountEl')
 let addPackToCartBtn = document.getElementById('addPackToCartBtn')
 let cartItemsBlock = document.getElementById('cartItemsBlock')
-let orderBasket = document.getElementById('orderBasket')
-let localProducts = JSON.parse(localStorage.getItem('products'))
-let localPacks = JSON.parse(localStorage.getItem('packs'))
+orderBasket = document.getElementById('orderBasket')
+localProducts = JSON.parse(localStorage.getItem('products'))
+localPacks = JSON.parse(localStorage.getItem('packs'))
 let popupFlag = false
 
 function addToCart(btn) {
