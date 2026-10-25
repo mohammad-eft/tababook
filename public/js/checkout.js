@@ -5,8 +5,9 @@ let totalPrice = 0
 let productsInput = document.getElementById('productsInput')
 let packsInput = document.getElementById('packsInput')
 localProducts = JSON.parse(localStorage.getItem('products'))
+let setUser = document.getElementById('setUser')
 localPacks = JSON.parse(localStorage.getItem('packs'))
-if(localStorage.getItem('products') && lcoalProducts.length){
+if (localStorage.getItem('products') && localStorage.length){
     localProducts.find(cart=>{
         let price = 0
         let discount = 0
@@ -75,4 +76,17 @@ province.addEventListener('change', ()=>{
             console.log('failed to load data')
         }
     })
+})
+function copyText(number){
+    navigator.clipboard.writeText(number)
+    alert('شماره کپی شد')
+}
+setUser.addEventListener('change', () => {
+    if (setUser.checked) {
+        document.getElementById('password').closest('.parentPass').classList.remove('hidden')
+        document.getElementById('password').disabled = false
+    } else {
+        document.getElementById('password').closest('.parentPass').classList.add('hidden')
+        document.getElementById('password').disabled = true
+    }
 })

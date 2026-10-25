@@ -111,5 +111,8 @@
 
             </div>
         </main>
+        <script>
+            window.currentPage = 'cart'
+        </script>
 <script src="{{ asset('js/cartPage.js') }}"></script>
 @endsection

@@ -25,6 +25,9 @@
         let userId = null;
         let user = null
         let routeIsCart = "{{ Route::is('cart.list') }}"
+        let orderBasket = document.getElementById('orderBasket')
+        let localProducts = JSON.parse(localStorage.getItem('products'))
+        let localPacks = JSON.parse(localStorage.getItem('packs'))
         if (flag) {
             userId = "{{ Auth::id() }}"
             user = "{{ Auth::user() }}"
@@ -34,7 +37,8 @@
 
 <body>
     <header class="w-full flex flex-col justify-start items-center">
-        <a href="{{ $setting['topBannerLink'] }}" class="w-full justify-center items-center hidden lg:flex" id="topBanner">
+        <a href="{{ $setting['topBannerLink'] }}" class="w-full justify-center items-center hidden lg:flex"
+            id="topBanner">
             <img src="{{ asset('storage/' . $setting['topBanner']) }}" class="w-full max-h-20 object-cover"
                 alt="">
         </a>
@@ -194,7 +198,9 @@
                                 <div
                                     class="rounded-xl pr-3 pl-0.5 pt-3 pb-1.5 border bg-white border-gray-300 translate-y-2.5">
                                     <div class="w-full flex flex-col gap-2 parentHeaderCarts max-h-[300px] overflow-y-auto pl-3"
-                                        style="scrollbar-width: thin;"></div>
+                                        style="scrollbar-width: thin;">
+                                        
+                                    </div>
                                     <div class="w-full text-end mt-1.5">
                                         <a href="{{ route('cart.list') }}"
                                             class="text-blue-500 text-sm font-bold pl-2.5">مشاهده سبد خرید</a>
@@ -408,9 +414,9 @@
 
 
         {{--        search_item --}}
-        <div class="w-full h-dvh bg-black/50 fixed top-0 right-0 z-1 invisible opacity-0 transition-all duration-400"
+        <div class="w-full h-dvh bg-black/50 fixed top-0 right-0 z-1111 invisible opacity-0 transition-all duration-400"
             onclick="search_pupup('close')" id="search_pupup_item_close"></div>
-        <div class="w-full h-0 bg-white fixed top-0 right-0 z-2 flex justify-center items-start overflow-y-hidden transition-all duration-400"
+        <div class="w-full h-0 bg-white fixed top-0 right-0 z-2222 flex justify-center items-start overflow-y-hidden transition-all duration-400"
             id="search_pupup_item">
             <div
                 class="w-11/12 flex max-sm:flex-col max-sm:gap-4 justify-between max-sm:justify-start items-center max-sm:items-start lg:pt-10 pt-6">

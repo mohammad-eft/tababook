@@ -5,10 +5,10 @@
 @section('content')
     <!-- address navbar -->
     <section
-        class="w-11/12 mx-auto lg:mb-5 py-5 flex flex-row justify-between items-center text-[#beb1d6] text-xs lg:text-sm">
+        class="w-11/12 mx-auto lg:mb-5 py-5 flex flex-row justify-between items-center text-[#beb1d6] text-xs lg:text-sm mt-5">
         <nav class="flex flex-row items-center text-xs lg:text-base">
             <div>
-                <a href="#" class="leading-[2.17]">
+                <a href="{{ route('home') }}" class="leading-[2.17]">
                     <span class="border-b border-[#beb1d6] lg:border-none text-(--pastel-purple)">
                         طبابوک
                     </span>
@@ -16,22 +16,24 @@
                 </a>
             </div>
             <div>
-                <a href="#" class="leading-[2.17]">
-                    <span class="border-b border-[#beb1d6] lg:border-none text-(--pastel-purple)">
+                <form action="{{ route('search.page') }}" method="POST" class="leading-[2.17] cursor-pointer">
+                    @csrf
+                    <button class="border-b border-[#beb1d6] lg:border-none text-(--pastel-purple) cursor-pointer">
                         {{ $product->categories[0]->title ?? 'بدون دسته بندی' }}
-                    </span>
+                    </button>
+                    <input type="hidden" name="categoryId" value="{{ $product->categories[0]->id }}" />
                     <span class="mx-3 text-(--primary-text-color)">/</span>
-                </a>
+                </form>
             </div>
             <div>
-                <a href="#" class="leading-[2.17]">
+                <a href="{{ route('product.show', $product->id) }}" class="leading-[2.17]">
                     <span class="border-b border-[#beb1d6] lg:border-none text-(--pastel-purple)">
                         {{ $product->title }}
                     </span>
                 </a>
             </div>
         </nav>
-        <div class="hidden lg:block">
+        {{-- <div class="hidden lg:block">
             <a href="#" class="flex flex-row gap-2 items-center text-(--secondary-text-color)">
                 فروش در طبابوک
                 <svg xmlns="http://www.w3.org/2000/svg" class="size-[18px]" viewBox="0 0 640 512">
@@ -39,7 +41,7 @@
                         d="M0 185.8c0-6.4 1.6-12.7 4.7-18.3L82.4 25C90.8 9.6 106.9 0 124.5 0h391c17.6 0 33.7 9.6 42.1 25l77.7 142.4c3.1 5.6 4.7 11.9 4.7 18.3c0 21.1-17.1 38.2-38.2 38.2H576V496c0 8.8-7.2 16-16 16s-16-7.2-16-16V224H96V352H352V272 256h32v16V464c0 26.5-21.5 48-48 48H112c-26.5 0-48-21.5-48-48V224H38.2C17.1 224 0 206.9 0 185.8zM80 192H560h41.8c3.4 0 6.2-2.8 6.2-6.2c0-1-.3-2.1-.8-3L529.6 40.3c-2.8-5.1-8.2-8.3-14-8.3h-391c-5.9 0-11.2 3.2-14 8.3L32.8 182.8c-.5 .9-.8 1.9-.8 3c0 3.4 2.8 6.2 6.2 6.2H80zM96 464c0 8.8 7.2 16 16 16H336c8.8 0 16-7.2 16-16V384H96v80z" />
                 </svg>
             </a>
-        </div>
+        </div> --}}
     </section>
     <!-- address navbar -->
 
@@ -216,7 +218,7 @@
             </div>
             <div class="grow min-w-0 flex flex-row gap-3">
                 <div class="w-full lg:w-1/2 xl:w-7/12">
-                    <div class="flex items-center w-full lg:px-0 pt-4 lg:pt-0 px-2">
+                    {{-- <div class="flex items-center w-full lg:px-0 pt-4 lg:pt-0 px-2">
                         <nav class="flex items-center text-sm lg:text-base">
                             <a href="#"
                                 class="text-(--primary-text-color) border-b border-(--color-border) lg:border-none lg:text-(--discount-color) text-xs lg:text-base">{{ $product->categories[0]->title ?? 'بدون دسته بندی' }}</a>
@@ -230,7 +232,7 @@
                                 {{ $product->title }}
                             </a>
                         </nav>
-                    </div>
+                    </div> --}}
                     <h1
                         class="text-md xl:text-3xl text-(--primary-text-color) font-bold mt-3 mb-2 pointer-events-none px-2 lg:px-0">
                         {{ $product->title }}
@@ -959,7 +961,7 @@
                                 </div>
                             </div>
 
-                            <div class="py-4">
+                            <div class="py-4 products" data-product-id="{{ $product->id }}">
                                 <div class="flex flex-row justify-end mb-3">
                                     @if($product->secondary_price)
                                     <div>
@@ -997,14 +999,14 @@
                                         + 200 فروش در هفته گذشته
                                     </span>
                                 </div> --}}
-                                <div class="h-12">
-                                    @if(Auth::check() && in_array($product->id, $cartProIds))
+                                <div class="h-12 addToCartBtns" data-product-id="{{ $product->id }}">
+                                    {{-- @if(Auth::check() && in_array($product->id, $cartProIds))
                                     <div class="w-full px-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
                                         <button onclick="setCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="+">+</button>
                                         <input type="number" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white text-sm text-center outline-none" readonly="" value="{{ $product->carts[0]->quantity }}">
                                         <button onclick="setCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="-">-</button>
                                     </div>
-                                    @else
+                                    @else --}}
                                     <button onclick="addToCart(this)" class="w-full px-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl addToCartBtns" data-product-id="{{ $product->id }}">
                                         <div>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3 fill-(--primary-text-color) group-hover:fill-white transition-all duration-300">
@@ -1014,7 +1016,7 @@
                                         </div>
                                         <span class="lg:text-sm text-[10px] text-(--primary-text-color) font-bold transition-all duration-300 group-hover:text-white">افزودن به سبد خرید</span>
                                     </button>
-                                    @endif
+                                    {{-- @endif --}}
                                 </div>
                             </div>
 
