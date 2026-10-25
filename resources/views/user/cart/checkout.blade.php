@@ -134,6 +134,16 @@
                         placeholder="یادداشت‌ها درباره سفارش شما، برای مثال نکات مهم درباره نحوه تحویل سفارش."
                         class="in-fa w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none resize-none"></textarea>
                 </div>
+                
+                <div class="w-full flex items-center gap-5">
+                    <input type="checkbox" name="" id="setUser">
+                    <span class="text-sm text-(--primary-text-color)">افزودن حساب کاربری</span>
+                </div>
+
+                <div class="parentPass hidden">
+                    <label class="block text-sm font-medium mb-2"> رمز عبور <span class="text-red-500">*</span></label>
+                    <input type="password" name="password" placeholder="رمز عبور خود را وارد کنید " disabled id="password" class="in-fa w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none">
+                </div>
             </div>
         </div>
 
