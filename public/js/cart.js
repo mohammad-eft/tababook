@@ -251,6 +251,15 @@ function addPackToCart(btn) {
                         `
                     }
                 }
+                if (response.quantity == response.count) {
+                    button.children[0].children[0].disabled = true
+                    button.children[0].children[0].classList.remove('cursor-pointer')
+                    button.children[0].children[0].classList.add('cursor-no-drop')
+                } else {
+                    button.children[0].children[0].disabled = false
+                    button.children[0].children[0].classList.remove('cursor-no-drop')
+                    button.children[0].children[0].classList.add('cursor-pointer')
+                }
             })
 
             let packs = []
@@ -308,6 +317,16 @@ function setPackCount(btn) {
             let currentPrice = parseInt(totalPriceEl.innerText) || 0
             totalPriceEl.innerText = currentPrice - finalPrice
         }
+    }
+
+    if (product.quantity == product.count) {
+        btn.disabled = true
+        btn.classList.remove('cursor-pointer')
+        btn.classList.add('cursor-no-drop')
+    } else {
+        btn.parentElement.children[0].disabled = false
+        btn.parentElement.children[0].classList.remove('cursor-no-drop')
+        btn.parentElement.children[0].classList.add('cursor-pointer')
     }
 
     document.querySelectorAll('.addPackToCartBtn').forEach(button => {
@@ -405,7 +424,7 @@ if (orderBasket) {
                                 <h3 class="font-semibold text-gray-800 text-sm sm:text-base truncate">${prod.title}</h3>
                                 <p class="text-xs text-gray-500 mt-0.5 mb-5 max-w-full h-8 max-h-8 overflow-hidden ellipsis-2">${prod.summary ? prod.summary : prod.description}</p>
                                 <div class="w-full p-2 bg-(--light-green-btn) hover:bg-(--green-btn) transition-all duration-300 group flex gap-2 justify-center items-center rounded-xl addToCartBtns" data-product-id="${prod.id}">
-                                    <button onclick="setCount(this)" class="w-1/3 text-lg font-bold text-(--primary-text-color) transition-all duration-300 group-hover:text-white flex justify-center items-center cursor-pointer" data-state="+">+</button>
+                                    <button onclick="setCount(this)" class="w-1/3 text-lg font-bold text-(--primary-text-color) transition-all duration-300 group-hover:text-white flex justify-center items-center ${prod.count == prod.quantity ? 'cursor-no-drop' : 'cursor-pointer'}" ${prod.count == prod.quantity ? 'disabled' : ''} data-state="+">+</button>
                                     <input type="number" class="w-1/3 text-sm text-center outline-none text-(--primary-text-color) transition-all duration-300 group-hover:text-white in-fa" readonly value="${prod.quantity}">
                                     <button onclick="setCount(this)" class="w-1/3 text-lg font-bold text-(--primary-text-color) transition-all duration-300 group-hover:text-white flex justify-center items-center cursor-pointer" data-state="-">-</button>
                                 </div>
@@ -432,7 +451,7 @@ if (orderBasket) {
                                 <h3 class="font-semibold text-gray-800 text-sm sm:text-base truncate">${pack.title}</h3>
                                 <p class="text-xs text-gray-500 mt-0.5 mb-5 max-w-full h-8 max-h-8 overflow-hidden ellipsis-2">${pack.summary}</p>
                                 <div class="w-full p-2 bg-(--light-green-btn) hover:bg-(--green-btn) transition-all duration-300 group flex gap-2 justify-center items-center rounded-xl addPackToCartBtn" data-pack-id="${pack.id}">
-                                    <button onclick="setPackCount(this)" class="w-1/3 text-lg font-bold text-(--primary-text-color) transition-all duration-300 group-hover:text-white flex justify-center items-center cursor-pointer" data-state="+">+</button>
+                                    <button onclick="setPackCount(this)" class="w-1/3 text-lg font-bold text-(--primary-text-color) transition-all duration-300 group-hover:text-white flex justify-center items-center ${pack.count == pack.quantity ? 'cursor-no-drop' : 'cursor-pointer'}" ${pack.count == pack.quantity ? 'disabled' : ''} data-state="+">+</button>
                                     <input type="number" class="w-1/3 text-sm text-center outline-none text-(--primary-text-color) transition-all duration-300 group-hover:text-white in-fa" readonly value="${pack.quantity}">
                                     <button onclick="setPackCount(this)" class="w-1/3 text-lg font-bold text-(--primary-text-color) transition-all duration-300 group-hover:text-white flex justify-center items-center cursor-pointer" data-state="-">-</button>
                                 </div>
