@@ -999,7 +999,7 @@
                                         + 200 فروش در هفته گذشته
                                     </span>
                                 </div> --}}
-                                <div class="h-12 addToCartBtns" data-product-id="{{ $product->id }}">
+                                <div class="h-12 addToCartBtns" data-count={{ $product->count }} data-product-id="{{ $product->id }}">
                                     {{-- @if(Auth::check() && in_array($product->id, $cartProIds))
                                     <div class="w-full px-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
                                         <button onclick="setCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="+">+</button>
