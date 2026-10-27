@@ -87,6 +87,8 @@ class OrdersController extends Controller
                     'order_id' => $order->id,
                     'quantity' => $product->quantity
                 ]);
+                $finalQuantity = $product->count-$product->quantity;
+                product::where('id', $product->id)->update(['count'=>$finalQuantity]);
             }
         }
         if ($packs) {

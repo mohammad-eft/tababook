@@ -365,7 +365,6 @@ function setPackCount(btn) {
     }
 }
 
-
 if (orderBasket) {
     orderBasket.addEventListener('click', () => {
         let hasProducts = (() => {
