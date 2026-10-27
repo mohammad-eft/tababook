@@ -113,18 +113,16 @@ maxPrice.addEventListener('keyup', ()=>{
         getFilters()
     }, 500)
 })
-searchInp.addEventListener('keyup', ()=>{
-    clearTimeout(timeout)
-    timeout = setTimeout(()=>{
-        title.innerText = 'نتایج جستجو برای "' + searchInp.value+'"'
-        filters.keyword = searchInp.value
-        getFilters()
-    }, 500)
-})
-// searchButton.addEventListener('click', ()=>{
-//     filters.keyword = searchInput.value
-//     getFilters()
-// })
+if (searchInp){
+    searchInp.addEventListener('keyup', ()=>{
+        clearTimeout(timeout)
+        timeout = setTimeout(()=>{
+            title.innerText = 'نتایج جستجو برای "' + searchInp.value+'"'
+            filters.keyword = searchInp.value
+            getFilters()
+        }, 500)
+    })
+}
 hasDescount.addEventListener('change', ()=>{
     hasDescount.checked ? filters.hasDescount = 1 : filters.hasDescount = 0
     getFilters()
