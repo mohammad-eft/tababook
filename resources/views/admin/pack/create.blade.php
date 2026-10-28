@@ -298,13 +298,7 @@
                             class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all text-sm resize-none"></textarea>
                     </div>
 
-                    <!-- توضیحات -->
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-1.5">توضیحات کامل</label>
-                        <textarea id="packDescription" name="description" rows="4"
-                            placeholder="توضیحات مفصل درباره محتوا، ویژگی‌ها و..."
-                            class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all text-sm resize-none"></textarea>
-                    </div>
+
 
                     <!-- قیمت و تخفیف -->
                     <div class="grid grid-cols-2 gap-4">
@@ -436,10 +430,20 @@
                         ثبت نهایی پک
                     </button>
                 </div>
+
+                                    <!-- توضیحات -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1.5">توضیحات کامل</label>
+                        <textarea id="editor" name="description" rows="4"
+                            placeholder="توضیحات مفصل درباره محتوا، ویژگی‌ها و..."
+                            class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all text-sm resize-none"></textarea>
+                    </div>
             </div>
         </div>
+        
     </form>
 
+    <script src="{{ asset('js/product.js') }}"></script>
     <!-- ===== اسکریپت MultiSelect ===== -->
     <script>
         /* =========================================================
