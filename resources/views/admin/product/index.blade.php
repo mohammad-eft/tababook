@@ -211,7 +211,7 @@
                                 <div class="w-full flex flex-col mt-5">
                                     <label for="description" class="mb-2">توضیحات محصول:</label>
                                     <textarea name="description" class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]" rows="4"
-                                        id="description" placeholder="توضیحات محصول را وارد کنید"></textarea>
+                                        id="editor" placeholder="توضیحات محصول را وارد کنید"></textarea>
                                     @error('description')
                                         <span class="text-xs text-red-500">{{ $message }}</span>
                                     @enderror
@@ -331,13 +331,14 @@
         </div>
     </div>
     {{-- end editForm popup --}}
+    <script src="{{ asset('js/product.js') }}"></script>
     <script>
         function editForm(state, id) {
             let editFormPopup = document.getElementById('editFormPopup')
             if (state == 'open') {
                 let product_id = document.getElementById('product_id')
                 let title = document.getElementById('title')
-                let description = document.getElementById('description')
+                // let editor = document.getElementById('editor')
                 let summary = document.getElementById('summary')
                 let show_in_home = document.getElementById('show_in_home')
                 let count = document.getElementById('count')
@@ -362,7 +363,7 @@
                     success: function(data) {
                         product_id.value = data['product'].id
                         title.value = data['product'].title
-                        description.value = data['product'].description
+                        editor.value = data['product'].description
                         summary.value = data['product'].summary
                         count.value = data['product'].count
                         primary_price.value = data['product'].primary_price
