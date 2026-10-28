@@ -194,14 +194,14 @@
                                 {{-- @endif --}}
                             </button>
                             <div
-                                class="absolute lg:w-80 -left-3 top-full invisible opacity-0 transition-all duration-300 z-555">
+                                class="absolute w-80 -left-3 top-full invisible opacity-0 transition-all duration-300 z-555">
                                 <div
                                     class="rounded-xl pr-3 pl-0.5 pt-3 pb-1.5 border bg-white border-gray-300 translate-y-2.5">
                                     <div class="w-full flex flex-col gap-2 parentHeaderCarts max-h-[300px] overflow-y-auto pl-3"
                                         style="scrollbar-width: thin;">
                                         
                                     </div>
-                                    <div class="w-full text-end mt-1.5">
+                                    <div class="w-full text-end mt-1.5 hidden" id="cartLink">
                                         <a href="{{ route('cart.list') }}"
                                             class="text-blue-500 text-sm font-bold pl-2.5">مشاهده سبد خرید</a>
                                     </div>
