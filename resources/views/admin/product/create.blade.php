@@ -28,8 +28,8 @@
                         </div>
                         <div class="w-full flex flex-col mt-5">
                             <label for="description" class="mb-2">توضیحات محصول:</label>
-                            <textarea name="description" class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]" rows="4"
-                                id="description" placeholder="توضیحات محصول را وارد کنید">{{ old('description') }}</textarea>
+                            <textarea name="description" id="editor" class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]" rows="4"
+                                id="description" placeholder="توضیحات محصول را وارد کنید">{!! old('description') !!}</textarea>
                             @error('description')
                                 <span class="text-xs text-red-500">{{ $message }}</span>
                             @enderror
@@ -150,4 +150,5 @@
         </div>
     </div>
     <script src="{{ url('js/attribute.js') }}"></script>
+    <script src="{{ url('js/product.js') }}"></script>
 @endsection
