@@ -10,12 +10,6 @@ const editor = Jodit.make('#editor', {
 
         url: api+'uploadImage',
 
-        headers: {
-            'X-CSRF-TOKEN': document
-                .querySelector('meta[name="csrf-token"]')
-                .getAttribute('content')
-        },
-
         format: 'json',
 
         isSuccess: function (resp) {

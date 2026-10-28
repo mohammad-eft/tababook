@@ -29,8 +29,11 @@ Route::get('/test', function(){
     //     $table->integer('user_id')->nullable()->change();
     //     $table->integer('pack_id')->after('product_id')->nullable();
     // });
-    Schema::table('packs', function(Blueprint $table){
-        $table->integer('count')->default(1)->after('image');
+    // Schema::table('packs', function(Blueprint $table){
+    //     $table->integer('count')->default(1)->after('image');
+    // });
+    Schema::table('products', function(Blueprint $table){
+        $table->longText('description')->nullable()->change();
     });
     // product::where('id', '>', 0)->update(['show_in_home'=>1]);
 });
