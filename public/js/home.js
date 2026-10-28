@@ -19,8 +19,8 @@ addToCartBtns.forEach(product=>{
                     </button>`
                 }
             }
-            console.log(cartPro)
         })
+        cartLink.classList.remove('hidden')
     }
     if(localPacks){
         localPacks.forEach(cartPro=>{
@@ -33,6 +33,7 @@ addToCartBtns.forEach(product=>{
                 </div>`
             }
         })
+        cartLink.classList.remove('hidden')
     }
 })
 if (localProducts) { orderBasket.children[1].innerText = localProducts.length }

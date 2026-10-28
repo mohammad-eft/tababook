@@ -2,6 +2,7 @@ let totalPriceEl = document.getElementById('totalPriceEl')
 let discountEl = document.getElementById('discountEl')
 let addPackToCartBtn = document.getElementById('addPackToCartBtn')
 let cartItemsBlock = document.getElementById('cartItemsBlock')
+let cartLink = document.getElementById('cartLink')
 orderBasket = document.getElementById('orderBasket')
 localProducts = JSON.parse(localStorage.getItem('products'))
 localPacks = JSON.parse(localStorage.getItem('packs'))
@@ -13,7 +14,7 @@ function addToCart(btn) {
 
     let productId = container.dataset.productId
     if (!productId) return
-
+    cartLink.classList.remove('hidden')
     btn.removeAttribute('onclick')
     btn.innerHTML = `<div class="w-5 h-5 border-2 border-white border-t-(--primary-text-color) rounded-full animate-spin"></div>`
 
@@ -220,6 +221,7 @@ function addPackToCart(btn) {
 
     let packId = container.dataset.packId
     if (!packId) return
+    cartLink.classList.remove('hidden')
 
     btn.innerHTML = `<div class="w-5 h-5 border-2 border-white border-t-(--primary-text-color) rounded-full animate-spin"></div>`
 
@@ -482,6 +484,8 @@ if (orderBasket) {
                         </svg>
                     </div>
                 `
+                cartLink.classList.add('hidden')
+
             }
             popupFlag = true
         }

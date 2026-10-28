@@ -7,10 +7,12 @@
     {{-- <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> --}}
     <link rel="stylesheet" href="{{ url('css/style.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url('css/MultiSelect.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url('css/jodit.css') }}" type="text/css">
     <title>@yield('title')</title>
     <link rel="shortcut icon" href="{{ asset('img/faveicon.png') }}" type="image/x-icon">
     <script src="{{ asset('js/tailwind.js') }}"></script>
     <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="{{ asset('js/jodit.js') }}"></script>
     <script>
         let url = "{{ url('/') }}/"
         let api = "{{ url('api/') }}/"

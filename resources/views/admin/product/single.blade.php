@@ -395,23 +395,23 @@
                             </h3>
                             <ul class="w-full flex flex-row items-center lg:grid lg:grid-cols-3 gap-1 overflow-x-scroll"
                                 style="scrollbar-width:none;">
-                                @foreach($product->attributes as $attr)
-                                <li class="w-fit lg:w-full bg-(--cream-color) p-2 rounded-md h-full">
-                                    <div class="flex flex-row items-center">
-                                        <p class="text-sm text-[var(--primary-text-color-secondary)]">
-                                           {{ $attr->attribute_key }}
+                                @foreach ($product->attributes as $attr)
+                                    <li class="w-fit lg:w-full bg-(--cream-color) p-2 rounded-md h-full">
+                                        <div class="flex flex-row items-center">
+                                            <p class="text-sm text-[var(--primary-text-color-secondary)]">
+                                                {{ $attr->attribute_key }}
+                                            </p>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="size-3 mr-2 lg:hidden"
+                                                viewBox="0 0 320 512">
+                                                <path fill="var(--color-fill)"
+                                                    d="M52.7 267.3c-6.2-6.2-6.2-16.4 0-22.6l160-160c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6L86.6 256 235.3 404.7c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0l-160-160z" />
+                                            </svg>
+                                        </div>
+                                        <p class="text-sm text-(--primary-text-color) font-bold">
+                                            {{ $attr->attribute_value }}
                                         </p>
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="size-3 mr-2 lg:hidden"
-                                            viewBox="0 0 320 512">
-                                            <path fill="var(--color-fill)"
-                                                d="M52.7 267.3c-6.2-6.2-6.2-16.4 0-22.6l160-160c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6L86.6 256 235.3 404.7c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0l-160-160z" />
-                                        </svg>
-                                    </div>
-                                    <p class="text-sm text-(--primary-text-color) font-bold">
-                                        {{ $attr->attribute_value }}
-                                    </p>
-                                </li>
-                              @endforeach
+                                    </li>
+                                @endforeach
 
                             </ul>
                         </div>
@@ -440,12 +440,12 @@
                             </svg>
                         </span>
                         <p class="text-sm leading-[2.15] text-[#beb1d6] text-justify">
-                            {{ $product->description }}
+                            {{ $product->summary }}
                         </p>
                     </div>
 
                     <hr class="w-full border-none h-2 bg-[var(--color-border)] lg:hidden">
-{{-- py-5 --}}
+                    {{-- py-5 --}}
                     <div class="lg:hidden  px-2 text-(--primary-text-color)">
                         {{-- <h3 class="text-md font-bold leading-[180%]">
                             فروشنده
@@ -584,7 +584,7 @@
                         </div> --}}
 
 
-{{-- 
+                        {{-- 
                         <div class="flex flex-row gap-3 items-center">
                             <div class="size-9 p-2 bg-(--discount-color-btn) flex justify-center items-center rounded-full">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 448 512">
@@ -932,8 +932,7 @@
 
                 <div class="hidden lg:block lg:w-1/2 xl:w-5/12">
                     <div class="sticky top-10">
-                        <div
-                            class=" bg-(--second-cream-color) rounded-md p-5 text-(--primary-text-color) cart_shdow">
+                        <div class=" bg-(--second-cream-color) rounded-md p-5 text-(--primary-text-color) cart_shdow">
                             <h3 class="pb-2 font-medium">
                                 فروشنده
                             </h3>
@@ -963,31 +962,33 @@
 
                             <div class="py-4 products" data-product-id="{{ $product->id }}">
                                 <div class="flex flex-row justify-end mb-3">
-                                    @if($product->secondary_price)
-                                    <div>
-                                        <div class="flex flex-row items-end gap-3">
-                                            <span
-                                                class="text-xs text-[#beb1d6] line-through in-fa">{{ number_format($product->primary_price) }}</span>
-                                            <span
-                                                class="px-2 leading-[1.9] bg-[var(--color-discount-bg)] text-(--discount-color-text) text-xs font-medium rounded-full">
-                                                
-                                            </span>
-                                        </div>
-                                        <div class="flex flex-row gap-1 mt-1 items-end">
-                                            <span class="text-lg font-bold in-fa">{{ number_format($product->secondary_price) }}</span>
-                                            <span class="text-xs pb-1.5">تومان</span>
-                                        </div>
+                                    @if ($product->secondary_price)
+                                        <div>
+                                            <div class="flex flex-row items-end gap-3">
+                                                <span
+                                                    class="text-xs text-[#beb1d6] line-through in-fa">{{ number_format($product->primary_price) }}</span>
+                                                <span
+                                                    class="px-2 leading-[1.9] bg-[var(--color-discount-bg)] text-(--discount-color-text) text-xs font-medium rounded-full">
 
-                                    </div>
-                                    @else 
-                                    <div>
-                                        
-                                        <div class="flex flex-row gap-1 mt-1 items-end">
-                                            <span class="text-lg font-bold in-fa">{{ number_format($product->primary_price) }}</span>
-                                            <span class="text-xs pb-1.5">تومان</span>
-                                        </div>
+                                                </span>
+                                            </div>
+                                            <div class="flex flex-row gap-1 mt-1 items-end">
+                                                <span
+                                                    class="text-lg font-bold in-fa">{{ number_format($product->secondary_price) }}</span>
+                                                <span class="text-xs pb-1.5">تومان</span>
+                                            </div>
 
-                                    </div>
+                                        </div>
+                                    @else
+                                        <div>
+
+                                            <div class="flex flex-row gap-1 mt-1 items-end">
+                                                <span
+                                                    class="text-lg font-bold in-fa">{{ number_format($product->primary_price) }}</span>
+                                                <span class="text-xs pb-1.5">تومان</span>
+                                            </div>
+
+                                        </div>
                                     @endif
                                 </div>
 
@@ -999,22 +1000,29 @@
                                         + 200 فروش در هفته گذشته
                                     </span>
                                 </div> --}}
-                                <div class="h-12 addToCartBtns" data-count={{ $product->count }} data-product-id="{{ $product->id }}">
-                                    {{-- @if(Auth::check() && in_array($product->id, $cartProIds))
+                                <div class="h-12 addToCartBtns" data-count={{ $product->count }}
+                                    data-product-id="{{ $product->id }}">
+                                    {{-- @if (Auth::check() && in_array($product->id, $cartProIds))
                                     <div class="w-full px-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
                                         <button onclick="setCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="+">+</button>
                                         <input type="number" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white text-sm text-center outline-none" readonly="" value="{{ $product->carts[0]->quantity }}">
                                         <button onclick="setCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="-">-</button>
                                     </div>
                                     @else --}}
-                                    <button onclick="addToCart(this)" class="w-full px-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl addToCartBtns" data-product-id="{{ $product->id }}">
+                                    <button onclick="addToCart(this)"
+                                        class="w-full px-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl addToCartBtns"
+                                        data-product-id="{{ $product->id }}">
                                         <div>
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3 fill-(--primary-text-color) group-hover:fill-white transition-all duration-300">
-                                                <path d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                                class="lg:size-4 size-3 fill-(--primary-text-color) group-hover:fill-white transition-all duration-300">
+                                                <path
+                                                    d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
                                                 </path>
                                             </svg>
                                         </div>
-                                        <span class="lg:text-sm text-[10px] text-(--primary-text-color) font-bold transition-all duration-300 group-hover:text-white">افزودن به سبد خرید</span>
+                                        <span
+                                            class="lg:text-sm text-[10px] text-(--primary-text-color) font-bold transition-all duration-300 group-hover:text-white">افزودن
+                                            به سبد خرید</span>
                                     </button>
                                     {{-- @endif --}}
                                 </div>
@@ -1654,16 +1662,31 @@
                             {{ $attribute->attribute_value }}
                         </div>
                     </div>
-                    @endforeach
+                @endforeach
             </div>
         </div>
     </section>
+
 
     <!-- specifications table mobile -->
 
     {{-- <hr class="w-11/12 border-none h-2 bg-[var(--color-border)] lg:hidden"> --}}
 
     <!-- specifications table desktop -->
+
+    <section class="w-11/12 mx-auto text-(--primary-text-color) mt-4 lg:pb-10">
+        <div class="hidden lg:block sticky top-0 bg-white z-[555]">
+            <div class="flex flex-row border-b border-(--color-border)">
+                <span
+                    class="text-sm font-medium leading-[180%] py-2 px-4 text-(--discount-color) border-b-4 border-(--discount-color) rounded-b-sm cursor-pointer">
+                    معرفی
+                </span>
+            </div>
+        </div>
+        <div class="py-3">
+            {!! $product->description !!}
+        </div>
+    </section>
 
     <section class="w-11/12 mx-auto text-(--primary-text-color) mt-4 lg:pb-10">
         <div class="hidden lg:block sticky top-0 bg-white z-[555]">
@@ -1696,7 +1719,7 @@
                             <div class="w-[70px] h-0.5 bg-(--discount-color) mt-2"></div>
                         </div>
                         <div class="mt-4 pt-4 flex flex-row items-start" id="attrDesktop">
-                            
+
                             <div class="w-1/4">
                                 <h2 class="font-bold leading-[2.17]">
                                     مشخصات کلی
@@ -1713,7 +1736,8 @@
                                         <div class="w-1/4 text-[#beb1d6] text-sm py-3 leading-[2.17]">
                                             {{ $attribute->attribute_key }}
                                         </div>
-                                        <div class="w-3/4 text-sm @if($product->attributes[count($product->attributes)-1]->attribute_key !== $attribute->attribute_key) border-b border-(--color-border) @endif py-3 leading-[2.17]">
+                                        <div
+                                            class="w-3/4 text-sm @if ($product->attributes[count($product->attributes) - 1]->attribute_key !== $attribute->attribute_key) border-b border-(--color-border) @endif py-3 leading-[2.17]">
                                             {{ $attribute->attribute_value }}
                                         </div>
                                     </div>
@@ -2135,9 +2159,9 @@
                 </div> --}}
 
 
-                {{-- <hr class="w-full border-none h-1 bg-[var(--color-border)] mt-5"> --}}
-            </div>
-            {{-- <div class="w-3/12 hidden 2xl:block">
+            {{-- <hr class="w-full border-none h-1 bg-[var(--color-border)] mt-5"> --}}
+        </div>
+        {{-- <div class="w-3/12 hidden 2xl:block">
                 <div
                     class="sticky top-[60px] mt-5 p-4 rounded border border-(--color-border) bg-[var(--color-secondary-bg)]">
                     <div class="flex flex-row gap-5 items-start pb-3 mb-3 border-b border-(--color-border)">
@@ -2182,7 +2206,7 @@
                         </span>
                     </div>
                     <div class="flex flex-row justify-end mb-3">
-                        @if($product->secondary_price)
+                        @if ($product->secondary_price)
                         <div>
                             <div class="flex flex-row items-end gap-3">
                                 <span
@@ -2790,8 +2814,7 @@
                 </svg>
             </div>
             <div class="kt-card max-w-[370px] m-auto transition-all duration-300 opacity-0 scale-75">
-                <form action="{{ route('user.check') }}" method="post"
-                    class="flex flex-col gap-5 p-10 bg-white">
+                <form action="{{ route('user.check') }}" method="post" class="flex flex-col gap-5 p-10 bg-white">
                     @csrf
                     <div class="text-center mb-2.5">
                         <h3 class="text-lg font-medium text-mono leading-none mb-2.5">
@@ -2834,8 +2857,7 @@
 
                     </div>
                     <div class="flex flex-row justify-start items-center">
-                        <span for="accept"
-                            class="text-sm text-[#0b0809] mr-2 flex flex-row justify-start items-center">
+                        <span for="accept" class="text-sm text-[#0b0809] mr-2 flex flex-row justify-start items-center">
                             گذرواژه خود را
                             <a href="" class="text-blue-500 mr-1"> فراموش کردم </a>
                         </span>
@@ -2858,39 +2880,53 @@
         class="w-full px-2 py-3 bg-white fixed bottom-0 right-0 lg:hidden border-t border-(--color-border) text-(--primary-text-color)">
         <div class="flex flex-row justify-between items-center py-2">
             <div class="w-1/2 h-12">
-                @if(Auth::check() && in_array($product->id, $cartProIds))
-                <div class="w-full px-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $product->id }}">
-                    <button onclick="setCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="+">+</button>
-                    <input type="number" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white text-sm text-center outline-none" readonly="" value="{{ $product->carts[0]->quantity }}">
-                    <button onclick="setCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="-">-</button>
-                </div>
-                @else
-                <button onclick="addToCart(this)" class="w-full px-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl addToCartBtns" data-product-id="{{ $product->id }}">
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3 fill-(--primary-text-color) transition-all duration-300 group-hover:fill-white">
-                            <path d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
-                            </path>
-                        </svg>
+                @if (Auth::check() && in_array($product->id, $cartProIds))
+                    <div class="w-full px-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl"
+                        data-product-id="{{ $product->id }}">
+                        <button onclick="setCount(this)"
+                            class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer"
+                            data-state="+">+</button>
+                        <input type="number"
+                            class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white text-sm text-center outline-none"
+                            readonly="" value="{{ $product->carts[0]->quantity }}">
+                        <button onclick="setCount(this)"
+                            class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer"
+                            data-state="-">-</button>
                     </div>
-                    <span class="lg:text-sm text-[10px] text-(--primary-text-color) font-bold transition-all duration-300 group-hover:text-white">افزودن به سبد خرید</span>
-                </button>
+                @else
+                    <button onclick="addToCart(this)"
+                        class="w-full px-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl addToCartBtns"
+                        data-product-id="{{ $product->id }}">
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                class="lg:size-4 size-3 fill-(--primary-text-color) transition-all duration-300 group-hover:fill-white">
+                                <path
+                                    d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
+                                </path>
+                            </svg>
+                        </div>
+                        <span
+                            class="lg:text-sm text-[10px] text-(--primary-text-color) font-bold transition-all duration-300 group-hover:text-white">افزودن
+                            به سبد خرید</span>
+                    </button>
                 @endif
             </div>
-            @if($product->secondary_price)
-            <div class="flex flex-row items-center gap-2 text-sm">
-                <span class="font-bold text-xs text-gray-400 in-fa line-through">{{ number_format($product->primary_price) }}</span>
-                <span class="font-bold in-fa">{{ number_format($product->secondary_price) }}</span>
-                <span class="font-medium text-xs">
-                    تومان
-                </span>
-            </div>
+            @if ($product->secondary_price)
+                <div class="flex flex-row items-center gap-2 text-sm">
+                    <span
+                        class="font-bold text-xs text-gray-400 in-fa line-through">{{ number_format($product->primary_price) }}</span>
+                    <span class="font-bold in-fa">{{ number_format($product->secondary_price) }}</span>
+                    <span class="font-medium text-xs">
+                        تومان
+                    </span>
+                </div>
             @else
-            <div class="flex flex-row items-center gap-2 text-sm">
-                <span class="font-bold in-fa">{{ number_format($product->primary_price) }}</span>
-                <span class="font-medium text-xs">
-                    تومان
-                </span>
-            </div>
+                <div class="flex flex-row items-center gap-2 text-sm">
+                    <span class="font-bold in-fa">{{ number_format($product->primary_price) }}</span>
+                    <span class="font-medium text-xs">
+                        تومان
+                    </span>
+                </div>
             @endif
         </div>
     </div>
