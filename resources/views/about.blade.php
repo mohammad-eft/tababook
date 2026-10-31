@@ -1,5 +1,5 @@
 @extends('app.document')
-@section('title', 'درباره ما')
+@section('title', 'طبابوک | درباره ما')
 @section('content')
     <script>
         tailwind.config = {

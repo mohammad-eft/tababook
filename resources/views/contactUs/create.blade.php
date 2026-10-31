@@ -1,5 +1,5 @@
 @extends('app.document')
-@section('title', 'ایجاد ارتباط باما')
+@section('title', 'طبابوک | ارتباط با ما')
 @section('content')
     <div class="2xl:container w-10/12 mx-auto">
         <div class="text-center mb-4 mt-4 lg:mt-10">

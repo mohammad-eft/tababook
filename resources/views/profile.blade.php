@@ -1,5 +1,5 @@
 @extends('admin.app.dashboard')
-@section('title', 'طبابوک | ایجاد محصول')
+@section('title', 'طبابوک | پروفایل من')
 @section('content')
     <div class="w-full max-w-4xl mx-auto px-4 py-6">
         <!-- Header Section -->

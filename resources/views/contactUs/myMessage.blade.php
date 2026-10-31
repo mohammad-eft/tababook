@@ -1,11 +1,11 @@
 
  @extends('app.document')
- @section('title', 'ارتباط با ما')
+ @section('title', 'طبابوک | تیکت های من')
  @section('content')
     <div class="w-full flex flex-col pb-4">
         <div class="bg-white rounded-lg">
 
-            <h2 class="text-lg font-bold text-[red] p-4 text-center">لیست ارتباط با ما</h2>
+            <h2 class="text-lg font-bold text-[red] p-4 text-center">لیست تیکت های من</h2>
             <a href="{{ route('contactUs.create') }}" class="text-sky-700">برگشت</a>
 
             <form class="flex flex-col gap-5" action="{{ route('contactUs.deleteAll') }}" method="post">

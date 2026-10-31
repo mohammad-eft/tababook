@@ -1,10 +1,10 @@
 @extends('app.document')
-@section('title', 'ویرایش درباره ما')
+@section('title', 'طبابوک | ویرایش ارتباط ما')
 @section('content')
 
     <div class="text-center mb-4">
         <h1 class="text-lg font-bold text-gray-800">
-             ویرایش درباره ما
+             ویرایش ارتباط ما
         </h1>
     </div>
     <form action="{{ route('contactUs.update') }}" method="post">

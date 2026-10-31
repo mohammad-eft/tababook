@@ -1,5 +1,5 @@
 @extends('admin.app.dashboard')
-@section('title', 'جست و جو')
+@section('title', 'طبابوک | جست و جو')
 @section('content')
      @if (session('message'))
         <div

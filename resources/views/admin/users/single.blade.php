@@ -1,5 +1,7 @@
 @extends('admin.app.dashboard')
-@section('title', 'طبابوک | ایجاد محصول')
+@section('title')
+طبابوک | {{ $user->name.' '.$user->family }}
+@endsection
 @section('content')
         <div class="w-full">
             <div class="flex flex-col border-none rounded-[7px]">

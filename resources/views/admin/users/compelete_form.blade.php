@@ -1,5 +1,5 @@
 @extends('admin.app.dashboard')
-@section('title', 'طبابوک | ایجاد محصول')
+@section('title', 'طبابوک | تکمیل پروفایل')
 @section('content')
 <div class="w-full lg:w-1/2 lg:mx-auto my-6">
     <div class="bg-white rounded-2xl shadow-md p-6">

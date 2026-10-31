@@ -1,5 +1,5 @@
 @extends('app.document')
-@section('title', 'پرداخت')
+@section('title', 'طبابوک | پرداخت')
 @section('content')
     <style>
         .card-glow {

@@ -1,5 +1,5 @@
 @extends('app.document')
-@section('title', 'سبد خرید')
+@section('title', 'طبابوک | سبد خرید')
 @section('content')
         <!-- Header -->
         <header class="bg-white border-b border-gray-100">
