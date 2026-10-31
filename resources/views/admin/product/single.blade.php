@@ -1,6 +1,6 @@
 @extends('app.document')
 @section('title')
-شهرپشم | {{ $product->title }}
+طبابوک | {{ $product->title }}
 @endsection
 @section('content')
 <!-- address navbar -->

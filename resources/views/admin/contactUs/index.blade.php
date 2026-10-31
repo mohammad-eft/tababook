@@ -1,5 +1,5 @@
  @extends('admin.app.dashboard')
- @section('title', 'ارتباط با ما')
+ @section('title', 'طبابوک | ارتباط با ما')
  @section('content')
      <div class="w-full flex flex-col pb-4">
          <div class="bg-white rounded-lg">

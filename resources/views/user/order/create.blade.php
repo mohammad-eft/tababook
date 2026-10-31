@@ -1,6 +1,6 @@
 @extends('app.document')
 @section('title')
-    ثبت سفارش
+    طبابوک | ثبت سفارش
 @endsection
 @section('content')
 

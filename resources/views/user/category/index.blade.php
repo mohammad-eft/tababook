@@ -1,5 +1,5 @@
 @extends('app.document')
-@section('title', 'دسته بندی ها')
+@section('title', 'طبابوک | دسته بندی ها')
 @section('content')
     <div class="grid grid-cols-2 mx:grid-cols-3 lg:grid-cols-5 xl:grid-cols-7 items-center gap-5 p-5">
         @foreach ($categories as $category)
