@@ -41,7 +41,7 @@
                         </h2>
                         <div class="flex flex-wrap justify-center md:justify-start gap-2">
                             <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
-                                {{ $user->role[0]->title ?? 'کاربر عادی' }}
+                                {{ $user->roles[0]->fa_title ?? '' }}
                             </span>
                             @if($user->phoneNumber)
                                 <span class="px-3 py-1 bg-purple-50 text-purple-700 rounded-full text-sm flex items-center gap-1">
