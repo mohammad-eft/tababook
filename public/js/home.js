@@ -21,7 +21,6 @@ addToCartBtns.forEach(product=>{
                 }
             }
         })
-        cartLink.classList.remove('hidden')
     }
     if(localPacks){
         localPacks.forEach(cartPro=>{
@@ -34,17 +33,18 @@ addToCartBtns.forEach(product=>{
                 </div>`
             }
         })
-        cartLink.classList.remove('hidden')
     }
 })
 if (localProducts) { 
     localProducts.forEach(item=>{
         totalCartQuantity+=item.quantity
     })
+    cartLink.classList.remove('hidden')
 }
 if (localPacks) { 
     localPacks.forEach(item => {
         totalCartQuantity += item.quantity
     })
+    cartLink.classList.remove('hidden')
 }
 orderBasket.children[1].innerText = totalCartQuantity
