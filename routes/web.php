@@ -17,6 +17,8 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 use App\Models\product;
+use App\Models\User;
+use App\Models\role_user;
 
 Route::get('/test', function(){
     // $dateTime = explode(' ', verta());
@@ -32,10 +34,19 @@ Route::get('/test', function(){
     // Schema::table('packs', function(Blueprint $table){
     //     $table->integer('count')->default(1)->after('image');
     // });
-    Schema::table('products', function(Blueprint $table){
-        $table->longText('description')->nullable()->change();
-    });
+    // Schema::table('products', function(Blueprint $table){
+    //     $table->longText('description')->nullable()->change();
+    // });
     // product::where('id', '>', 0)->update(['show_in_home'=>1]);
+
+    $userIds = User::pluck('id')->toArray();
+    role_user::where('id', '>', 0)->delete();
+    foreach($userIds as $userId){
+        role_user::create([
+            'user_id'=>$userId,
+            'role_id'=> $userId == 1 || $userId == 16 ? 1 : 2
+        ]);
+    }
 });
 
 Route::get('/', [SettingController::class, 'home'])->name('home');
