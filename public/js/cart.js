@@ -26,7 +26,8 @@ function addToCart(btn) {
             if (orderBasket && orderBasket.children[1]) {
                 let quan = parseInt(orderBasket.children[1].innerText) || 0
                 quan += 1
-                orderBasket.children[1].innerText = quan
+                totalCartQuantity++
+                orderBasket.children[1].innerText = totalCartQuantity
             }
 
             response.quantity = 1
@@ -111,6 +112,7 @@ function setCount(btn) {
     if (btn.dataset.state === '+') {
         btn.parentElement.children[1].value++
         product.quantity++
+        totalCartQuantity++
         if (totalPriceEl) {
             let currentPrice = parseInt(totalPriceEl.innerText) || 0
             totalPriceEl.innerText = currentPrice + finalPrice
@@ -120,6 +122,7 @@ function setCount(btn) {
     if (btn.dataset.state === '-') {
         btn.parentElement.children[1].value--
         product.quantity--
+        totalCartQuantity--
         if (totalPriceEl) {
             let currentPrice = parseInt(totalPriceEl.innerText) || 0
             totalPriceEl.innerText = currentPrice - finalPrice
@@ -149,9 +152,9 @@ function setCount(btn) {
     localStorage.setItem('products', JSON.stringify(localProducts))
 
     if (btn.parentElement.children[1].value == 0) {
-        if (orderBasket && orderBasket.children[1]) {
-            orderBasket.children[1].innerText = Math.max(0, (parseInt(orderBasket.children[1].innerText) || 1) - 1)
-        }
+        // if (orderBasket && orderBasket.children[1]) {
+        //     orderBasket.children[1].innerText = Math.max(0, (parseInt(orderBasket.children[1].innerText) || 1) - 1)
+        // }
 
         localProducts = localProducts.filter(cart => String(cart.id) !== String(productId))
         localStorage.setItem('products', JSON.stringify(localProducts))
@@ -213,6 +216,7 @@ function setCount(btn) {
             })
         }
     }
+    orderBasket.children[1].innerText = totalCartQuantity
 }
 
 function addPackToCart(btn) {
@@ -230,9 +234,11 @@ function addPackToCart(btn) {
         type: "GET",
         dataType: "json",
         success: function (response) {
-            if (orderBasket && orderBasket.children[1]) {
-                orderBasket.children[1].innerText = (parseInt(orderBasket.children[1].innerText) || 0) + 1
-            }
+            // if (orderBasket && orderBasket.children[1]) {
+            //     orderBasket.children[1].innerText = (parseInt(orderBasket.children[1].innerText) || 0) + 1
+            // }
+            totalCartQuantity++
+            orderBasket.children[1].innerText = totalCartQuantity
 
             response.quantity = 1
 
@@ -306,6 +312,7 @@ function setPackCount(btn) {
     if (btn.dataset.state === '+') {
         btn.parentElement.children[1].value++
         pack.quantity++
+        totalCartQuantity++
         if (totalPriceEl) {
             let currentPrice = parseInt(totalPriceEl.innerText) || 0
             totalPriceEl.innerText = currentPrice + finalPrice
@@ -315,6 +322,7 @@ function setPackCount(btn) {
     if (btn.dataset.state === '-') {
         btn.parentElement.children[1].value--
         pack.quantity--
+        totalCartQuantity--
         if (totalPriceEl) {
             let currentPrice = parseInt(totalPriceEl.innerText) || 0
             totalPriceEl.innerText = currentPrice - finalPrice
@@ -344,9 +352,9 @@ function setPackCount(btn) {
     localStorage.setItem('packs', JSON.stringify(localPacks))
 
     if (btn.parentElement.children[1].value == 0) {
-        if (orderBasket && orderBasket.children[1]) {
-            orderBasket.children[1].innerText = Math.max(0, (parseInt(orderBasket.children[1].innerText) || 1) - 1)
-        }
+        // if (orderBasket && orderBasket.children[1]) {
+        //     orderBasket.children[1].innerText = Math.max(0, (parseInt(orderBasket.children[1].innerText) || 1) - 1)
+        // }
 
         localPacks = localPacks.filter(cart => String(cart.id) !== String(packId))
         localStorage.setItem('packs', JSON.stringify(localPacks))
@@ -384,6 +392,7 @@ function setPackCount(btn) {
             })
         }
     }
+    orderBasket.children[1].innerText = totalCartQuantity
 }
 
 if (orderBasket) {
