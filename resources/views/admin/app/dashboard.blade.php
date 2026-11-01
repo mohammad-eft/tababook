@@ -321,8 +321,8 @@
                             @endcan
                             <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
                                 <span class="size-1 bg-white rounded-sm"></span>
-                                <a href="{{ route('aboutUs.list') }}"
-                                    class="py-1 @if (Route::is('aboutUs.list')) text-[#FF0000] @endif">درباره ما</a>
+                                <a href="{{ route('aboutUs.clientList') }}"
+                                    class="py-1 @if (Route::is('aboutUs.clientList')) text-[#FF0000] @endif">درباره ما</a>
                             </li>
                         </ul>
                     </div>
@@ -657,8 +657,8 @@
                                 @endcan
                                 <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
                                     <span class="size-1 bg-white rounded-sm"></span>
-                                    <a href="{{ route('aboutUs.list') }}"
-                                        class="py-1 @if (Route::is('aboutUs.list')) text-[#FF0000] @endif">درباره ما</a>
+                                    <a href="{{ route('aboutUs.clientList') }}"
+                                        class="py-1 @if (Route::is('aboutUs.clientList')) text-[#FF0000] @endif">درباره ما</a>
                                 </li>
                             </ul>
                         </div>
