@@ -59,7 +59,7 @@ class UserController extends Controller
             ], ['phoneNumber'], ['password']);
             $user_id = User::where('phoneNumber', $request->phoneNumber)->first();
             role_user::create(['role_id' => 2, 'user_id' => $user_id->id]);
-            Auth::loginUsingId($user_id);
+            Auth::loginUsingId($user_id->id);
             return to_route('home');
         }
         return to_route('signup');
