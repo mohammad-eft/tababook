@@ -34,9 +34,9 @@ Route::get('/test', function(){
     // Schema::table('packs', function(Blueprint $table){
     //     $table->integer('count')->default(1)->after('image');
     // });
-    // Schema::table('products', function(Blueprint $table){
-    //     $table->longText('description')->nullable()->change();
-    // });
+    Schema::table('phone_codes', function(Blueprint $table){
+        $table->string('phoneNumber')->unique()->change();
+    });
     // product::where('id', '>', 0)->update(['show_in_home'=>1]);
 
     $userIds = User::pluck('id')->toArray();

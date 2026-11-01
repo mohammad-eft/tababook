@@ -191,7 +191,7 @@
                         <!-- دکمه ورود -->
                         <button type="submit"
                             id="submitBtn"
-                            class="btn-purple w-full text-center text-white p-3.5 rounded-xl font-medium text-lg mt-4 cursor-pointer shadow-lg shadow-purple-200" onclick="loginToAccount(event, 'password')">
+                            class="btn-purple w-full text-center text-white p-3.5 rounded-xl font-medium text-lg mt-4 cursor-pointer shadow-lg shadow-purple-200" onclick="loginToAccount(event, 'code')">
                             ورود به حساب
                         </button>
                         
