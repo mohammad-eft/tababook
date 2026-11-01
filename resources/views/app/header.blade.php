@@ -448,7 +448,7 @@
         </div>
         {{--        search_item --}}
         {{--        account_pupup_close --}}
-        <div class="w-full h-dvh fixed top-0 right-0 z-5 invisible opacity-0 transition-all duration-400"
+        <div class="w-full h-dvh fixed top-0 right-0 z-0 invisible opacity-0 transition-all duration-400"
             onclick="account_pupup('close')" id="account_pupup_close"></div>
         {{--        account_pupup_close --}}
     </header>
