@@ -1,32 +1,7 @@
 @extends('app.document')
 @section('title', 'طبابوک | درباره ما')
 @section('content')
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        vazir: ['Ketabyar', 'Tahoma', 'Arial', 'sans-serif']
-                    },
-                    colors: {
-                        brand: '#0b8f4d',
-                        brandDark: '#08733e',
-                        cream: '#f7f2e9',
-                        softGreen: '#edf6ed'
-                    },
-                    boxShadow: {
-                        soft: '0 12px 40px rgba(20, 60, 35, .08)'
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        @font-face { font-family: Ketabyar; src: url("assets/fonts/NotoKufiArabic-Regular.ttf") format("truetype"); font-weight: 400; font-display: swap; }
-        @font-face { font-family: Ketabyar; src: url("assets/fonts/NotoKufiArabic-Medium.ttf") format("truetype"); font-weight: 500; font-display: swap; }
-        @font-face { font-family: Ketabyar; src: url("assets/fonts/NotoKufiArabic-Bold.ttf") format("truetype"); font-weight: 700; font-display: swap; }
-        @font-face { font-family: Ketabyar; src: url("assets/fonts/NotoKufiArabic-ExtraBold.ttf") format("truetype"); font-weight: 800; font-display: swap; }
-    </style>
+   
     <style>
         html { scroll-behavior: smooth; }
         body { font-family: Vazirmatn, Tahoma, Arial, sans-serif; }
@@ -222,11 +197,11 @@
 
 
 </div>
-<script>
+{{-- <script>
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-</script>
+</script> --}}
 
 @endsection
 

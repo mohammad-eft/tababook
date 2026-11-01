@@ -1,5 +1,5 @@
- @extends('admin.app.dashboard')
-    @section('title', 'درباره ما')
+ {{-- @extends('admin.app.dashboard')
+    @section('title', 'طبابوک | درباره ما')
     @section('content')
         <div class="w-full flex flex-col pb-4">
          <div class="bg-white rounded-lg">
@@ -77,4 +77,98 @@
              </div>
          </div>
      </div>
+@endsection --}}
+
+@extends('admin.app.dashboard')
+@section('title', 'طبابوک | درباره ما')
+@section('content')
+<div class="w-full flex flex-col pb-4">
+    <div class="bg-white rounded-lg shadow-sm">
+
+        {{-- هدر صفحه --}}
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3
+                    p-4 border-b border-gray-100">
+            <div>
+                <h2 class="text-base sm:text-lg font-bold text-gray-800">درباره ما</h2>
+                <p class="text-xs text-gray-500 mt-0.5">
+                    مدیریت بخش‌های صفحه «درباره ما»
+                </p>
+            </div>
+
+            {{-- اگر روت ایجاد وجود دارد، این دکمه را فعال کنید --}}
+            {{-- <a href="{{ route('aboutUs.create_edit') }}"
+               class="inline-flex items-center gap-1.5 bg-sky-500 hover:bg-sky-600
+                      text-white text-sm px-4 py-2 rounded-md transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 448 512">
+                    <path fill="currentColor" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/>
+                </svg>
+                افزودن
+            </a> --}}
+        </div>
+
+        @if($allAboutUs->isEmpty())
+            {{-- حالت خالی --}}
+            <div class="flex flex-col items-center justify-center py-16 px-4 text-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-14 text-gray-300 mb-3"
+                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <p class="text-gray-500 text-sm">هنوز هیچ مطلبی برای «درباره ما» ثبت نشده است.</p>
+            </div>
+        @else
+
+            {{-- نمای دسکتاپ: جدول --}}
+            <div class="hidden md:block overflow-x-auto">
+                <table class="w-full text-sm text-center">
+                    <thead class="bg-gray-100 text-gray-600 text-xs">
+                        <tr>
+                            <th class="p-3 w-16">ردیف</th>
+                            <th class="p-3 text-right">عنوان</th>
+                            <th class="p-3 w-40">عملیات</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        @foreach ($allAboutUs as $i => $aboutUs)
+                            <tr class="hover:bg-gray-50 transition">
+                                <td class="p-3 text-gray-700">{{ $i + 1 }}</td>
+                                <td class="p-3 text-gray-900 text-right">
+                                    <span class="line-clamp-2 break-words">{{ $aboutUs->title }}</span>
+                                </td>
+                                <td class="p-3">
+                                    <div class="flex items-center justify-center gap-2">
+                                        @include('admin.aboutUs._row_actions', ['aboutUs' => $aboutUs])
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+            {{-- نمای موبایل/تبلت: کارت --}}
+            <div class="md:hidden divide-y divide-gray-100">
+                @foreach ($allAboutUs as $i => $aboutUs)
+                    <div class="p-4 flex items-start gap-3">
+                        <span class="shrink-0 inline-flex items-center justify-center
+                                     size-7 rounded-full bg-gray-100 text-xs
+                                     font-medium text-gray-600">
+                            {{ $i + 1 }}
+                        </span>
+
+                        <div class="flex-1 min-w-0">
+                            <h3 class="text-sm font-medium text-gray-900 break-words mb-2">
+                                {{ $aboutUs->title }}
+                            </h3>
+                            <div class="flex items-center gap-2">
+                                @include('admin.aboutUs._row_actions', ['aboutUs' => $aboutUs])
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+        @endif
+    </div>
+</div>
 @endsection

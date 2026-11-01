@@ -147,7 +147,7 @@
                         
                         <!-- فیلد کلمه عبور -->
                         <div class="w-full" id="loginWay">
-                            {{-- <div class="relative w-full group @error('code') mb-5 @enderror flex gap-3">
+                            <div class="relative w-full group @error('code') mb-5 @enderror flex gap-3">
                                 <div class="w-3/4">
                                     <span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-purple-500 transition-colors">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -164,8 +164,8 @@
                                     @enderror
                                 </div>
                                 <button type="button" id="countDown" class="w-1/4 text-sm rounded-xl bg-purple-500 text-white cursor-pointer" onclick="sendCode(this)">ارسال کد</button>
-                            </div> --}}
-                            <div class="relative w-full group">
+                            </div>
+                            {{-- <div class="relative w-full group">
                                 <span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-purple-500 transition-colors">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
@@ -176,7 +176,7 @@
                                     name="password" 
                                     id="password"
                                     placeholder="کلمه عبور">
-                            </div>
+                            </div> --}}
                         </div>
                         
                         <!-- گزینه‌های اضافی -->
@@ -185,13 +185,13 @@
                                 <input type="checkbox" class="w-4 h-4 rounded border-gray-300 text-purple-500 focus:ring-purple-300">
                                 <span class="text-sm text-gray-600">مرا به خاطر بسپار</span>
                             </label>
-                            {{-- <button type="button" class="text-sm text-purple-500 hover:text-purple-600 transition-colors font-medium cursor-pointer" onclick="loginWithPassKey(this)">ورود با رمز عبور</button> --}}
+                            <button type="button" class="text-sm text-purple-500 hover:text-purple-600 transition-colors font-medium cursor-pointer" onclick="loginWithPassKey(this)">ورود با رمز عبور</button>
                         </div>
                         
                         <!-- دکمه ورود -->
                         <button type="submit"
                             id="submitBtn"
-                            class="btn-purple w-full text-center text-white p-3.5 rounded-xl font-medium text-lg mt-4 cursor-pointer shadow-lg shadow-purple-200" onclick="loginToAccount(event, 'password')">
+                            class="btn-purple w-full text-center text-white p-3.5 rounded-xl font-medium text-lg mt-4 cursor-pointer shadow-lg shadow-purple-200" onclick="loginToAccount(event, 'code')">
                             ورود به حساب
                         </button>
                         

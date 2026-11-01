@@ -2,6 +2,7 @@ let addToCartBtns = document.querySelectorAll('.addToCartBtns')
 localProducts = JSON.parse(localStorage.getItem('products'))
 localPacks = JSON.parse(localStorage.getItem('packs'))
 orderBasket = document.getElementById('orderBasket')
+let totalCartQuantity = 0
 addToCartBtns.forEach(product=>{
     if(localProducts){
         localProducts.find(cartPro=>{
@@ -20,7 +21,6 @@ addToCartBtns.forEach(product=>{
                 }
             }
         })
-        cartLink.classList.remove('hidden')
     }
     if(localPacks){
         localPacks.forEach(cartPro=>{
@@ -33,8 +33,18 @@ addToCartBtns.forEach(product=>{
                 </div>`
             }
         })
-        cartLink.classList.remove('hidden')
     }
 })
-if (localProducts) { orderBasket.children[1].innerText = localProducts.length }
-if (localPacks) { orderBasket.children[1].innerText = localPacks.length }
+if (localProducts) { 
+    localProducts.forEach(item=>{
+        totalCartQuantity+=item.quantity
+    })
+    cartLink.classList.remove('hidden')
+}
+if (localPacks) { 
+    localPacks.forEach(item => {
+        totalCartQuantity += item.quantity
+    })
+    cartLink.classList.remove('hidden')
+}
+orderBasket.children[1].innerText = totalCartQuantity

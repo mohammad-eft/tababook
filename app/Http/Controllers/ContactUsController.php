@@ -76,10 +76,9 @@ class ContactUsController extends Controller
     }
      public function deleteAll(Request $request)
     {
-        foreach($request->allContactUs as $contactUs){
-            $contactUs = contactUs::find($contactUs);
+        if($request->allContactUs && count($request->allContactUs) > 0){
+            contactUs::whereIn('id', $request->allContactUs)->delete();
         }
-        $contactUs->delete();
         return redirect()->back();
     }
 }
