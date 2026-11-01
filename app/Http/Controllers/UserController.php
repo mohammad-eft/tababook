@@ -36,12 +36,12 @@ class UserController extends Controller
             'phoneNumber' => ['required'],
             'password' => ['required'],
             'rules' => ['required'],
-            // 'code'=>['required']
+            'code'=>['required']
         ], [
             'phoneNumber.required' => 'وارد کردن شماره تلفن الزامی میباشد',
             'password.required' => 'وارد کردن گذرواژه الزامی میباشد',
             'rules.required' => 'پذیرفتن قوانین الزامی میباشد',
-            // 'code.required'=>" وارد کردن کد ارسال شده الزامی میباشد",
+            'code.required'=>" وارد کردن کد ارسال شده الزامی میباشد",
         ]);
         if ($request->rules) {
             $phone = User::where('phoneNumber', $request->phoneNumber)->first();
@@ -98,7 +98,7 @@ class UserController extends Controller
                 }
             }
             if (isset($request->code)) {
-                $phoneCode = phone_code::where('phoneNumber', $request->phoneNumber)->whereNotNull('password')->first();
+                $phoneCode = phone_code::where('phoneNumber', $request->phoneNumber)->first();
                 if ($phoneCode) {
                     if ($phoneCode->code == $request->code) {
                         $user->role;
