@@ -56,20 +56,23 @@
                                         type="password" name="password" placeholder="رمز عبور">
                                 </div>
                             </div>
-                            <div class="flex flex-col lg:flex-row">
-                                <div class="w-full lg:w-2/12 text-sm py-4">نقش</div>
-                                <div class="w-full lg:w-10/12 text-sm py-4">
-                                    <select
-                                        class="w-full p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9]"
-                                        name="role">
-                                        @foreach ($roles as $role)
-                                            <option value="{{ $role->id }}"
-                                                @if ($role->id == $user->roles[0]->id) {{ 'selected' }} @endif>
-                                                {{ $role->fa_title }}</option>
-                                        @endforeach
-                                    </select>
+                            @can('access', ['admin'])
+                                <div class="flex flex-col lg:flex-row">
+                                    <div class="w-full lg:w-2/12 text-sm py-4">نقش</div>
+                                    <div class="w-full lg:w-10/12 text-sm py-4">
+                                        <select
+                                            class="w-full p-4 rounded-lg focus:border-none focus:outline-none focus:bg-[#F1F1F4] bg-[#F9F9F9]"
+                                            name="role">
+                                            @foreach ($roles as $role)
+                                                <option value="{{ $role->id }}"
+                                                    @if ($role->id == $user->roles[0]->id) {{ 'selected' }} @endif>
+                                                    {{ $role->fa_title }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
+                            @endcan
+
                         </div>
                     </div>
                 </div>
