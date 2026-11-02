@@ -237,6 +237,14 @@
         </div>
     </div>
 
+    <div class="fixed w-full h-dvh top-0 right-0 bg-black/50 transition-all duration-300 flex justify-center items-center invisible opacity-0"
+        id="loader">
+        <div class="w-11/12 lg:w-1/3 p-5 rounded-xl bg-white flex flex-col items-center justify-center gap-4 lg:gap-8">
+            <div class="size-16 rounded-full border-4 border-[#6AA28D] border-t-4 border-t-white animate-spin"></div>
+            <span class="lg:text-lg font-bold text-[#6AA28D]">لطفا شکیبا باشید ...</span>
+        </div>
+    </div>
+
     <!-- فوتر موبایل -->
     <footer class="md:hidden">
         <div class="footer-purple w-full h-12 absolute bottom-0 flex flex-row gap-4 justify-center items-center text-white shadow-lg">
@@ -272,6 +280,14 @@
         let signupForm = document.getElementById('signupForm')
         let code = document.getElementById('code')
         let countDown = document.getElementById('countDown')
+        function loader(status) {
+            if (status === 'open') {
+                document.getElementById('loader').classList.remove('invisible', 'opacity-0')
+            }
+            if (status === 'close') {
+                document.getElementById('loader').classList.add('invisible', 'opacity-0')
+            }
+        }
         function checkAuth(e) {
             e.preventDefault()
             if(phoneNumber.value == '' || password.value == '' || code.value == ''){
@@ -280,6 +296,7 @@
                     closeMessage()
                 }, 2000)
             } else {
+                loader('open')
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': "{{ csrf_token() }}"
@@ -294,6 +311,7 @@
                         // 'code': code.value
                     },
                     success: function(data){
+                        loader('close')
                         if(data.flag){
                             // openMessage('کد وارد شده نامعتبر')
                             openMessage('کد وارد شده نامعتبر')
