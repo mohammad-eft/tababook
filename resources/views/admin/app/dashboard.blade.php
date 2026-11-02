@@ -281,9 +281,9 @@
                 @can('access', ['admin'])
                     <div class="pb-3">
                         <div
-                            class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('user.*')) bg-[#383c4d] @endif">
+                            class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('user.list')) bg-[#383c4d] @endif">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                class="size-6 fill-white w-[15px] transition-all duration-300 @if (Route::is('user.*')) rotate-180 @endif">
+                                class="size-6 fill-white w-[15px] transition-all duration-300 @if (Route::is('user.list')) rotate-180 @endif">
                                 <path fill-rule="evenodd"
                                     d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
                                     clip-rule="evenodd" />
@@ -296,7 +296,7 @@
                                 </svg>
                             </div>
                         </div>
-                        <div class="overflow-y-auto transition-all duration-300 @if (Route::is('user.*')) max-h-100 @else max-h-0 @endif"
+                        <div class="overflow-y-auto transition-all duration-300 @if (Route::is('user.list')) max-h-100 @else max-h-0 @endif"
                             style="scrollbar-width: none;">
                             <ul class="gap-2.5 pr-3">
 
@@ -640,9 +640,9 @@
                     @can('access', ['admin'])
                         <div class="pb-3">
                             <div
-                                class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('user.*')) bg-[#383c4d] @endif">
+                                class="arrow-down cursor-pointer flex justify-between items-center flex-row-reverse py-1 px-3 rounded-md @if (Route::is('user.list')) bg-[#383c4d] @endif">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                    class="size-6 fill-white w-[15px] transition-all duration-300 @if (Route::is('user.*')) rotate-180 @endif">
+                                    class="size-6 fill-white w-[15px] transition-all duration-300 @if (Route::is('user.list')) rotate-180 @endif">
                                     <path fill-rule="evenodd"
                                         d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
                                         clip-rule="evenodd" />
@@ -656,7 +656,7 @@
                                     </svg>
                                 </div>
                             </div>
-                            <div class="overflow-y-auto transition-all duration-300 @if (Route::is('user.*')) max-h-100 @else max-h-0 @endif"
+                            <div class="overflow-y-auto transition-all duration-300 @if (Route::is('user.list')) max-h-100 @else max-h-0 @endif"
                                 style="scrollbar-width: none;">
                                 <ul class="gap-2.5 pr-3">
                                     <li class="flex flex-row items-center gap-2.5 mt-2.5 mb-2.5 mr-5 text-white">
