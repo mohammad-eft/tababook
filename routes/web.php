@@ -108,7 +108,7 @@ Route::group([
 
     })->name('relatedProducts');
     Route::get('/show' , 'show')->name('show');
-
+    Route::delete('/bulk-delete', 'bulkDelete')->name('bulkDelete');
 
     // Route::get('/show/{category}', 'show')->withoutMiddleware(AdminMiddleware::class)->missing(function () {
     //     return to_route('missing');
