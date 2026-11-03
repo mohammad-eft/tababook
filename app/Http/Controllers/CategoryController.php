@@ -9,6 +9,7 @@ use App\Models\product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Log;
 
 class CategoryController extends Controller
 {
@@ -60,6 +61,9 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
+        if ($request->parent_id == 0) {
+            $request->merge(['parent_id' => null]);
+        }
         $validated = $request->validate(
             [
                 'title' => ['required', 'string', 'max:255'],
@@ -67,7 +71,6 @@ class CategoryController extends Controller
                 'parent_id' => ['nullable', 'exists:categories,id'],
                 'image' => ['nullable', 'image', 'max:2048'],
                 'attributes' => ['nullable', 'array'],
-                'attributes.*' => ['nullable', 'string', 'max:255'],
             ],
             [
                 'title.required' => 'پر کردن این فیلد الزامی است.',
@@ -77,7 +80,6 @@ class CategoryController extends Controller
                 'parent_id.exists' => 'دسته والد انتخاب‌شده معتبر نیست.',
             ]
         );
-
         // تصویر
         $img_path = null;
         if ($request->hasFile('image')) {
@@ -100,7 +102,6 @@ class CategoryController extends Controller
                 ->map(fn($v) => ['key' => $v])
                 ->values()
                 ->all();
-
             if (!empty($rows)) {
                 $category->attributes()->createMany($rows);
             }
@@ -161,7 +162,6 @@ class CategoryController extends Controller
     public function adminShow(Request $request)
     {
         $category = Category::with(['parent', 'children', 'attributes'])->findOrFail($request->id);
-
         return response()->json([
             'title' => $category->title,
             'description' => $category->description,
@@ -190,7 +190,7 @@ class CategoryController extends Controller
 
         return response()->json([
             'cat' => $cat,
-            'attributes' => $cat->attributes->pluck('key'),  // ← key نه name
+            'attributes' => $cat->attributes->pluck('key')->values(),  // ← این خط
             'cats' => Category::where('id', '!=', $cat->id)->get(['id', 'title']),
         ]);
     }
@@ -233,6 +233,11 @@ class CategoryController extends Controller
 
     public function update(Request $request)
     {
+
+        if ($request->parent_id == 0) {
+            $request->merge(['parent_id' => null]);
+        }
+        
         $data = $request->validate([
             'cat_id' => ['required', 'exists:categories,id'],
             'title' => ['required', 'string', 'max:255'],
@@ -244,7 +249,7 @@ class CategoryController extends Controller
             'removedImg' => ['nullable', 'string'],
         ]);
 
-        $category = Category::findOrFail($data['cat_id']);
+        $category = category::findOrFail($data['cat_id']);
 
         // تصویر
         $img_path = $category->image;
@@ -253,9 +258,8 @@ class CategoryController extends Controller
             $img_path = null;
         }
         if ($request->hasFile('image')) {
-            if ($category->image) {
+            if ($category->image)
                 \Storage::disk('public')->delete($category->image);
-            }
             $img_path = $request->file('image')->store('categoryImgs', 'public');
         }
 
@@ -267,9 +271,8 @@ class CategoryController extends Controller
         ]);
 
         // ویژگی‌ها: پاک و درج مجدد
-        $category->attributes()->delete();
-
         if (!empty($data['attributes'])) {
+            $category->attributes()->delete();
             $rows = collect($data['attributes'])
                 ->map(fn($v) => trim((string) $v))
                 ->filter(fn($v) => $v !== '')
@@ -281,7 +284,6 @@ class CategoryController extends Controller
                 $category->attributes()->createMany($rows);
             }
         }
-
         return redirect()->back()->with('message', 'دسته‌بندی به‌روزرسانی شد.');
     }
 

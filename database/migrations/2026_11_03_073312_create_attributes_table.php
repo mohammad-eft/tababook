@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('product_id')->nullable();
             $table->integer('category_id')->nullable();
             $table->integer('package_id')->nullable();
-            $table->integer('key')->nullable();
+            $table->string('key')->nullable();
             $table->timestamps();
         });
     }
