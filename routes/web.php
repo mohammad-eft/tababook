@@ -34,19 +34,23 @@ Route::get('/test', function(){
     // Schema::table('packs', function(Blueprint $table){
     //     $table->integer('count')->default(1)->after('image');
     // });
-    Schema::table('phone_codes', function(Blueprint $table){
-        $table->string('phoneNumber')->unique()->change();
-    });
-    // product::where('id', '>', 0)->update(['show_in_home'=>1]);
+    // Schema::table('phone_codes', function(Blueprint $table){
+    //     $table->string('phoneNumber')->unique()->change();
+    // });
+    // // product::where('id', '>', 0)->update(['show_in_home'=>1]);
 
-    $userIds = User::pluck('id')->toArray();
-    role_user::where('id', '>', 0)->delete();
-    foreach($userIds as $userId){
-        role_user::create([
-            'user_id'=>$userId,
-            'role_id'=> $userId == 1 || $userId == 16 ? 1 : 2
-        ]);
-    }
+    // $userIds = User::pluck('id')->toArray();
+    // role_user::where('id', '>', 0)->delete();
+    // foreach($userIds as $userId){
+    //     role_user::create([
+    //         'user_id'=>$userId,
+    //         'role_id'=> $userId == 1 || $userId == 16 ? 1 : 2
+    //     ]);
+    // }
+
+    Schema::table('packs', function(Blueprint $table){
+        $table->string('count')->default(0)->after('image');
+    });
 });
 
 Route::get('/', [SettingController::class, 'home'])->name('home');

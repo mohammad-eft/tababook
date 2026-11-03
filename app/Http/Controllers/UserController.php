@@ -19,12 +19,6 @@ use Log;
 
 class UserController extends Controller
 {
-    // public function home()
-    // {
-    //     $story = story::all();
-    //     return view('home', ['story' => $story]);
-    // }
-
     public function create()
     {
         return view('signup');

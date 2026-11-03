@@ -35,7 +35,8 @@ class PackController extends Controller
             'description' => $request->description,
             'primary_price' => $request->price,
             'secondary_price' => $request->discount,
-            'image' => $path
+            'image' => $path,
+            'count' => $request->count
         ]);
         foreach ($request->product as $proId) {
             product_pack::create([
@@ -183,6 +184,7 @@ class PackController extends Controller
         $pack->title = $request->title;
         $pack->summary = $request->sumary;
         $pack->description = $request->description;
+        $pack->count = $request->count;
         if (isset($request->product)) {
             product_pack::wehre('pack_id', $pack->id)->delete();
             foreach ($request->product as $productId) {

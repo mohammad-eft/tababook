@@ -114,10 +114,13 @@
                         required>
                 </div>
 
-                <div class="parentPass">
-                    <label class="block text-sm font-medium mb-2"> رمز عبور <span class="text-red-500">*</span></label>
-                    <input type="password" name="password" placeholder="رمز عبور خود را وارد کنید " disabled id="password" class="in-fa w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none">
-                </div>
+                @if (!Auth::check())
+                    <div class="parentPass">
+                        <label class="block text-sm font-medium mb-2"> رمز عبور <span class="text-red-500">*</span></label>
+                        <input type="password" name="password" placeholder="رمز عبور خود را وارد کنید " disabled id="password" class="in-fa w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none">
+                    </div>
+                @endif
+
 
                 <div>
                     <label class="block text-sm font-medium mb-2">آدرس ایمیل (اختیاری)</label>

@@ -329,7 +329,7 @@ function setPackCount(btn) {
         }
     }
 
-    if (product.quantity == product.count) {
+    if (pack.quantity == pack.count) {
         btn.disabled = true
         btn.classList.remove('cursor-pointer')
         btn.classList.add('cursor-no-drop')

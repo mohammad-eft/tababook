@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('primary_price');
             $table->integer('secondary_price')->nullable();
             $table->string('image')->nullable();
+            $table->integer('count')->default(0);
             $table->timestamps();
         });
     }
