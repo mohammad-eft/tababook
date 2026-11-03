@@ -48,8 +48,24 @@ Route::get('/test', function(){
     //     ]);
     // }
 
-    Schema::table('packs', function(Blueprint $table){
-        $table->string('count')->default(0)->after('image');
+    // Schema::table('packs', function(Blueprint $table){
+    //     $table->string('count')->default(0)->after('image');
+    // });
+    // Schema::table('package_attributes', function(Blueprint $table){
+    //     $table->unique(['package_id', 'attribute_id'])->change();
+    // });
+    // Schema::table('attributes', function(Blueprint $table){
+    //     $table->string('type')->after('key')->nullable();
+    // });
+
+    // Schema::table('product_attributes', function (Blueprint $table) {
+    //     $table->string('input_type')->default('text')->after('attribute_id');
+    // });
+    // Schema::table('package_attributes', function (Blueprint $table) {
+    //     $table->string('input_type')->default('text')->after('attribute_id');
+    // });
+    Schema::table('packages', function (Blueprint $table) {
+        $table->string('title')->nullable()->after('id');
     });
 });
 

@@ -10,6 +10,7 @@ class package_attribute extends Model
         'product_id',
         'package_id',
         'attribute_id',
+        'input_type',
         'value',
     ];
 

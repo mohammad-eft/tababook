@@ -11,6 +11,7 @@ class product_attributes extends Model
         // 'attribute_key',
         // 'attribute_value',
         'attribute_id',
+        'input_type',
         'value',
     ];
 }

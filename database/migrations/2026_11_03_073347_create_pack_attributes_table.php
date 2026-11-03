@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('product_id')->nullable();
             $table->integer('package_id')->nullable();
             $table->integer('attribute_id')->nullable();
+            $table->string('input_type')->default('text');
             $table->string('value')->nullable();
             $table->timestamps();
         });

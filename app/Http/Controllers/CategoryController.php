@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\classes\homeSetting;
 use App\Models\attribute;
+use App\Models\product_attributes;
+use App\Models\package_attribute;
 use App\Models\category;
 use App\Models\product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Log;
+use DB;
 
 class CategoryController extends Controller
 {
@@ -27,85 +30,74 @@ class CategoryController extends Controller
 
     // public function store(Request $request)
     // {
+    //     if ($request->parent_id == 0) {
+    //         $request->merge(['parent_id' => null]);
+    //     }
     //     $validated = $request->validate(
     //         [
-    //             'title' => ['required'],
-    //             'image' => ['max:100']
+    //             'title' => ['required', 'string', 'max:255'],
+    //             'description' => ['nullable', 'string'],
+    //             'parent_id' => ['nullable', 'exists:categories,id'],
+    //             'image' => ['nullable', 'image', 'max:2048'],
+    //             'attributes' => ['nullable', 'array'],
     //         ],
     //         [
     //             'title.required' => 'پر کردن این فیلد الزامی است.',
-    //             'image.max' => 'حجم فایل نباید بیشتر از 100 کیلوبایت باشد',
+    //             'title.max' => 'عنوان نباید بیشتر از ۲۵۵ کاراکتر باشد.',
+    //             'image.image' => 'فایل انتخاب‌شده باید تصویر باشد.',
+    //             'image.max' => 'حجم فایل نباید بیشتر از ۲ مگابایت باشد.',
+    //             'parent_id.exists' => 'دسته والد انتخاب‌شده معتبر نیست.',
     //         ]
     //     );
-    //     if ($request['image']) {
-    //         $img_path = $request->image->store('categoryImgs', 'public');
-    //     } else {
-    //         $img_path = null;
+    //     // تصویر
+    //     $img_path = null;
+    //     if ($request->hasFile('image')) {
+    //         $img_path = $request->file('image')->store('categoryImgs', 'public');
     //     }
-    //     $category = category::create([
-    //         'title' => $request->title,
-    //         'description' => $request->description,
-    //         'parent_id' => $request->parent_id,
-    //         'image' => $img_path
+
+    //     // ایجاد دسته
+    //     $category = Category::create([
+    //         'title' => $validated['title'],
+    //         'description' => $validated['description'] ?? null,
+    //         'parent_id' => $validated['parent_id'] ?? 0,
+    //         'image' => $img_path,
     //     ]);
-    //     if (isset($request->attributes)) {
-    //         foreach ($request->attributes as $attribute) {
-    //             attribute::create([
-    //                 'category_id' => $category->id,
-    //                 'key' => $attribute
-    //             ]);
+
+    //     // ویژگی‌ها — فقط موارد غیرخالی
+    //     if (!empty($validated['attributes'])) {
+    //         $rows = collect($validated['attributes'])
+    //             ->map(fn($v) => trim((string) $v))
+    //             ->filter(fn($v) => $v !== '')
+    //             ->map(fn($v) => ['key' => $v])
+    //             ->values()
+    //             ->all();
+    //         if (!empty($rows)) {
+    //             $category->attributes()->createMany($rows);
     //         }
     //     }
-    //     return redirect()->back()->with('message', 'دسته ' . $category->title . ' با موفقیت ایجاد شد');
+
+    //     return redirect()
+    //         ->back()
+    //         ->with('message', 'دسته «' . $category->title . '» با موفقیت ایجاد شد.');
     // }
 
     public function store(Request $request)
     {
-        if ($request->parent_id == 0) {
-            $request->merge(['parent_id' => null]);
-        }
-        $validated = $request->validate(
-            [
-                'title' => ['required', 'string', 'max:255'],
-                'description' => ['nullable', 'string'],
-                'parent_id' => ['nullable', 'exists:categories,id'],
-                'image' => ['nullable', 'image', 'max:2048'],
-                'attributes' => ['nullable', 'array'],
-            ],
-            [
-                'title.required' => 'پر کردن این فیلد الزامی است.',
-                'title.max' => 'عنوان نباید بیشتر از ۲۵۵ کاراکتر باشد.',
-                'image.image' => 'فایل انتخاب‌شده باید تصویر باشد.',
-                'image.max' => 'حجم فایل نباید بیشتر از ۲ مگابایت باشد.',
-                'parent_id.exists' => 'دسته والد انتخاب‌شده معتبر نیست.',
-            ]
-        );
-        // تصویر
-        $img_path = null;
-        if ($request->hasFile('image')) {
-            $img_path = $request->file('image')->store('categoryImgs', 'public');
-        }
+        $this->normalizeParent($request);
+        $data = $request->validate($this->rules(), $this->messages());
 
-        // ایجاد دسته
-        $category = Category::create([
-            'title' => $validated['title'],
-            'description' => $validated['description'] ?? null,
-            'parent_id' => $validated['parent_id'] ?? 0,
-            'image' => $img_path,
+        $imgPath = $request->hasFile('image')
+            ? $request->file('image')->store('categoryImgs', 'public')
+            : null;
+
+        $category = category::create([
+            'title' => $data['title'],
+            'description' => $data['description'] ?? null,
+            'parent_id' => $data['parent_id'] ?? 0, // ۰ = بدون والد (مثل قبل)
+            'image' => $imgPath,
         ]);
 
-        // ویژگی‌ها — فقط موارد غیرخالی
-        if (!empty($validated['attributes'])) {
-            $rows = collect($validated['attributes'])
-                ->map(fn($v) => trim((string) $v))
-                ->filter(fn($v) => $v !== '')
-                ->map(fn($v) => ['key' => $v])
-                ->values()
-                ->all();
-            if (!empty($rows)) {
-                $category->attributes()->createMany($rows);
-            }
-        }
+        $this->syncAttributes($category, $data['attributes'] ?? []);
 
         return redirect()
             ->back()
@@ -388,4 +380,91 @@ class CategoryController extends Controller
     //     }
     //     return redirect()->back();
     // }
+
+   private function normalizeParent(Request $request): void
+    {
+        if ($request->parent_id == 0) {
+            $request->merge(['parent_id' => null]);
+        }
+    }
+
+    private function rules(): array
+    {
+        return [
+            'title' => ['required', 'string', 'max:255'],
+            'description' => ['nullable', 'string'],
+            'parent_id' => ['nullable', 'exists:categories,id'],
+            'image' => ['nullable', 'image', 'max:2048'],
+            'attributes' => ['nullable', 'array'],
+            'attributes.*.id' => ['nullable', 'integer'],
+            'attributes.*.key' => ['nullable', 'string', 'max:255'],
+            'attributes.*.type' => ['nullable', 'in:text,color'],
+        ];
+    }
+
+    private function messages(): array
+    {
+        return [
+            'title.required' => 'پر کردن این فیلد الزامی است.',
+            'title.max' => 'عنوان نباید بیشتر از ۲۵۵ کاراکتر باشد.',
+            'image.image' => 'فایل انتخاب‌شده باید تصویر باشد.',
+            'image.max' => 'حجم فایل نباید بیشتر از ۲ مگابایت باشد.',
+            'parent_id.exists' => 'دسته والد انتخاب‌شده معتبر نیست.',
+            'attributes.*.type.in' => 'نوع ویژگی فقط می‌تواند متن یا رنگ باشد.',
+        ];
+    }
+
+    /**
+     * ویژگی‌های دسته رو با id سینک می‌کنه:
+     *  - ردیف با id موجود  → آپدیت (id ثابت می‌مونه و مقدارهای ثبت‌شده توی محصول‌ها سالم می‌مونن)
+     *  - ردیف بدون id      → ساخت
+     *  - ردیف حذف‌شده      → حذف همراه با مقدارهای وابسته (چون cascade نداریم)
+     */
+    private function syncAttributes(category $category, array $items): void
+    {
+        $rows = collect($items)
+            ->map(fn($i) => [
+                'id' => $i['id'] ?? null,
+                'key' => trim((string) ($i['key'] ?? '')),
+                'type' => ($i['type'] ?? 'text') === 'color' ? 'color' : 'text',
+            ])
+            ->filter(fn($i) => $i['key'] !== '')
+            ->unique('key')
+            ->values();
+
+        $keep = [];
+        foreach ($rows as $row) {
+            $attr = $category->attributes()->updateOrCreate(
+                ['id' => $row['id'] ?: null],
+                ['key' => $row['key'], 'type' => $row['type']]
+            );
+            $keep[] = $attr->id;
+        }
+
+        $removedIds = $category->attributes()->whereNotIn('id', $keep)->pluck('id');
+        if ($removedIds->isNotEmpty()) {
+            package_attribute::whereIn('attribute_id', $removedIds)->delete();
+            product_attributes::whereIn('attribute_id', $removedIds)->delete();
+            attribute::whereIn('id', $removedIds)->delete();
+        }
+    }
+
+    private function destroyCategory(category $category): void
+    {
+        DB::transaction(function () use ($category) {
+            $attrIds = $category->attributes()->pluck('id');
+
+            package_attribute::whereIn('attribute_id', $attrIds)->delete();
+            product_attributes::whereIn('attribute_id', $attrIds)->delete();
+            $category->attributes()->delete();
+
+            $category->products()->detach();
+            category::where('parent_id', $category->id)->update(['parent_id' => 0]);
+
+            if ($category->image) {
+                Storage::disk('public')->delete($category->image);
+            }
+            $category->delete();
+        });
+    }
 }

@@ -8,6 +8,7 @@ class package extends Model
 {
     protected $fillable = [
         'product_id',
+        'title',
         'image',
         'description',
         'summary',
@@ -28,6 +29,6 @@ class package extends Model
     }
 
     public function packageAttributes(){
-        return $this->hasMany(package_attributes::class);
+        return $this->hasMany(package_attribute::class);
     }
 }
