@@ -23,6 +23,7 @@ class ProductController extends Controller
     }
     public function store(Request $request)
     {
+        dd($request->all());
         $validated = $request->validate(
             [
                 'title' => ['required'],

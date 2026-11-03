@@ -8,7 +8,9 @@ class product_attributes extends Model
 {
     protected $fillable = [
         'product_id',
-        'attribute_key',
-        'attribute_value',
+        // 'attribute_key',
+        // 'attribute_value',
+        'attribute_id',
+        'value',
     ];
 }
