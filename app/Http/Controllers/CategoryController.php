@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\classes\homeSetting;
 use App\Models\category;
 use App\Models\product;
+use App\Models\attribute;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -39,13 +40,21 @@ class CategoryController extends Controller
         } else {
             $img_path = null;
         }
-        category::create([
+        $category = category::create([
             'title' => $request->title,
             'description' => $request->description,
             'parent_id' => $request->parent_id,
             'image' => $img_path
         ]);
-        return redirect()->back()->with('message', 'دسته بندی جدید برای سایت ایجاد شد.');
+        if(isset($request->attributes)){
+            foreach($request->attributes as $attribute){
+                attribute::create([
+                    'category_id'=>$category->id,
+                    'key'=>$attribute
+                ]);
+            }
+        }
+        return redirect()->back()->with('message', 'دسته '.$category->title.' با موفقیت ایجاد شد');
     }
     public function adminIndex()
     {
