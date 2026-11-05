@@ -22,7 +22,7 @@ class ProductController extends Controller
 {
     public function create()
     {
-        $categories = category::with('attributes:id,category_id,key,type')->get();
+        $categories = category::with('attributes:id,category_id,key')->get();
 
         $categoriesData = $categories->mapWithKeys(function ($category) {
             return [

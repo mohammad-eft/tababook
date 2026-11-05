@@ -161,7 +161,7 @@
                         <div class="flex items-center justify-between gap-3">
 
                             <h3 class="font-bold text-lg">
-                                ویژگی‌های عمومی محصول
+                                مشخصات محصول
                             </h3>
 
                             <button type="button"
@@ -193,7 +193,7 @@
                         <div class="flex items-center justify-between gap-3">
 
                             <h3 class="font-bold text-lg">
-                                پکیج‌های محصول
+                                قیمت های مختلف محصول
                             </h3>
 
                             <button type="button"

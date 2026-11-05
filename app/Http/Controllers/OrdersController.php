@@ -9,6 +9,7 @@ use App\Models\category;
 use App\Models\orders;
 use App\Models\product;
 use App\Models\User;
+use App\Models\role_user;
 use App\Models\order_status;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
@@ -61,6 +62,13 @@ class OrdersController extends Controller
         }
 
         $user = User::where('phoneNumber', $phoneNumber)->first();
+
+        if(count($user->roles) > 0){
+            $userRoleIds = $user->roles->pluck('id')->toArray();
+            if(!in_array(1, $userRoleIds)){
+                role_user::create(['role_id' => 2, 'user_id' => $user->id]);
+            }
+        }
 
         $address = address::firstOrCreate([
             'user_id' => $user->id,
