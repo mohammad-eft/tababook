@@ -1,12 +1,14 @@
 @extends('admin.app.dashboard')
 @section('title', 'طبابوک | همه محصولات')
 @section('content')
+
 @if (session('message'))
 <div
     class="modal py-5 px-8 rounded-lg shadow-lg bg-slate-100 fixed top-10 right-10 z-5 flex justify-center items-center transition-all duration-300">
     <span class="font-bold text-sm text-slate-500"> {{ session('message') }} </span>
 </div>
 @endif
+
 <div class="w-full flex flex-col pb-4">
     <div class="bg-white rounded-lg">
         <h2 class="text-lg font-bold text-gray-800 p-4 text-center">لیست محصولات</h2>
@@ -28,8 +30,10 @@
                 </button>
             </div>
         </div>
+
         <div class="w-full shadow-md [&::-webkit-scrollbar]:hidden lg:overflow-visible overflow-x-auto">
             <div class="w-full min-w-[620px] h-120 max-h-120 overflow-auto">
+
                 <div class="w-full grid grid-cols-12 divide-x divide-slate-400 sticky top-0 z-1">
                     <div class="py-5 text-center text-xs font-medium text-gray-600 bg-gray-100">
                         <span class="w-10 lg:w-full">ردیف</span>
@@ -50,6 +54,7 @@
                         <span class="w-[180px] lg:w-full">عملیات</span>
                     </div>
                 </div>
+
                 <div class="bg-white divide-y divide-[#f1f1f4]">
                     @php
                     $i = 1;
@@ -138,6 +143,8 @@
         {{-- </form> --}}
     </div>
 </div>
+
+
 {{-- start confirmDelete popup --}}
 <div id="confirmDeletePopup"
     class="w-full h-dvh fixed top-0 left-0 z-5 invisible opacity-0 transition-all duration-400">
@@ -164,6 +171,8 @@
     </div>
 </div>
 {{-- end confirmDelete popup --}}
+
+
 {{-- start editForm popup --}}
 @error('title')
 <div
@@ -177,6 +186,7 @@
     <span class="font-bold text-sm text-red-500"> {{ $message }} </span>
 </div>
 @enderror
+
 <div id="editFormPopup" class="w-full h-dvh fixed top-0 left-0 z-5 invisible opacity-0 transition-all duration-400">
     <div class="size-full relative">
         <div class="size-full bg-black/40 absolute top-0 left-0" onclick="editForm('close')"></div>
@@ -189,13 +199,18 @@
                     <span class="w-full h-0.5 rounded-full bg-slate-500 -rotate-45 -translate-y-1/2"></span>
                 </button>
             </div>
+
             <div id="popupContent">
                 <form action="{{ route('product.update') }}" method="post" id="editForm"
                     enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="product_id" id="product_id">
+
                     <div class="flex flex-col md:flex-row gap-3 md:gap-5">
+
+                        {{-- ستون سمت راست --}}
                         <div class="w-full md:w-2/3 space-y-8">
+
                             <div class="w-full flex flex-col">
                                 <label for="title" class="mb-2 flex flex-row items-center">
                                     <span>نام محصول:</span>
@@ -208,58 +223,97 @@
                                 <span class="text-xs text-red-500">{{ $message }}</span>
                                 @enderror
                             </div>
+
                             <div class="w-full flex flex-col mt-5">
-                                <label for="description" class="mb-2">توضیحات محصول:</label>
-                                <textarea name="description" class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]" rows="4"
+                                <label for="editor" class="mb-2">توضیحات محصول:</label>
+                                <textarea name="description"
+                                    class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]" rows="4"
                                     id="editor" placeholder="توضیحات محصول را وارد کنید"></textarea>
                                 @error('description')
                                 <span class="text-xs text-red-500">{{ $message }}</span>
                                 @enderror
                             </div>
+
                             <div class="w-full flex flex-col mt-5">
                                 <label for="summary" class="mb-2">خلاصه محصول:</label>
-                                <textarea class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]" rows="4"
-                                    placeholder="خلاصه" name="summary" id="summary"></textarea>
+                                <textarea class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]"
+                                    rows="4" placeholder="خلاصه" name="summary" id="summary"></textarea>
                                 @error('summary')
                                 <span class="text-xs text-red-500">{{ $message }}</span>
                                 @enderror
                             </div>
+
                             <div class="w-full flex flex-col gap-3 mt-5">
                                 <label for="category_ids" class="mb-2 flex flex-row items-center">
                                     <span>دسته بندی :</span>
                                     <span class="text-rose-500">*</span>
                                 </label>
                                 <select name="category_ids[]" id="category_ids"
-                                    class="w-full bg-[#F9F9F9] py-3 pr-5 rounded-[10px]" multiple size="1">
+                                    class="w-full bg-[#F9F9F9] py-3 pr-5 rounded-[10px]" multiple size="1" required>
                                 </select>
+                                <span class="text-xs text-gray-400">
+                                    برای انتخاب چند دسته‌بندی، کلید Ctrl را نگه دارید.
+                                </span>
                                 @error('category_ids')
                                 <span class="text-xs text-red-500">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="w-full flex flex-col gap-5 mt-5">
-                                <div class="" id="attributesContainer">
 
+
+                            {{-- ویژگی‌های عمومی محصول --}}
+                            <div class="w-full flex flex-col gap-5 mt-8">
+
+                                <div class="flex items-center justify-between gap-3">
+                                    <h3 class="font-bold text-lg">مشخصات محصول</h3>
+
+                                    <button type="button" id="add-product-attribute"
+                                        class="p-2 text-sm rounded-md bg-[#1B84FF] hover:bg-[#056EE9] text-white cursor-pointer">
+                                        افزودن ویژگی +
+                                    </button>
                                 </div>
-                                <button type="button" onclick="addAttribute(this,'edit')"
-                                    class="w-30 mx-auto p-2 text-sm rounded-md bg-[#1B84FF] hover:bg-[#056EE9] text-white cursor-pointer">
-                                    افزودن ویژگی +
-                                </button>
+
+                                <div id="product-attributes-list" class="space-y-4"></div>
+
                             </div>
+
+
+                            {{-- پکیج‌های محصول --}}
+                            <div class="w-full flex flex-col gap-5 mt-8">
+
+                                <div class="flex items-center justify-between gap-3">
+                                    <h3 class="font-bold text-lg">قیمت های مختلف محصول</h3>
+
+                                    <button type="button" id="add-package"
+                                        class="p-2 text-sm rounded-md bg-[#1B84FF] hover:bg-[#056EE9] text-white cursor-pointer">
+                                        افزودن پکیج +
+                                    </button>
+                                </div>
+
+                                <div id="packages-list" class="space-y-6"></div>
+
+                            </div>
+
                         </div>
+
+
+                        {{-- ستون سمت چپ --}}
                         <div class="w-full md:w-1/3 space-y-8">
+
                             <div class="w-full flex flex-col gap-6 mt-5">
+
                                 <div class="flex items-center gap-4">
                                     <label for="show_in_home">نمایش در خانه :</label>
                                     <label for="show_in_home"
                                         class="w-[50px] h-[28px] flex rounded-full cursor-pointer relative">
-                                        <input type="checkbox" name="show_in_home" value="1" id="show_in_home"
-                                            hidden class="peer">
+                                        <input type="checkbox" name="show_in_home" value="1" id="show_in_home" hidden
+                                            class="peer">
                                         <span
                                             class="size-full bg-gray-300 shadow-inner rounded-full peer-checked:bg-[#1B84FF] transition-all duration-300"></span>
                                         <span
                                             class="size-[20px] rounded-full bg-white absolute top-1 left-1 peer-checked:translate-x-[22px] transition-all duration-300 shadow-md"></span>
                                     </label>
                                 </div>
+
                                 <div class="flex items-center gap-4">
                                     <label class="mb-2"> تعداد :</label>
                                     <div class="flex">
@@ -268,9 +322,8 @@
                                             <button type="button"
                                                 class="inline-block size-7 rounded-lg bg-[#1B84FF] hover:bg-[#056EE9] cursor-pointer text-white"
                                                 onclick="calculate('+')">+</button>
-                                            <input type="number" min="1"
-                                                class="outline-none w-14 text-center text-xs" name="count"
-                                                id="count" dir="ltr">
+                                            <input type="number" min="1" class="outline-none w-14 text-center text-xs"
+                                                name="count" id="count" dir="ltr">
                                             <button type="button"
                                                 class="inline-block size-7 rounded-lg bg-[#1B84FF] hover:bg-[#056EE9] cursor-pointer text-white"
                                                 onclick="calculate('-')">-</button>
@@ -286,23 +339,26 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="w-full mt-3 lg:mt-5 flex flex-col">
                                 <label for="mainImage" class="mb-2">عکس اصلی:</label>
                                 <input type="file"
                                     class="w-full outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]"
-                                    name="mainImage" id="mainImage">
+                                    name="mainImage" id="mainImage" accept="image/*">
                                 <div id="mainImgContainer" class="relative mt-2 p-2 "></div>
                             </div>
+
                             <div class="w-full mt-3 lg:mt-5 flex flex-col">
                                 <label for="gallery" class="mb-2">گالری تصاویر :</label>
                                 <input type="file"
                                     class="w-full outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]"
-                                    name="gallery[]" id="gallery" multiple>
+                                    name="gallery[]" id="gallery" accept="image/*" multiple>
                                 <span class="text-xs text-red-500">حجم کل فایل ها نباید بیشتر از 500 کیلوبایت
                                     باشد.</span>
                                 <div id="galleryContainer" class=" mt-2 p-2 flex items-center gap-3 overflow-auto">
                                 </div>
                             </div>
+
                             <div class="w-full flex flex-col gap-3 md:gap-5 mt-3 lg:mt-5">
                                 <div class="w-full flex flex-col gap-3">
                                     <label for="primary_price" class="flex items-center gap-2">
@@ -318,19 +374,21 @@
                                     </label>
                                     <input type="number"
                                         class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]"
-                                        name="primary_price" id="primary_price">
+                                        name="primary_price" id="primary_price" min="0">
                                 </div>
                                 <div class="w-full flex flex-col gap-3">
                                     <label for="secondary_price"> قیمت ویژه :</label>
                                     <input type="number"
                                         class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]"
-                                        name="secondary_price" id="secondary_price">
+                                        name="secondary_price" id="secondary_price" min="0">
                                 </div>
                             </div>
+
                             <div class="mt-5 text-center">
                                 <button type="submit"
                                     class="py-3 px-10 rounded-[10px] bg-[#1B84FF] hover:bg-[#056EE9] text-white cursor-pointer">ثبت</button>
                             </div>
+
                         </div>
                     </div>
                 </form>
@@ -339,14 +397,175 @@
     </div>
 </div>
 {{-- end editForm popup --}}
+
+
+<style>
+    /* اینپوت رنگ: ارتفاع بیشتر تا رنگ انتخاب‌شده کامل دیده شود */
+    .attribute-value-input[type="color"] {
+        height: 2.75rem;
+        padding: 4px;
+        cursor: pointer;
+    }
+
+    .attribute-value-input[type="color"]::-webkit-color-swatch-wrapper {
+        padding: 0;
+    }
+
+    .attribute-value-input[type="color"]::-webkit-color-swatch {
+        border: none;
+        border-radius: 0.5rem;
+    }
+
+    .attribute-value-input[type="color"]::-moz-color-swatch {
+        border: none;
+        border-radius: 0.5rem;
+    }
+</style>
+
+
+{{-- ============================================== --}}
+{{-- قالب ویژگی --}}
+{{-- ============================================== --}}
+
+<template id="attribute-template">
+
+    <div class="attribute-item border border-[#D5DFE4] rounded-xl p-4 space-y-4 bg-[#F9F9F9]">
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+
+            <div>
+                <label class="block mb-2 text-sm font-medium">عنوان ویژگی</label>
+
+                <select class="attribute-select w-full border border-[#D5DFE4] rounded-lg p-2 bg-white" required>
+                </select>
+            </div>
+
+            <div>
+                <button type="button"
+                    class="remove-attribute w-full bg-red-100 hover:bg-red-200 text-red-700 rounded-lg p-2">
+                    حذف ویژگی
+                </button>
+            </div>
+
+        </div>
+
+        <div class="attribute-values-container border-t border-[#D5DFE4] pt-4">
+
+            <div class="flex items-center justify-between mb-3">
+                <label class="font-medium text-sm">مقادیر ویژگی</label>
+
+                <button type="button" class="add-attribute-value text-[#1B84FF] hover:text-[#056EE9] text-sm">
+                    + افزودن مقدار
+                </button>
+            </div>
+
+            <div class="attribute-values space-y-2"></div>
+
+        </div>
+
+    </div>
+
+</template>
+
+
+{{-- ============================================== --}}
+{{-- قالب مقدار ویژگی --}}
+{{-- ============================================== --}}
+
+<template id="attribute-value-template">
+
+    <div class="attribute-value-item flex items-center gap-2">
+
+        <input type="text" class="attribute-value-input flex-1 border border-[#D5DFE4] rounded-lg p-2 bg-white"
+            placeholder="مقدار ویژگی" required>
+
+        <button type="button"
+            class="remove-attribute-value bg-red-100 hover:bg-red-200 text-red-600 rounded-lg px-3 py-2">
+            ✕
+        </button>
+
+    </div>
+
+</template>
+
+
+{{-- ============================================== --}}
+{{-- قالب پکیج --}}
+{{-- ============================================== --}}
+
+<template id="package-template">
+
+    <div class="package-item border border-[#D5DFE4] rounded-xl p-5 space-y-5 bg-[#F9F9F9]">
+
+        <div class="flex items-center justify-between gap-3">
+
+            <h3 class="package-heading font-bold text-lg">محصول متغیر جدید</h3>
+
+            <button type="button"
+                class="remove-package bg-red-100 hover:bg-red-200 text-red-700 rounded-lg px-3 py-2">
+                حذف محصول متغیر
+            </button>
+
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+            <div>
+                <label class="block mb-2 text-sm">تعداد</label>
+                <input type="number" class="package-count w-full border border-[#D5DFE4] rounded-lg p-2 bg-white"
+                    min="1" value="1" required>
+            </div>
+
+            <div>
+                <label class="block mb-2 text-sm">قیمت اصلی</label>
+                <input type="number"
+                    class="package-primary-price w-full border border-[#D5DFE4] rounded-lg p-2 bg-white" min="0"
+                    placeholder="قیمت اصلی">
+            </div>
+
+            <div>
+                <label class="block mb-2 text-sm">قیمت ویژه</label>
+                <input type="number"
+                    class="package-secondary-price w-full border border-[#D5DFE4] rounded-lg p-2 bg-white" min="0"
+                    placeholder="قیمت ویژه">
+            </div>
+
+        </div>
+
+        <div class="package-attributes-section border-t border-[#D5DFE4] pt-4">
+
+            <div class="flex items-center justify-between gap-3 mb-4">
+
+                <h4 class="font-bold">ویژگی‌های این پکیج</h4>
+
+                <button type="button"
+                    class="add-package-attribute bg-[#1B84FF] hover:bg-[#056EE9] text-white rounded-lg px-3 py-2 text-sm">
+                    + افزودن ویژگی
+                </button>
+
+            </div>
+
+            <div class="package-attributes-list space-y-3"></div>
+
+        </div>
+
+    </div>
+
+</template>
+
+
 <script src="{{ asset('js/product.js') }}"></script>
+
 <script>
     function editForm(state, id) {
+
         let editFormPopup = document.getElementById('editFormPopup')
+
         if (state == 'open') {
+
             let product_id = document.getElementById('product_id')
             let title = document.getElementById('title')
-            // let editor = document.getElementById('editor')
+            let editor = document.getElementById('editor')
             let summary = document.getElementById('summary')
             let show_in_home = document.getElementById('show_in_home')
             let count = document.getElementById('count')
@@ -355,12 +574,17 @@
             let primary_price = document.getElementById('primary_price')
             let secondary_price = document.getElementById('secondary_price')
             let category_ids = document.getElementById('category_ids')
-            let attributesContainer = document.getElementById('attributesContainer')
+            let editFormEl = document.getElementById('editForm')
+
+            // پاک کردن اینپوت‌های حذف عکس مربوط به دفعه قبل
+            editFormEl.querySelectorAll('input[name^="removedImgs"]').forEach(input => input.remove())
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': "{{ csrf_token() }}"
                 }
             })
+
             $.ajax({
                 url: "{{ route('product.edit') }}",
                 type: "POST",
@@ -369,82 +593,84 @@
                     'id': id,
                 },
                 success: function(data) {
-                    product_id.value = data['product'].id
-                    title.value = data['product'].title
-                    editor.value = data['product'].description
-                    summary.value = data['product'].summary
-                    count.value = data['product'].count
-                    primary_price.value = data['product'].primary_price
-                    secondary_price.value = data['product'].secondary_price
+
+                    const product = data['product']
+
+                    product_id.value = product.id
+                    title.value = product.title
+                    editor.value = product.description ?? ''
+                    summary.value = product.summary ?? ''
+                    count.value = product.count
+                    primary_price.value = product.primary_price ?? ''
+                    secondary_price.value = product.secondary_price ?? ''
+                    show_in_home.checked = !!product.show_in_home
+
+                    // تصاویر
                     mainImgContainer.innerHTML = ''
                     galleryContainer.innerHTML = ''
-                    data['product'].media.forEach(media => {
+
+                    product.media.forEach(media => {
                         if (media.is_main) {
                             let div = document.createElement('div')
                             div.innerHTML = `
-                                    <img src="${media['media_path']}" class="w-35 h-20 rounded-lg">
-                                    <span class="absolute top-0 left-5 cursor-pointer" onclick="removeImg(this, '${media['media_path']}', 'mainImg')">❌</span>
-                                    `
+                                <img src="${media['media_path']}" class="w-35 h-20 rounded-lg">
+                                <span class="absolute top-0 left-5 cursor-pointer" onclick="removeImg(this, '${media['media_path']}', 'mainImg')">❌</span>
+                            `
                             mainImgContainer.appendChild(div)
                         } else {
                             let div = document.createElement('div')
                             div.classList = 'relative'
                             div.innerHTML = `
-                                    <img src="${media['media_path']}" class="min-w-35 h-20 rounded-lg">
-                                    <span class="absolute top-0 left-0 cursor-pointer" onclick="removeImg(this, '${media['media_path']}', 'gallery')">❌</span>
-                                    `
+                                <img src="${media['media_path']}" class="min-w-35 h-20 rounded-lg">
+                                <span class="absolute top-0 left-0 cursor-pointer" onclick="removeImg(this, '${media['media_path']}', 'gallery')">❌</span>
+                            `
                             galleryContainer.appendChild(div)
                         }
                     })
-                    if (data.product.show_in_home) {
-                        show_in_home.setAttribute('checked', true)
-                    }
+
+                    // دسته‌بندی‌ها
                     category_ids.innerHTML = ''
+
                     data['cats'].forEach(category => {
                         let option = document.createElement('option')
                         option.value = category.id
                         option.innerText = category.title
-                        if (data.catIds.includes(category.id)) {
-                            option.setAttribute('selected', true)
-                        }
+                        option.selected = data.catIds.map(String).includes(String(category.id))
                         category_ids.appendChild(option)
-                    });
-                    attributesContainer.innerHTML = ''
-                    data['product'].attributes.forEach(attribute => {
-                        let div = document.createElement('div');
-                        div.classList =
-                            'flex flex-row items-center justify-between gap-4 mt-4 border border-slate-300 rounded-xl p-2'
-                        div.innerHTML = `
-                                            <div class="w-full flex flex-col sm:flex-row items-center gap-4">
-                                                <input type="text"
-                                                    class="w-full outline-none pr-3 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]"
-                                                    placeholder="ویژگی" name="attributes[oldAttrs][attribute_key][${attribute.id}]" required value="${attribute.attribute_key}">
-                                                <input type="text"
-                                                    class="w-full outline-none pr-3 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]"
-                                                    placeholder="مقدار ویژگی" name="attributes[oldAttrs][attribute_value][${attribute.id}]" required value="${attribute.attribute_value}">
-                                            </div>
-                                            <button type="button"
-                                                class="p-3 text-sm rounded-md bg-rose-500 hover:bg-rose-600 text-white cursor-pointer"
-                                                onclick="remove(this, ${attribute.id})">حذف</button>
-                                            `
-                        attributesContainer.appendChild(div)
                     })
+
+                    // ویژگی‌های دسته‌بندی‌ها (برای سلکت ویژگی‌ها و تشخیص رنگ)
+                    if (data.categoriesData) {
+                        window.CATEGORIES = data.categoriesData
+                    }
+
+                    // ویژگی‌ها و پکیج‌ها (باید بعد از انتخاب دسته‌بندی‌ها باشد)
+                    PackageForm.load({
+                        attributes: product.attributes || [],
+                        packages: product.packages || []
+                    })
+
                 },
                 error: function() {
                     alert('error')
                 }
             })
+
             editFormPopup.classList.remove('invisible', 'opacity-0')
         }
+
         if (state == 'close') {
             editFormPopup.classList.add('invisible', 'opacity-0')
         }
     }
 
     function removeImg(el, file, type) {
+
         let editForm = document.getElementById('editForm')
+
         let index = file.indexOf('productImgs')
         let result = file.slice(index)
+
         if (type == 'mainImg') {
             let input = document.createElement('input')
             input.setAttribute("type", 'hidden')
@@ -452,6 +678,7 @@
             input.setAttribute("value", result)
             editForm.appendChild(input)
         }
+
         if (type == 'gallery') {
             let input = document.createElement('input')
             input.setAttribute("type", 'hidden')
@@ -459,28 +686,37 @@
             input.setAttribute("value", result)
             editForm.appendChild(input)
         }
+
         el.parentElement.remove()
     }
 
     function deleteProduct(state, id, proTitle) {
+
         let confirmDeletePopup = document.getElementById('confirmDeletePopup')
+
         if (state == 'open') {
             let yes = document.getElementById('yes')
             yes.setAttribute('href', `{{ url('product/delete') }}/${id}`)
+
             let confirmDeleteProName = document.getElementById('confirmDeleteProName')
             confirmDeleteProName.innerText = proTitle
+
             confirmDeletePopup.classList.remove('invisible', 'opacity-0')
         }
+
         if (state == 'close') {
             confirmDeletePopup.classList.add('invisible', 'opacity-0')
         }
     }
 
     function calculate(state) {
+
         let count = document.getElementById('count')
+
         if (state == "+") {
             count.value++
         }
+
         if (count.value > 1) {
             if (state == "-") {
                 count.value--
@@ -488,6 +724,9 @@
         }
     }
 </script>
-<script src="{{ url('assets/js/attribute.js') }}"></script>
+
+{{-- باید بعد از template ها لود شود --}}
+<script src="{{ url('js/packageForm.js') }}"></script>
 <script src="{{ asset('assets/js/checkAll.js') }}"></script>
+
 @endsection

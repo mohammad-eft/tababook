@@ -548,6 +548,110 @@ const PackageForm = (() => {
 
 
     // ================================================
+    // حالت ویرایش: پاک کردن کامل فرم
+    // ================================================
+
+    function reset() {
+
+        if (productAttributesList) {
+            productAttributesList.innerHTML = "";
+        }
+
+        if (packagesList) {
+            packagesList.innerHTML = "";
+        }
+
+    }
+
+
+    // ================================================
+    // حالت ویرایش: پر کردن یک آیتم ویژگی
+    // ابتدا ویژگی انتخاب می‌شود، سپس مقادیر اضافه می‌شوند
+    // تا نوع اینپوت (رنگ/متن) درست تشخیص داده شود
+    // ================================================
+
+    function fillAttributeItem(item, data) {
+
+        const select = item.querySelector(".attribute-select");
+
+        select.value = String(data.attribute_id);
+
+        // ویژگی متعلق به دسته‌های انتخاب‌شده نیست
+        if (select.value !== String(data.attribute_id)) {
+
+            item.remove();
+
+            return;
+
+        }
+
+        const values = data.values && data.values.length
+            ? data.values
+            : [""];
+
+        values.forEach(value => addValue(item, value));
+
+    }
+
+
+    // ================================================
+    // حالت ویرایش: پر کردن فرم از داده‌های محصول
+    // باید بعد از انتخاب شدن دسته‌بندی‌ها صدا زده شود
+    // ================================================
+
+    function load(data = {}) {
+
+        reset();
+
+        // ویژگی‌های عمومی
+        (data.attributes || []).forEach(attribute => {
+
+            const item = createAttributeItem();
+
+            productAttributesList.appendChild(item);
+
+            fillAttributeItem(item, attribute);
+
+        });
+
+        // پکیج‌ها
+        (data.packages || []).forEach(pkg => {
+
+            addPackage();
+
+            const packageItem = packagesList.lastElementChild;
+
+            packageItem.querySelector(".package-count").value =
+                pkg.count ?? 1;
+
+            packageItem.querySelector(".package-primary-price").value =
+                pkg.primary_price ?? "";
+
+            packageItem.querySelector(".package-secondary-price").value =
+                pkg.secondary_price ?? "";
+
+            const attributesList = packageItem.querySelector(
+                ".package-attributes-list"
+            );
+
+            (pkg.attributes || []).forEach(attribute => {
+
+                const item = createAttributeItem();
+
+                attributesList.appendChild(item);
+
+                fillAttributeItem(item, attribute);
+
+            });
+
+        });
+
+        reindex();
+
+    }
+
+
+    // ================================================
     // خروجی
     // ================================================
 
@@ -557,7 +661,9 @@ const PackageForm = (() => {
         addProductAttribute,
         addPackageAttribute,
         reindex,
-        updateAttributeOptions
+        updateAttributeOptions,
+        reset,
+        load
     };
 
 })();

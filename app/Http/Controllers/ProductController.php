@@ -5,26 +5,31 @@ namespace App\Http\Controllers;
 use App\classes\homeSetting;
 use App\Models\category;
 use App\Models\category_product;
-use App\Models\product;
-use App\Models\product_attributes;
 use App\Models\package;
 use App\Models\package_attribute;
+use App\Models\product;
+use App\Models\product_attributes;
 use App\Models\product_media;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
 use Log;
 
 class ProductController extends Controller
 {
-    public function create()
-    {
-        $categories = category::with('attributes:id,category_id,key')->get();
+    // ============================================================
+    // توابع کمکی
+    // ============================================================
 
-        $categoriesData = $categories->mapWithKeys(function ($category) {
+    /**
+     * ساختار دسته‌بندی‌ها و ویژگی‌هایشان برای JavaScript
+     * (window.CATEGORIES در فرم)
+     */
+    private function buildCategoriesData($categories)
+    {
+        return $categories->mapWithKeys(function ($category) {
             return [
                 $category->id => [
                     'name' => $category->title,
@@ -32,30 +37,20 @@ class ProductController extends Controller
                         return [
                             'id' => $attribute->id,
                             'key' => $attribute->key,
-                            'type' => $attribute->type,
+                            'type' => $attribute->type ?? null,
                         ];
                     })->values(),
                 ],
             ];
         });
-
-        $setting = homeSetting::document();
-
-        return view('admin.product.create', [
-            'categories' => $categories,
-            'categoriesData' => $categoriesData,
-            'setting' => $setting,
-        ]);
     }
 
-    public function store(Request $request)
+    /**
+     * قوانین اعتبارسنجی مشترک بین ساخت و ویرایش
+     */
+    private function productRules(bool $isUpdate): array
     {
-        // ============================================
-        // 1. اعتبارسنجی اطلاعات محصول و پکیج‌ها
-        // ============================================
-
-        $validator = Validator::make($request->all(), [
-            // اطلاعات اصلی محصول
+        return [
             'title' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
             'summary' => ['nullable', 'string'],
@@ -63,102 +58,187 @@ class ProductController extends Controller
             'primary_price' => ['nullable', 'numeric', 'min:0'],
             'secondary_price' => ['nullable', 'numeric', 'min:0'],
             'show_in_home' => ['nullable', 'boolean'],
-            // دسته‌بندی‌ها
             'category_ids' => ['required', 'array', 'min:1'],
-            'category_ids.*' => [
-                'required',
-                'integer',
-                'distinct',
-                'exists:categories,id',
-            ],
-            // تصویر اصلی محصول
-            'mainImage' => ['required', 'image', 'max:5120'],
-            // تصاویر گالری
+            'category_ids.*' => ['required', 'integer', 'distinct', 'exists:categories,id'],
+            'mainImage' => [$isUpdate ? 'nullable' : 'required', 'image', 'max:5120'],
             'gallery' => ['nullable', 'array'],
-            'gallery.*' => ['image', 'max:5120'],
-            // ویژگی‌های عمومی محصول
+            'gallery.*' => ['required', 'image', 'max:500'],
             'attributes' => ['nullable', 'array'],
-            'attributes.*.attribute_id' => [
-                'required',
-                'integer',
-                'exists:attributes,id',
-            ],
-            'attributes.*.input_type' => [
-                'required',
-                'string',
-                'in:text,number,color,date,select,checkbox',
-            ],
+            'attributes.*' => ['required', 'array'],
+            'attributes.*.attribute_id' => ['required', 'integer', 'exists:attributes,id'],
             'attributes.*.values' => ['nullable', 'array'],
-            'attributes.*.values.*' => [
-                'nullable',
-                'string',
-                'max:255',
-            ],
-            // پکیج‌ها
+            'attributes.*.values.*' => ['nullable', 'string', 'max:255'],
             'packages' => ['nullable', 'array'],
-            'packages.*.title' => [
-                'required',
-                'string',
-                'max:255',
-            ],
-            'packages.*.count' => [
-                'required',
-                'integer',
-                'min:1',
-            ],
-            'packages.*.primary_price' => [
-                'nullable',
-                'numeric',
-                'min:0',
-            ],
-            'packages.*.secondary_price' => [
-                'nullable',
-                'numeric',
-                'min:0',
-            ],
-            'packages.*.image' => [
-                'nullable',
-                'image',
-                'max:5120',
-            ],
-            'packages.*.summary' => ['nullable', 'string'],
-            'packages.*.description' => ['nullable', 'string'],
-            'packages.*.show_in_home' => ['nullable', 'boolean'],
-            // ویژگی‌های پکیج
+            'packages.*' => ['required', 'array'],
+            'packages.*.count' => ['required', 'integer', 'min:1'],
+            'packages.*.primary_price' => ['nullable', 'numeric', 'min:0'],
+            'packages.*.secondary_price' => ['nullable', 'numeric', 'min:0'],
             'packages.*.attributes' => ['nullable', 'array'],
-            'packages.*.attributes.*.attribute_id' => [
-                'required',
-                'integer',
-                'exists:attributes,id',
-            ],
-            'packages.*.attributes.*.input_type' => [
-                'required',
-                'string',
-                'in:text,number,color,date,select,checkbox',
-            ],
+            'packages.*.attributes.*' => ['required', 'array'],
+            'packages.*.attributes.*.attribute_id' => ['required', 'integer', 'exists:attributes,id'],
             'packages.*.attributes.*.values' => ['nullable', 'array'],
-            'packages.*.attributes.*.values.*' => [
-                'nullable',
-                'string',
-                'max:255',
-            ],
+            'packages.*.attributes.*.values.*' => ['nullable', 'string', 'max:255'],
+        ];
+    }
+
+    private function productMessages(): array
+    {
+        return [
+            'title.required' => 'پر کردن فیلد عنوان الزامی است.',
+            'category_ids.required' => 'حداقل یک دسته بندی برای محصول انتخاب کنید.',
+            'category_ids.min' => 'حداقل یک دسته بندی برای محصول انتخاب کنید.',
+            'mainImage.required' => 'انتخاب عکس اصلی الزامی است.',
+            'gallery.*.max' => 'حجم کل فایل ها نباید بیشتر از 500 کیلوبایت باشد.',
+        ];
+    }
+
+    /**
+     * ذخیره یک تصویر (اصلی یا گالری) و ثبت آن در جدول product_media
+     */
+    private function storeMedia(int $productId, $file, bool $isMain, array &$uploadedFiles): void
+    {
+        $path = $file->store('productImgs', 'public');
+
+        $uploadedFiles[] = $path;
+
+        product_media::insert([
+            'product_id' => $productId,
+            'media_type' => $file->getClientOriginalExtension(),
+            'media_path' => $path,
+            'is_main' => $isMain ? 1 : 0,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
+    }
 
-        $validated = $validator->validate();
+    /**
+     * ذخیره ویژگی‌های عمومی محصول
+     * هر مقدار یک ردیف است
+     */
+    private function saveProductAttributes(int $productId, array $attributes): void
+    {
+        $rows = [];
 
-        // ============================================
-        // 2. آماده‌سازی مدیریت فایل‌ها و تراکنش
-        // ============================================
+        foreach ($attributes as $attribute) {
+            foreach ($attribute['values'] ?? [] as $value) {
+                if ($value === null || $value === '') {
+                    continue;
+                }
+
+                $rows[] = [
+                    'product_id' => $productId,
+                    'attribute_id' => $attribute['attribute_id'],
+                    'value' => $value,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
+            }
+        }
+
+        if ($rows) {
+            product_attributes::insert($rows);
+        }
+    }
+
+    /** ذخیره پکیج‌ها و ویژگی‌های هر پکیج */
+
+    /**
+     * ذخیره پکیج‌ها و ویژگی‌های هر پکیج
+     */
+    private function savePackages(int $productId, array $packages): void
+    {
+        foreach ($packages as $packageData) {
+            // ایجاد پکیج
+            $packageId = package::insertGetId([
+                'product_id' => $productId,
+                'count' => $packageData['count'],
+                'primary_price' => $packageData['primary_price'] ?? null,
+                'secondary_price' => $packageData['secondary_price'] ?? null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            // ویژگی‌های این پکیج
+            $rows = [];
+
+            foreach ($packageData['attributes'] ?? [] as $attribute) {
+                $attributeId = $attribute['attribute_id'] ?? null;
+
+                if (!$attributeId) {
+                    continue;
+                }
+
+                // جلوگیری از ثبت یک ویژگی تکراری برای همین پکیج
+                $value = collect($attribute['values'] ?? [])
+                    ->filter(fn($value) => $value !== null && $value !== '')
+                    ->unique()
+                    ->first();
+
+                if ($value === null) {
+                    continue;
+                }
+
+                $rows[] = [
+                    'product_id' => $productId,
+                    'package_id' => $packageId,
+                    'attribute_id' => $attributeId,
+                    'value' => $value,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
+            }
+
+            // ثبت ویژگی‌های پکیج
+            if (!empty($rows)) {
+                package_attribute::insert($rows);
+            }
+        }
+    }
+
+    /**
+     * تبدیل ردیف‌های ویژگی (هر مقدار یک ردیف) به ساختار فرم:
+     * [{ attribute_id, values: [...] }]
+     */
+    private function groupAttributes($rows)
+    {
+        return $rows->groupBy('attribute_id')->map(function ($items, $attributeId) {
+            return [
+                'attribute_id' => (int) $attributeId,
+                'values' => $items->pluck('value')->values(),
+            ];
+        })->values();
+    }
+
+    // ============================================================
+    // ساخت محصول
+    // ============================================================
+
+    public function create()
+    {
+        $categories = category::with('attributes')->get();
+
+        $setting = homeSetting::document();
+
+        return view('admin.product.create', [
+            'categories' => $categories,
+            'categoriesData' => $this->buildCategoriesData($categories),
+            'setting' => $setting,
+        ]);
+    }
+
+    public function store(Request $request)
+    {
+        dd($request->all());
+        $validated = $request->validate(
+            $this->productRules(false),
+            $this->productMessages()
+        );
 
         $uploadedFiles = [];
 
-        // DB::beginTransaction();
+        DB::beginTransaction();
 
         try {
-            // ========================================
-            // 3. ذخیره اطلاعات اصلی محصول
-            // ========================================
-
             $productId = product::insertGetId([
                 'title' => $validated['title'],
                 'description' => $validated['description'] ?? null,
@@ -166,195 +246,47 @@ class ProductController extends Controller
                 'count' => $validated['count'],
                 'primary_price' => $validated['primary_price'] ?? null,
                 'secondary_price' => $validated['secondary_price'] ?? null,
-                'show_in_home' => $validated['show_in_home'] ?? 0,
+                'show_in_home' => $request->boolean('show_in_home') ? 1 : 0,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
 
-            // ========================================
-            // 4. اتصال محصول به دسته‌بندی‌ها
-            // ========================================
-
-            $categoryIds = $validated['category_ids'];
-
             $categoryRows = [];
-
-            foreach ($categoryIds as $categoryId) {
+            foreach ($validated['category_ids'] as $categoryId) {
                 $categoryRows[] = [
                     'product_id' => $productId,
                     'category_id' => $categoryId,
                 ];
             }
-
             category_product::insert($categoryRows);
 
-            // ========================================
-            // 5. ذخیره تصویر اصلی محصول
-            // ========================================
+            $this->storeMedia($productId, $validated['mainImage'], true, $uploadedFiles);
 
-            if ($request->hasFile('mainImage')) {
-                $mainImagePath = $request
-                    ->file('mainImage')
-                    ->store('products', 'public');
-
-                $uploadedFiles[] = $mainImagePath;
-
-                DB::table('product_media')->insert([
-                    'product_id' => $productId,
-                    'media_path' => $mainImagePath,
-                    'media_type' => 'image',
-                    'is_main' => true,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
+            foreach ($validated['gallery'] ?? [] as $galleryImage) {
+                $this->storeMedia($productId, $galleryImage, false, $uploadedFiles);
             }
 
-            // ========================================
-            // 6. ذخیره تصاویر گالری محصول
-            // ========================================
+            $this->saveProductAttributes($productId, $validated['attributes'] ?? []);
+            $this->savePackages($productId, $validated['packages'] ?? []);
 
-            if ($request->hasFile('gallery')) {
-                foreach ($request->file('gallery') as $galleryImage) {
-                    if (!$galleryImage) {
-                        continue;
-                    }
-
-                    $galleryImagePath = $galleryImage
-                        ->store('products/gallery', 'public');
-
-                    $uploadedFiles[] = $galleryImagePath;
-
-                    product_media::insert([
-                        'product_id' => $productId,
-                        'media_path' => $galleryImagePath,
-                        'media_type' => 'image',
-                        'is_main' => false,
-                        'created_at' => now(),
-                        'updated_at' => now(),
-                    ]);
-                }
-            }
-
-            // ========================================
-            // 7. ذخیره ویژگی‌های عمومی محصول
-            // ========================================
-
-            foreach ($validated['attributes'] ?? [] as $attribute) {
-                $attributeId = $attribute['attribute_id'];
-
-                $inputType = $attribute['input_type'];
-
-                $values = $attribute['values'] ?? [];
-
-                foreach ($values as $value) {
-                    // جلوگیری از ذخیره مقدار خالی
-                    if ($value === null || $value === '') {
-                        continue;
-                    }
-
-                    product_attributes::insert([
-                        'product_id' => $productId,
-                        'attribute_id' => $attributeId,
-                        'input_type' => $inputType,
-                        'value' => $value,
-                        'created_at' => now(),
-                        'updated_at' => now(),
-                    ]);
-                }
-            }
-
-            // ========================================
-            // 8. ذخیره پکیج‌های محصول
-            // ========================================
-
-            foreach ($validated['packages'] ?? [] as $packageIndex => $packageData) {
-                // ------------------------------------
-                // تصویر پکیج
-                // ------------------------------------
-
-                $packageImagePath = null;
-
-                if ($request->hasFile("packages.$packageIndex.image")) {
-                    $packageImagePath = $request
-                        ->file("packages.$packageIndex.image")
-                        ->store('products/packages', 'public');
-
-                    $uploadedFiles[] = $packageImagePath;
-                }
-
-                // ------------------------------------
-                // ایجاد پکیج
-                // ------------------------------------
-
-                $packageId = package::insertGetId([
-                    'product_id' => $productId,
-                    'image' => $packageImagePath,
-                    'title' => $packageData['title'],
-                    'description' => $packageData['description'] ?? null,
-                    'summary' => $packageData['summary'] ?? null,
-                    'count' => $packageData['count'],
-                    'primary_price' => $packageData['primary_price'] ?? null,
-                    'secondary_price' => $packageData['secondary_price'] ?? null,
-                    'show_in_home' => $packageData['show_in_home'] ?? 0,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-
-                // ====================================
-                // 9. ذخیره ویژگی‌های پکیج
-                // ====================================
-
-                foreach ($packageData['attributes'] ?? [] as $packageAttribute) {
-                    $attributeId = $packageAttribute['attribute_id'];
-
-                    $inputType = $packageAttribute['input_type'];
-
-                    $values = $packageAttribute['values'] ?? [];
-
-                    foreach ($values as $value) {
-                        // جلوگیری از ذخیره مقدار خالی
-                        if ($value === null || $value === '') {
-                            continue;
-                        }
-
-                        package_attribute::insert([
-                            'product_id' => $productId,
-                            'package_id' => $packageId,
-                            'attribute_id' => $attributeId,
-                            'input_type' => $inputType,
-                            'value' => $value,
-                            'created_at' => now(),
-                            'updated_at' => now(),
-                        ]);
-                    }
-                }
-            }
-
-            // ========================================
-            // 10. ثبت موفق عملیات
-            // ========================================
-
-            // DB::commit();
-
-            return redirect()
-                ->route('product.adminIndex')
-                ->with('success', 'محصول با موفقیت ایجاد شد.');
+            DB::commit();
         } catch (\Throwable $exception) {
-            // ========================================
-            // 11. بازگردانی تراکنش در صورت خطا
-            // ========================================
+            DB::rollBack();
 
-            // DB::rollBack();
-
-            // حذف تمام فایل‌هایی که در این درخواست آپلود شده‌اند
             foreach ($uploadedFiles as $filePath) {
                 Storage::disk('public')->delete($filePath);
             }
 
-            // ارسال خطا برای بررسی در محیط توسعه
             throw $exception;
         }
+
+        return to_route('product.adminIndex')
+            ->with('message', 'محصول ' . $validated['title'] . ' ایجاد شد.');
     }
+
+    // ============================================================
+    // لیست محصولات (ادمین)
+    // ============================================================
 
     public function adminIndex()
     {
@@ -377,116 +309,181 @@ class ProductController extends Controller
         return view('admin.product.index', ['products' => $products, 'setting' => $setting]);
     }
 
+    // ============================================================
+    // دریافت اطلاعات محصول برای پاپ‌آپ ویرایش (ajax)
+    // ============================================================
+
     public function edit(Request $request)
     {
-        $catIds = product::find($request['id'])->categories->pluck('id');
-        $product = product::find($request['id'])->load('attributes')->load('categories');
-        $categories = category::select(['id', 'title'])->get();
-        if ($product->media->isNotEmpty()) {
-            foreach ($product->media as $media) {
-                $media->media_path = asset('storage/' . $media['media_path']);
+        $product = product::with(['media', 'categories'])->findOrFail($request['id']);
+
+        // مسیر کامل تصاویر
+        $product->media->each(function ($media) {
+            $media->media_path = asset('storage/' . $media->media_path);
+        });
+
+        // ویژگی‌های عمومی (گروه‌بندی‌شده بر اساس ویژگی)
+        $attributes = $this->groupAttributes(
+            product_attributes::where('product_id', $product->id)->get()
+        );
+
+        // ویژگی‌های همه پکیج‌ها (یک بار کوئری، گروه‌بندی بر اساس پکیج)
+        $packageAttributes = package_attribute::where('product_id', $product->id)
+            ->get()
+            ->groupBy('package_id');
+
+        $packages = package::where('product_id', $product->id)->get()->map(
+            function ($package) use ($packageAttributes) {
+                return [
+                    'count' => $package->count,
+                    'primary_price' => $package->primary_price,
+                    'secondary_price' => $package->secondary_price,
+                    'attributes' => $this->groupAttributes(
+                        $packageAttributes->get($package->id, collect())
+                    ),
+                ];
             }
-        }
-        return response()->json(['product' => $product, 'cats' => $categories, 'catIds' => $catIds]);
+        )->values();
+
+        $productData = $product->toArray();
+        $productData['attributes'] = $attributes;
+        $productData['packages'] = $packages;
+
+        $categories = category::with('attributes')->get();
+
+        return response()->json([
+            'product' => $productData,
+            'cats' => $categories->map(fn($category) => [
+                'id' => $category->id,
+                'title' => $category->title,
+            ])->values(),
+            'catIds' => $product->categories->pluck('id'),
+            'categoriesData' => $this->buildCategoriesData($categories),
+        ]);
     }
+
+    // ============================================================
+    // به‌روزرسانی محصول
+    // ============================================================
 
     public function update(Request $request)
     {
         $validated = $request->validate(
-            [
-                'title' => ['required'],
-                'gallery.*' => ['max:500'],
-                'category_ids' => ['required'],
-            ],
-            [
-                'title.required' => 'پر کردن فیلد عنوان الزامی است.',
-                'gallery.*.max' => 'حجم کل فایل ها نباید بیشتر از 500 کیلوبایت باشد.',
-                'category_ids.required' => 'حداقل یک دسته بندی برای محصول انتخاب کنید.',
-            ]
+            $this->productRules(true),
+            $this->productMessages()
         );
-        $product = product::find($request['product_id']);
-        $title = $product->title;
-        $product->title = $request['title'];
-        $product->description = $request['description'];
-        $product->summary = $request['summary'];
-        $product->primary_price = $request['primary_price'];
-        $product->secondary_price = $request['secondary_price'];
-        $product->count = $request['count'];
-        $product->show_in_home = $request['show_in_home'] ?? 0;
-        category_product::where('product_id', $product['id'])->delete();
-        foreach ($request['category_ids'] as $catId) {
-            category_product::create([
-                'product_id' => $product['id'],
-                'category_id' => $catId,
-            ]);
+
+        $product = product::findOrFail($request->input('product_id'));
+        $oldTitle = $product->title;
+
+        $uploadedFiles = [];
+        $filesToDelete = [];
+
+        DB::beginTransaction();
+
+        try {
+            $product->title = $validated['title'];
+            $product->description = $validated['description'] ?? null;
+            $product->summary = $validated['summary'] ?? null;
+            $product->count = $validated['count'];
+            $product->primary_price = $validated['primary_price'] ?? null;
+            $product->secondary_price = $validated['secondary_price'] ?? null;
+            $product->show_in_home = $request->boolean('show_in_home') ? 1 : 0;
+            $product->save();
+
+            // جایگزینی دسته‌بندی‌ها
+            category_product::where('product_id', $product->id)->delete();
+
+            $categoryRows = [];
+            foreach ($validated['category_ids'] as $categoryId) {
+                $categoryRows[] = [
+                    'product_id' => $product->id,
+                    'category_id' => $categoryId,
+                ];
+            }
+            category_product::insert($categoryRows);
+
+            // حذف تصاویر انتخاب‌شده
+            $removed = (array) $request->input('removedImgs', []);
+            $removedPaths = array_filter(array_merge(
+                [$removed['mainImg'] ?? null],
+                (array) ($removed['gallery'] ?? [])
+            ));
+
+            foreach ($removedPaths as $path) {
+                $query = product_media::where('product_id', $product->id)
+                    ->where('media_path', $path);
+
+                $filesToDelete = array_merge(
+                    $filesToDelete,
+                    $query->pluck('media_path')->all()
+                );
+
+                $query->delete();
+            }
+
+            // جایگزینی تصویر اصلی در صورت آپلود تصویر جدید
+            if ($request->hasFile('mainImage')) {
+                $oldMain = product_media::where('product_id', $product->id)
+                    ->where('is_main', 1);
+
+                $filesToDelete = array_merge(
+                    $filesToDelete,
+                    $oldMain->pluck('media_path')->all()
+                );
+
+                $oldMain->delete();
+
+                $this->storeMedia(
+                    $product->id,
+                    $validated['mainImage'],
+                    true,
+                    $uploadedFiles
+                );
+            }
+
+            // ذخیره تصاویر جدید گالری
+            foreach ($validated['gallery'] ?? [] as $galleryImage) {
+                $this->storeMedia(
+                    $product->id,
+                    $galleryImage,
+                    false,
+                    $uploadedFiles
+                );
+            }
+
+            // حذف ویژگی‌ها و پکیج‌های قدیمی
+            product_attributes::where('product_id', $product->id)->delete();
+            package_attribute::where('product_id', $product->id)->delete();
+            package::where('product_id', $product->id)->delete();
+
+            // ثبت مجدد ویژگی‌ها و پکیج‌ها
+            $this->saveProductAttributes($product->id, $validated['attributes'] ?? []);
+            $this->savePackages($product->id, $validated['packages'] ?? []);
+
+            DB::commit();
+        } catch (\Throwable $exception) {
+            DB::rollBack();
+
+            foreach ($uploadedFiles as $filePath) {
+                Storage::disk('public')->delete($filePath);
+            }
+
+            throw $exception;
         }
-        if (isset($request['removedAttrs'])) {
-            foreach ($request['removedAttrs'] as $attrId) {
-                product_attributes::find($attrId)->delete();
-            }
+
+        // حذف فایل‌های قدیمی پس از موفقیت تراکنش
+        foreach (array_unique($filesToDelete) as $filePath) {
+            Storage::disk('public')->delete($filePath);
         }
-        if (isset($request['removedImgs'])) {
-            if (isset($request['removedImgs']['mainImg'])) {
-                Storage::disk('public')->delete($request['removedImgs']['mainImg']);
-                product_media::where('media_path', $request['removedImgs']['mainImg'])->delete();
-            }
-            if (isset($request['removedImgs']['gallery'])) {
-                foreach ($request['removedImgs']['gallery'] as $media) {
-                    Storage::disk('public')->delete($media);
-                    product_media::where('media_path', $media)->delete();
-                }
-            }
-        }
-        if (isset($request['mainImage'])) {
-            foreach ($product->media as $media) {
-                if ($media['is_main']) {
-                    Storage::disk('public')->delete($media['media_path']);
-                    product_media::where('media_path', $media['media_path'])->delete();
-                }
-            }
-            $newImgType = $request->mainImage->getClientOriginalExtension();
-            $newImgPath = $request->mainImage->store('productImgs', 'public');
-            product_media::create([
-                'product_id' => $product['id'],
-                'media_type' => $newImgType,
-                'media_path' => $newImgPath,
-                'is_main' => 1
-            ]);
-        }
-        if (isset($request['gallery'])) {
-            foreach ($request['gallery'] as $file) {
-                $newImgType = $file->getClientOriginalExtension();
-                $newImgPath = $file->store('productImgs', 'public');
-                product_media::create([
-                    'product_id' => $product['id'],
-                    'media_type' => $newImgType,
-                    'media_path' => $newImgPath,
-                    'is_main' => 0
-                ]);
-            }
-        }
-        if (isset($request['attributes'])) {
-            if (isset($request['attributes']['oldAttrs'])) {
-                foreach ($request['attributes']['oldAttrs']['attribute_key'] as $id => $key) {
-                    $oldProAtt = product_attributes::find($id);
-                    $oldProAtt->attribute_key = $key;
-                    $oldProAtt->attribute_value = $request['attributes']['oldAttrs']['attribute_value'][$id];
-                    $oldProAtt->save();
-                }
-            }
-            if (isset($request['attributes']['newAttrs'])) {
-                foreach ($request['attributes']['newAttrs']['attribute_key'] as $index => $key) {
-                    product_attributes::create([
-                        'product_id' => $product['id'],
-                        'attribute_key' => $key,
-                        'attribute_value' => $request['attributes']['newAttrs']['attribute_value'][$index]
-                    ]);
-                }
-            }
-        }
-        $product->save();
-        return to_route('product.adminIndex')->with('message', ' محصول ' . $title . ' به روز رسانی شد. ');
+
+        return to_route('product.adminIndex')
+            ->with('message', 'محصول ' . $oldTitle . ' به‌روزرسانی شد.');
     }
+
+    // ============================================================
+    // حذف محصول
+    // ============================================================
 
     public function delete($id)
     {
@@ -496,6 +493,8 @@ class ProductController extends Controller
                 Storage::disk('public')->delete($media['media_path']);
             }
             $product->media()->delete();
+            package_attribute::where('product_id', $product->id)->delete();
+            package::where('product_id', $product->id)->delete();
             $product->attributes()->delete();
             $product->categories()->detach();
             $product->delete();
@@ -504,6 +503,10 @@ class ProductController extends Controller
         }
         return to_route('product.adminIndex')->with('message', ' محصول ' . $product['title'] . ' حذف شد. ');
     }
+
+    // ============================================================
+    // بخش کاربران (بدون تغییر)
+    // ============================================================
 
     public function show(product $product)
     {
