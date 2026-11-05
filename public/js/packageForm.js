@@ -1,581 +1,27 @@
-
-// "use strict";
-
-// const PackageForm = (() => {
-
-//     // ================================================
-//     // عناصر اصلی
-//     // ================================================
-
-//     const productAttributesList = document.getElementById(
-//         "product-attributes-list"
-//     );
-
-//     const packagesList = document.getElementById(
-//         "packages-list"
-//     );
-
-//     const attributeTemplate = document.getElementById(
-//         "attribute-template"
-//     );
-
-//     const attributeValueTemplate = document.getElementById(
-//         "attribute-value-template"
-//     );
-
-//     const packageTemplate = document.getElementById(
-//         "package-template"
-//     );
-
-
-//     // ================================================
-//     // ساخت گزینه‌های عنوان ویژگی
-//     // ================================================
-
-//     function fillAttributeOptions(select) {
-
-//         select.innerHTML = "";
-
-//         const defaultOption = document.createElement("option");
-
-//         defaultOption.value = "";
-//         defaultOption.textContent = "انتخاب ویژگی";
-
-//         select.appendChild(defaultOption);
-
-
-//         Object.entries(window.CATEGORIES || {}).forEach(
-//             ([categoryId, category]) => {
-
-//                 const attributes = category.attributes || [];
-
-//                 if (!attributes.length) return;
-
-
-//                 const optgroup = document.createElement("optgroup");
-
-//                 optgroup.label = category.name || "ویژگی‌ها";
-
-
-//                 attributes.forEach(attribute => {
-
-//                     const option = document.createElement("option");
-
-//                     option.value = attribute.id;
-
-//                     option.textContent = attribute.key;
-
-//                     optgroup.appendChild(option);
-
-//                 });
-
-
-//                 select.appendChild(optgroup);
-
-//             }
-//         );
-
-//     }
-
-
-//     // ================================================
-//     // ساخت input مقدار ویژگی
-//     // ================================================
-
-//     function createValueInput(type, value = "") {
-
-//         const wrapper = attributeValueTemplate.content
-//             .firstElementChild
-//             .cloneNode(true);
-
-//         const input = wrapper.querySelector(
-//             ".attribute-value-input"
-//         );
-
-
-//         // نوع input
-//         if (["text", "number", "color", "date"].includes(type)) {
-
-//             input.type = type;
-//             if(type=='color'){
-//                 attributeValueTemplate.classList.add('h-10')
-//             } else {
-//                 attributeValueTemplate.classList.add('h-10')
-//             }
-//         } else {
-
-//             // select و checkbox در این مرحله مقادیر گزینه‌ها را دریافت می‌کنند
-//             input.type = "text";
-
-//         }
-
-
-//         // مقدار پیش‌فرض
-//         if (type === "color") {
-
-//             input.value = value || "#000000";
-
-//         } else {
-
-//             input.value = value;
-
-//         }
-
-
-//         // محدودیت عدد
-//         if (type === "number") {
-
-//             input.min = "0";
-
-//         }
-
-
-//         return wrapper;
-
-//     }
-
-
-//     // ================================================
-//     // افزودن مقدار جدید
-//     // ================================================
-
-//     function addValue(attributeItem, value = "") {
-
-//         const type = attributeItem.querySelector(
-//             ".attribute-input-type"
-//         ).value;
-
-
-//         const valuesContainer = attributeItem.querySelector(
-//             ".attribute-values"
-//         );
-
-
-//         const valueElement = createValueInput(type, value);
-
-
-//         // حذف مقدار
-//         valueElement.querySelector(
-//             ".remove-attribute-value"
-//         ).addEventListener("click", () => {
-
-//             valueElement.remove();
-
-//             reindex();
-
-//         });
-
-
-//         valuesContainer.appendChild(valueElement);
-
-
-//         reindex();
-
-//     }
-
-
-//     // ================================================
-//     // تغییر نوع ورودی ویژگی
-//     // ================================================
-
-//     function changeAttributeInputType(attributeItem) {
-
-//         const type = attributeItem.querySelector(
-//             ".attribute-input-type"
-//         ).value;
-
-
-//         const valuesContainer = attributeItem.querySelector(
-//             ".attribute-values"
-//         );
-
-
-//         // مقادیر قبلی را حذف می‌کنیم
-//         valuesContainer.innerHTML = "";
-
-
-//         // حداقل یک مقدار ایجاد می‌کنیم
-//         addValue(attributeItem);
-
-
-//     }
-
-
-//     // ================================================
-//     // ساخت یک ویژگی
-//     // ================================================
-
-//     function createAttributeItem() {
-
-//         const item = attributeTemplate.content
-//             .firstElementChild
-//             .cloneNode(true);
-
-
-//         // Select عنوان ویژگی
-//         const attributeSelect = item.querySelector(
-//             ".attribute-select"
-//         );
-
-
-//         fillAttributeOptions(attributeSelect);
-
-
-//         // Select نوع ورودی
-//         const inputTypeSelect = item.querySelector(
-//             ".attribute-input-type"
-//         );
-
-
-//         // تغییر نوع ورودی
-//         inputTypeSelect.addEventListener("change", () => {
-
-//             changeAttributeInputType(item);
-
-//         });
-
-
-//         // افزودن مقدار
-//         item.querySelector(
-//             ".add-attribute-value"
-//         ).addEventListener("click", () => {
-
-//             addValue(item);
-
-//         });
-
-
-//         // حذف ویژگی
-//         item.querySelector(
-//             ".remove-attribute"
-//         ).addEventListener("click", () => {
-
-//             item.remove();
-
-//             reindex();
-
-//         });
-
-
-//         return item;
-
-//     }
-
-
-//     // ================================================
-//     // افزودن ویژگی عمومی محصول
-//     // ================================================
-
-//     function addProductAttribute() {
-
-//         const item = createAttributeItem();
-
-
-//         productAttributesList.appendChild(item);
-
-
-//         // مقدار اولیه
-//         addValue(item);
-
-
-//         reindex();
-
-//     }
-
-
-//     // ================================================
-//     // افزودن ویژگی به پکیج
-//     // ================================================
-
-//     function addPackageAttribute(packageItem) {
-
-//         const attributesList = packageItem.querySelector(
-//             ".package-attributes-list"
-//         );
-
-
-//         const item = createAttributeItem();
-
-
-//         attributesList.appendChild(item);
-
-
-//         // مقدار اولیه
-//         addValue(item);
-
-
-//         reindex();
-
-//     }
-
-
-//     // ================================================
-//     // افزودن پکیج
-//     // ================================================
-
-//     function addPackage() {
-
-//         const packageItem = packageTemplate.content
-//             .firstElementChild
-//             .cloneNode(true);
-
-
-//         // حذف پکیج
-//         packageItem.querySelector(
-//             ".remove-package"
-//         ).addEventListener("click", () => {
-
-//             packageItem.remove();
-
-//             reindex();
-
-//         });
-
-
-//         // افزودن ویژگی به پکیج
-//         packageItem.querySelector(
-//             ".add-package-attribute"
-//         ).addEventListener("click", () => {
-
-//             addPackageAttribute(packageItem);
-
-//         });
-
-
-//         packagesList.appendChild(packageItem);
-
-
-//         reindex();
-
-//     }
-
-
-//     // ================================================
-//     // تنظیم name فیلدها
-//     // ================================================
-
-//     function reindex() {
-
-
-//         // --------------------------------------------
-//         // ویژگی‌های عمومی محصول
-//         // --------------------------------------------
-
-//         productAttributesList
-//             .querySelectorAll(".attribute-item")
-//             .forEach((attributeItem, attributeIndex) => {
-
-
-//                 // شناسه ویژگی
-//                 attributeItem.querySelector(
-//                     ".attribute-select"
-//                 ).name = `attributes[${attributeIndex}][attribute_id]`;
-
-
-//                 // نوع ورودی
-//                 attributeItem.querySelector(
-//                     ".attribute-input-type"
-//                 ).name = `attributes[${attributeIndex}][input_type]`;
-
-
-//                 // مقادیر
-//                 attributeItem.querySelectorAll(
-//                     ".attribute-value-input"
-//                 ).forEach((input, valueIndex) => {
-
-//                     input.name =
-//                         `attributes[${attributeIndex}][values][${valueIndex}]`;
-
-//                 });
-
-//             });
-
-
-
-//         // --------------------------------------------
-//         // پکیج‌ها
-//         // --------------------------------------------
-
-//         packagesList
-//             .querySelectorAll(".package-item")
-//             .forEach((packageItem, packageIndex) => {
-
-
-//                 // عنوان
-//                 packageItem.querySelector(
-//                     ".package-title"
-//                 ).name = `packages[${packageIndex}][title]`;
-
-
-//                 // تعداد
-//                 packageItem.querySelector(
-//                     ".package-count"
-//                 ).name = `packages[${packageIndex}][count]`;
-
-
-//                 // قیمت اصلی
-//                 packageItem.querySelector(
-//                     ".package-primary-price"
-//                 ).name = `packages[${packageIndex}][primary_price]`;
-
-
-//                 // قیمت ثانویه
-//                 packageItem.querySelector(
-//                     ".package-secondary-price"
-//                 ).name = `packages[${packageIndex}][secondary_price]`;
-
-
-//                 // تصویر
-//                 packageItem.querySelector(
-//                     ".package-image"
-//                 ).name = `packages[${packageIndex}][image]`;
-
-
-//                 // خلاصه
-//                 packageItem.querySelector(
-//                     ".package-summary"
-//                 ).name = `packages[${packageIndex}][summary]`;
-
-
-//                 // توضیحات
-//                 packageItem.querySelector(
-//                     ".package-description"
-//                 ).name = `packages[${packageIndex}][description]`;
-
-
-//                 // نمایش در صفحه اصلی
-//                 packageItem.querySelector(
-//                     ".package-show-in-home"
-//                 ).name = `packages[${packageIndex}][show_in_home]`;
-
-
-
-
-//                 // ----------------------------------------
-//                 // ویژگی‌های هر پکیج
-//                 // ----------------------------------------
-
-//                 packageItem
-//                     .querySelectorAll(".attribute-item")
-//                     .forEach((attributeItem, attributeIndex) => {
-
-
-//                         // شناسه ویژگی
-//                         attributeItem.querySelector(
-//                             ".attribute-select"
-//                         ).name =
-//                             `packages[${packageIndex}][attributes][${attributeIndex}][attribute_id]`;
-
-
-//                         // نوع ورودی
-//                         attributeItem.querySelector(
-//                             ".attribute-input-type"
-//                         ).name =
-//                             `packages[${packageIndex}][attributes][${attributeIndex}][input_type]`;
-
-
-//                         // مقادیر
-//                         attributeItem.querySelectorAll(
-//                             ".attribute-value-input"
-//                         ).forEach((input, valueIndex) => {
-
-//                             input.name =
-//                                 `packages[${packageIndex}][attributes][${attributeIndex}][values][${valueIndex}]`;
-
-//                         });
-
-//                     });
-
-//             });
-
-//     }
-
-
-//     // ================================================
-//     // راه‌اندازی
-//     // ================================================
-
-//     function init() {
-
-
-//         // افزودن ویژگی محصول
-//         document.getElementById(
-//             "add-product-attribute"
-//         )?.addEventListener("click", addProductAttribute);
-
-
-//         // افزودن پکیج
-//         document.getElementById(
-//             "add-package"
-//         )?.addEventListener("click", addPackage);
-
-//     }
-
-
-//     // ================================================
-//     // خروجی
-//     // ================================================
-
-//     return {
-
-//         init,
-
-//         addPackage,
-
-//         addProductAttribute,
-
-//         addPackageAttribute,
-
-//         reindex
-
-//     };
-
-
-// })();
-
-
-// // ================================================
-// // اجرای برنامه پس از بارگذاری صفحه
-// // ================================================
-
-// document.addEventListener("DOMContentLoaded", () => {
-
-//     PackageForm.init();
-
-// });
-
-
 "use strict";
 
 const PackageForm = (() => {
 
     // ================================================
+    // تنظیمات
+    // ================================================
+
+    // نام ویژگی رنگ (همان ویژگی پیش‌فرضی که با ساخت دسته‌بندی اضافه می‌شود)
+    const COLOR_ATTRIBUTE_KEY = "رنگ";
+
+
+    // ================================================
     // عناصر اصلی
     // ================================================
 
-    const productAttributesList = document.getElementById(
-        "product-attributes-list"
-    );
+    const productAttributesList = document.getElementById("product-attributes-list");
+    const packagesList = document.getElementById("packages-list");
 
-    const packagesList = document.getElementById(
-        "packages-list"
-    );
+    const attributeTemplate = document.getElementById("attribute-template");
+    const attributeValueTemplate = document.getElementById("attribute-value-template");
+    const packageTemplate = document.getElementById("package-template");
 
-    const attributeTemplate = document.getElementById(
-        "attribute-template"
-    );
-
-    const attributeValueTemplate = document.getElementById(
-        "attribute-value-template"
-    );
-
-    const packageTemplate = document.getElementById(
-        "package-template"
-    );
-
-    const categorySelect = document.getElementById(
-        "category_ids"
-    );
+    const categorySelect = document.getElementById("category_ids");
 
 
     // ================================================
@@ -600,14 +46,10 @@ const PackageForm = (() => {
 
     function getAvailableAttributes() {
 
-        const selectedCategoryIds = getSelectedCategories();
-
         const attributes = [];
-
         const uniqueAttributeIds = new Set();
 
-
-        selectedCategoryIds.forEach(categoryId => {
+        getSelectedCategories().forEach(categoryId => {
 
             const category = window.CATEGORIES?.[categoryId];
 
@@ -634,15 +76,77 @@ const PackageForm = (() => {
 
         });
 
-
         return attributes;
 
     }
 
 
     // ================================================
-    // ساخت گزینه‌های عنوان ویژگی
-    // فقط ویژگی‌های دسته‌های انتخاب‌شده
+    // آیا ویژگی انتخاب‌شده «رنگ» است؟
+    // ================================================
+
+    function isColorAttribute(attributeId) {
+
+        if (!attributeId) {
+            return false;
+        }
+
+        const attribute = getAvailableAttributes().find(
+            item => String(item.id) === String(attributeId)
+        );
+
+        if (!attribute) {
+            return false;
+        }
+
+        // اگر در دیتابیس فیلد type داری، همان اولویت دارد
+        return attribute.type === "color" || attribute.key === COLOR_ATTRIBUTE_KEY;
+
+    }
+
+
+    // ================================================
+    // نوع اینپوت مقدار برای یک آیتم ویژگی
+    // ================================================
+
+    function getInputTypeForItem(attributeItem) {
+
+        const select = attributeItem.querySelector(".attribute-select");
+
+        return isColorAttribute(select?.value) ? "color" : "text";
+
+    }
+
+
+    // ================================================
+    // اعمال نوع اینپوت روی تمام مقادیر یک آیتم
+    // ================================================
+
+    function applyInputType(attributeItem) {
+
+        const type = getInputTypeForItem(attributeItem);
+
+        attributeItem
+            .querySelectorAll(".attribute-value-input")
+            .forEach(input => {
+
+                // اگر نوع تغییری نکرده، کاری نکن
+                if (input.type === type) {
+                    return;
+                }
+
+                input.type = type;
+
+                // مقدار قبلی با نوع جدید سازگار نیست
+                input.value = type === "color" ? "#000000" : "";
+
+            });
+
+    }
+
+
+    // ================================================
+    // ساخت گزینه‌های عنوان ویژگی (فقط دسته‌های انتخاب‌شده)
     // ================================================
 
     function fillAttributeOptions(select) {
@@ -650,7 +154,6 @@ const PackageForm = (() => {
         const previousValue = select.value;
 
         select.innerHTML = "";
-
 
         // گزینه پیش‌فرض
         const defaultOption = document.createElement("option");
@@ -663,133 +166,89 @@ const PackageForm = (() => {
 
         select.appendChild(defaultOption);
 
-
-        // دریافت ویژگی‌های مجاز
         const availableAttributes = getAvailableAttributes();
-
 
         // گروه‌بندی ویژگی‌ها بر اساس دسته
         const groupedAttributes = {};
 
-
         availableAttributes.forEach(attribute => {
 
-            const categoryName = attribute.categoryName;
-
-            if (!groupedAttributes[categoryName]) {
-                groupedAttributes[categoryName] = [];
+            if (!groupedAttributes[attribute.categoryName]) {
+                groupedAttributes[attribute.categoryName] = [];
             }
 
-            groupedAttributes[categoryName].push(attribute);
+            groupedAttributes[attribute.categoryName].push(attribute);
 
         });
 
+        Object.entries(groupedAttributes).forEach(([categoryName, attributes]) => {
 
-        // ساخت optgroup ها
-        Object.entries(groupedAttributes).forEach(
-            ([categoryName, attributes]) => {
+            const optgroup = document.createElement("optgroup");
 
-                const optgroup = document.createElement("optgroup");
+            optgroup.label = categoryName;
 
-                optgroup.label = categoryName;
+            attributes.forEach(attribute => {
 
+                const option = document.createElement("option");
 
-                attributes.forEach(attribute => {
+                option.value = attribute.id;
+                option.textContent = attribute.key;
 
-                    const option = document.createElement("option");
+                optgroup.appendChild(option);
 
-                    option.value = attribute.id;
+            });
 
-                    option.textContent = attribute.key;
+            select.appendChild(optgroup);
 
-                    optgroup.appendChild(option);
-
-                });
-
-
-                select.appendChild(optgroup);
-
-            }
-        );
-
+        });
 
         // حفظ انتخاب قبلی در صورت مجاز بودن
         const stillAvailable = availableAttributes.some(
             attribute => String(attribute.id) === String(previousValue)
         );
 
-        if (stillAvailable) {
-            select.value = previousValue;
-        } else {
-            select.value = "";
-        }
+        select.value = stillAvailable ? previousValue : "";
 
     }
 
 
     // ================================================
-    // به‌روزرسانی ویژگی‌های تمام فرم
-    // هنگام تغییر دسته‌بندی
+    // به‌روزرسانی ویژگی‌های کل فرم هنگام تغییر دسته‌بندی
     // ================================================
+
+    function refreshSelects(container) {
+
+        container
+            ?.querySelectorAll(".attribute-select")
+            .forEach(select => {
+
+                const previousValue = select.value;
+
+                fillAttributeOptions(select);
+
+                const attributeItem = select.closest(".attribute-item");
+
+                if (previousValue && select.value === "") {
+
+                    // ویژگی دیگر متعلق به دسته‌های انتخاب‌شده نیست
+                    attributeItem?.remove();
+
+                } else if (attributeItem) {
+
+                    // ممکن است ویژگی همان بماند ولی نوعش نیاز به بازبینی داشته باشد
+                    applyInputType(attributeItem);
+
+                }
+
+            });
+
+    }
 
     function updateAttributeOptions() {
 
-        // ویژگی‌های عمومی محصول
-        productAttributesList
-            ?.querySelectorAll(".attribute-select")
-            .forEach(select => {
+        refreshSelects(productAttributesList);
+        refreshSelects(packagesList);
 
-                const previousValue = select.value;
-
-                fillAttributeOptions(select);
-
-
-                // اگر ویژگی دیگر متعلق به دسته‌های انتخاب‌شده نیست
-                if (
-                    previousValue &&
-                    select.value === ""
-                ) {
-
-                    const attributeItem = select.closest(
-                        ".attribute-item"
-                    );
-
-                    // حذف ویژگی نامعتبر از فرم
-                    attributeItem?.remove();
-
-                }
-
-            });
-
-
-        // ویژگی‌های تمام پکیج‌ها
-        packagesList
-            ?.querySelectorAll(".attribute-select")
-            .forEach(select => {
-
-                const previousValue = select.value;
-
-                fillAttributeOptions(select);
-
-
-                // حذف ویژگی نامعتبر
-                if (
-                    previousValue &&
-                    select.value === ""
-                ) {
-
-                    const attributeItem = select.closest(
-                        ".attribute-item"
-                    );
-
-                    attributeItem?.remove();
-
-                }
-
-            });
-
-
-        // تنظیم مجدد نام فیلدها
         reindex();
 
     }
@@ -805,44 +264,21 @@ const PackageForm = (() => {
             .firstElementChild
             .cloneNode(true);
 
-        const input = wrapper.querySelector(
-            ".attribute-value-input"
-        );
+        const input = wrapper.querySelector(".attribute-value-input");
 
+        input.type = ["text", "number", "color", "date"].includes(type)
+            ? type
+            : "text";
 
-        // تعیین نوع ورودی
-        if (["text", "number", "color", "date"].includes(type)) {
-
-            input.type = type;
-
-        } else {
-
-            // select و checkbox در حال حاضر
-            // مقادیر گزینه‌ها را به‌صورت متن دریافت می‌کنند
-            input.type = "text";
-
-        }
-
-
-        // مقدار پیش‌فرض
         if (type === "color") {
-
             input.value = value || "#000000";
-
         } else {
-
             input.value = value;
-
         }
 
-
-        // محدودیت مقدار عددی
         if (type === "number") {
-
             input.min = "0";
-
         }
-
 
         return wrapper;
 
@@ -855,60 +291,27 @@ const PackageForm = (() => {
 
     function addValue(attributeItem, value = "") {
 
-        const type = attributeItem.querySelector(
-            ".attribute-input-type"
-        ).value;
+        // نوع اینپوت بر اساس ویژگی انتخاب‌شده
+        const type = getInputTypeForItem(attributeItem);
 
-
-        const valuesContainer = attributeItem.querySelector(
-            ".attribute-values"
-        );
-
+        const valuesContainer = attributeItem.querySelector(".attribute-values");
 
         const valueElement = createValueInput(type, value);
 
-
         // حذف مقدار
-        valueElement.querySelector(
-            ".remove-attribute-value"
-        ).addEventListener("click", () => {
+        valueElement
+            .querySelector(".remove-attribute-value")
+            .addEventListener("click", () => {
 
-            valueElement.remove();
+                valueElement.remove();
 
-            reindex();
+                reindex();
 
-        });
-
+            });
 
         valuesContainer.appendChild(valueElement);
 
         reindex();
-
-    }
-
-
-    // ================================================
-    // تغییر نوع ورودی ویژگی
-    // ================================================
-
-    function changeAttributeInputType(attributeItem) {
-
-        const type = attributeItem.querySelector(
-            ".attribute-input-type"
-        ).value;
-
-
-        const valuesContainer = attributeItem.querySelector(
-            ".attribute-values"
-        );
-
-
-        // حذف مقادیر قبلی
-        valuesContainer.innerHTML = "";
-
-
-        // ایجاد یک مقدار جدید
-        addValue(attributeItem);
 
     }
 
@@ -923,52 +326,37 @@ const PackageForm = (() => {
             .firstElementChild
             .cloneNode(true);
 
-
-        // عنوان ویژگی
-        const attributeSelect = item.querySelector(
-            ".attribute-select"
-        );
-
+        const attributeSelect = item.querySelector(".attribute-select");
 
         // فقط ویژگی‌های دسته‌های انتخاب‌شده
         fillAttributeOptions(attributeSelect);
 
+        // تغییر نوع اینپوت‌ها با تغییر ویژگی (رنگ => color، غیر از آن => text)
+        attributeSelect.addEventListener("change", () => {
 
-        // نوع ورودی ویژگی
-        const inputTypeSelect = item.querySelector(
-            ".attribute-input-type"
-        );
-
-
-        // تغییر نوع ورودی
-        inputTypeSelect.addEventListener("change", () => {
-
-            changeAttributeInputType(item);
+            applyInputType(item);
 
         });
-
 
         // افزودن مقدار
-        item.querySelector(
-            ".add-attribute-value"
-        ).addEventListener("click", () => {
+        item
+            .querySelector(".add-attribute-value")
+            .addEventListener("click", () => {
 
-            addValue(item);
+                addValue(item);
 
-        });
-
+            });
 
         // حذف ویژگی
-        item.querySelector(
-            ".remove-attribute"
-        ).addEventListener("click", () => {
+        item
+            .querySelector(".remove-attribute")
+            .addEventListener("click", () => {
 
-            item.remove();
+                item.remove();
 
-            reindex();
+                reindex();
 
-        });
-
+            });
 
         return item;
 
@@ -981,7 +369,6 @@ const PackageForm = (() => {
 
     function addProductAttribute() {
 
-        // بدون انتخاب دسته امکان افزودن ویژگی وجود ندارد
         if (getSelectedCategories().length === 0) {
 
             alert("ابتدا یک دسته‌بندی برای محصول انتخاب کنید.");
@@ -990,16 +377,12 @@ const PackageForm = (() => {
 
         }
 
-
         const item = createAttributeItem();
-
 
         productAttributesList.appendChild(item);
 
-
-        // مقدار اولیه ویژگی
+        // مقدار اولیه
         addValue(item);
-
 
         reindex();
 
@@ -1012,7 +395,6 @@ const PackageForm = (() => {
 
     function addPackageAttribute(packageItem) {
 
-        // بدون انتخاب دسته امکان افزودن ویژگی وجود ندارد
         if (getSelectedCategories().length === 0) {
 
             alert("ابتدا یک دسته‌بندی برای محصول انتخاب کنید.");
@@ -1021,21 +403,14 @@ const PackageForm = (() => {
 
         }
 
-
-        const attributesList = packageItem.querySelector(
-            ".package-attributes-list"
-        );
-
+        const attributesList = packageItem.querySelector(".package-attributes-list");
 
         const item = createAttributeItem();
 
-
         attributesList.appendChild(item);
 
-
-        // مقدار اولیه ویژگی
+        // مقدار اولیه
         addValue(item);
-
 
         reindex();
 
@@ -1052,31 +427,27 @@ const PackageForm = (() => {
             .firstElementChild
             .cloneNode(true);
 
-
         // حذف پکیج
-        packageItem.querySelector(
-            ".remove-package"
-        ).addEventListener("click", () => {
+        packageItem
+            .querySelector(".remove-package")
+            .addEventListener("click", () => {
 
-            packageItem.remove();
+                packageItem.remove();
 
-            reindex();
+                reindex();
 
-        });
-
+            });
 
         // افزودن ویژگی به پکیج
-        packageItem.querySelector(
-            ".add-package-attribute"
-        ).addEventListener("click", () => {
+        packageItem
+            .querySelector(".add-package-attribute")
+            .addEventListener("click", () => {
 
-            addPackageAttribute(packageItem);
+                addPackageAttribute(packageItem);
 
-        });
-
+            });
 
         packagesList.appendChild(packageItem);
-
 
         reindex();
 
@@ -1089,40 +460,27 @@ const PackageForm = (() => {
 
     function reindex() {
 
-
         // --------------------------------------------
         // ویژگی‌های عمومی محصول
         // --------------------------------------------
 
         productAttributesList
-            .querySelectorAll(".attribute-item")
+            ?.querySelectorAll(".attribute-item")
             .forEach((attributeItem, attributeIndex) => {
 
+                attributeItem.querySelector(".attribute-select").name =
+                    `attributes[${attributeIndex}][attribute_id]`;
 
-                // شناسه ویژگی
-                attributeItem.querySelector(
-                    ".attribute-select"
-                ).name = `attributes[${attributeIndex}][attribute_id]`;
+                attributeItem
+                    .querySelectorAll(".attribute-value-input")
+                    .forEach((input, valueIndex) => {
 
+                        input.name =
+                            `attributes[${attributeIndex}][values][${valueIndex}]`;
 
-                // نوع ورودی
-                attributeItem.querySelector(
-                    ".attribute-input-type"
-                ).name = `attributes[${attributeIndex}][input_type]`;
-
-
-                // مقادیر ویژگی
-                attributeItem.querySelectorAll(
-                    ".attribute-value-input"
-                ).forEach((input, valueIndex) => {
-
-                    input.name =
-                        `attributes[${attributeIndex}][values][${valueIndex}]`;
-
-                });
+                    });
 
             });
-
 
 
         // --------------------------------------------
@@ -1130,92 +488,35 @@ const PackageForm = (() => {
         // --------------------------------------------
 
         packagesList
-            .querySelectorAll(".package-item")
+            ?.querySelectorAll(".package-item")
             .forEach((packageItem, packageIndex) => {
 
+                packageItem.querySelector(".package-count").name =
+                    `packages[${packageIndex}][count]`;
 
-                // عنوان
-                packageItem.querySelector(
-                    ".package-title"
-                ).name = `packages[${packageIndex}][title]`;
+                packageItem.querySelector(".package-primary-price").name =
+                    `packages[${packageIndex}][primary_price]`;
 
-
-                // تعداد
-                packageItem.querySelector(
-                    ".package-count"
-                ).name = `packages[${packageIndex}][count]`;
+                packageItem.querySelector(".package-secondary-price").name =
+                    `packages[${packageIndex}][secondary_price]`;
 
 
-                // قیمت اصلی
-                packageItem.querySelector(
-                    ".package-primary-price"
-                ).name = `packages[${packageIndex}][primary_price]`;
-
-
-                // قیمت ثانویه
-                packageItem.querySelector(
-                    ".package-secondary-price"
-                ).name = `packages[${packageIndex}][secondary_price]`;
-
-
-                // تصویر
-                packageItem.querySelector(
-                    ".package-image"
-                ).name = `packages[${packageIndex}][image]`;
-
-
-                // خلاصه
-                packageItem.querySelector(
-                    ".package-summary"
-                ).name = `packages[${packageIndex}][summary]`;
-
-
-                // توضیحات
-                packageItem.querySelector(
-                    ".package-description"
-                ).name = `packages[${packageIndex}][description]`;
-
-
-                // نمایش در صفحه اصلی
-                packageItem.querySelector(
-                    ".package-show-in-home"
-                ).name = `packages[${packageIndex}][show_in_home]`;
-
-
-
-
-                // ----------------------------------------
                 // ویژگی‌های هر پکیج
-                // ----------------------------------------
-
                 packageItem
                     .querySelectorAll(".attribute-item")
                     .forEach((attributeItem, attributeIndex) => {
 
-
-                        // شناسه ویژگی
-                        attributeItem.querySelector(
-                            ".attribute-select"
-                        ).name =
+                        attributeItem.querySelector(".attribute-select").name =
                             `packages[${packageIndex}][attributes][${attributeIndex}][attribute_id]`;
 
+                        attributeItem
+                            .querySelectorAll(".attribute-value-input")
+                            .forEach((input, valueIndex) => {
 
-                        // نوع ورودی
-                        attributeItem.querySelector(
-                            ".attribute-input-type"
-                        ).name =
-                            `packages[${packageIndex}][attributes][${attributeIndex}][input_type]`;
+                                input.name =
+                                    `packages[${packageIndex}][attributes][${attributeIndex}][values][${valueIndex}]`;
 
-
-                        // مقادیر
-                        attributeItem.querySelectorAll(
-                            ".attribute-value-input"
-                        ).forEach((input, valueIndex) => {
-
-                            input.name =
-                                `packages[${packageIndex}][attributes][${attributeIndex}][values][${valueIndex}]`;
-
-                        });
+                            });
 
                     });
 
@@ -1230,25 +531,18 @@ const PackageForm = (() => {
 
     function init() {
 
-
         // تغییر دسته‌بندی محصول
-        categorySelect?.addEventListener("change", () => {
-
-            updateAttributeOptions();
-
-        });
-
+        categorySelect?.addEventListener("change", updateAttributeOptions);
 
         // افزودن ویژگی عمومی محصول
-        document.getElementById(
-            "add-product-attribute"
-        )?.addEventListener("click", addProductAttribute);
-
+        document
+            .getElementById("add-product-attribute")
+            ?.addEventListener("click", addProductAttribute);
 
         // افزودن پکیج
-        document.getElementById(
-            "add-package"
-        )?.addEventListener("click", addPackage);
+        document
+            .getElementById("add-package")
+            ?.addEventListener("click", addPackage);
 
     }
 
@@ -1258,21 +552,13 @@ const PackageForm = (() => {
     // ================================================
 
     return {
-
         init,
-
         addPackage,
-
         addProductAttribute,
-
         addPackageAttribute,
-
         reindex,
-
         updateAttributeOptions
-
     };
-
 
 })();
 
