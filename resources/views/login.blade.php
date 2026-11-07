@@ -221,7 +221,7 @@
                             <span class="text-gray-600">
                                 حساب کاربری ندارید؟
                                 <a href="{{ route('signup') }}"
-                                    class="text-purple-500 font-semibold hover:text-purple-600 transition-colors mr-1">
+                                    class="text-purple-500 font-bold hover:text-purple-600 transition-colors mr-1">
                                     ثبت نام کنید!
                                 </a>
                             </span>

@@ -36,7 +36,6 @@ class OrdersController extends Controller
         $email = $request->input('email');
         $nationalCode = $request->input('nationalCode');
         $descriptoin = $request->input('descriptoin');
-        // $onlinePayment = $request->input('onlinePayment');
         $password = $request->input('password');
         $password = isset($password) ? Hash::make($password) : false;
         $products = json_decode($request->products);
@@ -119,7 +118,6 @@ class OrdersController extends Controller
                 ]);
             }
         }
-
         return redirect('/')->with('clearStorage', true);
     }
     public function index()

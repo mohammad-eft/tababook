@@ -26,7 +26,7 @@ if (localStorage.getItem('products')) {
                     <img src="${imgPath + cart.mainImg}" class="size-full object-cover" alt="">
                 </div>
                 <div class="flex-1 min-w-0">
-                    <h3 class="font-semibold text-gray-800 text-sm sm:text-base truncate">${cart.title}</h3>
+                    <h3 class="font-bold text-gray-800 text-sm sm:text-base truncate">${cart.title}</h3>
                     <p class="text-xs text-gray-500 mt-0.5 mb-5">${cart.summary ? cart.summary : cart.description}</p>
                     <div class="w-full lg:w-1/4 p-2 flex gap-2 justify-center items-center rounded-xl addToCartBtns" data-product-id="${cart.id}">
                         <button onclick="setCount(this)" class="w-1/3 text-lg font-bold text-white flex justify-center items-center ${ cart.quantity == cart.count ? 'cursor-no-drop' : 'cursor-pointer' }" ${cart.quantity == cart.count ? 'disabled' : ''} data-state="+">+</button>
@@ -75,7 +75,7 @@ if (localStorage.getItem('packs')) {
                     <img src="${imgPath + cart.image}" class="size-full object-cover" alt="">
                 </div>
                 <div class="flex-1 min-w-0">
-                    <h3 class="font-semibold text-gray-800 text-sm sm:text-base truncate">${cart.title}</h3>
+                    <h3 class="font-bold text-gray-800 text-sm sm:text-base truncate">${cart.title}</h3>
                     <p class="text-xs text-gray-500 mt-0.5 mb-5">${cart.summary}</p>
                     <div class="w-full lg:w-1/4 p-2 flex gap-2 justify-center transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) items-center rounded-xl addPackToCartBtn" data-pack-id="${cart.id}">
                         <button onclick="setPackCount(this)" class="w-1/3 text-lg font-bold transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center ${ cart.quantity == cart.count ? 'cursor-no-drop' : 'cursor-pointer'}" ${cart.quantity == cart.count ? 'disabled' : '' } data-state="+">+</button>

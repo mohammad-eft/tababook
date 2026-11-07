@@ -36,7 +36,7 @@
             <div class="py-14 sm:py-20 lg:py-24 flex flex-col justify-center">
                 <div class="flex items-center gap-3 mb-5">
                     <span class="w-12 h-[3px] bg-brand rounded-full"></span>
-                    <span class="text-brand font-semibold">{{ $aboutUs->title }}</span>
+                    <span class="text-brand font-bold">{{ $aboutUs->title }}</span>
                 </div>
                 <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.35] text-slate-900">
                     درباره ما
@@ -48,10 +48,10 @@
                    {{ $aboutUs->description }}
                 </p>
                 {{-- <div class="mt-8 flex flex-wrap gap-3">
-                    <a href="#story" class="px-6 py-3 rounded-xl bg-brand text-white font-semibold hover:bg-brandDark transition">
+                    <a href="#story" class="px-6 py-3 rounded-xl bg-brand text-white font-bold hover:bg-brandDark transition">
                         داستان ما
                     </a>
-                    <a href="#values" class="px-6 py-3 rounded-xl border border-brand/30 text-brand font-semibold hover:bg-white transition">
+                    <a href="#values" class="px-6 py-3 rounded-xl border border-brand/30 text-brand font-bold hover:bg-white transition">
                         ارزش‌های ما
                     </a>
                 </div> --}}
@@ -117,7 +117,7 @@
                         به اندازه خواندن آن لذت‌بخش باشد. امروز با همین نگاه، سعی می‌کنیم
                         انتخاب‌های متنوع، اطلاعات کاربردی و خریدی آسان را کنار هم قرار دهیم.
                     </p>
-                    <a href="#contact" class="mt-7 self-start rounded-xl bg-brand text-white px-6 py-3 font-semibold hover:bg-brandDark transition">
+                    <a href="#contact" class="mt-7 self-start rounded-xl bg-brand text-white px-6 py-3 font-bold hover:bg-brandDark transition">
                         با ما آشنا شوید ←
                     </a>
                 </div>
@@ -185,8 +185,8 @@
                 <h2 class="mt-4 text-2xl sm:text-3xl font-extrabold">کتاب بعدی‌تان را پیدا کنید</h2>
                 <p class="mt-3 text-sm sm:text-base text-slate-600">یک کتاب خوب شاید شروع یک مسیر تازه باشد.</p>
                 <div class="mt-7 flex flex-wrap justify-center gap-3">
-                    <a href="#" class="px-7 py-3 rounded-xl bg-brand text-white font-semibold hover:bg-brandDark transition">مشاهده کتاب‌ها</a>
-                    <a href="mailto:info@ketabyar.ir" class="px-7 py-3 rounded-xl bg-white border border-slate-200 font-semibold hover:border-brand transition">ارتباط با ما</a>
+                    <a href="#" class="px-7 py-3 rounded-xl bg-brand text-white font-bold hover:bg-brandDark transition">مشاهده کتاب‌ها</a>
+                    <a href="mailto:info@ketabyar.ir" class="px-7 py-3 rounded-xl bg-white border border-slate-200 font-bold hover:border-brand transition">ارتباط با ما</a>
                 </div>
             </div>
         </div>

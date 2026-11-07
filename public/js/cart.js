@@ -432,7 +432,7 @@ if (orderBasket) {
                                 <img src="${imgPath + prod.mainImg}" class="size-full object-cover" alt="">
                             </div>
                             <div class="flex-1 min-w-0 products">
-                                <h3 class="font-semibold text-gray-800 text-sm sm:text-base truncate">${prod.title}</h3>
+                                <h3 class="font-bold text-gray-800 text-sm sm:text-base truncate">${prod.title}</h3>
                                 <p class="text-xs text-gray-500 mt-0.5 mb-5 max-w-full h-8 max-h-8 overflow-hidden ellipsis-2">${prod.summary ? prod.summary : prod.description}</p>
                                 <div class="w-full p-2 bg-(--light-green-btn) hover:bg-(--green-btn) transition-all duration-300 group flex gap-2 justify-center items-center rounded-xl addToCartBtns" data-product-id="${prod.id}">
                                     <button onclick="setCount(this)" class="w-1/3 text-lg font-bold text-(--primary-text-color) transition-all duration-300 group-hover:text-white flex justify-center items-center ${prod.count == prod.quantity ? 'cursor-no-drop' : 'cursor-pointer'}" ${prod.count == prod.quantity ? 'disabled' : ''} data-state="+">+</button>
@@ -459,7 +459,7 @@ if (orderBasket) {
                                 <img src="${imgPath + pack.image}" class="size-full object-cover" alt="">
                             </div>
                             <div class="flex-1 min-w-0 products">
-                                <h3 class="font-semibold text-gray-800 text-sm sm:text-base truncate">${pack.title}</h3>
+                                <h3 class="font-bold text-gray-800 text-sm sm:text-base truncate">${pack.title}</h3>
                                 <p class="text-xs text-gray-500 mt-0.5 mb-5 max-w-full h-8 max-h-8 overflow-hidden ellipsis-2">${pack.summary}</p>
                                 <div class="w-full p-2 bg-(--light-green-btn) hover:bg-(--green-btn) transition-all duration-300 group flex gap-2 justify-center items-center rounded-xl addPackToCartBtn" data-pack-id="${pack.id}">
                                     <button onclick="setPackCount(this)" class="w-1/3 text-lg font-bold text-(--primary-text-color) transition-all duration-300 group-hover:text-white flex justify-center items-center ${pack.count == pack.quantity ? 'cursor-no-drop' : 'cursor-pointer'}" ${pack.count == pack.quantity ? 'disabled' : ''} data-state="+">+</button>

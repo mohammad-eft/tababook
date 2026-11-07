@@ -66,7 +66,7 @@
                 <div class="min-w-[700px]">
                     <div
                         class="grid grid-cols-12 px-4 py-3 bg-gray-50/70 border-b border-gray-100
-                                text-[11px] font-semibold text-gray-500 uppercase tracking-wide">
+                                text-[11px] font-bold text-gray-500 uppercase tracking-wide">
                         <div class="col-span-1 text-center">#</div>
                         <div class="col-span-4">دسته‌بندی</div>
                         <div class="col-span-3 text-center">زیر دسته‌ها</div>
@@ -103,7 +103,7 @@
                                         @endif
                                     </div>
                                     <div class="min-w-0">
-                                        <p class="text-sm font-semibold text-gray-800 truncate"
+                                        <p class="text-sm font-bold text-gray-800 truncate"
                                             title="{{ $category->title }}">
                                             {{ $category->title }}
                                         </p>
@@ -199,7 +199,7 @@
                                     </svg>
                                 </div>
                                 <div class="text-center">
-                                    <p class="text-sm font-semibold text-gray-600">هنوز دسته‌بندی‌ای ثبت نشده</p>
+                                    <p class="text-sm font-bold text-gray-600">هنوز دسته‌بندی‌ای ثبت نشده</p>
                                     <p class="text-xs text-gray-400 mt-1">اولین دسته‌بندی خود را بسازید</p>
                                 </div>
                             </div>
@@ -264,7 +264,7 @@
                                 </span>
                                 <h4 class="text-xs font-bold text-blue-600">عنوان</h4>
                             </div>
-                            <p id="singleTitle" class="text-sm font-semibold text-gray-800"></p>
+                            <p id="singleTitle" class="text-sm font-bold text-gray-800"></p>
                         </div>
 
                         <div
@@ -280,7 +280,7 @@
                                 </span>
                                 <h4 class="text-xs font-bold text-emerald-600">دسته والد</h4>
                             </div>
-                            <p id="singleParent" class="text-sm font-semibold text-gray-800"></p>
+                            <p id="singleParent" class="text-sm font-bold text-gray-800"></p>
                         </div>
                     </div>
 
@@ -579,7 +579,7 @@
                                 d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z" />
                         </svg>
                     </div>
-                    <p class="text-base font-semibold text-gray-800">حذف دسته‌بندی</p>
+                    <p class="text-base font-bold text-gray-800">حذف دسته‌بندی</p>
                     <p class="text-sm text-gray-600 leading-7">آیا از حذف
                         <span id="confirmDeleteCatName" class="font-bold text-gray-900"></span>
                         اطمینان دارید؟
