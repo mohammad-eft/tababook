@@ -157,7 +157,7 @@ Route::group([
     // Route::get('/admin/show/{product}', 'adminShow')->missing(function () {
     //     return to_route('missing');
     // })->name('adminShow');
-    // Route::post('/admin/deleteAll', 'deleteAll')->name('deleteAll');
+    Route::post('/admin/deleteAll', 'deleteAll')->name('deleteAll');
 });
 
 Route::group([

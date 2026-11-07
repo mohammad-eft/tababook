@@ -90,23 +90,6 @@
                         </div>
 
 
-                        {{-- توضیحات محصول --}}
-                        <div class="w-full flex flex-col mt-5">
-
-                            <label for="editor" class="mb-2">
-                                توضیحات محصول:
-                            </label>
-
-                            <textarea name="description" id="editor" class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]"
-                                rows="4" placeholder="توضیحات محصول را وارد کنید">{!! old('description') !!}</textarea>
-
-                            @error('description')
-                                <span class="text-xs text-red-500">{{ $message }}</span>
-                            @enderror
-
-                        </div>
-
-
                         {{-- خلاصه محصول --}}
                         <div class="w-full flex flex-col mt-5">
 
@@ -123,6 +106,22 @@
 
                         </div>
 
+
+                        {{-- توضیحات محصول --}}
+                        <div class="w-full flex flex-col mt-5">
+
+                            <label for="editor" class="mb-2">
+                                توضیحات محصول:
+                            </label>
+
+                            <textarea name="description" id="editor" class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]"
+                                rows="4" placeholder="توضیحات محصول را وارد کنید">{!! old('description') !!}</textarea>
+
+                            @error('description')
+                                <span class="text-xs text-red-500">{{ $message }}</span>
+                            @enderror
+
+                        </div>
 
                         {{-- دسته‌بندی محصول --}}
                         <div class="w-full flex flex-col gap-3 mt-5">

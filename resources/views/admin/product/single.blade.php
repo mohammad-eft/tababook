@@ -10,7 +10,7 @@
         <div>
             <a href="{{ route('home') }}" class="leading-[2.17]">
                 <span class="border-b border-[#beb1d6] lg:border-none text-(--pastel-purple)">
-                    شهرپشم
+                    طبابوک
                 </span>
                 <span class="mx-3 text-(--primary-text-color)">/</span>
             </a>
@@ -35,7 +35,7 @@
     </nav>
     {{-- <div class="hidden lg:block">
             <a href="#" class="flex flex-row gap-2 items-center text-(--secondary-text-color)">
-                فروش در شهرپشم
+                فروش در طبابوک
                 <svg xmlns="http://www.w3.org/2000/svg" class="size-[18px]" viewBox="0 0 640 512">
                     <path fill="var(--secondary-text-color)"
                         d="M0 185.8c0-6.4 1.6-12.7 4.7-18.3L82.4 25C90.8 9.6 106.9 0 124.5 0h391c17.6 0 33.7 9.6 42.1 25l77.7 142.4c3.1 5.6 4.7 11.9 4.7 18.3c0 21.1-17.1 38.2-38.2 38.2H576V496c0 8.8-7.2 16-16 16s-16-7.2-16-16V224H96V352H352V272 256h32v16V464c0 26.5-21.5 48-48 48H112c-26.5 0-48-21.5-48-48V224H38.2C17.1 224 0 206.9 0 185.8zM80 192H560h41.8c3.4 0 6.2-2.8 6.2-6.2c0-1-.3-2.1-.8-3L529.6 40.3c-2.8-5.1-8.2-8.3-14-8.3h-391c-5.9 0-11.2 3.2-14 8.3L32.8 182.8c-.5 .9-.8 1.9-.8 3c0 3.4 2.8 6.2 6.2 6.2H80zM96 464c0 8.8 7.2 16 16 16H336c8.8 0 16-7.2 16-16V384H96v80z" />
@@ -462,7 +462,7 @@
                             <div class="w-full flex flex-col gap-2 py-4 border-b border-(--color-border)">
                                 <div class="flex flex-row items-center">
                                     <span class="text-sm font-bold">
-                                        شهرپشم
+                                        طبابوک
                                     </span>
                                     <svg xmlns="http://www.w3.org/2000/svg" class="size-3" viewBox="0 0 320 512">
                                         <path fill="var(--color-fill)"
@@ -545,7 +545,7 @@
                                             d="M64 32C46.3 32 32 46.3 32 64V352c0 17.7 14.3 32 32 32h5.5c13.2-37.3 48.7-64 90.5-64s77.4 26.7 90.5 64H384V64c0-17.7-14.3-32-32-32H64zm0 384c-35.3 0-64-28.7-64-64V64C0 28.7 28.7 0 64 0H352c35.3 0 64 28.7 64 64V96h65.3c14 0 27.3 6.1 36.4 16.8l78.7 91.8c7.5 8.7 11.6 19.8 11.6 31.2V384h16c8.8 0 16 7.2 16 16s-7.2 16-16 16H576c0 53-43 96-96 96s-96-43-96-96H256c0 53-43 96-96 96s-96-43-96-96zM416 224H570.9l-77.5-90.4c-3-3.5-7.5-5.6-12.1-5.6H416v96zm0 32v88.4c17-15.2 39.4-24.4 64-24.4c41.8 0 77.4 26.7 90.5 64H576V256H416zM224 416A64 64 0 1 0 96 416a64 64 0 1 0 128 0zm256 64a64 64 0 1 0 0-128 64 64 0 1 0 0 128z" />
                                     </svg>
                                     <span class="mr-2 text-xs text-[#beb1d6]">
-                                        توسط مجموعه شهرپشم
+                                        توسط مجموعه طبابوک
                                     </span>
                                 </div>
                                 <div class="text-sm font-bold leading-[180%] flex flex-row justify-start items-center">
@@ -578,7 +578,7 @@
                                     ویژه اعضای پلاس
                                 </h3>
                                 <p class="text-xs text-[#beb1d6]">
-                                    ارسال سریع مجموعه شهرپشم (فقط برای تهران و کرج)
+                                    ارسال سریع مجموعه طبابوک (فقط برای تهران و کرج)
                                 </p>
                             </div>
                         </div> --}}
@@ -649,7 +649,7 @@
                                     </li>
                                     <li
                                         class="text-xs text-[#beb1d6] lg:py-1 leading-[1.7] lg:leading-[2.17] lg:relative lg:before:absolute lg:before:content-[''] lg:before:w-1.5 lg:before:h-1.5 lg:before:rounded-full lg:before:bg-(--discount-color) lg:before:-right-[22px] lg:before:top-[38%]">
-                                        ارسال سریع و رایگان شهرپشم (فقط تهران و کرج)
+                                        ارسال سریع و رایگان طبابوک (فقط تهران و کرج)
                                     </li>
                                 </ul>
 
@@ -690,7 +690,7 @@
 
             {{-- <div class="py-5 px-2 lg:hidden">
                         <h3 class="text-base font-bold leading-[180%] mb-5">
-                            دیگر سرویس های شهرپشم
+                            دیگر سرویس های طبابوک
                         </h3>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
 
@@ -704,7 +704,7 @@
                                 </div>
                                 <div>
                                     <h4 class="text-sm font-medium leading-[180%] mb-1">
-                                        مشاوره رایگان با شهرپشم
+                                        مشاوره رایگان با طبابوک
                                     </h4>
                                     <span
                                         class="text-xs text-[#beb1d6] font-medium inline-block mb-2 leading-[180%] max-h-[45px] sm:h-[45px]">
@@ -939,7 +939,7 @@
                     <div class="flex flex-row items-start gap-4 py-4 border-b border-(--color-border)">
                         <div class="size-6 rounded-full bg-(--discount-color) mt-[5px]"></div>
                         <div>
-                            <h3 class="leading-[2.15] mb-1">شهرپشم</h3>
+                            <h3 class="leading-[2.15] mb-1">طبابوک</h3>
                             {{-- <div class="flex flex-row items-center">
                                         <div
                                             class="flex flex-row items-center gap-1 pl-2 border-l border-(--color-border)">
@@ -1066,7 +1066,7 @@
                                                 d="M64 32C46.3 32 32 46.3 32 64V352c0 17.7 14.3 32 32 32h5.5c13.2-37.3 48.7-64 90.5-64s77.4 26.7 90.5 64H384V64c0-17.7-14.3-32-32-32H64zm0 384c-35.3 0-64-28.7-64-64V64C0 28.7 28.7 0 64 0H352c35.3 0 64 28.7 64 64V96h65.3c14 0 27.3 6.1 36.4 16.8l78.7 91.8c7.5 8.7 11.6 19.8 11.6 31.2V384h16c8.8 0 16 7.2 16 16s-7.2 16-16 16H576c0 53-43 96-96 96s-96-43-96-96H256c0 53-43 96-96 96s-96-43-96-96zM416 224H570.9l-77.5-90.4c-3-3.5-7.5-5.6-12.1-5.6H416v96zm0 32v88.4c17-15.2 39.4-24.4 64-24.4c41.8 0 77.4 26.7 90.5 64H576V256H416zM224 416A64 64 0 1 0 96 416a64 64 0 1 0 128 0zm256 64a64 64 0 1 0 0-128 64 64 0 1 0 0 128z" />
                                         </svg>
                                         <span class="mr-2 text-xs text-[#beb1d6] font-normal">
-                                            توسط مجموعه شهرپشم
+                                            توسط مجموعه طبابوک
                                         </span>
                                     </div>
                                     <div
@@ -1109,7 +1109,7 @@
                                                 d="M480 256A224 224 0 1 1 32 256a224 224 0 1 1 448 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM240 112V256c0 5.3 2.7 10.3 7.1 13.3l96 64c7.4 4.9 17.3 2.9 22.2-4.4s2.9-17.3-4.4-22.2L272 247.4V112c0-8.8-7.2-16-16-16s-16 7.2-16 16z" />
                                         </svg>
                                         <span class="mr-2 text-xs font-normal text-[#beb1d6]">
-                                            ارسال سریع و رایگان شهرپشم
+                                            ارسال سریع و رایگان طبابوک
                                         </span>
                                     </div>
 
@@ -1262,7 +1262,7 @@
                                             d="M480 256A224 224 0 1 1 32 256a224 224 0 1 1 448 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM240 112V256c0 5.3 2.7 10.3 7.1 13.3l96 64c7.4 4.9 17.3 2.9 22.2-4.4s2.9-17.3-4.4-22.2L272 247.4V112c0-8.8-7.2-16-16-16s-16 7.2-16 16z" />
                                     </svg>
                                     <span class="text-xs text-[var(--colo-secondary)]">
-                                        ارسال سریع شهرپشم
+                                        ارسال سریع طبابوک
                                     </span>
                                 </div>
                                 <div class="flex flex-row items-center justify-between">
@@ -1310,7 +1310,7 @@
                                             d="M480 256A224 224 0 1 1 32 256a224 224 0 1 1 448 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM240 112V256c0 5.3 2.7 10.3 7.1 13.3l96 64c7.4 4.9 17.3 2.9 22.2-4.4s2.9-17.3-4.4-22.2L272 247.4V112c0-8.8-7.2-16-16-16s-16 7.2-16 16z" />
                                     </svg>
                                     <span class="text-xs text-[var(--colo-secondary)]">
-                                        ارسال سریع شهرپشم
+                                        ارسال سریع طبابوک
                                     </span>
                                 </div>
                                 <div class="flex flex-row items-center justify-between">
@@ -1358,7 +1358,7 @@
                                             d="M480 256A224 224 0 1 1 32 256a224 224 0 1 1 448 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM240 112V256c0 5.3 2.7 10.3 7.1 13.3l96 64c7.4 4.9 17.3 2.9 22.2-4.4s2.9-17.3-4.4-22.2L272 247.4V112c0-8.8-7.2-16-16-16s-16 7.2-16 16z" />
                                     </svg>
                                     <span class="text-xs text-[var(--colo-secondary)]">
-                                        ارسال سریع شهرپشم
+                                        ارسال سریع طبابوک
                                     </span>
                                 </div>
                                 <div class="flex flex-row items-center justify-between">
@@ -1406,7 +1406,7 @@
                                             d="M480 256A224 224 0 1 1 32 256a224 224 0 1 1 448 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM240 112V256c0 5.3 2.7 10.3 7.1 13.3l96 64c7.4 4.9 17.3 2.9 22.2-4.4s2.9-17.3-4.4-22.2L272 247.4V112c0-8.8-7.2-16-16-16s-16 7.2-16 16z" />
                                     </svg>
                                     <span class="text-xs text-[var(--colo-secondary)]">
-                                        ارسال سریع شهرپشم
+                                        ارسال سریع طبابوک
                                     </span>
                                 </div>
                                 <div class="flex flex-row items-center justify-between">
@@ -1454,7 +1454,7 @@
                                             d="M480 256A224 224 0 1 1 32 256a224 224 0 1 1 448 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM240 112V256c0 5.3 2.7 10.3 7.1 13.3l96 64c7.4 4.9 17.3 2.9 22.2-4.4s2.9-17.3-4.4-22.2L272 247.4V112c0-8.8-7.2-16-16-16s-16 7.2-16 16z" />
                                     </svg>
                                     <span class="text-xs text-[var(--colo-secondary)]">
-                                        ارسال سریع شهرپشم
+                                        ارسال سریع طبابوک
                                     </span>
                                 </div>
                                 <div class="flex flex-row items-center justify-between">
@@ -1502,7 +1502,7 @@
                                             d="M480 256A224 224 0 1 1 32 256a224 224 0 1 1 448 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM240 112V256c0 5.3 2.7 10.3 7.1 13.3l96 64c7.4 4.9 17.3 2.9 22.2-4.4s2.9-17.3-4.4-22.2L272 247.4V112c0-8.8-7.2-16-16-16s-16 7.2-16 16z" />
                                     </svg>
                                     <span class="text-xs text-[var(--colo-secondary)]">
-                                        ارسال سریع شهرپشم
+                                        ارسال سریع طبابوک
                                     </span>
                                 </div>
                                 <div class="flex flex-row items-center justify-between">
@@ -1550,7 +1550,7 @@
                                             d="M480 256A224 224 0 1 1 32 256a224 224 0 1 1 448 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM240 112V256c0 5.3 2.7 10.3 7.1 13.3l96 64c7.4 4.9 17.3 2.9 22.2-4.4s2.9-17.3-4.4-22.2L272 247.4V112c0-8.8-7.2-16-16-16s-16 7.2-16 16z" />
                                     </svg>
                                     <span class="text-xs text-[var(--colo-secondary)]">
-                                        ارسال سریع شهرپشم
+                                        ارسال سریع طبابوک
                                     </span>
                                 </div>
                                 <div class="flex flex-row items-center justify-between">
@@ -1964,7 +1964,7 @@
                                                                                                                                     d="M0 185.8c0-6.4 1.6-12.7 4.7-18.3L82.4 25C90.8 9.6 106.9 0 124.5 0h391c17.6 0 33.7 9.6 42.1 25l77.7 142.4c3.1 5.6 4.7 11.9 4.7 18.3c0 21.1-17.1 38.2-38.2 38.2H576V496c0 8.8-7.2 16-16 16s-16-7.2-16-16V224H96V352H352V272 256h32v16V464c0 26.5-21.5 48-48 48H112c-26.5 0-48-21.5-48-48V224H38.2C17.1 224 0 206.9 0 185.8zM80 192H560h41.8c3.4 0 6.2-2.8 6.2-6.2c0-1-.3-2.1-.8-3L529.6 40.3c-2.8-5.1-8.2-8.3-14-8.3h-391c-5.9 0-11.2 3.2-14 8.3L32.8 182.8c-.5 .9-.8 1.9-.8 3c0 3.4 2.8 6.2 6.2 6.2H80zM96 464c0 8.8 7.2 16 16 16H336c8.8 0 16-7.2 16-16V384H96v80z" />
                                                                                                                             </svg>
                                                                                                                             <span class="text-xs text-[#beb1d6]">
-                                                                                                                                شهرپشم
+                                                                                                                                طبابوک
                                                                                                                             </span>
                                                                                                                             <div
                                                                                                                                 class="size-1.5 rounded-full bg-[var[#beb1d6]]/30">
@@ -2184,7 +2184,7 @@
     <div class="flex flex-row items-center gap-2 mb-2">
         <div class="size-6 rounded-full bg-(--discount-color)"></div>
         <span class="text-xs leading-[2.17]">
-            شهرپشم
+            طبابوک
         </span>
     </div>
     <div class="flex flex-row items-center gap-2">

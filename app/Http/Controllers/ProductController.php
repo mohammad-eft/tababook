@@ -88,17 +88,27 @@ class ProductController extends Controller
             'category_ids.required' => 'حداقل یک دسته بندی برای محصول انتخاب کنید.',
             'category_ids.min' => 'حداقل یک دسته بندی برای محصول انتخاب کنید.',
             'mainImage.required' => 'انتخاب عکس اصلی الزامی است.',
-            'gallery.*.max' => 'حجم کل فایل ها نباید بیشتر از 500 کیلوبایت باشد.',
+            'gallery.*.max' => 'حجم هر تصویر نباید بیشتر از 500 کیلوبایت باشد.',
         ];
     }
 
     /**
      * ذخیره یک تصویر (اصلی یا گالری) و ثبت آن در جدول product_media
      */
-    private function storeMedia(int $productId, $file, bool $isMain, array &$uploadedFiles): void
-    {
+
+    private function storeMedia(
+        int $productId,
+        $file,
+        bool $isMain,
+        array &$uploadedFiles
+    ): void {
         $path = $file->store('productImgs', 'public');
 
+        if (!$path) {
+            throw new \RuntimeException('ذخیره تصویر با خطا مواجه شد.');
+        }
+
+        // ثبت مسیر بلافاصله بعد از آپلود موفق
         $uploadedFiles[] = $path;
 
         product_media::insert([
@@ -228,7 +238,6 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
         $validated = $request->validate(
             $this->productRules(false),
             $this->productMessages()
@@ -236,43 +245,55 @@ class ProductController extends Controller
 
         $uploadedFiles = [];
 
-        DB::beginTransaction();
-
         try {
-            $productId = product::insertGetId([
-                'title' => $validated['title'],
-                'description' => $validated['description'] ?? null,
-                'summary' => $validated['summary'] ?? null,
-                'count' => $validated['count'],
-                'primary_price' => $validated['primary_price'] ?? null,
-                'secondary_price' => $validated['secondary_price'] ?? null,
-                'show_in_home' => $request->boolean('show_in_home') ? 1 : 0,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+            DB::transaction(function () use ($validated, $request, &$uploadedFiles) {
+                $productId = product::insertGetId([
+                    'title' => $validated['title'],
+                    'description' => $validated['description'] ?? null,
+                    'summary' => $validated['summary'] ?? null,
+                    'count' => $validated['count'],
+                    'primary_price' => $validated['primary_price'] ?? null,
+                    'secondary_price' => $validated['secondary_price'] ?? null,
+                    'show_in_home' => $request->boolean('show_in_home') ? 1 : 0,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
 
-            $categoryRows = [];
-            foreach ($validated['category_ids'] as $categoryId) {
-                $categoryRows[] = [
-                    'product_id' => $productId,
-                    'category_id' => $categoryId,
-                ];
-            }
-            category_product::insert($categoryRows);
+                $categoryRows = [];
 
-            $this->storeMedia($productId, $validated['mainImage'], true, $uploadedFiles);
+                foreach ($validated['category_ids'] as $categoryId) {
+                    $categoryRows[] = [
+                        'product_id' => $productId,
+                        'category_id' => $categoryId,
+                    ];
+                }
 
-            foreach ($validated['gallery'] ?? [] as $galleryImage) {
-                $this->storeMedia($productId, $galleryImage, false, $uploadedFiles);
-            }
+                category_product::insert($categoryRows);
 
-            $this->saveProductAttributes($productId, $validated['attributes'] ?? []);
-            $this->savePackages($productId, $validated['packages'] ?? []);
+                $this->storeMedia(
+                    $productId,
+                    $validated['mainImage'],
+                    true,
+                    $uploadedFiles
+                );
 
-            DB::commit();
+                foreach ($validated['gallery'] ?? [] as $galleryImage) {
+                    $this->storeMedia(
+                        $productId,
+                        $galleryImage,
+                        false,
+                        $uploadedFiles
+                    );
+                }
+
+                // ادامه عملیات:
+                // $this->saveProductAttributes(...)
+                // $this->savePackages(...)
+
+                $this->saveProductAttributes($productId, $validated['attributes'] ?? []);
+                $this->savePackages($productId, $validated['packages'] ?? []);
+            });
         } catch (\Throwable $exception) {
-            DB::rollBack();
-
             foreach ($uploadedFiles as $filePath) {
                 Storage::disk('public')->delete($filePath);
             }
@@ -283,10 +304,6 @@ class ProductController extends Controller
         return to_route('product.adminIndex')
             ->with('message', 'محصول ' . $validated['title'] . ' ایجاد شد.');
     }
-
-    // ============================================================
-    // لیست محصولات (ادمین)
-    // ============================================================
 
     public function adminIndex()
     {
@@ -704,5 +721,10 @@ class ProductController extends Controller
                 'files' => $uploadedFiles,
             ],
         ]);
+    }
+
+    public function deleteAll(Request $request){
+        product::whereIn('id', $request->products)->delete();
+        return redirect()->back()->with('message', 'محصولات انتخاب شده با موفقیت حذف شدند');
     }
 }

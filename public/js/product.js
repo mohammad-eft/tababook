@@ -1,15 +1,50 @@
-const editor = Jodit.make('#editor', {
+// const editor = Jodit.make('#editor', {
+//     height: 500,
+//     direction: 'rtl',
+//     language: 'fa',
+//     uploader: {
+//         url: api+'uploadImage',
+//         format: 'json',
+//         isSuccess: function (resp) {
+//             return resp.success;
+//         },
+//         getMessage: function (resp) {
+//             return resp.message || '';
+//         },
+//         process: function (resp) {
+//             return {
+//                 files: resp.data.files,
+//                 path: '',
+//                 baseurl: '',
+//                 error: resp.error,
+//                 message: resp.message
+//             };
+//         },
+//         defaultHandlerSuccess: function (data) {
+//             const files = data.files || [];
+//             if (files.length) {
+//                 files.forEach(file => {
+//                     this.selection.insertImage(
+//                         file.url,
+//                         null,
+//                         null
+//                     );
+//                 });
+//             }
+//         },
+//         defaultHandlerError: function (error) {
+//             console.error(error);
+//         }
+//     }
+// });
 
+window.productEditor = Jodit.make('#editor', {
     height: 500,
-
     direction: 'rtl',
-
     language: 'fa',
 
     uploader: {
-
-        url: api+'uploadImage',
-
+        url: api + 'uploadImage',
         format: 'json',
 
         isSuccess: function (resp) {
@@ -21,7 +56,6 @@ const editor = Jodit.make('#editor', {
         },
 
         process: function (resp) {
-
             return {
                 files: resp.data.files,
                 path: '',
@@ -29,35 +63,20 @@ const editor = Jodit.make('#editor', {
                 error: resp.error,
                 message: resp.message
             };
-
         },
 
         defaultHandlerSuccess: function (data) {
-
             const files = data.files || [];
 
             if (files.length) {
-
                 files.forEach(file => {
-
-                    this.selection.insertImage(
-                        file.url,
-                        null,
-                        null
-                    );
-
+                    this.selection.insertImage(file.url, null, null);
                 });
-
             }
-
         },
 
         defaultHandlerError: function (error) {
-
             console.error(error);
-
         }
-
     }
-
 });

@@ -761,7 +761,7 @@
         </div>
         <!-- end responsive menu -->
         <div class="w-full pt-10 lg:pt-0">
-            <div class="w-full lg:w-[calc(100%-265px)] float-end p-5 overflow-y-auto" style="scrollbar-width:none;">
+            <div class="w-full lg:w-[calc(100%-265px)] float-end p-5 overflow-y-auto max-h-[calc(100vh-20px)]" style="scrollbar-width:none;">
                 @yield('content')
             </div>
         </div>
