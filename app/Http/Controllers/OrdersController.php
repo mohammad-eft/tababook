@@ -57,7 +57,7 @@ class OrdersController extends Controller
                 'phoneNumber' => $phoneNumber,
                 'email' => $email,
                 'nationalCode' => $nationalCode,
-            ], ['phoneNumber'], ['name', 'family', 'email', 'nationalCode', 'password']);
+            ], ['phoneNumber'], ['name', 'family', 'email', 'nationalCode']);
         }
 
         $user = User::where('phoneNumber', $phoneNumber)->first();
