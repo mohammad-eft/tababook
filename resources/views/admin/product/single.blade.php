@@ -73,7 +73,7 @@
                 <div class="flex flex-col items-center lg:items-start lg:max-w-[368px] xl:max-w-[580px]">
                     <div
                         class="w-full h-[250px] lg:h-auto flex justify-center items-center cursor-pointer bg-(--cream-color) lg:bg-white">
-                        <img class="gallery_pack_single_primary_img w-full h-full object-cover rounded-large"
+                        <img class="gallery_pack_single_primary_img w-full h-full object-cover rounded-lg" id="mainImage"
                             src="{{ $mainImage }}" alt="{{ $product->title }}">
                     </div>
 
@@ -81,7 +81,7 @@
                         <div class="w-full overflow-x-auto touch-pan-x" style="scrollbar-width:none;">
                             <div class="flex flex-row items-center mt-5 mb-3">
                                 @foreach ($galleryMedia as $media)
-                                    <div class="cursor-pointer rounded border border-(--color-border) p-1 ml-2">
+                                    <div class="cursor-pointer rounded border border-(--color-border) p-1 ml-2 gallery">
                                         <div class="w-[72px] h-[72px] gallery_pack_single">
                                             <img class="size-full object-cover" loading="lazy"
                                                 src="{{ asset('storage/' . $media->media_path) }}"

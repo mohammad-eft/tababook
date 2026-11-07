@@ -527,47 +527,32 @@ class ProductController extends Controller
 
     public function show(product $product)
     {
-        $categories = category::with('products')->has('products')->get();
-        if ($product->media->isNotEmpty()) {
-            foreach ($product->media as $media) {
-                if ($media['is_main']) {
-                    $product['mainImg'] = $media['media_path'];
-                    break;
-                } else {
-                    $product['mainImg'] = 'default.jpg';
-                }
-            }
-        } else {
-            $product['mainImg'] = 'default.jpg';
-        }
-        $allCartCount = 0;
-        $proIds = [];
-        if (isset($allCarts)) {
-            foreach ($allCarts as $pro) {
-                $proIds[] = $pro->product_id;
-            }
-        }
-        $setting = homeSetting::document();
-        $cartProIds = null;
-        if (Auth::check()) {
-            Auth::user()->load(['carts' => function ($query) {
-                $query->whereNull('order_id');
-            }])->pluck('id')->toArray();
-            $cartProIds = Auth::user()->carts()->whereNull('order_id')->pluck('product_id')->toArray();
+        $category = $product->categories->first();
+        $mainMedia = $product->media->firstWhere('is_main', true);
+        $mainImage = $mainMedia?->media_path
+            ? asset('storage/' . $mainMedia->media_path)
+            : asset('storage/images/noImage.png');
+        $galleryMedia = $product->media->where('is_main', false);
 
-            $product->load(['carts' => function ($q) {
-                $q->where('user_id', Auth::id())->whereNull('order_id')->first();
-            }]);
-        }
-        // dd(Auth::user(), in_array($product->id, $cartProIds), $product->id);
+        $hasSecondary = (bool) $product->secondary_price;
+        $discountPercent =
+            $hasSecondary && $product->primary_price > 0
+                ? (int) round((1 - $product->secondary_price / $product->primary_price) * 100)
+                : 0;
+
+        $inCart = Auth::check() && isset($cartProIds) && in_array($product->id, $cartProIds);
+        $cartQuantity = $inCart ? $product->carts->first()->quantity ?? 1 : 0;
+       
+        $setting = homeSetting::document();
         $setting = homeSetting::document();
         return view('admin.product.single', [
             'product' => $product,
             'setting' => $setting,
-            'categories' => $categories,
-            'allCartCount' => $allCartCount,
-            'proIds' => $proIds,
-            'cartProIds' => $cartProIds,
+            'category'=>$category,
+            'mainImage'=>$mainImage,
+            'galleryMedia'=>$galleryMedia,
+            'discountPercent'=>$discountPercent,
+            'cartQuntity'=>$cartQuantity
         ]);
     }
 
