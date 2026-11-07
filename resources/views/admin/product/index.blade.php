@@ -71,24 +71,30 @@
                             </td>
 
                             <td class="px-4 py-4">
-                                <span class="block max-w-xs truncate text-sm font-semibold text-slate-800"
-                                    title="{{ $product->title }}">{{ $product->title }}</span>
-                                <span class="mt-1 block text-[11px] text-slate-400">شناسه: {{ $product->id }}</span>
+                                <a href="{{ route('product.show', $product->id) }}">
+                                    <span class="block max-w-xs truncate text-sm font-semibold text-slate-800"
+                                        title="{{ $product->title }}">{{ $product->title }}</span>
+                                    <span class="mt-1 block text-[11px] text-slate-400">شناسه: {{ $product->id }}</span>
+                                </a>
                             </td>
 
                             <td class="px-4 py-4">
-                                <div class="flex justify-center">
-                                    <img src="{{ asset('storage/' . ($product['mainImg'] ?? 'default.jpg')) }}"
-                                        alt="{{ $product->title }}"
-                                        loading="lazy"
-                                        class="size-14 rounded-xl border border-slate-200 bg-slate-50 object-cover">
-                                </div>
+                                <a href="{{ route('product.show', $product->id) }}">
+                                    <div class="flex justify-center">
+                                        <img src="{{ asset('storage/' . ($product['mainImg'] ?? 'default.jpg')) }}"
+                                            alt="{{ $product->title }}"
+                                            loading="lazy"
+                                            class="size-14 rounded-xl border border-slate-200 bg-slate-50 object-cover">
+                                    </div>
+                                </a>
                             </td>
 
                             <td class="px-4 py-4">
-                                <p class="max-w-xs text-xs leading-6 text-slate-600">
-                                    {{ $product->summary ?: 'خلاصه‌ای برای این محصول ثبت نشده است.' }}
-                                </p>
+                                <a href="{{ route('product.show', $product->id) }}">
+                                    <p class="max-w-xs text-xs leading-6 text-slate-600">
+                                        {{ $product->summary ?: 'خلاصه‌ای برای این محصول ثبت نشده است.' }}
+                                    </p>
+                                </a>
                             </td>
 
                             <td class="px-4 py-4">
