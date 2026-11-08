@@ -521,9 +521,6 @@ class ProductController extends Controller
         return to_route('product.adminIndex')->with('message', ' محصول ' . $product['title'] . ' حذف شد. ');
     }
 
-    // ============================================================
-    // بخش کاربران (بدون تغییر)
-    // ============================================================
 
     public function show(product $product)
     {
@@ -552,7 +549,9 @@ class ProductController extends Controller
             'mainImage'=>$mainImage,
             'galleryMedia'=>$galleryMedia,
             'discountPercent'=>$discountPercent,
-            'cartQuntity'=>$cartQuantity
+            'cartQuantity'=>$cartQuantity,
+            'hasSecondary'=>$hasSecondary,
+            'inCart'=>$inCart,
         ]);
     }
 

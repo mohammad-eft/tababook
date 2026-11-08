@@ -6,21 +6,21 @@
 
 @section('content')
     @php
-        $category = $product->categories->first();
-        $mainMedia = $product->media->firstWhere('is_main', true);
-        $mainImage = $mainMedia?->media_path
-            ? asset('storage/' . $mainMedia->media_path)
-            : asset('storage/images/noImage.png');
-        $galleryMedia = $product->media->where('is_main', false);
+        // $category = $product->categories->first();
+        // $mainMedia = $product->media->firstWhere('is_main', true);
+        // $mainImage = $mainMedia?->media_path
+        //     ? asset('storage/' . $mainMedia->media_path)
+        //     : asset('storage/images/noImage.png');
+        // $galleryMedia = $product->media->where('is_main', false);
 
-        $hasSecondary = (bool) $product->secondary_price;
-        $discountPercent =
-            $hasSecondary && $product->primary_price > 0
-                ? (int) round((1 - $product->secondary_price / $product->primary_price) * 100)
-                : 0;
+        // $hasSecondary = (bool) $product->secondary_price;
+        // $discountPercent =
+        //     $hasSecondary && $product->primary_price > 0
+        //         ? (int) round((1 - $product->secondary_price / $product->primary_price) * 100)
+        //         : 0;
 
-        $inCart = Auth::check() && isset($cartProIds) && in_array($product->id, $cartProIds);
-        $cartQuantity = $inCart ? $product->carts->first()->quantity ?? 1 : 0;
+        // $inCart = Auth::check() && isset($cartProIds) && in_array($product->id, $cartProIds);
+        // $cartQuantity = $inCart ? $product->carts->first()->quantity ?? 1 : 0;
     @endphp
 
     <!-- breadcrumb -->
@@ -278,7 +278,7 @@
     <!-- description -->
     @if ($product->description)
         <section class="w-11/12 mx-auto text-(--primary-text-color) mt-4 lg:pb-10">
-            <div class="hidden lg:block sticky top-0 bg-white z-[555]">
+            <div class="hidden lg:block sticky top-0 bg-white">
                 <div class="flex flex-row border-b border-(--color-border)">
                     <span
                         class="text-sm font-medium leading-[180%] py-2 px-4 text-(--discount-color) border-b-4 border-(--discount-color) rounded-b-sm">
