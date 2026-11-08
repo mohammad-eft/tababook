@@ -152,51 +152,37 @@
 
                         </div>
 
-
-                        {{-- ====================================== --}}
-                        {{-- ویژگی‌های عمومی محصول --}}
-                        {{-- ====================================== --}}
-
-                        <div class="w-full flex flex-col gap-5 mt-8">
-
-                            <div class="flex items-center justify-between gap-3">
-
+                        <div class="w-full flex flex-col gap-5 mt-8 items-end">
+                            <div class="w-full flex items-center gap-3">
                                 <h3 class="font-bold text-lg">
                                     مشخصات محصول
                                 </h3>
-
-                                <button type="button" id="add-product-attribute"
-                                    class="p-2 text-sm rounded-md bg-[#1B84FF] hover:bg-[#056EE9] text-white cursor-pointer">
-                                    افزودن ویژگی +
-                                </button>
-
                             </div>
 
                             <div id="product-attributes-list" class="space-y-4"></div>
 
+                            <button type="button" id="add-product-attribute"
+                                class="w-fit p-2 text-sm rounded-md bg-[#1B84FF] hover:bg-[#056EE9] text-white cursor-pointer">
+                                افزودن ویژگی +
+                            </button>
                         </div>
 
+                        <div class="w-full flex flex-col gap-5 mt-8 items-end">
 
-                        {{-- ====================================== --}}
-                        {{-- پکیج‌های محصول --}}
-                        {{-- ====================================== --}}
-
-                        <div class="w-full flex flex-col gap-5 mt-8">
-
-                            <div class="flex items-center justify-between gap-3">
+                            <div class="w-full flex items-center gap-3">
 
                                 <h3 class="font-bold text-lg">
                                     قیمت های مختلف محصول
                                 </h3>
 
-                                <button type="button" id="add-package"
-                                    class="p-2 text-sm rounded-md bg-[#1B84FF] hover:bg-[#056EE9] text-white cursor-pointer">
-                                    افزودن پکیج +
-                                </button>
-
                             </div>
 
-                            <div id="packages-list" class="space-y-6"></div>
+                            <div id="packages-list" class="w-full space-y-6"></div>
+
+                            <button type="button" id="add-package"
+                                class="p-2 text-sm rounded-md bg-[#1B84FF] hover:bg-[#056EE9] text-white cursor-pointer">
+                                افزودن محصول متغیر +
+                            </button>
 
                         </div>
 
@@ -332,7 +318,7 @@
                                 name="gallery[]" id="gallery" accept="image/*" multiple>
 
                             <span class="text-xs text-red-500">
-                                حجم کل فایل‌ها نباید بیشتر از 500 کیلوبایت باشد.
+                                حجم کل فایل‌ها نباید بیشتر از 1 مگابایت باشد.
                             </span>
 
                             @error('gallery')
@@ -493,14 +479,14 @@
 
 
     {{-- ============================================== --}}
-    {{-- قالب پکیج --}}
+    {{-- قالب محصول متغیر --}}
     {{-- ============================================== --}}
 
     <template id="package-template">
 
         <div class="package-item border border-[#D5DFE4] rounded-xl p-5 space-y-5 bg-[#F9F9F9]">
 
-            {{-- عنوان پکیج --}}
+            {{-- عنوان محصول متغیر --}}
             <div class="flex items-center justify-between gap-3">
 
                 <h3 class="package-heading font-bold text-lg">
@@ -515,7 +501,7 @@
             </div>
 
 
-            {{-- اطلاعات پکیج --}}
+            {{-- اطلاعات محصول متغیر --}}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
                 {{-- تعداد --}}
@@ -559,13 +545,13 @@
             </div>
 
 
-            {{-- ویژگی‌های پکیج --}}
+            {{-- ویژگی‌های محصول متغیر --}}
             <div class="package-attributes-section border-t border-[#D5DFE4] pt-4">
 
                 <div class="flex items-center justify-between gap-3 mb-4">
 
                     <h4 class="font-bold">
-                        ویژگی‌های این پکیج
+                        ویژگی‌های این محصول متغیر
                     </h4>
 
                     <button type="button"

@@ -62,7 +62,7 @@ class ProductController extends Controller
             'category_ids.*' => ['required', 'integer', 'distinct', 'exists:categories,id'],
             'mainImage' => [$isUpdate ? 'nullable' : 'required', 'image', 'max:5120'],
             'gallery' => ['nullable', 'array'],
-            'gallery.*' => ['required', 'image', 'max:500'],
+            'gallery.*.max' => ['required', 'image', 'max:1024'],
             'attributes' => ['nullable', 'array'],
             'attributes.*' => ['required', 'array'],
             'attributes.*.attribute_id' => ['required', 'integer', 'exists:attributes,id'],
@@ -88,7 +88,7 @@ class ProductController extends Controller
             'category_ids.required' => 'حداقل یک دسته بندی برای محصول انتخاب کنید.',
             'category_ids.min' => 'حداقل یک دسته بندی برای محصول انتخاب کنید.',
             'mainImage.required' => 'انتخاب عکس اصلی الزامی است.',
-            'gallery.*.max' => 'حجم هر تصویر نباید بیشتر از 500 کیلوبایت باشد.',
+            'gallery.*.max' => 'حجم هر تصویر نباید بیشتر از 1 مگابایت باشد.',
         ];
     }
 

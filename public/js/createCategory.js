@@ -78,7 +78,7 @@
         const row = tmpl.content.firstElementChild.cloneNode(true);
         row.querySelector('[data-field="id"]').value = data.id ?? '';
         row.querySelector('[data-field="key"]').value = data.key ?? '';
-        row.querySelector('[data-field="type"]').value = data.type ?? 'text';
+        // row.querySelector('[data-field="type"]').value = data.type ?? 'text';
         row.querySelector('.remove-attribute-btn').addEventListener('click', () => {
             row.remove();
             refresh();

@@ -143,7 +143,7 @@
                         </span>
                     </label>
                     <input type="text" class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-[12px] focus:bg-[#f1f1f4]"
-                        name="title" id="catTitle" placeholder="نام دسته را وارد کنید" value="{{ old('title') }}">
+                        name="title" id="catTitle" placeholder="نام دسته را وارد کنید" value="{{ old('title') }}" required>
                     @error('title')
                         <span class="text-xs text-red-500">{{ $message }}</span>
                     @enderror
@@ -219,16 +219,16 @@
                         <div class="attribute-row flex items-center justify-center gap-3 animate-[fadeIn_0.2s_ease-out]">
                             <input type="hidden" data-field="id">
                             <input type="text" data-field="key" placeholder="مثلاً: رنگ، سایز، جنس"
-                                class="w-7/12 px-3 py-2 rounded-lg border border-gray-300 bg-white
+                                class="w-10/12 px-3 py-2 rounded-lg border border-gray-300 bg-white
                        text-sm text-gray-800 placeholder:text-gray-400
                        focus:outline-none focus:ring-2 focus:ring-(--primary-text-color) focus:border-(--primary-text-color)
                        transition-shadow duration-150" />
-                            <select data-field="type"
+                            {{-- <select data-field="type"
                                 class="w-3/12 px-3 py-2 rounded-lg border border-gray-300 bg-white text-sm text-gray-800
                        focus:outline-none focus:ring-2 focus:ring-(--primary-text-color)">
                                 <option value="text">متن</option>
                                 <option value="color">رنگ</option>
-                            </select>
+                            </select> --}}
                             <button type="button"
                                 class="remove-attribute-btn flex items-center gap-1.5 px-3 py-2 rounded-lg
                        text-sm font-medium text-red-600 bg-red-50
