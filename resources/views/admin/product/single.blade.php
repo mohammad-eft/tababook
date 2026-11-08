@@ -10,7 +10,7 @@
         <div>
             <a href="{{ route('home') }}" class="leading-[2.17]">
                 <span class="border-b border-[#beb1d6] lg:border-none text-(--pastel-purple)">
-                    شهرپشم
+                    طبابوک
                 </span>
                 <span class="mx-3 text-(--primary-text-color)">/</span>
             </a>
@@ -939,7 +939,7 @@
                     <div class="flex flex-row items-start gap-4 py-4 border-b border-(--color-border)">
                         <div class="size-6 rounded-full bg-(--discount-color) mt-[5px]"></div>
                         <div>
-                            <h3 class="leading-[2.15] mb-1">شهرپشم</h3>
+                            <h3 class="leading-[2.15] mb-1">طبابوک</h3>
                             {{-- <div class="flex flex-row items-center">
                                         <div
                                             class="flex flex-row items-center gap-1 pl-2 border-l border-(--color-border)">
