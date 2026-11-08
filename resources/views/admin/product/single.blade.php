@@ -5,24 +5,6 @@
 @endsection
 
 @section('content')
-    @php
-        // $category = $product->categories->first();
-        // $mainMedia = $product->media->firstWhere('is_main', true);
-        // $mainImage = $mainMedia?->media_path
-        //     ? asset('storage/' . $mainMedia->media_path)
-        //     : asset('storage/images/noImage.png');
-        // $galleryMedia = $product->media->where('is_main', false);
-
-        // $hasSecondary = (bool) $product->secondary_price;
-        // $discountPercent =
-        //     $hasSecondary && $product->primary_price > 0
-        //         ? (int) round((1 - $product->secondary_price / $product->primary_price) * 100)
-        //         : 0;
-
-        // $inCart = Auth::check() && isset($cartProIds) && in_array($product->id, $cartProIds);
-        // $cartQuantity = $inCart ? $product->carts->first()->quantity ?? 1 : 0;
-    @endphp
-
     <!-- breadcrumb -->
     <section
         class="w-11/12 mx-auto lg:mb-5 py-5 flex flex-row justify-between items-center text-[#beb1d6] text-xs lg:text-sm mt-5">
