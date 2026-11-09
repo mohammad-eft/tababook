@@ -54,7 +54,7 @@
             <div class="lg:ml-4 shrink-0 lg:w-[36%] overflow-hidden">
                 <div class="flex flex-col items-center lg:items-start lg:max-w-[368px] xl:max-w-[580px]">
                     <div
-                        class="w-full h-[250px] lg:h-auto flex justify-center items-center cursor-pointer bg-(--cream-color) lg:bg-white">
+                        class="w-full h-[250px] lg:h-[432px] flex justify-center items-center cursor-pointer bg-(--cream-color) lg:bg-white">
                         <img class="gallery_pack_single_primary_img w-full h-full object-cover rounded-lg" id="mainImage"
                             src="{{ $mainImage }}" alt="{{ $product->title }}">
                     </div>
