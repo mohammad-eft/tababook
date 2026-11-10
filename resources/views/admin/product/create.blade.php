@@ -90,6 +90,50 @@
                         </div>
 
 
+                        <div class="w-full flex flex-col mt-5">
+
+                            <label for="brand" class="mb-2">
+                                برند:
+                            </label>
+
+                            <input type="text" class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]"
+                                placeholder="برند" name="brand" id="brand" value="{{ old('brand') }}">
+
+                            @error('brand')
+                                <span class="text-xs text-red-500">{{ $message }}</span>
+                            @enderror
+
+                        </div>
+                        <div class="w-full flex flex-col mt-5">
+
+                            <label for="writer" class="mb-2">
+                                نویسنده:
+                            </label>
+
+                            <input type="text" class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]"
+                                placeholder="نویسنده" name="writer" id="writer" value="{{ old('writer') }}">
+
+                            @error('writer')
+                                <span class="text-xs text-red-500">{{ $message }}</span>
+                            @enderror
+
+                        </div>
+                        <div class="w-full flex flex-col mt-5">
+
+                            <label for="publication" class="mb-2">
+                                انتشارات:
+                            </label>
+
+                            <input type="text" class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]"
+                                placeholder="انتشارات" name="publication" id="publication" value="{{ old('publication') }}">
+
+                            @error('publication')
+                                <span class="text-xs text-red-500">{{ $message }}</span>
+                            @enderror
+
+                        </div>
+
+
                         {{-- خلاصه محصول --}}
                         <div class="w-full flex flex-col mt-5">
 

@@ -52,6 +52,9 @@ class ProductController extends Controller
     {
         return [
             'title' => ['required', 'string', 'max:255'],
+            'brand' => ['nullable', 'string', 'max:255'],
+            'writer' => ['nullable', 'string', 'max:255'],
+            'publication' => ['nullable', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
             'summary' => ['nullable', 'string'],
             'count' => ['required', 'integer', 'min:0'],
@@ -541,7 +544,7 @@ class ProductController extends Controller
         $cartQuantity = $inCart ? $product->carts->first()->quantity ?? 1 : 0;
        
         $setting = homeSetting::document();
-        $setting = homeSetting::document();
+        
         return view('admin.product.single', [
             'product' => $product,
             'setting' => $setting,
