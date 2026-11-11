@@ -11,7 +11,6 @@ let popupFlag = false
 function addToCart(btn) {
     let container = btn.closest('.addToCartBtns')
     if (!container) return
-
     let productId = container.dataset.productId
     if (!productId) return
     cartLink.classList.remove('hidden')
@@ -29,9 +28,7 @@ function addToCart(btn) {
                 totalCartQuantity++
                 orderBasket.children[1].innerText = totalCartQuantity
             }
-
             response.quantity = 1
-
             document.querySelectorAll('.addToCartBtns').forEach(button => {
                 if (button.dataset.productId != productId) return
 
@@ -57,8 +54,6 @@ function addToCart(btn) {
                     button.children[0].children[0].classList.add('cursor-pointer')
                 }
             })
-
-
             let products = []
             if (localStorage.getItem('products')) {
                 try {
@@ -67,7 +62,6 @@ function addToCart(btn) {
                     products = []
                 }
             }
-
             let existing = products.find(pro => String(pro.id) === String(response.id))
             if (existing) {
                 existing.quantity = (existing.quantity || 1) + 1

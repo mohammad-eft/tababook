@@ -580,6 +580,7 @@ class ProductController extends Controller
                 }
             }
         }
+        // dd($product);
         return view('admin.product.single', [
             'product' => $product,
             'setting' => $setting,
