@@ -77,7 +77,6 @@
                 </div>
             </div>
             <!-- /gallery -->
-
             <div class="grow min-w-0 flex flex-row gap-3">
 
                 <!-- product info -->
@@ -86,16 +85,16 @@
                         class="text-base xl:text-3xl text-(--primary-text-color) font-bold mt-3 mb-2 pointer-events-none px-2 lg:px-0">
                         {{ $product->title }}
                     </h1>
-
                     @if ($product->brand)
                         <div class="lg:pb-5 mb-5 lg:border-b border-(--color-border) px-2 lg:px-0">
                             <span class="text-xs text-[#beb1d6]">{{ $product->brand }}</span>
                         </div>
                     @endif
-
-                    @if ($product->attributes->isNotEmpty())
-                        <div
-                            class="w-full pb-3 lg:pb-0 border-b border-(--color-border) lg:border-none px-2 lg:px-0">
+                    <div class="flex flex-col gap-3">
+                        <span class="text-(--primary-text-color)">رنگ: </span>
+                    </div>
+                    @if (count($product->attributes) > 0)
+                        <div class="w-full pb-3 lg:pb-0 border-b border-(--color-border) lg:border-none px-2 lg:px-0">
                             <h3 class="text-lg font-bold py-3 hidden lg:block">ویژگی ها</h3>
                             <h3 class="text-base font-bold py-3 lg:hidden flex flex-row justify-between items-center">
                                 <span>ویژگی ها</span>
@@ -111,21 +110,23 @@
                             <ul class="w-full flex flex-row items-center lg:grid lg:grid-cols-3 gap-1 overflow-x-auto"
                                 style="scrollbar-width:none;">
                                 @foreach ($product->attributes as $attr)
-                                    <li class="w-fit lg:w-full bg-(--cream-color) p-2 rounded-md h-full">
-                                        <div class="flex flex-row items-center">
-                                            <p class="text-sm text-[var(--primary-text-color-secondary)]">
-                                                {{ $attr->attribute_key }}
+                                    @if ($product->attributes[0] !== $attr)
+                                        <li class="w-fit lg:w-full bg-(--cream-color) p-2 rounded-md h-full">
+                                            <div class="flex flex-row items-center">
+                                                <p class="text-sm text-[var(--primary-text-color-secondary)]">
+                                                    {{ $attr['key'] }}
+                                                </p>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="size-3 mr-2 lg:hidden"
+                                                    viewBox="0 0 320 512">
+                                                    <path fill="var(--color-fill)"
+                                                        d="M52.7 267.3c-6.2-6.2-6.2-16.4 0-22.6l160-160c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6L86.6 256 235.3 404.7c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0l-160-160z" />
+                                                </svg>
+                                            </div>
+                                            <p class="text-sm text-(--primary-text-color) font-bold">
+                                                {{ $attr['value'] }}
                                             </p>
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="size-3 mr-2 lg:hidden"
-                                                viewBox="0 0 320 512">
-                                                <path fill="var(--color-fill)"
-                                                    d="M52.7 267.3c-6.2-6.2-6.2-16.4 0-22.6l160-160c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6L86.6 256 235.3 404.7c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0l-160-160z" />
-                                            </svg>
-                                        </div>
-                                        <p class="text-sm text-(--primary-text-color) font-bold">
-                                            {{ $attr->attribute_value }}
-                                        </p>
-                                    </li>
+                                        </li>
+                                    @endif
                                 @endforeach
                             </ul>
                         </div>
@@ -238,17 +239,17 @@
     <!-- /single product -->
 
     <!-- specifications table (mobile) -->
-    @if ($product->attributes->isNotEmpty())
+    @if (count($product->attributes) > 0)
         <section class="w-11/12 mx-auto lg:hidden text-(--primary-text-color)" id="phoneDetails">
             <div class="py-5 px-2">
                 <h3 class="text-lg font-bold leading-[180%] mb-4">جدول مشخصات</h3>
                 @foreach ($product->attributes as $attribute)
                     <div class="flex flex-row border-b border-(--color-border)">
                         <div class="w-1/4 p-1 text-[10px] bg-[var(--color-secondary-bg)] leading-[180%]">
-                            {{ $attribute->attribute_key }}
+                            {{ $attribute['key'] }}
                         </div>
                         <div class="w-3/4 p-1 text-[10px] leading-[180%]">
-                            {{ $attribute->attribute_value }}
+                            {{ $attribute['value'] }}
                         </div>
                     </div>
                 @endforeach
@@ -277,7 +278,7 @@
     <!-- /description -->
 
     <!-- specifications table (desktop) -->
-    @if ($product->attributes->isNotEmpty())
+    @if (count($product->attributes) > 0)
         <section class="w-11/12 mx-auto text-(--primary-text-color) mt-4 pb-28 lg:pb-10 hidden lg:block">
             <div class="sticky top-0 bg-white z-[555]">
                 <div class="flex flex-row border-b border-(--color-border)">
@@ -302,11 +303,11 @@
                         @foreach ($product->attributes as $attribute)
                             <div class="flex flex-row items-start">
                                 <div class="w-1/4 text-[#beb1d6] text-sm py-3 leading-[2.17]">
-                                    {{ $attribute->attribute_key }}
+                                    {{ $attribute['key'] }}
                                 </div>
                                 <div
                                     class="w-3/4 text-sm py-3 leading-[2.17] {{ $loop->last ? '' : 'border-b border-(--color-border)' }}">
-                                    {{ $attribute->attribute_value }}
+                                    {{ $attribute['value'] }}
                                 </div>
                             </div>
                         @endforeach

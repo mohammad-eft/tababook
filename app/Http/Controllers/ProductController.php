@@ -257,6 +257,9 @@ class ProductController extends Controller
                     'count' => $validated['count'],
                     'primary_price' => $validated['primary_price'] ?? null,
                     'secondary_price' => $validated['secondary_price'] ?? null,
+                    'writer' => $validated['writer'] ?? null,
+                    'brand' => $validated['brand'] ?? null,
+                    'publication' => $validated['publication'] ?? null,
                     'show_in_home' => $request->boolean('show_in_home') ? 1 : 0,
                     'created_at' => now(),
                     'updated_at' => now(),
@@ -408,6 +411,9 @@ class ProductController extends Controller
             $product->count = $validated['count'];
             $product->primary_price = $validated['primary_price'] ?? null;
             $product->secondary_price = $validated['secondary_price'] ?? null;
+            $product->writer = $validated['writer'] ?? null;
+            $product->brand = $validated['brand'] ?? null;
+            $product->publication = $validated['publication'] ?? null;
             $product->show_in_home = $request->boolean('show_in_home') ? 1 : 0;
             $product->save();
 
@@ -542,9 +548,32 @@ class ProductController extends Controller
 
         $inCart = Auth::check() && isset($cartProIds) && in_array($product->id, $cartProIds);
         $cartQuantity = $inCart ? $product->carts->first()->quantity ?? 1 : 0;
-       
+        $attributes = [];
+        $variants = [];
+        $variantCounter = 0;
         $setting = homeSetting::document();
-        
+        if($product->productAttributes->isNotEmpty()){
+            foreach($product->productAttributes as $key => $attribute){
+                $attribute->attribute;
+                $attributes[$key]['key']=$attribute->attribute->key;
+                $attributes[$key]['value']=$attribute->value;
+                if($key==0){
+                    $variants[$variantCounter]['key']=$attribute->attribute->key;
+                    $variants[$variantCounter]['value']=$attribute->value;
+                    $variants[$variantCounter]['primary_price']=$product->primary_price;
+                    $variants[$variantCounter]['secondary_price']=$product->secondary_price;
+                    $product->setAttribute('variants', $variants); 
+                    $variantCounter++;
+                }
+            }
+            $product->attributes = $attributes;
+        }
+        if($product->packages->isNotEmpty()){
+            foreach($product->packages as $package){
+                dd($package->packageAttributes);
+            }
+        }
+        dd($product);
         return view('admin.product.single', [
             'product' => $product,
             'setting' => $setting,

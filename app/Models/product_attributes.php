@@ -14,4 +14,11 @@ class product_attributes extends Model
         'input_type',
         'value',
     ];
+
+    public function product(){
+        return $this->belongsTo(product::class);
+    }
+    public function attribute(){
+        return $this->belongsTo(attribute::class);
+    }
 }

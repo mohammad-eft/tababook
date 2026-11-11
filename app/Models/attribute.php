@@ -25,7 +25,7 @@ class attribute extends Model
         return $this->belongsTo(package::class);
     }
 
-    public function packageAttributes(){
-        return $this->hasMany(package_attributes::class);
+    public function productAttributes(){
+        return $this->hasMany(product_attributes::class);
     }
 }

@@ -37,14 +37,14 @@ class product extends Model
     public function packs(){
         return $this->belongsToMany(pack::class, 'product_packs');
     }
-    public function attributes(){
-        return $this->hasMany(attribute::class);
+    public function productAttributes(){
+        return $this->hasMany(product_attributes::class);
     }
     public function packages(){
-        return $this->hasMany(pakcage::class);
+        return $this->hasMany(package::class);
     }
 
     public function packageAttributes(){
-        return $this->hasMany(package_attributes::class);
+        return $this->hasMany(package_attribute::class);
     }
 }
