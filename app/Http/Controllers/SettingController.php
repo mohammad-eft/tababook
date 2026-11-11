@@ -303,7 +303,6 @@ class SettingController extends Controller
                 }]);
             }
         }
-        $setting = homeSetting::all();
         $packs = pack::all();
         return view('home', [
             'setting'=>$setting, 

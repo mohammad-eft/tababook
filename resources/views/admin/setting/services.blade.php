@@ -49,7 +49,7 @@
         <!-- ==================== پیش‌نمایش زنده ==================== -->
         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
             <div class="border-b border-gray-100 bg-gradient-to-l from-gray-50 to-transparent px-6 py-4">
-                <h2 class="text-base md:text-lg font-semibold text-gray-800 flex items-center gap-2">
+                <h2 class="text-base md:text-lg font-bold text-gray-800 flex items-center gap-2">
                     <span class="w-8 h-8 rounded-lg bg-gray-100 text-gray-600 flex items-center justify-center">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -128,7 +128,7 @@
 
                 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col">
                     <div class="border-b border-gray-100 bg-gradient-to-l from-{{ $color }}-50/60 to-transparent px-5 py-4">
-                        <h2 class="text-base font-semibold text-gray-800 flex items-center gap-2">
+                        <h2 class="text-base font-bold text-gray-800 flex items-center gap-2">
                             <span class="w-8 h-8 rounded-lg bg-{{ $color }}-100 text-{{ $color }}-600 flex items-center justify-center">
 
                                 @switch($service['icon'])

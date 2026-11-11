@@ -22,6 +22,7 @@ return new class extends Migration
             $table->boolean('show_in_home')->default(false);
             $table->string('writer')->nullable();
             $table->string('publication')->nullable();
+            $table->string('brand')->nullable();
             $table->timestamps();
         });
     }

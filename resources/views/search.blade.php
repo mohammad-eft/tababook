@@ -22,7 +22,7 @@
                 </div>
 
                 <section class="p-[18px] border-b border-[#e4e4e7]">
-                    <div class="font-semibold text-sm mb-[15px]">دسته‌بندی</div>
+                    <div class="font-bold text-sm mb-[15px]">دسته‌بندی</div>
                     @foreach ($categories as $category)
                         <label class="flex items-center gap-2 my-3 text-[13px] text-[#52525b]"><input
                             class="accent-[#ef394e] w-[17px] h-[17px] categories" type="checkbox" data-filter="{{ $category->id }}">{{ $category->title }}</label>
@@ -30,7 +30,7 @@
                 </section>
 
                 <section class="p-[18px] border-b border-[#e4e4e7]">
-                    <div class="font-semibold text-sm mb-[15px]">محدوده قیمت</div>
+                    <div class="font-bold text-sm mb-[15px]">محدوده قیمت</div>
                     <div class="grid grid-cols-2 gap-2">
                         <input id="minPrice" type="number" placeholder="حداقل"
                             class="w-full border border-[#e4e4e7] rounded-lg p-[9px] outline-none text-[11px]">

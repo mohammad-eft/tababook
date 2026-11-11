@@ -19,4 +19,7 @@ class category extends Model
     {
         return $this->belongsTo(category::class, 'parent_id');
     }
+    public function attributes(){
+        return $this->hasMany(attribute::class);
+    }
 }

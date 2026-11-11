@@ -26,7 +26,7 @@
                                     <img src="{{ asset('storage/'.$cart->product->image) }}" class="size-full object-cover" alt="">
                                 </div>
                                 <div class="flex-1 min-w-0">
-                                    <h3 class="font-semibold text-gray-800 text-sm sm:text-base truncate">{{ $cart->product->title }}</h3>
+                                    <h3 class="font-bold text-gray-800 text-sm sm:text-base truncate">{{ $cart->product->title }}</h3>
                                     <p class="text-xs text-gray-500 mt-0.5 mb-5">{{ $cart->product->summary }}</p>
                                     <div class="w-full lg:w-1/4 p-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-product-id="{{ $cart->product_id }}">
                                         <button onclick="setCount(this)" class="w-1/3 text-lg font-bold text-white flex justify-center items-center cursor-pointer" data-state="+">+</button>
@@ -47,7 +47,7 @@
                                     <img src="{{ asset('storage/'.$cart->pack->image) }}" class="size-full object-cover" alt="">
                                 </div>
                                 <div class="flex-1 min-w-0">
-                                    <h3 class="font-semibold text-gray-800 text-sm sm:text-base truncate">{{ $cart->pack->title }}</h3>
+                                    <h3 class="font-bold text-gray-800 text-sm sm:text-base truncate">{{ $cart->pack->title }}</h3>
                                     <p class="text-xs text-gray-500 mt-0.5 mb-5">{{ $cart->pack->summary }}</p>
                                     <div class="w-full lg:w-1/4 p-2 bg-green-700 flex gap-2 justify-center items-center rounded-xl" data-pack-id="{{ $cart->pack_id }}">
                                         <button onclick="setPackCount(this)" class="w-1/3 text-lg font-bold text-white flex justify-center items-center cursor-pointer" data-state="+">+</button>
@@ -90,7 +90,7 @@
                         <div class="border-t border-dashed border-gray-200 my-4"></div>
 
                         <div class="flex justify-between items-center mb-5">
-                            <span class="font-semibold text-gray-700">مبلغ قابل پرداخت</span>
+                            <span class="font-bold text-gray-700">مبلغ قابل پرداخت</span>
                             <div class="text-left">
                                 <p class="font-bold text-lg text-gray-900 in-fa" id="totalPriceEl">0</p>
                                 <p class="text-xs text-gray-400">تومان</p>

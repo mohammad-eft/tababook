@@ -15,7 +15,7 @@
             <!-- ==================== تنظیمات کل بخش ==================== -->
             <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                 <div class="border-b border-gray-200 bg-gray-50 px-6 py-4">
-                    <h2 class="text-lg font-semibold text-gray-800 flex items-center gap-2">
+                    <h2 class="text-lg font-bold text-gray-800 flex items-center gap-2">
                         <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
@@ -65,7 +65,7 @@
             <!-- ==================== کارت راست: برای خودم ==================== -->
             <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                 <div class="border-b border-gray-200 bg-gray-50 px-6 py-4 flex items-center justify-between">
-                    <h2 class="text-lg font-semibold text-gray-800 flex items-center gap-2">
+                    <h2 class="text-lg font-bold text-gray-800 flex items-center gap-2">
                         <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -155,7 +155,7 @@
             <!-- ==================== کارت چپ: برای هدیه ==================== -->
             <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                 <div class="border-b border-gray-200 bg-gray-50 px-6 py-4 flex items-center justify-between">
-                    <h2 class="text-lg font-semibold text-gray-800 flex items-center gap-2">
+                    <h2 class="text-lg font-bold text-gray-800 flex items-center gap-2">
                         <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />

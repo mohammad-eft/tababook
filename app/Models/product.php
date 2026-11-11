@@ -14,6 +14,9 @@ class product extends Model
         'secondary_price',
         'count',
         'show_in_home',
+        'publication',
+        'writer',
+        'brand',
     ];
     public function media()
     {
@@ -23,15 +26,25 @@ class product extends Model
     {
         return $this->belongsToMany(category::class, 'category_products');
     }
-    public function attributes()
-    {
-        return $this->hasMany(product_attributes::class);
-    }
+    // public function attributes()
+    // {
+    //     return $this->hasMany(product_attributes::class);
+    // }
     public function carts()
     {
         return $this->hasMany(carts::class);
     }
     public function packs(){
         return $this->belongsToMany(pack::class, 'product_packs');
+    }
+    public function productAttributes(){
+        return $this->hasMany(product_attributes::class);
+    }
+    public function packages(){
+        return $this->hasMany(package::class);
+    }
+
+    public function packageAttributes(){
+        return $this->hasMany(package_attribute::class);
     }
 }

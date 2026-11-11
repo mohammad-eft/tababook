@@ -164,7 +164,7 @@
 
                             </div>
                         </div>
-                        {{-- @if (Auth::check()) --}}
+                        
                         <div class="relative">
                             <button class="block relative cursor-pointer" id="orderBasket">
                                 <svg class="w-[29px] h-[29px] text-gray-800" aria-hidden="true"
@@ -174,24 +174,10 @@
                                         stroke-width="1.5"
                                         d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312" />
                                 </svg>
-                                {{-- @if (count(Auth::user()->carts))
-                                        @php
-                                            $quantity = 0;
-                                            Auth::user()->load([
-                                                'carts' => function ($query) {
-                                                    $query->whereNull('order_id')->get();
-                                                },
-                                            ]);
-                                            foreach (Auth::user()->carts as $cart) {
-                                                $quantity += $cart->quantity;
-                                            }
-                                        @endphp
-                                        <span
-                                            class="absolute text-xs size-4 -top-3 in-fa right-0 flex items-center justify-center rounded-full bg-(--discount-color) text-white">{{ $quantity }}</span>
-                                    @else --}}
+                                
                                 <span
                                     class="absolute text-xs size-4 -top-2 in-fa right-0 flex items-center justify-center rounded-full bg-(--discount-color) text-white"></span>
-                                {{-- @endif --}}
+                               
                             </button>
                             <div
                                 class="absolute w-80 -left-3 top-full invisible opacity-0 transition-all duration-300 z-555">
@@ -208,157 +194,10 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- @else --}}
-                        {{-- <div class="relative">
-                                <button class="block relative cursor-pointer" id="dropdownCart">
-                                    <svg class="w-[29px] h-[29px] text-gray-800" aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                        viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="1.5"
-                                            d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312" />
-                                    </svg>
-                                    <span
-                                        class="absolute text-xs size-4 -top-3 in-fa right-0 flex items-center justify-center rounded-full bg-(--discount-color) text-white">0</span>
-                                </button>
-                                <div
-                                    class="absolute lg:w-80 -left-3 top-full invisible opacity-0 transition-all duration-300">
-                                    <div
-                                        class="rounded-xl px-3 pt-3 pb-1.5 border bg-white border-gray-300 translate-y-2.5">
-                                        <div class="w-full flex flex-col gap-2">
-                                            <div
-                                                class="bg-white rounded-2xl p-4 flex gap-4 items-center shadow-sm border border-gray-100 parentItem">
-                                                <div
-                                                    class="w-16 h-20 sm:w-20 sm:h-24 bg-gradient-to-br from-indigo-100 to-indigo-200 rounded-xl flex items-center justify-center text-2xl shrink-0">
-                                                    <img src="http://localhost/tababook/public/storage/productImgs/33ehHBcvUUKJ2SxeNjvT3syKHbn9WqEQRuDf216f.jpg"
-                                                        class="size-full object-cover" alt="">
-                                                </div>
-                                                <div class="flex-1 min-w-0">
-                                                    <h3 class="font-semibold text-gray-800 text-sm sm:text-base truncate">
-                                                        کتاب ملت عشق</h3>
-                                                    <p
-                                                        class="text-xs text-gray-500 mt-0.5 mb-5 max-w-full h-8 max-h-8 overflow-hidden ellipsis-2">
-                                                        الیف شافاک در کتاب ملت عشق
-                                                        دو داستان را به‌صورت موازی پیش می‌برد؛ یکی روایت شمس و مولانا در
-                                                        قونیه قرن هفتم به‌عنوان مرشد و مرید و دیگری روایت اللا روبینشتان،
-                                                        زنی ۴۰ساله ساکن بوستون آمریکا.</p>
-                                                    <div class="w-full p-2 bg-(--light-green-btn) hover:bg-(--green-btn) transition-all duration-300 group flex gap-2 justify-center items-center rounded-xl"
-                                                        data-product-id="6">
-                                                        <button onclick="setCount(this)"
-                                                            class="w-1/3 text-lg font-bold text-(--primary-text-color) transition-all duration-300 group-hover:text-white flex justify-center items-center cursor-pointer"
-                                                            data-state="+">+</button>
-                                                        <input type="number"
-                                                            class="w-1/3 text-sm text-center outline-none text-(--primary-text-color) transition-all duration-300 group-hover:text-white"
-                                                            readonly="" value="3">
-                                                        <button onclick="setCount(this)"
-                                                            class="w-1/3 text-lg font-bold text-(--primary-text-color) transition-all duration-300 group-hover:text-white flex justify-center items-center cursor-pointer"
-                                                            data-state="-">-</button>
-                                                    </div>
-                                                </div>
-                                                <div class="text-left shrink-0">
-                                                    <p class="font-bold text-gray-800 text-sm sm:text-base in-fa price">
-                                                        840000</p>
-                                                    <p class="text-xs text-gray-400">تومان</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="w-full text-end mt-1.5">
-                                            <a href="{{ route('cart.list') }}"
-                                                class="text-blue-500 text-sm font-bold">مشاهده همه</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
-                        {{-- @endif --}}
-                        {{-- <div class="relative sm:p-2.5 p-1.5 flex items-center gap-4">
-    
-                                <a href="{{ route('search.page') }}">
-                                    <svg class="w-[30px] h-[30px] text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-width="1.2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
-                                    </svg>
-                                </a>
-    
-                                <a @if (!Auth::check()) href="{{ route('login') }}" @else href="{{ route('user.profile') }}" @endif>
-                                    <svg class="w-[30px] h-[30px] text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a8.949 8.949 0 0 0 4.951-1.488A3.987 3.987 0 0 0 13 16h-2a3.987 3.987 0 0 0-3.951 3.512A8.948 8.948 0 0 0 12 21Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
-                                    </svg>
-                                </a>
-    
-                        </div> --}}
-                        {{--                    <div class="w-full relative lg:hidden block mt-5"> --}}
-                        {{--                        <input type="text" class="w-full outline-none rounded-md py-2 md:py-4 pl-2 pr-10 md:pr-20" --}}
-                        {{--                            placeholder="جست و جو"> --}}
-                        {{--                        <svg class="absolute w-5 md:w-8 top-[20%] right-[3%]" xmlns="http://www.w3.org/2000/svg" --}}
-                        {{--                            viewBox="0 0 512 512"> --}}
-                        {{--                            <path --}}
-                        {{--                                d="M24 0C10.7 0 0 10.7 0 24S10.7 48 24 48H69.5c3.8 0 7.1 2.7 7.9 6.5l51.6 271c6.5 34 36.2 58.5 70.7 58.5H488c13.3 0 24-10.7 24-24s-10.7-24-24-24H199.7c-11.5 0-21.4-8.2-23.6-19.5L170.7 288H459.2c32.6 0 61.1-21.8 69.5-53.3l41-152.3C576.6 57 557.4 32 531.1 32h-411C111 12.8 91.6 0 69.5 0H24zM131.1 80H520.7L482.4 222.2c-2.8 10.5-12.3 17.8-23.2 17.8H161.6L131.1 80zM176 512a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm336-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0z"> --}}
-                        {{--                            </path> --}}
-                        {{--                        </svg> --}}
-                        {{--                        <span --}}
-                        {{--                            class="sm:size-3 size-1 bg-green-700 rounded-full absolute top-0 right-0 text-xs flex justify-center items-center">4</span> --}}
-                        {{--                    </div> --}}
+                        
                     </div>
                 </div>
-                {{--            <div class="w-full h-10 flex justify-center items-center"> --}}
-                {{--                <ul class="flex gap-4 lg:gap-6 xl:gap-10 text-sm lg:text-base justify-end max-lg:hidden"> --}}
-                {{--                    <li> --}}
-                {{--                        <a href="{{ route('home') }}" --}}
-                {{--                            class="flex justify-center flex-col items-center cursor-pointer py-1 group transition-all duration-300"> --}}
-                {{--                            <span>خانه</span> --}}
-                {{--                            <div --}}
-                {{--                                class="rounded-md group-hover:w-full @if (Route::is('home')) w-full @else w-0 @endif bg-(--pastel-pink) h-[2px] transition-all duration-300"> --}}
-                {{--                            </div> --}}
-                {{--                        </a> --}}
-                {{--                    </li> --}}
-                {{--                    <li> --}}
-                {{--                        <a href="{{ route('product.index') }}" --}}
-                {{--                            class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300"> --}}
-                {{--                            <span>محصولات</span> --}}
-                {{--                            <div --}}
-                {{--                                class="rounded-md group-hover:w-full w-0 bg-(--pastel-pink) h-[2px] transition-all duration-300"> --}}
-                {{--                            </div> --}}
-                {{--                        </a> --}}
-                {{--                    </li> --}}
-                {{--                    <li> --}}
-                {{--                        <a href="{{ route('category.index') }}" --}}
-                {{--                            class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300"> --}}
-                {{--                            <span>دسته بندی ها</span> --}}
-                {{--                            <div --}}
-                {{--                                class="rounded-md group-hover:w-full w-[0px] bg-(--pastel-pink) h-[2px] transition-all duration-300"> --}}
-                {{--                            </div> --}}
-                {{--                        </a> --}}
-                {{--                    </li> --}}
-                {{--                    <li> --}}
-                {{--                        <a href="{{route('contactUs.create')}}" --}}
-                {{--                            class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300"> --}}
-                {{--                            <span>تماس باما</span> --}}
-                {{--                            <div --}}
-                {{--                                class="rounded-md group-hover:w-full w-[0px] bg-(--pastel-pink) h-[2px] transition-all duration-300"> --}}
-                {{--                            </div> --}}
-                {{--                        </a> --}}
-                {{--                    </li> --}}
-                {{--                    <li> --}}
-                {{--                        <a href="{{route('aboutUs.clientList')}}" --}}
-                {{--                            class="flex justify-center flex-col items-center group cursor-pointer py-1 transition-all duration-300"> --}}
-                {{--                            <span>درباره ما</span> --}}
-                {{--                            <div --}}
-                {{--                                class="rounded-md group-hover:w-full w-[0px] bg-(--pastel-pink) h-[2px] transition-all duration-300"> --}}
-                {{--                            </div> --}}
-                {{--                        </a> --}}
-                {{--                    </li> --}}
-                {{--                </ul> --}}
-                {{--                <div --}}
-                {{--                    class="w-full py-2 bg-white rounded-full flex justify-between items-center px-2 cart_shdow lg:hidden"> --}}
-                {{--                    <input type="text" class="outline-none w-full h-full text-xs" --}}
-                {{--                        placeholder="کتاب یا نویسنده یا محصول خود را جستجو کنید"> --}}
-                {{--                    <div class=""> --}}
-                {{--                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-4 fill-[#929391]"> --}}
-                {{--                            <path --}}
-                {{--                                d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" /> --}}
-                {{--                        </svg> --}}
-                {{--                    </div> --}}
-                {{--                </div> --}}
-                {{--            </div> --}}
+                
             </section>
         </div>
 

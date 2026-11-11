@@ -117,45 +117,29 @@
                         </div>
                         <div class="w-full flex flex-col gap-1.5 lg:gap-2.5 justify-start items-start">
                             <a href={{ route('product.show', [$product->id]) }}
-                                class="lg:text-lg text-sm font-bold max-w-full truncate text-(--primary-text-color)">{{ $product->title }}</a>
-                            <span class="text-[#ADB4B2] text-sm h-10 max-h-10 ellipsis-2 text-(--secondary-text)">{{ $product->summary }}</span>
+                                class="lg:text-lg text-sm font-bold max-w-full truncate text-(--primary-text-color) in-fa">{{ $product->title }}</a>
+                            <span class="text-[#ADB4B2] text-sm h-10 max-h-10 ellipsis-2 text-(--secondary-text) in-fa">{{ $product->summary }}</span>
 
                             <div class="flex items-center gap-3">
                             @if ($product->secondary_price)
                                     <div class="line-through text-[#a1a1aa] text-[10px] in-fa">
-                                        {{ $product->primary_price }} تومان
+                                        {{ number_format($product->primary_price) }} تومان
                                     </div>
                                 <div class="flex items-center justify-between gap-2">
-                                    <strong class="text-[15px] in-fa">{{ $product->secondary_price }}</strong>
+                                    <strong class="text-[15px] in-fa">{{ number_format($product->secondary_price) }}</strong>
                                     <span class="text-[10px] text-[#71717a]">تومان
                                     </span>
                                 </div>
 
                             @else
                                 <div class="flex items-center justify-between gap-2">
-                                    <strong class="text-[15px] in-fa">{{ $product->primary_price }}</strong>
+                                    <strong class="text-[15px] in-fa">{{ number_format($product->primary_price) }}</strong>
                                     <span class="text-[10px] text-[#71717a]">تومان
                                     </span>
                                 </div>
                             @endif
                             </div>
                             <div class="w-full h-12 addToCartBtns" data-product-id="{{ $product->id }}">
-                                {{-- @if (Auth::check() && in_array($product->id, $cartProIds) && count($product->carts))
-
-                                    <div class="w-full h-full px-4 transition-all bg-(--light-green-btn) duration-300 hover:bg-(--green-btn) cursor-pointer group flex gap-2 justify-center items-center rounded-xl"
-                                         data-product-id="{{ $product->id }}">
-                                        <button onclick="setCount(this)"
-                                                class="w-1/3 text-lg font-bold transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex itmes-center justify-center cursor-pointer"
-                                                data-state="+">+
-                                        </button>
-                                        <input type="number" class="w-1/3 text-sm text-center outline-none transition-all duration-300 text-(--primary-text-color) group-hover:text-white"
-                                               readonly value="{{ $product->carts[0]->quantity }}">
-                                        <button onclick="setCount(this)"
-                                                class="w-1/3 text-lg font-bold transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex itmes-center justify-center cursor-pointer"
-                                                data-state="-">-
-                                        </button>
-                                    </div>
-                                @else --}}
                                 @if ($product->count > 0)
                                     <button onclick="addToCart(this)"
                                             class="w-full px-4 h-full bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl cursor-pointer transition-all duration-300 hover:bg-(--green-btn) group"
@@ -242,38 +226,23 @@
                             <div class="flex items-center gap-3">
                                 @if ($product->secondary_price)
                                     <div class="line-through text-[#a1a1aa] text-[10px] in-fa">
-                                        {{ $product->primary_price }} تومان
+                                        {{ number_format($product->primary_price) }} تومان
                                     </div>
                                     <div class="flex items-center justify-between gap-2">
-                                        <strong class="text-[15px] in-fa">{{ $product->secondary_price }}</strong>
+                                        <strong class="text-[15px] in-fa">{{ number_format($product->secondary_price) }}</strong>
                                         <span class="text-[10px] text-[#71717a]">تومان
                                         </span>
                                     </div>
 
                                 @else
                                     <div class="flex items-center justify-between gap-2">
-                                        <strong class="text-[15px] in-fa">{{ $product->primary_price }}</strong>
+                                        <strong class="text-[15px] in-fa">{{ number_format($product->primary_price) }}</strong>
                                         <span class="text-[10px] text-[#71717a]">تومان
                                         </span>
                                     </div>
                                 @endif
                             </div>
                             <div class="w-full h-12 addToCartBtns" data-product-id="{{ $product->id }}">
-                                {{-- @if (Auth::check() && in_array($product->id, $cartProIds) && count($product->carts))
-                                    <div class="w-full h-full px-4 transition-all duration-300 hover:bg-(--green-btn) cursor-pointer group bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl"
-                                         data-product-id="{{ $product->id }}">
-                                        <button onclick="setCount(this)"
-                                                class="w-1/3 text-lg font-bold text-(--primary-text-color) flex justify-center items-center cursor-pointer group-hover:text-white"
-                                                data-state="+">+
-                                        </button>
-                                        <input type="number" class="w-1/3 text-sm text-center outline-none text-(--primary-text-color) group-hover:text-white"
-                                               readonly value="{{ $product->carts[0]->quantity }}">
-                                        <button onclick="setCount(this)"
-                                                class="w-1/3 text-lg font-bold text-(--primary-text-color) flex justify-center items-center cursor-pointer group-hover:text-white"
-                                                data-state="-">-
-                                        </button>
-                                    </div>
-                                @else --}}
                                 @if ($product->count > 0)
                                     <button onclick="addToCart(this)"
                                             class="w-full px-4 h-full bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl transition-all duration-300 hover:bg-(--green-btn) cursor-pointer group"

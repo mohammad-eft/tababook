@@ -15,7 +15,7 @@
             <!-- ==================== تبلیغ بالا (Top Ads) ==================== -->
             <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                 <div class="border-b border-gray-200 bg-gray-50 px-6 py-4">
-                    <h2 class="text-lg font-semibold text-gray-800 flex items-center gap-2">
+                    <h2 class="text-lg font-bold text-gray-800 flex items-center gap-2">
                         <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
                         </svg>
@@ -59,7 +59,7 @@
             <!-- ==================== بنر دوم (Second Ads) ==================== -->
             <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                 <div class="border-b border-gray-200 bg-gray-50 px-6 py-4">
-                    <h2 class="text-lg font-semibold text-gray-800 flex items-center gap-2">
+                    <h2 class="text-lg font-bold text-gray-800 flex items-center gap-2">
                         <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/>
                         </svg>
@@ -135,7 +135,7 @@
             <!-- ==================== بنر راست (Right Banner) ==================== -->
             <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                 <div class="border-b border-gray-200 bg-gray-50 px-6 py-4">
-                    <h2 class="text-lg font-semibold text-gray-800 flex items-center gap-2">
+                    <h2 class="text-lg font-bold text-gray-800 flex items-center gap-2">
                         <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                         </svg>
@@ -179,7 +179,7 @@
             <!-- ==================== بنر چپ (Left Banner) ==================== -->
             <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                 <div class="border-b border-gray-200 bg-gray-50 px-6 py-4">
-                    <h2 class="text-lg font-semibold text-gray-800 flex items-center gap-2">
+                    <h2 class="text-lg font-bold text-gray-800 flex items-center gap-2">
                         <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                         </svg>

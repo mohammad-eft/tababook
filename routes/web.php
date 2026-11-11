@@ -21,35 +21,11 @@ use App\Models\User;
 use App\Models\role_user;
 
 Route::get('/test', function(){
-    // $dateTime = explode(' ', verta());
-    // $date = implode('/', explode('-', $dateTime[0]));
-    // $currentTime = explode(':', $dateTime[1]);
-    // unset($currentTime[count($currentTime)-1]);
-    // $time = implode(':', $currentTime);
-    // Schema::table('carts', function (Blueprint $table) {
-    //     $table->integer('product_id')->nullable()->change();
-    //     $table->integer('user_id')->nullable()->change();
-    //     $table->integer('pack_id')->after('product_id')->nullable();
-    // });
-    // Schema::table('packs', function(Blueprint $table){
-    //     $table->integer('count')->default(1)->after('image');
-    // });
-    // Schema::table('phone_codes', function(Blueprint $table){
-    //     $table->string('phoneNumber')->unique()->change();
-    // });
-    // // product::where('id', '>', 0)->update(['show_in_home'=>1]);
-
-    // $userIds = User::pluck('id')->toArray();
-    // role_user::where('id', '>', 0)->delete();
-    // foreach($userIds as $userId){
-    //     role_user::create([
-    //         'user_id'=>$userId,
-    //         'role_id'=> $userId == 1 || $userId == 16 ? 1 : 2
-    //     ]);
-    // }
-
-    Schema::table('packs', function(Blueprint $table){
-        $table->string('count')->default(0)->after('image');
+    Schema::table('packages', function (Blueprint $table) {
+        $table->string('title')->nullable()->after('id');
+    });
+    Schema::table('carts', function (Blueprint $table) {
+        $table->integer('product_variety_id')->nullable()->after('product_id');
     });
 });
 
@@ -108,7 +84,7 @@ Route::group([
 
     })->name('relatedProducts');
     Route::get('/show' , 'show')->name('show');
-
+    Route::delete('/bulk-delete', 'bulkDelete')->name('bulkDelete');
 
     // Route::get('/show/{category}', 'show')->withoutMiddleware(AdminMiddleware::class)->missing(function () {
     //     return to_route('missing');
@@ -141,7 +117,7 @@ Route::group([
     // Route::get('/admin/show/{product}', 'adminShow')->missing(function () {
     //     return to_route('missing');
     // })->name('adminShow');
-    // Route::post('/admin/deleteAll', 'deleteAll')->name('deleteAll');
+    Route::post('/admin/deleteAll', 'deleteAll')->name('deleteAll');
 });
 
 Route::group([

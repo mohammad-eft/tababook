@@ -49,7 +49,7 @@
         <!-- ==================== ستون ۱: برند ==================== -->
         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
             <div class="border-b border-gray-100 bg-gradient-to-l from-indigo-50/60 to-transparent px-6 py-4">
-                <h2 class="text-base md:text-lg font-semibold text-gray-800 flex items-center gap-2">
+                <h2 class="text-base md:text-lg font-bold text-gray-800 flex items-center gap-2">
                     <span class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -85,7 +85,7 @@
         <!-- ==================== ستون ۲: خدمات ما ==================== -->
         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
             <div class="border-b border-gray-100 bg-gradient-to-l from-emerald-50/60 to-transparent px-6 py-4 flex items-center justify-between">
-                <h2 class="text-base md:text-lg font-semibold text-gray-800 flex items-center gap-2">
+                <h2 class="text-base md:text-lg font-bold text-gray-800 flex items-center gap-2">
                     <span class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -157,7 +157,7 @@
         <!-- ==================== ستون ۳: دسته‌بندی‌ها ==================== -->
         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
             <div class="border-b border-gray-100 bg-gradient-to-l from-amber-50/60 to-transparent px-6 py-4 flex items-center justify-between">
-                <h2 class="text-base md:text-lg font-semibold text-gray-800 flex items-center gap-2">
+                <h2 class="text-base md:text-lg font-bold text-gray-800 flex items-center gap-2">
                     <span class="w-8 h-8 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -231,7 +231,7 @@
         <!-- ==================== ستون ۴: درباره ما ==================== -->
         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
             <div class="border-b border-gray-100 bg-gradient-to-l from-rose-50/60 to-transparent px-6 py-4">
-                <h2 class="text-base md:text-lg font-semibold text-gray-800 flex items-center gap-2">
+                <h2 class="text-base md:text-lg font-bold text-gray-800 flex items-center gap-2">
                     <span class="w-8 h-8 rounded-lg bg-rose-100 text-rose-600 flex items-center justify-center">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -312,7 +312,7 @@
         <!-- ==================== شبکه‌های اجتماعی ==================== -->
         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
             <div class="border-b border-gray-100 bg-gradient-to-l from-sky-50/60 to-transparent px-6 py-4">
-                <h2 class="text-base md:text-lg font-semibold text-gray-800 flex items-center gap-2">
+                <h2 class="text-base md:text-lg font-bold text-gray-800 flex items-center gap-2">
                     <span class="w-8 h-8 rounded-lg bg-sky-100 text-sky-600 flex items-center justify-center">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -392,7 +392,7 @@
         <!-- ==================== پایین فوتر ==================== -->
         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
             <div class="border-b border-gray-100 bg-gradient-to-l from-gray-50 to-transparent px-6 py-4">
-                <h2 class="text-base md:text-lg font-semibold text-gray-800 flex items-center gap-2">
+                <h2 class="text-base md:text-lg font-bold text-gray-800 flex items-center gap-2">
                     <span class="w-8 h-8 rounded-lg bg-gray-100 text-gray-600 flex items-center justify-center">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

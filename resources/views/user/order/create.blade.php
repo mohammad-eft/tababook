@@ -54,7 +54,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
             </svg>
-            <span class="bg-white/30 px-2.5 py-1 rounded-full font-semibold text-white">آدرس</span>
+            <span class="bg-white/30 px-2.5 py-1 rounded-full font-bold text-white">آدرس</span>
             <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
             </svg>
@@ -70,7 +70,7 @@
 
         <!-- بخش: اطلاعات گیرنده -->
         {{-- <div class="space-y-5">
-          <h2 class="text-lg font-semibold text-gray-800 flex items-center gap-2">
+          <h2 class="text-lg font-bold text-gray-800 flex items-center gap-2">
             <span class="w-1.5 h-6 bg-indigo-500 rounded-full inline-block"></span>
             اطلاعات گیرنده
           </h2>
@@ -95,7 +95,7 @@
 
         <!-- بخش: آدرس دقیق -->
         <div class="space-y-5 pt-2">
-          <h2 class="text-lg font-semibold text-gray-800 flex items-center gap-2">
+          <h2 class="text-lg font-bold text-gray-800 flex items-center gap-2">
             <span class="w-1.5 h-6 bg-indigo-500 rounded-full inline-block"></span>
             آدرس تحویل
           </h2>
@@ -165,7 +165,7 @@
             بازگشت به سبد خرید
           </a>
           <button type="submit"
-            class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white font-semibold py-3.5 px-8 rounded-xl transition-all duration-200 shadow-lg shadow-indigo-200 hover:shadow-indigo-300 flex items-center justify-center gap-2 text-sm sm:text-base">
+            class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white font-bold py-3.5 px-8 rounded-xl transition-all duration-200 shadow-lg shadow-indigo-200 hover:shadow-indigo-300 flex items-center justify-center gap-2 text-sm sm:text-base">
             ادامه و پرداخت
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />

@@ -9,6 +9,7 @@ use App\Models\category;
 use App\Models\orders;
 use App\Models\product;
 use App\Models\User;
+use App\Models\role_user;
 use App\Models\order_status;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
@@ -35,7 +36,6 @@ class OrdersController extends Controller
         $email = $request->input('email');
         $nationalCode = $request->input('nationalCode');
         $descriptoin = $request->input('descriptoin');
-        // $onlinePayment = $request->input('onlinePayment');
         $password = $request->input('password');
         $password = isset($password) ? Hash::make($password) : false;
         $products = json_decode($request->products);
@@ -57,10 +57,17 @@ class OrdersController extends Controller
                 'phoneNumber' => $phoneNumber,
                 'email' => $email,
                 'nationalCode' => $nationalCode,
-            ], ['phoneNumber'], ['name', 'family', 'email', 'nationalCode', 'password']);
+            ], ['phoneNumber'], ['name', 'family', 'email', 'nationalCode']);
         }
 
         $user = User::where('phoneNumber', $phoneNumber)->first();
+
+        if(count($user->roles) > 0){
+            $userRoleIds = $user->roles->pluck('id')->toArray();
+            if(!in_array(1, $userRoleIds)){
+                role_user::create(['role_id' => 2, 'user_id' => $user->id]);
+            }
+        }
 
         $address = address::firstOrCreate([
             'user_id' => $user->id,
@@ -111,7 +118,6 @@ class OrdersController extends Controller
                 ]);
             }
         }
-
         return redirect('/')->with('clearStorage', true);
     }
     public function index()

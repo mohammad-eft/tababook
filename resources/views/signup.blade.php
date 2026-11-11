@@ -170,7 +170,7 @@
                                 onchange="checkRule()" id="rule">
                             <label for="rules" class="text-sm text-gray-600 cursor-pointer">
                                 <span>قوانین و مقررات را </span>
-                                <span class="text-purple-500 font-semibold hover:text-purple-600 cursor-pointer transition-colors" onclick="rules('open')">مطالعه</span>
+                                <span class="text-purple-500 font-bold hover:text-purple-600 cursor-pointer transition-colors" onclick="rules('open')">مطالعه</span>
                                 <span> کردم و می‌پذیرم</span>
                             </label>
                         </div>
@@ -226,7 +226,7 @@
                         <div class="w-full text-center mt-2">
                             <span class="text-sm text-gray-600">
                                 قبلاً ثبت نام کرده‌اید؟
-                                <a href="{{ route('login') }}" class="text-purple-500 font-semibold hover:text-purple-600 transition-colors mr-1">
+                                <a href="{{ route('login') }}" class="text-purple-500 font-bold hover:text-purple-600 transition-colors mr-1">
                                     وارد شوید
                                 </a>
                             </span>

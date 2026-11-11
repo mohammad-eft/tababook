@@ -117,7 +117,7 @@
                 @if (!Auth::check())
                     <div class="parentPass">
                         <label class="block text-sm font-medium mb-2"> رمز عبور <span class="text-red-500">*</span></label>
-                        <input type="password" name="password" placeholder="رمز عبور خود را وارد کنید " disabled id="password" class="in-fa w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none">
+                        <input type="password" name="password" placeholder="رمز عبور خود را وارد کنید " id="password" class="in-fa w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none">
                     </div>
                 @endif
 
@@ -205,7 +205,7 @@
                                                 <img src="{{ asset('img/bank.png') }}" class="size-10 rounded-full" alt="">
                                             </span>
                                         </div>
-                                        <span class="text-sm font-semibold tracking-wide text-white/90">بانک مهر
+                                        <span class="text-sm font-bold tracking-wide text-white/90">بانک مهر
                                             ایران</span>
                                     </div>
                                     <div
@@ -302,22 +302,6 @@
                             required>
                     </div>
                 </div>
-
-                {{-- <div class="bg-gray-100/80 p-4 rounded-lg border border-gray-200 mb-4">
-                    <div class="flex items-center gap-2 mb-4">
-                        <input type="checkbox" id="zarinpal" class="w-4 h-4 text-primary rounded focus:ring-primary border-gray-300" checked>
-                        <label for="zarinpal" class="flex items-center gap-2 cursor-pointer font-bold text-gray-700">
-                            <img src="https://www.zarinpal.com/assets/images/logo/logo.svg" alt="زرین‌پال" class="h-6 w-auto" onerror="this.style.display='none'"> <!-- لوگو آنلاین -->
-                            <span class="text-blue-700 hidden">زرین‌پال</span> 
-                            پرداخت امن زرین‌پال
-                        </label>
-                    </div>
-                    <p class="text-xs text-gray-500 leading-5 text-justify">
-                        پرداخت امن به وسیله کلیه کارت‌های عضو شتاب از طریق درگاه زرین‌پال.
-                        <br>
-                        اطلاعات شخصی شما برای پردازش سفارش شما، پشتیبانی از تجربه شما در سراسر این وب سایت و برای اهداف دیگری که در سیاست حفظ حریم خصوصی ذکر شده است استفاده می‌شود.
-                    </p>
-                </div> --}}
 
                 <button
                     class="w-full bg-(--purple-btn) text-white font-bold py-3 px-4 rounded-lg transition duration-200 shadow-md cursor-pointer">

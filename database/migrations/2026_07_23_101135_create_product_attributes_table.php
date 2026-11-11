@@ -14,8 +14,11 @@ return new class extends Migration
         Schema::create('product_attributes', function (Blueprint $table) {
             $table->id();
             $table->integer('product_id');
-            $table->string('attribute_key');
-            $table->string('attribute_value');
+            // $table->string('attribute_key');
+            // $table->string('attribute_value');
+            $table->integer('attribute_id')->nullable();
+            $table->string('input_type')->default('text');
+            $table->string('value')->nullable();
             $table->timestamps();
         });
     }
