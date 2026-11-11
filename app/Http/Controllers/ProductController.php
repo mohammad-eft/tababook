@@ -570,10 +570,16 @@ class ProductController extends Controller
         }
         if($product->packages->isNotEmpty()){
             foreach($product->packages as $package){
-                dd($package->packageAttributes);
+                foreach($package->packageAttributes as $packAtt){
+                    $variants[$variantCounter]['key']=$packAtt->attribute->key;
+                    $variants[$variantCounter]['value']=$packAtt->value;
+                    $variants[$variantCounter]['primary_price']=$package->primary_price;
+                    $variants[$variantCounter]['secondary_price']=$package->secondary_price;
+                    $product->setAttribute('variants', $variants); 
+                    $variantCounter++;
+                }
             }
         }
-        dd($product);
         return view('admin.product.single', [
             'product' => $product,
             'setting' => $setting,
