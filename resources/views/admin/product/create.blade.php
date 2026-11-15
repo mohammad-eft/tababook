@@ -5,615 +5,917 @@
 @section('content')
 
     <style>
-        /* اینپوت رنگ: ارتفاع بیشتر تا رنگ انتخاب‌شده کامل دیده شود */
-        .attribute-value-input[type="color"] {
-            height: 2.75rem;
-            /* ~44px */
-            padding: 4px;
-            cursor: pointer;
+        .product-form-shell {
+            --pf-primary: #4C6B62;
+            --pf-primary-dark: #3B554D;
+            --pf-border: #E9E2D9;
+            --pf-muted: #87978F;
+            --pf-accent: #EA9CA1;
+            --pf-accent-soft: #F5E8E6;
+            --pf-sage: #95ADA2;
+            --pf-lavender: #B4A0D4;
+            color: #344B43;
         }
 
-        /* پر شدن کامل کادر با رنگ انتخاب‌شده */
-        .attribute-value-input[type="color"]::-webkit-color-swatch-wrapper {
+        .product-form-shell .pf-card {
+            background: #fff;
+            border: 1px solid var(--pf-border);
+            border-radius: 18px;
+            padding: 22px;
+            box-shadow: 0 5px 22px rgba(76, 107, 98, .07);
+        }
+
+        .product-form-shell .pf-card-head {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            padding-bottom: 16px;
+            margin-bottom: 18px;
+            border-bottom: 1px solid #F0EAE2;
+        }
+
+        .product-form-shell .pf-card-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: #344B43;
+        }
+
+        .product-form-shell .pf-card-desc {
+            margin-top: 5px;
+            color: var(--pf-muted);
+            font-size: 12px;
+            line-height: 1.9;
+        }
+
+        .product-form-shell label {
+            display: block;
+            margin-bottom: 8px;
+            color: #465F56;
+            font-size: 13px;
+            font-weight: 650;
+        }
+
+        /* چیدمان اختصاصی گزینه‌های دسته‌بندی؛ جلوگیری از override شدن flex توسط استایل عمومی label */
+        .product-form-shell label[data-category-option] {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 12px;
+            width: 100%;
+            margin: 0;
+            text-align: right;
+        }
+
+        .product-form-shell label[data-category-option] .category-checkbox {
+            display: block;
+            width: 16px;
+            height: 16px;
+            flex: 0 0 16px;
+            margin: 0;
+        }
+
+        .product-form-shell label[data-category-option]>span.flex-1 {
+            display: block;
+            min-width: 0;
+            flex: 1 1 auto;
+            margin: 0;
+            line-height: 1.8;
+            white-space: normal;
+        }
+
+        .product-form-shell input:not([type=checkbox]):not([type=file]):not([type=color]),
+        .product-form-shell textarea,
+        .product-form-shell select:not(.attribute-select) {
+            width: 100%;
+            min-width: 0;
+            border: 1px solid #E8E3DA;
+            border-radius: 11px;
+            background: #FBF6EF;
+            padding: 11px 13px;
+            color: #465F56;
+            font-size: 13px;
+            outline: none;
+            transition: border-color .2s, box-shadow .2s, background .2s;
+        }
+
+        .product-form-shell input:focus,
+        .product-form-shell textarea:focus,
+        .product-form-shell select:focus {
+            border-color: #95ADA2;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(76, 107, 98, .12);
+        }
+
+        .product-form-shell input::placeholder,
+        .product-form-shell textarea::placeholder {
+            color: #A6ADA6;
+        }
+
+        .product-form-shell input[type=file] {
+            width: 100%;
+            border: 1px dashed #D8D0C5;
+            border-radius: 12px;
+            background: #FBF6EF;
+            padding: 12px;
+            color: #65766E;
+            font-size: 12px;
+        }
+
+        .product-form-shell .pf-field {
+            min-width: 0;
+        }
+
+        .product-form-shell .pf-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            border-radius: 11px;
+            padding: 10px 15px;
+            font-size: 12px;
+            font-weight: 700;
+            transition: .2s;
+        }
+
+        .product-form-shell .pf-btn-primary {
+            background: #4C6B62;
+            color: white;
+            box-shadow: 0 5px 12px rgba(76, 107, 98, .18);
+        }
+
+        .product-form-shell .pf-btn-primary:hover {
+            background: #3B554D;
+            transform: translateY(-1px);
+        }
+
+        .product-form-shell .pf-btn-soft {
+            background: #F5E8E6;
+            color: #4C6B62;
+        }
+
+        .product-form-shell .pf-btn-soft:hover {
+            background: #EDE4DA;
+        }
+
+        .product-form-shell .pf-danger {
+            background: #FBEAEC;
+            color: #C65D6D;
+            border-radius: 9px;
+            padding: 8px 11px;
+            font-size: 12px;
+            font-weight: 650;
+        }
+
+        .product-form-shell .pf-danger:hover {
+            background: #F6DADD;
+        }
+
+        .product-form-shell .attribute-item,
+        .product-form-shell .package-item {
+            border: 1px solid #E8E3DA;
+            border-radius: 15px;
+            padding: 17px;
+            background: #FBF6EF;
+        }
+
+        .product-form-shell .attribute-item input,
+        .product-form-shell .attribute-item select,
+        .product-form-shell .package-item input,
+        .product-form-shell .package-item select {
+            border: 1px solid #E8E3DA;
+            border-radius: 10px;
+            padding: 10px 12px;
+            background: white;
+            width: 100%;
+            min-width: 0;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .product-form-shell .attribute-value-input[type=color] {
+            height: 2.75rem;
+            padding: 4px;
+            cursor: pointer;
+            flex: 0 0 6rem;
+        }
+
+        .product-form-shell .attribute-value-input[type=color]::-webkit-color-swatch-wrapper {
             padding: 0;
         }
 
-        .attribute-value-input[type="color"]::-webkit-color-swatch {
-            border: none;
-            border-radius: 0.5rem;
+        .product-form-shell .attribute-value-input[type=color]::-webkit-color-swatch,
+        .product-form-shell .attribute-value-input[type=color]::-moz-color-swatch {
+            border: 0;
+            border-radius: .5rem;
         }
 
-        .attribute-value-input[type="color"]::-moz-color-swatch {
-            border: none;
-            border-radius: 0.5rem;
+        .product-form-shell .pf-error {
+            display: block;
+            margin-top: 6px;
+            color: #D96F7D;
+            font-size: 11px;
         }
 
-        .attribute-value-input[type="color"] {
-            flex: 0 0 6rem;
-            /* عرض ثابت ۶rem به جای کشیده شدن */
+        .product-form-shell .category-checkbox {
+            accent-color: #4C6B62;
         }
+
+        .product-form-shell [data-category-option].is-selected {
+            background: #EDF3EF;
+        }
+
+        .product-form-shell .category-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            max-width: 100%;
+            border: 1px solid #DCE8DF;
+            border-radius: 999px;
+            background: #EDF3EF;
+            padding: 6px 9px;
+            color: #4C6B62;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .product-form-shell .category-chip button {
+            display: inline-flex;
+            width: 17px;
+            height: 17px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #DCE8DF;
+            color: #3B554D;
+            line-height: 1;
+        }
+
+        .product-form-shell .category-chip button:hover {
+            background: #D2E1D7;
+        }
+
+        .product-form-shell .pf-hint {
+            color: #87978F;
+            font-size: 11px;
+            line-height: 1.9;
+        }
+
+        .product-form-shell .pf-icon {
+            display: flex;
+            width: 38px;
+            height: 38px;
+            flex: none;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: #F5E8E6;
+            color: #4C6B62;
+        }
+
+        .product-form-shell .pf-switch {
+            position: relative;
+            display: inline-flex;
+            width: 48px;
+            height: 27px;
+            cursor: pointer;
+        }
+
+        .product-form-shell .pf-switch input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .product-form-shell .pf-switch span:first-of-type {
+            width: 100%;
+            height: 100%;
+            border-radius: 99px;
+            background: #D8D0C5;
+            transition: .2s;
+        }
+
+        .product-form-shell .pf-switch span:last-of-type {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 19px;
+            height: 19px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 1px 4px #0002;
+            transition: .2s;
+        }
+
+        .product-form-shell .pf-switch input:checked+span:first-of-type {
+            background: #4C6B62;
+        }
+
+        .product-form-shell .pf-switch input:checked~span:last-of-type {
+            transform: translateX(21px);
+        }
+
+        @media(max-width:640px) {
+            .product-form-shell .pf-card {
+                padding: 16px;
+                border-radius: 15px
+            }
+
+            .product-form-shell .pf-card-head {
+                margin-bottom: 15px
+            }
+        }
+
+        /* تنظیم دقیق موقعیت تیک چک‌باکس دسته‌بندی */
+        .product-form-shell .category-checkbox {
+            appearance: none;
+            -webkit-appearance: none;
+            position: relative;
+            width: 16px;
+            height: 16px;
+            flex: 0 0 16px;
+            margin: 0;
+            border: 1.5px solid #95ADA2;
+            border-radius: 4px;
+            background: #fff;
+            cursor: pointer;
+        }
+
+        /* تیک سفارشی */
+        .product-form-shell .category-checkbox:checked {
+            /* background: #4C6B62; */
+            border-color: #4C6B62;
+        }
+
+        .product-form-shell .category-checkbox:checked::after {
+            content: "";
+            position: absolute;
+            top: 1px;
+            left: 4px;
+            width: 4px;
+            height: 8px;
+            border: solid rgb(148, 16, 255);
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+
+/* ==========================================
+   طراحی بخش ویژگی‌های محصول
+========================================== */
+
+.product-form-shell #product-attributes-list,
+.product-form-shell #packages-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* کارت ویژگی */
+.product-form-shell .attribute-item {
+    padding: 18px;
+    border: 1px solid #E9E2D9;
+    border-radius: 15px;
+    background: #FCF9F4;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.product-form-shell .attribute-item:hover {
+    border-color: #D5E2D9;
+    box-shadow: 0 4px 14px rgba(76, 107, 98, .05);
+}
+
+/* کارت محصول متغیر */
+.product-form-shell .package-item {
+    padding: 20px;
+    border: 1px solid #E9E2D9;
+    border-radius: 16px;
+    background: #FBF6EF;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.product-form-shell .package-item:hover {
+    border-color: #D5E2D9;
+}
+
+/* عنوان ویژگی‌ها و پکیج‌ها */
+.product-form-shell .attribute-item label,
+.product-form-shell .package-item label {
+    display: block;
+    margin-bottom: 8px;
+    color: #465F56;
+    font-size: 12px;
+    font-weight: 750;
+}
+
+/* ورودی‌های داخل ویژگی و پکیج */
+.product-form-shell .attribute-item input:not([type="color"]),
+.product-form-shell .attribute-item select,
+.product-form-shell .package-item input,
+.product-form-shell .package-item select {
+    width: 100%;
+    min-width: 0;
+    min-height: 43px;
+    padding: 10px 12px;
+    border: 1px solid #E8E3DA;
+    border-radius: 10px;
+    outline: none;
+    background: #FFFFFF;
+    color: #465F56;
+    font-size: 13px;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.product-form-shell .attribute-item input:focus,
+.product-form-shell .attribute-item select:focus,
+.product-form-shell .package-item input:focus,
+.product-form-shell .package-item select:focus {
+    border-color: #95ADA2;
+    box-shadow: 0 0 0 3px rgba(76, 107, 98, .10);
+}
+
+/* ورودی رنگ */
+.product-form-shell .attribute-item input[type="color"] {
+    width: 100%;
+    height: 43px;
+    padding: 4px;
+    border: 1px solid #E8E3DA;
+    border-radius: 10px;
+    background: white;
+    cursor: pointer;
+}
+
+/* ردیف مقادیر ویژگی */
+.product-form-shell .attribute-values {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.product-form-shell .attribute-value-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    padding: 8px;
+    border: 1px solid #E9E2D9;
+    border-radius: 12px;
+    background: #FFFFFF;
+}
+
+.product-form-shell .attribute-value-item input {
+    flex: 1;
+    min-width: 0;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+/* دکمه افزودن مقدار */
+.product-form-shell .add-attribute-value,
+.product-form-shell .add-package-attribute {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border-radius: 9px;
+    padding: 9px 12px;
+    background: #EDF3EF;
+    color: #4C6B62;
+    font-size: 11px;
+    font-weight: 750;
+    transition: .2s;
+}
+
+.product-form-shell .add-attribute-value:hover,
+.product-form-shell .add-package-attribute:hover {
+    background: #DCE8DF;
+    color: #3B554D;
+}
+
+/* دکمه‌های حذف */
+.product-form-shell .remove-attribute,
+.product-form-shell .remove-package,
+.product-form-shell .remove-attribute-value {
+    flex: none;
+    border: 1px solid #F2DCDD;
+    border-radius: 9px;
+    background: #FBEAEC;
+    color: #C65D6D;
+    font-size: 11px;
+    font-weight: 750;
+    transition: .2s;
+}
+
+.product-form-shell .remove-attribute:hover,
+.product-form-shell .remove-package:hover,
+.product-form-shell .remove-attribute-value:hover {
+    border-color: #EEC7CC;
+    background: #F6DADD;
+}
+
+/* جداکننده بخش‌ها */
+.product-form-shell .attribute-values-container,
+.product-form-shell .package-attributes-section {
+    border-color: #E9E2D9;
+}
+
+/* عنوان پکیج */
+.product-form-shell .package-heading {
+    color: #344B43;
+    font-size: 13px;
+    font-weight: 850;
+}
+
+/* موبایل */
+@media (max-width: 640px) {
+    .product-form-shell .attribute-item,
+    .product-form-shell .package-item {
+        padding: 14px;
+        border-radius: 13px;
+    }
+
+    .product-form-shell .attribute-value-item {
+        gap: 7px;
+        padding: 6px;
+    }
+
+    .product-form-shell .remove-attribute-value {
+        padding: 7px 9px;
+    }
+}
+
     </style>
 
     @if (session('message'))
         <div
-            class="modal py-5 px-8 rounded-lg shadow-lg bg-slate-100 fixed top-10 right-10 z-5 flex justify-center items-center transition-all duration-300">
-            <span class="font-bold text-sm text-slate-500">
-                {{ session('message') }}
-            </span>
+            class="modal fixed right-4 top-4 z-50 flex items-center gap-3 rounded-xl border border-[#DCE8DF] bg-white px-5 py-4 text-sm font-bold text-[#4C6B62] shadow-xl sm:right-8 sm:top-8">
+            <span class="flex size-7 items-center justify-center rounded-full bg-[#EDF3EF]">✓</span>
+            {{ session('message') }}
         </div>
     @endif
 
+    <div class="product-form-shell w-full rounded-2xl bg-[#FBF6EF] p-3 pb-10 sm:p-5">
+        <div class="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+                <span
+                    class="mb-2 inline-flex rounded-full bg-[#F5E8E6] px-3 py-1 text-[11px] font-bold text-[#4C6B62]">مدیریت
+                    فروشگاه / محصولات</span>
+                <h2 class="text-2xl font-extrabold tracking-tight text-[#344B43] sm:text-3xl">ایجاد محصول جدید</h2>
+                <p class="mt-2 text-xs leading-6 text-[#718078]">اطلاعات محصول، مشخصات، تصاویر و قیمت‌گذاری را تکمیل کنید.
+                </p>
+            </div>
+            <span class="text-xs text-[#87978F]">فیلدهای ستاره‌دار الزامی هستند <b class="text-[#D96F7D]">*</b></span>
+        </div>
 
-    <div class="w-full h-full pb-10">
-
-        <h2 class="text-3xl text-center font-bold py-5 text-[#425A8B]">
-            فرم ایجاد محصول
-        </h2>
-
-        <div class="w-full mx-auto border border-[#D5DFE4] rounded-[10px] text-[#425A8B] p-5 bg-white">
-
-            <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
-
-                @csrf
-
-
-                {{-- ========================================== --}}
-                {{-- ساختار اصلی فرم --}}
-                {{-- ========================================== --}}
-
-                <div class="flex flex-col md:flex-row gap-3 md:gap-5">
-
-
-                    {{-- ====================================== --}}
-                    {{-- ستون سمت راست: اطلاعات اصلی و ویژگی‌ها --}}
-                    {{-- ====================================== --}}
-
-                    <div class="w-full md:w-2/3 space-y-8">
-
-
-                        {{-- نام محصول --}}
-                        <div class="w-full flex flex-col">
-
-                            <label for="title" class="mb-2 flex flex-row items-center">
-                                <span>نام محصول:</span>
-                                <span class="text-rose-500">*</span>
-                            </label>
-
-                            <input type="text" class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]"
-                                name="title" id="title" placeholder="نام محصول را وارد کنید"
-                                value="{{ old('title') }}" required>
-
-                            @error('title')
-                                <span class="text-xs text-red-500">{{ $message }}</span>
-                            @enderror
-
+        <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data" class="space-y-5">
+            @csrf
+            <div class="grid grid-cols-1 items-start gap-5 xl:grid-cols-3">
+                {{-- ستون اطلاعات اصلی --}}
+                <div class="min-w-0 space-y-5 xl:col-span-2">
+                    <section class="pf-card">
+                        <div class="pf-card-head">
+                            <div>
+                                <h3 class="pf-card-title">اطلاعات پایه محصول</h3>
+                                <p class="pf-card-desc">عنوان و اطلاعات شناسنامه‌ای محصول را وارد کنید.</p>
+                            </div>
+                            <span class="pf-icon"><svg class="size-5" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="1.8">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M4 5.5A1.5 1.5 0 0 1 5.5 4h13A1.5 1.5 0 0 1 20 5.5v13a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18.5zM8 8h8M8 12h8M8 16h4" />
+                                </svg></span>
                         </div>
-
-
-                        <div class="w-full flex flex-col mt-5">
-
-                            <label for="brand" class="mb-2">
-                                برند:
-                            </label>
-
-                            <input type="text" class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]"
-                                placeholder="برند" name="brand" id="brand" value="{{ old('brand') }}">
-
-                            @error('brand')
-                                <span class="text-xs text-red-500">{{ $message }}</span>
-                            @enderror
-
+                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                            <div class="pf-field sm:col-span-2">
+                                <label for="title">نام محصول <span class="text-[#D96F7D]">*</span></label>
+                                <input type="text" name="title" id="title" placeholder="مثلاً: دفتر طراحی ۱۰۰ برگ"
+                                    value="{{ old('title') }}" required>
+                                @error('title')
+                                    <span class="pf-error">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="pf-field"><label for="brand">برند</label><input type="text" name="brand"
+                                    id="brand" placeholder="نام برند" value="{{ old('brand') }}">
+                                @error('brand')
+                                    <span class="pf-error">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="pf-field"><label for="writer">نویسنده</label><input type="text" name="writer"
+                                    id="writer" placeholder="نام نویسنده" value="{{ old('writer') }}">
+                                @error('writer')
+                                    <span class="pf-error">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="pf-field sm:col-span-2"><label for="publication">انتشارات</label><input
+                                    type="text" name="publication" id="publication" placeholder="نام انتشارات"
+                                    value="{{ old('publication') }}">
+                                @error('publication')
+                                    <span class="pf-error">{{ $message }}</span>
+                                @enderror
+                            </div>
                         </div>
-                        <div class="w-full flex flex-col mt-5">
+                    </section>
 
-                            <label for="writer" class="mb-2">
-                                نویسنده:
-                            </label>
-
-                            <input type="text" class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]"
-                                placeholder="نویسنده" name="writer" id="writer" value="{{ old('writer') }}">
-
-                            @error('writer')
-                                <span class="text-xs text-red-500">{{ $message }}</span>
-                            @enderror
-
+                    <section class="pf-card">
+                        <div class="pf-card-head">
+                            <div>
+                                <h3 class="pf-card-title">معرفی محصول</h3>
+                                <p class="pf-card-desc">یک معرفی کوتاه و توضیحات کامل محصول بنویسید.</p>
+                            </div><span class="pf-icon"><svg class="size-5" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="1.8">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M7 4h10a2 2 0 0 1 2 2v14H5V6a2 2 0 0 1 2-2zM8 9h8M8 13h8M8 17h5" />
+                                </svg></span>
                         </div>
-                        <div class="w-full flex flex-col mt-5">
-
-                            <label for="publication" class="mb-2">
-                                انتشارات:
-                            </label>
-
-                            <input type="text" class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]"
-                                placeholder="انتشارات" name="publication" id="publication" value="{{ old('publication') }}">
-
-                            @error('publication')
-                                <span class="text-xs text-red-500">{{ $message }}</span>
-                            @enderror
-
+                        <div class="space-y-4">
+                            <div><label for="summary">خلاصه محصول</label>
+                                <textarea rows="3" name="summary" id="summary" placeholder="در چند جمله محصول را معرفی کنید...">{{ old('summary') }}</textarea>
+                                @error('summary')
+                                    <span class="pf-error">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div><label for="editor">توضیحات محصول</label>
+                                <textarea name="description" id="editor" rows="5" placeholder="توضیحات کامل محصول را وارد کنید...">{!! old('description') !!}</textarea>
+                                @error('description')
+                                    <span class="pf-error">{{ $message }}</span>
+                                @enderror
+                            </div>
                         </div>
+                    </section>
 
-
-                        {{-- خلاصه محصول --}}
-                        <div class="w-full flex flex-col mt-5">
-
-                            <label for="summary" class="mb-2">
-                                خلاصه محصول:
-                            </label>
-
-                            <textarea class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]" rows="4"
-                                placeholder="خلاصه محصول" name="summary" id="summary">{{ old('summary') }}</textarea>
-
-                            @error('summary')
-                                <span class="text-xs text-red-500">{{ $message }}</span>
-                            @enderror
-
+                    <section class="pf-card">
+                        <div class="pf-card-head">
+                            <div>
+                                <h3 class="pf-card-title">مشخصات و ویژگی‌ها</h3>
+                                <p class="pf-card-desc">ویژگی‌هایی مانند رنگ، سایز، جنس یا سایر مشخصات را تعریف کنید.</p>
+                            </div><span class="pf-icon"><svg class="size-5" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="1.8">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M4 7h16M4 12h16M4 17h16M8 4v6m8 4v6" />
+                                </svg></span>
                         </div>
+                        <div id="product-attributes-list" class="space-y-3"></div>
+                        <button type="button" id="add-product-attribute" class="pf-btn pf-btn-soft mt-4">＋ افزودن
+                            ویژگی</button>
+                    </section>
 
-
-                        {{-- توضیحات محصول --}}
-                        <div class="w-full flex flex-col mt-5">
-
-                            <label for="editor" class="mb-2">
-                                توضیحات محصول:
-                            </label>
-
-                            <textarea name="description" id="editor" class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]"
-                                rows="4" placeholder="توضیحات محصول را وارد کنید">{!! old('description') !!}</textarea>
-
-                            @error('description')
-                                <span class="text-xs text-red-500">{{ $message }}</span>
-                            @enderror
-
+                    <section class="pf-card">
+                        <div class="pf-card-head">
+                            <div>
+                                <h3 class="pf-card-title">تنوع و قیمت‌های مختلف</h3>
+                                <p class="pf-card-desc">اگر محصول در چند مدل یا ترکیب عرضه می‌شود، متغیرهای آن را بسازید.
+                                </p>
+                            </div><span class="pf-icon"><svg class="size-5" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="1.8">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M4 7h16M4 12h16M4 17h16M7 4v6m10 4v6" />
+                                </svg></span>
                         </div>
+                        <div id="packages-list" class="w-full space-y-4"></div>
+                        <button type="button" id="add-package" class="pf-btn pf-btn-soft mt-4">＋ افزودن محصول
+                            متغیر</button>
+                    </section>
 
-                        {{-- دسته‌بندی محصول --}}
-                        <div class="w-full flex flex-col gap-3 mt-5">
+                    <div
+                        class="flex flex-col-reverse gap-3 rounded-2xl border border-[#E9E2D9] bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-5">
+                        <p class="text-xs leading-6 text-[#87978F]">قبل از ثبت، اطلاعات و تصاویر محصول را بررسی کنید.</p>
+                        <button type="submit" class="pf-btn pf-btn-primary w-full px-8 py-3 sm:w-auto">ثبت محصول
+                            <span>←</span></button>
+                    </div>
+                </div>
 
-                            <label for="category_ids" class="mb-2 flex flex-row items-center">
-                                <span>دسته‌بندی:</span>
-                                <span class="text-rose-500">*</span>
-                            </label>
+                {{-- سایدبار تنظیمات --}}
+                <aside class="min-w-0 space-y-5 xl:col-span-1">
+                    <section class="pf-card">
+                        <div class="pf-card-head">
+                            <div>
+                                <h3 class="pf-card-title">دسته‌بندی محصول</h3>
+                                <p class="pf-card-desc">محصول را در دسته‌های مرتبط قرار دهید.</p>
+                            </div><span class="pf-icon"><svg class="size-5" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="1.8">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M4 5.75A1.75 1.75 0 0 1 5.75 4h4.5L12 6h6.25A1.75 1.75 0 0 1 20 7.75v10.5A1.75 1.75 0 0 1 18.25 20h-12.5A1.75 1.75 0 0 1 4 18.25z" />
+                                </svg></span>
+                        </div>
+                        <div class="relative">
+                            <div
+                                class="mb-3 flex items-center gap-2 rounded-xl border border-[#E8E3DA] bg-[#FBF6EF] px-3 py-2.5 focus-within:border-[#95ADA2] focus-within:ring-4 focus-within:ring-[#4C6B62]/10">
+                                <svg class="size-4 flex-none text-[#87978F]" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="7"></circle>
+                                    <path stroke-linecap="round" d="m16 16 4 4"></path>
+                                </svg>
+                                <input type="search" id="category-search" autocomplete="off"
+                                    class="!border-0 !bg-transparent !p-0 !shadow-none !ring-0"
+                                    placeholder="جست‌وجوی دسته‌بندی..." aria-label="جست‌وجوی دسته‌بندی">
+                                <button type="button" id="clear-category-search"
+                                    class="hidden flex-none rounded-lg px-2 py-1 text-xs font-bold text-[#4C6B62] hover:bg-white">
+                                    پاک کردن
+                                </button>
+                            </div>
 
-                            <select name="category_ids[]" id="category_ids"
-                                class="w-full bg-[#F9F9F9] py-3 pr-5 rounded-[10px]" multiple size="1" required>
+                            <div id="selected-category-chips" class="mb-3 flex min-h-8 flex-wrap gap-2"
+                                aria-live="polite">
+                                <span id="category-empty-selection" class="text-xs text-[#A6ADA6]">
+                                    هنوز دسته‌بندی‌ای انتخاب نشده است.
+                                </span>
+                            </div>
 
+                            <div class="overflow-hidden rounded-xl border border-[#E8E3DA] bg-white">
+                                <div
+                                    class="flex items-center justify-between border-b border-[#F0EAE2] bg-[#FCF9F4] px-3 py-2.5">
+                                    <span class="text-xs font-bold text-[#465F56]">همه دسته‌بندی‌ها</span>
+                                    <span id="category-result-count" class="text-[11px] text-[#87978F]">
+                                        {{ $categories->count() }} دسته‌بندی
+                                    </span>
+                                </div>
+                                <div id="category-options" class="max-h-64 overflow-y-auto p-2">
+                                    @foreach ($categories as $category)
+                                        <label data-category-option
+                                            data-category-title="{{ mb_strtolower($category->title) }}"
+                                            class="!mb-0 flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 transition hover:bg-[#FBF6EF]">
+                                            <input type="checkbox" name="category_ids[]" value="{{ $category->id }}"
+                                                class="category-checkbox size-4 flex-none accent-[#4C6B62]"
+                                                @if (in_array($category->id, old('category_ids', []))) checked @endif>
+                                            <span class="min-w-0 flex-1 truncate text-xs font-medium text-[#465F56]">
+                                                {{ $category->title }}
+                                            </span>
+                                            <span
+                                                class="category-check-indicator hidden text-xs font-bold text-[#4C6B62]">✓</span>
+                                        </label>
+                                    @endforeach
+                                    <p id="category-no-results"
+                                        class="hidden px-3 py-8 text-center text-xs text-[#87978F]">
+                                        دسته‌بندی‌ای با این عبارت پیدا نشد.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <p class="pf-hint mt-2">
+                                می‌توانید نام دسته‌بندی را جست‌وجو کنید و چند مورد را هم‌زمان انتخاب کنید.
+                            </p>
+
+                            {{-- این select برای سازگاری با اسکریپت قبلی ویژگی‌ها حفظ شده است. --}}
+                            <select id="category_ids" multiple hidden tabindex="-1" aria-hidden="true">
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->id }}" @if (in_array($category->id, old('category_ids', []))) selected @endif>
                                         {{ $category->title }}
                                     </option>
                                 @endforeach
-
                             </select>
-
-                            <span class="text-xs text-gray-400">
-                                برای انتخاب چند دسته‌بندی، کلید Ctrl را نگه دارید.
-                            </span>
-
-                            @error('category_ids')
-                                <span class="text-xs text-red-500">{{ $message }}</span>
-                            @enderror
-
                         </div>
+                        @error('category_ids')
+                            <span class="pf-error">{{ $message }}</span>
+                        @enderror
+                    </section>
 
-                        <div class="w-full flex flex-col gap-5 mt-8 items-end">
-                            <div class="w-full flex items-center gap-3">
-                                <h3 class="font-bold text-lg">
-                                    مشخصات محصول
-                                </h3>
+                    <section class="pf-card">
+                        <div class="pf-card-head">
+                            <div>
+                                <h3 class="pf-card-title">وضعیت و موجودی</h3>
+                                <p class="pf-card-desc">نحوه نمایش و تعداد موجودی را مشخص کنید.</p>
+                            </div><span class="pf-icon"><svg class="size-5" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="1.8">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M4 7h16v13H4zM8 7V4h8v3M8 12h8M8 16h5" />
+                                </svg></span>
+                        </div>
+                        <div class="flex items-center justify-between gap-3 rounded-xl bg-[#FBF6EF] p-3"><span
+                                class="text-sm font-semibold text-[#465F56]">نمایش در صفحه اصلی</span><label
+                                for="show_in_home" class="pf-switch mb-0"><input type="checkbox" name="show_in_home"
+                                    value="1" id="show_in_home"
+                                    @if (old('show_in_home')) checked @endif><span></span><span></span></label>
+                        </div>
+                        <div class="mt-4"><label for="count">تعداد موجودی</label>
+                            <div class="flex items-center gap-2"><button type="button"
+                                    class="flex size-10 flex-none items-center justify-center rounded-xl bg-[#4C6B62] text-lg text-white hover:bg-[#3B554D]"
+                                    onclick="calculate('+')">＋</button><input type="number" min="1"
+                                    value="{{ old('count', 1) }}" name="count" id="count" dir="ltr" required
+                                    class="text-center"><button type="button"
+                                    class="flex size-10 flex-none items-center justify-center rounded-xl bg-[#4C6B62] text-lg text-white hover:bg-[#3B554D]"
+                                    onclick="calculate('-')">−</button></div>
+                            <p class="pf-hint mt-2">می‌توانید عدد موجودی را مستقیماً ویرایش کنید.</p>
+                        </div>
+                    </section>
+
+                    <section class="pf-card">
+                        <div class="pf-card-head">
+                            <div>
+                                <h3 class="pf-card-title">تصاویر محصول</h3>
+                                <p class="pf-card-desc">تصویر اصلی و تصاویر تکمیلی را بارگذاری کنید.</p>
+                            </div><span class="pf-icon"><svg class="size-5" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="1.8">
+                                    <rect x="3" y="4" width="18" height="16" rx="2" />
+                                    <circle cx="8.5" cy="9" r="1.5" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 15-5-5L5 20" />
+                                </svg></span>
+                        </div>
+                        <div class="space-y-4">
+                            <div><label for="mainImage">تصویر اصلی</label><input type="file" name="mainImage"
+                                    id="mainImage" accept="image/*">
+                                @error('mainImage')
+                                    <span class="pf-error">{{ $message }}</span>
+                                @enderror
                             </div>
-
-                            <div id="product-attributes-list" class="space-y-4"></div>
-
-                            <button type="button" id="add-product-attribute"
-                                class="w-fit p-2 text-sm rounded-md bg-[#1B84FF] hover:bg-[#056EE9] text-white cursor-pointer">
-                                افزودن ویژگی +
-                            </button>
-                        </div>
-
-                        <div class="w-full flex flex-col gap-5 mt-8 items-end">
-
-                            <div class="w-full flex items-center gap-3">
-
-                                <h3 class="font-bold text-lg">
-                                    قیمت های مختلف محصول
-                                </h3>
-
+                            <div><label for="gallery">گالری تصاویر</label><input type="file" name="gallery[]"
+                                    id="gallery" accept="image/*" multiple>
+                                <p class="pf-hint mt-2">حجم کل فایل‌ها نباید بیشتر از ۱ مگابایت باشد.</p>
+                                @error('gallery')
+                                    <span class="pf-error">{{ $message }}</span>
+                                @enderror
                             </div>
-
-                            <div id="packages-list" class="w-full space-y-6"></div>
-
-                            <button type="button" id="add-package"
-                                class="p-2 text-sm rounded-md bg-[#1B84FF] hover:bg-[#056EE9] text-white cursor-pointer">
-                                افزودن محصول متغیر +
-                            </button>
-
                         </div>
+                    </section>
 
-
-                        {{-- دکمه ثبت --}}
-                        <div class="mt-8 text-center">
-
-                            <button type="submit"
-                                class="py-3 px-10 rounded-[10px] bg-[#1B84FF] hover:bg-[#056EE9] text-white cursor-pointer">
-                                ثبت محصول
-                            </button>
-
+                    <section class="pf-card">
+                        <div class="pf-card-head">
+                            <div>
+                                <h3 class="pf-card-title">قیمت‌گذاری</h3>
+                                <p class="pf-card-desc">قیمت اصلی و قیمت تخفیف‌خورده را وارد کنید.</p>
+                            </div><span class="pf-icon"><svg class="size-5" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="1.8">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M12 3v18m5-14.5C17 5.1 15 4 12 4S7 5.1 7 6.8 9 9.5 12 10s5 1.7 5 3.5-2 3.5-5 3.5-5-1.1-5-2.5" />
+                                </svg></span>
                         </div>
-
-                    </div>
-
-
-                    {{-- ========================================== --}}
-                    {{-- ستون سمت چپ: تنظیمات، تصاویر و قیمت --}}
-                    {{-- ========================================== --}}
-
-                    <div class="w-full md:w-1/3 space-y-8">
-
-
-                        {{-- تنظیمات محصول --}}
-                        <div class="w-full flex flex-col gap-6 mt-5">
-
-
-                            {{-- نمایش در خانه --}}
-                            <div class="flex items-center gap-4">
-
-                                <label for="show_in_home">
-                                    نمایش در خانه:
-                                </label>
-
-                                <label for="show_in_home"
-                                    class="w-[50px] h-[28px] flex rounded-full cursor-pointer relative">
-
-                                    <input type="checkbox" name="show_in_home" value="1" id="show_in_home" hidden
-                                        class="peer" @if (old('show_in_home')) checked @endif>
-
-                                    <span
-                                        class="size-full bg-gray-300 shadow-inner rounded-full peer-checked:bg-[#1B84FF] transition-all duration-300"></span>
-
-                                    <span
-                                        class="size-[20px] rounded-full bg-white absolute top-1 left-1 peer-checked:translate-x-[22px] transition-all duration-300 shadow-md"></span>
-
-                                </label>
-
-                            </div>
-
-
-                            {{-- تعداد محصول --}}
-                            <div class="flex items-center gap-4">
-
-                                <label class="mb-2">
-                                    تعداد:
-                                </label>
-
-                                <div class="flex">
-
-                                    <div class="bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4] flex flex-row items-center">
-
-                                        <button type="button"
-                                            class="inline-block size-7 rounded-lg bg-[#1B84FF] hover:bg-[#056EE9] cursor-pointer text-white"
-                                            onclick="calculate('+')">
-                                            +
-                                        </button>
-
-                                        <input type="number" min="1" value="{{ old('count', 1) }}"
-                                            class="outline-none w-14 text-center text-xs" name="count" id="count"
-                                            dir="ltr" required>
-
-                                        <button type="button"
-                                            class="inline-block size-7 rounded-lg bg-[#1B84FF] hover:bg-[#056EE9] cursor-pointer text-white"
-                                            onclick="calculate('-')">
-                                            -
-                                        </button>
-
-                                    </div>
-
-                                </div>
-
-
-                                {{-- راهنما --}}
-                                <div class="relative group">
-
-                                    <span
-                                        class="size-4 text-xs bg-[#ededed] border border-[#6f6f6f] rounded-full p-2 flex justify-center items-center cursor-pointer">
-                                        ?
-                                    </span>
-
-                                    <span
-                                        class="w-70 py-4 text-center rounded-xl text-xs absolute bottom-5 left-5 bg-[#F9F9F9] border border-slate-300 invisible opacity-0 transition-all duration-300 group-hover:visible group-hover:opacity-100">
-                                        اگر تعداد موجودی محصول زیاد بود نیازی نیست + را بزنید. روی عدد موجودی دوبار کلیک
-                                        کرده و عدد مورد نظر را بنویسید.
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        {{-- تصویر اصلی --}}
-                        <div class="w-full mt-3 lg:mt-5 flex flex-col">
-
-                            <label for="mainImage" class="mb-2">
-                                عکس اصلی:
-                            </label>
-
-                            <input type="file"
-                                class="w-full outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]"
-                                name="mainImage" id="mainImage" accept="image/*">
-
-                            @error('mainImage')
-                                <span class="text-xs text-red-500">{{ $message }}</span>
-                            @enderror
-
-                        </div>
-
-
-                        {{-- گالری تصاویر --}}
-                        <div class="w-full mt-3 lg:mt-5 flex flex-col">
-
-                            <label for="gallery" class="mb-2">
-                                گالری تصاویر:
-                            </label>
-
-                            <input type="file"
-                                class="w-full outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]"
-                                name="gallery[]" id="gallery" accept="image/*" multiple>
-
-                            <span class="text-xs text-red-500">
-                                حجم کل فایل‌ها نباید بیشتر از 1 مگابایت باشد.
-                            </span>
-
-                            @error('gallery')
-                                <span class="text-xs text-red-500">{{ $message }}</span>
-                            @enderror
-
-                        </div>
-
-
-                        {{-- قیمت‌ها --}}
-                        <div class="w-full flex flex-col gap-3 md:gap-5 mt-3 lg:mt-5">
-
-
-                            {{-- قیمت اصلی --}}
-                            <div class="w-full flex flex-col gap-3">
-
-                                <label for="primary_price" class="flex items-center gap-2">
-
-                                    <span>قیمت اصلی:</span>
-
-                                    <div class="relative group">
-
-                                        <span
-                                            class="size-4 text-xs bg-[#ededed] border border-[#6f6f6f] rounded-full p-2 flex justify-center items-center cursor-pointer">
-                                            ?
-                                        </span>
-
-                                        <span
-                                            class="w-70 py-4 text-center rounded-xl text-xs absolute bottom-5 left-5 bg-[#F9F9F9] border border-slate-300 invisible opacity-0 transition-all duration-300 group-hover:visible group-hover:opacity-100">
-                                            در صورتی که مایلید برای استعلام قیمت تماس گرفته شود، این فیلد را خالی بگذارید.
-                                        </span>
-
-                                    </div>
-
-                                </label>
-
-                                <input type="number"
-                                    class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]"
-                                    name="primary_price" id="primary_price" min="0"
-                                    value="{{ old('primary_price') }}">
-
+                        <div class="space-y-4">
+                            <div><label for="primary_price">قیمت اصلی</label><input type="number" name="primary_price"
+                                    id="primary_price" min="0" value="{{ old('primary_price') }}"
+                                    placeholder="مبلغ به تومان">
                                 @error('primary_price')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <span class="pf-error">{{ $message }}</span>
                                 @enderror
-
+                                <p class="pf-hint mt-2">
+                                    برای محصولاتی که نیاز به استعلام قیمت دارند، این فیلد را خالی بگذارید.</p>
                             </div>
-
-
-                            {{-- قیمت ویژه --}}
-                            <div class="w-full flex flex-col gap-3">
-
-                                <label for="secondary_price">
-                                    قیمت ویژه:
-                                </label>
-
-                                <input type="number"
-                                    class="outline-none pr-5 py-3 bg-[#F9F9F9] rounded-xl focus:bg-[#f1f1f4]"
+                            <div><label for="secondary_price">قیمت ویژه</label><input type="number"
                                     name="secondary_price" id="secondary_price" min="0"
-                                    value="{{ old('secondary_price') }}">
-
+                                    value="{{ old('secondary_price') }}" placeholder="مبلغ به تومان">
                                 @error('secondary_price')
-                                    <span class="text-xs text-red-500">{{ $message }}</span>
+                                    <span class="pf-error">{{ $message }}</span>
                                 @enderror
-
                             </div>
-
                         </div>
-
-                    </div>
-
-                </div>
-                {{-- پایان ساختار اصلی فرم --}}
-
-            </form>
-
-        </div>
-
+                    </section>
+                </aside>
+            </div>
+        </form>
     </div>
 
-
-
-    {{-- ============================================== --}}
     {{-- قالب ویژگی --}}
-    {{-- ============================================== --}}
-
     <template id="attribute-template">
-
-        <div class="attribute-item border border-[#D5DFE4] rounded-xl p-4 space-y-4 bg-[#F9F9F9]">
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
-
-                <div>
-
-                    <label class="block mb-2 text-sm font-medium">
-                        عنوان ویژگی
-                    </label>
-
-                    <select class="attribute-select w-full border border-[#D5DFE4] rounded-lg p-2 bg-white" required>
-                    </select>
-
-                </div>
-
-                <div>
-
-                    <button type="button"
-                        class="remove-attribute w-full bg-red-100 hover:bg-red-200 text-red-700 rounded-lg p-2">
-                        حذف ویژگی
-                    </button>
-
-                </div>
-
+        <div class="attribute-item space-y-4">
+            <div class="flex flex-col gap-3 sm:flex-row sm:items-end">
+                <div class="min-w-0 flex-1"><label class="mb-2 block text-xs font-bold text-[#465F56]">عنوان
+                        ویژگی</label><select
+                        class="attribute-select w-full rounded-xl border border-[#E8E3DA] bg-white p-3 text-sm"
+                        required></select></div>
+                <button type="button" class="remove-attribute pf-danger">حذف ویژگی</button>
             </div>
-
-            <div class="attribute-values-container border-t border-[#D5DFE4] pt-4">
-
-                <div class="flex items-center justify-between mb-3">
-
-                    <label class="font-medium text-sm">
-                        مقادیر ویژگی
-                    </label>
-
-                    <button type="button" class="add-attribute-value text-[#1B84FF] hover:text-[#056EE9] text-sm">
-                        + افزودن مقدار
-                    </button>
-
-                </div>
-
+            <div class="attribute-values-container border-t border-[#E8E3DA] pt-4">
+                <div class="mb-3 flex items-center justify-between gap-3"><label class="mb-0 text-xs font-bold">مقادیر
+                        ویژگی</label><button type="button"
+                        class="add-attribute-value text-xs font-bold text-[#4C6B62] hover:text-[#3B554D]">＋ افزودن
+                        مقدار</button></div>
                 <div class="attribute-values space-y-2"></div>
-
             </div>
-
         </div>
-
     </template>
 
-
-
-    {{-- ============================================== --}}
     {{-- قالب مقدار ویژگی --}}
-    {{-- ============================================== --}}
-
     <template id="attribute-value-template">
-
         <div class="attribute-value-item flex items-center gap-2">
-
-            <input type="text" class="attribute-value-input flex-1 border border-[#D5DFE4] rounded-lg p-2 bg-white"
+            <input type="text"
+                class="attribute-value-input min-w-0 flex-1 rounded-xl border border-[#E8E3DA] bg-white p-3 text-sm"
                 placeholder="مقدار ویژگی" required>
-
-            <button type="button"
-                class="remove-attribute-value bg-red-100 hover:bg-red-200 text-red-600 rounded-lg px-3 py-2">
-                ✕
-            </button>
-
+            <button type="button" class="remove-attribute-value pf-danger" aria-label="حذف مقدار">✕</button>
         </div>
-
     </template>
 
-
-
-    {{-- ============================================== --}}
     {{-- قالب محصول متغیر --}}
-    {{-- ============================================== --}}
-
     <template id="package-template">
-
-        <div class="package-item border border-[#D5DFE4] rounded-xl p-5 space-y-5 bg-[#F9F9F9]">
-
-            {{-- عنوان محصول متغیر --}}
-            <div class="flex items-center justify-between gap-3">
-
-                <h3 class="package-heading font-bold text-lg">
-                    محصول متغیر جدید
-                </h3>
-
-                <button type="button"
-                    class="remove-package bg-red-100 hover:bg-red-200 text-red-700 rounded-lg px-3 py-2">
-                    حذف محصول متغیر
-                </button>
-
+        <div class="package-item space-y-5">
+            <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <h3 class="package-heading text-sm font-extrabold text-[#344B43]">محصول متغیر جدید</h3><button
+                    type="button" class="remove-package pf-danger">حذف محصول متغیر</button>
             </div>
-
-
-            {{-- اطلاعات محصول متغیر --}}
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-
-                {{-- تعداد --}}
-                <div>
-
-                    <label class="block mb-2 text-sm">
-                        تعداد
-                    </label>
-
-                    <input type="number" class="package-count w-full border border-[#D5DFE4] rounded-lg p-2 bg-white"
-                        min="1" value="1" required>
-
-                </div>
-
-                {{-- قیمت اصلی --}}
-                <div>
-
-                    <label class="block mb-2 text-sm">
-                        قیمت اصلی
-                    </label>
-
-                    <input type="number"
-                        class="package-primary-price w-full border border-[#D5DFE4] rounded-lg p-2 bg-white"
-                        min="0" placeholder="قیمت اصلی">
-
-                </div>
-
-                {{-- قیمت ثانویه --}}
-                <div>
-
-                    <label class="block mb-2 text-sm">
-                        قیمت ویژه
-                    </label>
-
-                    <input type="number"
-                        class="package-secondary-price w-full border border-[#D5DFE4] rounded-lg p-2 bg-white"
-                        min="0" placeholder="قیمت ویژه">
-
-                </div>
-
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div><label class="mb-2 block text-xs">تعداد</label><input type="number" class="package-count"
+                        min="1" value="1" required></div>
+                <div><label class="mb-2 block text-xs">قیمت اصلی</label><input type="number"
+                        class="package-primary-price" min="0" placeholder="قیمت اصلی"></div>
+                <div><label class="mb-2 block text-xs">قیمت ویژه</label><input type="number"
+                        class="package-secondary-price" min="0" placeholder="قیمت ویژه"></div>
             </div>
-
-
-            {{-- ویژگی‌های محصول متغیر --}}
-            <div class="package-attributes-section border-t border-[#D5DFE4] pt-4">
-
-                <div class="flex items-center justify-between gap-3 mb-4">
-
-                    <h4 class="font-bold">
-                        ویژگی‌های این محصول متغیر
-                    </h4>
-
-                    <button type="button"
-                        class="add-package-attribute bg-[#1B84FF] hover:bg-[#056EE9] text-white rounded-lg px-3 py-2 text-sm">
-                        + افزودن ویژگی
-                    </button>
-
+            <div class="package-attributes-section border-t border-[#E8E3DA] pt-4">
+                <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <h4 class="text-xs font-extrabold text-[#344B43]">ویژگی‌های این محصول متغیر</h4><button type="button"
+                        class="add-package-attribute pf-btn pf-btn-soft">＋ افزودن ویژگی</button>
                 </div>
-
                 <div class="package-attributes-list space-y-3"></div>
-
             </div>
-
         </div>
-
     </template>
-
-
 
     {{-- ============================================== --}}
     {{-- ارسال اطلاعات دسته‌بندی‌ها به JavaScript --}}
@@ -628,6 +930,123 @@
     {{-- ============================================== --}}
     {{-- فایل‌های JavaScript --}}
     {{-- ============================================== --}}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const root = document.querySelector('.product-form-shell');
+            if (!root) return;
+
+            const searchInput = root.querySelector('#category-search');
+            const clearSearchButton = root.querySelector('#clear-category-search');
+            const optionLabels = Array.from(root.querySelectorAll('[data-category-option]'));
+            const checkboxes = Array.from(root.querySelectorAll('.category-checkbox'));
+            const chipsContainer = root.querySelector('#selected-category-chips');
+            const emptySelection = root.querySelector('#category-empty-selection');
+            const resultCount = root.querySelector('#category-result-count');
+            const noResults = root.querySelector('#category-no-results');
+            const compatibilitySelect = root.querySelector('#category_ids');
+            const form = root.querySelector('form');
+
+            function updateSelectedCategories() {
+                const selected = checkboxes.filter(input => input.checked);
+
+                chipsContainer.querySelectorAll('.category-chip').forEach(chip => chip.remove());
+                emptySelection.classList.toggle('hidden', selected.length > 0);
+
+                selected.forEach(input => {
+                    const label = input.closest('[data-category-option]');
+                    const title = label.querySelector('span.flex-1').textContent.trim();
+
+                    const chip = document.createElement('span');
+                    chip.className = 'category-chip';
+
+                    const chipText = document.createElement('span');
+                    chipText.textContent = title;
+
+                    const removeButton = document.createElement('button');
+                    removeButton.type = 'button';
+                    removeButton.setAttribute('aria-label', 'حذف ' + title);
+                    removeButton.textContent = '×';
+                    removeButton.addEventListener('click', function() {
+                        input.checked = false;
+                        input.dispatchEvent(new Event('change', {
+                            bubbles: true
+                        }));
+                    });
+
+                    chip.append(chipText, removeButton);
+                    chipsContainer.appendChild(chip);
+                });
+
+                if (compatibilitySelect) {
+                    Array.from(compatibilitySelect.options).forEach(option => {
+                        option.selected = selected.some(input => input.value === option.value);
+                    });
+
+                    // اطلاع‌رسانی به کدهای قبلی که روی تغییر دسته‌بندی گوش می‌دهند.
+                    compatibilitySelect.dispatchEvent(new Event('change', {
+                        bubbles: true
+                    }));
+                }
+
+                optionLabels.forEach(label => {
+                    const input = label.querySelector('.category-checkbox');
+                    const indicator = label.querySelector('.category-check-indicator');
+                    label.classList.toggle('is-selected', input.checked);
+                    indicator.classList.toggle('hidden', !input.checked);
+                });
+
+                resultCount.textContent = selected.length + ' مورد انتخاب شده';
+            }
+
+            function filterCategories() {
+                const query = (searchInput.value || '').trim().toLocaleLowerCase('fa');
+                let visibleCount = 0;
+
+                optionLabels.forEach(label => {
+                    const title = (label.dataset.categoryTitle || '').toLocaleLowerCase('fa');
+                    const matches = !query || title.includes(query);
+                    label.classList.toggle('hidden', !matches);
+                    if (matches) visibleCount++;
+                });
+
+                noResults.classList.toggle('hidden', visibleCount !== 0);
+                clearSearchButton.classList.toggle('hidden', query.length === 0);
+                resultCount.textContent = visibleCount + ' از ' + optionLabels.length + ' دسته‌بندی';
+            }
+
+            checkboxes.forEach(input => {
+                input.addEventListener('change', updateSelectedCategories);
+            });
+
+            searchInput.addEventListener('input', filterCategories);
+            clearSearchButton.addEventListener('click', function() {
+                searchInput.value = '';
+                filterCategories();
+                searchInput.focus();
+            });
+
+            // حداقل یک دسته‌بندی باید انتخاب شده باشد.
+            if (form) {
+                form.addEventListener('submit', function(event) {
+                    const hasSelection = checkboxes.some(input => input.checked);
+                    if (!hasSelection) {
+                        event.preventDefault();
+                        searchInput.setCustomValidity('لطفاً حداقل یک دسته‌بندی انتخاب کنید.');
+                        searchInput.reportValidity();
+                        searchInput.addEventListener('input', function clearValidity() {
+                            searchInput.setCustomValidity('');
+                            searchInput.removeEventListener('input', clearValidity);
+                        });
+                        searchInput.focus();
+                    }
+                });
+            }
+
+            updateSelectedCategories();
+            filterCategories();
+        });
+    </script>
 
     <script src="{{ url('js/attribute.js') }}"></script>
 
