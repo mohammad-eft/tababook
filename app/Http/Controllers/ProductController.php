@@ -865,7 +865,6 @@ class ProductController extends Controller
         }
 
         $setting = homeSetting::document();
-
         return view('admin.product.index', [
             'products' => $products,
             'setting' => $setting,
@@ -1340,7 +1339,6 @@ class ProductController extends Controller
 
         $product->setAttribute('attributes', $attributes);
         $product->setAttribute('variants', $variants);
-
         return view('admin.product.single', [
             'product' => $product,
             'setting' => homeSetting::document(),
