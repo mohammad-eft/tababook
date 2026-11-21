@@ -360,191 +360,569 @@
         }
 
 
-/* ==========================================
-   طراحی بخش ویژگی‌های محصول
-========================================== */
+        /* ==========================================
+       طراحی بخش ویژگی‌های محصول
+    ========================================== */
 
-.product-form-shell #product-attributes-list,
-.product-form-shell #packages-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
+        .product-form-shell #product-attributes-list,
+        .product-form-shell #packages-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
 
-/* کارت ویژگی */
-.product-form-shell .attribute-item {
-    padding: 18px;
-    border: 1px solid #E9E2D9;
-    border-radius: 15px;
-    background: #FCF9F4;
-    transition: border-color .2s, box-shadow .2s;
-}
+        /* کارت ویژگی */
+        .product-form-shell .attribute-item {
+            padding: 18px;
+            border: 1px solid #E9E2D9;
+            border-radius: 15px;
+            background: #FCF9F4;
+            transition: border-color .2s, box-shadow .2s;
+        }
 
-.product-form-shell .attribute-item:hover {
-    border-color: #D5E2D9;
-    box-shadow: 0 4px 14px rgba(76, 107, 98, .05);
-}
+        .product-form-shell .attribute-item:hover {
+            border-color: #D5E2D9;
+            box-shadow: 0 4px 14px rgba(76, 107, 98, .05);
+        }
 
-/* کارت محصول متغیر */
-.product-form-shell .package-item {
-    padding: 20px;
-    border: 1px solid #E9E2D9;
-    border-radius: 16px;
-    background: #FBF6EF;
-    transition: border-color .2s, box-shadow .2s;
-}
+        /* کارت محصول متغیر */
+        .product-form-shell .package-item {
+            padding: 20px;
+            border: 1px solid #E9E2D9;
+            border-radius: 16px;
+            background: #FBF6EF;
+            transition: border-color .2s, box-shadow .2s;
+        }
 
-.product-form-shell .package-item:hover {
-    border-color: #D5E2D9;
-}
+        .product-form-shell .package-item:hover {
+            border-color: #D5E2D9;
+        }
 
-/* عنوان ویژگی‌ها و پکیج‌ها */
-.product-form-shell .attribute-item label,
-.product-form-shell .package-item label {
-    display: block;
-    margin-bottom: 8px;
-    color: #465F56;
-    font-size: 12px;
-    font-weight: 750;
-}
+        /* عنوان ویژگی‌ها و پکیج‌ها */
+        .product-form-shell .attribute-item label,
+        .product-form-shell .package-item label {
+            display: block;
+            margin-bottom: 8px;
+            color: #465F56;
+            font-size: 12px;
+            font-weight: 750;
+        }
 
-/* ورودی‌های داخل ویژگی و پکیج */
-.product-form-shell .attribute-item input:not([type="color"]),
-.product-form-shell .attribute-item select,
-.product-form-shell .package-item input,
-.product-form-shell .package-item select {
+        /* ورودی‌های داخل ویژگی و پکیج */
+        .product-form-shell .attribute-item input:not([type="color"]),
+        .product-form-shell .attribute-item select,
+        .product-form-shell .package-item input,
+        .product-form-shell .package-item select {
+            width: 100%;
+            min-width: 0;
+            min-height: 43px;
+            padding: 10px 12px;
+            border: 1px solid #E8E3DA;
+            border-radius: 10px;
+            outline: none;
+            background: #FFFFFF;
+            color: #465F56;
+            font-size: 13px;
+            transition: border-color .2s, box-shadow .2s;
+        }
+
+        .product-form-shell .attribute-item input:focus,
+        .product-form-shell .attribute-item select:focus,
+        .product-form-shell .package-item input:focus,
+        .product-form-shell .package-item select:focus {
+            border-color: #95ADA2;
+            box-shadow: 0 0 0 3px rgba(76, 107, 98, .10);
+        }
+
+        /* ورودی رنگ */
+        .product-form-shell .attribute-item input[type="color"] {
+            width: 100%;
+            height: 43px;
+            padding: 4px;
+            border: 1px solid #E8E3DA;
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+        }
+
+        /* ردیف مقادیر ویژگی */
+        .product-form-shell .attribute-values {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .product-form-shell .attribute-value-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 0;
+            padding: 8px;
+            border: 1px solid #E9E2D9;
+            border-radius: 12px;
+            background: #FFFFFF;
+        }
+
+        .product-form-shell .attribute-value-item input {
+            flex: 1;
+            min-width: 0;
+            border: 0 !important;
+            background: transparent !important;
+            box-shadow: none !important;
+        }
+
+        /* دکمه افزودن مقدار */
+        .product-form-shell .add-attribute-value,
+        .product-form-shell .add-package-attribute {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            border-radius: 9px;
+            padding: 9px 12px;
+            background: #EDF3EF;
+            color: #4C6B62;
+            font-size: 11px;
+            font-weight: 750;
+            transition: .2s;
+        }
+
+        .product-form-shell .add-attribute-value:hover,
+        .product-form-shell .add-package-attribute:hover {
+            background: #DCE8DF;
+            color: #3B554D;
+        }
+
+        /* دکمه‌های حذف */
+        .product-form-shell .remove-attribute,
+        .product-form-shell .remove-package,
+        .product-form-shell .remove-attribute-value {
+            flex: none;
+            border: 1px solid #F2DCDD;
+            border-radius: 9px;
+            background: #FBEAEC;
+            color: #C65D6D;
+            font-size: 11px;
+            font-weight: 750;
+            transition: .2s;
+        }
+
+        .product-form-shell .remove-attribute:hover,
+        .product-form-shell .remove-package:hover,
+        .product-form-shell .remove-attribute-value:hover {
+            border-color: #EEC7CC;
+            background: #F6DADD;
+        }
+
+        /* جداکننده بخش‌ها */
+        .product-form-shell .attribute-values-container,
+        .product-form-shell .package-attributes-section {
+            border-color: #E9E2D9;
+        }
+
+        /* عنوان پکیج */
+        .product-form-shell .package-heading {
+            color: #344B43;
+            font-size: 13px;
+            font-weight: 850;
+        }
+
+        /* موبایل */
+        @media (max-width: 640px) {
+
+            .product-form-shell .attribute-item,
+            .product-form-shell .package-item {
+                padding: 14px;
+                border-radius: 13px;
+            }
+
+            .product-form-shell .attribute-value-item {
+                gap: 7px;
+                padding: 6px;
+            }
+
+            .product-form-shell .remove-attribute-value {
+                padding: 7px 9px;
+            }
+        }
+
+        /* ==========================================
+       Product Tree - Tababook
+    ========================================== */
+
+        .product-form-shell .tree-product-intro {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding: 15px;
+            margin-bottom: 18px;
+            border: 1px solid #DCE8DF;
+            border-radius: 13px;
+            background: #F6F9F5;
+        }
+
+        .product-form-shell .tree-product-intro strong {
+            color: #344B43;
+            font-size: 13px;
+            font-weight: 850;
+        }
+
+        .product-form-shell .tree-product-intro p {
+            margin-top: 5px;
+            color: #87978F;
+            font-size: 11px;
+            line-height: 1.8;
+        }
+
+        .product-form-shell .tree-product-badge {
+            padding: 6px 10px;
+            border-radius: 8px;
+            background: #E8F0EA;
+            color: #4C6B62;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .product-form-shell .product-tree {
+            display: flex;
+            flex-direction: column;
+            gap: 13px;
+        }
+
+        .product-form-shell .tree-feature {
+            position: relative;
+            min-width: 0;
+            padding: 14px;
+            border: 1px solid #DCE8DF;
+            border-radius: 14px;
+            background: #F8FAF7;
+        }
+
+        .product-form-shell .tree-feature-head,
+        .product-form-shell .tree-value-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .product-form-shell .tree-feature-title,
+        .product-form-shell .tree-value-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 0;
+            color: #344B43;
+            font-size: 12px;
+            font-weight: 850;
+        }
+
+        .product-form-shell .tree-toggle {
+            display: flex;
+            width: 27px;
+            height: 27px;
+            flex: none;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background: #E8F0EA;
+            color: #4C6B62;
+            cursor: pointer;
+        }
+
+        .product-form-shell .tree-toggle:hover {
+            background: #DCE8DF;
+        }
+
+        .product-form-shell .tree-actions {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .product-form-shell .tree-action {
+            padding: 7px 9px;
+            border-radius: 8px;
+            background: #EDF3EF;
+            color: #4C6B62;
+            font-size: 10px;
+            font-weight: 750;
+            transition: .2s;
+        }
+
+        .product-form-shell .tree-action:hover {
+            background: #DCE8DF;
+        }
+
+        .product-form-shell .tree-action-danger {
+            background: #FBEAEC;
+            color: #C65D6D;
+        }
+
+        .product-form-shell .tree-action-danger:hover {
+            background: #F6DADD;
+        }
+
+        .product-form-shell .tree-feature-body {
+            margin-top: 13px;
+            padding-right: 17px;
+            border-right: 2px solid #DCE8DF;
+        }
+
+        .product-form-shell .tree-value {
+            position: relative;
+            margin-top: 10px;
+            padding: 12px;
+            border: 1px solid #E9E2D9;
+            border-radius: 12px;
+            background: #fff;
+        }
+
+        .product-form-shell .tree-value-name {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 0;
+            color: #465F56;
+            font-size: 12px;
+            font-weight: 750;
+        }
+
+        .product-form-shell .tree-value-dot {
+            width: 7px;
+            height: 7px;
+            flex: none;
+            border-radius: 50%;
+            background: #95ADA2;
+        }
+
+        .product-form-shell .tree-price-box {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 10px;
+            background: #FBF6EF;
+        }
+
+        .product-form-shell .tree-price-box label {
+            margin-bottom: 6px;
+            font-size: 11px;
+        }
+
+        .product-form-shell .tree-price-box input {
+            min-height: 39px;
+            padding: 8px 10px;
+            border: 1px solid #E8E3DA;
+            border-radius: 9px;
+            background: #fff;
+            font-size: 12px;
+        }
+
+        .product-form-shell .tree-children {
+            margin-top: 12px;
+            padding-right: 17px;
+            border-right: 2px solid #E9E2D9;
+        }
+
+        .product-form-shell .tree-add-form {
+            display: flex;
+            align-items: end;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+            padding: 12px;
+            border: 1px dashed #95ADA2;
+            border-radius: 11px;
+            background: #F6F9F5;
+        }
+
+        .product-form-shell .tree-add-form .tree-add-field {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .product-form-shell .tree-add-form label {
+            margin-bottom: 6px;
+            font-size: 11px;
+        }
+
+        .product-form-shell .tree-add-form input {
+            min-height: 40px;
+            padding: 9px 11px;
+            border: 1px solid #DCE8DF;
+            border-radius: 9px;
+            background: white;
+            font-size: 12px;
+        }
+
+        .product-form-shell .tree-add-form button {
+            min-height: 40px;
+            padding: 8px 13px;
+            border-radius: 9px;
+            font-size: 11px;
+            font-weight: 750;
+        }
+
+        .product-form-shell .tree-add-confirm {
+            background: #4C6B62;
+            color: white;
+        }
+
+        .product-form-shell .tree-add-cancel {
+            background: #F5E8E6;
+            color: #4C6B62;
+        }
+
+        .product-form-shell .product-tree-empty {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 7px;
+            padding: 30px 15px;
+            border: 1px dashed #DCE8DF;
+            border-radius: 13px;
+            background: #FCF9F4;
+            text-align: center;
+        }
+
+        .product-form-shell .product-tree-empty .empty-icon {
+            display: flex;
+            width: 42px;
+            height: 42px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: #F5E8E6;
+            color: #4C6B62;
+            font-size: 23px;
+        }
+
+        .product-form-shell .product-tree-empty strong {
+            color: #465F56;
+            font-size: 12px;
+        }
+
+        .product-form-shell .product-tree-empty p {
+            color: #87978F;
+            font-size: 11px;
+        }
+
+        .product-form-shell .product-tree-summary {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 17px;
+            padding-top: 14px;
+            border-top: 1px solid #F0EAE2;
+            color: #87978F;
+            font-size: 11px;
+        }
+
+        .product-form-shell .product-tree-summary strong {
+            color: #4C6B62;
+            font-weight: 850;
+        }
+
+        @media(max-width:640px) {
+            .product-form-shell .tree-feature {
+                padding: 11px;
+            }
+
+            .product-form-shell .tree-feature-body,
+            .product-form-shell .tree-children {
+                padding-right: 10px;
+            }
+
+            .product-form-shell .tree-price-box {
+                grid-template-columns: 1fr;
+            }
+
+            .product-form-shell .tree-actions {
+                width: 100%;
+            }
+        }
+
+        .product-form-shell .tree-edit-input {
+            width: 140px !important;
+            min-width: 100px !important;
+            min-height: 34px !important;
+            padding: 6px 9px !important;
+            border: 1px solid #95ADA2 !important;
+            border-radius: 8px !important;
+            background: #fff !important;
+            color: #344B43 !important;
+            font-size: 12px !important;
+            outline: none;
+        }
+
+        .product-form-shell .tree-edit-input:focus {
+            border-color: #4C6B62 !important;
+            box-shadow: 0 0 0 3px rgba(76, 107, 98, .1) !important;
+        }
+
+        .tree-feature-select {
     width: 100%;
-    min-width: 0;
-    min-height: 43px;
+    min-height: 44px;
     padding: 10px 12px;
-    border: 1px solid #E8E3DA;
+    border: 1px solid #dbe3df;
     border-radius: 10px;
+    background: #fff;
+    color: #334155;
     outline: none;
-    background: #FFFFFF;
-    color: #465F56;
-    font-size: 13px;
-    transition: border-color .2s, box-shadow .2s;
+    direction: rtl;
 }
 
-.product-form-shell .attribute-item input:focus,
-.product-form-shell .attribute-item select:focus,
-.product-form-shell .package-item input:focus,
-.product-form-shell .package-item select:focus {
-    border-color: #95ADA2;
-    box-shadow: 0 0 0 3px rgba(76, 107, 98, .10);
+.tree-feature-select:focus {
+    border-color: #4c6b62;
+    box-shadow: 0 0 0 3px rgba(76, 107, 98, 0.10);
 }
 
-/* ورودی رنگ */
-.product-form-shell .attribute-item input[type="color"] {
-    width: 100%;
-    height: 43px;
-    padding: 4px;
-    border: 1px solid #E8E3DA;
+.tree-add-hint {
+    padding: 12px;
     border-radius: 10px;
-    background: white;
-    cursor: pointer;
-}
-
-/* ردیف مقادیر ویژگی */
-.product-form-shell .attribute-values {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.product-form-shell .attribute-value-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-width: 0;
-    padding: 8px;
-    border: 1px solid #E9E2D9;
-    border-radius: 12px;
-    background: #FFFFFF;
-}
-
-.product-form-shell .attribute-value-item input {
-    flex: 1;
-    min-width: 0;
-    border: 0 !important;
-    background: transparent !important;
-    box-shadow: none !important;
-}
-
-/* دکمه افزودن مقدار */
-.product-form-shell .add-attribute-value,
-.product-form-shell .add-package-attribute {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    border-radius: 9px;
-    padding: 9px 12px;
-    background: #EDF3EF;
-    color: #4C6B62;
-    font-size: 11px;
-    font-weight: 750;
-    transition: .2s;
-}
-
-.product-form-shell .add-attribute-value:hover,
-.product-form-shell .add-package-attribute:hover {
-    background: #DCE8DF;
-    color: #3B554D;
-}
-
-/* دکمه‌های حذف */
-.product-form-shell .remove-attribute,
-.product-form-shell .remove-package,
-.product-form-shell .remove-attribute-value {
-    flex: none;
-    border: 1px solid #F2DCDD;
-    border-radius: 9px;
-    background: #FBEAEC;
-    color: #C65D6D;
-    font-size: 11px;
-    font-weight: 750;
-    transition: .2s;
-}
-
-.product-form-shell .remove-attribute:hover,
-.product-form-shell .remove-package:hover,
-.product-form-shell .remove-attribute-value:hover {
-    border-color: #EEC7CC;
-    background: #F6DADD;
-}
-
-/* جداکننده بخش‌ها */
-.product-form-shell .attribute-values-container,
-.product-form-shell .package-attributes-section {
-    border-color: #E9E2D9;
-}
-
-/* عنوان پکیج */
-.product-form-shell .package-heading {
-    color: #344B43;
+    background: #f8faf9;
+    color: #64748b;
     font-size: 13px;
-    font-weight: 850;
 }
 
-/* موبایل */
-@media (max-width: 640px) {
-    .product-form-shell .attribute-item,
-    .product-form-shell .package-item {
-        padding: 14px;
-        border-radius: 13px;
-    }
-
-    .product-form-shell .attribute-value-item {
-        gap: 7px;
-        padding: 6px;
-    }
-
-    .product-form-shell .remove-attribute-value {
-        padding: 7px 9px;
-    }
+.tree-select {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+    border: 1px solid #dce3df;
+    border-radius: 10px;
+    background: #fff;
+    outline: none;
 }
 
+.tree-select:focus {
+    border-color: #4c6b62;
+}
+
+.tree-color-input {
+    width: 48px;
+    height: 42px;
+    padding: 3px;
+    border: 1px solid #dce3df;
+    border-radius: 9px;
+    cursor: pointer;
+    background: #fff;
+}
+
+.tree-color-preview {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    flex-shrink: 0;
+}
     </style>
 
     @if (session('message'))
@@ -663,18 +1041,44 @@
                         <div class="pf-card-head">
                             <div>
                                 <h3 class="pf-card-title">تنوع و قیمت‌های مختلف</h3>
-                                <p class="pf-card-desc">اگر محصول در چند مدل یا ترکیب عرضه می‌شود، متغیرهای آن را بسازید.
+                                <p class="pf-card-desc">
+                                    ویژگی‌های متغیر محصول را به‌صورت درختی تعریف کنید؛
+                                    برای مثال رنگ، سپس سایز و در نهایت قیمت هر ترکیب.
                                 </p>
-                            </div><span class="pf-icon"><svg class="size-5" viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="1.8">
+                            </div>
+                            <span class="pf-icon">
+                                <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.8">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M4 7h16M4 12h16M4 17h16M7 4v6m10 4v6" />
-                                </svg></span>
+                                </svg>
+                            </span>
                         </div>
-                        <div id="packages-list" class="w-full space-y-4"></div>
-                        <button type="button" id="add-package" class="pf-btn pf-btn-soft mt-4">＋ افزودن محصول
-                            متغیر</button>
+
+                        <div class="tree-product-intro">
+                            <div>
+                                <strong>ساختار تنوع‌های محصول</strong>
+                                <p>ابتدا یک ویژگی اضافه کنید و سپس مقادیر و زیرشاخه‌های آن را بسازید.</p>
+                            </div>
+                            <span class="tree-product-badge">مدیریت درختی</span>
+                        </div>
+
+                        <div id="product-tree" class="product-tree mb-5"></div>
+
+                        <button type="button" id="add-root-feature" class="pf-btn pf-btn-primary">
+                            ＋ افزودن ویژگی اصلی
+                        </button>
+
+                        <div class="product-tree-summary">
+                            <span>تعداد ویژگی‌ها: <strong id="tree-feature-count">۰</strong></span>
+                            <span>تعداد مقادیر: <strong id="tree-value-count">۰</strong></span>
+                            <span>ترکیب‌های نهایی: <strong id="tree-leaf-count">۰</strong></span>
+                        </div>
                     </section>
+
+                    <script>
+                        window.PRODUCT_FEATURES = @json(old('product_features', []));
+                    </script>
 
                     <div
                         class="flex flex-col-reverse gap-3 rounded-2xl border border-[#E9E2D9] bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-5">
@@ -789,8 +1193,8 @@
                         <div class="mt-4"><label for="count">تعداد موجودی</label>
                             <div class="flex items-center gap-2"><button type="button"
                                     class="flex size-10 flex-none items-center justify-center rounded-xl bg-[#4C6B62] text-lg text-white hover:bg-[#3B554D]"
-                                    onclick="calculate('+')">＋</button><input type="number" min="1"
-                                    value="{{ old('count', 1) }}" name="count" id="count" dir="ltr" required
+                                    onclick="calculate('+')">＋</button><input type="number" min="0"
+                                    value="{{ old('count', 0) }}" name="count" id="count" dir="ltr"
                                     class="text-center"><button type="button"
                                     class="flex size-10 flex-none items-center justify-center rounded-xl bg-[#4C6B62] text-lg text-white hover:bg-[#3B554D]"
                                     onclick="calculate('-')">−</button></div>
@@ -921,9 +1325,11 @@
     {{-- ارسال اطلاعات دسته‌بندی‌ها به JavaScript --}}
     {{-- ============================================== --}}
 
+
     <script>
-        window.CATEGORIES = @json($categoriesData);
-    </script>
+    window.PRODUCT_FEATURES = @json(old('product_features', []));
+    window.CATEGORIES = @json($categoriesData);
+</script>
 
 
 
@@ -1027,21 +1433,21 @@
             });
 
             // حداقل یک دسته‌بندی باید انتخاب شده باشد.
-            if (form) {
-                form.addEventListener('submit', function(event) {
-                    const hasSelection = checkboxes.some(input => input.checked);
-                    if (!hasSelection) {
-                        event.preventDefault();
-                        searchInput.setCustomValidity('لطفاً حداقل یک دسته‌بندی انتخاب کنید.');
-                        searchInput.reportValidity();
-                        searchInput.addEventListener('input', function clearValidity() {
-                            searchInput.setCustomValidity('');
-                            searchInput.removeEventListener('input', clearValidity);
-                        });
-                        searchInput.focus();
-                    }
-                });
-            }
+            // if (form) {
+            //     form.addEventListener('submit', function(event) {
+            //         const hasSelection = checkboxes.some(input => input.checked);
+            //         if (!hasSelection) {
+            //             event.preventDefault();
+            //             searchInput.setCustomValidity('لطفاً حداقل یک دسته‌بندی انتخاب کنید.');
+            //             searchInput.reportValidity();
+            //             searchInput.addEventListener('input', function clearValidity() {
+            //                 searchInput.setCustomValidity('');
+            //                 searchInput.removeEventListener('input', clearValidity);
+            //             });
+            //             searchInput.focus();
+            //         }
+            //     });
+            // }
 
             updateSelectedCategories();
             filterCategories();
@@ -1053,6 +1459,7 @@
     <script src="{{ url('js/product.js') }}"></script>
 
     <script src="{{ url('js/packageForm.js') }}"></script>
+    <script src="{{ url('js/productTree.js') }}"></script>
 
 
 @endsection

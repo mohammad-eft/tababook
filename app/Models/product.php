@@ -18,14 +18,17 @@ class product extends Model
         'writer',
         'brand',
     ];
+
     public function media()
     {
         return $this->hasMany(product_media::class);
     }
+
     public function categories()
     {
         return $this->belongsToMany(category::class, 'category_products');
     }
+
     // public function attributes()
     // {
     //     return $this->hasMany(product_attributes::class);
@@ -34,17 +37,32 @@ class product extends Model
     {
         return $this->hasMany(carts::class);
     }
-    public function packs(){
+
+    public function packs()
+    {
         return $this->belongsToMany(pack::class, 'product_packs');
     }
-    public function productAttributes(){
+
+    public function productAttributes()
+    {
         return $this->hasMany(product_attributes::class);
     }
-    public function packages(){
+
+    public function packages()
+    {
         return $this->hasMany(package::class);
     }
 
-    public function packageAttributes(){
+    public function packageAttributes()
+    {
         return $this->hasMany(package_attribute::class);
+    }
+
+    public function productFeatures()
+    {
+        return $this
+            ->hasMany(ProductFeature::class, 'product_id')
+            ->whereNull('parent_value_id')
+            ->orderBy('sort_order');
     }
 }
