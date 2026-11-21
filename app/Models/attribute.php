@@ -13,19 +13,28 @@ class attribute extends Model
         'key',
     ];
 
-    public function product(){
+    public function product()
+    {
         return $this->belongsTo(product::class);
     }
 
-    public function category(){
+    public function category()
+    {
         return $this->belongsTo(category::class);
     }
 
-    public function package(){
+    public function package()
+    {
         return $this->belongsTo(package::class);
     }
 
-    public function productAttributes(){
+    public function productAttributes()
+    {
         return $this->hasMany(product_attributes::class);
+    }
+
+    public function productFeatures()
+    {
+        return $this->hasMany(ProductFeature::class, 'attribute_id');
     }
 }

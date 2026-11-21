@@ -1,13 +1,18 @@
+
 document.addEventListener('DOMContentLoaded', function () {
     const root = document.querySelector('#product-tree');
     if (!root) return;
 
-    // const emptyState = document.querySelector('#product-tree-empty');
+    const categorySelect = document.querySelector('#category_ids');
     const featureCount = document.querySelector('#tree-feature-count');
     const valueCount = document.querySelector('#tree-value-count');
     const leafCount = document.querySelector('#tree-leaf-count');
 
     let activeForm = null;
+
+    // --------------------------------------------------
+    // ابزارهای عمومی
+    // --------------------------------------------------
 
     function uid() {
         return window.crypto?.randomUUID
@@ -25,20 +30,55 @@ document.addEventListener('DOMContentLoaded', function () {
         })[char]);
     }
 
+    function normalizeKey(value) {
+        return String(value ?? '')
+            .trim()
+            .replace(/ي/g, 'ی')
+            .replace(/ك/g, 'ک')
+            .replace(/\s+/g, ' ');
+    }
+
+    function isColorFeature(feature) {
+        const key = normalizeKey(feature?.name);
+
+        return key === 'رنگ' ||
+            String(feature?.type ?? '').toLowerCase() === 'color';
+    }
+
+    function isValidHex(value) {
+        return /^#[0-9a-fA-F]{6}$/.test(String(value ?? ''));
+    }
+
     function normalizeFeatures(features) {
         if (!Array.isArray(features)) return [];
 
         return features.map(feature => ({
             id: uid(),
+
+            attributeId: feature.attribute_id ?? feature.attributeId ?? '',
+
             name: feature.name ?? '',
+            type: feature.type ?? '',
+
             open: feature.open !== false,
+
             values: Array.isArray(feature.values)
                 ? feature.values.map(value => ({
                     id: uid(),
                     name: value.name ?? '',
-                    originalPrice: value.original_price ?? value.originalPrice ?? '',
-                    specialPrice: value.special_price ?? value.specialPrice ?? '',
+
+                    originalPrice:
+                        value.original_price ??
+                        value.originalPrice ??
+                        '',
+
+                    specialPrice:
+                        value.special_price ??
+                        value.specialPrice ??
+                        '',
+
                     open: value.open !== false,
+
                     children: normalizeFeatures(value.children ?? [])
                 }))
                 : []
@@ -47,12 +87,76 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let productFeatures = normalizeFeatures(window.PRODUCT_FEATURES || []);
 
+    // --------------------------------------------------
+    // ویژگی‌های مجاز دسته‌بندی‌های انتخاب‌شده
+    // --------------------------------------------------
+
+    function getSelectedCategoryIds() {
+        if (!categorySelect) return [];
+
+        return Array.from(categorySelect.selectedOptions)
+            .map(option => String(option.value));
+    }
+
+    function getAvailableAttributes() {
+        const categories = window.CATEGORIES || {};
+        const selectedIds = getSelectedCategoryIds();
+
+        const attributesMap = new Map();
+
+        selectedIds.forEach(categoryId => {
+            const category = categories[categoryId];
+
+            if (!category || !Array.isArray(category.attributes)) return;
+
+            category.attributes.forEach(attribute => {
+                const id = String(attribute.id);
+
+                if (!attributesMap.has(id)) {
+                    attributesMap.set(id, {
+                        id,
+                        key: attribute.key ?? '',
+                        type: attribute.type ?? '',
+                        categories: [category.name ?? '']
+                    });
+                } else {
+                    const existing = attributesMap.get(id);
+
+                    if (!existing.categories.includes(category.name ?? '')) {
+                        existing.categories.push(category.name ?? '');
+                    }
+                }
+            });
+        });
+
+        return Array.from(attributesMap.values());
+    }
+
+    function getAttributeById(id) {
+        return getAvailableAttributes().find(
+            attribute => String(attribute.id) === String(id)
+        ) || null;
+    }
+
+    function getAttributeLabel(attribute) {
+        const categoryName = attribute.categories.join('، ');
+
+        return categoryName
+            ? `${attribute.key} — ${categoryName}`
+            : attribute.key;
+    }
+
+    // --------------------------------------------------
+    // جست‌وجوی اعضای درخت
+    // --------------------------------------------------
+
     function findFeature(id, features = productFeatures) {
         for (const feature of features) {
             if (feature.id === id) return feature;
 
             for (const value of feature.values) {
                 const found = findFeature(id, value.children);
+
                 if (found) return found;
             }
         }
@@ -66,12 +170,62 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (value.id === id) return value;
 
                 const found = findValue(id, value.children);
+
                 if (found) return found;
             }
         }
 
         return null;
     }
+
+    // --------------------------------------------------
+    // بررسی ویژگی‌های استفاده‌شده در مسیر
+    // --------------------------------------------------
+
+    function getUsedAttributeIds(targetValueId = null) {
+        const usedIds = new Set();
+
+        if (!targetValueId) {
+            productFeatures.forEach(feature => {
+                if (feature.attributeId) {
+                    usedIds.add(String(feature.attributeId));
+                }
+            });
+
+            return usedIds;
+        }
+
+        function search(features, ancestors = []) {
+            for (const feature of features) {
+                if (feature.attributeId) {
+                    ancestors.push(String(feature.attributeId));
+                }
+
+                for (const value of feature.values) {
+                    if (value.id === targetValueId) {
+                        ancestors.forEach(id => usedIds.add(id));
+                        return true;
+                    }
+
+                    if (search(value.children, [...ancestors])) {
+                        return true;
+                    }
+                }
+
+                ancestors.pop();
+            }
+
+            return false;
+        }
+
+        search(productFeatures);
+
+        return usedIds;
+    }
+
+    // --------------------------------------------------
+    // آمار درخت
+    // --------------------------------------------------
 
     function countTree(features) {
         let featuresTotal = 0;
@@ -103,47 +257,184 @@ document.addEventListener('DOMContentLoaded', function () {
         };
     }
 
+    // --------------------------------------------------
+    // فرم افزودن ویژگی
+    // --------------------------------------------------
+
+    function renderAttributeSelect(targetValueId = null) {
+        const attributes = getAvailableAttributes();
+        const usedIds = getUsedAttributeIds(targetValueId);
+
+        const availableAttributes = attributes.filter(
+            attribute => !usedIds.has(String(attribute.id))
+        );
+
+        if (!availableAttributes.length) {
+            return `
+                <select
+                    data-add-attribute
+                    class="tree-select"
+                    disabled
+                >
+                    <option value="">ویژگی مجازی برای انتخاب وجود ندارد</option>
+                </select>
+            `;
+        }
+
+        return `
+            <select
+                data-add-attribute
+                class="tree-select"
+            >
+                <option value="">انتخاب ویژگی</option>
+
+                ${availableAttributes.map(attribute => `
+                    <option
+                        value="${escapeHTML(attribute.id)}"
+                        data-key="${escapeHTML(attribute.key)}"
+                        data-type="${escapeHTML(attribute.type)}"
+                    >
+                        ${escapeHTML(getAttributeLabel(attribute))}
+                    </option>
+                `).join('')}
+            </select>
+        `;
+    }
+
     function renderAddForm(type, targetId = '') {
-        if (!activeForm ||
+        if (
+            !activeForm ||
             activeForm.type !== type ||
-            activeForm.targetId !== targetId) {
+            activeForm.targetId !== targetId
+        ) {
             return '';
         }
 
-        const title = type === 'value'
-            ? 'عنوان مقدار جدید'
-            : 'عنوان ویژگی جدید';
+        // افزودن ویژگی اصلی یا زیرشاخه
+        if (type === 'root' || type === 'feature') {
+            return `
+                <div class="tree-add-form">
 
-        return `
-            <div class="tree-add-form">
-                <div class="tree-add-field">
-                    <label>${title}</label>
-                    <input
-                        type="text"
-                        data-add-name
-                        autocomplete="off"
-                        placeholder="${type === 'value' ? 'مثلاً مشکی' : 'مثلاً سایز'}"
+                    <div class="tree-add-field">
+                        <label>انتخاب ویژگی</label>
+                        ${renderAttributeSelect(
+                type === 'feature' ? targetId : null
+            )}
+                    </div>
+
+                    <button
+                        type="button"
+                        class="tree-add-confirm"
+                        data-action="confirm-add"
                     >
+                        افزودن ویژگی
+                    </button>
+
+                    <button
+                        type="button"
+                        class="tree-add-cancel"
+                        data-action="cancel-add"
+                    >
+                        انصراف
+                    </button>
+
                 </div>
+            `;
+        }
 
-                <button
-                    type="button"
-                    class="tree-add-confirm"
-                    data-action="confirm-add"
-                >
-                    افزودن
-                </button>
+        // افزودن مقدار به ویژگی
+        if (type === 'value') {
+            const feature = findFeature(targetId);
 
-                <button
-                    type="button"
-                    class="tree-add-cancel"
-                    data-action="cancel-add"
-                >
-                    انصراف
-                </button>
-            </div>
-        `;
+            if (!feature) return '';
+
+            if (isColorFeature(feature)) {
+                return `
+                    <div class="tree-add-form">
+
+                        <div class="tree-add-field">
+                            <label>انتخاب رنگ</label>
+
+                            <div class="flex items-center gap-3">
+                                <input
+                                    type="color"
+                                    data-add-color
+                                    value="#000000"
+                                    class="tree-color-input"
+                                >
+
+                                <input
+                                    type="text"
+                                    data-add-color-hex
+                                    value="#000000"
+                                    maxlength="7"
+                                    class="tree-edit-input"
+                                    dir="ltr"
+                                    placeholder="#000000"
+                                >
+                            </div>
+                        </div>
+
+                        <button
+                            type="button"
+                            class="tree-add-confirm"
+                            data-action="confirm-add"
+                        >
+                            افزودن رنگ
+                        </button>
+
+                        <button
+                            type="button"
+                            class="tree-add-cancel"
+                            data-action="cancel-add"
+                        >
+                            انصراف
+                        </button>
+
+                    </div>
+                `;
+            }
+
+            return `
+                <div class="tree-add-form">
+
+                    <div class="tree-add-field">
+                        <label>عنوان مقدار جدید</label>
+
+                        <input
+                            type="text"
+                            data-add-name
+                            autocomplete="off"
+                            placeholder="مثلاً بزرگ، کوچک یا چوبی"
+                        >
+                    </div>
+
+                    <button
+                        type="button"
+                        class="tree-add-confirm"
+                        data-action="confirm-add"
+                    >
+                        افزودن مقدار
+                    </button>
+
+                    <button
+                        type="button"
+                        class="tree-add-cancel"
+                        data-action="cancel-add"
+                    >
+                        انصراف
+                    </button>
+
+                </div>
+            `;
+        }
+
+        return '';
     }
+
+    // --------------------------------------------------
+    // نمایش قیمت
+    // --------------------------------------------------
 
     function renderPriceInputs(value, valuePath) {
         const originalName = `${valuePath}[original_price]`;
@@ -152,24 +443,28 @@ document.addEventListener('DOMContentLoaded', function () {
         const originalValue = escapeHTML(value.originalPrice);
         const specialValue = escapeHTML(value.specialPrice);
 
-        // قیمت هر مقدار در داده‌ها حفظ می‌شود؛
-        // اگر مقدار زیرشاخه داشته باشد، ورودی قابل ویرایش مخفی می‌شود.
         if (value.children.length) {
             return `
-                <input type="hidden"
+                <input
+                    type="hidden"
                     name="${originalName}"
-                    value="${originalValue}">
+                    value="${originalValue}"
+                >
 
-                <input type="hidden"
+                <input
+                    type="hidden"
                     name="${specialName}"
-                    value="${specialValue}">
+                    value="${specialValue}"
+                >
             `;
         }
 
         return `
             <div class="tree-price-box">
+
                 <div>
                     <label>قیمت اصلی (تومان)</label>
+
                     <input
                         type="number"
                         min="0"
@@ -183,6 +478,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 <div>
                     <label>قیمت ویژه (تومان)</label>
+
                     <input
                         type="number"
                         min="0"
@@ -193,109 +489,136 @@ document.addEventListener('DOMContentLoaded', function () {
                         placeholder="قیمت ویژه"
                     >
                 </div>
+
             </div>
         `;
     }
 
+    // --------------------------------------------------
+    // نمایش ویژگی
+    // --------------------------------------------------
+
     function renderFeature(feature, featureIndex, parentPath) {
         const featurePath = `${parentPath}[${featureIndex}]`;
+
         const bodyId = `feature-body-${feature.id}`;
 
+        // const valuesHTML = feature.values.map((value, index) =>
+        //     renderValue(value, index, featurePath)
+        // ).join('');
+
         const valuesHTML = feature.values.map((value, index) =>
-            renderValue(value, index, featurePath)
+            renderValue(value, index, featurePath, feature)
         ).join('');
 
         const isEditing = activeForm?.type === 'edit-feature' &&
             activeForm.targetId === feature.id;
 
-        return `
-        <div class="tree-feature" data-feature-id="${feature.id}">
+        const availableAttribute = getAttributeById(feature.attributeId);
 
-            <input
-                type="hidden"
-                name="${featurePath}[name]"
-                value="${escapeHTML(feature.name)}"
-                data-feature-name="${feature.id}"
+        const isInvalid = !availableAttribute;
+
+        return `
+            <div
+                class="tree-feature"
+                data-feature-id="${feature.id}"
             >
 
-            <div class="tree-feature-head">
-                <div class="tree-feature-title">
-                    <button
-                        type="button"
-                        class="tree-toggle"
-                        data-action="toggle-feature"
-                        data-id="${feature.id}"
-                    >
-                        ${feature.open ? '−' : '+'}
-                    </button>
+                <input
+                    type="hidden"
+                    name="${featurePath}[attribute_id]"
+                    value="${escapeHTML(feature.attributeId)}"
+                >
 
-                    ${isEditing ? `
-                        <input
-                            type="text"
-                            class="tree-edit-input"
-                            data-edit-name
-                            value="${escapeHTML(feature.name)}"
+                <input
+                    type="hidden"
+                    name="${featurePath}[name]"
+                    value="${escapeHTML(feature.name)}"
+                >
+
+                <input
+                    type="hidden"
+                    name="${featurePath}[type]"
+                    value="${escapeHTML(feature.type)}"
+                >
+
+                <div class="tree-feature-head">
+
+                    <div class="tree-feature-title">
+
+                        <button
+                            type="button"
+                            class="tree-toggle"
+                            data-action="toggle-feature"
+                            data-id="${feature.id}"
                         >
-                        <button
-                            type="button"
-                            class="tree-action"
-                            data-action="save-edit"
-                            data-id="${feature.id}"
-                            data-type="feature"
-                        >ذخیره</button>
-                        <button
-                            type="button"
-                            class="tree-action tree-action-danger"
-                            data-action="cancel-edit"
-                        >انصراف</button>
-                    ` : `
+                            ${feature.open ? '−' : '+'}
+                        </button>
+
                         <span>${escapeHTML(feature.name)}</span>
-                    `}
 
-                    <span class="pf-hint">
-                        (${feature.values.length} مقدار)
-                    </span>
-                </div>
+                        <span class="pf-hint">
+                            (${feature.values.length} مقدار)
+                        </span>
 
-                ${!isEditing ? `
+                        ${isInvalid ? `
+                            <span class="text-red-600 text-xs">
+                                این ویژگی دیگر در دسته‌بندی‌های انتخاب‌شده مجاز نیست
+                            </span>
+                        ` : ''}
+
+                    </div>
+
                     <div class="tree-actions">
-                        <button
-                            type="button"
-                            class="tree-action"
-                            data-action="edit-feature"
-                            data-id="${feature.id}"
-                        >✎ ویرایش</button>
 
                         <button
                             type="button"
                             class="tree-action"
                             data-action="add-value"
                             data-id="${feature.id}"
-                        >＋ افزودن مقدار</button>
+                        >
+                            ＋ افزودن مقدار
+                        </button>
 
                         <button
                             type="button"
                             class="tree-action tree-action-danger"
                             data-action="delete-feature"
                             data-id="${feature.id}"
-                        >حذف</button>
+                        >
+                            حذف
+                        </button>
+
+                    </div>
+
+                </div>
+
+                ${feature.open ? `
+                    <div
+                        class="tree-feature-body"
+                        id="${bodyId}"
+                    >
+                        ${valuesHTML}
+
+                        ${renderAddForm('value', feature.id)}
                     </div>
                 ` : ''}
-            </div>
 
-            ${feature.open ? `
-                <div class="tree-feature-body" id="${bodyId}">
-                    ${valuesHTML}
-                    ${renderAddForm('value', feature.id)}
-                </div>
-            ` : ''}
-        </div>
-    `;
+            </div>
+        `;
     }
 
-    function renderValue(value, valueIndex, featurePath) {
+    // --------------------------------------------------
+    // نمایش مقدار
+    // --------------------------------------------------
+
+    function renderValue(value, valueIndex, featurePath, parentFeature) {
         const valuePath = `${featurePath}[values][${valueIndex}]`;
+
         const hasChildren = value.children.length > 0;
+
+
+        const isColor = isColorFeature(parentFeature);
 
         const childrenHTML = value.children.map((feature, index) =>
             renderFeature(feature, index, `${valuePath}[children]`)
@@ -304,100 +627,166 @@ document.addEventListener('DOMContentLoaded', function () {
         const isEditing = activeForm?.type === 'edit-value' &&
             activeForm.targetId === value.id;
 
-        return `
-        <div class="tree-value" data-value-id="${value.id}">
+        const colorValue = isValidHex(value.name)
+            ? value.name
+            : '#000000';
 
-            <input
-                type="hidden"
-                name="${valuePath}[name]"
-                value="${escapeHTML(value.name)}"
-                data-value-name="${value.id}"
-            >
+        let valueTitle = '';
 
-            <div class="tree-value-head">
-                <div class="tree-value-name">
-                    <span class="tree-value-dot"></span>
-
-                    ${isEditing ? `
+        if (isEditing) {
+            valueTitle = isColor
+                ? `
+                    <div class="flex items-center gap-2">
                         <input
-                            type="text"
-                            class="tree-edit-input"
-                            data-edit-name
-                            value="${escapeHTML(value.name)}"
+                            type="color"
+                            data-edit-color
+                            value="${colorValue}"
+                            class="tree-color-input"
                         >
 
-                        <button
-                            type="button"
-                            class="tree-action"
-                            data-action="save-edit"
-                            data-id="${value.id}"
-                            data-type="value"
-                        >ذخیره</button>
+                        <input
+                            type="text"
+                            data-edit-color-hex
+                            value="${colorValue}"
+                            maxlength="7"
+                            dir="ltr"
+                            class="tree-edit-input"
+                        >
+                    </div>
+                `
+                : `
+                    <input
+                        type="text"
+                        class="tree-edit-input"
+                        data-edit-name
+                        value="${escapeHTML(value.name)}"
+                    >
+                `;
+        } else if (isColor) {
+            valueTitle = `
+                <span
+                    class="tree-color-preview"
+                    style="background-color: ${colorValue}"
+                ></span>
 
-                        <button
-                            type="button"
-                            class="tree-action tree-action-danger"
-                            data-action="cancel-edit"
-                        >انصراف</button>
-                    ` : `
-                        <span>${escapeHTML(value.name)}</span>
-                    `}
+                <span dir="ltr">${escapeHTML(value.name)}</span>
+            `;
+        } else {
+            valueTitle = `
+                <span>${escapeHTML(value.name)}</span>
+            `;
+        }
 
-                    ${hasChildren
+        return `
+            <div
+                class="tree-value"
+                data-value-id="${value.id}"
+            >
+
+                <input
+                    type="hidden"
+                    name="${valuePath}[name]"
+                    value="${escapeHTML(value.name)}"
+                    data-value-name="${value.id}"
+                >
+
+                <div class="tree-value-head">
+
+                    <div class="tree-value-name">
+
+                        <span class="tree-value-dot"></span>
+
+                        ${valueTitle}
+
+                        ${hasChildren
                 ? `<span class="pf-hint">دارای ${value.children.length} زیرشاخه</span>`
                 : `<span class="pf-hint">ترکیب نهایی</span>`
             }
-                </div>
 
-                ${!isEditing ? `
+                    </div>
+
                     <div class="tree-actions">
-                        <button
-                            type="button"
-                            class="tree-action"
-                            data-action="edit-value"
-                            data-id="${value.id}"
-                        >✎ ویرایش</button>
 
-                        <button
-                            type="button"
-                            class="tree-action"
-                            data-action="add-child-feature"
-                            data-id="${value.id}"
-                        >＋ افزودن زیرشاخه</button>
-
-                        ${hasChildren ? `
+                        ${isEditing ? `
                             <button
                                 type="button"
-                                class="tree-toggle"
-                                data-action="toggle-value"
+                                class="tree-action"
+                                data-action="save-edit"
                                 data-id="${value.id}"
                             >
-                                ${value.open ? '−' : '+'}
+                                ذخیره
                             </button>
-                        ` : ''}
 
-                        <button
-                            type="button"
-                            class="tree-action tree-action-danger"
-                            data-action="delete-value"
-                            data-id="${value.id}"
-                        >حذف</button>
+                            <button
+                                type="button"
+                                class="tree-action tree-action-danger"
+                                data-action="cancel-edit"
+                            >
+                                انصراف
+                            </button>
+                        ` : `
+                            <button
+                                type="button"
+                                class="tree-action"
+                                data-action="edit-value"
+                                data-id="${value.id}"
+                            >
+                                ✎ ویرایش
+                            </button>
+
+                            <button
+                                type="button"
+                                class="tree-action"
+                                data-action="add-child-feature"
+                                data-id="${value.id}"
+                            >
+                                ＋ افزودن زیرشاخه
+                            </button>
+
+                            ${hasChildren ? `
+                                <button
+                                    type="button"
+                                    class="tree-toggle"
+                                    data-action="toggle-value"
+                                    data-id="${value.id}"
+                                >
+                                    ${value.open ? '−' : '+'}
+                                </button>
+                            ` : ''}
+
+                            <button
+                                type="button"
+                                class="tree-action tree-action-danger"
+                                data-action="delete-value"
+                                data-id="${value.id}"
+                            >
+                                حذف
+                            </button>
+                        `}
+
+                    </div>
+
+                </div>
+
+                ${renderPriceInputs(value, valuePath)}
+
+                ${hasChildren && value.open ? `
+                    <div class="tree-children">
+                        ${childrenHTML}
                     </div>
                 ` : ''}
+
+                ${renderAddForm('feature', value.id)}
+
             </div>
-
-            ${renderPriceInputs(value, valuePath)}
-
-            ${hasChildren && value.open ? `
-                <div class="tree-children">
-                    ${childrenHTML}
-                </div>
-            ` : ''}
-
-            ${renderAddForm('feature', value.id)}
-        </div>
-    `;
+        `;
     }
+
+   
+
+    // --------------------------------------------------
+    // رندر اصلی
+    // --------------------------------------------------
 
     function renderTree() {
         root.innerHTML = productFeatures.map((feature, index) =>
@@ -406,39 +795,66 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const counts = countTree(productFeatures);
 
-        featureCount.textContent = counts.features.toLocaleString('fa-IR');
-        valueCount.textContent = counts.values.toLocaleString('fa-IR');
-        leafCount.textContent = counts.leaves.toLocaleString('fa-IR');
+        if (featureCount) {
+            featureCount.textContent = counts.features.toLocaleString('fa-IR');
+        }
 
-        // emptyState.classList.toggle('hidden', productFeatures.length > 0);
+        if (valueCount) {
+            valueCount.textContent = counts.values.toLocaleString('fa-IR');
+        }
+
+        if (leafCount) {
+            leafCount.textContent = counts.leaves.toLocaleString('fa-IR');
+        }
 
         if (activeForm) {
             requestAnimationFrame(() => {
-                const input = root.querySelector('[data-add-name]');
-                if (input) input.focus();
+                const input = root.querySelector(
+                    '[data-add-name], [data-add-attribute], [data-add-color-hex], [data-edit-name], [data-edit-color-hex]'
+                );
+
+                input?.focus();
             });
         }
     }
 
+    // --------------------------------------------------
+    // باز کردن فرم افزودن
+    // --------------------------------------------------
+
     function openAddForm(type, targetId = '') {
         if (type === 'value' && targetId) {
             const feature = findFeature(targetId);
+
             if (feature) feature.open = true;
         }
 
         if (type === 'feature' && targetId) {
             const value = findValue(targetId);
+
             if (value) value.open = true;
         }
 
         activeForm = { type, targetId };
+
         renderTree();
     }
 
-    function addFeature(name, targetValueId = null) {
+    // --------------------------------------------------
+    // افزودن ویژگی و مقدار
+    // --------------------------------------------------
+
+    function addFeature(attribute, targetValueId = null) {
+        if (!attribute) return;
+
         const feature = {
             id: uid(),
-            name,
+
+            attributeId: String(attribute.id),
+
+            name: attribute.key,
+            type: attribute.type ?? '',
+
             open: true,
             values: []
         };
@@ -458,19 +874,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function addValue(name, featureId) {
         const feature = findFeature(featureId);
-        if (!feature) return;
+
+        if (!feature || !name) return;
 
         feature.values.push({
             id: uid(),
+
             name,
+
             originalPrice: '',
             specialPrice: '',
+
             open: true,
             children: []
         });
 
         feature.open = true;
     }
+
+    // --------------------------------------------------
+    // حذف ویژگی و مقدار
+    // --------------------------------------------------
 
     function deleteFeature(id, features = productFeatures) {
         const index = features.findIndex(feature => feature.id === id);
@@ -510,35 +934,159 @@ document.addEventListener('DOMContentLoaded', function () {
         return false;
     }
 
+    // --------------------------------------------------
+    // تأیید افزودن
+    // --------------------------------------------------
+
     function confirmAdd() {
-        const input = root.querySelector('[data-add-name]');
-        if (!input) return;
+        if (!activeForm) return;
 
-        const name = input.value.trim();
+        // افزودن ویژگی اصلی یا زیرشاخه
+        if (activeForm.type === 'root' || activeForm.type === 'feature') {
+            const select = root.querySelector('[data-add-attribute]');
 
-        if (!name) {
-            input.focus();
+            const attributeId = select?.value;
+
+            if (!attributeId) {
+                select?.focus();
+                return;
+            }
+
+            const attribute = getAttributeById(attributeId);
+
+            if (!attribute) {
+                alert('این ویژگی در دسته‌بندی‌های انتخاب‌شده موجود نیست.');
+                return;
+            }
+
+            const usedIds = getUsedAttributeIds(
+                activeForm.type === 'feature'
+                    ? activeForm.targetId
+                    : null
+            );
+
+            if (usedIds.has(String(attribute.id))) {
+                alert('این ویژگی قبلاً در این مسیر انتخاب شده است.');
+                return;
+            }
+
+            if (activeForm.type === 'root') {
+                addFeature(attribute);
+            } else {
+                addFeature(attribute, activeForm.targetId);
+            }
+
+            activeForm = null;
+            renderTree();
+
             return;
         }
 
-        if (activeForm.type === 'root') {
-            addFeature(name);
-        }
-
-        if (activeForm.type === 'feature') {
-            addFeature(name, activeForm.targetId);
-        }
-
+        // افزودن مقدار
         if (activeForm.type === 'value') {
+            const feature = findFeature(activeForm.targetId);
+
+            if (!feature) return;
+
+            let name = '';
+
+            if (isColorFeature(feature)) {
+                name = root.querySelector('[data-add-color-hex]')?.value.trim();
+
+                if (!isValidHex(name)) {
+                    alert('لطفاً یک کد رنگ معتبر وارد کنید.');
+                    return;
+                }
+            } else {
+                name = root.querySelector('[data-add-name]')?.value.trim();
+
+                if (!name) {
+                    root.querySelector('[data-add-name]')?.focus();
+                    return;
+                }
+            }
+
             addValue(name, activeForm.targetId);
+
+            activeForm = null;
+            renderTree();
+        }
+    }
+
+    // --------------------------------------------------
+    // هماهنگی انتخابگر رنگ و کد HEX
+    // --------------------------------------------------
+
+    root.addEventListener('input', function (event) {
+        const target = event.target;
+
+        if (target.matches('[data-add-color]')) {
+            const hexInput = root.querySelector('[data-add-color-hex]');
+
+            if (hexInput) {
+                hexInput.value = target.value.toUpperCase();
+            }
+
+            return;
         }
 
-        activeForm = null;
-        renderTree();
-    }
+        if (target.matches('[data-add-color-hex]')) {
+            const colorInput = root.querySelector('[data-add-color]');
+
+            if (colorInput && isValidHex(target.value)) {
+                colorInput.value = target.value;
+            }
+
+            return;
+        }
+
+        if (target.matches('[data-edit-color]')) {
+            const hexInput = root.querySelector('[data-edit-color-hex]');
+
+            if (hexInput) {
+                hexInput.value = target.value.toUpperCase();
+            }
+
+            return;
+        }
+
+        if (target.matches('[data-edit-color-hex]')) {
+            const colorInput = root.querySelector('[data-edit-color]');
+
+            if (colorInput && isValidHex(target.value)) {
+                colorInput.value = target.value;
+            }
+
+            return;
+        }
+
+        const priceInput = target.closest('[data-price-field]');
+
+        if (priceInput) {
+            const value = findValue(priceInput.dataset.valueId);
+
+            if (!value) return;
+
+            const field = priceInput.dataset.priceField;
+
+            if (
+                field !== 'originalPrice' &&
+                field !== 'specialPrice'
+            ) {
+                return;
+            }
+
+            value[field] = priceInput.value;
+        }
+    });
+
+    // --------------------------------------------------
+    // کلیک‌های درخت
+    // --------------------------------------------------
 
     root.addEventListener('click', function (event) {
         const button = event.target.closest('[data-action]');
+
         if (!button) return;
 
         const action = button.dataset.action;
@@ -547,14 +1095,22 @@ document.addEventListener('DOMContentLoaded', function () {
         switch (action) {
             case 'toggle-feature': {
                 const feature = findFeature(id);
-                if (feature) feature.open = !feature.open;
+
+                if (feature) {
+                    feature.open = !feature.open;
+                }
+
                 renderTree();
                 break;
             }
 
             case 'toggle-value': {
                 const value = findValue(id);
-                if (value) value.open = !value.open;
+
+                if (value) {
+                    value.open = !value.open;
+                }
+
                 renderTree();
                 break;
             }
@@ -570,7 +1126,9 @@ document.addEventListener('DOMContentLoaded', function () {
             case 'delete-feature':
                 if (confirm('این ویژگی و تمام زیرشاخه‌های آن حذف شود؟')) {
                     deleteFeature(id);
+
                     activeForm = null;
+
                     renderTree();
                 }
                 break;
@@ -578,7 +1136,9 @@ document.addEventListener('DOMContentLoaded', function () {
             case 'delete-value':
                 if (confirm('این مقدار و تمام زیرشاخه‌های آن حذف شود؟')) {
                     deleteValue(id);
+
                     activeForm = null;
+
                     renderTree();
                 }
                 break;
@@ -586,18 +1146,6 @@ document.addEventListener('DOMContentLoaded', function () {
             case 'confirm-add':
                 confirmAdd();
                 break;
-            case 'edit-feature': {
-                const feature = findFeature(id);
-                if (feature) feature.open = true;
-
-                activeForm = {
-                    type: 'edit-feature',
-                    targetId: id
-                };
-
-                renderTree();
-                break;
-            }
 
             case 'edit-value':
                 activeForm = {
@@ -609,36 +1157,41 @@ document.addEventListener('DOMContentLoaded', function () {
                 break;
 
             case 'save-edit': {
-                const input = root.querySelector('[data-edit-name]');
-                const newName = input?.value.trim();
+                const value = findValue(id);
 
-                if (!newName) {
-                    input?.focus();
-                    return;
+                if (!value) return;
+
+                const feature = findParentFeatureOfValue(id);
+
+                if (!feature) return;
+
+                let newName = '';
+
+                if (isColorFeature(feature)) {
+                    newName = root.querySelector('[data-edit-color-hex]')?.value.trim();
+
+                    if (!isValidHex(newName)) {
+                        alert('لطفاً یک کد رنگ معتبر وارد کنید.');
+                        return;
+                    }
+                } else {
+                    newName = root.querySelector('[data-edit-name]')?.value.trim();
+
+                    if (!newName) {
+                        root.querySelector('[data-edit-name]')?.focus();
+                        return;
+                    }
                 }
 
-                const type = button.dataset.type;
-
-                if (type === 'feature') {
-                    const feature = findFeature(id);
-                    if (feature) feature.name = newName;
-                }
-
-                if (type === 'value') {
-                    const value = findValue(id);
-                    if (value) value.name = newName;
-                }
+                value.name = newName;
 
                 activeForm = null;
+
                 renderTree();
                 break;
             }
 
             case 'cancel-edit':
-                activeForm = null;
-                renderTree();
-                break;
-
             case 'cancel-add':
                 activeForm = null;
                 renderTree();
@@ -646,31 +1199,122 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    // --------------------------------------------------
+    // پیدا کردن ویژگی والد یک مقدار
+    // --------------------------------------------------
+
+    function findParentFeatureOfValue(valueId, features = productFeatures) {
+        for (const feature of features) {
+            for (const value of feature.values) {
+                if (value.id === valueId) {
+                    return feature;
+                }
+
+                const found = findParentFeatureOfValue(
+                    valueId,
+                    value.children
+                );
+
+                if (found) return found;
+            }
+        }
+
+        return null;
+    }
+
+    // --------------------------------------------------
+    // کلید Enter
+    // --------------------------------------------------
+
     root.addEventListener('keydown', function (event) {
-        if (event.target.matches('[data-add-name]') && event.key === 'Enter') {
+        if (event.key !== 'Enter') return;
+
+        if (
+            event.target.matches('[data-add-name]') ||
+            event.target.matches('[data-add-color-hex]')
+        ) {
             event.preventDefault();
-            confirmAdd();
+
+            if (activeForm?.type === 'value') {
+                confirmAdd();
+            }
+        }
+
+        if (
+            event.target.matches('[data-edit-name]') ||
+            event.target.matches('[data-edit-color-hex]')
+        ) {
+            event.preventDefault();
+
+            const saveButton = root.querySelector('[data-action="save-edit"]');
+
+            saveButton?.click();
         }
     });
 
-    root.addEventListener('input', function (event) {
-        const input = event.target.closest('[data-price-field]');
-        if (!input) return;
+    // --------------------------------------------------
+    // تغییر دسته‌بندی‌ها
+    // --------------------------------------------------
 
-        const value = findValue(input.dataset.valueId);
-        if (!value) return;
-
-        const field = input.dataset.priceField;
-
-        if (field !== 'originalPrice' && field !== 'specialPrice') return;
-
-        value[field] = input.value;
-    });
-
-    document.querySelector('#add-root-feature')?.addEventListener('click', function () {
-        activeForm = { type: 'root', targetId: '' };
+    categorySelect?.addEventListener('change', function () {
         renderTree();
     });
+
+    // --------------------------------------------------
+    // افزودن ویژگی اصلی
+    // --------------------------------------------------
+
+    document.querySelector('#add-root-feature')?.addEventListener('click', function () {
+        activeForm = {
+            type: 'root',
+            targetId: ''
+        };
+
+        renderTree();
+    });
+
+    // --------------------------------------------------
+    // جلوگیری از ارسال ویژگی نامعتبر
+    // --------------------------------------------------
+
+    const productForm = root.closest('form');
+
+    productForm?.addEventListener('submit', function (event) {
+        const availableIds = new Set(
+            getAvailableAttributes().map(attribute => String(attribute.id))
+        );
+
+        function validateFeatures(features) {
+            for (const feature of features) {
+                if (
+                    !feature.attributeId ||
+                    !availableIds.has(String(feature.attributeId))
+                ) {
+                    return false;
+                }
+
+                if (!validateFeatures(
+                    feature.values.flatMap(value => value.children)
+                )) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        if (!validateFeatures(productFeatures)) {
+            event.preventDefault();
+
+            alert(
+                'یکی از ویژگی‌های درخت با دسته‌بندی‌های انتخاب‌شده مطابقت ندارد. لطفاً آن ویژگی یا زیرشاخه را حذف کنید.'
+            );
+        }
+    });
+
+    // --------------------------------------------------
+    // شروع
+    // --------------------------------------------------
 
     renderTree();
 });
