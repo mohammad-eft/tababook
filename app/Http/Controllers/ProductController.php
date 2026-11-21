@@ -292,10 +292,6 @@ class ProductController extends Controller
                     );
                 }
 
-                // ادامه عملیات:
-                // $this->saveProductAttributes(...)
-                // $this->savePackages(...)
-
                 $this->saveProductAttributes($productId, $validated['attributes'] ?? []);
                 $this->savePackages($productId, $validated['packages'] ?? []);
             });
@@ -396,7 +392,7 @@ class ProductController extends Controller
             $this->productMessages()
         );
 
-        dd($validated, $request->all());
+      
         $product = product::findOrFail($request->input('product_id'));
         $oldTitle = $product->title;
 
