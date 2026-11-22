@@ -90,28 +90,16 @@
                             <span class="text-xs text-[#beb1d6]">{{ $product->brand }}</span>
                         </div>
                     @endif
-                    <div class="flex flex-col gap-3">
-                        <div class="flex items-center gap-3">
-                            <span class="text-(--primary-text-color)">رنگ: </span>
-                            <span
-                                class="inline-block size-4 rounded-full bg-[{{ $product->variants[0]['value'] }}]"></span>
+                    @if (!empty($product->product_features))
+                        <div class="mt-5 space-y-4" id="productFeatureSelector">
+                            <div>
+                                <h3 class="font-bold text-sm">انتخاب ویژگی‌های محصول</h3>
+                                <p class="text-xs text-[#9B91A9] mt-1">برای مشاهده گزینه‌های بعدی، ابتدا یک مورد را انتخاب کنید.</p>
+                            </div>
+                            <div id="productFeatureLevels" class="space-y-4"></div>
+                            <p id="featureSelectionHint" class="text-xs text-[#9B91A9]">لطفاً ویژگی‌های محصول را انتخاب کنید.</p>
                         </div>
-                        <div class="mt-3 flex flex-row items-center gap-8">
-                            @foreach ($product->variants as $var)
-                                <div
-                                    class="size-7 rounded-full @if($product->variants[0] == $var) ring-4 ring-offset-2 ring-blue-500 @else ring-1 ring-offset-5 ring-gray-300 @endif bg-[{{ $var['value'] }}] flex items-center justify-center cursor-pointer variants" data-color="{{ $var['value'] }}" data-primary-price="{{ $var['primary_price'] }}" data-secondary-price="{{ $var['secondary_price'] }}">
-                                    @if($product->variants[0] == $var)
-                                        <svg class="size-5 text-white" aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                            viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5" />
-                                        </svg>
-                                    @endif
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
+                    @endif
                     @if (count($product->attributes) > 0)
                         <div class="w-full pb-3 lg:pb-0 border-b border-(--color-border) lg:border-none px-2 lg:px-0">
                             <h3 class="text-lg font-bold py-3 hidden lg:block">ویژگی ها</h3>
@@ -194,55 +182,26 @@
                             </div>
 
                             <div class="py-4 products" data-product-id="{{ $product->id }}">
-                                <div class="flex flex-row justify-end mb-3">
-                                    <div id="priceBox">
-                                        <div class="@if ($hasSecondary) flex @else hidden @endif flex-row items-end gap-3 secondary-price">
-                                            <span class="text-xs text-[#beb1d6] line-through in-fa abolished">
-                                                {{ number_format($product->primary_price) }}
-                                            </span>
-                                            
-                                            <span
-                                                class="@if ($discountPercent <= 0) hidden @endif px-2 leading-[1.9] bg-[var(--color-discount-bg)] text-(--discount-color-text) text-xs font-medium rounded-full percent in-fa">
-                                                {{ $discountPercent }}%
-                                            </span>
+                                <div class="flex flex-row justify-end mb-3" id="priceBox">
+                                    <div class="text-left">
+                                        <div class="hidden flex-row items-end gap-3 secondary-price" id="featureOldPriceWrap">
+                                            <span class="text-xs text-[#beb1d6] line-through in-fa abolished" id="featureOldPrice"></span>
+                                            <span class="hidden px-2 leading-[1.9] bg-[var(--color-discount-bg)] text-(--discount-color-text) text-xs font-medium rounded-full percent in-fa" id="featureDiscount"></span>
                                         </div>
                                         <div class="flex flex-row gap-1 mt-1 items-end">
-                                            <span class="text-lg font-bold in-fa mainPrice">
-                                                {{ number_format($hasSecondary ? $product->secondary_price : $product->primary_price) }}
-                                            </span>
+                                            <span class="text-lg font-bold in-fa mainPrice" id="featureMainPrice">{{ number_format($product->secondary_price ?: $product->primary_price) }}</span>
                                             <span class="text-xs pb-1.5">تومان</span>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="h-12 addToCartBtns" data-count="{{ $product->count }}"
-                                    data-product-id="{{ $product->id }}">
-                                    @if ($inCart)
-                                        <div class="w-full px-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl"
-                                            data-product-id="{{ $product->id }}">
-                                            <button type="button" onclick="setCount(this)" data-state="+"
-                                                class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer">+</button>
-                                            <input type="number" readonly value="{{ $cartQuantity }}"
-                                                class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white text-sm text-center outline-none">
-                                            <button type="button" onclick="setCount(this)" data-state="-"
-                                                class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer">-</button>
-                                        </div>
-                                    @else
-                                        <button type="button" onclick="addToCart(this)"
-                                            data-product-id="{{ $product->id }}"
-                                            class="w-full px-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl addToCartBtns">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
-                                                class="size-4 fill-(--primary-text-color) group-hover:fill-white transition-all duration-300">
-                                                <path
-                                                    d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z" />
-                                            </svg>
-                                            <span
-                                                class="text-sm text-(--primary-text-color) font-bold transition-all duration-300 group-hover:text-white">
-                                                افزودن به سبد خرید
-                                            </span>
-                                        </button>
-                                    @endif
+                                <div class="h-12 addToCartBtns" data-product-id="{{ $product->id }}"
+                                    data-count="{{ $product->count ?? 0 }}" data-feature-value-id="" data-cart-key="">
+                                    <button type="button" onclick="addToCart(this)" data-product-id="{{ $product->id }}"
+                                        class="w-full px-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl">
+                                        <span class="text-sm text-(--primary-text-color) font-bold group-hover:text-white">افزودن به سبد خرید</span>
+                                    </button>
                                 </div>
+                                <p class="text-xs text-rose-500 mt-2 hidden" data-feature-stock-message></p>
                             </div>
                         </div>
                     </div>
@@ -409,40 +368,156 @@
     <!-- /login popup -->
 
     <!-- buy bar (mobile) -->
-    <div
-        class="w-full px-2 py-3 bg-white fixed bottom-0 right-0 lg:hidden border-t border-(--color-border) text-(--primary-text-color)">
-        <div class="flex flex-row justify-between items-center py-2">
-            <div class="w-1/2 h-12">
+    <div class="w-full px-2 py-3 bg-white fixed bottom-0 right-0 lg:hidden border-t border-(--color-border) text-(--primary-text-color) z-40">
+        <div class="flex flex-row justify-between items-center py-2 gap-3">
+            <div class="w-1/2 h-12 addToCartBtns" data-product-id="{{ $product->id }}"
+                data-count="{{ $product->count ?? 0 }}" data-feature-value-id="" data-cart-key="">
                 <button type="button" onclick="addToCart(this)" data-product-id="{{ $product->id }}"
-                    class="w-full px-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl addToCartBtns">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
-                        class="size-3 fill-(--primary-text-color) transition-all duration-300 group-hover:fill-white">
-                        <path
-                            d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z" />
-                    </svg>
-                    <span
-                        class="text-[10px] text-(--primary-text-color) font-bold transition-all duration-300 group-hover:text-white">
-                        افزودن به سبد خرید
-                    </span>
+                    class="w-full px-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl">
+                    <span class="text-[10px] text-(--primary-text-color) font-bold group-hover:text-white">افزودن به سبد خرید</span>
                 </button>
             </div>
-
             <div class="flex flex-row items-center gap-2 text-sm" id="footer-price">
-                
-                <span class="@if (!$hasSecondary) hidden @endif font-bold text-xs text-gray-400 in-fa line-through abolished">
-                    {{ number_format($product->primary_price) }}
-                </span>
-                <span class="font-bold in-fa mainPrice">
-                    {{ number_format($hasSecondary ? $product->secondary_price : $product->primary_price) }}
-                </span>
+                <span class="hidden font-bold text-xs text-gray-400 in-fa line-through abolished" id="mobileOldPrice"></span>
+                <span class="font-bold in-fa mainPrice" id="mobileMainPrice">{{ number_format($product->secondary_price ?: $product->primary_price) }}</span>
                 <span class="font-medium text-xs">تومان</span>
             </div>
         </div>
     </div>
     <!-- /buy bar (mobile) -->
 
+
     <script>
-        let productId = "{{ $product->id }}";
+        window.productId = @json((string) $product->id);
+        window.productFeatureTree = @json($product->product_features ?? []);
+
+        document.querySelectorAll('.gallery').forEach(item => {
+            item.addEventListener('click', () => {
+                const image = item.querySelector('img');
+                const main = document.getElementById('mainImage');
+                if (image && main) main.src = image.src;
+            });
+        });
+
+        (() => {
+            const tree = Array.isArray(window.productFeatureTree) ? window.productFeatureTree : [];
+            const levels = document.getElementById('productFeatureLevels');
+            const hint = document.getElementById('featureSelectionHint');
+            const selectorExists = !!levels;
+            const selectedPath = [];
+            let selectedLeaf = null;
+
+            const money = value => Number(value || 0).toLocaleString('fa-IR');
+            const getValues = feature => Array.isArray(feature?.values) ? feature.values : [];
+            const getChildren = value => Array.isArray(value?.children) ? value.children : [];
+
+            function updatePrice(value) {
+                const primary = Number(value?.original_price || 0);
+                const special = Number(value?.special_price || 0);
+                const hasDiscount = special > 0 && primary > special;
+                const finalPrice = hasDiscount ? special : primary;
+                const oldWrap = document.getElementById('featureOldPriceWrap');
+                const oldPrice = document.getElementById('featureOldPrice');
+                const discount = document.getElementById('featureDiscount');
+                const main = document.getElementById('featureMainPrice');
+                const mobileOld = document.getElementById('mobileOldPrice');
+                const mobileMain = document.getElementById('mobileMainPrice');
+                if (main) main.textContent = money(finalPrice);
+                if (mobileMain) mobileMain.textContent = money(finalPrice);
+                if (oldWrap) oldWrap.classList.toggle('hidden', !hasDiscount);
+                if (oldWrap) oldWrap.classList.toggle('flex', hasDiscount);
+                if (oldPrice) oldPrice.textContent = money(primary);
+                if (mobileOld) {
+                    mobileOld.textContent = money(primary);
+                    mobileOld.classList.toggle('hidden', !hasDiscount);
+                }
+                if (discount) {
+                    discount.textContent = Math.round((1 - special / primary) * 100).toLocaleString('fa-IR') + '٪';
+                    discount.classList.toggle('hidden', !hasDiscount);
+                }
+            }
+
+            function updateCartControls(value) {
+                selectedLeaf = value;
+                const isLeaf = getChildren(value).length === 0;
+                const stock = Number(value?.count || 0);
+                const valueId = value?.id ?? '';
+                const cartKey = `${window.productId}:${valueId}`;
+                document.querySelectorAll('.addToCartBtns').forEach(control => {
+                    control.dataset.featureValueId = isLeaf ? String(valueId) : '';
+                    control.dataset.cartKey = isLeaf ? cartKey : '';
+                    control.dataset.count = isLeaf ? String(stock) : '0';
+                    const button = control.querySelector('button[onclick*="addToCart"]');
+                    if (button) {
+                        button.disabled = !isLeaf || stock < 1;
+                        button.classList.toggle('opacity-50', !isLeaf || stock < 1);
+                        button.classList.toggle('cursor-not-allowed', !isLeaf || stock < 1);
+                        button.innerHTML = !isLeaf
+                            ? '<span class="text-xs font-bold">ابتدا زیرمجموعه را انتخاب کنید</span>'
+                            : stock < 1
+                                ? '<span class="text-xs font-bold">ناموجود</span>'
+                                : '<span class="text-sm font-bold">افزودن به سبد خرید</span>';
+                        if (isLeaf && stock > 0) button.setAttribute('onclick', 'addToCart(this)');
+                        else button.removeAttribute('onclick');
+                    }
+                });
+                const stockMessage = document.querySelector('[data-feature-stock-message]');
+                if (stockMessage) {
+                    stockMessage.textContent = isLeaf ? (stock > 0 ? `موجودی: ${stock.toLocaleString('fa-IR')} عدد` : 'این ترکیب در حال حاضر موجود نیست.') : '';
+                    stockMessage.classList.toggle('hidden', !isLeaf);
+                }
+                if (isLeaf) updatePrice(value);
+            }
+
+            function renderFeature(feature, depth) {
+                if (!feature || !levels) return;
+                const values = getValues(feature);
+                if (!values.length) return;
+                const wrapper = document.createElement('section');
+                wrapper.className = 'space-y-2';
+                const title = document.createElement('h4');
+                title.className = 'text-sm font-semibold';
+                title.textContent = feature.name || feature.title || 'انتخاب ویژگی';
+                wrapper.appendChild(title);
+                const options = document.createElement('div');
+                options.className = 'flex flex-wrap gap-2';
+                values.forEach(value => {
+                    const option = document.createElement('button');
+                    option.type = 'button';
+                    option.className = 'rounded-lg border border-(--color-border) px-3 py-2 text-xs transition hover:border-(--pastel-purple)';
+                    option.textContent = value.name || value.title || '—';
+                    option.addEventListener('click', () => {
+                        selectedPath.splice(depth);
+                        selectedPath.push({ feature: feature.name || feature.title || '', value: value.name || value.title || '', id: value.id });
+                        [...options.children].forEach(el => {
+                            el.classList.remove('border-(--pastel-purple)', 'bg-(--cream-color)', 'font-bold');
+                            el.classList.add('border-(--color-border)');
+                        });
+                        option.classList.remove('border-(--color-border)');
+                        option.classList.add('border-(--pastel-purple)', 'bg-(--cream-color)', 'font-bold');
+                        while (levels.children.length > depth + 1) levels.lastElementChild.remove();
+                        const children = getChildren(value);
+                        if (children.length) {
+                            updateCartControls(null);
+                            children.forEach(childFeature => renderFeature(childFeature, depth + 1));
+                            if (hint) hint.textContent = 'یک گزینه از ویژگی بعدی انتخاب کنید.';
+                        } else {
+                            updateCartControls(value);
+                            if (hint) hint.textContent = 'ترکیب موردنظر انتخاب شد.';
+                        }
+                    });
+                    options.appendChild(option);
+                });
+                wrapper.appendChild(options);
+                levels.appendChild(wrapper);
+            }
+
+            if (selectorExists && tree.length) {
+                tree.forEach(feature => renderFeature(feature, 0));
+                updateCartControls(null);
+            } else if (selectorExists) {
+                document.getElementById('productFeatureSelector')?.classList.add('hidden');
+            }
+        })();
     </script>
-    <script src="{{ asset('js/singleProduct.js') }}"></script>
 @endsection

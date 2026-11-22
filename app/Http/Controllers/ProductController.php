@@ -673,9 +673,11 @@ class ProductController extends Controller
                     ->values()
                     ->map(function ($value) use ($features, $values) {
                         return [
+                            'id' => (int) $value->id,
                             'name' => $value->name,
                             'original_price' => $value->original_price,
                             'special_price' => $value->special_price,
+                            'count' => (int) ($value->count ?? 0),
                             'children' => $this->buildFeatureNodes(
                                 $features,
                                 $values,
@@ -1280,6 +1282,9 @@ class ProductController extends Controller
 
         $category = $product->categories->first();
 
+        // درخت ویژگی‌ها همراه شناسه و موجودی هر مقدار برای انتخاب ترکیب در صفحه محصول
+        $productFeatures = $this->buildProductFeatureTree((int) $product->id);
+
         $mainMedia = $product->media->firstWhere('is_main', true);
 
         $mainImage = $mainMedia
@@ -1354,6 +1359,8 @@ class ProductController extends Controller
 
         $product->setAttribute('attributes', $attributes);
         $product->setAttribute('variants', $variants);
+        $product->setAttribute('product_features', $productFeatures);
+
         return view('admin.product.single', [
             'product' => $product,
             'setting' => homeSetting::document(),
@@ -1503,6 +1510,12 @@ class ProductController extends Controller
         $product->mainImg = $mainMedia
             ? $mainMedia->media_path
             : 'default.jpg';
+
+        // findProduct برای سبد خرید نیز باید اطلاعات درخت و ترکیب‌های محصول را برگرداند.
+        $product->setAttribute(
+            'product_features',
+            $this->buildProductFeatureTree((int) $product->id)
+        );
 
         return response()->json($product);
     }
