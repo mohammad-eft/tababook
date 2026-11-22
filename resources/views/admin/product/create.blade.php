@@ -972,25 +972,27 @@
                                     <span class="pf-error">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="pf-field"><label for="brand">برند</label><input type="text" name="brand"
-                                    id="brand" placeholder="نام برند" value="{{ old('brand') }}">
-                                @error('brand')
-                                    <span class="pf-error">{{ $message }}</span>
-                                @enderror
-                            </div>
+                            <select id="brand_id" name='brand_id'>
+                                @foreach ($brands as $brand)
+                                    <option value="{{ $brand->id }}" @if (in_array($brand->id, old('brand_id', []))) selected @endif>
+                                        {{ $brand->title }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <select id="publication_id" name='publication_id'>
+                                @foreach ($publications as $publication)
+                                    <option value="{{ $publication->id }}" @if (in_array($publication->id, old('publication_id', []))) selected @endif>
+                                        {{ $publication->title }}
+                                    </option>
+                                @endforeach
+                            </select>
                             <div class="pf-field"><label for="writer">نویسنده</label><input type="text" name="writer"
                                     id="writer" placeholder="نام نویسنده" value="{{ old('writer') }}">
                                 @error('writer')
                                     <span class="pf-error">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="pf-field sm:col-span-2"><label for="publication">انتشارات</label><input
-                                    type="text" name="publication" id="publication" placeholder="نام انتشارات"
-                                    value="{{ old('publication') }}">
-                                @error('publication')
-                                    <span class="pf-error">{{ $message }}</span>
-                                @enderror
-                            </div>
+
                         </div>
                     </section>
 

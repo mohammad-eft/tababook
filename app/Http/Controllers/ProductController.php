@@ -6,6 +6,8 @@ use App\classes\homeSetting;
 use App\Models\category;
 use App\Models\category_product;
 use App\Models\package;
+use App\Models\publication;
+use App\Models\brand;
 use App\Models\package_attribute;
 use App\Models\product;
 use App\Models\product_attributes;
@@ -735,11 +737,14 @@ class ProductController extends Controller
     public function create()
     {
         $categories = category::with('attributes')->get();
-
+        $publications=publication::all();
+        $brands=brand::all();
         return view('admin.product.create', [
             'categories' => $categories,
             'categoriesData' => $this->buildCategoriesData($categories),
             'setting' => homeSetting::document(),
+            'publications' => $publications,
+            'brands' => $brands,
         ]);
     }
 
@@ -764,8 +769,8 @@ class ProductController extends Controller
                     'primary_price' => $validated['primary_price'] ?? null,
                     'secondary_price' => $validated['secondary_price'] ?? null,
                     'writer' => $validated['writer'] ?? null,
-                    'brand' => $validated['brand'] ?? null,
-                    'publication' => $validated['publication'] ?? null,
+                    'brand_id' => $validated['brand_id'] ?? null,
+                    'publication_id' => $validated['publication_id'] ?? null,
                     'show_in_home' => $request->boolean('show_in_home'),
                     'created_at' => now(),
                     'updated_at' => now(),
