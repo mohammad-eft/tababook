@@ -177,25 +177,20 @@ let headerMenu = document.getElementById('headerMenu')
 let topBanner = document.getElementById('topBanner')
 let main = document.getElementById('main')
 let header = document.querySelector('header')
-let num = 40
-if (typeof page !== 'undefined'){
-    if (page = "home") {
-        num = 0
-    }
-}
+
 let mt = 'lg:mt-[' + topBanner.clientHeight + 'px]'
 headerMenu.classList.add(mt)
 
-main.classList.add('lg:mt-[' + (parseInt(header.clientHeight)+num) + 'px]', 'mt-[' + headerMenu.clientHeight + 'px]')
+main.classList.add('lg:mt-[' + (parseInt(header.clientHeight)) + 'px]', 'mt-[' + headerMenu.clientHeight + 'px]')
 
 window.addEventListener('scroll', () => {
     headerMenu = document.getElementById('headerMenu')
     if (window.scrollY > 80) {  
         headerMenu.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)'
-        main.classList.remove('lg:mt-[' + (parseInt(header.clientHeight)+num) + 'px]', 'mt-[' + headerMenu.clientHeight + 'px]')
+        main.classList.remove('lg:mt-[' + (parseInt(header.clientHeight)) + 'px]', 'mt-[' + headerMenu.clientHeight + 'px]')
         headerMenu.classList.remove(mt)
     } else {
-        main.classList.add('lg:mt-[' + (parseInt(header.clientHeight)+num) + 'px]', 'mt-[' + headerMenu.clientHeight + 'px]')
+        main.classList.add('lg:mt-[' + (parseInt(header.clientHeight)) + 'px]', 'mt-[' + headerMenu.clientHeight + 'px]')
         header.style.boxShadow = 'none'
         headerMenu.classList.add(mt)
     }

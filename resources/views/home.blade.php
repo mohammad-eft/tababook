@@ -437,8 +437,4 @@
        
         <!-- prapery -->
     </main>
-
-    <script>
-        let page = 'home'
-    </script>
 @endsection
