@@ -2,7 +2,7 @@
 @section('title', 'طبابوک | جست و جو')
 @section('content')
     <script src="{{ asset('js/filters.js') }}"></script>
-    <main class="max-w-[1280px] mx-auto my-4 md:my-6 px-3 md:px-5 mt-20">
+    <main class="max-w-[1280px] mx-auto my-20 md:mb-20 md:mt-28 px-3 md:px-5">
         <div class="text-[#71717a] text-xs mb-[18px]">خانه / <b class="text-[#333]">جستجو</b></div>
 
         <div class="flex items-end justify-between gap-2.5 mb-[18px]">

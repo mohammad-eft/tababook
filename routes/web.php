@@ -157,7 +157,7 @@ Route::group([
     'as'=>'search.'
 ], function(){
     // Route::post('/', 'search')->name('search');
-    Route::post('/', 'page')->name('page');
+    Route::get('/', 'page')->name('page');
 });
 
 Route::group([
