@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', function () {
     const root = document.querySelector('#product-tree');
     if (!root) return;
@@ -79,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     count:
                         value.count ??
                         value.stock ??
-                        0,
+                        '',
 
                     open: value.open !== false,
 
@@ -140,6 +141,31 @@ document.addEventListener('DOMContentLoaded', function () {
         return getAvailableAttributes().find(
             attribute => String(attribute.id) === String(id)
         ) || null;
+    }
+
+
+    function hasSelectedCategories() {
+        return getSelectedCategoryIds().length > 0;
+    }
+
+    function hasAvailableAttributes(targetValueId = null) {
+        const usedIds = getUsedAttributeIds(targetValueId);
+
+        return getAvailableAttributes().some(
+            attribute => !usedIds.has(String(attribute.id))
+        );
+    }
+
+    function updateRootFeatureButton() {
+        const button = document.querySelector('#add-root-feature');
+        if (!button) return;
+
+        // در نبود دسته‌بندی دکمه باقی می‌ماند تا پیام راهنما نمایش داده شود.
+        // پس از انتخاب دسته‌بندی، اگر همه ویژگی‌ها استفاده شده باشند دکمه مخفی می‌شود.
+        button.classList.toggle(
+            'hidden',
+            hasSelectedCategories() && !hasAvailableAttributes()
+        );
     }
 
     function getAttributeLabel(attribute) {
@@ -447,7 +473,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const originalValue = escapeHTML(value.originalPrice);
         const specialValue = escapeHTML(value.specialPrice);
-        const countValue = escapeHTML(value.count ?? 0);
+        const countValue = escapeHTML(value.count);
 
         if (value.children.length) {
             return `
@@ -530,8 +556,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const bodyId = `feature-body-${feature.id}`;
 
+        // const valuesHTML = feature.values.map((value, index) =>
+        //     renderValue(value, index, featurePath)
+        // ).join('');
+
         const valuesHTML = feature.values.map((value, index) =>
-            renderValue(value, index, featurePath)
+            renderValue(value, index, featurePath, feature)
         ).join('');
 
         const isEditing = activeForm?.type === 'edit-feature' &&
@@ -635,18 +665,11 @@ document.addEventListener('DOMContentLoaded', function () {
     // نمایش مقدار
     // --------------------------------------------------
 
-    function renderValue(value, valueIndex, featurePath) {
+    function renderValue(value, valueIndex, featurePath, parentFeature) {
         const valuePath = `${featurePath}[values][${valueIndex}]`;
 
         const hasChildren = value.children.length > 0;
 
-        const parentFeatureId = featurePath;
-
-        const featureIndex = Number(
-            featurePath.substring(featurePath.lastIndexOf('[') + 1)
-        );
-
-        const parentFeature = findFeatureByPath(featurePath);
 
         const isColor = isColorFeature(parentFeature);
 
@@ -764,14 +787,16 @@ document.addEventListener('DOMContentLoaded', function () {
                                 ✎ ویرایش
                             </button>
 
-                            <button
-                                type="button"
-                                class="tree-action"
-                                data-action="add-child-feature"
-                                data-id="${value.id}"
-                            >
-                                ＋ افزودن زیرشاخه
-                            </button>
+                            ${(!hasSelectedCategories() || hasAvailableAttributes(value.id)) ? `
+                                <button
+                                    type="button"
+                                    class="tree-action"
+                                    data-action="add-child-feature"
+                                    data-id="${value.id}"
+                                >
+                                    ＋ افزودن زیرشاخه
+                                </button>
+                            ` : ''}
 
                             ${hasChildren ? `
                                 <button
@@ -812,34 +837,7 @@ document.addEventListener('DOMContentLoaded', function () {
         `;
     }
 
-    // پیدا کردن ویژگی والد از روی مسیر نام‌گذاری فرم
-    function findFeatureByPath(path) {
-        const match = path.match(/\[(\d+)\]$/);
 
-        if (!match) return null;
-
-        const index = Number(match[1]);
-
-        let features = productFeatures;
-
-        const parts = path
-            .replace('product_features', '')
-            .match(/\[(\d+)\]/g) || [];
-
-        let currentFeature = null;
-
-        for (const part of parts) {
-            const featureIndex = Number(part.replace(/\D/g, ''));
-
-            currentFeature = features[featureIndex];
-
-            if (!currentFeature) return null;
-
-            features = null;
-        }
-
-        return currentFeature;
-    }
 
     // --------------------------------------------------
     // رندر اصلی
@@ -849,6 +847,8 @@ document.addEventListener('DOMContentLoaded', function () {
         root.innerHTML = productFeatures.map((feature, index) =>
             renderFeature(feature, index, 'product_features')
         ).join('') + renderAddForm('root', '');
+
+        updateRootFeatureButton();
 
         const counts = countTree(productFeatures);
 
@@ -880,6 +880,16 @@ document.addEventListener('DOMContentLoaded', function () {
     // --------------------------------------------------
 
     function openAddForm(type, targetId = '') {
+        if ((type === 'root' || type === 'feature') && !hasSelectedCategories()) {
+            alert('برای افزودن ویژگی، ابتدا حداقل یک دسته‌بندی را انتخاب کنید.');
+            return;
+        }
+
+        if ((type === 'root' || type === 'feature') && !hasAvailableAttributes(type === 'feature' ? targetId : null)) {
+            alert('تمام ویژگی‌های قابل استفاده در این مسیر اضافه شده‌اند.');
+            return;
+        }
+
         if (type === 'value' && targetId) {
             const feature = findFeature(targetId);
 
@@ -941,7 +951,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             originalPrice: '',
             specialPrice: '',
-            count: 0,
+            count: '0',
 
             open: true,
             children: []
@@ -1113,6 +1123,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (colorInput && isValidHex(target.value)) {
                 colorInput.value = target.value;
+            }
+
+            return;
+        }
+
+        const stockInput = target.closest('[data-stock-field]');
+
+        if (stockInput) {
+            const value = findValue(stockInput.dataset.valueId);
+
+            if (value) {
+                value.count = stockInput.value;
             }
 
             return;
@@ -1323,12 +1345,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // --------------------------------------------------
 
     document.querySelector('#add-root-feature')?.addEventListener('click', function () {
-        activeForm = {
-            type: 'root',
-            targetId: ''
-        };
-
-        renderTree();
+        openAddForm('root', '');
     });
 
     // --------------------------------------------------

@@ -21,11 +21,19 @@ use App\Models\User;
 use App\Models\role_user;
 
 Route::get('/test', function(){
-    Schema::table('packages', function (Blueprint $table) {
-        $table->string('title')->nullable()->after('id');
+    // Schema::table('packages', function (Blueprint $table) {
+    //     $table->string('title')->nullable()->after('id');
+    // });
+    // Schema::table('carts', function (Blueprint $table) {
+    //     $table->integer('product_variety_id')->nullable()->after('product_id');
+    // });
+    Schema::table('products', function(Blueprint $table){
+        $table->dropColumn('brand');
+        $table->integer('brand_id')->nullable()->after('description');
     });
-    Schema::table('carts', function (Blueprint $table) {
-        $table->integer('product_variety_id')->nullable()->after('product_id');
+    Schema::table('products', function(Blueprint $table){
+        $table->dropColumn('publication');
+        $table->integer('publication_id')->nullable()->after('description');
     });
 });
 

@@ -1,3 +1,8 @@
+/*
+ * Product tree editor for the edit-product popup only.
+ * Keep productTree.js for the create-product form.
+ */
+
 
 document.addEventListener('DOMContentLoaded', function () {
     const root = document.querySelector('#editForm #product-tree');
@@ -76,8 +81,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         value.special_price ??
                         value.specialPrice ??
                         '',
-
-                    count: value.count ?? 0,
 
                     open: value.open !== false,
 
@@ -441,11 +444,9 @@ document.addEventListener('DOMContentLoaded', function () {
     function renderPriceInputs(value, valuePath) {
         const originalName = `${valuePath}[original_price]`;
         const specialName = `${valuePath}[special_price]`;
-        const countName = `${valuePath}[count]`;
 
         const originalValue = escapeHTML(value.originalPrice);
         const specialValue = escapeHTML(value.specialPrice);
-        const countValue = escapeHTML(value.count ?? 0);
 
         if (value.children.length) {
             return `
@@ -459,12 +460,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     type="hidden"
                     name="${specialName}"
                     value="${specialValue}"
-                >
-
-                <input
-                    type="hidden"
-                    name="${countName}"
-                    value="0"
                 >
             `;
         }
@@ -497,21 +492,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         data-price-field="specialPrice"
                         data-value-id="${value.id}"
                         placeholder="قیمت ویژه"
-                    >
-                </div>
-
-                <div>
-                    <label>موجودی این ترکیب</label>
-
-                    <input
-                        type="number"
-                        min="0"
-                        step="1"
-                        name="${countName}"
-                        value="${countValue}"
-                        data-count-field
-                        data-value-id="${value.id}"
-                        placeholder="تعداد موجودی"
                     >
                 </div>
 
@@ -638,6 +618,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const hasChildren = value.children.length > 0;
 
+        // ویژگی‌هایی که در این مسیر هنوز قابل انتخاب‌اند.
+        // اگر همه ویژگی‌های دسته‌بندی‌ها مصرف شده باشند، افزودن زیرشاخه مخفی می‌شود.
+        const usedAttributeIds = getUsedAttributeIds(value.id);
+        const hasAvailableChildAttributes = getAvailableAttributes().some(
+            attribute => !usedAttributeIds.has(String(attribute.id))
+        );
+
         const isColor = isColorFeature(parentFeature);
 
         const childrenHTML = value.children.map((feature, index) =>
@@ -754,14 +741,16 @@ document.addEventListener('DOMContentLoaded', function () {
                                 ✎ ویرایش
                             </button>
 
-                            <button
-                                type="button"
-                                class="tree-action"
-                                data-action="add-child-feature"
-                                data-id="${value.id}"
-                            >
-                                ＋ افزودن زیرشاخه
-                            </button>
+                            ${hasAvailableChildAttributes ? `
+                                <button
+                                    type="button"
+                                    class="tree-action"
+                                    data-action="add-child-feature"
+                                    data-id="${value.id}"
+                                >
+                                    ＋ افزودن زیرشاخه
+                                </button>
+                            ` : ''}
 
                             ${hasChildren ? `
                                 <button
@@ -923,7 +912,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             originalPrice: '',
             specialPrice: '',
-            count: 0,
 
             open: true,
             children: []
@@ -1100,20 +1088,6 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        const countInput = target.closest('[data-count-field]');
-
-        if (countInput) {
-            const value = findValue(countInput.dataset.valueId);
-
-            if (value) {
-                value.count = countInput.value === ''
-                    ? ''
-                    : Math.max(0, parseInt(countInput.value, 10) || 0);
-            }
-
-            return;
-        }
-
         const priceInput = target.closest('[data-price-field]');
 
         if (priceInput) {
@@ -1173,9 +1147,25 @@ document.addEventListener('DOMContentLoaded', function () {
                 openAddForm('value', id);
                 break;
 
-            case 'add-child-feature':
+            case 'add-child-feature': {
+                if (!getSelectedCategoryIds().length) {
+                    alert('برای افزودن زیرشاخه، ابتدا حداقل یک دسته‌بندی را انتخاب کنید.');
+                    return;
+                }
+
+                const usedIds = getUsedAttributeIds(id);
+                const hasAvailableAttribute = getAvailableAttributes().some(
+                    attribute => !usedIds.has(String(attribute.id))
+                );
+
+                if (!hasAvailableAttribute) {
+                    renderTree();
+                    return;
+                }
+
                 openAddForm('feature', id);
                 break;
+            }
 
             case 'delete-feature':
                 if (confirm('این ویژگی و تمام زیرشاخه‌های آن حذف شود؟')) {
@@ -1319,6 +1309,21 @@ document.addEventListener('DOMContentLoaded', function () {
     // --------------------------------------------------
 
     document.querySelector('#add-root-feature')?.addEventListener('click', function () {
+        if (!getSelectedCategoryIds().length) {
+            alert('برای افزودن ویژگی، ابتدا حداقل یک دسته‌بندی را انتخاب کنید.');
+            return;
+        }
+
+        const usedIds = getUsedAttributeIds();
+        const hasAvailableAttribute = getAvailableAttributes().some(
+            attribute => !usedIds.has(String(attribute.id))
+        );
+
+        if (!hasAvailableAttribute) {
+            alert('تمام ویژگی‌های قابل انتخاب برای دسته‌بندی‌های انتخاب‌شده اضافه شده‌اند.');
+            return;
+        }
+
         activeForm = {
             type: 'root',
             targetId: ''
