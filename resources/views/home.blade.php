@@ -8,7 +8,7 @@
         localStorage.clear();
     </script>
 @endsession
-    <main class="w-full flex flex-col gap-10 justify-start items-center my-3 lg:my-5">
+    <main class="w-full flex flex-col gap-10 justify-start items-center mb-3 lg:mb-5">
         <!-- hero -->
         <section
                 class="max-w-[1800px] w-full mx-auto xl:h-90 bg-[url('{{ asset('storage/' . $setting['heroBanner']) }}')] bg-cover bg-no-repeat bg-center lg:h-80 flex max-lg:flex-col xl:gap-20 lg:gap-15 gap-5 justify-start items-center bg-(--second-cream-color) max-lg:pb-5">
@@ -437,4 +437,8 @@
        
         <!-- prapery -->
     </main>
+
+    <script>
+        let page = 'home'
+    </script>
 @endsection
