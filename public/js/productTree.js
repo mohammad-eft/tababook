@@ -67,6 +67,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     id: uid(),
                     name: value.name ?? '',
 
+                    isDefault: [true, 1, '1'].includes(
+                        value.is_default ?? value.isDefault ?? false
+                    ),
+
                     originalPrice:
                         value.original_price ??
                         value.originalPrice ??
@@ -743,6 +747,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     data-value-name="${value.id}"
                 >
 
+                <input
+                    type="hidden"
+                    name="${valuePath}[is_default]"
+                    value="${value.isDefault ? '1' : '0'}"
+                >
+
                 <div class="tree-value-head">
 
                     <div class="tree-value-name">
@@ -755,6 +765,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 ? `<span class="pf-hint">دارای ${value.children.length} زیرشاخه</span>`
                 : `<span class="pf-hint">ترکیب نهایی</span>`
             }
+
+                        ${hasChildren ? `
+                            <label class="inline-flex items-center gap-1.5 mr-2 text-xs text-slate-600 cursor-pointer select-none">
+                                <input
+                                    type="radio"
+                                    class="accent-blue-600"
+                                    name="tree-default-${parentFeature.id}"
+                                    value="${value.id}"
+                                    data-default-value-id="${value.id}"
+                                    data-default-feature-id="${parentFeature.id}"
+                                    ${value.isDefault ? 'checked' : ''}
+                                >
+                                <span>پیش‌فرض</span>
+                            </label>
+                        ` : ''}
 
                     </div>
 
@@ -948,6 +973,8 @@ document.addEventListener('DOMContentLoaded', function () {
             id: uid(),
 
             name,
+
+            isDefault: false,
 
             originalPrice: '',
             specialPrice: '',
@@ -1158,6 +1185,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
             value[field] = priceInput.value;
         }
+    });
+
+    // --------------------------------------------------
+    // انتخاب مقدار پیش‌فرض در هر گروه از مقادیر هم‌سطح
+    // --------------------------------------------------
+
+    root.addEventListener('change', function (event) {
+        const radio = event.target.closest('[data-default-value-id]');
+
+        if (!radio) return;
+
+        const feature = findFeature(radio.dataset.defaultFeatureId);
+
+        if (!feature) return;
+
+        feature.values.forEach(value => {
+            value.isDefault = String(value.id) === String(radio.dataset.defaultValueId);
+        });
+
+        renderTree();
     });
 
     // --------------------------------------------------

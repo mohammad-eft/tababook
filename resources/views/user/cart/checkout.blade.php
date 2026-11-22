@@ -19,7 +19,7 @@
         }
     </style>
     <form action="{{ route('order.store') }}" method="POST" enctype="multipart/form-data"
-        class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 mt-5">
+        id="checkoutForm" class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 mt-5">
 
         <div class="lg:col-span-7 xl:col-span-8 bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
             <h2 class="text-lg font-bold mb-6 text-gray-700">صورت حساب و حمل و نقل</h2>

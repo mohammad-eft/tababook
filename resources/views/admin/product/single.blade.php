@@ -196,9 +196,9 @@
                                 </div>
                                 <div class="h-12 addToCartBtns" data-product-id="{{ $product->id }}"
                                     data-count="{{ $product->count ?? 0 }}" data-feature-value-id="" data-cart-key="">
-                                    <button type="button" onclick="addToCart(this)" data-product-id="{{ $product->id }}"
-                                        class="w-full px-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl">
-                                        <span class="text-sm text-(--primary-text-color) font-bold group-hover:text-white">افزودن به سبد خرید</span>
+                                    <button type="button" {{ ($product->count ?? 0) < 1 ? 'disabled' : '' }} onclick="addToCart(this)" data-product-id="{{ $product->id }}"
+                                        class="w-full px-2 h-full transition-all duration-300 {{ ($product->count ?? 0) < 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-(--green-btn) group cursor-pointer' }} bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl">
+                                        <span class="text-sm text-(--primary-text-color) font-bold">{{ ($product->count ?? 0) < 1 ? 'ناموجود' : 'افزودن به سبد خرید' }}</span>
                                     </button>
                                 </div>
                                 <p class="text-xs text-rose-500 mt-2 hidden" data-feature-stock-message></p>
@@ -372,9 +372,9 @@
         <div class="flex flex-row justify-between items-center py-2 gap-3">
             <div class="w-1/2 h-12 addToCartBtns" data-product-id="{{ $product->id }}"
                 data-count="{{ $product->count ?? 0 }}" data-feature-value-id="" data-cart-key="">
-                <button type="button" onclick="addToCart(this)" data-product-id="{{ $product->id }}"
-                    class="w-full px-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl">
-                    <span class="text-[10px] text-(--primary-text-color) font-bold group-hover:text-white">افزودن به سبد خرید</span>
+                <button type="button" {{ ($product->count ?? 0) < 1 ? 'disabled' : '' }} onclick="addToCart(this)" data-product-id="{{ $product->id }}"
+                    class="w-full px-2 h-full transition-all duration-300 {{ ($product->count ?? 0) < 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-(--green-btn) group cursor-pointer' }} bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl">
+                    <span class="text-[10px] text-(--primary-text-color) font-bold">{{ ($product->count ?? 0) < 1 ? 'ناموجود' : 'افزودن به سبد خرید' }}</span>
                 </button>
             </div>
             <div class="flex flex-row items-center gap-2 text-sm" id="footer-price">
@@ -410,6 +410,44 @@
             const money = value => Number(value || 0).toLocaleString('fa-IR');
             const getValues = feature => Array.isArray(feature?.values) ? feature.values : [];
             const getChildren = value => Array.isArray(value?.children) ? value.children : [];
+            const isDefaultValue = value =>
+                value?.is_default === true ||
+                value?.is_default === 1 ||
+                value?.is_default === '1' ||
+                value?.isDefault === true ||
+                value?.isDefault === 1 ||
+                value?.isDefault === '1';
+
+            /**
+             * از یک مقدار انتخاب‌شده، زنجیره پیش‌فرض‌ها را تا ترکیب نهایی دنبال می‌کند.
+             * در این ساختار هر مقدار باید حداکثر یک ویژگی فرزند داشته باشد تا
+             * قیمت و موجودی یک ترکیب نهایی به‌صورت قطعی قابل تشخیص باشد.
+             */
+            function resolveDefaultLeaf(value) {
+                if (!value) return null;
+
+                let currentValue = value;
+                let safety = 0;
+
+                while (getChildren(currentValue).length) {
+                    if (++safety > 100) return null;
+
+                    const childFeatures = getChildren(currentValue);
+
+                    // اگر چند ویژگی مستقل زیر یک مقدار وجود داشته باشد،
+                    // انتخاب یک مسیر پیش‌فرض واحد از روی این ساختار ممکن نیست.
+                    if (childFeatures.length !== 1) return null;
+
+                    const childFeature = childFeatures[0];
+                    const defaults = getValues(childFeature).filter(isDefaultValue);
+
+                    if (defaults.length !== 1) return null;
+
+                    currentValue = defaults[0];
+                }
+
+                return currentValue;
+            }
 
             function updatePrice(value) {
                 const primary = Number(value?.original_price || 0);
@@ -422,92 +460,212 @@
                 const main = document.getElementById('featureMainPrice');
                 const mobileOld = document.getElementById('mobileOldPrice');
                 const mobileMain = document.getElementById('mobileMainPrice');
+
                 if (main) main.textContent = money(finalPrice);
                 if (mobileMain) mobileMain.textContent = money(finalPrice);
                 if (oldWrap) oldWrap.classList.toggle('hidden', !hasDiscount);
                 if (oldWrap) oldWrap.classList.toggle('flex', hasDiscount);
                 if (oldPrice) oldPrice.textContent = money(primary);
+
                 if (mobileOld) {
                     mobileOld.textContent = money(primary);
                     mobileOld.classList.toggle('hidden', !hasDiscount);
                 }
+
                 if (discount) {
-                    discount.textContent = Math.round((1 - special / primary) * 100).toLocaleString('fa-IR') + '٪';
+                    discount.textContent = hasDiscount
+                        ? Math.round((1 - special / primary) * 100).toLocaleString('fa-IR') + '٪'
+                        : '';
                     discount.classList.toggle('hidden', !hasDiscount);
                 }
             }
 
-            function updateCartControls(value) {
+            function updateCartControls(value, path = []) {
                 selectedLeaf = value;
-                const isLeaf = getChildren(value).length === 0;
-                const stock = Number(value?.count || 0);
-                const valueId = value?.id ?? '';
-                const cartKey = `${window.productId}:${valueId}`;
+                const isLeaf = !!value && getChildren(value).length === 0;
+                const stock = isLeaf ? Number(value.count || 0) : 0;
+                const valueId = isLeaf ? value.id : '';
+                const cartKey = isLeaf ? `${window.productId}:${valueId}` : '';
+                const selectedFeatures = isLeaf ? path : [];
+
                 document.querySelectorAll('.addToCartBtns').forEach(control => {
-                    control.dataset.featureValueId = isLeaf ? String(valueId) : '';
-                    control.dataset.cartKey = isLeaf ? cartKey : '';
-                    control.dataset.count = isLeaf ? String(stock) : '0';
-                    const button = control.querySelector('button[onclick*="addToCart"]');
-                    if (button) {
-                        button.disabled = !isLeaf || stock < 1;
-                        button.classList.toggle('opacity-50', !isLeaf || stock < 1);
-                        button.classList.toggle('cursor-not-allowed', !isLeaf || stock < 1);
-                        button.innerHTML = !isLeaf
-                            ? '<span class="text-xs font-bold">ابتدا زیرمجموعه را انتخاب کنید</span>'
-                            : stock < 1
-                                ? '<span class="text-xs font-bold">ناموجود</span>'
-                                : '<span class="text-sm font-bold">افزودن به سبد خرید</span>';
-                        if (isLeaf && stock > 0) button.setAttribute('onclick', 'addToCart(this)');
-                        else button.removeAttribute('onclick');
+                    // کنترل قبلی ممکن است از دکمه افزودن به کنترل تعداد (+ / -) تبدیل شده باشد.
+                    // هر بار بر اساس ترکیب فعلی، کل محتوای کنترل را از نو و با ساختار درست می‌سازیم.
+                    if (isLeaf) {
+                        let cartProducts = [];
+                        try {
+                            cartProducts = JSON.parse(localStorage.getItem('products') || '[]');
+                            if (!Array.isArray(cartProducts)) cartProducts = [];
+                        } catch (error) {
+                            cartProducts = [];
+                        }
+
+                        const inCart = cartProducts.find(product => {
+                            const key = typeof getProductCartKey === 'function'
+                                ? getProductCartKey(product)
+                                : (product.cart_key || (product.feature_value_id
+                                    ? `${product.id}:${product.feature_value_id}`
+                                    : `product:${product.id}`));
+                            return String(key) === String(cartKey);
+                        });
+
+                        if (inCart && typeof renderProductQuantityControl === 'function') {
+                            renderProductQuantityControl(control, inCart);
+                        } else if (typeof restoreProductAddButton === 'function') {
+                            restoreProductAddButton(control);
+                        } else {
+                            control.innerHTML = `
+                                <button type="button" onclick="addToCart(this)" class="w-full px-4 h-full bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl cursor-pointer transition-all duration-300 hover:bg-(--green-btn) group">
+                                    <span class="text-sm font-bold">افزودن به سبد خرید</span>
+                                </button>
+                            `;
+                        }
+                    } else {
+                        if (typeof restoreProductAddButton === 'function') {
+                            restoreProductAddButton(control);
+                        }
                     }
+
+                    control.dataset.productId = String(window.productId);
+                    control.dataset.featureValueId = isLeaf ? String(valueId) : '';
+                    control.dataset.cartKey = cartKey;
+                    control.dataset.count = String(stock);
+                    control.dataset.originalPrice = isLeaf && value.original_price != null ? String(value.original_price) : '';
+                    control.dataset.specialPrice = isLeaf && value.special_price != null ? String(value.special_price) : '';
+                    control.dataset.selectedFeatures = JSON.stringify(selectedFeatures);
+
+                    // موجودی ترکیب انتخابی ممکن است با مقداری که قبلاً در localStorage ذخیره شده متفاوت باشد.
+                    // وضعیت دکمه + را با موجودی فعلی همین ترکیب همگام می‌کنیم.
+                    const quantityControl = control.querySelector('input[type="number"]');
+                    const plusButton = control.querySelector('button[data-state="+"]');
+                    if (quantityControl && plusButton) {
+                        const currentQuantity = Number(quantityControl.value || 0);
+                        const reachedStock = stock < 1 || currentQuantity >= stock;
+                        plusButton.disabled = reachedStock;
+                        plusButton.classList.toggle('cursor-no-drop', reachedStock);
+                        plusButton.classList.toggle('opacity-50', reachedStock);
+                        plusButton.classList.toggle('cursor-pointer', !reachedStock);
+                    }
+
+                    // اگر این ترکیب قبلاً به سبد اضافه شده، کنترل تعداد را دست‌کاری نکن؛
+                    // چون دکمه‌های + و - داخل آن هستند و نباید متن افزودن جایگزینشان شود.
+                    const quantityInput = control.querySelector('input[type="number"]');
+                    if (quantityInput) return;
+
+                    const button = control.querySelector('button');
+                    if (!button) return;
+
+                    button.disabled = !isLeaf || stock < 1;
+                    button.classList.toggle('opacity-50', !isLeaf || stock < 1);
+                    button.classList.toggle('cursor-not-allowed', !isLeaf || stock < 1);
+
+                    button.innerHTML = !isLeaf
+                        ? '<span class="text-xs font-bold">ابتدا زیرمجموعه را انتخاب کنید</span>'
+                        : stock < 1
+                            ? '<span class="text-xs font-bold">ناموجود</span>'
+                            : '<span class="text-sm font-bold">افزودن به سبد خرید</span>';
+
+                    if (isLeaf && stock > 0) button.setAttribute('onclick', 'addToCart(this)');
+                    else button.removeAttribute('onclick');
                 });
-                const stockMessage = document.querySelector('[data-feature-stock-message]');
-                if (stockMessage) {
-                    stockMessage.textContent = isLeaf ? (stock > 0 ? `موجودی: ${stock.toLocaleString('fa-IR')} عدد` : 'این ترکیب در حال حاضر موجود نیست.') : '';
+
+                document.querySelectorAll('[data-feature-stock-message]').forEach(stockMessage => {
+                    stockMessage.textContent = isLeaf
+                        ? (stock > 0
+                            ? `موجودی: ${stock.toLocaleString('fa-IR')} عدد`
+                            : 'این ترکیب در حال حاضر موجود نیست.')
+                        : '';
                     stockMessage.classList.toggle('hidden', !isLeaf);
-                }
+                });
+
                 if (isLeaf) updatePrice(value);
             }
 
             function renderFeature(feature, depth) {
                 if (!feature || !levels) return;
+
                 const values = getValues(feature);
                 if (!values.length) return;
+
                 const wrapper = document.createElement('section');
                 wrapper.className = 'space-y-2';
+
                 const title = document.createElement('h4');
                 title.className = 'text-sm font-semibold';
                 title.textContent = feature.name || feature.title || 'انتخاب ویژگی';
                 wrapper.appendChild(title);
+
                 const options = document.createElement('div');
                 options.className = 'flex flex-wrap gap-2';
+
                 values.forEach(value => {
                     const option = document.createElement('button');
                     option.type = 'button';
                     option.className = 'rounded-lg border border-(--color-border) px-3 py-2 text-xs transition hover:border-(--pastel-purple)';
                     option.textContent = value.name || value.title || '—';
+
                     option.addEventListener('click', () => {
                         selectedPath.splice(depth);
-                        selectedPath.push({ feature: feature.name || feature.title || '', value: value.name || value.title || '', id: value.id });
-                        [...options.children].forEach(el => {
-                            el.classList.remove('border-(--pastel-purple)', 'bg-(--cream-color)', 'font-bold');
-                            el.classList.add('border-(--color-border)');
+                        selectedPath.push({
+                            feature: feature.name || feature.title || '',
+                            value: value.name || value.title || '',
+                            id: value.id
                         });
+
+                        [...options.children].forEach(element => {
+                            element.classList.remove('border-(--pastel-purple)', 'bg-(--cream-color)', 'font-bold');
+                            element.classList.add('border-(--color-border)');
+                        });
+
                         option.classList.remove('border-(--color-border)');
                         option.classList.add('border-(--pastel-purple)', 'bg-(--cream-color)', 'font-bold');
-                        while (levels.children.length > depth + 1) levels.lastElementChild.remove();
+
+                        while (levels.children.length > depth + 1) {
+                            levels.lastElementChild.remove();
+                        }
+
                         const children = getChildren(value);
+
                         if (children.length) {
-                            updateCartControls(null);
                             children.forEach(childFeature => renderFeature(childFeature, depth + 1));
-                            if (hint) hint.textContent = 'یک گزینه از ویژگی بعدی انتخاب کنید.';
+
+                            const defaultLeaf = resolveDefaultLeaf(value);
+                            if (defaultLeaf) {
+                                const defaultPath = [...selectedPath];
+                                let currentValue = value;
+
+                                while (getChildren(currentValue).length) {
+                                    const childFeature = getChildren(currentValue)[0];
+                                    const defaultValue = getValues(childFeature).find(isDefaultValue);
+                                    if (!defaultValue) break;
+
+                                    defaultPath.push({
+                                        feature: childFeature.name || childFeature.title || '',
+                                        value: defaultValue.name || defaultValue.title || '',
+                                        id: defaultValue.id,
+                                        is_default: true
+                                    });
+
+                                    currentValue = defaultValue;
+                                }
+
+                                updateCartControls(defaultLeaf, defaultPath);
+                                if (hint) {
+                                    hint.textContent = 'قیمت و موجودی بر اساس زیرشاخه پیش‌فرض محاسبه شده است؛ در صورت تمایل می‌توانید گزینه دیگری انتخاب کنید.';
+                                }
+                            } else {
+                                updateCartControls(null);
+                                if (hint) hint.textContent = 'برای مشاهده قیمت و موجودی، زیرشاخه را انتخاب کنید.';
+                            }
                         } else {
-                            updateCartControls(value);
+                            updateCartControls(value, [...selectedPath]);
                             if (hint) hint.textContent = 'ترکیب موردنظر انتخاب شد.';
                         }
                     });
+
                     options.appendChild(option);
                 });
+
                 wrapper.appendChild(options);
                 levels.appendChild(wrapper);
             }
@@ -517,6 +675,20 @@
                 updateCartControls(null);
             } else if (selectorExists) {
                 document.getElementById('productFeatureSelector')?.classList.add('hidden');
+            } else {
+                // محصول ساده: موجودی صفر از همان ابتدا دکمه افزودن را غیرفعال می‌کند.
+                document.querySelectorAll('.addToCartBtns').forEach(control => {
+                    const stock = Number(control.dataset.count || 0);
+                    const button = control.querySelector('button');
+                    if (!button) return;
+                    if (stock < 1) {
+                        button.disabled = true;
+                        button.removeAttribute('onclick');
+                        button.classList.add('opacity-50', 'cursor-not-allowed');
+                        button.classList.remove('cursor-pointer', 'hover:bg-(--green-btn)', 'group');
+                        button.innerHTML = '<span class="text-xs font-bold">ناموجود</span>';
+                    }
+                });
             }
         })();
     </script>
