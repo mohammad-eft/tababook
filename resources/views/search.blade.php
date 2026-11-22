@@ -7,7 +7,7 @@
 
         <div class="flex items-end justify-between gap-2.5 mb-[18px]">
             <div>
-                <h1 id="title" class="m-0 text-[18px] md:text-[22px]">نتایج جستجو برای "{{ $title }}"</h1>
+                <h1 id="title" class="m-0 text-[18px] md:text-[22px] @if(!$title) hidden @endif">نتایج جستجو برای "{{ $title }}"</h1>
                 <div id="resultCount" class="text-[#71717a] text-[13px]"></div>
             </div>
         </div>
@@ -142,6 +142,18 @@
             </section>
         </div>
     </main>
+
+    <script>
+        let mainTitle = document.getElementById('title')
+        let searchInputt = document.getElementById('searchInp')
+        searchInputt.addEventListener('input', function(){
+            if(searchInputt.value != ''){
+                mainTitle.classList.remove('hidden')
+            } else {
+                mainTitle.classList.add('hidden')
+            }
+        })
+    </script>
     
     <script src="{{ asset('js/filterStore.js') }}"></script>
 @endsection
