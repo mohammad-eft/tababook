@@ -4,6 +4,8 @@ use App\Http\Controllers\CartsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\ProductController;
 use App\Http\Middleware\AuthMiddleware;
 use App\Http\Middleware\AdminMiddleware;
@@ -217,4 +219,32 @@ Route::group([
     Route::get('/', 'index')->name('index');
     Route::get('/list', 'list')->name('list')->withoutMiddleware([AuthMiddleware::class]);
     Route::get('/single/{pack}', 'single')->name('single')->withoutMiddleware([AuthMiddleware::class]);
+});
+Route::group([
+    'prefix'=>'brand',
+    'controller'=>BrandController::class,
+    'middleware'=>[AuthMiddleware::class],
+    'as'=>'brand.'
+], function(){
+    Route::get('/create', 'create')->name('create');
+    Route::Post('/store', 'store')->name('store');
+    Route::get('/list', 'list')->name('list');
+    Route::get('/edit/{brand}', 'edit')->name('edit');
+    Route::post('/update/{brand}', 'update')->name('update');
+    Route::get('/delete/{brand}', 'delete')->name('delete');
+    Route::get('/single/{brand}', 'single')->name('single');
+});
+Route::group([
+    'prefix'=>'publication',
+    'controller'=>PublicationController::class,
+    'middleware'=>[AuthMiddleware::class],
+    'as'=>'publication.'
+], function(){
+    Route::get('/create', 'create')->name('create');
+    Route::Post('/store', 'store')->name('store');
+    Route::get('/list', 'list')->name('list');
+    Route::get('/edit/{publication}', 'edit')->name('edit');
+    Route::post('/update/{publication}', 'update')->name('update');
+    Route::get('/delete/{publication}', 'delete')->name('delete');
+    Route::get('/single/{publication}', 'single')->name('single');
 });
