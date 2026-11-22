@@ -338,6 +338,8 @@ class ProductController extends Controller
                 continue;
             }
 
+            $defaultValueCount = 0;
+
             foreach ($values as $valueIndex => $value) {
                 $valuePath = "{$featurePath}.values.{$valueIndex}";
 
@@ -359,6 +361,34 @@ class ProductController extends Controller
                     $validator->errors()->add(
                         "$valuePath.name",
                         'عنوان مقدار ویژگی الزامی است.'
+                    );
+                }
+
+                // مقدار پیش‌فرض باید boolean باشد و در هر گروه فقط یک مقدار پیش‌فرض مجاز است.
+                $isDefault = $value['is_default'] ?? false;
+
+                if (!in_array($isDefault, [true, false, 0, 1, '0', '1'], true)) {
+                    $validator->errors()->add(
+                        "$valuePath.is_default",
+                        'وضعیت پیش‌فرض مقدار ویژگی معتبر نیست.'
+                    );
+                }
+
+                if (in_array($isDefault, [true, 1, '1'], true)) {
+                    $defaultValueCount++;
+                }
+
+                // بررسی موجودی هر مقدار (موجودی واقعی فقط برای ترکیب‌های نهایی استفاده می‌شود)
+                $count = $value['count'] ?? 0;
+
+                if (
+                    !is_numeric($count) ||
+                    (string) (int) $count !== (string) $count ||
+                    (int) $count < 0
+                ) {
+                    $validator->errors()->add(
+                        "$valuePath.count",
+                        'موجودی هر ترکیب باید عدد صحیح و بزرگ‌تر یا مساوی صفر باشد.'
                     );
                 }
 
@@ -398,7 +428,19 @@ class ProductController extends Controller
                         "$valuePath.children",
                         [...$ancestors, $attributeId]
                     );
+                } elseif (in_array($isDefault, [true, 1, '1'], true)) {
+                    $validator->errors()->add(
+                        "$valuePath.is_default",
+                        'فقط مقادیری که زیرشاخه دارند می‌توانند پیش‌فرض باشند.'
+                    );
                 }
+            }
+
+            if ($defaultValueCount > 1) {
+                $validator->errors()->add(
+                    "$featurePath.values",
+                    'در هر گروه از مقادیر، فقط یک مقدار می‌تواند پیش‌فرض باشد.'
+                );
             }
         }
     }
@@ -598,6 +640,11 @@ class ProductController extends Controller
                     'special_price' => (
                         $specialPrice !== '' && $specialPrice !== null
                     ) ? $specialPrice : null,
+                    'count' => (int) ($valueData['count'] ?? 0),
+                    'is_default' => filter_var(
+                        $valueData['is_default'] ?? false,
+                        FILTER_VALIDATE_BOOLEAN
+                    ),
                     'sort_order' => $valueIndex,
                     'created_at' => now(),
                     'updated_at' => now(),
@@ -660,9 +707,12 @@ class ProductController extends Controller
                     ->values()
                     ->map(function ($value) use ($features, $values) {
                         return [
+                            'id' => (int) $value->id,
                             'name' => $value->name,
                             'original_price' => $value->original_price,
                             'special_price' => $value->special_price,
+                            'count' => (int) ($value->count ?? 0),
+                            'is_default' => (bool) ($value->is_default ?? false),
                             'children' => $this->buildFeatureNodes(
                                 $features,
                                 $values,
@@ -1270,6 +1320,9 @@ class ProductController extends Controller
 
         $category = $product->categories->first();
 
+        // درخت ویژگی‌ها همراه شناسه و موجودی هر مقدار برای انتخاب ترکیب در صفحه محصول
+        $productFeatures = $this->buildProductFeatureTree((int) $product->id);
+
         $mainMedia = $product->media->firstWhere('is_main', true);
 
         $mainImage = $mainMedia
@@ -1344,6 +1397,8 @@ class ProductController extends Controller
 
         $product->setAttribute('attributes', $attributes);
         $product->setAttribute('variants', $variants);
+        $product->setAttribute('product_features', $productFeatures);
+
         return view('admin.product.single', [
             'product' => $product,
             'setting' => homeSetting::document(),
@@ -1493,6 +1548,12 @@ class ProductController extends Controller
         $product->mainImg = $mainMedia
             ? $mainMedia->media_path
             : 'default.jpg';
+
+        // findProduct برای سبد خرید نیز باید اطلاعات درخت و ترکیب‌های محصول را برگرداند.
+        $product->setAttribute(
+            'product_features',
+            $this->buildProductFeatureTree((int) $product->id)
+        );
 
         return response()->json($product);
     }

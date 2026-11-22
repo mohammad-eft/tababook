@@ -67,6 +67,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     id: uid(),
                     name: value.name ?? '',
 
+                    isDefault: [true, 1, '1'].includes(
+                        value.is_default ?? value.isDefault ?? false
+                    ),
+
                     originalPrice:
                         value.original_price ??
                         value.originalPrice ??
@@ -75,6 +79,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     specialPrice:
                         value.special_price ??
                         value.specialPrice ??
+                        '',
+
+                    count:
+                        value.count ??
+                        value.stock ??
                         '',
 
                     open: value.open !== false,
@@ -136,6 +145,31 @@ document.addEventListener('DOMContentLoaded', function () {
         return getAvailableAttributes().find(
             attribute => String(attribute.id) === String(id)
         ) || null;
+    }
+
+
+    function hasSelectedCategories() {
+        return getSelectedCategoryIds().length > 0;
+    }
+
+    function hasAvailableAttributes(targetValueId = null) {
+        const usedIds = getUsedAttributeIds(targetValueId);
+
+        return getAvailableAttributes().some(
+            attribute => !usedIds.has(String(attribute.id))
+        );
+    }
+
+    function updateRootFeatureButton() {
+        const button = document.querySelector('#add-root-feature');
+        if (!button) return;
+
+        // در نبود دسته‌بندی دکمه باقی می‌ماند تا پیام راهنما نمایش داده شود.
+        // پس از انتخاب دسته‌بندی، اگر همه ویژگی‌ها استفاده شده باشند دکمه مخفی می‌شود.
+        button.classList.toggle(
+            'hidden',
+            hasSelectedCategories() && !hasAvailableAttributes()
+        );
     }
 
     function getAttributeLabel(attribute) {
@@ -439,9 +473,11 @@ document.addEventListener('DOMContentLoaded', function () {
     function renderPriceInputs(value, valuePath) {
         const originalName = `${valuePath}[original_price]`;
         const specialName = `${valuePath}[special_price]`;
+        const countName = `${valuePath}[count]`;
 
         const originalValue = escapeHTML(value.originalPrice);
         const specialValue = escapeHTML(value.specialPrice);
+        const countValue = escapeHTML(value.count);
 
         if (value.children.length) {
             return `
@@ -455,6 +491,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     type="hidden"
                     name="${specialName}"
                     value="${specialValue}"
+                >
+
+                <input
+                    type="hidden"
+                    name="${countName}"
+                    value="${countValue}"
                 >
             `;
         }
@@ -487,6 +529,21 @@ document.addEventListener('DOMContentLoaded', function () {
                         data-price-field="specialPrice"
                         data-value-id="${value.id}"
                         placeholder="قیمت ویژه"
+                    >
+                </div>
+
+                <div>
+                    <label>موجودی این ترکیب</label>
+
+                    <input
+                        type="number"
+                        min="0"
+                        step="1"
+                        name="${countName}"
+                        value="${countValue}"
+                        data-stock-field
+                        data-value-id="${value.id}"
+                        placeholder="تعداد موجودی"
                     >
                 </div>
 
@@ -690,6 +747,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     data-value-name="${value.id}"
                 >
 
+                <input
+                    type="hidden"
+                    name="${valuePath}[is_default]"
+                    value="${value.isDefault ? '1' : '0'}"
+                >
+
                 <div class="tree-value-head">
 
                     <div class="tree-value-name">
@@ -702,6 +765,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 ? `<span class="pf-hint">دارای ${value.children.length} زیرشاخه</span>`
                 : `<span class="pf-hint">ترکیب نهایی</span>`
             }
+
+                        ${hasChildren ? `
+                            <label class="inline-flex items-center gap-1.5 mr-2 text-xs text-slate-600 cursor-pointer select-none">
+                                <input
+                                    type="radio"
+                                    class="accent-blue-600"
+                                    name="tree-default-${parentFeature.id}"
+                                    value="${value.id}"
+                                    data-default-value-id="${value.id}"
+                                    data-default-feature-id="${parentFeature.id}"
+                                    ${value.isDefault ? 'checked' : ''}
+                                >
+                                <span>پیش‌فرض</span>
+                            </label>
+                        ` : ''}
 
                     </div>
 
@@ -734,14 +812,16 @@ document.addEventListener('DOMContentLoaded', function () {
                                 ✎ ویرایش
                             </button>
 
-                            <button
-                                type="button"
-                                class="tree-action"
-                                data-action="add-child-feature"
-                                data-id="${value.id}"
-                            >
-                                ＋ افزودن زیرشاخه
-                            </button>
+                            ${(!hasSelectedCategories() || hasAvailableAttributes(value.id)) ? `
+                                <button
+                                    type="button"
+                                    class="tree-action"
+                                    data-action="add-child-feature"
+                                    data-id="${value.id}"
+                                >
+                                    ＋ افزودن زیرشاخه
+                                </button>
+                            ` : ''}
 
                             ${hasChildren ? `
                                 <button
@@ -782,7 +862,7 @@ document.addEventListener('DOMContentLoaded', function () {
         `;
     }
 
-   
+
 
     // --------------------------------------------------
     // رندر اصلی
@@ -792,6 +872,8 @@ document.addEventListener('DOMContentLoaded', function () {
         root.innerHTML = productFeatures.map((feature, index) =>
             renderFeature(feature, index, 'product_features')
         ).join('') + renderAddForm('root', '');
+
+        updateRootFeatureButton();
 
         const counts = countTree(productFeatures);
 
@@ -823,6 +905,16 @@ document.addEventListener('DOMContentLoaded', function () {
     // --------------------------------------------------
 
     function openAddForm(type, targetId = '') {
+        if ((type === 'root' || type === 'feature') && !hasSelectedCategories()) {
+            alert('برای افزودن ویژگی، ابتدا حداقل یک دسته‌بندی را انتخاب کنید.');
+            return;
+        }
+
+        if ((type === 'root' || type === 'feature') && !hasAvailableAttributes(type === 'feature' ? targetId : null)) {
+            alert('تمام ویژگی‌های قابل استفاده در این مسیر اضافه شده‌اند.');
+            return;
+        }
+
         if (type === 'value' && targetId) {
             const feature = findFeature(targetId);
 
@@ -882,8 +974,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
             name,
 
+            isDefault: false,
+
             originalPrice: '',
             specialPrice: '',
+            count: '0',
 
             open: true,
             children: []
@@ -1060,6 +1155,18 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
+        const stockInput = target.closest('[data-stock-field]');
+
+        if (stockInput) {
+            const value = findValue(stockInput.dataset.valueId);
+
+            if (value) {
+                value.count = stockInput.value;
+            }
+
+            return;
+        }
+
         const priceInput = target.closest('[data-price-field]');
 
         if (priceInput) {
@@ -1078,6 +1185,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
             value[field] = priceInput.value;
         }
+    });
+
+    // --------------------------------------------------
+    // انتخاب مقدار پیش‌فرض در هر گروه از مقادیر هم‌سطح
+    // --------------------------------------------------
+
+    root.addEventListener('change', function (event) {
+        const radio = event.target.closest('[data-default-value-id]');
+
+        if (!radio) return;
+
+        const feature = findFeature(radio.dataset.defaultFeatureId);
+
+        if (!feature) return;
+
+        feature.values.forEach(value => {
+            value.isDefault = String(value.id) === String(radio.dataset.defaultValueId);
+        });
+
+        renderTree();
     });
 
     // --------------------------------------------------
@@ -1265,12 +1392,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // --------------------------------------------------
 
     document.querySelector('#add-root-feature')?.addEventListener('click', function () {
-        activeForm = {
-            type: 'root',
-            targetId: ''
-        };
-
-        renderTree();
+        openAddForm('root', '');
     });
 
     // --------------------------------------------------

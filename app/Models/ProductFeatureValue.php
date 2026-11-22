@@ -13,12 +13,16 @@ class ProductFeatureValue extends Model
         'name',
         'original_price',
         'special_price',
+        'count',
+        'is_default',
         'sort_order',
     ];
 
     protected $casts = [
         'original_price' => 'integer',
         'special_price' => 'integer',
+        'count' => 'integer',
+        'is_default' => 'boolean',
         'sort_order' => 'integer',
     ];
 
