@@ -360,6 +360,20 @@ class ProductController extends Controller
                     );
                 }
 
+                // بررسی موجودی هر مقدار (موجودی واقعی فقط برای ترکیب‌های نهایی استفاده می‌شود)
+                $count = $value['count'] ?? 0;
+
+                if (
+                    !is_numeric($count) ||
+                    (string) (int) $count !== (string) $count ||
+                    (int) $count < 0
+                ) {
+                    $validator->errors()->add(
+                        "$valuePath.count",
+                        'موجودی هر ترکیب باید عدد صحیح و بزرگ‌تر یا مساوی صفر باشد.'
+                    );
+                }
+
                 // بررسی قیمت‌ها
                 foreach (['original_price', 'special_price'] as $priceField) {
                     $price = $value[$priceField] ?? null;
@@ -596,6 +610,7 @@ class ProductController extends Controller
                     'special_price' => (
                         $specialPrice !== '' && $specialPrice !== null
                     ) ? $specialPrice : null,
+                    'count' => (int) ($valueData['count'] ?? 0),
                     'sort_order' => $valueIndex,
                     'created_at' => now(),
                     'updated_at' => now(),

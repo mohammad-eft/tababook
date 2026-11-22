@@ -77,6 +77,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         value.specialPrice ??
                         '',
 
+                    count: value.count ?? 0,
+
                     open: value.open !== false,
 
                     children: normalizeFeatures(value.children ?? [])
@@ -439,9 +441,11 @@ document.addEventListener('DOMContentLoaded', function () {
     function renderPriceInputs(value, valuePath) {
         const originalName = `${valuePath}[original_price]`;
         const specialName = `${valuePath}[special_price]`;
+        const countName = `${valuePath}[count]`;
 
         const originalValue = escapeHTML(value.originalPrice);
         const specialValue = escapeHTML(value.specialPrice);
+        const countValue = escapeHTML(value.count ?? 0);
 
         if (value.children.length) {
             return `
@@ -455,6 +459,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     type="hidden"
                     name="${specialName}"
                     value="${specialValue}"
+                >
+
+                <input
+                    type="hidden"
+                    name="${countName}"
+                    value="0"
                 >
             `;
         }
@@ -487,6 +497,21 @@ document.addEventListener('DOMContentLoaded', function () {
                         data-price-field="specialPrice"
                         data-value-id="${value.id}"
                         placeholder="قیمت ویژه"
+                    >
+                </div>
+
+                <div>
+                    <label>موجودی این ترکیب</label>
+
+                    <input
+                        type="number"
+                        min="0"
+                        step="1"
+                        name="${countName}"
+                        value="${countValue}"
+                        data-count-field
+                        data-value-id="${value.id}"
+                        placeholder="تعداد موجودی"
                     >
                 </div>
 
@@ -898,6 +923,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             originalPrice: '',
             specialPrice: '',
+            count: 0,
 
             open: true,
             children: []
@@ -1069,6 +1095,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (colorInput && isValidHex(target.value)) {
                 colorInput.value = target.value;
+            }
+
+            return;
+        }
+
+        const countInput = target.closest('[data-count-field]');
+
+        if (countInput) {
+            const value = findValue(countInput.dataset.valueId);
+
+            if (value) {
+                value.count = countInput.value === ''
+                    ? ''
+                    : Math.max(0, parseInt(countInput.value, 10) || 0);
             }
 
             return;

@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function () {
     const root = document.querySelector('#product-tree');
     if (!root) return;
@@ -76,6 +75,11 @@ document.addEventListener('DOMContentLoaded', function () {
                         value.special_price ??
                         value.specialPrice ??
                         '',
+
+                    count:
+                        value.count ??
+                        value.stock ??
+                        0,
 
                     open: value.open !== false,
 
@@ -439,9 +443,11 @@ document.addEventListener('DOMContentLoaded', function () {
     function renderPriceInputs(value, valuePath) {
         const originalName = `${valuePath}[original_price]`;
         const specialName = `${valuePath}[special_price]`;
+        const countName = `${valuePath}[count]`;
 
         const originalValue = escapeHTML(value.originalPrice);
         const specialValue = escapeHTML(value.specialPrice);
+        const countValue = escapeHTML(value.count ?? 0);
 
         if (value.children.length) {
             return `
@@ -455,6 +461,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     type="hidden"
                     name="${specialName}"
                     value="${specialValue}"
+                >
+
+                <input
+                    type="hidden"
+                    name="${countName}"
+                    value="${countValue}"
                 >
             `;
         }
@@ -490,6 +502,21 @@ document.addEventListener('DOMContentLoaded', function () {
                     >
                 </div>
 
+                <div>
+                    <label>موجودی این ترکیب</label>
+
+                    <input
+                        type="number"
+                        min="0"
+                        step="1"
+                        name="${countName}"
+                        value="${countValue}"
+                        data-stock-field
+                        data-value-id="${value.id}"
+                        placeholder="تعداد موجودی"
+                    >
+                </div>
+
             </div>
         `;
     }
@@ -503,12 +530,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const bodyId = `feature-body-${feature.id}`;
 
-        // const valuesHTML = feature.values.map((value, index) =>
-        //     renderValue(value, index, featurePath)
-        // ).join('');
-
         const valuesHTML = feature.values.map((value, index) =>
-            renderValue(value, index, featurePath, feature)
+            renderValue(value, index, featurePath)
         ).join('');
 
         const isEditing = activeForm?.type === 'edit-feature' &&
@@ -612,11 +635,18 @@ document.addEventListener('DOMContentLoaded', function () {
     // نمایش مقدار
     // --------------------------------------------------
 
-    function renderValue(value, valueIndex, featurePath, parentFeature) {
+    function renderValue(value, valueIndex, featurePath) {
         const valuePath = `${featurePath}[values][${valueIndex}]`;
 
         const hasChildren = value.children.length > 0;
 
+        const parentFeatureId = featurePath;
+
+        const featureIndex = Number(
+            featurePath.substring(featurePath.lastIndexOf('[') + 1)
+        );
+
+        const parentFeature = findFeatureByPath(featurePath);
 
         const isColor = isColorFeature(parentFeature);
 
@@ -782,7 +812,34 @@ document.addEventListener('DOMContentLoaded', function () {
         `;
     }
 
-   
+    // پیدا کردن ویژگی والد از روی مسیر نام‌گذاری فرم
+    function findFeatureByPath(path) {
+        const match = path.match(/\[(\d+)\]$/);
+
+        if (!match) return null;
+
+        const index = Number(match[1]);
+
+        let features = productFeatures;
+
+        const parts = path
+            .replace('product_features', '')
+            .match(/\[(\d+)\]/g) || [];
+
+        let currentFeature = null;
+
+        for (const part of parts) {
+            const featureIndex = Number(part.replace(/\D/g, ''));
+
+            currentFeature = features[featureIndex];
+
+            if (!currentFeature) return null;
+
+            features = null;
+        }
+
+        return currentFeature;
+    }
 
     // --------------------------------------------------
     // رندر اصلی
@@ -884,6 +941,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             originalPrice: '',
             specialPrice: '',
+            count: 0,
 
             open: true,
             children: []
