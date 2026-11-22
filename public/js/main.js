@@ -179,7 +179,7 @@ let main = document.getElementById('main')
 let header = document.querySelector('header')
 let mt = 'lg:mt-[' + topBanner.clientHeight + 'px]'
 headerMenu.classList.add(mt)
-main.classList.add('lg:mt-[' + (parseInt(header.clientHeight)) + 'px]', 'mt-[' + headerMenu.clientHeight + 'px]')
+main.classList.add('lg:mt-[' + (parseInt(header.clientHeight)+40) + 'px]', 'mt-[' + headerMenu.clientHeight + 'px]')
 
 window.addEventListener('scroll', () => {
     headerMenu = document.getElementById('headerMenu')
