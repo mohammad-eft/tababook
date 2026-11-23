@@ -17,6 +17,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
 class OrdersController extends Controller
@@ -114,90 +116,150 @@ class OrdersController extends Controller
         return (int) ($product->primary_price ?? 0);
     }
 
+    /**
+     * ثبت سفارش بر اساس ساختار فعلی محصول:
+     * - محصول ساده: product_id + quantity
+     * - محصول متغیر: product_id + feature_value_id (مقدار نهایی/برگ)
+     * - پکیج: pack_id + quantity
+     * قیمت و موجودی همیشه از دیتابیس خوانده می‌شوند.
+     */
     public function store(Request $request)
     {
         $request->validate([
             'name' => ['required', 'string', 'max:191'],
             'family' => ['required', 'string', 'max:191'],
             'phoneNumber' => ['required', 'string', 'max:30'],
-            'cityId' => ['required', 'integer'],
-            'address' => ['required', 'string'],
-            'postalCode' => ['required', 'string', 'max:30'],
+            'cityId' => ['required', 'integer', 'exists:province_cities,id'],
+            'address' => ['required', 'string', 'max:2000'],
+            // در فرم فعلی کدپستی اختیاری است.
+            'postalCode' => ['nullable', 'string', 'max:30'],
             'email' => ['nullable', 'email', 'max:191'],
             'nationalCode' => ['nullable', 'string', 'max:20'],
             'password' => ['nullable', 'string', 'min:6'],
-            'receipt' => ['required', 'file', 'max:5120'],
-            'products' => ['required'],
+            'receipt' => ['required', 'image', 'max:5120'],
+            'products' => ['nullable'],
             'packs' => ['nullable'],
-            'descriptoin' => ['nullable', 'string'],
+            'description' => ['nullable', 'string'],
+            'descriptoin' => ['nullable', 'string'], // سازگاری با فرم‌های قدیمی
+        ], [
+            'name.required' => 'وارد کردن نام ضروری است.',
+            'family.required' => 'وارد کردن نام خانوادگی ضروری است.',
+            'phoneNumber.required' => 'وارد کردن شماره تلفن ضروری است.',
+            'cityId.required' => 'انتخاب شهر ضروری است.',
+            'address.required' => 'وارد کردن آدرس ضروری است.',
+            'receipt.required' => 'بارگذاری رسید پرداخت ضروری است.',
+            'receipt.image' => 'فایل رسید باید تصویر باشد.',
+            'receipt.max' => 'حجم تصویر رسید نباید بیشتر از ۵ مگابایت باشد.',
         ]);
 
         $products = $this->decodeCheckoutItems($request->input('products'), 'products');
         $packs = $this->decodeCheckoutItems($request->input('packs'), 'packs');
 
-        if (count($products) === 0 && count($packs) === 0) {
+        if (empty($products) && empty($packs)) {
             throw ValidationException::withMessages([
-                'products' => 'سبد خرید خالی است.',
+                'products' => 'سبد خرید خالی است. لطفاً ابتدا محصولی به سبد خرید اضافه کنید.',
             ]);
         }
 
+        // نرمال‌سازی ورودی‌های قدیمی و جدید سبد خرید
+        $products = array_values(array_map(function ($item) {
+            if (!is_array($item)) return [];
+
+            return [
+                'product_id' => (int) ($item['product_id'] ?? $item['id'] ?? 0),
+                'feature_value_id' => !empty($item['feature_value_id'])
+                    ? (int) $item['feature_value_id']
+                    : null,
+                'quantity' => (int) ($item['quantity'] ?? 0),
+            ];
+        }, $products));
+
+        $packs = array_values(array_map(function ($item) {
+            if (!is_array($item)) return [];
+
+            return [
+                'pack_id' => (int) ($item['pack_id'] ?? $item['id'] ?? 0),
+                'quantity' => (int) ($item['quantity'] ?? 0),
+            ];
+        }, $packs));
+
+        foreach ($products as $item) {
+            if ($item['product_id'] < 1 || $item['quantity'] < 1) {
+                throw ValidationException::withMessages([
+                    'products' => 'شناسه یا تعداد یکی از محصولات سبد خرید معتبر نیست.',
+                ]);
+            }
+        }
+
+        foreach ($packs as $item) {
+            if ($item['pack_id'] < 1 || $item['quantity'] < 1) {
+                throw ValidationException::withMessages([
+                    'packs' => 'شناسه یا تعداد یکی از پکیج‌های سبد خرید معتبر نیست.',
+                ]);
+            }
+        }
+
         $receipt = $request->file('receipt');
-        $receiptName = time() . '_' . preg_replace('/[^A-Za-z0-9._-]/', '_', $receipt->getClientOriginalName());
+        $receiptName = now()->format('YmdHis') . '_' . Str::uuid() . '.' . $receipt->getClientOriginalExtension();
         $receiptPath = $receipt->storeAs('receipts', $receiptName, 'public');
+
+        if (!$receiptPath) {
+            return back()->withInput()->withErrors([
+                'receipt' => 'ذخیره فایل رسید انجام نشد. لطفاً دوباره تلاش کنید.',
+            ]);
+        }
 
         $name = $request->input('name');
         $family = $request->input('family');
-        $cityId = $request->input('cityId');
+        $cityId = (int) $request->input('cityId');
         $addressText = $request->input('address');
         $postalCode = $request->input('postalCode');
         $phoneNumber = $request->input('phoneNumber');
         $email = $request->input('email');
         $nationalCode = $request->input('nationalCode');
-        $description = $request->input('descriptoin');
-
+        $description = $request->input('description', $request->input('descriptoin'));
         $password = $request->filled('password')
             ? Hash::make($request->input('password'))
             : null;
 
-        DB::transaction(function () use (
-            $name,
-            $family,
-            $cityId,
-            $addressText,
-            $postalCode,
-            $phoneNumber,
-            $email,
-            $nationalCode,
-            $description,
-            $password,
-            $receiptPath,
-            $products,
-            $packs
-        ) {
-            $userData = [
-                'name' => $name,
-                'family' => $family,
-                'phoneNumber' => $phoneNumber,
-                'email' => $email,
-                'nationalCode' => $nationalCode,
-            ];
+        try {
+            DB::transaction(function () use (
+                $name,
+                $family,
+                $cityId,
+                $addressText,
+                $postalCode,
+                $phoneNumber,
+                $email,
+                $nationalCode,
+                $description,
+                $password,
+                $receiptPath,
+                $products,
+                $packs
+            ) {
+                $userData = [
+                    'name' => $name,
+                    'family' => $family,
+                    'phoneNumber' => $phoneNumber,
+                    'email' => $email,
+                    'nationalCode' => $nationalCode,
+                ];
 
-            if ($password) {
-                $userData['password'] = $password;
-            }
+                if ($password !== null) {
+                    $userData['password'] = $password;
+                }
 
-            User::upsert(
-                [$userData],
-                ['phoneNumber'],
-                $password
-                    ? ['name', 'family', 'email', 'nationalCode', 'password']
-                    : ['name', 'family', 'email', 'nationalCode']
-            );
+                User::upsert(
+                    [$userData],
+                    ['phoneNumber'],
+                    $password !== null
+                        ? ['name', 'family', 'email', 'nationalCode', 'password']
+                        : ['name', 'family', 'email', 'nationalCode']
+                );
 
-            $user = User::where('phoneNumber', $phoneNumber)->firstOrFail();
-
-            if ($user->roles->isNotEmpty()) {
-                $userRoleIds = $user->roles->pluck('id')->toArray();
+                $user = User::where('phoneNumber', $phoneNumber)->firstOrFail();
+                $userRoleIds = $user->roles->pluck('id')->map(fn ($id) => (int) $id)->all();
 
                 if (!in_array(1, $userRoleIds, true) && !in_array(2, $userRoleIds, true)) {
                     role_user::firstOrCreate([
@@ -205,161 +267,163 @@ class OrdersController extends Controller
                         'user_id' => $user->id,
                     ]);
                 }
-            }
 
-            $address = address::firstOrCreate([
-                'user_id' => $user->id,
-                'address' => $addressText,
-                'city_id' => $cityId,
-                'postalCode' => $postalCode,
-            ]);
+                $address = address::firstOrCreate([
+                    'user_id' => $user->id,
+                    'address' => $addressText,
+                    'city_id' => $cityId,
+                    'postalCode' => $postalCode,
+                ]);
 
-            $dateTime = explode(' ', verta());
-            $date = implode('/', explode('-', $dateTime[0]));
-            $currentTime = explode(':', $dateTime[1]);
-            unset($currentTime[count($currentTime) - 1]);
-            $time = implode(':', $currentTime);
+                $dateTime = explode(' ', (string) verta());
+                $date = isset($dateTime[0])
+                    ? implode('/', explode('-', $dateTime[0]))
+                    : now()->format('Y/m/d');
+                $time = isset($dateTime[1])
+                    ? implode(':', array_slice(explode(':', $dateTime[1]), 0, 2))
+                    : now()->format('H:i');
 
-            $order = orders::create([
-                'user_id' => $user->id,
-                'description' => $description,
-                'receipt' => $receiptPath,
-                'onlinePayment' => 0,
-                'address_id' => $address->id,
-                'order_status_id' => 1,
-                'date' => $date,
-                'time' => $time,
-            ]);
+                $order = orders::create([
+                    'user_id' => $user->id,
+                    'description' => $description,
+                    'receipt' => $receiptPath,
+                    'onlinePayment' => 0,
+                    'address_id' => $address->id,
+                    'order_status_id' => 1,
+                    'date' => $date,
+                    'time' => $time,
+                ]);
 
-            $orderCode = '100' . $order->id;
-            $order->update([
-                'order_code' => $orderCode,
-            ]);
+                $order->update(['order_code' => '100' . $order->id]);
 
-            /*
-             * ثبت محصولات و کسر موجودی:
-             * - محصول ساده: products.count
-             * - محصول دارای ترکیب: product_feature_values.count
-             */
-            foreach ($products as $item) {
-                $productId = (int) ($item['product_id'] ?? $item['id'] ?? 0);
-                $quantity = (int) ($item['quantity'] ?? 0);
-                $featureValueId = !empty($item['feature_value_id'])
-                    ? (int) $item['feature_value_id']
-                    : null;
-
-                if ($productId < 1 || $quantity < 1) {
-                    throw ValidationException::withMessages([
-                        'products' => 'شناسه یا تعداد یکی از محصولات سفارش معتبر نیست.',
-                    ]);
-                }
-
-                $dbProduct = product::query()
-                    ->lockForUpdate()
-                    ->find($productId);
-
-                if (!$dbProduct) {
-                    throw ValidationException::withMessages([
-                        'products' => 'یکی از محصولات سفارش دیگر وجود ندارد.',
-                    ]);
-                }
-
-                $featureValue = null;
-
-                if ($featureValueId) {
-                    $featureValue = ProductFeatureValue::query()
-                        ->with(['feature.parentValue.feature'])
+                foreach ($products as $item) {
+                    $dbProduct = product::query()
                         ->lockForUpdate()
-                        ->find($featureValueId);
+                        ->find($item['product_id']);
 
-                    if (
-                        !$featureValue ||
-                        !$featureValue->feature ||
-                        (int) $featureValue->feature->product_id !== (int) $dbProduct->id
-                    ) {
+                    if (!$dbProduct) {
                         throw ValidationException::withMessages([
-                            'products' => 'ترکیب انتخاب‌شده برای یکی از محصولات معتبر نیست.',
+                            'products' => 'یکی از محصولات سبد خرید دیگر وجود ندارد.',
                         ]);
                     }
 
-                    $availableCount = (int) $featureValue->count;
+                    $hasVariableFeatures = DB::table('product_features')
+                        ->where('product_id', $dbProduct->id)
+                        ->whereNull('parent_value_id')
+                        ->exists();
 
-                    if ($quantity > $availableCount) {
+                    $featureValue = null;
+                    $featureValueId = $item['feature_value_id'];
+
+                    if ($hasVariableFeatures && !$featureValueId) {
                         throw ValidationException::withMessages([
-                            'products' => "موجودی ترکیب «{$featureValue->name}» برای محصول «{$dbProduct->title}» کافی نیست.",
+                            'products' => "برای محصول «{$dbProduct->title}» باید یک ترکیب نهایی انتخاب شود.",
                         ]);
                     }
 
-                    $featureValue->decrement('count', $quantity);
-                } else {
-                    $availableCount = (int) ($dbProduct->count ?? 0);
-
-                    if ($quantity > $availableCount) {
+                    if (!$hasVariableFeatures && $featureValueId) {
                         throw ValidationException::withMessages([
-                            'products' => "موجودی محصول «{$dbProduct->title}» کافی نیست.",
+                            'products' => "محصول «{$dbProduct->title}» ساده است و ترکیب ویژگی ندارد.",
                         ]);
                     }
 
-                    $dbProduct->decrement('count', $quantity);
-                }
+                    if ($featureValueId) {
+                        $featureValue = ProductFeatureValue::query()
+                            ->with(['feature.parentValue.feature'])
+                            ->lockForUpdate()
+                            ->find($featureValueId);
 
-                $unitPrice = $this->resolveOrderUnitPrice($dbProduct, $featureValue);
-                $snapshotOptions = $featureValue
-                    ? $this->buildFeatureSnapshot($featureValue)
-                    : null;
+                        if (
+                            !$featureValue ||
+                            !$featureValue->feature ||
+                            (int) $featureValue->feature->product_id !== (int) $dbProduct->id
+                        ) {
+                            throw ValidationException::withMessages([
+                                'products' => "ترکیب انتخاب‌شده برای محصول «{$dbProduct->title}» معتبر نیست.",
+                            ]);
+                        }
 
-                carts::create([
-                    'product_id' => $dbProduct->id,
-                    'feature_value_id' => $featureValue?->id,
-                    'user_id' => $user->id,
-                    'order_id' => $order->id,
-                    'quantity' => $quantity,
-                    'snapshot_title' => $dbProduct->title,
-                    'snapshot_options' => $snapshotOptions,
-                    'snapshot_sku' => null,
-                    'unit_price' => $unitPrice,
-                    'line_total' => $unitPrice * $quantity,
-                ]);
-            }
+                        // فقط مقدار نهایی (leaf) باید به سفارش ارسال شود.
+                        $hasChildren = DB::table('product_features')
+                            ->where('parent_value_id', $featureValue->id)
+                            ->exists();
 
-            /*
-             * پکیج‌ها مانند قبل ثبت می‌شوند؛ قیمت در صورت وجود از دیتابیس snapshot می‌شود.
-             */
-            foreach ($packs as $item) {
-                $packId = (int) ($item['pack_id'] ?? $item['id'] ?? 0);
-                $quantity = (int) ($item['quantity'] ?? 0);
+                        if ($hasChildren) {
+                            throw ValidationException::withMessages([
+                                'products' => "برای محصول «{$dbProduct->title}» باید آخرین زیرمقدار ویژگی انتخاب شود.",
+                            ]);
+                        }
 
-                if ($packId < 1 || $quantity < 1) {
-                    throw ValidationException::withMessages([
-                        'packs' => 'شناسه یا تعداد یکی از پکیج‌ها معتبر نیست.',
+                        $availableCount = (int) $featureValue->count;
+                        if ($item['quantity'] > $availableCount) {
+                            throw ValidationException::withMessages([
+                                'products' => "موجودی ترکیب «{$featureValue->name}» برای محصول «{$dbProduct->title}» کافی نیست.",
+                            ]);
+                        }
+
+                        $featureValue->decrement('count', $item['quantity']);
+                    } else {
+                        $availableCount = (int) ($dbProduct->count ?? 0);
+                        if ($item['quantity'] > $availableCount) {
+                            throw ValidationException::withMessages([
+                                'products' => "موجودی محصول «{$dbProduct->title}» کافی نیست.",
+                            ]);
+                        }
+
+                        $dbProduct->decrement('count', $item['quantity']);
+                    }
+
+                    $unitPrice = $this->resolveOrderUnitPrice($dbProduct, $featureValue);
+                    $snapshotOptions = $featureValue
+                        ? $this->buildFeatureSnapshot($featureValue)
+                        : null;
+
+                    carts::create([
+                        'product_id' => $dbProduct->id,
+                        'feature_value_id' => $featureValue?->id,
+                        'user_id' => $user->id,
+                        'order_id' => $order->id,
+                        'quantity' => $item['quantity'],
+                        'snapshot_title' => $dbProduct->title,
+                        'snapshot_options' => $snapshotOptions,
+                        'snapshot_sku' => null,
+                        'unit_price' => $unitPrice,
+                        'line_total' => $unitPrice * $item['quantity'],
                     ]);
                 }
 
-                $pack = \App\Models\pack::find($packId);
+                foreach ($packs as $item) {
+                    $pack = \App\Models\pack::query()
+                        ->lockForUpdate()
+                        ->find($item['pack_id']);
 
-                if (!$pack) {
-                    throw ValidationException::withMessages([
-                        'packs' => 'یکی از پکیج‌های سفارش دیگر وجود ندارد.',
+                    if (!$pack) {
+                        throw ValidationException::withMessages([
+                            'packs' => 'یکی از پکیج‌های سبد خرید دیگر وجود ندارد.',
+                        ]);
+                    }
+
+                    $unitPrice = $pack->secondary_price !== null && (int) $pack->secondary_price > 0
+                        ? (int) $pack->secondary_price
+                        : (int) ($pack->primary_price ?? 0);
+
+                    carts::create([
+                        'pack_id' => $pack->id,
+                        'user_id' => $user->id,
+                        'order_id' => $order->id,
+                        'quantity' => $item['quantity'],
+                        'snapshot_title' => $pack->title ?? $pack->name ?? 'پکیج',
+                        'unit_price' => $unitPrice,
+                        'line_total' => $unitPrice * $item['quantity'],
                     ]);
                 }
+            });
+        } catch (\Throwable $exception) {
+            Storage::disk('public')->delete($receiptPath);
+            throw $exception;
+        }
 
-                $unitPrice = $pack->secondary_price
-                    ? (int) $pack->secondary_price
-                    : (int) ($pack->primary_price ?? 0);
-
-                carts::create([
-                    'pack_id' => $pack->id,
-                    'user_id' => $user->id,
-                    'order_id' => $order->id,
-                    'quantity' => $quantity,
-                    'snapshot_title' => $pack->title ?? $pack->name ?? 'پکیج',
-                    'unit_price' => $unitPrice,
-                    'line_total' => $unitPrice * $quantity,
-                ]);
-            }
-        });
-
-        return redirect('/')->with('clearStorage', true);
+        return redirect('/')->with('clearStorage', true)->with('message', 'سفارش شما با موفقیت ثبت شد.');
     }
 
     public function index()

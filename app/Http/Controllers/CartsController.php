@@ -113,8 +113,25 @@ class CartsController extends Controller
                 ->lockForUpdate()
                 ->findOrFail($validated['product_id']);
 
+            $hasVariableFeatures = DB::table('product_features')
+                ->where('product_id', $product->id)
+                ->whereNull('parent_value_id')
+                ->exists();
+
             $featureValue = null;
             $featureValueId = $validated['feature_value_id'] ?? null;
+
+            if ($hasVariableFeatures && !$featureValueId) {
+                throw ValidationException::withMessages([
+                    'feature_value_id' => 'برای افزودن این محصول باید یک ترکیب نهایی انتخاب کنید.',
+                ]);
+            }
+
+            if (!$hasVariableFeatures && $featureValueId) {
+                throw ValidationException::withMessages([
+                    'feature_value_id' => 'این محصول ترکیب ویژگی ندارد.',
+                ]);
+            }
 
             if ($featureValueId) {
                 $featureValue = ProductFeatureValue::query()
@@ -125,6 +142,16 @@ class CartsController extends Controller
                 if (!$featureValue->feature || (int) $featureValue->feature->product_id !== (int) $product->id) {
                     throw ValidationException::withMessages([
                         'feature_value_id' => 'ترکیب انتخاب‌شده متعلق به این محصول نیست.',
+                    ]);
+                }
+
+                $hasChildren = DB::table('product_features')
+                    ->where('parent_value_id', $featureValue->id)
+                    ->exists();
+
+                if ($hasChildren) {
+                    throw ValidationException::withMessages([
+                        'feature_value_id' => 'باید آخرین زیرمقدار ویژگی را انتخاب کنید.',
                     ]);
                 }
             }

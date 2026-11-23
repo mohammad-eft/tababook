@@ -73,14 +73,17 @@
                         @endphp
                         @foreach ($orders as $order)
                         @php
-                            $i++
+                            $i++;
+                            $orderTotal = $order->carts->sum(function ($cart) {
+                                return (float) ($cart->line_total ?? ((float) ($cart->unit_price ?? 0) * (int) ($cart->quantity ?? 0)));
+                            });
                         @endphp
-                            <tr class="hover:bg-gray-50 orders">
+                            <tr class="hover:bg-gray-50 orders" data-order-id="{{ $order->id }}">
                                 <td class="px-4 py-3 font-medium whitespace-nowrap">{{ $i }}</td>
                                 <td class="px-4 py-3 font-medium whitespace-nowrap in-fa">#{{ $order->order_code }}</td>
                                 <td class="px-4 py-3 whitespace-nowrap in-fa">{{ $order->user->name.' '.$order->user->family }}</td>
                                 <td class="px-4 py-3 text-gray-500 whitespace-nowrap in-fa">{{ $order->time . ' | ' . $order->date }}</td>
-                                <td class="px-4 py-3 whitespace-nowrap in-fa">{{ number_format($order->totalPrice) }} تومان</td>
+                                <td class="px-4 py-3 whitespace-nowrap in-fa">{{ number_format($orderTotal) }} تومان</td>
                                 <td class="px-4 py-3">
                                     <span
                                         class="px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-50 text-[{{ $order->state->color }}] whitespace-nowrap order-status-desktop">{{ $order->state->title }}</span>
@@ -123,6 +126,12 @@
                     $i = 0;
                 @endphp
                 @foreach ($orders as $order)
+                    @php
+                        $i++;
+                        $orderTotal = $order->carts->sum(function ($cart) {
+                            return (float) ($cart->line_total ?? ((float) ($cart->unit_price ?? 0) * (int) ($cart->quantity ?? 0)));
+                        });
+                    @endphp
                     {{-- <div class="w-full p-3 bg-white rounded-md flex flex-col shadow-[0px_0px_2px_1px_#e7e7ef] orders"
                              >
                             <div class="w-full flex flex-row items-center justify-between pb-3 border-b border-[#e4e5ea]">
@@ -263,11 +272,7 @@
                             </div>
                         </div> --}}
 
-                    @php
-                        $i++;
-                    @endphp
-
-                    <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 space-y-3 orders">
+                    <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 space-y-3 orders" data-order-id="{{ $order->id }}">
                         <div class="flex justify-between items-start">
                             <div>
                                 <p class="text-sm text-gray-500 mt-1">{{ $i }}</p>
@@ -284,7 +289,7 @@
                         </div>
                         <div class="flex justify-between text-sm text-gray-600">
                             <span class="in-fa">{{ $order->time . ' | ' . $order->date }}</span>
-                            <span class="font-medium text-gray-900 in-fa">{{ $order->totalPrice }} تومان</span>
+                            <span class="font-medium text-gray-900 in-fa">{{ number_format($orderTotal) }} تومان</span>
                         </div>
                         <div class="grid grid-cols-2 gap-2 pt-1">
                             <button onclick="showItems(this, {{ $order->id }})"
@@ -310,9 +315,10 @@
     <div id="orderBlock"
         class="fixed w-full h-dvh bg-black/50 top-0 right-0 z-999999 transition-all duration-300 invisible opacity-0">
         <div class="w-full h-full flex justify-center items-center lg:w-[calc(100%-265px)] lg:float-end">
-            <div class="w-11/12 lg:w-3/4 p-3 lg:p-5 rounded-xl bg-white relative pt-5">
+            <div class="w-11/12 lg:w-3/4 max-h-[90dvh] overflow-hidden p-3 lg:p-5 rounded-xl bg-white relative pt-5">
                 {{-- <span class="absolute -top-4 -right-2 text-md bg-white p-2 rounded-full cursor-pointer" onclick="hideItems()">❌</span> --}}
-                <div class="w-full flex flex-row items-center">
+                <div class="w-full flex flex-row items-center gap-2">
+                    <button type="button" onclick="hideItems()" class="shrink-0 size-8 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-600" aria-label="بستن">✕</button>
                     <h2 class="w-1/3 text-sm font-bold text-(--primary-text-color) in-fa" id="tableName"></h2>
                     <div class="w-1/3 flex flex-row justify-center">
                         <span id="orderStatus"></span>
@@ -323,7 +329,7 @@
                     <h4 class="text-xs text-(--primary-text-color) mb-2">آدرس :</h4>
                     <p class="text-xs text-(--secondary-text-color) text-center my-2 in-fa" id="address"></p>
                 </div>
-                <div class="w-full flex flex-col gap-2 max-h-[500px] overflow-y-auto p-3 mt-3 border-t-1 border-gray-200"
+                <div class="w-full flex flex-col gap-3 max-h-[65dvh] overflow-y-auto p-1 lg:p-3 mt-3 border-t border-gray-200"
                     style="scrollbar-width: thin;" id="itemList"></div>
             </div>
         </div>
@@ -347,251 +353,255 @@
     {{-- <script src="https://cdn.jsdeliver.net/npm/pusher-js8/dist/web/pusher.min.js"></script>
         <script src="{{ asset('assets/js/echo.js') }}"></script> --}}
     <script>
-        let orderBlock = document.getElementById('orderBlock')
-        let itemList = document.getElementById('itemList')
-        let tableName = document.getElementById('tableName')
-        let orderCode = document.getElementById('orderCode')
-        let orderStatus = document.getElementById('orderStatus')
-        let address = document.getElementById('address')
-        let orders = document.querySelectorAll('.orders')
-        let message = document.getElementById('message')
-        let element = document.createElement('div')
-        element.classList = "text-sm font-bold flex flex-row items-center justify-center py-3 gap-2 lg:gap-3"
-        let receiptBlock = document.getElementById('receiptBlock')
+        const orderBlock = document.getElementById('orderBlock');
+        const itemList = document.getElementById('itemList');
+        const tableName = document.getElementById('tableName');
+        const orderCode = document.getElementById('orderCode');
+        const orderStatus = document.getElementById('orderStatus');
+        const address = document.getElementById('address');
+        const message = document.getElementById('message');
+        const receiptBlock = document.getElementById('receiptBlock');
 
-        function showItems(el, orderId) {
-            el.disabled = true
-            el.classList.add('cursor-no-drop')
-            el.classList.remove('cursor-pointer')
-            el.classList.add('opacity-50')
+        const numberFormat = new Intl.NumberFormat('fa-IR');
+        const money = (value) => `${numberFormat.format(Number(value || 0))} تومان`;
+        const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({
+            '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+        }[char]));
+
+        function showItems(button, orderId) {
+            if (button) {
+                button.disabled = true;
+                button.classList.add('opacity-50', 'cursor-wait');
+            }
+
             $.ajax({
-                url: "{{ url('api/order/showItems') }}/" + orderId,
-                type: "GET",
-                success: function(data) {
+                url: "{{ url('api/order/showItems') }}/" + encodeURIComponent(orderId),
+                type: 'GET',
+                dataType: 'json',
+                success: function (order) {
+                    itemList.innerHTML = '';
+                    tableName.textContent = order.user
+                        ? `${order.user.name || ''} ${order.user.family || ''}`.trim()
+                        : 'جزئیات سفارش';
+                    orderCode.textContent = `#${order.order_code || ''}`;
 
-                    let formatter = new Intl.NumberFormat('en-US')
-
-                    itemList.innerHTML = ""
-                    orderBlock.classList.remove('invisible')
-                    orderBlock.classList.remove('opacity-0')
-                    el.disabled = false
-                    el.classList.remove('cursor-no-drop')
-                    el.classList.remove('opacity-50')
-                    el.classList.add('cursor-pointer')
-
-                    tableName.innerHTML = data.qr_code ? (data.qr_code.description ? data.qr_code.description :
-                        data.qr_code.slug) : `<svg xmlns="http://www.w3.org/2000/svg" onclick="hideItems()" class="w-4 cursor-pointer fill-gray-600" viewBox="0 0 384 512">
-                        <path d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/>
-                    </svg>`
-                    orderStatus.classList =
-                        `text-[10px] font-bold px-2 py-0.5 rounded-full border-1 border-[${ data.state.color }] text-[${ data.state.color }] bg-[${ data.state.color }]/10`
-                    orderStatus.innerText = data.state.title
-                    orderCode.innerText = '#' + data.order_code
-                    if (data.address) {
-                        address.parentElement.classList.remove('hidden')
-                        address.innerText = data.address
+                    if (order.state) {
+                        orderStatus.textContent = order.state.title || '';
+                        orderStatus.style.color = order.state.color || '#64748b';
+                        orderStatus.style.backgroundColor = `${order.state.color || '#64748b'}18`;
+                        orderStatus.style.border = `1px solid ${order.state.color || '#64748b'}`;
+                        orderStatus.className = 'text-[10px] font-bold px-2 py-1 rounded-full whitespace-nowrap';
                     }
-                    data.carts.forEach((cart) => {
-                        let item = document.createElement('div')
-                        item.classList =
-                            'w-full px-2 py-1.5 bg-white rounded-xl flex justify-between items-center shadow_box menuItems'
-                        item.setAttribute('data-menu-item-id', cart.product_id)
-                        let inner = `
-                        <div class="w-full flex gap-3 items-center relative">
-                            <div class="w-7/12 relative">
-                    `
-                        if (cart.product) {
-                            inner += `
-                        <img src='${cart.product.media[0].media_path ? "{{ asset('storage/') }}/" + cart.product.media[0].media_path : "{{ asset('storage/resturan_img/807c88cc-7948-4f75-88e5-4c4598ab8175_1767800481_6872954f6e4630ba6c0eda84b2ca1882.jpg') }}"}'
-                                alt="" class="w-full min-h-24 max-h-24 rounded-xl object-cover">
-                       </div>
-                        <div class="w-full flex h-full flex-col gap-1 items-start">
-                            <div class="w-full flex gap-1 items-center">
-                                <span class="w-[7px] h-[7px] rounded-full bg-[#f6911e]"></span>
-                                <h3 class="text-[14px] font-bold">${ cart.product.title }</h3>
-                            </div>
-                            <div class="flex flex-row items-center gap-2">
-                                <div class="flex gap-1 relative ${ cart.product.secondary_price ? 'through' : '' }">
-                                    <span class="text-[10px] text-[#f6911e] in-fa">${ formatter.format(cart.product.primary_price) }</span>
-                                    <span class='text-[10px] text-[#f6911e] ${ cart.product.secondary_price ? '' : 'hidden' } '></span>
-                                </div>
-                                <div class="flex gap-1 relative ${ cart.product.secondary_price ? '' : 'hidden' }">
-                                    <span class="text-[10px] text-[#f6911e] font-bold in-fa">${ formatter.format(cart.product.secondary_price) }</span>
-                                    <span class="text-[10px] text-[#f6911e]">تومان</span>
-                                </div>
-                            </div>
-                            <p class="text-[10px] text-[#6B7280] mt-0.5">${ cart.product.description ?? "" }</p>
-                            <div class="flex flex-wrap gap-1">
-                                <span class="px-1.5 py-0.5 rounded-full text-[9px] bg-[#f5d4ae] text-[#f6911e]">محبوب ها</span>
-                                <span class="px-1.5 py-0.5 rounded-full text-[9px] bg-[#F3F3F3] ">محبوب ها</span>
-                                <span class="px-1.5 py-0.5 rounded-full text-[9px] bg-[#F3F3F3] ">محبوب ها</span>
-                            </div>
-                        </div>
-                    </div>
-                        <div class="flex gap-1 items-center">
-                            <div class="h-full flex flex-col gap-2 items-center justify-center px-1" data-item-id="${ cart.product_id }">
-    
-                                <span class="text-xs text-(--secondary-text-color)">تعداد</span>
-                                <span class="text-xs text-(--primary-text-color) font-bold in-fa">${cart.quantity}</span>
-    
-                            </div>
-                        </div>
-                    `
-                        }
-                        console.log(cart)
-                        if (cart.pack) {
-                            inner += `
-                        <img src='${cart.pack.image ? "{{ asset('storage/') }}/" + cart.pack.image : "{{ asset('storage/resturan_img/807c88cc-7948-4f75-88e5-4c4598ab8175_1767800481_6872954f6e4630ba6c0eda84b2ca1882.jpg') }}"}'
-                                alt="" class="w-full min-h-24 max-h-24 rounded-xl object-cover">
-                       </div>
-                        <div class="w-full flex h-full flex-col gap-1 items-start">
-                            <div class="w-full flex gap-1 items-center">
-                                <span class="w-[7px] h-[7px] rounded-full bg-[#f6911e]"></span>
-                                <h3 class="text-[14px] font-bold">${ cart.pack.title }</h3>
-                            </div>
-                            <div class="flex flex-row items-center gap-2">
-                                <div class="flex gap-1 relative ${ cart.pack.secondary_price ? 'through' : '' }">
-                                    <span class="text-[10px] text-[#f6911e] in-fa">${ formatter.format(cart.pack.primary_price) }</span>
-                                    <span class='text-[10px] text-[#f6911e] ${ cart.pack.secondary_price ? '' : 'hidden' } '></span>
-                                </div>
-                                <div class="flex gap-1 relative ${ cart.pack.secondary_price ? '' : 'hidden' }">
-                                    <span class="text-[10px] text-[#f6911e] font-bold in-fa">${ formatter.format(cart.pack.secondary_price) }</span>
-                                    <span class="text-[10px] text-[#f6911e]">تومان</span>
-                                </div>
-                            </div>
-                            <p class="text-[10px] text-[#6B7280] mt-0.5">${ cart.pack.description ?? "" }</p>
-                            <div class="flex flex-wrap gap-1">
-                                <span class="px-1.5 py-0.5 rounded-full text-[9px] bg-[#f5d4ae] text-[#f6911e]">محبوب ها</span>
-                                <span class="px-1.5 py-0.5 rounded-full text-[9px] bg-[#F3F3F3] ">محبوب ها</span>
-                                <span class="px-1.5 py-0.5 rounded-full text-[9px] bg-[#F3F3F3] ">محبوب ها</span>
-                            </div>
-                        </div>
-                    </div>
-                        <div class="flex gap-1 items-center">
-                            <div class="h-full flex flex-col gap-2 items-center justify-center px-1" data-item-id="${ cart.pack_id }">
-    
-                                <span class="text-xs text-(--secondary-text-color)">تعداد</span>
-                                <span class="text-xs text-(--primary-text-color) font-bold in-fa">${cart.quantity}</span>
-    
-                            </div>
-                        </div>
-                    `
-                        }
-                        item.innerHTML = inner
-                        itemList.appendChild(item)
 
-                    })
+                    const carts = Array.isArray(order.carts) ? order.carts : [];
+                    if (!carts.length) {
+                        itemList.innerHTML = '<p class="text-center text-sm text-gray-500 py-8">برای این سفارش آیتمی ثبت نشده است.</p>';
+                    }
+
+                    let calculatedTotal = 0;
+                    carts.forEach((cart) => {
+                        const isPack = Boolean(cart.pack_id && cart.pack);
+                        const product = cart.product || null;
+                        const pack = cart.pack || null;
+                        const title = cart.snapshot_title || (isPack ? (pack.title || pack.name) : product?.title) || 'محصول';
+                        const quantity = Number(cart.quantity || 0);
+                        const unitPrice = Number(cart.unit_price ?? (isPack
+                            ? (pack?.secondary_price || pack?.primary_price)
+                            : (cart.feature_value?.special_price ?? cart.feature_value?.original_price ?? product?.secondary_price ?? product?.primary_price)) ?? 0);
+                        const lineTotal = Number(cart.line_total ?? (unitPrice * quantity));
+                        calculatedTotal += lineTotal;
+
+                        let options = cart.snapshot_options;
+                        if (typeof options === 'string') {
+                            try { options = JSON.parse(options); } catch (error) { options = []; }
+                        }
+                        if (!Array.isArray(options) || !options.length) {
+                            options = cart.selected_features;
+                            if (typeof options === 'string') {
+                                try { options = JSON.parse(options); } catch (error) { options = []; }
+                            }
+                        }
+                        if (!Array.isArray(options)) options = [];
+
+                        const optionText = options.map((option) => {
+                            if (typeof option === 'string') return option;
+                            const featureName = option.feature_name || option.name || option.feature || '';
+                            const valueName = option.value_name || option.value || option.title || '';
+                            return [featureName, valueName].filter(Boolean).join(' : ');
+                        }).filter(Boolean);
+
+                        const mediaPath = product?.media?.[0]?.media_path || product?.mainImg || null;
+                        const imagePath = isPack ? (pack?.image || null) : mediaPath;
+                        const imageUrl = imagePath
+                            ? `{{ asset('storage/') }}/${String(imagePath).replace(/^\/+/, '')}`
+                            : "{{ asset('storage/resturan_img/807c88cc-7948-4f75-88e5-4c4598ab8175_1767800481_6872954f6e4630ba6c0eda84b2ca1882.jpg') }}";
+
+                        const optionHtml = optionText.length
+                            ? `<div class="flex flex-wrap gap-1.5 mt-2">${optionText.map((text) => `<span class="text-[11px] px-2 py-1 rounded-lg bg-indigo-50 text-indigo-700">${escapeHtml(text)}</span>`).join('')}</div>`
+                            : '';
+
+                        const card = document.createElement('article');
+                        card.className = 'w-full rounded-xl border border-gray-100 bg-white p-3 shadow-sm';
+                        card.innerHTML = `
+                            <div class="flex gap-3 items-start">
+                                <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(title)}" class="w-20 h-20 rounded-lg object-cover bg-gray-50 shrink-0" onerror="this.src='{{ asset('storage/resturan_img/807c88cc-7948-4f75-88e5-4c4598ab8175_1767800481_6872954f6e4630ba6c0eda84b2ca1882.jpg') }}'">
+                                <div class="min-w-0 flex-1">
+                                    <div class="flex items-start justify-between gap-2">
+                                        <div class="min-w-0">
+                                            <span class="text-[10px] text-gray-400">${isPack ? 'پکیج' : 'محصول'}</span>
+                                            <h3 class="text-sm font-bold text-gray-800 leading-6">${escapeHtml(title)}</h3>
+                                        </div>
+                                        <span class="text-[11px] text-gray-500 whitespace-nowrap">${numberFormat.format(quantity)} عدد</span>
+                                    </div>
+                                    ${optionHtml}
+                                    <div class="flex flex-wrap justify-between gap-2 mt-3 pt-2 border-t border-dashed border-gray-200 text-xs">
+                                        <span class="text-gray-500">قیمت واحد: <b class="text-gray-700">${money(unitPrice)}</b></span>
+                                        <span class="font-bold text-(--primary-text-color)">جمع: ${money(lineTotal)}</span>
+                                    </div>
+                                </div>
+                            </div>`;
+                        itemList.appendChild(card);
+                    });
+
+                    const totalBox = document.createElement('div');
+                    totalBox.className = 'sticky bottom-0 flex items-center justify-between rounded-xl bg-gray-50 border border-gray-200 px-4 py-3 text-sm';
+                    totalBox.innerHTML = `<span class="text-gray-600">جمع اقلام سفارش</span><strong class="text-(--primary-text-color)">${money(calculatedTotal)}</strong>`;
+                    itemList.appendChild(totalBox);
+
+                    if (order.description) {
+                        const description = document.createElement('div');
+                        description.className = 'rounded-lg bg-amber-50 text-amber-800 p-3 text-xs leading-6';
+                        description.textContent = `توضیحات سفارش: ${order.description}`;
+                        itemList.appendChild(description);
+                    }
+
+                    orderBlock.classList.remove('invisible', 'opacity-0');
                 },
-                error: function() {
-                    showMessage('open')
-                    element.innerHTML = `
-                        <span>خطا در دریافت اطلاعات</span>
-                        <span class="text-red-500">!</span>
-                        `
-                    message.children[0].appendChild(element)
+                error: function () {
+                    showMessage('open');
+                    const notice = document.createElement('div');
+                    notice.className = 'text-sm font-bold text-red-500 text-center py-3';
+                    notice.textContent = 'دریافت جزئیات سفارش با خطا مواجه شد.';
+                    message.children[0].appendChild(notice);
                     setTimeout(() => {
-                        showMessage('close')
-                    }, 2000)
+                        showMessage('close');
+                        notice.remove();
+                    }, 2500);
+                },
+                complete: function () {
+                    if (button) {
+                        button.disabled = false;
+                        button.classList.remove('opacity-50', 'cursor-wait');
+                    }
                 }
-            })
+            });
         }
 
         function hideItems() {
-            orderBlock.classList.add('invisible')
-            orderBlock.classList.add('opacity-0')
-            // orderStatus.innerText = ''
-            // orderCode.innerText = ''
-            // tableName.innerText = ''
-            // address.innerText = ''
+            orderBlock.classList.add('invisible', 'opacity-0');
         }
 
         function showMessage(state) {
-            if (state == 'open') {
-                message.classList.remove('top-0')
-                message.classList.remove('opacity-0')
-                message.classList.remove('invisible')
-                message.classList.add('top-1/10')
-            }
-            if (state == 'close') {
-                message.classList.remove('top-1/10')
-                message.classList.add('top-0')
-                message.classList.add('opacity-0')
-                message.classList.add('invisible')
+            if (state === 'open') {
+                message.classList.remove('top-0', 'opacity-0', 'invisible');
+                message.classList.add('top-1/10');
+            } else {
+                message.classList.remove('top-1/10');
+                message.classList.add('top-0', 'opacity-0', 'invisible');
             }
         }
 
-        function accept(orderId, el, status) {
-            orders = document.querySelectorAll('.orders')
+        function accept(orderId, button, status) {
+            if (!button) return;
+            button.disabled = true;
+
             $.ajax({
                 url: "{{ url('api/order/acceptOrder') }}",
-                type: "POST",
-                dataType: "json",
+                type: 'POST',
+                dataType: 'json',
                 data: {
-                    'status': status,
-                    'order_id': orderId
+                    status: status,
+                    order_id: orderId,
+                    _token: "{{ csrf_token() }}"
                 },
-                success: function(data) {
-                    console.log(data.state)
-                    if(el.closest('.orders').querySelector('.order-status') && el.closest('.orders').querySelector('.order-show-btn') && el.closest('.orders').querySelector('.order-accept-btn')){
-                        el.closest('.orders').querySelector('.order-status').classList =
-                            `px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-50 text-[${data.state.color}] order-status`
-                        el.closest('.orders').querySelector('.order-status').innerText = data.state.title
-                        el.closest('.orders').querySelector('.order-show-btn').classList =
-                            `flex items-center justify-center gap-1 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-medium transition order-show-btn`
-                        el.closest('.orders').querySelector('.order-accept-btn').innerText = data.state.admin_title
-                    }
-                    // el.setAttribute('onclick', `accept(${data.id}, this, ${data.state.id})`)
-
-                    if(el.closest('.orders').querySelector('.order-status-desktop') && el.closest('.orders').querySelector('.order-show-btn-desktop') && el.closest('.orders').querySelector('.order-accept-btn-desktop')){
-                        el.closest('.orders').querySelector('.order-status-desktop').classList =
-                            `px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-50 text-[${data.state.color}] whitespace-nowrap order-status-desktop`
-                        el.closest('.orders').querySelector('.order-status-desktop').innerText = data.state.title
-                        el.closest('.orders').querySelector('.order-show-btn-desktop').classList =
-                            `px-2.5 py-1.5 rounded-lg text-xs font-medium bg-gray-100 hover:bg-gray-200 text-gray-700 transition whitespace-nowrap order-show-btn-desktop`
-                        el.closest('.orders').querySelector('.order-accept-btn-desktop').innerText = data.state.admin_title
-                    }
-                    el.setAttribute('onclick', `accept(${data.id}, this, ${data.state.id})`)
-
-                },
-                error: function() {
-                    alert('error')
-                }
-            })
-        }
-
-        {{-- function deleteOrder(el, id) {
-            orders = document.querySelectorAll('.orders')
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                }
-            })
-            $.ajax({
-                url: "{{ url('api/order/delete') }}/" + id,
-                type: "GET",
                 success: function (data) {
-                    console.log(data)
-                    orders.forEach((order) => {
-                        if (order.getAttribute('data-order-id') == data) {
-                            order.remove()
-                        }
-                    })
+                    const card = button.closest('.orders');
+                    if (!card || !data.state) return;
+
+                    const state = data.state;
+                    const statusElements = card.querySelectorAll('.order-status, .order-status-desktop');
+                    statusElements.forEach((element) => {
+                        element.textContent = state.title || '';
+                        element.style.color = state.color || '';
+                        element.style.borderColor = state.color || '';
+                    });
+
+                    const actionButtons = card.querySelectorAll('.order-accept-btn, .order-accept-btn-desktop');
+                    actionButtons.forEach((element) => {
+                        element.textContent = state.admin_title || 'وضعیت';
+                        element.setAttribute('onclick', `accept(${Number(data.id)}, this, ${Number(state.id)})`);
+                    });
                 },
                 error: function () {
-                    console.log('error')
+                    alert('تغییر وضعیت سفارش انجام نشد. دوباره تلاش کنید.');
+                },
+                complete: function () {
+                    button.disabled = false;
                 }
-            })
-        } --}}
+            });
+        }
 
-        function showReceipt(el, img) {
-            let path = "{{ asset('storage/') }}/" + img
-            receiptBlock.classList.remove('invisible', 'opacity-0')
-            receiptBlock.querySelector('img').src = path
+        function deleteOrder(button, orderId) {
+            if (!confirm('از حذف این سفارش مطمئن هستید؟')) return;
+            if (button) button.disabled = true;
+
+            $.ajaxSetup({
+                headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}" }
+            });
+
+            $.ajax({
+                url: "{{ url('api/order/delete') }}/" + encodeURIComponent(orderId),
+                type: 'GET',
+                success: function () {
+                    const orderElement = button?.closest('.orders');
+                    if (orderElement) orderElement.remove();
+                },
+                error: function () {
+                    alert('حذف سفارش انجام نشد.');
+                    if (button) button.disabled = false;
+                }
+            });
+        }
+
+        function showReceipt(button, image) {
+            if (!image) {
+                alert('برای این سفارش رسیدی ثبت نشده است.');
+                return;
+            }
+            const path = `{{ asset('storage/') }}/${String(image).replace(/^\/+/, '')}`;
+            const imageElement = receiptBlock.querySelector('img');
+            imageElement.src = path;
+            receiptBlock.classList.remove('invisible', 'opacity-0');
         }
 
         function closeReceipt() {
-            receiptBlock.classList.add('invisible', 'opacity-0')
+            receiptBlock.classList.add('invisible', 'opacity-0');
+            receiptBlock.querySelector('img').src = '';
         }
+
+        // بستن پنجره‌ها با کلیک روی فضای تیره یا کلید Escape
+        orderBlock?.addEventListener('click', (event) => {
+            if (event.target === orderBlock) hideItems();
+        });
+        receiptBlock?.addEventListener('click', (event) => {
+            if (event.target === receiptBlock) closeReceipt();
+        });
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                hideItems();
+                closeReceipt();
+            }
+        });
     </script>
 
 

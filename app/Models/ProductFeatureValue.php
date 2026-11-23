@@ -31,12 +31,9 @@ class ProductFeatureValue extends Model
         return $this->belongsTo(ProductFeature::class, 'product_feature_id');
     }
 
-    // ویژگی‌هایی که زیرمجموعه این مقدار هستند.
     public function childFeatures(): HasMany
     {
-        return $this->hasMany(
-            ProductFeature::class,
-            'parent_value_id'
-        )->orderBy('sort_order');
+        return $this->hasMany(ProductFeature::class, 'parent_value_id')
+            ->orderBy('sort_order');
     }
 }

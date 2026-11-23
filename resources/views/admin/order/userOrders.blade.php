@@ -80,7 +80,7 @@
                                 <td class="px-4 py-3 font-medium whitespace-nowrap in-fa">#{{ $order->order_code }}</td>
                                 <td class="px-4 py-3 whitespace-nowrap in-fa">{{ $order->user->name.' '.$order->user->family }}</td>
                                 <td class="px-4 py-3 text-gray-500 whitespace-nowrap in-fa">{{ $order->time . ' | ' . $order->date }}</td>
-                                <td class="px-4 py-3 whitespace-nowrap in-fa">{{ number_format($order->totalPrice) }} تومان</td>
+                                <td class="px-4 py-3 whitespace-nowrap in-fa">{{ number_format($order->carts->sum(fn ($cart) => (int) ($cart->line_total ?? (($cart->unit_price ?? 0) * ($cart->quantity ?? 0))))) }} تومان</td>
                                 <td class="px-4 py-3">
                                     <span
                                         class="px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-50 text-[{{ $order->state->color }}] whitespace-nowrap order-status-desktop">{{ $order->state->title }}</span>
@@ -140,7 +140,7 @@
                         </div>
                         <div class="flex justify-between text-sm text-gray-600">
                             <span class="in-fa">{{ $order->time . ' | ' . $order->date }}</span>
-                            <span class="font-medium text-gray-900 in-fa">{{ $order->totalPrice }} تومان</span>
+                            <span class="font-medium text-gray-900 in-fa">{{ number_format($order->carts->sum(fn ($cart) => (int) ($cart->line_total ?? (($cart->unit_price ?? 0) * ($cart->quantity ?? 0))))) }} تومان</span>
                         </div>
                         <div class="grid grid-cols-2 gap-2 pt-1">
                             <button onclick="showItems(this, {{ $order->id }})"
@@ -245,96 +245,84 @@
                         address.parentElement.classList.remove('hidden')
                         address.innerText = data.address
                     }
-                    data.carts.forEach((cart) => {
-                        let item = document.createElement('div')
-                        item.classList =
-                            'w-full px-2 py-1.5 bg-white rounded-xl flex justify-between items-center shadow_box menuItems'
-                        item.setAttribute('data-menu-item-id', cart.product_id)
-                        let inner = `
-                        <div class="w-full flex gap-3 items-center relative">
-                            <div class="w-7/12 relative">
-                    `
-                        if (cart.product) {
-                            inner += `
-                        <img src='${cart.product.media[0].media_path ? "{{ asset('storage/') }}/" + cart.product.media[0].media_path : "{{ asset('storage/resturan_img/807c88cc-7948-4f75-88e5-4c4598ab8175_1767800481_6872954f6e4630ba6c0eda84b2ca1882.jpg') }}"}'
-                                alt="" class="w-full min-h-24 max-h-24 rounded-xl object-cover">
-                       </div>
-                        <div class="w-full flex h-full flex-col gap-1 items-start">
-                            <div class="w-full flex gap-1 items-center">
-                                <span class="w-[7px] h-[7px] rounded-full bg-[#f6911e]"></span>
-                                <h3 class="text-[14px] font-bold">${ cart.product.title }</h3>
-                            </div>
-                            <div class="flex flex-row items-center gap-2">
-                                <div class="flex gap-1 relative ${ cart.product.secondary_price ? 'through' : '' }">
-                                    <span class="text-[10px] text-[#f6911e] in-fa">${ formatter.format(cart.product.primary_price) }</span>
-                                    <span class='text-[10px] text-[#f6911e] ${ cart.product.secondary_price ? '' : 'hidden' } '></span>
-                                </div>
-                                <div class="flex gap-1 relative ${ cart.product.secondary_price ? '' : 'hidden' }">
-                                    <span class="text-[10px] text-[#f6911e] font-bold in-fa">${ formatter.format(cart.product.secondary_price) }</span>
-                                    <span class="text-[10px] text-[#f6911e]">تومان</span>
-                                </div>
-                            </div>
-                            <p class="text-[10px] text-[#6B7280] mt-0.5">${ cart.product.description ?? "" }</p>
-                            <div class="flex flex-wrap gap-1">
-                                <span class="px-1.5 py-0.5 rounded-full text-[9px] bg-[#f5d4ae] text-[#f6911e]">محبوب ها</span>
-                                <span class="px-1.5 py-0.5 rounded-full text-[9px] bg-[#F3F3F3] ">محبوب ها</span>
-                                <span class="px-1.5 py-0.5 rounded-full text-[9px] bg-[#F3F3F3] ">محبوب ها</span>
-                            </div>
-                        </div>
-                    </div>
-                        <div class="flex gap-1 items-center">
-                            <div class="h-full flex flex-col gap-2 items-center justify-center px-1" data-item-id="${ cart.product_id }">
-    
-                                <span class="text-xs text-(--secondary-text-color)">تعداد</span>
-                                <span class="text-xs text-(--primary-text-color) font-bold in-fa">${cart.quantity}</span>
-    
-                            </div>
-                        </div>
-                    `
-                        }
-                        console.log(cart)
-                        if (cart.pack) {
-                            inner += `
-                        <img src='${cart.pack.image ? "{{ asset('storage/') }}/" + cart.pack.image : "{{ asset('storage/resturan_img/807c88cc-7948-4f75-88e5-4c4598ab8175_1767800481_6872954f6e4630ba6c0eda84b2ca1882.jpg') }}"}'
-                                alt="" class="w-full min-h-24 max-h-24 rounded-xl object-cover">
-                       </div>
-                        <div class="w-full flex h-full flex-col gap-1 items-start">
-                            <div class="w-full flex gap-1 items-center">
-                                <span class="w-[7px] h-[7px] rounded-full bg-[#f6911e]"></span>
-                                <h3 class="text-[14px] font-bold">${ cart.pack.title }</h3>
-                            </div>
-                            <div class="flex flex-row items-center gap-2">
-                                <div class="flex gap-1 relative ${ cart.pack.secondary_price ? 'through' : '' }">
-                                    <span class="text-[10px] text-[#f6911e] in-fa">${ formatter.format(cart.pack.primary_price) }</span>
-                                    <span class='text-[10px] text-[#f6911e] ${ cart.pack.secondary_price ? '' : 'hidden' } '></span>
-                                </div>
-                                <div class="flex gap-1 relative ${ cart.pack.secondary_price ? '' : 'hidden' }">
-                                    <span class="text-[10px] text-[#f6911e] font-bold in-fa">${ formatter.format(cart.pack.secondary_price) }</span>
-                                    <span class="text-[10px] text-[#f6911e]">تومان</span>
-                                </div>
-                            </div>
-                            <p class="text-[10px] text-[#6B7280] mt-0.5">${ cart.pack.description ?? "" }</p>
-                            <div class="flex flex-wrap gap-1">
-                                <span class="px-1.5 py-0.5 rounded-full text-[9px] bg-[#f5d4ae] text-[#f6911e]">محبوب ها</span>
-                                <span class="px-1.5 py-0.5 rounded-full text-[9px] bg-[#F3F3F3] ">محبوب ها</span>
-                                <span class="px-1.5 py-0.5 rounded-full text-[9px] bg-[#F3F3F3] ">محبوب ها</span>
-                            </div>
-                        </div>
-                    </div>
-                        <div class="flex gap-1 items-center">
-                            <div class="h-full flex flex-col gap-2 items-center justify-center px-1" data-item-id="${ cart.pack_id }">
-    
-                                <span class="text-xs text-(--secondary-text-color)">تعداد</span>
-                                <span class="text-xs text-(--primary-text-color) font-bold in-fa">${cart.quantity}</span>
-    
-                            </div>
-                        </div>
-                    `
-                        }
-                        item.innerHTML = inner
-                        itemList.appendChild(item)
+                    const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({
+                        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+                    })[char]);
 
-                    })
+                    data.carts.forEach((cart) => {
+                        const product = cart.product || null;
+                        const pack = cart.pack || null;
+                        const title = cart.snapshot_title || product?.title || pack?.title || 'محصول';
+                        const quantity = Number(cart.quantity || 0);
+                        const unitPrice = Number(cart.unit_price ?? (cart.snapshot_price ?? 0));
+                        const lineTotal = Number(cart.line_total ?? (unitPrice * quantity));
+                        const imagePath = product?.media?.find(media => media.is_main == 1)?.media_path
+                            || product?.media?.[0]?.media_path
+                            || pack?.image
+                            || null;
+                        const imageUrl = imagePath
+                            ? `{{ asset('storage/') }}/${imagePath}`
+                            : `{{ asset('storage/resturan_img/807c88cc-7948-4f75-88e5-4c4598ab8175_1767800481_6872954f6e4630ba6c0eda84b2ca1882.jpg') }}`;
+
+                        let options = cart.snapshot_options || cart.selected_features || [];
+                        if (typeof options === 'string') {
+                            try { options = JSON.parse(options); } catch (_) { options = []; }
+                        }
+
+                        let optionsHtml = '';
+                        if (Array.isArray(options)) {
+                            optionsHtml = options.map(option => {
+                                const featureName = option.feature_name || option.name || '';
+                                const valueName = option.value_name || option.value || '';
+                                if (!featureName && !valueName) return '';
+                                return `<span class="px-2 py-1 rounded-full text-[10px] bg-gray-100 text-gray-600">
+                                    ${escapeHtml(featureName)}${featureName && valueName ? ' : ' : ''}${escapeHtml(valueName)}
+                                </span>`;
+                            }).filter(Boolean).join('');
+                        } else if (options && typeof options === 'object') {
+                            optionsHtml = Object.entries(options).map(([key, value]) =>
+                                `<span class="px-2 py-1 rounded-full text-[10px] bg-gray-100 text-gray-600">${escapeHtml(key)}: ${escapeHtml(value)}</span>`
+                            ).join('');
+                        }
+
+                        const item = document.createElement('div');
+                        item.className = 'w-full p-3 bg-white rounded-xl flex flex-col sm:flex-row gap-3 items-center shadow_box';
+                        item.innerHTML = `
+                            <div class="w-full sm:w-24 shrink-0">
+                                <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(title)}"
+                                    class="w-full h-24 rounded-xl object-cover">
+                            </div>
+                            <div class="w-full flex-1 flex flex-col gap-2">
+                                <h3 class="text-sm font-bold text-gray-800">${escapeHtml(title)}</h3>
+                                <div class="flex flex-wrap gap-1">${optionsHtml}</div>
+                                <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-gray-500">
+                                    <span>تعداد: <b class="text-gray-800">${formatter.format(quantity)}</b></span>
+                                    <span>قیمت واحد: <b class="text-gray-800">${formatter.format(unitPrice)} تومان</b></span>
+                                </div>
+                            </div>
+                            <div class="w-full sm:w-auto text-left sm:text-right shrink-0">
+                                <span class="block text-[10px] text-gray-500 mb-1">جمع ردیف</span>
+                                <strong class="text-sm text-(--primary-text-color) in-fa">${formatter.format(lineTotal)} تومان</strong>
+                            </div>
+                        `;
+                        itemList.appendChild(item);
+                    });
+
+                    const orderTotal = data.carts.reduce((sum, cart) => {
+                        const quantity = Number(cart.quantity || 0);
+                        const unitPrice = Number(cart.unit_price || 0);
+                        return sum + Number(cart.line_total ?? (unitPrice * quantity));
+                    }, 0);
+
+                    const totalElement = document.createElement('div');
+                    totalElement.className = 'w-full flex justify-between items-center border-t border-gray-200 pt-3 mt-2 text-sm font-bold';
+                    totalElement.innerHTML = `<span>مجموع سفارش</span><span class="in-fa">${formatter.format(orderTotal)} تومان</span>`;
+                    itemList.appendChild(totalElement);
+                },
+                complete: function() {
+                    el.disabled = false;
+                    el.classList.remove('cursor-no-drop', 'opacity-50');
+                    el.classList.add('cursor-pointer');
                 },
                 error: function() {
                     showMessage('open')

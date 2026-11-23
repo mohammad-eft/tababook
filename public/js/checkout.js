@@ -1,17 +1,21 @@
 (() => {
-    const form = document.getElementById('checkoutForm') || document.querySelector('form');
+    'use strict';
+
+    const form = document.getElementById('checkoutForm');
     const parentCheckout = document.getElementById('parentCheckout');
     const totalPriceCheckout = document.getElementById('totalPriceCheckout');
     const totalDiscountCheckout = document.getElementById('totalDiscountCheckout');
     const productsInput = document.getElementById('productsInput');
     const packsInput = document.getElementById('packsInput');
+    const province = document.getElementById('province');
+    const city = document.getElementById('city');
+    const setUser = document.getElementById('setUser');
 
-    if (!form || !parentCheckout || !productsInput || !packsInput) return;
-
+    // خواندن امن اطلاعات از localStorage
     const readArray = (key) => {
         try {
-            const value = JSON.parse(localStorage.getItem(key) || '[]');
-            return Array.isArray(value) ? value : [];
+            const parsed = JSON.parse(localStorage.getItem(key) || '[]');
+            return Array.isArray(parsed) ? parsed : [];
         } catch (error) {
             return [];
         }
@@ -22,180 +26,213 @@
         return Number.isFinite(parsed) ? parsed : 0;
     };
 
-    const formatPrice = (value) => number(value).toLocaleString('fa-IR');
-
-    const getUnitPrice = (item) => {
-        const special = number(item.secondary_price);
-        return special > 0 ? special : number(item.primary_price);
+    const formatPrice = (value) => {
+        return number(value).toLocaleString('fa-IR');
     };
 
-    const getUnitDiscount = (item) => {
-        const special = number(item.secondary_price);
-        const primary = number(item.primary_price);
-        return special > 0 ? Math.max(0, primary - special) : 0;
+    // آماده‌سازی محصولات برای ارسال به سرور
+    // قیمت از سمت سرور و دیتابیس محاسبه می‌شود.
+    const normalizeProducts = () => {
+        return readArray('products')
+            .map((item) => ({
+                product_id: Number(item.product_id ?? item.id ?? 0),
+                feature_value_id: item.feature_value_id
+                    ? Number(item.feature_value_id)
+                    : null,
+                quantity: Number(item.quantity ?? 0),
+            }))
+            .filter((item) => {
+                return item.product_id > 0 && item.quantity > 0;
+            });
     };
 
-    const getProductCartKey = (product) => {
-        if (product.cart_key) return String(product.cart_key);
-        if (product.feature_value_id) return `${product.id}:${product.feature_value_id}`;
-        return `product:${product.id}`;
+    // آماده‌سازی پکیج‌ها برای ارسال به سرور
+    const normalizePacks = () => {
+        return readArray('packs')
+            .map((item) => ({
+                pack_id: Number(item.pack_id ?? item.id ?? 0),
+                quantity: Number(item.quantity ?? 0),
+            }))
+            .filter((item) => {
+                return item.pack_id > 0 && item.quantity > 0;
+            });
     };
 
-    const getFeatureText = (product) => {
-        const features = Array.isArray(product.selected_features) ? product.selected_features : [];
-        return features.map((feature) => {
-            if (typeof feature === 'string') return feature;
-            const name = feature.name || feature.feature_name || '';
-            const value = feature.value || feature.value_name || feature.title || '';
-            return [name, value].filter(Boolean).join(': ');
-        }).filter(Boolean).join('، ');
-    };
-
-    const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#039;'
-    }[char]));
-
-    let products = readArray('products');
-    let packs = readArray('packs');
-    let total = 0;
-    let discountTotal = 0;
-
-    parentCheckout.innerHTML = '';
-
-    products.forEach((product) => {
-        const quantity = Math.max(0, number(product.quantity));
-        const unitPrice = getUnitPrice(product);
-        const lineTotal = unitPrice * quantity;
-        const lineDiscount = getUnitDiscount(product) * quantity;
-        const featureText = getFeatureText(product);
-        total += lineTotal;
-        discountTotal += lineDiscount;
-
-        const row = document.createElement('div');
-        row.className = 'flex justify-between gap-3 p-3 border-b border-gray-200 text-sm';
-        row.innerHTML = `
-            <span class="text-gray-600 min-w-0">
-                ${escapeHtml(product.title || 'محصول')}
-                ${featureText ? `<span class="block text-xs text-indigo-700 mt-1">${escapeHtml(featureText)}</span>` : ''}
-                <span class="text-xs text-gray-400 mx-1 in-fa">× ${formatPrice(quantity)}</span>
-            </span>
-            <span class="font-medium in-fa whitespace-nowrap">${formatPrice(lineTotal)} تومان</span>
-        `;
-        parentCheckout.append(row);
-    });
-
-    packs.forEach((pack) => {
-        const quantity = Math.max(0, number(pack.quantity));
-        const unitPrice = getUnitPrice(pack);
-        const lineTotal = unitPrice * quantity;
-        const lineDiscount = getUnitDiscount(pack) * quantity;
-        total += lineTotal;
-        discountTotal += lineDiscount;
-
-        const row = document.createElement('div');
-        row.className = 'flex justify-between gap-3 p-3 border-b border-gray-200 text-sm';
-        row.innerHTML = `
-            <span class="text-gray-600 min-w-0">
-                ${escapeHtml(pack.title || 'پک')}
-                <span class="text-xs text-gray-400 mx-1 in-fa">× ${formatPrice(quantity)}</span>
-            </span>
-            <span class="font-medium in-fa whitespace-nowrap">${formatPrice(lineTotal)} تومان</span>
-        `;
-        parentCheckout.append(row);
-    });
-
-    if (totalPriceCheckout) totalPriceCheckout.innerText = `${formatPrice(total)} تومان`;
-    if (totalDiscountCheckout) totalDiscountCheckout.innerText = `${formatPrice(discountTotal)} تومان`;
-
-    // فقط شناسه محصول، شناسه مقدار نهایی ویژگی و تعداد به سرور ارسال می‌شود.
-    // قیمت و موجودی ارسالی مرورگر مبنای ثبت سفارش نیستند.
-    const buildOrderProducts = () => products.map((product) => ({
-        product_id: product.id,
-        feature_value_id: product.feature_value_id || null,
-        quantity: Math.max(1, number(product.quantity))
-    }));
-
-    const buildOrderPacks = () => packs.map((pack) => ({
-        id: pack.id,
-        quantity: Math.max(1, number(pack.quantity))
-    }));
-
+    // همگام‌سازی اطلاعات سبد خرید با inputهای مخفی فرم
     const syncHiddenInputs = () => {
-        products = readArray('products');
-        packs = readArray('packs');
-        productsInput.value = JSON.stringify(buildOrderProducts());
-        packsInput.value = JSON.stringify(buildOrderPacks());
+        if (productsInput) {
+            productsInput.value = JSON.stringify(normalizeProducts());
+        }
+
+        if (packsInput) {
+            packsInput.value = JSON.stringify(normalizePacks());
+        }
     };
 
+    let totalPrice = 0;
+    let totalDiscount = 0;
+
+    // ساخت ردیف هر محصول در خلاصه سفارش
+    const appendSummary = (title, quantity, primaryPrice, specialPrice) => {
+        const primary = number(primaryPrice);
+        const special = number(specialPrice);
+
+        const unitPrice = special > 0 ? special : primary;
+        const lineTotal = unitPrice * quantity;
+
+        const lineDiscount = special > 0
+            ? Math.max(0, primary - special) * quantity
+            : 0;
+
+        totalPrice += lineTotal;
+        totalDiscount += lineDiscount;
+
+        if (!parentCheckout) return;
+
+        const row = document.createElement('div');
+
+        row.className = 'flex justify-between p-3 border-b border-gray-200 text-sm';
+
+        const name = document.createElement('span');
+
+        name.className = 'text-gray-600';
+
+        name.textContent = `${title || 'کالا'} × ${quantity.toLocaleString('fa-IR')}`;
+
+        const price = document.createElement('span');
+
+        price.className = 'font-medium in-fa';
+
+        price.textContent = `${formatPrice(lineTotal)} تومان`;
+
+        row.append(name, price);
+
+        parentCheckout.append(row);
+    };
+
+    // اطلاعات محصولات
+    const products = normalizeProducts();
+    const productSources = readArray('products');
+
+    products.forEach((item, index) => {
+        const source = productSources.find((product) => {
+            return (
+                Number(product.product_id ?? product.id) === item.product_id &&
+                Number(product.feature_value_id || 0) === Number(item.feature_value_id || 0)
+            );
+        });
+
+        appendSummary(
+            source?.title || source?.product_name || `محصول ${index + 1}`,
+            item.quantity,
+            source?.primary_price,
+            source?.secondary_price
+        );
+    });
+
+    // اطلاعات پکیج‌ها
+    const packs = normalizePacks();
+    const packSources = readArray('packs');
+
+    packs.forEach((item, index) => {
+        const source = packSources.find((pack) => {
+            return Number(pack.pack_id ?? pack.id) === item.pack_id;
+        });
+
+        appendSummary(
+            source?.title || source?.name || `پکیج ${index + 1}`,
+            item.quantity,
+            source?.primary_price,
+            source?.secondary_price
+        );
+    });
+
+    // نمایش مجموع قیمت و تخفیف
+    if (totalPriceCheckout) {
+        totalPriceCheckout.textContent = `${formatPrice(totalPrice)} تومان`;
+    }
+
+    if (totalDiscountCheckout) {
+        totalDiscountCheckout.textContent = `${formatPrice(totalDiscount)} تومان`;
+    }
+
+    // ثبت اطلاعات در inputهای مخفی
     syncHiddenInputs();
 
-    form.addEventListener('submit', (event) => {
-        syncHiddenInputs();
+    // بررسی سبد خرید هنگام ثبت سفارش
+    if (form) {
+        form.addEventListener('submit', (event) => {
+            syncHiddenInputs();
 
-        if (!products.length && !packs.length) {
-            event.preventDefault();
-            alert('سبد خرید شما خالی است.');
-            return;
-        }
+            const hasItems =
+                normalizeProducts().length > 0 ||
+                normalizePacks().length > 0;
 
-        if (products.some((product) => !product.id || number(product.quantity) < 1) ||
-            packs.some((pack) => !pack.id || number(pack.quantity) < 1)) {
-            event.preventDefault();
-            alert('اطلاعات سبد خرید معتبر نیست. لطفاً صفحه را تازه‌سازی کنید.');
-        }
-    });
+            if (!hasItems) {
+                event.preventDefault();
+                alert('سبد خرید شما خالی است.');
+            }
+        });
+    }
 
-    const province = document.getElementById('province');
-    const city = document.getElementById('city');
-
-    if (province && city && typeof $ !== 'undefined' && typeof api !== 'undefined') {
+    // دریافت شهرهای استان انتخاب‌شده
+    if (
+        province &&
+        city &&
+        typeof window.$ !== 'undefined' &&
+        typeof window.api !== 'undefined'
+    ) {
         province.addEventListener('change', () => {
-            $.ajax({
-                url: api + 'cities',
+            window.$.ajax({
+                url: window.api + 'cities',
                 type: 'POST',
                 dataType: 'json',
-                data: { provinceId: province.value },
-                success: (response) => {
-                    city.innerHTML = '';
-                    response.forEach((cityModel) => {
+                data: {
+                    provinceId: province.value
+                },
+
+                success(response) {
+                    city.innerHTML = '<option value="">یک شهر انتخاب کنید</option>';
+
+                    (Array.isArray(response) ? response : []).forEach((cityModel) => {
                         const option = document.createElement('option');
+
                         option.value = cityModel.id;
-                        option.innerText = cityModel.title;
+                        option.textContent = cityModel.title;
+
                         city.append(option);
                     });
                 },
-                error: () => console.log('failed to load cities')
+
+                error() {
+                    console.error('دریافت فهرست شهرها انجام نشد.');
+                }
             });
         });
     }
 
+    // کپی شماره کارت و شبا
     window.copyText = (value) => {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(value).then(() => alert('شماره کپی شد'));
-        } else {
-            const input = document.createElement('textarea');
-            input.value = value;
-            document.body.append(input);
-            input.select();
-            document.execCommand('copy');
-            input.remove();
-            alert('شماره کپی شد');
+        if (navigator.clipboard?.writeText) {
+            navigator.clipboard.writeText(value)
+                .then(() => {
+                    alert('شماره کپی شد');
+                });
         }
     };
 
-    const setUser = document.getElementById('setUser');
+    // تنظیم نمایش فیلد رمز عبور، در صورت وجود گزینه setUser
     if (setUser) {
         setUser.addEventListener('change', () => {
             const password = document.getElementById('password');
-            const parentPass = password ? password.closest('.parentPass') : null;
+            const parentPass = password?.closest('.parentPass');
+
             if (!password || !parentPass) return;
 
             parentPass.classList.toggle('hidden', !setUser.checked);
+
             password.disabled = !setUser.checked;
         });
     }
+
 })();

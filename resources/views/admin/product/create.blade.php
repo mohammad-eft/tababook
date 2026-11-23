@@ -4,16 +4,21 @@
 
 @section('content')
     <style>
-
-        #brand_id, #publication_id{
+        #brand_id,
+        #publication_id {
             background-color: #f8f9fb !important;
         }
 
-        input[type=text], input[type=number], input[type=file], select, textarea{
+        input[type=text],
+        input[type=number],
+        input[type=file],
+        select,
+        textarea {
             background-color: #f8f9fb !important;
             border: 1px solid #f8f9fb !important;
             padding-block: 8px !important;
         }
+
         .product-form-shell {
             --pf-primary: #4C6B62;
             --pf-primary-dark: #3B554D;
@@ -33,7 +38,9 @@
             padding: 22px;
             box-shadow: 0 5px 22px rgba(76, 107, 98, .07);
         }
-        .product-form-shell .pf-card select, input{
+
+        .product-form-shell .pf-card select,
+        input {
             background-color: #fff !important;
         }
 
@@ -286,7 +293,7 @@
             color: #4C6B62;
         }
 
-        .product-form-shell .pf-icon:hover + p{
+        .product-form-shell .pf-icon:hover+p {
             visibility: visible;
             opacity: 1;
         }
@@ -378,8 +385,8 @@
 
 
         /* ==========================================
-                   طراحی بخش ویژگی‌های محصول
-                ========================================== */
+                           طراحی بخش ویژگی‌های محصول
+                        ========================================== */
 
         .product-form-shell #product-attributes-list,
         .product-form-shell #packages-list {
@@ -564,8 +571,8 @@
         }
 
         /* ==========================================
-                   Product Tree - Tababook
-                ========================================== */
+                           Product Tree - Tababook
+                        ========================================== */
 
         .product-form-shell .tree-product-intro {
             display: flex;
@@ -959,7 +966,6 @@
             border-radius: 6px;
             flex-shrink: 0;
         }
-
     </style>
     @if (session('message'))
         <div
@@ -969,7 +975,7 @@
         </div>
     @endif
 
-    
+
 
     <div class="product-form-shell w-full rounded-2xl bg-blue-900/3 p-3 pb-10 sm:p-5">
         <div class="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
@@ -1019,9 +1025,14 @@
                                 <label for="brand_id">برند</label>
                                 <select id="brand_id" name='brand_id'>
                                     <option value="0">انتخاب کنید</option>
+                                    @php
+                                        $selectedBrands = old('brand_id', []);
+                                        $selectedBrands = is_array($selectedBrands) ? $selectedBrands : [];
+                                    @endphp
+
                                     @foreach ($brands as $brand)
                                         <option value="{{ $brand->id }}"
-                                            @if (in_array($brand->id, old('brand_id', []))) selected @endif>
+                                            @if (in_array($brand->id, $selectedBrands)) selected @endif>
                                             {{ $brand->title }}
                                         </option>
                                     @endforeach
@@ -1103,12 +1114,14 @@
                                         d="M9.529 9.988a2.502 2.502 0 1 1 5 .191A2.441 2.441 0 0 1 12 12.582V14m-.01 3.008H12M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                 </svg>
                             </span>
-                            <p class="absolute text-xs w-[175px] left-1/10 invisible opacity-0 transition-all duration-300">
-                               ویژگی‌هایی مانند رنگ، سایز، جنس یا سایر مشخصات را تعریف کنید.
+                            <p
+                                class="absolute text-xs w-[175px] left-1/10 invisible opacity-0 transition-all duration-300">
+                                ویژگی‌هایی مانند رنگ، سایز، جنس یا سایر مشخصات را تعریف کنید.
                             </p>
                         </div>
                         <div id="product-attributes-list" class="space-y-3"></div>
-                        <button type="button" id="add-product-attribute" class="pf-btn pf-btn-soft mt-4" style="background-color: #f8f9fb;">＋ افزودن
+                        <button type="button" id="add-product-attribute" class="pf-btn pf-btn-soft mt-4"
+                            style="background-color: #f8f9fb;">＋ افزودن
                             ویژگی</button>
                     </section>
 
@@ -1125,18 +1138,19 @@
                                         d="M9.529 9.988a2.502 2.502 0 1 1 5 .191A2.441 2.441 0 0 1 12 12.582V14m-.01 3.008H12M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                 </svg>
                             </span>
-                            <p class="absolute text-xs w-[250px] left-1/10 invisible opacity-0 transition-all duration-300">
+                            <p
+                                class="absolute text-xs w-[250px] left-1/10 invisible opacity-0 transition-all duration-300">
                                 ویژگی‌های متغیر محصول را به‌صورت درختی تعریف کنید؛
-                                    برای مثال رنگ، سپس سایز و در نهایت قیمت هر ترکیب.
+                                برای مثال رنگ، سپس سایز و در نهایت قیمت هر ترکیب.
                             </p>
                         </div>
 
-                        
+
 
                         <div id="product-tree" class="product-tree mb-5"></div>
 
                         <button type="button" id="add-root-feature" class="pf-btn pf-btn-primary">
-                            ＋ افزودن  اصلی
+                            ＋ افزودن اصلی
                         </button>
 
                         <div class="product-tree-summary">
@@ -1149,7 +1163,8 @@
                     <div
                         class="hidden lg:flex flex-col-reverse gap-3 rounded-2xl border border-[#E9E2D9] bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-5">
                         <p class="text-xs leading-6 text-[#87978F]">قبل از ثبت، اطلاعات و تصاویر محصول را بررسی کنید.</p>
-                        <button type="submit" class="pf-btn pf-btn-primary w-full px-8 py-3 sm:w-auto cursor-pointer">ثبت محصول
+                        <button type="submit" class="pf-btn pf-btn-primary w-full px-8 py-3 sm:w-auto cursor-pointer">ثبت
+                            محصول
                             <span>←</span></button>
                     </div>
                 </div>
@@ -1319,11 +1334,11 @@
                 </aside>
             </div>
             <div
-                        class="lg:hidden flex flex-col-reverse gap-3 rounded-2xl border border-[#E9E2D9] bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-5">
-                        <p class="text-xs leading-6 text-[#87978F]">قبل از ثبت، اطلاعات و تصاویر محصول را بررسی کنید.</p>
-                        <button type="submit" class="pf-btn pf-btn-primary w-full px-8 py-3 sm:w-auto cursor-pointer">ثبت محصول
-                            <span>←</span></button>
-                    </div>
+                class="lg:hidden flex flex-col-reverse gap-3 rounded-2xl border border-[#E9E2D9] bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-5">
+                <p class="text-xs leading-6 text-[#87978F]">قبل از ثبت، اطلاعات و تصاویر محصول را بررسی کنید.</p>
+                <button type="submit" class="pf-btn pf-btn-primary w-full px-8 py-3 sm:w-auto cursor-pointer">ثبت محصول
+                    <span>←</span></button>
+            </div>
         </form>
     </div>
 
@@ -1336,17 +1351,19 @@
                         class="attribute-select w-full rounded-xl border border-[#E8E3DA] bg-white p-3 text-sm"
                         required></select></div>
                 <button type="button" class="remove-attribute pf-danger">
-                    <svg class="w-[20px] h-[20px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
-</svg>
+                    <svg class="w-[20px] h-[20px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                        height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
+                    </svg>
 
                 </button>
             </div>
             <div class="attribute-values-container border-t border-[#E8E3DA] pt-4">
                 <div class="mb-3 flex items-center justify-between gap-3"><label class="mb-0 text-xs font-bold">مقادیر
                         ویژگی</label><button type="button"
-                        class="add-attribute-value text-xs font-bold text-[#4C6B62] hover:text-[#3B554D]">＋ 
-                        </button></div>
+                        class="add-attribute-value text-xs font-bold text-[#4C6B62] hover:text-[#3B554D]">＋
+                    </button></div>
                 <div class="attribute-values space-y-2"></div>
             </div>
         </div>
@@ -1502,15 +1519,13 @@
 
 
 
-        function showMessage(text){
+        function showMessage(text) {
             document.getElementById('message').classList.remove('invisible', 'opacity-0')
             document.getElementById('message').innerText = text
             setTimeout(() => {
                 document.getElementById('message').classList.add('invisible', 'opacity-0')
             }, 3000);
         }
-
-        
     </script>
 
     <script src="{{ url('js/attribute.js') }}"></script>
