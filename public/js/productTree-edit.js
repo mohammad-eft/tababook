@@ -48,20 +48,11 @@ document.addEventListener('DOMContentLoaded', function () {
         return /^#[0-9a-fA-F]{6}$/.test(String(value ?? ''));
     }
 
-    function normalizeFeatures(features) {
+    function normalizeFeatures(features, isChildLevel = false) {
         if (!Array.isArray(features)) return [];
 
-        return features.map(feature => ({
-            id: uid(),
-
-            attributeId: feature.attribute_id ?? feature.attributeId ?? '',
-
-            name: feature.name ?? '',
-            type: feature.type ?? '',
-
-            open: feature.open !== false,
-
-            values: Array.isArray(feature.values)
+        return features.map(feature => {
+            const values = Array.isArray(feature.values)
                 ? feature.values.map(value => ({
                     id: uid(),
                     name: value.name ?? '',
@@ -84,10 +75,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     open: value.open !== false,
 
-                    children: normalizeFeatures(value.children ?? [])
+                    children: normalizeFeatures(value.children ?? [], true)
                 }))
-                : []
-        }));
+                : [];
+
+            // در هر ویژگی فرزند، اگر مقدار پیش‌فرض از دیتابیس نیامده باشد،
+            // اولین مقدار به‌عنوان پیش‌فرض انتخاب می‌شود.
+            if (isChildLevel && values.length) {
+                const defaultIndex = values.findIndex(value => value.isDefault);
+
+                values.forEach((value, index) => {
+                    value.isDefault = defaultIndex === -1
+                        ? index === 0
+                        : index === defaultIndex;
+                });
+            }
+
+            return {
+                id: uid(),
+                attributeId: feature.attribute_id ?? feature.attributeId ?? '',
+                name: feature.name ?? '',
+                type: feature.type ?? '',
+                open: feature.open !== false,
+                values
+            };
+        });
     }
 
     let productFeatures = normalizeFeatures(window.PRODUCT_FEATURES || []);
@@ -526,13 +538,13 @@ document.addEventListener('DOMContentLoaded', function () {
     // نمایش ویژگی
     // --------------------------------------------------
 
-    function renderFeature(feature, featureIndex, parentPath) {
+    function renderFeature(feature, featureIndex, parentPath, isChildFeature = false) {
         const featurePath = `${parentPath}[${featureIndex}]`;
 
         const bodyId = `feature-body-${feature.id}`;
 
         const valuesHTML = feature.values.map((value, index) =>
-            renderValue(value, index, feature, featurePath)
+            renderValue(value, index, feature, featurePath, isChildFeature)
         ).join('');
 
         const isEditing = activeForm?.type === 'edit-feature' &&
@@ -641,7 +653,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // نمایش مقدار
     // --------------------------------------------------
 
-    function renderValue(value, valueIndex, parentFeature, featurePath) {
+    function renderValue(value, valueIndex, parentFeature, featurePath, isChildFeature = false) {
         const valuePath = `${featurePath}[values][${valueIndex}]`;
 
         const hasChildren = value.children.length > 0;
@@ -656,7 +668,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const isColor = isColorFeature(parentFeature);
 
         const childrenHTML = value.children.map((feature, index) =>
-            renderFeature(feature, index, `${valuePath}[children]`)
+            renderFeature(feature, index, `${valuePath}[children]`, true)
         ).join('');
 
         const isEditing = activeForm?.type === 'edit-value' &&
@@ -749,7 +761,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 : ``
             }
 
-                        ${hasChildren ? `
+                        ${isChildFeature ? `
                             <label class="inline-flex items-center gap-1.5 mr-2 text-xs text-slate-600 cursor-pointer select-none">
                                 <input
                                     type="radio"
@@ -858,13 +870,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // در ویرایش نیز قیمت ثابت فقط زمانی نمایش داده می‌شود
         // که هیچ ویژگی اصلی ثبت نشده و فرم افزودن ویژگی اصلی باز نباشد.
-        const fixedPricingCard = root.closest('form')?.querySelector('#fixed-product-pricing-card');
+        const fixedPricingCard = document.getElementById('fixed-product-pricing-card');
 
         if (fixedPricingCard) {
-            fixedPricingCard.classList.toggle(
-                'hidden',
-                productFeatures.length > 0 || activeForm?.type === 'root'
-            );
+            const shouldHideFixedPricing =
+                productFeatures.length > 0 || activeForm?.type === 'root';
+
+            // استفاده از display inline برای جلوگیری از تداخل احتمالی کلاس‌های CSS
+            // و اطمینان از اعمال وضعیت هنگام باز و بسته شدن پاپ‌آپ و بارگذاری AJAX.
+            if (shouldHideFixedPricing) {
+                fixedPricingCard.style.setProperty('display', 'none', 'important');
+            } else {
+                fixedPricingCard.style.removeProperty('display');
+            }
+
+            fixedPricingCard.classList.toggle('hidden', shouldHideFixedPricing);
         }
 
         const counts = countTree(productFeatures);
@@ -966,17 +986,34 @@ document.addEventListener('DOMContentLoaded', function () {
         value.open = true;
     }
 
+    function findParentValueOfFeature(featureId, features = productFeatures) {
+        for (const feature of features) {
+            for (const value of feature.values) {
+                if (value.children.some(child => child.id === featureId)) {
+                    return value;
+                }
+
+                const found = findParentValueOfFeature(featureId, value.children);
+                if (found) return found;
+            }
+        }
+
+        return null;
+    }
+
     function addValue(name, featureId) {
         const feature = findFeature(featureId);
 
         if (!feature || !name) return;
+
+        const isChildFeature = findParentValueOfFeature(featureId) !== null;
 
         feature.values.push({
             id: uid(),
 
             name,
 
-            isDefault: false,
+            isDefault: isChildFeature && feature.values.length === 0,
 
             originalPrice: '',
             specialPrice: '',
