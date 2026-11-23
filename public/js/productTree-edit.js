@@ -333,7 +333,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         class="tree-add-confirm"
                         data-action="confirm-add"
                     >
-                        افزودن ویژگی
+                        ثبت 
                     </button>
 
                     <button
@@ -386,7 +386,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             class="tree-add-confirm"
                             data-action="confirm-add"
                         >
-                            افزودن رنگ
+                            ثبت 
                         </button>
 
                         <button
@@ -420,7 +420,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         class="tree-add-confirm"
                         data-action="confirm-add"
                     >
-                        افزودن مقدار
+                        ثبت 
                     </button>
 
                     <button
@@ -505,7 +505,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>
 
                 <div>
-                    <label>تعداد موجودی</label>
+                    <label>موجودی </label>
 
                     <input
                         type="number"
@@ -515,7 +515,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         value="${countValue}"
                         data-count-field
                         data-value-id="${value.id}"
-                        placeholder="تعداد موجودی"
+                        placeholder="تعداد "
                     >
                 </div>
 
@@ -792,7 +792,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     data-action="add-child-feature"
                                     data-id="${value.id}"
                                 >
-                                    ＋ افزودن زیرشاخه
+                                    ＋ 
                                 </button>
                             ` : ''}
 
@@ -1033,7 +1033,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const attribute = getAttributeById(attributeId);
 
             if (!attribute) {
-                alert('این ویژگی در دسته‌بندی‌های انتخاب‌شده موجود نیست.');
+                showMessage('این ویژگی در دسته‌بندی‌های انتخاب‌شده موجود نیست.');
                 return;
             }
 
@@ -1044,7 +1044,7 @@ document.addEventListener('DOMContentLoaded', function () {
             );
 
             if (usedIds.has(String(attribute.id))) {
-                alert('این ویژگی قبلاً در این مسیر انتخاب شده است.');
+                showMessage('این ویژگی قبلاً در این مسیر انتخاب شده است.');
                 return;
             }
 
@@ -1072,7 +1072,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 name = root.querySelector('[data-add-color-hex]')?.value.trim();
 
                 if (!isValidHex(name)) {
-                    alert('لطفاً یک کد رنگ معتبر وارد کنید.');
+                    showMessage('لطفاً یک کد رنگ معتبر وارد کنید.');
                     return;
                 }
             } else {
@@ -1219,7 +1219,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             case 'add-child-feature': {
                 if (!getSelectedCategoryIds().length) {
-                    alert('برای افزودن زیرشاخه، ابتدا حداقل یک دسته‌بندی را انتخاب کنید.');
+                    showMessage('برای افزودن زیرشاخه، ابتدا حداقل یک دسته‌بندی را انتخاب کنید.');
                     return;
                 }
 
@@ -1285,7 +1285,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     newName = root.querySelector('[data-edit-color-hex]')?.value.trim();
 
                     if (!isValidHex(newName)) {
-                        alert('لطفاً یک کد رنگ معتبر وارد کنید.');
+                        showMessage('لطفاً یک کد رنگ معتبر وارد کنید.');
                         return;
                     }
                 } else {
@@ -1380,7 +1380,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.querySelector('#add-root-feature')?.addEventListener('click', function () {
         if (!getSelectedCategoryIds().length) {
-            alert('برای افزودن ویژگی، ابتدا حداقل یک دسته‌بندی را انتخاب کنید.');
+            showMessage('برای افزودن ویژگی، ابتدا حداقل یک دسته‌بندی را انتخاب کنید.');
             return;
         }
 
@@ -1390,7 +1390,7 @@ document.addEventListener('DOMContentLoaded', function () {
         );
 
         if (!hasAvailableAttribute) {
-            alert('تمام ویژگی‌های قابل انتخاب برای دسته‌بندی‌های انتخاب‌شده اضافه شده‌اند.');
+            showMessage('تمام ویژگی‌های قابل انتخاب برای دسته‌بندی‌های انتخاب‌شده اضافه شده‌اند.');
             return;
         }
 
@@ -1435,7 +1435,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!validateFeatures(productFeatures)) {
             event.preventDefault();
 
-            alert(
+            showMessage(
                 'یکی از ویژگی‌های درخت با دسته‌بندی‌های انتخاب‌شده مطابقت ندارد. لطفاً آن ویژگی یا زیرشاخه را حذف کنید.'
             );
         }

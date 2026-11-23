@@ -361,7 +361,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         class="tree-add-confirm"
                         data-action="confirm-add"
                     >
-                        افزودن ویژگی
+                        ثبت 
                     </button>
 
                     <button
@@ -414,7 +414,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             class="tree-add-confirm"
                             data-action="confirm-add"
                         >
-                            افزودن رنگ
+                            ثبت 
                         </button>
 
                         <button
@@ -448,7 +448,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         class="tree-add-confirm"
                         data-action="confirm-add"
                     >
-                        افزودن مقدار
+                        ثبت 
                     </button>
 
                     <button
@@ -533,7 +533,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>
 
                 <div>
-                    <label>موجودی این ترکیب</label>
+                    <label>موجودی </label>
 
                     <input
                         type="number"
@@ -543,7 +543,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         value="${countValue}"
                         data-stock-field
                         data-value-id="${value.id}"
-                        placeholder="تعداد موجودی"
+                        placeholder="تعداد "
                     >
                 </div>
 
@@ -819,7 +819,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     data-action="add-child-feature"
                                     data-id="${value.id}"
                                 >
-                                    ＋ افزودن زیرشاخه
+                                    ＋
                                 </button>
                             ` : ''}
 
