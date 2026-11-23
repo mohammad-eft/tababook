@@ -602,7 +602,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             data-action="add-value"
                             data-id="${feature.id}"
                         >
-                            ＋ افزودن مقدار
+                            ＋
                         </button>
 
                         <button
@@ -730,7 +730,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     <div class="tree-value-name">
 
-                        <span class="tree-value-dot"></span>
+            
+                                <button
+                                    type="button"
+                                    class="tree-toggle"
+                                    data-action="toggle-value"
+                                    data-id="${value.id}"
+                                >
+                                    ${value.open ? '−' : '+'}
+                                </button>
+                 
 
                         ${valueTitle}
 
@@ -796,16 +805,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 </button>
                             ` : ''}
 
-                            ${hasChildren ? `
-                                <button
-                                    type="button"
-                                    class="tree-toggle"
-                                    data-action="toggle-value"
-                                    data-id="${value.id}"
-                                >
-                                    ${value.open ? '−' : '+'}
-                                </button>
-                            ` : ''}
+                            
 
                             <button
                                 type="button"
@@ -821,16 +821,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 </div>
 
-                ${renderPriceInputs(value, valuePath)}
+               ${value.open ? `
+                    ${renderPriceInputs(value, valuePath)}
 
-                ${hasChildren ? `
-                    <div
-                        class="tree-children"
-                        style="${value.open ? '' : 'display: none;'}"
-                    >
-                        ${childrenHTML}
-                    </div>
-                ` : ''}
+                    ${hasChildren ? `
+                        <div class="tree-children">
+                            ${childrenHTML}
+                        </div>
+                    ` : ''}
+
+                    ${renderAddForm('feature', value.id)}` : `<div class="tree-collapsed"></div>`
+            }
 
                 ${renderAddForm('feature', value.id)}
 

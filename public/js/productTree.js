@@ -560,10 +560,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const bodyId = `feature-body-${feature.id}`;
 
-        // const valuesHTML = feature.values.map((value, index) =>
-        //     renderValue(value, index, featurePath)
-        // ).join('');
-
         const valuesHTML = feature.values.map((value, index) =>
             renderValue(value, index, featurePath, feature)
         ).join('');
@@ -634,7 +630,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             data-action="add-value"
                             data-id="${feature.id}"
                         >
-                            ＋ افزودن مقدار
+                            ＋
                         </button>
 
                         <button
@@ -735,6 +731,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         return `
+
+        
             <div
                 class="tree-value"
                 data-value-id="${value.id}"
@@ -757,7 +755,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     <div class="tree-value-name">
 
-                        <span class="tree-value-dot"></span>
+                         
+                                <button
+                                    type="button"
+                                    class="tree-toggle"
+                                    data-action="toggle-value"
+                                    data-id="${value.id}"
+                                >
+                                    ${value.open ? '−' : '+'}
+                                </button>
+                             
 
                         ${valueTitle}
 
@@ -767,19 +774,17 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
                         ${hasChildren ? `
-                            <label class="inline-flex items-center gap-1.5 mr-2 text-xs text-slate-600 cursor-pointer select-none">
-                                <input
-                                    type="radio"
-                                    class="accent-blue-600"
-                                    name="tree-default-${parentFeature.id}"
-                                    value="${value.id}"
-                                    data-default-value-id="${value.id}"
-                                    data-default-feature-id="${parentFeature.id}"
-                                    ${value.isDefault ? 'checked' : ''}
-                                >
-                                <span>پیش‌فرض</span>
-                            </label>
-                        ` : ''}
+    <button
+        type="button"
+        class="tree-toggle"
+        data-action="toggle-value"
+        data-id="${value.id}"
+        aria-expanded="${value.open}"
+        title="${value.open ? 'بستن زیرشاخه‌ها' : 'نمایش زیرشاخه‌ها'}"
+    >
+        ${value.open ? '−' : '+'}
+    </button>
+` : ''}
 
                     </div>
 
@@ -809,7 +814,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 data-action="edit-value"
                                 data-id="${value.id}"
                             >
-                                ✎ ویرایش
+                                ✎ 
                             </button>
 
                             ${(!hasSelectedCategories() || hasAvailableAttributes(value.id)) ? `
@@ -823,16 +828,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 </button>
                             ` : ''}
 
-                            ${hasChildren ? `
-                                <button
-                                    type="button"
-                                    class="tree-toggle"
-                                    data-action="toggle-value"
-                                    data-id="${value.id}"
-                                >
-                                    ${value.open ? '−' : '+'}
-                                </button>
-                            ` : ''}
+                            
 
                             <button
                                 type="button"
@@ -848,15 +844,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 </div>
 
-                ${renderPriceInputs(value, valuePath)}
+                ${value.open ? `
+                    ${renderPriceInputs(value, valuePath)}
 
-                ${hasChildren && value.open ? `
-                    <div class="tree-children">
-                        ${childrenHTML}
-                    </div>
-                ` : ''}
+                    ${hasChildren ? `
+                        <div class="tree-children">
+                            ${childrenHTML}
+                        </div>
+                    ` : ''}
 
-                ${renderAddForm('feature', value.id)}
+                    ${renderAddForm('feature', value.id)}` : `<div class="tree-collapsed"></div>`
+            }
 
             </div>
         `;
