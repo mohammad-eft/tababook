@@ -361,7 +361,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         class="tree-add-confirm"
                         data-action="confirm-add"
                     >
-                        افزودن ویژگی
+                        ثبت 
                     </button>
 
                     <button
@@ -414,7 +414,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             class="tree-add-confirm"
                             data-action="confirm-add"
                         >
-                            افزودن رنگ
+                            ثبت 
                         </button>
 
                         <button
@@ -448,7 +448,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         class="tree-add-confirm"
                         data-action="confirm-add"
                     >
-                        افزودن مقدار
+                        ثبت 
                     </button>
 
                     <button
@@ -533,7 +533,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>
 
                 <div>
-                    <label>موجودی این ترکیب</label>
+                    <label>موجودی </label>
 
                     <input
                         type="number"
@@ -543,7 +543,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         value="${countValue}"
                         data-stock-field
                         data-value-id="${value.id}"
-                        placeholder="تعداد موجودی"
+                        placeholder="تعداد "
                     >
                 </div>
 
@@ -559,10 +559,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const featurePath = `${parentPath}[${featureIndex}]`;
 
         const bodyId = `feature-body-${feature.id}`;
-
-        // const valuesHTML = feature.values.map((value, index) =>
-        //     renderValue(value, index, featurePath)
-        // ).join('');
 
         const valuesHTML = feature.values.map((value, index) =>
             renderValue(value, index, featurePath, feature)
@@ -634,7 +630,10 @@ document.addEventListener('DOMContentLoaded', function () {
                             data-action="add-value"
                             data-id="${feature.id}"
                         >
-                            ＋ افزودن مقدار
+                            <svg class="size-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 12h14m-7 7V5"/>
+</svg>
+
                         </button>
 
                         <button
@@ -643,7 +642,10 @@ document.addEventListener('DOMContentLoaded', function () {
                             data-action="delete-feature"
                             data-id="${feature.id}"
                         >
-                            حذف
+                            <svg class="size-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+                            </svg>
+
                         </button>
 
                     </div>
@@ -735,6 +737,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         return `
+
+        
             <div
                 class="tree-value"
                 data-value-id="${value.id}"
@@ -757,29 +761,36 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     <div class="tree-value-name">
 
-                        <span class="tree-value-dot"></span>
+                         
+                                <button
+                                    type="button"
+                                    class="tree-toggle"
+                                    data-action="toggle-value"
+                                    data-id="${value.id}"
+                                >
+                                    ${value.open ? '−' : '+'}
+                                </button>
+                             
 
                         ${valueTitle}
 
                         ${hasChildren
                 ? `<span class="pf-hint">دارای ${value.children.length} زیرشاخه</span>`
-                : `<span class="pf-hint">ترکیب نهایی</span>`
+                : ``
             }
 
                         ${hasChildren ? `
-                            <label class="inline-flex items-center gap-1.5 mr-2 text-xs text-slate-600 cursor-pointer select-none">
-                                <input
-                                    type="radio"
-                                    class="accent-blue-600"
-                                    name="tree-default-${parentFeature.id}"
-                                    value="${value.id}"
-                                    data-default-value-id="${value.id}"
-                                    data-default-feature-id="${parentFeature.id}"
-                                    ${value.isDefault ? 'checked' : ''}
-                                >
-                                <span>پیش‌فرض</span>
-                            </label>
-                        ` : ''}
+    <button
+        type="button"
+        class="tree-toggle"
+        data-action="toggle-value"
+        data-id="${value.id}"
+        aria-expanded="${value.open}"
+        title="${value.open ? 'بستن زیرشاخه‌ها' : 'نمایش زیرشاخه‌ها'}"
+    >
+        ${value.open ? '−' : '+'}
+    </button>
+` : ''}
 
                     </div>
 
@@ -809,7 +820,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 data-action="edit-value"
                                 data-id="${value.id}"
                             >
-                                ✎ ویرایش
+                                ✎ 
                             </button>
 
                             ${(!hasSelectedCategories() || hasAvailableAttributes(value.id)) ? `
@@ -819,20 +830,14 @@ document.addEventListener('DOMContentLoaded', function () {
                                     data-action="add-child-feature"
                                     data-id="${value.id}"
                                 >
-                                    ＋ افزودن زیرشاخه
+                                    <svg class="size-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 12h14m-7 7V5"/>
+</svg>
+
                                 </button>
                             ` : ''}
 
-                            ${hasChildren ? `
-                                <button
-                                    type="button"
-                                    class="tree-toggle"
-                                    data-action="toggle-value"
-                                    data-id="${value.id}"
-                                >
-                                    ${value.open ? '−' : '+'}
-                                </button>
-                            ` : ''}
+                            
 
                             <button
                                 type="button"
@@ -840,7 +845,10 @@ document.addEventListener('DOMContentLoaded', function () {
                                 data-action="delete-value"
                                 data-id="${value.id}"
                             >
-                                حذف
+                                <svg class="size-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+                                </svg>
+
                             </button>
                         `}
 
@@ -848,15 +856,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 </div>
 
-                ${renderPriceInputs(value, valuePath)}
+                ${value.open ? `
+                    ${renderPriceInputs(value, valuePath)}
 
-                ${hasChildren && value.open ? `
-                    <div class="tree-children">
-                        ${childrenHTML}
-                    </div>
-                ` : ''}
+                    ${hasChildren ? `
+                        <div class="tree-children">
+                            ${childrenHTML}
+                        </div>
+                    ` : ''}
 
-                ${renderAddForm('feature', value.id)}
+                    ${renderAddForm('feature', value.id)}` : `<div class="tree-collapsed"></div>`
+            }
 
             </div>
         `;
@@ -906,12 +916,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function openAddForm(type, targetId = '') {
         if ((type === 'root' || type === 'feature') && !hasSelectedCategories()) {
-            alert('برای افزودن ویژگی، ابتدا حداقل یک دسته‌بندی را انتخاب کنید.');
+            showMessage('برای افزودن ویژگی، ابتدا حداقل یک دسته‌بندی را انتخاب کنید.');
             return;
         }
 
         if ((type === 'root' || type === 'feature') && !hasAvailableAttributes(type === 'feature' ? targetId : null)) {
-            alert('تمام ویژگی‌های قابل استفاده در این مسیر اضافه شده‌اند.');
+            showMessage('تمام ویژگی‌های قابل استفاده در این مسیر اضافه شده‌اند.');
             return;
         }
 
@@ -1050,7 +1060,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const attribute = getAttributeById(attributeId);
 
             if (!attribute) {
-                alert('این ویژگی در دسته‌بندی‌های انتخاب‌شده موجود نیست.');
+                showMessage('این ویژگی در دسته‌بندی‌های انتخاب‌شده موجود نیست.');
                 return;
             }
 
@@ -1061,7 +1071,7 @@ document.addEventListener('DOMContentLoaded', function () {
             );
 
             if (usedIds.has(String(attribute.id))) {
-                alert('این ویژگی قبلاً در این مسیر انتخاب شده است.');
+                showMessage('این ویژگی قبلاً در این مسیر انتخاب شده است.');
                 return;
             }
 
@@ -1089,7 +1099,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 name = root.querySelector('[data-add-color-hex]')?.value.trim();
 
                 if (!isValidHex(name)) {
-                    alert('لطفاً یک کد رنگ معتبر وارد کنید.');
+                    showMessage('لطفاً یک کد رنگ معتبر وارد کنید.');
                     return;
                 }
             } else {
@@ -1298,7 +1308,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     newName = root.querySelector('[data-edit-color-hex]')?.value.trim();
 
                     if (!isValidHex(newName)) {
-                        alert('لطفاً یک کد رنگ معتبر وارد کنید.');
+                        showMessage('لطفاً یک کد رنگ معتبر وارد کنید.');
                         return;
                     }
                 } else {
@@ -1428,7 +1438,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!validateFeatures(productFeatures)) {
             event.preventDefault();
 
-            alert(
+            showMessage(
                 'یکی از ویژگی‌های درخت با دسته‌بندی‌های انتخاب‌شده مطابقت ندارد. لطفاً آن ویژگی یا زیرشاخه را حذف کنید.'
             );
         }

@@ -22,8 +22,6 @@ class PublicationController extends Controller
         dd('create');
     }
     public function store(Request $request){
-        // dd($request->all());
-
         $validate=$request->validate(
         [
             'title'=>['required'],
@@ -43,27 +41,27 @@ class PublicationController extends Controller
             'is_active'=>$request['is_active'],
         ]);
         return to_route('publication.list');
-        dd('store');
     }
     public function list(){
         $setting = homeSetting::document();
         $publications=publication::all();
+        foreach($publications as $publication){
+            if(!$publication->logo_path){
+                $publication->logo_path = 'noImage.png';
+            }
+        }
         return view('admin.publication.list',['publications'=>$publications,'setting'=>$setting]);
-        dd('list');
     }
     public function single(publication $publication){
         $setting = homeSetting::document();
         return view('admin.publication.single',['publication'=>$publication,'setting'=>$setting]);
-        dd('single');
     }
     public function edit(publication $publication){
         $setting = homeSetting::document();
         return view('admin.publication.edit',['publication'=>$publication,'setting'=>$setting]);
-        dd('edit');
     }
     public function update(Request $request, publication $publication){
         $setting = homeSetting::document();
-        // dd($request->all());
         $validate=$request->validate(
         [
             'title'=>['required'],

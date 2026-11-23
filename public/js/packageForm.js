@@ -371,7 +371,7 @@ const PackageForm = (() => {
 
         if (getSelectedCategories().length === 0) {
 
-            alert("ابتدا یک دسته‌بندی برای محصول انتخاب کنید.");
+            showMessage("ابتدا یک دسته‌بندی برای محصول انتخاب کنید.");
 
             return;
 
@@ -397,7 +397,7 @@ const PackageForm = (() => {
 
         if (getSelectedCategories().length === 0) {
 
-            alert("ابتدا یک دسته‌بندی برای محصول انتخاب کنید.");
+            showMessage("ابتدا یک دسته‌بندی برای محصول انتخاب کنید.");
 
             return;
 

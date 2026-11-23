@@ -63,10 +63,7 @@
         border-bottom: 1px solid var(--metronic-border);
         transition: all 0.3s ease;
     }
-    .vafadar-table-row:hover {
-        background: var(--metronic-shadow);
-        transform: translateX(-4px);
-    }
+  
     .vafadar-table-row:last-child {
         border-bottom: none;
     }
@@ -467,12 +464,6 @@
             <p class="text-sm mt-1" style="color: var(--metronic-text-dark);">مدیریت برندهای محصولات</p>
         </div>
         <div class="flex items-center gap-3 flex-wrap">
-            <span class="vafadar-counter">
-                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                </svg>
-                {{ count($publications) }} برند
-            </span>
             <a href="{{route('publication.create')}}" class="vafadar-add-btn">
                 <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                     <path d="M12 5v14M5 12h14"/>
@@ -594,7 +585,6 @@
         <div class="vafadar-table-header px-4 py-3 border-t" style="border-color: var(--metronic-border);">
             <div class="flex flex-col sm:flex-row items-center justify-between gap-2 text-xs" style="color: var(--metronic-text-dark);">
                 <span>تعداد کل: <strong style="color: var(--metronic-dark);">{{ count($publications) }}</strong> برند</span>
-                <span>آخرین بروزرسانی: <strong style="color: var(--metronic-dark);">{{ now()->format('Y/m/d H:i') }}</strong></span>
             </div>
         </div>
 

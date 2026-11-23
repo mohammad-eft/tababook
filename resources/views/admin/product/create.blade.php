@@ -5,6 +5,16 @@
 @section('content')
 
     <style>
+
+        #brand_id, #publication_id{
+            background-color: #f8f9fb !important;
+        }
+
+        input[type=text], input[type=number], input[type=file], select, textarea{
+            background-color: #f8f9fb !important;
+            border: 1px solid #f8f9fb !important;
+            padding-block: 8px !important;
+        }
         .product-form-shell {
             --pf-primary: #4C6B62;
             --pf-primary-dark: #3B554D;
@@ -23,6 +33,9 @@
             border-radius: 18px;
             padding: 22px;
             box-shadow: 0 5px 22px rgba(76, 107, 98, .07);
+        }
+        .product-form-shell .pf-card select, input{
+            background-color: #fff !important;
         }
 
         .product-form-shell .pf-card-head {
@@ -270,8 +283,13 @@
             align-items: center;
             justify-content: center;
             border-radius: 12px;
-            background: #F5E8E6;
+            background: #f8f9fb;
             color: #4C6B62;
+        }
+
+        .product-form-shell .pf-icon:hover + p{
+            visibility: visible;
+            opacity: 1;
         }
 
         .product-form-shell .pf-switch {
@@ -361,8 +379,8 @@
 
 
         /* ==========================================
-       طراحی بخش ویژگی‌های محصول
-    ========================================== */
+                   طراحی بخش ویژگی‌های محصول
+                ========================================== */
 
         .product-form-shell #product-attributes-list,
         .product-form-shell #packages-list {
@@ -376,7 +394,7 @@
             padding: 18px;
             border: 1px solid #E9E2D9;
             border-radius: 15px;
-            background: #FCF9F4;
+            background: #f8f9fb;
             transition: border-color .2s, box-shadow .2s;
         }
 
@@ -547,8 +565,8 @@
         }
 
         /* ==========================================
-       Product Tree - Tababook
-    ========================================== */
+                   Product Tree - Tababook
+                ========================================== */
 
         .product-form-shell .tree-product-intro {
             display: flex;
@@ -707,7 +725,7 @@
             margin-top: 12px;
             padding: 12px;
             border-radius: 10px;
-            background: #FBF6EF;
+            background: #f8f9fb;
         }
 
         .product-form-shell .tree-price-box label {
@@ -720,7 +738,7 @@
             padding: 8px 10px;
             border: 1px solid #E8E3DA;
             border-radius: 9px;
-            background: #fff;
+            background-color: #fff !important;
             font-size: 12px;
         }
 
@@ -787,7 +805,7 @@
             padding: 30px 15px;
             border: 1px dashed #DCE8DF;
             border-radius: 13px;
-            background: #FCF9F4;
+            background: #f8f9fb;
             text-align: center;
         }
 
@@ -867,62 +885,63 @@
         }
 
         .tree-feature-select {
-    width: 100%;
-    min-height: 44px;
-    padding: 10px 12px;
-    border: 1px solid #dbe3df;
-    border-radius: 10px;
-    background: #fff;
-    color: #334155;
-    outline: none;
-    direction: rtl;
-}
+            width: 100%;
+            min-height: 44px;
+            padding: 10px 12px;
+            border: 1px solid #dbe3df;
+            border-radius: 10px;
+            background: #fff;
+            color: #334155;
+            outline: none;
+            direction: rtl;
+        }
 
-.tree-feature-select:focus {
-    border-color: #4c6b62;
-    box-shadow: 0 0 0 3px rgba(76, 107, 98, 0.10);
-}
+        .tree-feature-select:focus {
+            border-color: #4c6b62;
+            box-shadow: 0 0 0 3px rgba(76, 107, 98, 0.10);
+        }
 
-.tree-add-hint {
-    padding: 12px;
-    border-radius: 10px;
-    background: #f8faf9;
-    color: #64748b;
-    font-size: 13px;
-}
+        .tree-add-hint {
+            padding: 12px;
+            border-radius: 10px;
+            background: #f8faf9;
+            color: #64748b;
+            font-size: 13px;
+        }
 
-.tree-select {
-    width: 100%;
-    min-height: 44px;
-    padding: 10px 12px;
-    border: 1px solid #dce3df;
-    border-radius: 10px;
-    background: #fff;
-    outline: none;
-}
+        .tree-select {
+            width: 100%;
+            min-height: 44px;
+            padding: 10px 12px;
+            border: 1px solid #dce3df;
+            border-radius: 10px;
+            background: #fff;
+            outline: none;
+        }
 
-.tree-select:focus {
-    border-color: #4c6b62;
-}
+        .tree-select:focus {
+            border-color: #4c6b62;
+        }
 
-.tree-color-input {
-    width: 48px;
-    height: 42px;
-    padding: 3px;
-    border: 1px solid #dce3df;
-    border-radius: 9px;
-    cursor: pointer;
-    background: #fff;
-}
+        .tree-color-input {
+            width: 48px;
+            height: 42px;
+            padding: 3px;
+            border: 1px solid #dce3df;
+            border-radius: 9px;
+            cursor: pointer;
+            background: #fff;
+        }
 
-.tree-color-preview {
-    display: inline-block;
-    width: 22px;
-    height: 22px;
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
-    flex-shrink: 0;
-}
+        .tree-color-preview {
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            flex-shrink: 0;
+        }
+
     </style>
 
     @if (session('message'))
@@ -933,11 +952,13 @@
         </div>
     @endif
 
-    <div class="product-form-shell w-full rounded-2xl bg-[#FBF6EF] p-3 pb-10 sm:p-5">
+    
+
+    <div class="product-form-shell w-full rounded-2xl bg-blue-900/3 p-3 pb-10 sm:p-5">
         <div class="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
             <div>
                 <span
-                    class="mb-2 inline-flex rounded-full bg-[#F5E8E6] px-3 py-1 text-[11px] font-bold text-[#4C6B62]">مدیریت
+                    class="mb-2 inline-flex rounded-full bg-[#e8eeff] px-3 py-1 text-[11px] font-bold text-[#4C6B62]">مدیریت
                     فروشگاه / محصولات</span>
                 <h2 class="text-2xl font-extrabold tracking-tight text-[#344B43] sm:text-3xl">ایجاد محصول جدید</h2>
                 <p class="mt-2 text-xs leading-6 text-[#718078]">اطلاعات محصول، مشخصات، تصاویر و قیمت‌گذاری را تکمیل کنید.
@@ -952,16 +973,21 @@
                 {{-- ستون اطلاعات اصلی --}}
                 <div class="min-w-0 space-y-5 xl:col-span-2">
                     <section class="pf-card">
-                        <div class="pf-card-head">
+                        <div class="pf-card-head relative">
                             <div>
                                 <h3 class="pf-card-title">اطلاعات پایه محصول</h3>
-                                <p class="pf-card-desc">عنوان و اطلاعات شناسنامه‌ای محصول را وارد کنید.</p>
                             </div>
-                            <span class="pf-icon"><svg class="size-5" viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="1.8">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M4 5.5A1.5 1.5 0 0 1 5.5 4h13A1.5 1.5 0 0 1 20 5.5v13a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18.5zM8 8h8M8 12h8M8 16h4" />
-                                </svg></span>
+                            <span class="pf-icon cursor-pointer">
+                                <svg class="size-8" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                    height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="1.8"
+                                        d="M9.529 9.988a2.502 2.502 0 1 1 5 .191A2.441 2.441 0 0 1 12 12.582V14m-.01 3.008H12M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                </svg>
+                            </span>
+                            <p class="absolute text-xs w-[165px] left-1/10 invisible opacity-0 transition-all duration-300">
+                                عنوان و اطلاعات شناسنامه‌ای محصول را وارد کنید.
+                            </p>
                         </div>
                         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                             <div class="pf-field sm:col-span-2">
@@ -972,20 +998,36 @@
                                     <span class="pf-error">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <select id="brand_id" name='brand_id'>
-                                @foreach ($brands as $brand)
-                                    <option value="{{ $brand->id }}" @if (in_array($brand->id, old('brand_id', []))) selected @endif>
-                                        {{ $brand->title }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            <select id="publication_id" name='publication_id'>
-                                @foreach ($publications as $publication)
-                                    <option value="{{ $publication->id }}" @if (in_array($publication->id, old('publication_id', []))) selected @endif>
-                                        {{ $publication->title }}
-                                    </option>
-                                @endforeach
-                            </select>
+                            <div class="pf-field">
+                                <label for="brand_id">برند</label>
+                                <select id="brand_id" name='brand_id'>
+                                    @foreach ($brands as $brand)
+                                        <option value="{{ $brand->id }}"
+                                            @if (in_array($brand->id, old('brand_id', []))) selected @endif>
+                                            {{ $brand->title }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('brand_id')
+                                    <span class="pf-error">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="pf-field">
+                                <label for="publication_id">انتشارات</label>
+                                <select id="publication_id" name='publication_id'>
+                                    @foreach ($publications as $publication)
+                                        <option value="{{ $publication->id }}"
+                                            @if (in_array($publication->id, old('publication_id', []))) selected @endif>
+                                            {{ $publication->title }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('publication_id')
+                                    <span class="pf-error">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+
                             <div class="pf-field"><label for="writer">نویسنده</label><input type="text" name="writer"
                                     id="writer" placeholder="نام نویسنده" value="{{ old('writer') }}">
                                 @error('writer')
@@ -997,15 +1039,21 @@
                     </section>
 
                     <section class="pf-card">
-                        <div class="pf-card-head">
+                        <div class="pf-card-head relative">
                             <div>
                                 <h3 class="pf-card-title">معرفی محصول</h3>
-                                <p class="pf-card-desc">یک معرفی کوتاه و توضیحات کامل محصول بنویسید.</p>
-                            </div><span class="pf-icon"><svg class="size-5" viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="1.8">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M7 4h10a2 2 0 0 1 2 2v14H5V6a2 2 0 0 1 2-2zM8 9h8M8 13h8M8 17h5" />
-                                </svg></span>
+                            </div>
+                            <span class="pf-icon cursor-pointer">
+                                <svg class="size-8" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                    height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="1.8"
+                                        d="M9.529 9.988a2.502 2.502 0 1 1 5 .191A2.441 2.441 0 0 1 12 12.582V14m-.01 3.008H12M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                </svg>
+                            </span>
+                            <p class="absolute text-xs w-[165px] left-1/10 invisible opacity-0 transition-all duration-300">
+                                یک معرفی کوتاه و توضیحات کامل محصول بنویسید.
+                            </p>
                         </div>
                         <div class="space-y-4">
                             <div><label for="summary">خلاصه محصول</label>
@@ -1024,57 +1072,58 @@
                     </section>
 
                     <section class="pf-card">
-                        <div class="pf-card-head">
+                        <div class="pf-card-head relative">
                             <div>
                                 <h3 class="pf-card-title">مشخصات و ویژگی‌ها</h3>
-                                <p class="pf-card-desc">ویژگی‌هایی مانند رنگ، سایز، جنس یا سایر مشخصات را تعریف کنید.</p>
-                            </div><span class="pf-icon"><svg class="size-5" viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="1.8">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M4 7h16M4 12h16M4 17h16M8 4v6m8 4v6" />
-                                </svg></span>
+                            </div>
+                            <span class="pf-icon">
+                                <svg class="size-8" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                    height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="1.8"
+                                        d="M9.529 9.988a2.502 2.502 0 1 1 5 .191A2.441 2.441 0 0 1 12 12.582V14m-.01 3.008H12M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                </svg>
+                            </span>
+                            <p class="absolute text-xs w-[175px] left-1/10 invisible opacity-0 transition-all duration-300">
+                               ویژگی‌هایی مانند رنگ، سایز، جنس یا سایر مشخصات را تعریف کنید.
+                            </p>
                         </div>
                         <div id="product-attributes-list" class="space-y-3"></div>
-                        <button type="button" id="add-product-attribute" class="pf-btn pf-btn-soft mt-4">＋ افزودن
+                        <button type="button" id="add-product-attribute" class="pf-btn pf-btn-soft mt-4" style="background-color: #f8f9fb;">＋ افزودن
                             ویژگی</button>
                     </section>
 
                     <section class="pf-card">
-                        <div class="pf-card-head">
+                        <div class="pf-card-head relative">
                             <div>
                                 <h3 class="pf-card-title">تنوع و قیمت‌های مختلف</h3>
-                                <p class="pf-card-desc">
-                                    ویژگی‌های متغیر محصول را به‌صورت درختی تعریف کنید؛
-                                    برای مثال رنگ، سپس سایز و در نهایت قیمت هر ترکیب.
-                                </p>
                             </div>
-                            <span class="pf-icon">
-                                <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="1.8">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M4 7h16M4 12h16M4 17h16M7 4v6m10 4v6" />
+                            <span class="pf-icon cursor-pointer">
+                                <svg class="size-8" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                    height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="1.8"
+                                        d="M9.529 9.988a2.502 2.502 0 1 1 5 .191A2.441 2.441 0 0 1 12 12.582V14m-.01 3.008H12M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                 </svg>
                             </span>
+                            <p class="absolute text-xs w-[250px] left-1/10 invisible opacity-0 transition-all duration-300">
+                                ویژگی‌های متغیر محصول را به‌صورت درختی تعریف کنید؛
+                                    برای مثال رنگ، سپس سایز و در نهایت قیمت هر ترکیب.
+                            </p>
                         </div>
 
-                        <div class="tree-product-intro">
-                            <div>
-                                <strong>ساختار تنوع‌های محصول</strong>
-                                <p>ابتدا یک ویژگی اضافه کنید و سپس مقادیر و زیرشاخه‌های آن را بسازید.</p>
-                            </div>
-                            <span class="tree-product-badge">مدیریت درختی</span>
-                        </div>
+                        
 
                         <div id="product-tree" class="product-tree mb-5"></div>
 
                         <button type="button" id="add-root-feature" class="pf-btn pf-btn-primary">
-                            ＋ افزودن ویژگی اصلی
+                            ＋ افزودن  اصلی
                         </button>
 
                         <div class="product-tree-summary">
                             <span>تعداد ویژگی‌ها: <strong id="tree-feature-count">۰</strong></span>
                             <span>تعداد مقادیر: <strong id="tree-value-count">۰</strong></span>
-                            <span>ترکیب‌های نهایی: <strong id="tree-leaf-count">۰</strong></span>
+                            <span>تنوع : <strong id="tree-leaf-count">۰</strong></span>
                         </div>
                     </section>
 
@@ -1083,9 +1132,9 @@
                     </script>
 
                     <div
-                        class="flex flex-col-reverse gap-3 rounded-2xl border border-[#E9E2D9] bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-5">
+                        class="hidden lg:flex flex-col-reverse gap-3 rounded-2xl border border-[#E9E2D9] bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-5">
                         <p class="text-xs leading-6 text-[#87978F]">قبل از ثبت، اطلاعات و تصاویر محصول را بررسی کنید.</p>
-                        <button type="submit" class="pf-btn pf-btn-primary w-full px-8 py-3 sm:w-auto">ثبت محصول
+                        <button type="submit" class="pf-btn pf-btn-primary w-full px-8 py-3 sm:w-auto cursor-pointer">ثبت محصول
                             <span>←</span></button>
                     </div>
                 </div>
@@ -1094,52 +1143,45 @@
                 <aside class="min-w-0 space-y-5 xl:col-span-1">
                     <section class="pf-card">
                         <div class="pf-card-head">
-                            <div>
-                                <h3 class="pf-card-title">دسته‌بندی محصول</h3>
-                                <p class="pf-card-desc">محصول را در دسته‌های مرتبط قرار دهید.</p>
-                            </div><span class="pf-icon"><svg class="size-5" viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="1.8">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M4 5.75A1.75 1.75 0 0 1 5.75 4h4.5L12 6h6.25A1.75 1.75 0 0 1 20 7.75v10.5A1.75 1.75 0 0 1 18.25 20h-12.5A1.75 1.75 0 0 1 4 18.25z" />
-                                </svg></span>
+                            <h3 class="pf-card-title">دسته‌بندی محصول</h3>
                         </div>
                         <div class="relative">
-                            <div
-                                class="mb-3 flex items-center gap-2 rounded-xl border border-[#E8E3DA] bg-[#FBF6EF] px-3 py-2.5 focus-within:border-[#95ADA2] focus-within:ring-4 focus-within:ring-[#4C6B62]/10">
-                                <svg class="size-4 flex-none text-[#87978F]" viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="2">
-                                    <circle cx="11" cy="11" r="7"></circle>
-                                    <path stroke-linecap="round" d="m16 16 4 4"></path>
-                                </svg>
-                                <input type="search" id="category-search" autocomplete="off"
-                                    class="!border-0 !bg-transparent !p-0 !shadow-none !ring-0"
-                                    placeholder="جست‌وجوی دسته‌بندی..." aria-label="جست‌وجوی دسته‌بندی">
-                                <button type="button" id="clear-category-search"
-                                    class="hidden flex-none rounded-lg px-2 py-1 text-xs font-bold text-[#4C6B62] hover:bg-white">
-                                    پاک کردن
-                                </button>
-                            </div>
 
-                            <div id="selected-category-chips" class="mb-3 flex min-h-8 flex-wrap gap-2"
-                                aria-live="polite">
-                                <span id="category-empty-selection" class="text-xs text-[#A6ADA6]">
-                                    هنوز دسته‌بندی‌ای انتخاب نشده است.
-                                </span>
-                            </div>
+
+
 
                             <div class="overflow-hidden rounded-xl border border-[#E8E3DA] bg-white">
                                 <div
-                                    class="flex items-center justify-between border-b border-[#F0EAE2] bg-[#FCF9F4] px-3 py-2.5">
+                                    class="flex items-center justify-between border-b border-[#f8f9fb] bg-[#f8f9fb] px-3 py-2.5">
                                     <span class="text-xs font-bold text-[#465F56]">همه دسته‌بندی‌ها</span>
                                     <span id="category-result-count" class="text-[11px] text-[#87978F]">
                                         {{ $categories->count() }} دسته‌بندی
                                     </span>
                                 </div>
                                 <div id="category-options" class="max-h-64 overflow-y-auto p-2">
+                                    <div
+                                        class="mb-3 flex items-center gap-2 rounded-xl border border-[#f8f9fb] bg-[#f8f9fb] px-3 py-2.5 focus-within:border-[#95ADA2] focus-within:ring-4 focus-within:ring-[#4C6B62]/10 sticky top-0 z-2">
+                                        <svg class="size-4 flex-none text-[#87978F]" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <circle cx="11" cy="11" r="7"></circle>
+                                            <path stroke-linecap="round" d="m16 16 4 4"></path>
+                                        </svg>
+                                        <input type="search" id="category-search" autocomplete="off"
+                                            class="!border-0 !bg-transparent !p-0 !shadow-none !ring-0"
+                                            placeholder="جست‌وجوی دسته‌بندی..." aria-label="جست‌وجوی دسته‌بندی">
+                                        <button type="button" id="clear-category-search"
+                                            class="hidden flex-none rounded-lg px-2 py-1 text-xs font-bold text-[#4C6B62] hover:bg-white">
+                                            پاک کردن
+                                        </button>
+                                    </div>
+                                    {{-- min-h-8 --}}
+                                    <div id="selected-category-chips" class="mb-3 flex flex-wrap gap-2"
+                                        aria-live="polite">
+                                    </div>
                                     @foreach ($categories as $category)
                                         <label data-category-option
                                             data-category-title="{{ mb_strtolower($category->title) }}"
-                                            class="!mb-0 flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 transition hover:bg-[#FBF6EF]">
+                                            class="!mb-0 flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 transition hover:bg-[#f8f9fb]">
                                             <input type="checkbox" name="category_ids[]" value="{{ $category->id }}"
                                                 class="category-checkbox size-4 flex-none accent-[#4C6B62]"
                                                 @if (in_array($category->id, old('category_ids', []))) checked @endif>
@@ -1156,10 +1198,6 @@
                                     </p>
                                 </div>
                             </div>
-
-                            <p class="pf-hint mt-2">
-                                می‌توانید نام دسته‌بندی را جست‌وجو کنید و چند مورد را هم‌زمان انتخاب کنید.
-                            </p>
 
                             {{-- این select برای سازگاری با اسکریپت قبلی ویژگی‌ها حفظ شده است. --}}
                             <select id="category_ids" multiple hidden tabindex="-1" aria-hidden="true">
@@ -1186,7 +1224,7 @@
                                         d="M4 7h16v13H4zM8 7V4h8v3M8 12h8M8 16h5" />
                                 </svg></span>
                         </div>
-                        <div class="flex items-center justify-between gap-3 rounded-xl bg-[#FBF6EF] p-3"><span
+                        <div class="flex items-center justify-between gap-3 rounded-xl bg-[#f8f9fb] p-3"><span
                                 class="text-sm font-semibold text-[#465F56]">نمایش در صفحه اصلی</span><label
                                 for="show_in_home" class="pf-switch mb-0"><input type="checkbox" name="show_in_home"
                                     value="1" id="show_in_home"
@@ -1265,6 +1303,12 @@
                     </section>
                 </aside>
             </div>
+            <div
+                        class="lg:hidden flex flex-col-reverse gap-3 rounded-2xl border border-[#E9E2D9] bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-5">
+                        <p class="text-xs leading-6 text-[#87978F]">قبل از ثبت، اطلاعات و تصاویر محصول را بررسی کنید.</p>
+                        <button type="submit" class="pf-btn pf-btn-primary w-full px-8 py-3 sm:w-auto cursor-pointer">ثبت محصول
+                            <span>←</span></button>
+                    </div>
         </form>
     </div>
 
@@ -1276,13 +1320,18 @@
                         ویژگی</label><select
                         class="attribute-select w-full rounded-xl border border-[#E8E3DA] bg-white p-3 text-sm"
                         required></select></div>
-                <button type="button" class="remove-attribute pf-danger">حذف ویژگی</button>
+                <button type="button" class="remove-attribute pf-danger">
+                    <svg class="w-[20px] h-[20px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+</svg>
+
+                </button>
             </div>
             <div class="attribute-values-container border-t border-[#E8E3DA] pt-4">
                 <div class="mb-3 flex items-center justify-between gap-3"><label class="mb-0 text-xs font-bold">مقادیر
                         ویژگی</label><button type="button"
-                        class="add-attribute-value text-xs font-bold text-[#4C6B62] hover:text-[#3B554D]">＋ افزودن
-                        مقدار</button></div>
+                        class="add-attribute-value text-xs font-bold text-[#4C6B62] hover:text-[#3B554D]">＋ 
+                        </button></div>
                 <div class="attribute-values space-y-2"></div>
             </div>
         </div>
@@ -1316,7 +1365,7 @@
             <div class="package-attributes-section border-t border-[#E8E3DA] pt-4">
                 <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <h4 class="text-xs font-extrabold text-[#344B43]">ویژگی‌های این محصول متغیر</h4><button type="button"
-                        class="add-package-attribute pf-btn pf-btn-soft">＋ افزودن ویژگی</button>
+                        class="add-package-attribute pf-btn pf-btn-soft">＋ </button>
                 </div>
                 <div class="package-attributes-list space-y-3"></div>
             </div>
@@ -1329,9 +1378,9 @@
 
 
     <script>
-    window.PRODUCT_FEATURES = @json(old('product_features', []));
-    window.CATEGORIES = @json($categoriesData);
-</script>
+        window.PRODUCT_FEATURES = @json(old('product_features', []));
+        window.CATEGORIES = @json($categoriesData);
+    </script>
 
 
 
@@ -1349,7 +1398,6 @@
             const optionLabels = Array.from(root.querySelectorAll('[data-category-option]'));
             const checkboxes = Array.from(root.querySelectorAll('.category-checkbox'));
             const chipsContainer = root.querySelector('#selected-category-chips');
-            const emptySelection = root.querySelector('#category-empty-selection');
             const resultCount = root.querySelector('#category-result-count');
             const noResults = root.querySelector('#category-no-results');
             const compatibilitySelect = root.querySelector('#category_ids');
@@ -1359,7 +1407,6 @@
                 const selected = checkboxes.filter(input => input.checked);
 
                 chipsContainer.querySelectorAll('.category-chip').forEach(chip => chip.remove());
-                emptySelection.classList.toggle('hidden', selected.length > 0);
 
                 selected.forEach(input => {
                     const label = input.closest('[data-category-option]');
@@ -1433,27 +1480,22 @@
                 filterCategories();
                 searchInput.focus();
             });
-
-            // حداقل یک دسته‌بندی باید انتخاب شده باشد.
-            // if (form) {
-            //     form.addEventListener('submit', function(event) {
-            //         const hasSelection = checkboxes.some(input => input.checked);
-            //         if (!hasSelection) {
-            //             event.preventDefault();
-            //             searchInput.setCustomValidity('لطفاً حداقل یک دسته‌بندی انتخاب کنید.');
-            //             searchInput.reportValidity();
-            //             searchInput.addEventListener('input', function clearValidity() {
-            //                 searchInput.setCustomValidity('');
-            //                 searchInput.removeEventListener('input', clearValidity);
-            //             });
-            //             searchInput.focus();
-            //         }
-            //     });
-            // }
-
             updateSelectedCategories();
             filterCategories();
         });
+
+
+
+
+        function showMessage(text){
+            document.getElementById('message').classList.remove('invisible', 'opacity-0')
+            document.getElementById('message').innerText = text
+            setTimeout(() => {
+                document.getElementById('message').classList.add('invisible', 'opacity-0')
+            }, 3000);
+        }
+
+        
     </script>
 
     <script src="{{ url('js/attribute.js') }}"></script>
