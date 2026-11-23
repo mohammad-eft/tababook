@@ -710,6 +710,25 @@
             font-weight: 750;
         }
 
+        .product-form-shell .tree-default-option {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin: 0;
+            color: #4C6B62;
+            font-size: 11px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .product-form-shell .tree-default-option input[type="radio"] {
+            width: 14px;
+            height: 14px;
+            margin: 0;
+            accent-color: #4C6B62;
+            cursor: pointer;
+        }
+
         .product-form-shell .tree-value-dot {
             width: 7px;
             height: 7px;
@@ -1001,6 +1020,7 @@
                             <div class="pf-field">
                                 <label for="brand_id">برند</label>
                                 <select id="brand_id" name='brand_id'>
+                                    <option value="0">انتخاب کنید</option>
                                     @foreach ($brands as $brand)
                                         <option value="{{ $brand->id }}"
                                             @if (in_array($brand->id, old('brand_id', []))) selected @endif>
@@ -1015,6 +1035,7 @@
                             <div class="pf-field">
                                 <label for="publication_id">انتشارات</label>
                                 <select id="publication_id" name='publication_id'>
+                                    <option value="0">انتخاب کنید</option>
                                     @foreach ($publications as $publication)
                                         <option value="{{ $publication->id }}"
                                             @if (in_array($publication->id, old('publication_id', []))) selected @endif>
@@ -1126,10 +1147,6 @@
                             <span>تنوع : <strong id="tree-leaf-count">۰</strong></span>
                         </div>
                     </section>
-
-                    <script>
-                        window.PRODUCT_FEATURES = @json(old('product_features', []));
-                    </script>
 
                     <div
                         class="hidden lg:flex flex-col-reverse gap-3 rounded-2xl border border-[#E9E2D9] bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-5">
@@ -1271,7 +1288,7 @@
                         </div>
                     </section>
 
-                    <section class="pf-card">
+                    <section class="pf-card" id="fixed-product-pricing-card">
                         <div class="pf-card-head">
                             <div>
                                 <h3 class="pf-card-title">قیمت‌گذاری</h3>
