@@ -3,7 +3,6 @@
 @section('title', 'طبابوک | ایجاد محصول')
 
 @section('content')
-
     <style>
 
         #brand_id, #publication_id{
@@ -962,7 +961,6 @@
         }
 
     </style>
-
     @if (session('message'))
         <div
             class="modal fixed right-4 top-4 z-50 flex items-center gap-3 rounded-xl border border-[#DCE8DF] bg-white px-5 py-4 text-sm font-bold text-[#4C6B62] shadow-xl sm:right-8 sm:top-8">
