@@ -48,6 +48,11 @@ class BrandController extends Controller
     public function list(){
         $setting = homeSetting::document();
         $brands=brand::all();
+        foreach($brands as $brand){
+            if(!$brand->logo_path){
+                $brand->logo_path = 'noImage.png';
+            }
+        }
         return view('admin.brand.list',['brands'=>$brands,'setting'=>$setting]);
         dd('list');
     }
