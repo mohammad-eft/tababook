@@ -36,7 +36,8 @@ function addAttribute(el, state) {
             console.log(parentElement)
         }
     } else {
-        alert('حداقل یک دسته انتخاب کنید')
+        // alert('حداقل یک دسته انتخاب کنید')
+        showMessage('حداقل یک دسته را انتخاب کنید')
     }
 }
 function remove(el, id) {

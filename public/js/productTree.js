@@ -906,12 +906,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function openAddForm(type, targetId = '') {
         if ((type === 'root' || type === 'feature') && !hasSelectedCategories()) {
-            alert('برای افزودن ویژگی، ابتدا حداقل یک دسته‌بندی را انتخاب کنید.');
+            showMessage('برای افزودن ویژگی، ابتدا حداقل یک دسته‌بندی را انتخاب کنید.');
             return;
         }
 
         if ((type === 'root' || type === 'feature') && !hasAvailableAttributes(type === 'feature' ? targetId : null)) {
-            alert('تمام ویژگی‌های قابل استفاده در این مسیر اضافه شده‌اند.');
+            showMessage('تمام ویژگی‌های قابل استفاده در این مسیر اضافه شده‌اند.');
             return;
         }
 
@@ -1050,7 +1050,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const attribute = getAttributeById(attributeId);
 
             if (!attribute) {
-                alert('این ویژگی در دسته‌بندی‌های انتخاب‌شده موجود نیست.');
+                showMessage('این ویژگی در دسته‌بندی‌های انتخاب‌شده موجود نیست.');
                 return;
             }
 
@@ -1061,7 +1061,7 @@ document.addEventListener('DOMContentLoaded', function () {
             );
 
             if (usedIds.has(String(attribute.id))) {
-                alert('این ویژگی قبلاً در این مسیر انتخاب شده است.');
+                showMessage('این ویژگی قبلاً در این مسیر انتخاب شده است.');
                 return;
             }
 
@@ -1089,7 +1089,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 name = root.querySelector('[data-add-color-hex]')?.value.trim();
 
                 if (!isValidHex(name)) {
-                    alert('لطفاً یک کد رنگ معتبر وارد کنید.');
+                    showMessage('لطفاً یک کد رنگ معتبر وارد کنید.');
                     return;
                 }
             } else {
@@ -1298,7 +1298,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     newName = root.querySelector('[data-edit-color-hex]')?.value.trim();
 
                     if (!isValidHex(newName)) {
-                        alert('لطفاً یک کد رنگ معتبر وارد کنید.');
+                        showMessage('لطفاً یک کد رنگ معتبر وارد کنید.');
                         return;
                     }
                 } else {
@@ -1428,7 +1428,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!validateFeatures(productFeatures)) {
             event.preventDefault();
 
-            alert(
+            showMessage(
                 'یکی از ویژگی‌های درخت با دسته‌بندی‌های انتخاب‌شده مطابقت ندارد. لطفاً آن ویژگی یا زیرشاخه را حذف کنید.'
             );
         }
