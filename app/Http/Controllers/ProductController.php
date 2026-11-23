@@ -260,7 +260,8 @@ class ProductController extends Controller
                 $allowedAttributeIds,
                 $validator,
                 'product_features',
-                []
+                [],
+                false
             );
         });
 
@@ -272,7 +273,8 @@ class ProductController extends Controller
         array $allowedAttributeIds,
         $validator,
         string $path,
-        array $ancestors
+        array $ancestors,
+        bool $allowDefault = true
     ): void {
         foreach ($features as $featureIndex => $feature) {
             $featurePath = "{$path}.{$featureIndex}";
@@ -376,6 +378,13 @@ class ProductController extends Controller
 
                 if (in_array($isDefault, [true, 1, '1'], true)) {
                     $defaultValueCount++;
+
+                    if (!$allowDefault) {
+                        $validator->errors()->add(
+                            "$valuePath.is_default",
+                            'برای ویژگی‌های اصلی امکان تعیین مقدار پیش‌فرض وجود ندارد.'
+                        );
+                    }
                 }
 
                 // بررسی موجودی هر مقدار (موجودی واقعی فقط برای ترکیب‌های نهایی استفاده می‌شود)
@@ -426,12 +435,8 @@ class ProductController extends Controller
                         $allowedAttributeIds,
                         $validator,
                         "$valuePath.children",
-                        [...$ancestors, $attributeId]
-                    );
-                } elseif (in_array($isDefault, [true, 1, '1'], true)) {
-                    $validator->errors()->add(
-                        "$valuePath.is_default",
-                        'فقط مقادیری که زیرشاخه دارند می‌توانند پیش‌فرض باشند.'
+                        [...$ancestors, $attributeId],
+                        true
                     );
                 }
             }
@@ -800,7 +805,10 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        // return $request->all();
         $validated = $this->validateProductRequest($request, false);
+        // return $validated;
+        // dd($validated);
 
         $uploadedFiles = [];
 
@@ -1026,9 +1034,9 @@ class ProductController extends Controller
                 foreach ([
                     'description',
                     'summary',
-                    'brand',
+                    'brand_id',
                     'writer',
-                    'publication',
+                    'publication_id',
                     'count',
                     'primary_price',
                     'secondary_price',

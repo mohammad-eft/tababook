@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function () {
     const root = document.querySelector('#product-tree');
     if (!root) return;
@@ -49,20 +48,13 @@ document.addEventListener('DOMContentLoaded', function () {
         return /^#[0-9a-fA-F]{6}$/.test(String(value ?? ''));
     }
 
-    function normalizeFeatures(features) {
+    // ویژگی‌های ریشه انتخاب پیش‌فرض ندارند؛ اما هر ویژگیِ زیرشاخه‌ای
+    // که مقدار داشته باشد باید دقیقاً یک مقدار پیش‌فرض داشته باشد.
+    function normalizeFeatures(features, isNested = false) {
         if (!Array.isArray(features)) return [];
 
-        return features.map(feature => ({
-            id: uid(),
-
-            attributeId: feature.attribute_id ?? feature.attributeId ?? '',
-
-            name: feature.name ?? '',
-            type: feature.type ?? '',
-
-            open: feature.open !== false,
-
-            values: Array.isArray(feature.values)
+        return features.map(feature => {
+            const values = Array.isArray(feature.values)
                 ? feature.values.map(value => ({
                     id: uid(),
                     name: value.name ?? '',
@@ -88,10 +80,33 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     open: value.open !== false,
 
-                    children: normalizeFeatures(value.children ?? [])
+                    children: normalizeFeatures(value.children ?? [], true)
                 }))
-                : []
-        }));
+                : [];
+
+            if (isNested && values.length) {
+                let defaultFound = false;
+
+                values.forEach(value => {
+                    if (value.isDefault && !defaultFound) {
+                        defaultFound = true;
+                    } else {
+                        value.isDefault = false;
+                    }
+                });
+
+                if (!defaultFound) values[0].isDefault = true;
+            }
+
+            return {
+                id: uid(),
+                attributeId: feature.attribute_id ?? feature.attributeId ?? '',
+                name: feature.name ?? '',
+                type: feature.type ?? '',
+                open: feature.open !== false,
+                values
+            };
+        });
     }
 
     let productFeatures = normalizeFeatures(window.PRODUCT_FEATURES || []);
@@ -162,6 +177,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function updateRootFeatureButton() {
         const button = document.querySelector('#add-root-feature');
+        const fixedPricingCard = document.querySelector('#fixed-product-pricing-card');
+
+        // با شروع افزودن ویژگی اصلی، باکس قیمت ثابت مخفی می‌شود.
+        // در صورت انصراف، اگر هیچ ویژگی‌ای ثبت نشده باشد دوباره نمایش داده می‌شود.
+        if (fixedPricingCard) {
+            fixedPricingCard.classList.toggle(
+                'hidden',
+                productFeatures.length > 0 || activeForm?.type === 'root'
+            );
+        }
+
         if (!button) return;
 
         // در نبود دسته‌بندی دکمه باقی می‌ماند تا پیام راهنما نمایش داده شود.
@@ -560,8 +586,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const bodyId = `feature-body-${feature.id}`;
 
+        const isChildFeature = parentPath !== 'product_features';
+
         const valuesHTML = feature.values.map((value, index) =>
-            renderValue(value, index, featurePath, feature)
+            renderValue(value, index, featurePath, feature, isChildFeature)
         ).join('');
 
         const isEditing = activeForm?.type === 'edit-feature' &&
@@ -604,9 +632,13 @@ document.addEventListener('DOMContentLoaded', function () {
                             class="tree-toggle"
                             data-action="toggle-feature"
                             data-id="${feature.id}"
+                            aria-expanded="${feature.open}"
+                            title="${feature.open ? 'بستن ویژگی' : 'نمایش ویژگی'}"
                         >
                             ${feature.open ? '−' : '+'}
                         </button>
+
+                       
 
                         <span>${escapeHTML(feature.name)}</span>
 
@@ -652,16 +684,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 </div>
 
-                ${feature.open ? `
-                    <div
-                        class="tree-feature-body"
-                        id="${bodyId}"
-                    >
-                        ${valuesHTML}
+                <div
+                    class="tree-feature-body"
+                    id="${bodyId}"
+                    ${feature.open ? '' : 'style="display:none"'}
+                >
+                    ${valuesHTML}
 
-                        ${renderAddForm('value', feature.id)}
-                    </div>
-                ` : ''}
+                    ${feature.open ? renderAddForm('value', feature.id) : ''}
+                </div>
 
             </div>
         `;
@@ -671,7 +702,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // نمایش مقدار
     // --------------------------------------------------
 
-    function renderValue(value, valueIndex, featurePath, parentFeature) {
+    function renderValue(value, valueIndex, featurePath, parentFeature, isChildFeature = false) {
         const valuePath = `${featurePath}[values][${valueIndex}]`;
 
         const hasChildren = value.children.length > 0;
@@ -774,6 +805,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         ${valueTitle}
 
+                        ${isChildFeature ? `
+                            <label class="tree-default-option inline-flex items-center gap-1.5 text-xs text-slate-600 mr-2 cursor-pointer">
+                                <input
+                                    type="radio"
+                                    name="tree-default-${parentFeature.id}"
+                                    value="${value.id}"
+                                    data-default-feature-id="${parentFeature.id}"
+                                    data-default-value-id="${value.id}"
+                                    ${value.isDefault ? 'checked' : ''}
+                                >
+                                <span>پیش‌فرض</span>
+                            </label>
+                        ` : ''}
+
                         ${hasChildren
                 ? `<span class="pf-hint">دارای ${value.children.length} زیرشاخه</span>`
                 : ``
@@ -856,7 +901,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 </div>
 
-                ${value.open ? `
+                <div
+                    class="tree-value-body"
+                    ${value.open ? '' : 'style="display:none"'}
+                >
                     ${renderPriceInputs(value, valuePath)}
 
                     ${hasChildren ? `
@@ -865,8 +913,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         </div>
                     ` : ''}
 
-                    ${renderAddForm('feature', value.id)}` : `<div class="tree-collapsed"></div>`
-            }
+                    ${value.open ? renderAddForm('feature', value.id) : ''}
+                </div>
 
             </div>
         `;
@@ -979,12 +1027,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (!feature || !name) return;
 
+        const shouldBeDefault = isNestedFeature(featureId) && feature.values.length === 0;
+
         feature.values.push({
             id: uid(),
 
             name,
 
-            isDefault: false,
+            isDefault: shouldBeDefault,
 
             originalPrice: '',
             specialPrice: '',
@@ -1272,10 +1322,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
             case 'delete-value':
                 if (confirm('این مقدار و تمام زیرشاخه‌های آن حذف شود؟')) {
+                    const parentFeature = findParentFeatureOfValue(id);
+                    const wasDefault = findValue(id)?.isDefault === true;
+
                     deleteValue(id);
 
-                    activeForm = null;
+                    if (
+                        wasDefault &&
+                        parentFeature &&
+                        isNestedFeature(parentFeature.id) &&
+                        parentFeature.values.length &&
+                        !parentFeature.values.some(value => value.isDefault)
+                    ) {
+                        parentFeature.values[0].isDefault = true;
+                    }
 
+                    activeForm = null;
                     renderTree();
                 }
                 break;
@@ -1359,6 +1421,26 @@ document.addEventListener('DOMContentLoaded', function () {
         return null;
     }
 
+    // آیا این ویژگی زیرمجموعه یک مقدار دیگر است؟
+    function findParentValueOfFeature(featureId, features = productFeatures) {
+        for (const feature of features) {
+            for (const value of feature.values) {
+                if (value.children.some(child => child.id === featureId)) {
+                    return value;
+                }
+
+                const found = findParentValueOfFeature(featureId, value.children);
+                if (found) return found;
+            }
+        }
+
+        return null;
+    }
+
+    function isNestedFeature(featureId) {
+        return Boolean(findParentValueOfFeature(featureId));
+    }
+
     // --------------------------------------------------
     // کلید Enter
     // --------------------------------------------------
@@ -1416,30 +1498,41 @@ document.addEventListener('DOMContentLoaded', function () {
             getAvailableAttributes().map(attribute => String(attribute.id))
         );
 
-        function validateFeatures(features) {
+        function validateFeatures(features, isNested = false) {
             for (const feature of features) {
                 if (
                     !feature.attributeId ||
                     !availableIds.has(String(feature.attributeId))
                 ) {
-                    return false;
+                    return { valid: false, reason: 'attribute' };
                 }
 
-                if (!validateFeatures(
-                    feature.values.flatMap(value => value.children)
-                )) {
-                    return false;
+                if (isNested && feature.values.length) {
+                    const defaultCount = feature.values.filter(value => value.isDefault).length;
+
+                    if (defaultCount !== 1) {
+                        return { valid: false, reason: 'default' };
+                    }
+                }
+
+                for (const value of feature.values) {
+                    const result = validateFeatures(value.children, true);
+                    if (!result.valid) return result;
                 }
             }
 
-            return true;
+            return { valid: true, reason: null };
         }
 
-        if (!validateFeatures(productFeatures)) {
+        const validation = validateFeatures(productFeatures);
+
+        if (!validation.valid) {
             event.preventDefault();
 
             showMessage(
-                'یکی از ویژگی‌های درخت با دسته‌بندی‌های انتخاب‌شده مطابقت ندارد. لطفاً آن ویژگی یا زیرشاخه را حذف کنید.'
+                validation.reason === 'default'
+                    ? 'برای هر زیرشاخه‌ای که مقدار دارد، دقیقاً یک مقدار پیش‌فرض انتخاب کنید.'
+                    : 'یکی از ویژگی‌های درخت با دسته‌بندی‌های انتخاب‌شده مطابقت ندارد. لطفاً آن ویژگی یا زیرشاخه را حذف کنید.'
             );
         }
     });

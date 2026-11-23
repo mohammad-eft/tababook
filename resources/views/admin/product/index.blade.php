@@ -1418,7 +1418,7 @@
                         </div>
                     </section>
 
-                    <section class="pf-card">
+                    <section id="fixed-product-pricing-card" class="pf-card">
                         <div class="pf-card-head">
                             <div>
                                 <h3 class="pf-card-title">قیمت‌گذاری</h3>

@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function () {
     const root = document.querySelector('#editForm #product-tree');
     if (!root) return;
@@ -735,8 +734,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div class="tree-value-head">
 
                     <div class="tree-value-name">
-
-            
                                 <button
                                     type="button"
                                     class="tree-toggle"
@@ -745,8 +742,6 @@ document.addEventListener('DOMContentLoaded', function () {
                                 >
                                     ${value.open ? '−' : '+'}
                                 </button>
-                 
-
                         ${valueTitle}
 
                         ${hasChildren
@@ -860,6 +855,17 @@ document.addEventListener('DOMContentLoaded', function () {
         root.innerHTML = productFeatures.map((feature, index) =>
             renderFeature(feature, index, 'product_features')
         ).join('') + renderAddForm('root', '');
+
+        // در ویرایش نیز قیمت ثابت فقط زمانی نمایش داده می‌شود
+        // که هیچ ویژگی اصلی ثبت نشده و فرم افزودن ویژگی اصلی باز نباشد.
+        const fixedPricingCard = root.closest('form')?.querySelector('#fixed-product-pricing-card');
+
+        if (fixedPricingCard) {
+            fixedPricingCard.classList.toggle(
+                'hidden',
+                productFeatures.length > 0 || activeForm?.type === 'root'
+            );
+        }
 
         const counts = countTree(productFeatures);
 

@@ -449,6 +449,19 @@
                 return currentValue;
             }
 
+            function markOptionSelected(option) {
+                if (!option) return;
+
+                const siblings = option.parentElement?.children || [];
+                [...siblings].forEach(element => {
+                    element.classList.remove('border-(--pastel-purple)', 'bg-(--cream-color)', 'font-bold');
+                    element.classList.add('border-(--color-border)');
+                });
+
+                option.classList.remove('border-(--color-border)');
+                option.classList.add('border-(--pastel-purple)', 'bg-(--cream-color)', 'font-bold');
+            }
+
             function updatePrice(value) {
                 const primary = Number(value?.original_price || 0);
                 const special = Number(value?.special_price || 0);
@@ -602,6 +615,8 @@
                     const option = document.createElement('button');
                     option.type = 'button';
                     option.className = 'rounded-lg border border-(--color-border) px-3 py-2 text-xs transition hover:border-(--pastel-purple)';
+                    option.dataset.valueId = String(value.id ?? '');
+                    option.dataset.featureDepth = String(depth);
                     option.textContent = value.name || value.title || '—';
 
                     option.addEventListener('click', () => {
@@ -612,13 +627,7 @@
                             id: value.id
                         });
 
-                        [...options.children].forEach(element => {
-                            element.classList.remove('border-(--pastel-purple)', 'bg-(--cream-color)', 'font-bold');
-                            element.classList.add('border-(--color-border)');
-                        });
-
-                        option.classList.remove('border-(--color-border)');
-                        option.classList.add('border-(--pastel-purple)', 'bg-(--cream-color)', 'font-bold');
+                        markOptionSelected(option);
 
                         while (levels.children.length > depth + 1) {
                             levels.lastElementChild.remove();
@@ -633,6 +642,7 @@
                             if (defaultLeaf) {
                                 const defaultPath = [...selectedPath];
                                 let currentValue = value;
+                                let defaultDepth = depth + 1;
 
                                 while (getChildren(currentValue).length) {
                                     const childFeature = getChildren(currentValue)[0];
@@ -646,9 +656,18 @@
                                         is_default: true
                                     });
 
+                                    const defaultOption = [...levels.querySelectorAll('[data-feature-depth]')]
+                                        .find(element =>
+                                            element.dataset.featureDepth === String(defaultDepth) &&
+                                            element.dataset.valueId === String(defaultValue.id)
+                                        );
+
+                                    markOptionSelected(defaultOption);
+                                    defaultDepth++;
                                     currentValue = defaultValue;
                                 }
 
+                                selectedPath.splice(0, selectedPath.length, ...defaultPath);
                                 updateCartControls(defaultLeaf, defaultPath);
                                 if (hint) {
                                     hint.textContent = 'قیمت و موجودی بر اساس زیرشاخه پیش‌فرض محاسبه شده است؛ در صورت تمایل می‌توانید گزینه دیگری انتخاب کنید.';
@@ -672,7 +691,25 @@
 
             if (selectorExists && tree.length) {
                 tree.forEach(feature => renderFeature(feature, 0));
-                updateCartControls(null);
+
+                // ویژگی ریشه is_default ندارد؛ بنابراین اولین مقدار ریشه
+                // به‌عنوان شاخه آغازین انتخاب می‌شود و زنجیره is_default
+                // در تمام ویژگی‌های فرزند تا ترکیب نهایی دنبال خواهد شد.
+                const firstRootFeature = tree[0];
+                const firstRootValue = getValues(firstRootFeature)[0];
+
+                if (firstRootValue) {
+                    const firstRootOption = [...levels.querySelectorAll('[data-feature-depth="0"]')]
+                        .find(element => element.dataset.valueId === String(firstRootValue.id));
+
+                    if (firstRootOption) {
+                        firstRootOption.click();
+                    } else {
+                        updateCartControls(null);
+                    }
+                } else {
+                    updateCartControls(null);
+                }
             } else if (selectorExists) {
                 document.getElementById('productFeatureSelector')?.classList.add('hidden');
             } else {
