@@ -832,7 +832,7 @@
         <!-- end responsive menu -->
         <div class="w-full pt-10 lg:pt-0">
             <div class="w-full lg:w-[calc(100%-265px)] float-end p-5 overflow-y-auto max-h-[calc(100vh-20px)]" style="scrollbar-width:none;">
-                <div class="fixed right-1/2 translate-x-1/2 text-center lg:text-start text-xs lg:text-sm lg:translate-x-0 top-4 z-50 flex items-center gap-3 rounded-xl border border-[#e8dce1] bg-white px-5 py-4 font-bold text-[#ff005d] shadow-xl sm:right-8 sm:top-8 transition-all duration-300 invisible opacity-0" id="message"></div>
+                <div class="fixed right-1/2 translate-x-1/2 text-center lg:text-start text-xs lg:text-sm lg:translate-x-0 top-4 z-50 flex items-center gap-3 rounded-xl border border-[#e8dce1] bg-white px-5 py-4 font-bold text-[#ff005d] shadow-xl lg:right-8 lg:top-8 transition-all duration-300 invisible opacity-0" id="message"></div>
                 @yield('content')
                 
             </div>

@@ -6,9 +6,14 @@
 
     <style>
 
+        #brand_id, #publication_id{
+            background-color: #f8f9fb !important;
+        }
+
         input[type=text], input[type=number], input[type=file], select, textarea{
             background-color: #f8f9fb !important;
             border: 1px solid #f8f9fb !important;
+            padding-block: 8px !important;
         }
         .product-form-shell {
             --pf-primary: #4C6B62;
@@ -28,6 +33,9 @@
             border-radius: 18px;
             padding: 22px;
             box-shadow: 0 5px 22px rgba(76, 107, 98, .07);
+        }
+        .product-form-shell .pf-card select, input{
+            background-color: #fff !important;
         }
 
         .product-form-shell .pf-card-head {
@@ -386,7 +394,7 @@
             padding: 18px;
             border: 1px solid #E9E2D9;
             border-radius: 15px;
-            background: #FCF9F4;
+            background: #f8f9fb;
             transition: border-color .2s, box-shadow .2s;
         }
 
@@ -717,7 +725,7 @@
             margin-top: 12px;
             padding: 12px;
             border-radius: 10px;
-            background: #FBF6EF;
+            background: #f8f9fb;
         }
 
         .product-form-shell .tree-price-box label {
@@ -730,7 +738,7 @@
             padding: 8px 10px;
             border: 1px solid #E8E3DA;
             border-radius: 9px;
-            background: #fff;
+            background-color: #fff !important;
             font-size: 12px;
         }
 
@@ -797,7 +805,7 @@
             padding: 30px 15px;
             border: 1px dashed #DCE8DF;
             border-radius: 13px;
-            background: #FCF9F4;
+            background: #f8f9fb;
             text-align: center;
         }
 
@@ -933,6 +941,7 @@
             border-radius: 6px;
             flex-shrink: 0;
         }
+
     </style>
 
     @if (session('message'))
@@ -1108,7 +1117,7 @@
                         <div id="product-tree" class="product-tree mb-5"></div>
 
                         <button type="button" id="add-root-feature" class="pf-btn pf-btn-primary">
-                            ＋ افزودن ویژگی اصلی
+                            ＋ افزودن  اصلی
                         </button>
 
                         <div class="product-tree-summary">
@@ -1123,9 +1132,9 @@
                     </script>
 
                     <div
-                        class="flex flex-col-reverse gap-3 rounded-2xl border border-[#E9E2D9] bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-5">
+                        class="hidden lg:flex flex-col-reverse gap-3 rounded-2xl border border-[#E9E2D9] bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-5">
                         <p class="text-xs leading-6 text-[#87978F]">قبل از ثبت، اطلاعات و تصاویر محصول را بررسی کنید.</p>
-                        <button type="submit" class="pf-btn pf-btn-primary w-full px-8 py-3 sm:w-auto">ثبت محصول
+                        <button type="submit" class="pf-btn pf-btn-primary w-full px-8 py-3 sm:w-auto cursor-pointer">ثبت محصول
                             <span>←</span></button>
                     </div>
                 </div>
@@ -1168,7 +1177,6 @@
                                     {{-- min-h-8 --}}
                                     <div id="selected-category-chips" class="mb-3 flex flex-wrap gap-2"
                                         aria-live="polite">
-
                                     </div>
                                     @foreach ($categories as $category)
                                         <label data-category-option
@@ -1295,6 +1303,12 @@
                     </section>
                 </aside>
             </div>
+            <div
+                        class="lg:hidden flex flex-col-reverse gap-3 rounded-2xl border border-[#E9E2D9] bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-5">
+                        <p class="text-xs leading-6 text-[#87978F]">قبل از ثبت، اطلاعات و تصاویر محصول را بررسی کنید.</p>
+                        <button type="submit" class="pf-btn pf-btn-primary w-full px-8 py-3 sm:w-auto cursor-pointer">ثبت محصول
+                            <span>←</span></button>
+                    </div>
         </form>
     </div>
 
@@ -1306,13 +1320,18 @@
                         ویژگی</label><select
                         class="attribute-select w-full rounded-xl border border-[#E8E3DA] bg-white p-3 text-sm"
                         required></select></div>
-                <button type="button" class="remove-attribute pf-danger">حذف ویژگی</button>
+                <button type="button" class="remove-attribute pf-danger">
+                    <svg class="w-[20px] h-[20px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+</svg>
+
+                </button>
             </div>
             <div class="attribute-values-container border-t border-[#E8E3DA] pt-4">
                 <div class="mb-3 flex items-center justify-between gap-3"><label class="mb-0 text-xs font-bold">مقادیر
                         ویژگی</label><button type="button"
-                        class="add-attribute-value text-xs font-bold text-[#4C6B62] hover:text-[#3B554D]">＋ افزودن
-                        مقدار</button></div>
+                        class="add-attribute-value text-xs font-bold text-[#4C6B62] hover:text-[#3B554D]">＋ 
+                        </button></div>
                 <div class="attribute-values space-y-2"></div>
             </div>
         </div>
@@ -1346,7 +1365,7 @@
             <div class="package-attributes-section border-t border-[#E8E3DA] pt-4">
                 <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <h4 class="text-xs font-extrabold text-[#344B43]">ویژگی‌های این محصول متغیر</h4><button type="button"
-                        class="add-package-attribute pf-btn pf-btn-soft">＋ افزودن ویژگی</button>
+                        class="add-package-attribute pf-btn pf-btn-soft">＋ </button>
                 </div>
                 <div class="package-attributes-list space-y-3"></div>
             </div>

@@ -602,7 +602,10 @@ document.addEventListener('DOMContentLoaded', function () {
                             data-action="add-value"
                             data-id="${feature.id}"
                         >
-                            ＋
+                            <svg class="size-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 12h14m-7 7V5"/>
+                            </svg>
+
                         </button>
 
                         <button
@@ -611,7 +614,10 @@ document.addEventListener('DOMContentLoaded', function () {
                             data-action="delete-feature"
                             data-id="${feature.id}"
                         >
-                            حذف
+                            <svg class="size-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+                            </svg>
+
                         </button>
 
                     </div>
@@ -745,7 +751,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         ${hasChildren
                 ? `<span class="pf-hint">دارای ${value.children.length} زیرشاخه</span>`
-                : `<span class="pf-hint">ترکیب نهایی</span>`
+                : ``
             }
 
                         ${hasChildren ? `
@@ -791,7 +797,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 data-action="edit-value"
                                 data-id="${value.id}"
                             >
-                                ✎ ویرایش
+                                ✎ 
                             </button>
 
                             ${hasAvailableChildAttributes ? `
@@ -801,7 +807,10 @@ document.addEventListener('DOMContentLoaded', function () {
                                     data-action="add-child-feature"
                                     data-id="${value.id}"
                                 >
-                                    ＋ 
+                                    <svg class="size-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 12h14m-7 7V5"/>
+</svg>
+
                                 </button>
                             ` : ''}
 
@@ -813,7 +822,10 @@ document.addEventListener('DOMContentLoaded', function () {
                                 data-action="delete-value"
                                 data-id="${value.id}"
                             >
-                                حذف
+                                <svg class="size-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+                                </svg>
+
                             </button>
                         `}
 
