@@ -5,6 +5,11 @@
 @section('content')
 
     <style>
+
+        input[type=text], input[type=number], input[type=file], select, textarea{
+            background-color: #f8f9fb !important;
+            border: 1px solid #f8f9fb !important;
+        }
         .product-form-shell {
             --pf-primary: #4C6B62;
             --pf-primary-dark: #3B554D;
@@ -270,7 +275,7 @@
             align-items: center;
             justify-content: center;
             border-radius: 12px;
-            background: #F5E8E6;
+            background: #f8f9fb;
             color: #4C6B62;
         }
 
@@ -940,11 +945,11 @@
 
     
 
-    <div class="product-form-shell w-full rounded-2xl bg-[#FBF6EF] p-3 pb-10 sm:p-5">
+    <div class="product-form-shell w-full rounded-2xl bg-blue-900/3 p-3 pb-10 sm:p-5">
         <div class="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
             <div>
                 <span
-                    class="mb-2 inline-flex rounded-full bg-[#F5E8E6] px-3 py-1 text-[11px] font-bold text-[#4C6B62]">مدیریت
+                    class="mb-2 inline-flex rounded-full bg-[#e8eeff] px-3 py-1 text-[11px] font-bold text-[#4C6B62]">مدیریت
                     فروشگاه / محصولات</span>
                 <h2 class="text-2xl font-extrabold tracking-tight text-[#344B43] sm:text-3xl">ایجاد محصول جدید</h2>
                 <p class="mt-2 text-xs leading-6 text-[#718078]">اطلاعات محصول، مشخصات، تصاویر و قیمت‌گذاری را تکمیل کنید.
@@ -1075,7 +1080,7 @@
                             </p>
                         </div>
                         <div id="product-attributes-list" class="space-y-3"></div>
-                        <button type="button" id="add-product-attribute" class="pf-btn pf-btn-soft mt-4">＋ افزودن
+                        <button type="button" id="add-product-attribute" class="pf-btn pf-btn-soft mt-4" style="background-color: #f8f9fb;">＋ افزودن
                             ویژگی</button>
                     </section>
 
@@ -1138,7 +1143,7 @@
 
                             <div class="overflow-hidden rounded-xl border border-[#E8E3DA] bg-white">
                                 <div
-                                    class="flex items-center justify-between border-b border-[#F0EAE2] bg-[#FCF9F4] px-3 py-2.5">
+                                    class="flex items-center justify-between border-b border-[#f8f9fb] bg-[#f8f9fb] px-3 py-2.5">
                                     <span class="text-xs font-bold text-[#465F56]">همه دسته‌بندی‌ها</span>
                                     <span id="category-result-count" class="text-[11px] text-[#87978F]">
                                         {{ $categories->count() }} دسته‌بندی
@@ -1146,7 +1151,7 @@
                                 </div>
                                 <div id="category-options" class="max-h-64 overflow-y-auto p-2">
                                     <div
-                                        class="mb-3 flex items-center gap-2 rounded-xl border border-[#E8E3DA] bg-[#FBF6EF] px-3 py-2.5 focus-within:border-[#95ADA2] focus-within:ring-4 focus-within:ring-[#4C6B62]/10 sticky top-0 z-2">
+                                        class="mb-3 flex items-center gap-2 rounded-xl border border-[#f8f9fb] bg-[#f8f9fb] px-3 py-2.5 focus-within:border-[#95ADA2] focus-within:ring-4 focus-within:ring-[#4C6B62]/10 sticky top-0 z-2">
                                         <svg class="size-4 flex-none text-[#87978F]" viewBox="0 0 24 24" fill="none"
                                             stroke="currentColor" stroke-width="2">
                                             <circle cx="11" cy="11" r="7"></circle>
@@ -1168,7 +1173,7 @@
                                     @foreach ($categories as $category)
                                         <label data-category-option
                                             data-category-title="{{ mb_strtolower($category->title) }}"
-                                            class="!mb-0 flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 transition hover:bg-[#FBF6EF]">
+                                            class="!mb-0 flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 transition hover:bg-[#f8f9fb]">
                                             <input type="checkbox" name="category_ids[]" value="{{ $category->id }}"
                                                 class="category-checkbox size-4 flex-none accent-[#4C6B62]"
                                                 @if (in_array($category->id, old('category_ids', []))) checked @endif>
@@ -1211,7 +1216,7 @@
                                         d="M4 7h16v13H4zM8 7V4h8v3M8 12h8M8 16h5" />
                                 </svg></span>
                         </div>
-                        <div class="flex items-center justify-between gap-3 rounded-xl bg-[#FBF6EF] p-3"><span
+                        <div class="flex items-center justify-between gap-3 rounded-xl bg-[#f8f9fb] p-3"><span
                                 class="text-sm font-semibold text-[#465F56]">نمایش در صفحه اصلی</span><label
                                 for="show_in_home" class="pf-switch mb-0"><input type="checkbox" name="show_in_home"
                                     value="1" id="show_in_home"
