@@ -74,9 +74,9 @@ class ProductController extends Controller
                 : ['prohibited'],
             // اطلاعات عمومی
             'title' => ['required', 'string', 'max:255'],
-            'brand' => ['nullable', 'string', 'max:255'],
+            'brand_id' => ['nullable', 'integer', 'exists:brands,id'],
+            'publication_id' => ['nullable', 'integer', 'exists:publications,id'],
             'writer' => ['nullable', 'string', 'max:255'],
-            'publication' => ['nullable', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
             'summary' => ['nullable', 'string'],
             // موجودی و قیمت
@@ -136,6 +136,10 @@ class ProductController extends Controller
             'title.required' => 'وارد کردن نام محصول الزامی است.',
             'title.string' => 'نام محصول باید متن باشد.',
             'title.max' => 'نام محصول نباید بیشتر از ۲۵۵ کاراکتر باشد.',
+            'brand_id.integer' => 'شناسه برند باید عدد باشد.',
+            'brand_id.exists' => 'برند انتخاب‌شده معتبر نیست.',
+            'publication_id.integer' => 'شناسه انتشارات باید عدد باشد.',
+            'publication.exists' => 'انتشارات انتخاب‌شده معتبر نیست.',
             'product_id.required' => 'شناسه محصول برای ویرایش ارسال نشده است.',
             'product_id.exists' => 'محصول موردنظر پیدا نشد.',
             'count.integer' => 'موجودی باید عدد صحیح باشد.',
@@ -916,7 +920,9 @@ class ProductController extends Controller
             'media' => function ($query) {
                 $query->where('is_main', 1);
             },
-            'categories'
+            'categories',
+            'brand',
+            'publication',
         ])->get();
 
         foreach ($products as $product) {
@@ -928,9 +934,14 @@ class ProductController extends Controller
         }
 
         $setting = homeSetting::document();
+        $brands = brand::all();
+        $publications = publication::all();
+
         return view('admin.product.index', [
             'products' => $products,
             'setting' => $setting,
+            'brands' => $brands,
+            'publications' => $publications,
         ]);
     }
 
@@ -951,6 +962,8 @@ class ProductController extends Controller
             'categories',
         ])->findOrFail($request->input('id'));
 
+        $product->brand;
+        $product->publication;
         $product->media->each(function ($media) {
             $media->url = asset('storage/' . $media->media_path);
             $media->media_path = $media->media_path;
@@ -991,9 +1004,13 @@ class ProductController extends Controller
         $productData['product_features'] = $productFeatures;
 
         $categories = category::with('attributes')->get();
-
+        $brands=brand::all();
+        $publications=publication::all();
         return response()->json([
             'product' => $productData,
+            'publications' => $publications,
+            'brands' => $brands,
+
             'cats' => $categories->map(fn($category) => [
                 'id' => $category->id,
                 'title' => $category->title,

@@ -65,4 +65,12 @@ class product extends Model
             ->whereNull('parent_value_id')
             ->orderBy('sort_order');
     }
+    public function brand(){
+        return $this->belongsTo(Brand::class, 'brand_id');
+    }
+
+    public function publication(){
+        return $this->belongsTo(Publication::class, 'publication_id');
+    }
+
 }
