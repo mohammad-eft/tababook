@@ -1174,8 +1174,15 @@
                                     <span class="pf-error">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="pf-field"><label for="brand">برند</label><input type="text" name="brand"
-                                    id="brand" placeholder="نام برند" value="">
+                            <div class="pf-field"><label for="brand_id">برند</label>
+                                <select id="brand_id" name="brand_id">
+                                    @foreach ($brands as $brand)
+                                        <option value="{{ $brand->id }}"
+                                            @if (old('brand') == $brand->id) selected @endif>
+                                            {{ $brand->title }}
+                                        </option>
+                                    @endforeach
+                                </select>
                                 @error('brand')
                                     <span class="pf-error">{{ $message }}</span>
                                 @enderror
@@ -1186,10 +1193,22 @@
                                     <span class="pf-error">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="pf-field sm:col-span-2"><label for="publication">انتشارات</label><input
-                                    type="text" name="publication" id="publication" placeholder="نام انتشارات"
-                                    value="">
+                            <div class="pf-field sm:col-span-2"><label for="publication_id">انتشارات</label>
+                                <select id="publication_id" name="publication_id">
+                                    @foreach ($publications as $publication)
+                                        <option value="{{ $publication->id }}"
+                                            @if (old('publication') == $publication->id) selected @endif>
+                                            {{ $publication->title }}
+                                        </option>
+                                    @endforeach
+                                </select>
                                 @error('publication')
+                                    <span class="pf-error">{{ $message }}</span>
+                                @enderror
+                            </div>                            
+                            <div class="pf-field"><label for="writer">نویسنده</label><input type="text" name="writer"
+                                    id="writer" placeholder="نام نویسنده" value="">
+                                @error('writer')
                                     <span class="pf-error">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -3188,7 +3207,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     const product = data.product || {};
                     document.getElementById('product_id').value = product.id;
                     document.getElementById('title').value = product.title || '';
-                    document.getElementById('brand').value = product.brand || '';
+                    document.getElementById('brand').value = product.brand_id ?? '';
                     document.getElementById('writer').value = product.writer || '';
                     document.getElementById('publication').value = product.publication || '';
                     document.getElementById('summary').value = product.summary || '';
@@ -3196,7 +3215,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     document.getElementById('primary_price').value = product.primary_price ?? '';
                     document.getElementById('secondary_price').value = product.secondary_price ?? '';
                     document.getElementById('show_in_home').checked = !!Number(product.show_in_home);
-
                     const editor = document.getElementById('editor');
                     if (window.productEditor && typeof window.productEditor.value !== 'undefined') {
                         window.productEditor.value = product.description || '';
